@@ -232,6 +232,10 @@ module Square
           retval.merge!(APIHelper.form_encode(value, instance_name + '[' +
             key.to_s + ']', formatting: formatting))
         end
+      elsif obj.instance_of? File
+        retval[instance_name] = UploadIO.new(
+          obj, 'application/octet-stream', File.basename(obj.path)
+        )
       else
         retval[instance_name] = obj
       end

@@ -14,7 +14,8 @@ module Square
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
     # results for your original query.  See
-    # [Pagination](/basics/api101/pagination) for more information.
+    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
+    # for more information.
     # @param [CustomerSortField] sort_field Optional parameter: Indicates how
     # Customers should be sorted. Default: `DEFAULT`.
     # @param [SortOrder] sort_order Optional parameter: Indicates whether
@@ -256,8 +257,8 @@ module Square
     # with the provided nonce during the _first_ call.
     # Cards on file are automatically updated on a monthly basis to confirm they
     # are still valid and can be charged.
-    # @param [String] customer_id Required parameter: The ID of the customer to
-    # link the card on file to.
+    # @param [String] customer_id Required parameter: The Square ID of the
+    # customer profile the card is linked to.
     # @param [CreateCustomerCardRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.

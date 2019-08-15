@@ -12,7 +12,9 @@ module Square
 
     # `RenewToken` is deprecated. For information about refreshing OAuth access
     # tokens, see
-    # [Renew OAuth Token](/authz/oauth/cookbook/oauth-renew).
+    # [Renew OAuth
+    # Token](https://developer.squareup.com/docs/oauth-api/cookbook/renew-oauth-
+    # tokens).
     # Renews an OAuth access token before it expires.
     # OAuth access tokens besides your application's personal access token
     # expire after __30 days__.
@@ -41,6 +43,7 @@ module Square
     def renew_token(client_id:,
                     body:,
                     authorization:)
+      warn 'Endpoint renew_token in OAuthApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/oauth2/clients/{client_id}/access-token/renew'
@@ -125,7 +128,8 @@ module Square
     # Applications specify a method by adding the `grant_type` parameter
     # in the request and also provide relevant information.
     # For more information, see [OAuth access token
-    # management](/authz/oauth/how-it-works#oauth-access-token-management).
+    # management](https://developer.squareup.com/docs/authz/oauth/how-it-works#o
+    # auth-access-token-management).
     # __Note:__ Regardless of the method application specified,
     # the endpoint always returns two items; an OAuth access token and
     # a refresh token in the response.

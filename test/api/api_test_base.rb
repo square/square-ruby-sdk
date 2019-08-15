@@ -18,6 +18,7 @@ class ApiTestBase < Minitest::Test
 
   # Create configuration and set any test parameters
   CONFIG = Configuration.new(
-    access_token: ENV.fetch('SQUARE_SANDBOX_TOKEN', 'AccessToken')
+    access_token: ENV.fetch('SQUARE_SANDBOX_TOKEN', 'AccessToken'),
+    environment: "sandbox"
   )
 end
