@@ -3,7 +3,7 @@
 # Square Ruby SDK
 
 [![Travis status](https://travis-ci.org/square/square-ruby-sdk.svg?branch=master)](https://travis-ci.org/square/square-ruby-sdk)
-[![Gem version](https://badge.fury.io/rb/square.rb.svg)](https://badge.fury.io/rb/square.rb)
+[![Gem version](https://badge.fury.io/rb/square.rb.svg?new)](https://badge.fury.io/rb/square.rb)
 [![Apache-2 license](https://img.shields.io/badge/license-Apache2-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 Use this gem to integrate Square payments into your app and grow your business with Square APIs including Catalog, Customers, Employees, Inventory, Labor, Locations, and Orders.
