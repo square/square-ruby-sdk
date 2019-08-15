@@ -110,6 +110,18 @@ module Square
       @transactions ||= TransactionsApi.new config
     end
 
+    # Access to payments controller.
+    # @return [PaymentsApi] Returns the controller instance.
+    def payments
+      @payments ||= PaymentsApi.new config
+    end
+
+    # Access to refunds controller.
+    # @return [RefundsApi] Returns the controller instance.
+    def refunds
+      @refunds ||= RefundsApi.new config
+    end
+
     def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
                    backoff_factor: 1, environment: 'production',
                    access_token: 'TODO: Replace', config: nil)

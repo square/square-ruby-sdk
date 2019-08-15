@@ -180,7 +180,8 @@ module Square
     # to `true`.
     # @param [String] cursor Optional parameter: The pagination cursor returned
     # in the previous response. Leave unset for an initial request. See
-    # [Pagination](/basics/api101/pagination) for more information.
+    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
+    # for more information.
     # @param [String] types Optional parameter: An optional case-insensitive,
     # comma-separated list of object types to retrieve, for example
     # `ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.  The legal values are taken from the

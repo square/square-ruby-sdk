@@ -11,6 +11,7 @@ module Square
     end
 
     # Lists refunds for one of a business's locations.
+    # Deprecated - recommend using [SearchOrders](#endpoint-orders-searchorders)
     # In addition to full or partial tender refunds processed through Square
     # APIs,
     # refunds may result from itemized returns or exchanges through Square's
@@ -34,13 +35,15 @@ module Square
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
     # results for your original query.  See
-    # [Pagination](/basics/api101/pagination) for more information.
+    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
+    # for more information.
     # @return [ListRefundsResponse Hash] response from the API call
     def list_refunds(location_id:,
                      begin_time: nil,
                      end_time: nil,
                      sort_order: nil,
                      cursor: nil)
+      warn 'Endpoint list_refunds in TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/refunds'
@@ -77,6 +80,7 @@ module Square
     end
 
     # Lists transactions for a particular location.
+    # Deprecated - recommend using [SearchOrders](#endpoint-orders-searchorders)
     # Transactions include payment information from sales and exchanges and
     # refund
     # information from returns and exchanges.
@@ -97,13 +101,15 @@ module Square
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
     # results for your original query.  See
-    # [Pagination](/basics/api101/pagination) for more information.
+    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
+    # for more information.
     # @return [ListTransactionsResponse Hash] response from the API call
     def list_transactions(location_id:,
                           begin_time: nil,
                           end_time: nil,
                           sort_order: nil,
                           cursor: nil)
+      warn 'Endpoint list_transactions in TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/transactions'
@@ -140,6 +146,8 @@ module Square
     end
 
     # Charges a card represented by a card nonce or a customer's card on file.
+    # Deprecated - recommend using
+    # [CreatePayment](#endpoint-payments-createpayment)
     # Your request to this endpoint must include _either_:
     # - A value for the `card_nonce` parameter (to charge a card nonce generated
     # with the `SqPaymentForm`)
@@ -160,6 +168,7 @@ module Square
     # @return [ChargeResponse Hash] response from the API call
     def charge(location_id:,
                body:)
+      warn 'Endpoint charge in TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/transactions'
@@ -191,6 +200,8 @@ module Square
     end
 
     # Retrieves details for a single transaction.
+    # Deprecated - recommend using
+    # [BatchRetrieveOrders](#endpoint-batchretrieveorders)
     # @param [String] location_id Required parameter: The ID of the
     # transaction's associated location.
     # @param [String] transaction_id Required parameter: The ID of the
@@ -198,6 +209,7 @@ module Square
     # @return [RetrieveTransactionResponse Hash] response from the API call
     def retrieve_transaction(location_id:,
                              transaction_id:)
+      warn 'Endpoint retrieve_transaction in TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/transactions/{transaction_id}'
@@ -230,14 +242,16 @@ module Square
     # Captures a transaction that was created with the
     # [Charge](#endpoint-transactions-charge)
     # endpoint with a `delay_capture` value of `true`.
-    # See [Delayed capture
-    # transactions](/payments/transactions/overview#delayed-capture)
-    # for more information.
+    # See the [Delay Capture of
+    # Funds](https://developer.squareup.com/docs/transactions-api/cookbook/delay
+    # -capture)
+    # recipe for more information.
     # @param [String] location_id Required parameter: Example:
     # @param [String] transaction_id Required parameter: Example:
     # @return [CaptureTransactionResponse Hash] response from the API call
     def capture_transaction(location_id:,
                             transaction_id:)
+      warn 'Endpoint capture_transaction in TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/transactions/{transaction_id}/capture'
@@ -268,6 +282,8 @@ module Square
     end
 
     # Initiates a refund for a previously charged tender.
+    # Deprecated - recommend using
+    # [RefundPayment](#endpoint-refunds-refundpayment)
     # You must issue a refund within 120 days of the associated payment. See
     # [this article](https://squareup.com/help/us/en/article/5060) for more
     # information
@@ -286,6 +302,7 @@ module Square
     def create_refund(location_id:,
                       transaction_id:,
                       body:)
+      warn 'Endpoint create_refund in TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/transactions/{transaction_id}/refund'
@@ -320,14 +337,16 @@ module Square
     # Cancels a transaction that was created with the
     # [Charge](#endpoint-transactions-charge)
     # endpoint with a `delay_capture` value of `true`.
-    # See [Delayed capture
-    # transactions](/payments/transactions/overview#delayed-capture)
-    # for more information.
+    # See the [Delay Capture of
+    # Funds](https://developer.squareup.com/docs/transactions-api/cookbook/delay
+    # -capture)
+    # recipe for more information.
     # @param [String] location_id Required parameter: Example:
     # @param [String] transaction_id Required parameter: Example:
     # @return [VoidTransactionResponse Hash] response from the API call
     def void_transaction(location_id:,
                          transaction_id:)
+      warn 'Endpoint void_transaction in TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/transactions/{transaction_id}/void'

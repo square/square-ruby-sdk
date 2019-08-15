@@ -71,6 +71,9 @@ module Square
     @environments = {
       'production' => {
         'default' => 'https://connect.squareup.com'
+      },
+      'sandbox' => {
+        'default' => 'https://connect.squareupsandbox.com'
       }
     }
 

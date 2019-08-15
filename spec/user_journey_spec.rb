@@ -5,6 +5,7 @@ require 'json'
 
 describe "UserJourney" do
   let(:access_token) { ApiTestBase::CONFIG.access_token }
+  let(:environment) { ApiTestBase::CONFIG.environment }
 
   let(:phone_number) { "1-212-555-4240" }
   let(:phone_number2) { "1-917-500-1000" }
@@ -29,7 +30,7 @@ describe "UserJourney" do
   end
 
   let :sq do
-    Square::Client.new(access_token: access_token)
+    Square::Client.new(access_token: access_token, environment: environment)
   end
 
   let :unauthoerized_sq do
@@ -109,6 +110,8 @@ describe "UserJourney" do
       # create
       response = sq.customers.create_customer(body: customer)
       assert_equal response.data.customer[:phone_number], phone_number
+
+
       assert_equal response.status_code, 200
       created_customer = response.data.customer
 

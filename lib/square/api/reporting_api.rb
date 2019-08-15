@@ -31,13 +31,15 @@ module Square
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
     # results for your original query.  See
-    # [Pagination](/basics/api101/pagination) for more information.
+    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
+    # for more information.
     # @return [ListAdditionalRecipientReceivableRefundsResponse Hash] response from the API call
     def list_additional_recipient_receivable_refunds(location_id:,
                                                      begin_time: nil,
                                                      end_time: nil,
                                                      sort_order: nil,
                                                      cursor: nil)
+      warn 'Endpoint list_additional_recipient_receivable_refunds in ReportingApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/additional-recipient-receivable-refunds'
@@ -94,13 +96,15 @@ module Square
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
     # results for your original query.  See
-    # [Pagination](/basics/api101/pagination) for more information.
+    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
+    # for more information.
     # @return [ListAdditionalRecipientReceivablesResponse Hash] response from the API call
     def list_additional_recipient_receivables(location_id:,
                                               begin_time: nil,
                                               end_time: nil,
                                               sort_order: nil,
                                               cursor: nil)
+      warn 'Endpoint list_additional_recipient_receivables in ReportingApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/additional-recipient-receivables'
