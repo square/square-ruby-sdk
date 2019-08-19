@@ -212,7 +212,7 @@ If your call succeeds, you’ll see a response that looks like this:
 API calls return a response object that contains properties that describe both the request (headers and request) and the response (status_code, reason_phrase, text, errors, body, and cursor). The response also has #success? and #error? helper methods so you can easily determine the success or failure of a call:
 
 ```ruby
-if result.is_success?
+if result.success?
   p result.data
 elsif result.error?
   warn result.errors.inspect
