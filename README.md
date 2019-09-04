@@ -42,6 +42,7 @@ gem 'square.rb'
 * [Locations]
 * [Orders]
 * [Apple Pay]
+* [Refunds]
 * [Reporting]
 
 ### Authorization APIs
@@ -271,6 +272,7 @@ You can also use the Square API to create applications or services that work wit
 [Locations]: doc/locations.md
 [Orders]: doc/orders.md
 [Apple Pay]: doc/apple-pay.md
+[Refunds]: doc/refunds.md
 [Reporting]: doc/reporting.md
 [Mobile Authorization]: doc/mobile-authorization.md
 [O Auth]: doc/o-auth.md
