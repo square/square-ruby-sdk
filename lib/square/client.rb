@@ -8,6 +8,14 @@ module Square
   class Client
     attr_reader :config
 
+    def sdk_version
+      '3.20190925.0'
+    end
+
+    def square_version
+      '2019-09-25'
+    end
+
     # Access to mobile_authorization controller.
     # @return [MobileAuthorizationApi] Returns the controller instance.
     def mobile_authorization
@@ -110,6 +118,12 @@ module Square
       @transactions ||= TransactionsApi.new config
     end
 
+    # Access to merchants controller.
+    # @return [MerchantsApi] Returns the controller instance.
+    def merchants
+      @merchants ||= MerchantsApi.new config
+    end
+
     # Access to payments controller.
     # @return [PaymentsApi] Returns the controller instance.
     def payments
@@ -124,13 +138,15 @@ module Square
 
     def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
                    backoff_factor: 1, environment: 'production',
-                   access_token: 'TODO: Replace', config: nil)
+                   access_token: 'TODO: Replace', additional_headers: {},
+                   config: nil)
       @config = if config.nil?
                   Configuration.new(timeout: timeout, max_retries: max_retries,
                                     retry_interval: retry_interval,
                                     backoff_factor: backoff_factor,
                                     environment: environment,
-                                    access_token: access_token)
+                                    access_token: access_token,
+                                    additional_headers: additional_headers)
                 else
                   config
                 end

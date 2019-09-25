@@ -24,11 +24,11 @@ catalog_api = client.catalog
 
 ## Batch Delete Catalog Objects
 
-Deletes a set of [CatalogItem](./models/catalog-item.md)s based on the
+Deletes a set of [CatalogItem](#type-catalogitem)s based on the
 provided list of target IDs and returns a set of successfully deleted IDs in
 the response. Deletion is a cascading event such that all children of the
 targeted object are also deleted. For example, deleting a CatalogItem will
-also delete all of its [CatalogItemVariation](./models/catalog-item-variation.md)
+also delete all of its [CatalogItemVariation](#type-catalogitemvariation)
 children.
 
 `BatchDeleteCatalogObjects` succeeds even if only a portion of the targeted
@@ -67,11 +67,11 @@ end
 ## Batch Retrieve Catalog Objects
 
 Returns a set of objects based on the provided ID.
-Each [CatalogItem](./models/catalog-item.md) returned in the set includes all of its
+Each [CatalogItem](#type-catalogitem) returned in the set includes all of its
 child information including: all of its
-[CatalogItemVariation](./models/catalog-item-variation.md) objects, references to
-its [CatalogModifierList](./models/catalog-modifier-list.md) objects, and the ids of
-any [CatalogTax](./models/catalog-tax.md) objects that apply to it.
+[CatalogItemVariation](#type-catalogitemvariation) objects, references to
+its [CatalogModifierList](#type-catalogmodifierlist) objects, and the ids of
+any [CatalogTax](#type-catalogtax) objects that apply to it.
 
 ```ruby
 def batch_retrieve_catalog_objects(body:)
@@ -230,10 +230,10 @@ end
 
 ## List Catalog
 
-Returns a list of [CatalogObject](./models/catalog-object.md)s that includes
-all objects of a set of desired types (for example, all [CatalogItem](./models/catalog-item.md)
-and [CatalogTax](./models/catalog-tax.md) objects) in the catalog. The `types` parameter
-is specified as a comma-separated list of valid [CatalogObject](./models/catalog-object.md) types:
+Returns a list of [CatalogObject](#type-catalogobject)s that includes
+all objects of a set of desired types (for example, all [CatalogItem](#type-catalogitem)
+and [CatalogTax](#type-catalogtax) objects) in the catalog. The `types` parameter
+is specified as a comma-separated list of valid [CatalogObject](#type-catalogobject) types:
 `ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`.
 
 __Important:__ ListCatalog does not return deleted catalog items. To retrieve
@@ -249,8 +249,8 @@ def list_catalog(cursor: nil,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `cursor` | `String` | Query, Optional | The pagination cursor returned in the previous response. Leave unset for an initial request.<br>See [Pagination](/basics/api101/pagination) for more information. |
-| `types` | `String` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve, for example<br>`ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.<br><br>The legal values are taken from the [CatalogObjectType](./models/catalog-object-type.md)<br>enumeration, namely `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, or `IMAGE`. |
+| `cursor` | `String` | Query, Optional | The pagination cursor returned in the previous response. Leave unset for an initial request.<br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
+| `types` | `String` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve, for example<br>`ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.<br><br>The legal values are taken from the [CatalogObjectType](#type-catalogobjecttype)<br>enumeration, namely `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, or `IMAGE`. |
 
 ### Response Type
 
@@ -270,7 +270,7 @@ end
 
 ## Upsert Catalog Object
 
-Creates or updates the target [CatalogObject](./models/catalog-object.md).
+Creates or updates the target [CatalogObject](#type-catalogobject).
 
 ```ruby
 def upsert_catalog_object(body:)
@@ -310,12 +310,12 @@ end
 
 ## Delete Catalog Object
 
-Deletes a single [CatalogObject](./models/catalog-object.md) based on the
+Deletes a single [CatalogObject](#type-catalogobject) based on the
 provided ID and returns the set of successfully deleted IDs in the response.
 Deletion is a cascading event such that all children of the targeted object
-are also deleted. For example, deleting a [CatalogItem](./models/catalog-item.md)
+are also deleted. For example, deleting a [CatalogItem](#type-catalogitem)
 will also delete all of its
-[CatalogItemVariation](./models/catalog-item-variation.md) children.
+[CatalogItemVariation](#type-catalogitemvariation) children.
 
 ```ruby
 def delete_catalog_object(object_id:)
@@ -325,7 +325,7 @@ def delete_catalog_object(object_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `object_id` | `String` | Template, Required | The ID of the [CatalogObject](./models/catalog-object.md) to be deleted. When an object is deleted, other<br>objects in the graph that depend on that object will be deleted as well (for example, deleting a<br>[CatalogItem](./models/catalog-item.md) will delete its [CatalogItemVariation](./models/catalog-item-variation.md)s). |
+| `object_id` | `String` | Template, Required | The ID of the [CatalogObject](#type-catalogobject) to be deleted. When an object is deleted, other<br>objects in the graph that depend on that object will be deleted as well (for example, deleting a<br>[CatalogItem](#type-catalogitem) will delete its [CatalogItemVariation](#type-catalogitemvariation)s). |
 
 ### Response Type
 
@@ -347,13 +347,13 @@ end
 
 ## Retrieve Catalog Object
 
-Returns a single [CatalogItem](./models/catalog-item.md) as a
-[CatalogObject](./models/catalog-object.md) based on the provided ID. The returned
-object includes all of the relevant [CatalogItem](./models/catalog-item.md)
-information including: [CatalogItemVariation](./models/catalog-item-variation.md)
+Returns a single [CatalogItem](#type-catalogitem) as a
+[CatalogObject](#type-catalogobject) based on the provided ID. The returned
+object includes all of the relevant [CatalogItem](#type-catalogitem)
+information including: [CatalogItemVariation](#type-catalogitemvariation)
 children, references to its
-[CatalogModifierList](./models/catalog-modifier-list.md) objects, and the ids of
-any [CatalogTax](./models/catalog-tax.md) objects that apply to it.
+[CatalogModifierList](#type-catalogmodifierlist) objects, and the ids of
+any [CatalogTax](#type-catalogtax) objects that apply to it.
 
 ```ruby
 def retrieve_catalog_object(object_id:,
@@ -364,8 +364,8 @@ def retrieve_catalog_object(object_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `object_id` | `String` | Template, Required | The object ID of any type of [CatalogObject](./models/catalog-object.md)s to be retrieved. |
-| `include_related_objects` | `Boolean` | Query, Optional | If `true`, the response will include additional objects that are related to the<br>requested object, as follows:<br><br>If the `object` field of the response contains a [CatalogItem](./models/catalog-item.md),<br>its associated [CatalogCategory](./models/catalog-category.md), [CatalogTax](./models/catalog-tax.md)es,<br>[CatalogImage](./models/catalog-image.md)s and [CatalogModifierList](./models/catalog-modifier-list.md)s<br>will be returned in the `related_objects` field of the response. If the `object`<br>field of the response contains a [CatalogItemVariation](./models/catalog-item-variation.md),<br>its parent [CatalogItem](./models/catalog-item.md) will be returned in the `related_objects` field of <br>the response.<br><br>Default value: `false` |
+| `object_id` | `String` | Template, Required | The object ID of any type of [CatalogObject](#type-catalogobject)s to be retrieved. |
+| `include_related_objects` | `Boolean` | Query, Optional | If `true`, the response will include additional objects that are related to the<br>requested object, as follows:<br><br>If the `object` field of the response contains a [CatalogItem](#type-catalogitem),<br>its associated [CatalogCategory](#type-catalogcategory), [CatalogTax](#type-catalogtax)es,<br>[CatalogImage](#type-catalogimage)s and [CatalogModifierList](#type-catalogmodifierlist)s<br>will be returned in the `related_objects` field of the response. If the `object`<br>field of the response contains a [CatalogItemVariation](#type-catalogitemvariation),<br>its parent [CatalogItem](#type-catalogitem) will be returned in the `related_objects` field of <br>the response.<br><br>Default value: `false` |
 
 ### Response Type
 
@@ -388,12 +388,12 @@ end
 ## Search Catalog Objects
 
 Queries the targeted catalog using a variety of query types:
-[CatalogQuerySortedAttribute](./models/catalog-query-sorted-attribute.md),
-[CatalogQueryExact](./models/catalog-query-exact.md),
-[CatalogQueryRange](./models/catalog-query-range.md),
-[CatalogQueryText](./models/catalog-query-text.md),
-[CatalogQueryItemsForTax](./models/catalog-query-items-for-tax.md), and
-[CatalogQueryItemsForModifierList](./models/catalog-query-items-for-modifier-list.md).
+[CatalogQuerySortedAttribute](#type-catalogquerysortedattribute),
+[CatalogQueryExact](#type-catalogqueryexact),
+[CatalogQueryRange](#type-catalogqueryrange),
+[CatalogQueryText](#type-catalogquerytext),
+[CatalogQueryItemsForTax](#type-catalogqueryitemsfortax), and
+[CatalogQueryItemsForModifierList](#type-catalogqueryitemsformodifierlist).
 
 ```ruby
 def search_catalog_objects(body:)
@@ -431,8 +431,8 @@ end
 
 ## Update Item Modifier Lists
 
-Updates the [CatalogModifierList](./models/catalog-modifier-list.md) objects
-that apply to the targeted [CatalogItem](./models/catalog-item.md) without having
+Updates the [CatalogModifierList](#type-catalogmodifierlist) objects
+that apply to the targeted [CatalogItem](#type-catalogitem) without having
 to perform an upsert on the entire item.
 
 ```ruby
@@ -468,8 +468,8 @@ end
 
 ## Update Item Taxes
 
-Updates the [CatalogTax](./models/catalog-tax.md) objects that apply to the
-targeted [CatalogItem](./models/catalog-item.md) without having to perform an
+Updates the [CatalogTax](#type-catalogtax) objects that apply to the
+targeted [CatalogItem](#type-catalogitem) without having to perform an
 upsert on the entire item.
 
 ```ruby

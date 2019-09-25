@@ -16,13 +16,17 @@ module Square
     attr_reader :environment
     attr_reader :access_token
 
+    def additional_headers
+      @additional_headers.clone
+    end
+
     class << self
       attr_reader :environments
     end
 
     def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
                    backoff_factor: 1, environment: 'production',
-                   access_token: 'TODO: Replace')
+                   access_token: 'TODO: Replace', additional_headers: {})
       # The value to use for connection timeout
       @timeout = timeout
 
@@ -42,23 +46,29 @@ module Square
       # OAuth 2.0 Access Token
       @access_token = access_token
 
+      # Additional headers to add to each API request
+      @additional_headers = additional_headers.clone
+
       # The Http Client to use for making requests.
       @http_client = create_http_client
     end
 
     def clone_with(timeout: nil, max_retries: nil, retry_interval: nil,
-                   backoff_factor: nil, environment: nil, access_token: nil)
+                   backoff_factor: nil, environment: nil, access_token: nil,
+                   additional_headers: nil)
       timeout ||= self.timeout
       max_retries ||= self.max_retries
       retry_interval ||= self.retry_interval
       backoff_factor ||= self.backoff_factor
       environment ||= self.environment
       access_token ||= self.access_token
+      additional_headers ||= self.additional_headers
 
       Configuration.new(timeout: timeout, max_retries: max_retries,
                         retry_interval: retry_interval,
                         backoff_factor: backoff_factor,
-                        environment: environment, access_token: access_token)
+                        environment: environment, access_token: access_token,
+                        additional_headers: additional_headers)
     end
 
     def create_http_client

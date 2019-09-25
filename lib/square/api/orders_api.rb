@@ -120,15 +120,17 @@ module Square
     # To learn more about the Orders API, see the
     # [Orders API
     # Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
+    # @param [String] location_id Required parameter: The ID of the order's
+    # associated location.
+    # @param [String] order_id Required parameter: The ID of the order to
+    # update.
     # @param [UpdateOrderRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
-    # @param [String] location_id Required parameter: Example:
-    # @param [String] order_id Required parameter: Example:
     # @return [UpdateOrderResponse Hash] response from the API call
-    def update_order(body:,
-                     location_id:,
-                     order_id:)
+    def update_order(location_id:,
+                     order_id:,
+                     body:)
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/orders/{order_id}'

@@ -22,7 +22,7 @@ transactions_api = client.transactions
 
 Lists refunds for one of a business's locations.
 
-Deprecated - recommend using [SearchOrders](/doc/orders.md#searchorders)
+Deprecated - recommend using [SearchOrders](#endpoint-orders-searchorders)
 
 In addition to full or partial tender refunds processed through Square APIs,
 refunds may result from itemized returns or exchanges through Square's
@@ -49,7 +49,7 @@ def list_refunds(location_id:,
 | `begin_time` | `String` | Query, Optional | The beginning of the requested reporting period, in RFC 3339 format.<br><br>See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.<br><br>Default value: The current time minus one year. |
 | `end_time` | `String` | Query, Optional | The end of the requested reporting period, in RFC 3339 format.<br><br>See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.<br><br>Default value: The current time. |
 | `sort_order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | The order in which results are listed in the response (`ASC` for<br>oldest first, `DESC` for newest first).<br><br>Default value: `DESC` |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>See [Pagination](/basics/api101/pagination) for more information. |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
 
 ### Response Type
 
@@ -73,7 +73,7 @@ end
 
 Lists transactions for a particular location.
 
-Deprecated - recommend using [SearchOrders](/doc/orders.md#searchorders)
+Deprecated - recommend using [SearchOrders](#endpoint-orders-searchorders)
 
 Transactions include payment information from sales and exchanges and refund
 information from returns and exchanges.
@@ -96,7 +96,7 @@ def list_transactions(location_id:,
 | `begin_time` | `String` | Query, Optional | The beginning of the requested reporting period, in RFC 3339 format.<br><br>See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.<br><br>Default value: The current time minus one year. |
 | `end_time` | `String` | Query, Optional | The end of the requested reporting period, in RFC 3339 format.<br><br>See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.<br><br>Default value: The current time. |
 | `sort_order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | The order in which results are listed in the response (`ASC` for<br>oldest first, `DESC` for newest first).<br><br>Default value: `DESC` |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>See [Pagination](/basics/api101/pagination) for more information. |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
 
 ### Response Type
 
@@ -120,7 +120,7 @@ end
 
 Charges a card represented by a card nonce or a customer's card on file.
 
-Deprecated - recommend using [CreatePayment](/doc/payments.md#createpayment)
+Deprecated - recommend using [CreatePayment](#endpoint-payments-createpayment)
 
 Your request to this endpoint must include _either_:
 
@@ -131,7 +131,7 @@ a customer's card on file)
 
 When this response is returned, the amount of Square's processing fee might not yet be
 calculated. To obtain the processing fee, wait about ten seconds and call
-[RetrieveTransaction](/doc/transactions.md#retrievetransaction). See the `processing_fee_money`
+[RetrieveTransaction](#endpoint-transactions-retrievetransaction). See the `processing_fee_money`
 field of each [Tender included](#type-tender) in the transaction.
 
 ```ruby
@@ -235,10 +235,10 @@ end
 
 ## Capture Transaction
 
-Captures a transaction that was created with the [Charge](/doc/transactions.md#charge)
+Captures a transaction that was created with the [Charge](#endpoint-transactions-charge)
 endpoint with a `delay_capture` value of `true`.
 
-See the [Delay Capture of Funds](/transactions-api/cookbook/delay-capture)
+See the [Delay Capture of Funds](https://developer.squareup.com/docs/transactions-api/cookbook/delay-capture)
 recipe for more information.
 
 ```ruby
@@ -276,7 +276,7 @@ end
 
 Initiates a refund for a previously charged tender.
 
-Deprecated - recommend using [RefundPayment](/doc/refunds.md#refundpayment)
+Deprecated - recommend using [RefundPayment](#endpoint-refunds-refundpayment)
 
 You must issue a refund within 120 days of the associated payment. See
 [this article](https://squareup.com/help/us/en/article/5060) for more information
@@ -328,10 +328,10 @@ end
 
 ## Void Transaction
 
-Cancels a transaction that was created with the [Charge](/doc/transactions.md#charge)
+Cancels a transaction that was created with the [Charge](#endpoint-transactions-charge)
 endpoint with a `delay_capture` value of `true`.
 
-See the [Delay Capture of Funds](/transactions-api/cookbook/delay-capture)
+See the [Delay Capture of Funds](https://developer.squareup.com/docs/transactions-api/cookbook/delay-capture)
 recipe for more information.
 
 ```ruby

@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | The set of [Error](./models/error.md)s encountered. |
+| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | The set of [Error](#type-error)s encountered. |
 | `limits` | [`Catalog Info Response Limits Hash`](/doc/models/catalog-info-response-limits.md) | Optional | - |
 | `standard_unit_description_group` | [`Standard Unit Description Group Hash`](/doc/models/standard-unit-description-group.md) | Optional | Group of standard measurement units. |
 

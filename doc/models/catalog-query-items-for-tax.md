@@ -8,7 +8,7 @@
 
 | Name | Type | Description |
 |  --- | --- | --- |
-| `tax_ids` | `Array<String>` | A set of [CatalogTax](./models/catalog-tax.md) IDs to be used to find associated [CatalogItem](./models/catalog-item.md)s. |
+| `tax_ids` | `Array<String>` | A set of [CatalogTax](#type-catalogtax) IDs to be used to find associated [CatalogItem](#type-catalogitem)s. |
 
 ### Example (as JSON)
 

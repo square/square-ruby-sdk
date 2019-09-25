@@ -14,7 +14,7 @@ Represents one of a business's locations.
 | `name` | `String` | Optional | The location's name. Location names are set by the account owner and displayed<br>in the dashboard as the location's nickname |
 | `address` | [`Address Hash`](/doc/models/address.md) | Optional | Represents a physical address. |
 | `timezone` | `String` | Optional | The [IANA Timezone Database](https://www.iana.org/time-zones)<br>identifier for the location's timezone. |
-| `capabilities` | [`Array<String (Location Capability)>`](/doc/models/location-capability.md) | Optional | Indicates which Square features are enabled for the location.<br>See [LocationCapability](./models/location-capability.md) for possible values |
+| `capabilities` | [`Array<String (Location Capability)>`](/doc/models/location-capability.md) | Optional | Indicates which Square features are enabled for the location.<br>See [LocationCapability](#type-locationcapability) for possible values |
 | `status` | [`String (Location Status)`](/doc/models/location-status.md) | Optional | Indicates the location's status. |
 | `created_at` | `String` | Optional | The time when the location was created, in RFC 3339 format. |
 | `merchant_id` | `String` | Optional | The identifier of the merchant that owns the location. |
@@ -28,10 +28,13 @@ Represents one of a business's locations.
 | `business_hours` | [`Business Hours Hash`](/doc/models/business-hours.md) | Optional | Represents the hours of operation for a business location. |
 | `business_email` | `String` | Optional | The email of the location. |
 | `description` | `String` | Optional | The business description of the location. |
-| `twitter_username` | `String` | Optional | The Twitter username of the location without the ' |
-| `instagram_username` | `String` | Optional | The Instagram username of the location without the ' |
+| `twitter_username` | `String` | Optional | The Twitter username of the location without the '&#64;' symbol. |
+| `instagram_username` | `String` | Optional | The Instagram username of the location without the '&#64;' symbol. |
 | `facebook_url` | `String` | Optional | The Facebook profile URL of the location. The URL should begin with 'facebook.com/'. |
 | `coordinates` | [`Coordinates Hash`](/doc/models/coordinates.md) | Optional | Latitude and longitude coordinates. |
+| `logo_url` | `String` | Optional | The logo image URL of the location. |
+| `pos_background_url` | `String` | Optional | The Point of Sale background image URL of the location. |
+| `mcc` | `String` | Optional | The merchant category code (MCC) of the location, as standardized by ISO 18245.<br>The MCC describes the kind of goods or services sold at the location. |
 
 ### Example (as JSON)
 
@@ -58,7 +61,10 @@ Represents one of a business's locations.
   "twitter_username": null,
   "instagram_username": null,
   "facebook_url": null,
-  "coordinates": null
+  "coordinates": null,
+  "logo_url": null,
+  "pos_background_url": null,
+  "mcc": null
 }
 ```
 

@@ -122,8 +122,8 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Cancels a payment identified by the idenpotency key that is specified the
-    # request.
+    # Cancels (voids) a payment identified by the idempotency key that is
+    # specified in the request.
     # Use this method when status of a CreatePayment request is unknown.
     # For example, after you send a CreatePayment
     # request a network error occurs and you don't get a response. In this case,
@@ -200,8 +200,8 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Cancels a payment. If you set `autocomplete` to false when creating a
-    # payment,
+    # Cancels (voids) a payment. If you set `autocomplete` to false when
+    # creating a payment,
     # you can cancel the payment using this endpoint. For more information, see
     # [Delayed
     # Payments](https://developer.squareup.com/docs/payments-api/take-payments#d
@@ -238,12 +238,12 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Completes a payment.
+    # Completes (captures) a payment.
     # By default, payments are set to complete immediately after they are
     # created.
-    # If you set autocomplete to false when creating a payment,
-    # you can complete the payment using this endpoint. For more information,
-    # see
+    # If you set autocomplete to false when creating a payment, you can complete
+    # (capture)
+    # the payment using this endpoint. For more information, see
     # [Delayed
     # Payments](https://developer.squareup.com/docs/payments-api/take-payments#d
     # elayed-payments).

@@ -20,7 +20,7 @@ inventory_api = client.inventory
 
 ## Retrieve Inventory Adjustment
 
-Returns the [InventoryAdjustment](./models/inventory-adjustment.md) object
+Returns the [InventoryAdjustment](#type-inventoryadjustment) object
 with the provided `adjustment_id`.
 
 ```ruby
@@ -31,7 +31,7 @@ def retrieve_inventory_adjustment(adjustment_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `adjustment_id` | `String` | Template, Required | ID of the [InventoryAdjustment](./models/inventory-adjustment.md) to retrieve. |
+| `adjustment_id` | `String` | Template, Required | ID of the [InventoryAdjustment](#type-inventoryadjustment) to retrieve. |
 
 ### Response Type
 
@@ -151,8 +151,8 @@ end
 ## Batch Retrieve Inventory Counts
 
 Returns current counts for the provided
-[CatalogObject](./models/catalog-object.md)s at the requested
-[Location](./models/location.md)s.
+[CatalogObject](#type-catalogobject)s at the requested
+[Location](#type-location)s.
 
 Results are paginated and sorted in descending order according to their
 `calculated_at` timestamp (newest first).
@@ -195,7 +195,7 @@ end
 
 ## Retrieve Inventory Physical Count
 
-Returns the [InventoryPhysicalCount](./models/inventory-physical-count.md)
+Returns the [InventoryPhysicalCount](#type-inventoryphysicalcount)
 object with the provided `physical_count_id`.
 
 ```ruby
@@ -206,7 +206,7 @@ def retrieve_inventory_physical_count(physical_count_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `physical_count_id` | `String` | Template, Required | ID of the<br>[InventoryPhysicalCount](./models/inventory-physical-count.md) to retrieve. |
+| `physical_count_id` | `String` | Template, Required | ID of the<br>[InventoryPhysicalCount](#type-inventoryphysicalcount) to retrieve. |
 
 ### Response Type
 
@@ -229,8 +229,8 @@ end
 ## Retrieve Inventory Count
 
 Retrieves the current calculated stock count for a given
-[CatalogObject](./models/catalog-object.md) at a given set of
-[Location](./models/location.md)s. Responses are paginated and unsorted.
+[CatalogObject](#type-catalogobject) at a given set of
+[Location](#type-location)s. Responses are paginated and unsorted.
 For more sophisticated queries, use a batch endpoint.
 
 ```ruby
@@ -243,9 +243,9 @@ def retrieve_inventory_count(catalog_object_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `catalog_object_id` | `String` | Template, Required | ID of the [CatalogObject](./models/catalog-object.md) to retrieve. |
-| `location_ids` | `String` | Query, Optional | The [Location](./models/location.md) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See [Pagination](/basics/api101/pagination) for more information. |
+| `catalog_object_id` | `String` | Template, Required | ID of the [CatalogObject](#type-catalogobject) to retrieve. |
+| `location_ids` | `String` | Query, Optional | The [Location](#type-location) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
 
 ### Response Type
 
@@ -268,8 +268,8 @@ end
 ## Retrieve Inventory Changes
 
 Returns a set of physical counts and inventory adjustments for the
-provided [CatalogObject](./models/catalog-object.md) at the requested
-[Location](./models/location.md)s.
+provided [CatalogObject](#type-catalogobject) at the requested
+[Location](#type-location)s.
 
 Results are paginated and sorted in descending order according to their
 `occurred_at` timestamp (newest first).
@@ -288,9 +288,9 @@ def retrieve_inventory_changes(catalog_object_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `catalog_object_id` | `String` | Template, Required | ID of the [CatalogObject](./models/catalog-object.md) to retrieve. |
-| `location_ids` | `String` | Query, Optional | The [Location](./models/location.md) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See [Pagination](/basics/api101/pagination) for more information. |
+| `catalog_object_id` | `String` | Template, Required | ID of the [CatalogObject](#type-catalogobject) to retrieve. |
+| `location_ids` | `String` | Query, Optional | The [Location](#type-location) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
 
 ### Response Type
 
