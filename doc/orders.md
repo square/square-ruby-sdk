@@ -18,18 +18,16 @@ orders_api = client.orders
 
 ## Create Order
 
-Creates an [Order](./models/order.md) which specifies products for
-purchase, along with discounts, taxes, and other settings to apply to the purchase.
+Creates a new [Order](#type-order) which can include information on products for
+purchase and settings to apply to the purchase.
 
-To pay for a created order, please refer to the [Pay for Orders](/orders-api/pay-for-orders)
+To pay for a created order, please refer to the [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders)
 guide.
 
-You can modify an order after you create it by using the
-[UpdateOrder](/doc/orders.md#updateorder) endpoint.  Orders that have reached a terminal state
-cannot be updated.
+You can modify open orders using the [UpdateOrder](#endpoint-orders-updateorder) endpoint.
 
 To learn more about the Orders API, see the
-[Orders API Overview](/products/orders/overview).
+[Orders API Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
 
 ```ruby
 def create_order(location_id:,
@@ -64,7 +62,7 @@ end
 
 ## Batch Retrieve Orders
 
-Retrieves a set of [Order](./models/order.md)s by their IDs.
+Retrieves a set of [Order](#type-order)s by their IDs.
 
 If a given Order ID does not exist, the ID is ignored instead of generating an error.
 
@@ -102,26 +100,37 @@ end
 
 ## Update Order
 
-Updates an [Order](./models/orders.md) by referencing its `order_id` and `version`.
+Updates an open [Order](#type-order) by adding, replacing, or deleting
+fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated.
 
-To pay for an order, please refer to the [Pay for Orders](/orders-api/pay-for-orders) guide.
+An UpdateOrder request requires the following:
+
+- The `order_id` in the endpoint path, identifying the order to update.
+- The latest `version` of the order to update.
+- The [sparse order](https://developer.squareup.com/docs/orders-api/manage-orders#sparse-order-objects)
+containing only the fields to update and the version the update is
+being applied to.
+- If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation)
+identifying fields to clear.
+
+To pay for an order, please refer to the [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders) guide.
 
 To learn more about the Orders API, see the
-[Orders API Overview](/products/orders/overview).
+[Orders API Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
 
 ```ruby
-def update_order(body:,
-                 location_id:,
-                 order_id:)
+def update_order(location_id:,
+                 order_id:,
+                 body:)
 ```
 
 ### Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
+| `location_id` | `String` | Template, Required | The ID of the order's associated location. |
+| `order_id` | `String` | Template, Required | The ID of the order to update. |
 | `body` | [`Update Order Request Hash`](/doc/models/update-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
-| `location_id` | `String` | Template, Required | - |
-| `order_id` | `String` | Template, Required | - |
 
 ### Response Type
 
@@ -130,11 +139,11 @@ def update_order(body:,
 ### Example Usage
 
 ```ruby
-body = {}
 location_id = 'location_id4'
 order_id = 'order_id6'
+body = {}
 
-result = orders_api.update_order(body: body, location_id: location_id, order_id: order_id)
+result = orders_api.update_order(location_id: location_id, order_id: order_id, body: body)
 
 if result.success?
   puts result.data
@@ -145,17 +154,23 @@ end
 
 ## Search Orders
 
-Search all Orders for a merchant and return either [Orders](./models/order.md) or
-[OrderEntries](./models/order-entries.md).
+Search all orders for one or more locations. Orders include all sales,
+returns, and exchanges regardless of how or when they entered the Square
+Ecosystem (e.g. Point of Sale, Invoices, Connect APIs, etc).
 
-Note that details for orders processed with Square Point of Sale while in offline mode may not be
-transmitted to Square for up to 72 hours. Offline orders have a `created_at` value that reflects
-the time the order was originally processed, not the time it was subsequently transmitted to
-Square. Consequently, the SearchOrder endpoint might list an offline Order chronologically
-between online Orders that were seen in a previous request.
+SearchOrders requests need to specify which locations to search and define a
+[`SearchOrdersQuery`](#type-searchordersquery) object which controls
+how to sort or filter the results. Your SearchOrdersQuery can:
 
-When fetching additional pages using a `cursor`, the `query` must be equal
-to the `query` used to fetch the first page of results.
+  Set filter criteria.
+  Set sort order.
+  Determine whether to return results as complete Order objects, or as
+[OrderEntry](#type-orderentry) objects.
+
+Note that details for orders processed with Square Point of Sale while in
+offline mode may not be transmitted to Square for up to 72 hours. Offline
+orders have a `created_at` value that reflects the time the order was created,
+not the time it was subsequently transmitted to Square.
 
 ```ruby
 def search_orders(body:)
@@ -201,22 +216,22 @@ end
 
 ## Pay Order
 
-Pay for an [order](./models/order.md) using one or more approved [payments](./models/payments.md),
+Pay for an [order](#type-order) using one or more approved [payments](#type-payment),
 or settle an order with a total of `0`.
 
-The total of the `payments_ids` listed in the request must be equal to the order
+The total of the `payment_ids` listed in the request must be equal to the order
 total. Orders with a total amount of `0` can be marked as paid by specifying an empty
 array of `payment_ids` in the request.
 
 To be used with PayOrder, a payment must:
 
-- Reference the order by specifying the `order_id` when [creating the payment](/doc/payments.md#createpayment).
+- Reference the order by specifying the `order_id` when [creating the payment](#endpoint-payments-createpayment).
 Any approved payments that reference the same `order_id` not specified in the
 `payment_ids` will be canceled.
-- Be approved with [delayed capture](/payments-api/take-payments#delayed-capture).
+- Be approved with [delayed capture](https://developer.squareup.com/docs/payments-api/take-payments#delayed-capture).
 Using a delayed capture payment with PayOrder will complete the approved payment.
 
-Learn how to [pay for orders with a single payment using the Payments API](/orders-api/pay-for-orders).
+Learn how to [pay for orders with a single payment using the Payments API](https://developer.squareup.com/docs/orders-api/pay-for-orders).
 
 ```ruby
 def pay_order(order_id:,

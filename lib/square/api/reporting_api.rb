@@ -39,7 +39,8 @@ module Square
                                                      end_time: nil,
                                                      sort_order: nil,
                                                      cursor: nil)
-      warn 'Endpoint list_additional_recipient_receivable_refunds in ReportingApi is deprecated'
+      warn 'Endpoint list_additional_recipient_receivable_refunds in Reporting'\
+           'Api is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/additional-recipient-receivable-refunds'
@@ -104,7 +105,8 @@ module Square
                                               end_time: nil,
                                               sort_order: nil,
                                               cursor: nil)
-      warn 'Endpoint list_additional_recipient_receivables in ReportingApi is deprecated'
+      warn 'Endpoint list_additional_recipient_receivables in ReportingApi is '\
+           'deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/additional-recipient-receivables'

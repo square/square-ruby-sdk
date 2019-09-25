@@ -33,7 +33,7 @@ def list_customers(cursor: nil,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>See [Pagination](/basics/api101/pagination) for more information. |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
 | `sort_field` | [`String (Customer Sort Field)`](/doc/models/customer-sort-field.md) | Query, Optional | Indicates how Customers should be sorted. Default: `DEFAULT`. |
 | `sort_order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | Indicates whether Customers should be sorted in ascending (`ASC`) or<br>descending (`DESC`) order. Default: `ASC`. |
 
@@ -228,9 +228,9 @@ the new `customer_id` to update merged profiles.
 
 You cannot edit a customer's cards on file with this endpoint. To make changes
 to a card on file, you must delete the existing card on file with the
-[DeleteCustomerCard](/doc/customers.md#deletecustomercard) endpoint, then
+[DeleteCustomerCard](#endpoint-customers-deletecustomercard) endpoint, then
 create a new one with the
-[CreateCustomerCard](/doc/customers.md#createcustomercard) endpoint.
+[CreateCustomerCard](#endpoint-customers-createcustomercard) endpoint.
 
 ```ruby
 def update_customer(customer_id:,

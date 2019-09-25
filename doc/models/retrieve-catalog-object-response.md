@@ -8,9 +8,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | The set of [Error](./models/error.md)s encountered. |
+| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | The set of [Error](#type-error)s encountered. |
 | `object` | [`Catalog Object Hash`](/doc/models/catalog-object.md) | Optional | - |
-| `related_objects` | [`Array<Catalog Object Hash>`](/doc/models/catalog-object.md) | Optional | A list of [CatalogObject](./models/catalog-object.md)s referenced by the object in the `object` field. |
+| `related_objects` | [`Array<Catalog Object Hash>`](/doc/models/catalog-object.md) | Optional | A list of [CatalogObject](#type-catalogobject)s referenced by the object in the `object` field. |
 
 ### Example (as JSON)
 

@@ -41,7 +41,7 @@ def list_payments(begin_time: nil,
 | `begin_time` | `String` | Query, Optional | Timestamp for the beginning of the reporting period, in RFC 3339 format.<br>Inclusive. Default: The current time minus one year. |
 | `end_time` | `String` | Query, Optional | Timestamp for the end of the requested reporting period, in RFC 3339 format.<br><br>Default: The current time. |
 | `sort_order` | `String` | Query, Optional | The order in which results are listed.<br>- `ASC` - oldest to newest<br>- `DESC` - newest to oldest (default). |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See [Pagination](/basics/api101/pagination) for more information. |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
 | `location_id` | `String` | Query, Optional | ID of location associated with payment |
 | `total` | `Long` | Query, Optional | The exact amount in the total_money for a `Payment`. |
 | `last_4` | `String` | Query, Optional | The last 4 digits of `Payment` card. |
@@ -74,7 +74,7 @@ There are several optional parameters that you can include in the request.
 For example, tip money, whether to autocomplete the payment, or a reference ID
 to correlate this payment with another system. 
 For more information about these 
-payment options, see [Take Payments](/payments-api/take-payments).
+payment options, see [Take Payments](https://developer.squareup.com/docs/payments-api/take-payments).
 
 The `PAYMENTS_WRITE_ADDITIONAL_RECIPIENTS` OAuth permission is required
 to enable application fees.
@@ -122,7 +122,7 @@ end
 
 ## Cancel Payment by Idempotency Key
 
-Cancels a payment identified by the idenpotency key that is specified the request.
+Cancels (voids) a payment identified by the idempotency key that is specified in the request. 
 
 Use this method when status of a CreatePayment request is unknown.
 For example, after you send a CreatePayment
@@ -196,9 +196,9 @@ end
 
 ## Cancel Payment
 
-Cancels a payment. If you set `autocomplete` to false when creating a payment, 
+Cancels (voids) a payment. If you set `autocomplete` to false when creating a payment,
 you can cancel the payment using this endpoint. For more information, see
-[Delayed Payments](/payments-api/take-payments#delayed-payments).
+[Delayed Payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments).
 
 ```ruby
 def cancel_payment(payment_id:)
@@ -230,12 +230,12 @@ end
 
 ## Complete Payment
 
-Completes a payment.
+Completes (captures) a payment.
 
 By default, payments are set to complete immediately after they are created. 
-If you set autocomplete to false when creating a payment, 
-you can complete the payment using this endpoint. For more information, see
-[Delayed Payments](/payments-api/take-payments#delayed-payments).
+If you set autocomplete to false when creating a payment, you can complete (capture) 
+the payment using this endpoint. For more information, see
+[Delayed Payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments).
 
 ```ruby
 def complete_payment(payment_id:)

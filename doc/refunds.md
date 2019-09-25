@@ -37,9 +37,9 @@ def list_payment_refunds(begin_time: nil,
 | `begin_time` | `String` | Query, Optional | Timestamp for the beginning of the requested reporting period, in RFC 3339 format.<br><br>Default: The current time minus one year. |
 | `end_time` | `String` | Query, Optional | Timestamp for the end of the requested reporting period, in RFC 3339 format.<br><br>Default: The current time. |
 | `sort_order` | `String` | Query, Optional | The order in which results are listed.<br>- `ASC` - oldest to newest<br>- `DESC` - newest to oldest (default). |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See [Pagination](/basics/api101/pagination) for more information. |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
 | `location_id` | `String` | Query, Optional | ID of location associated with payment. |
-| `status` | `String` | Query, Optional | If provided, only refunds with the given status are returned. <br>For a list of refund status values, see [PaymentRefund](./models/payment-refund.md).<br><br>Default: If omitted refunds are returned regardless of status. |
+| `status` | `String` | Query, Optional | If provided, only refunds with the given status are returned. <br>For a list of refund status values, see [PaymentRefund](#type-paymentrefund).<br><br>Default: If omitted refunds are returned regardless of status. |
 | `source_type` | `String` | Query, Optional | If provided, only refunds with the given source type are returned. <br>- `CARD` - List refunds only for payments where card was specified as payment <br>source.<br><br>Default: If omitted refunds are returned regardless of source type. |
 
 ### Response Type
@@ -62,7 +62,7 @@ end
 
 Refunds a payment. You can refund the entire payment amount or a 
 portion of it. For more information, see 
-[Payments and Refunds Overview](/payments-api/overview).
+[Payments and Refunds Overview](https://developer.squareup.com/docs/payments-api/overview).
 
 ```ruby
 def refund_payment(body:)
