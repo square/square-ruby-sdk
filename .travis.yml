@@ -13,7 +13,7 @@ deploy:
   provider: rubygems
   api_key:
     secure: APwgfUKWYhBNNniPnVPbUN1nThch9YbXpahuRXyjgfly5RgfZew2g4OIDWHIS/ILhkylM3PpHZPEk02BVf65rPgvl/KZbv2FOM6DZRQ8QUr54gh9A5JwgfSc62t8fmFyzBMgOyJ5csS3f9rZUp8UuUBkCiWQsESqjytAFU35duPioiz1gkUwChcZ8A3Ap8sSYQeHadXdkfcd8fahFnbgHFRH6h7SuXqZIS5SwcMmJRem33HRfd6AImjI9p23H3C0/ajFIX/qrTlwIe+ZtvXJb3rjCjt6y/1chY91F3VDx2T2p4hs1qRcYYj8WQOTllum73arvtoACpLDU7ebe1lzWlC+GA7dUOjzvuwI8NzZGpaU15R0HEOAjctJFlnOF9H0XtvT95IcpVX99pVxzqA3DSdPlzTE5dBlJwFyMDNrjwrESLq2me58+R94ZYQa0hkmcGnBYn8UugRqsHycTRH8ZoCURqv8mFbRfAdAnESWE/dj/i66ptm7vnzHb0PRp9EVWQN2/M92eQ92/Sybu7qwNP5Zw7uQZAL/Vt4kswZCRrwVZ8dnsa2QAAZ2M51OrK9d4GyMn/nurWVE3GdZT/mXFbWz/40WA2+16u80128TDr0iWe882feTLJ3pTc6NZrwEPOIX98WtGl/yCOSWK5ulrDE99VYc+PB2IKa4N2T2Ca8=
-  gem: square.rb
+  gem: square
   on:
     branch: master
     repo: square/square-ruby-sdk
