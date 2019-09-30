@@ -33,7 +33,7 @@ result = v1_locations_api.retrieve_business()
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -57,7 +57,7 @@ result = v1_locations_api.list_locations()
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 

@@ -50,7 +50,7 @@ result = v1_transactions_api.list_bank_accounts(location_id: location_id)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -85,7 +85,7 @@ result = v1_transactions_api.retrieve_bank_account(location_id: location_id, ban
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -123,7 +123,7 @@ result = v1_transactions_api.list_orders(location_id: location_id, )
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -158,7 +158,7 @@ result = v1_transactions_api.retrieve_order(location_id: location_id, order_id: 
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -197,7 +197,7 @@ result = v1_transactions_api.update_order(location_id: location_id, order_id: or
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -251,7 +251,7 @@ result = v1_transactions_api.list_payments(location_id: location_id, )
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -286,7 +286,7 @@ result = v1_transactions_api.retrieve_payment(location_id: location_id, payment_
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -328,7 +328,7 @@ result = v1_transactions_api.list_refunds(location_id: location_id, )
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -377,7 +377,7 @@ result = v1_transactions_api.create_refund(location_id: location_id, body: body)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -426,7 +426,7 @@ result = v1_transactions_api.list_settlements(location_id: location_id, )
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -477,7 +477,7 @@ result = v1_transactions_api.retrieve_settlement(location_id: location_id, settl
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
