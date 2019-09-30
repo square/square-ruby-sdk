@@ -79,7 +79,7 @@ result = v1_items_api.list_categories(location_id: location_id)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -114,7 +114,7 @@ result = v1_items_api.create_category(location_id: location_id, body: body)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -152,7 +152,7 @@ result = v1_items_api.delete_category(location_id: location_id, category_id: cat
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -190,7 +190,7 @@ result = v1_items_api.update_category(location_id: location_id, category_id: cat
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -222,7 +222,7 @@ result = v1_items_api.list_discounts(location_id: location_id)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -257,7 +257,7 @@ result = v1_items_api.create_discount(location_id: location_id, body: body)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -295,7 +295,7 @@ result = v1_items_api.delete_discount(location_id: location_id, discount_id: dis
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -333,7 +333,7 @@ result = v1_items_api.update_discount(location_id: location_id, discount_id: dis
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -365,7 +365,7 @@ result = v1_items_api.list_fees(location_id: location_id)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -400,7 +400,7 @@ result = v1_items_api.create_fee(location_id: location_id, body: body)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -438,7 +438,7 @@ result = v1_items_api.delete_fee(location_id: location_id, fee_id: fee_id)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -476,7 +476,7 @@ result = v1_items_api.update_fee(location_id: location_id, fee_id: fee_id, body:
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -512,7 +512,7 @@ result = v1_items_api.list_inventory(location_id: location_id, )
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -550,7 +550,7 @@ result = v1_items_api.adjust_inventory(location_id: location_id, variation_id: v
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -584,7 +584,7 @@ result = v1_items_api.list_items(location_id: location_id, )
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -631,7 +631,7 @@ result = v1_items_api.create_item(location_id: location_id, body: body)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -669,7 +669,7 @@ result = v1_items_api.delete_item(location_id: location_id, item_id: item_id)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -704,7 +704,7 @@ result = v1_items_api.retrieve_item(location_id: location_id, item_id: item_id)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -742,7 +742,7 @@ result = v1_items_api.update_item(location_id: location_id, item_id: item_id, bo
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -780,7 +780,7 @@ result = v1_items_api.remove_fee(location_id: location_id, item_id: item_id, fee
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -818,7 +818,7 @@ result = v1_items_api.apply_fee(location_id: location_id, item_id: item_id, fee_
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -856,7 +856,7 @@ result = v1_items_api.remove_modifier_list(location_id: location_id, modifier_li
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -894,7 +894,7 @@ result = v1_items_api.apply_modifier_list(location_id: location_id, modifier_lis
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -932,7 +932,7 @@ result = v1_items_api.create_variation(location_id: location_id, item_id: item_i
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -973,7 +973,7 @@ result = v1_items_api.delete_variation(location_id: location_id, item_id: item_i
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -1014,7 +1014,7 @@ result = v1_items_api.update_variation(location_id: location_id, item_id: item_i
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -1046,7 +1046,7 @@ result = v1_items_api.list_modifier_lists(location_id: location_id)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -1081,7 +1081,7 @@ result = v1_items_api.create_modifier_list(location_id: location_id, body: body)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -1120,7 +1120,7 @@ result = v1_items_api.delete_modifier_list(location_id: location_id, modifier_li
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -1155,7 +1155,7 @@ result = v1_items_api.retrieve_modifier_list(location_id: location_id, modifier_
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -1193,7 +1193,7 @@ result = v1_items_api.update_modifier_list(location_id: location_id, modifier_li
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -1231,7 +1231,7 @@ result = v1_items_api.create_modifier_option(location_id: location_id, modifier_
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -1272,7 +1272,7 @@ result = v1_items_api.delete_modifier_option(location_id: location_id, modifier_
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -1313,7 +1313,7 @@ result = v1_items_api.update_modifier_option(location_id: location_id, modifier_
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -1345,7 +1345,7 @@ result = v1_items_api.list_pages(location_id: location_id)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -1380,7 +1380,7 @@ result = v1_items_api.create_page(location_id: location_id, body: body)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -1418,7 +1418,7 @@ result = v1_items_api.delete_page(location_id: location_id, page_id: page_id)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -1456,7 +1456,7 @@ result = v1_items_api.update_page(location_id: location_id, page_id: page_id, bo
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -1498,7 +1498,7 @@ result = v1_items_api.delete_page_cell(location_id: location_id, page_id: page_i
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -1536,7 +1536,7 @@ result = v1_items_api.update_page_cell(location_id: location_id, page_id: page_i
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
