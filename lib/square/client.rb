@@ -13,7 +13,7 @@ module Square
     end
 
     def square_version
-      '2019-09-25'
+      '2019-10-23'
     end
 
     # Access to mobile_authorization controller.

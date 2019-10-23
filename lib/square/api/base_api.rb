@@ -14,7 +14,7 @@ module Square
 
       @global_headers = {
         'user-agent' => 'Square-Ruby-SDK/3.20190925.0',
-        'Square-Version' => '2019-09-25'
+        'Square-Version' => '2019-10-23'
       }
     end
 
