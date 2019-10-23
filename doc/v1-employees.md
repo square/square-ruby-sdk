@@ -52,7 +52,7 @@ def list_employees(order: nil,
 | `end_updated_at` | `String` | Query, Optional | If filtering results by there updated_at field, the end of the requested reporting period, in ISO 8601 format. |
 | `begin_created_at` | `String` | Query, Optional | If filtering results by their created_at field, the beginning of the requested reporting period, in ISO 8601 format. |
 | `end_created_at` | `String` | Query, Optional | If filtering results by their created_at field, the end of the requested reporting period, in ISO 8601 format. |
-| `status` | [`String (V1 Employee Status)`](/doc/models/v1-employee-status.md) | Query, Optional | If provided, the endpoint returns only employee entities with the specified status (ACTIVE or INACTIVE). |
+| `status` | [`String (V1 List Employees Request Status)`](/doc/models/v1-list-employees-request-status.md) | Query, Optional | If provided, the endpoint returns only employee entities with the specified status (ACTIVE or INACTIVE). |
 | `external_id` | `String` | Query, Optional | If provided, the endpoint returns only employee entities with the specified external_id. |
 | `limit` | `Integer` | Query, Optional | The maximum integer number of employee entities to return in a single response. Default 100, maximum 200. |
 | `batch_token` | `String` | Query, Optional | A pagination cursor to retrieve the next set of results for your<br>original query to the endpoint. |
@@ -69,7 +69,7 @@ result = v1_employees_api.list_employees()
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -112,7 +112,7 @@ result = v1_employees_api.create_employee(body: body)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -144,7 +144,7 @@ result = v1_employees_api.retrieve_employee(employee_id: employee_id)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -181,7 +181,7 @@ result = v1_employees_api.update_employee(employee_id: employee_id, body: body)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -215,7 +215,7 @@ result = v1_employees_api.list_employee_roles()
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -261,7 +261,7 @@ result = v1_employees_api.create_employee_role(body: body)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -293,7 +293,7 @@ result = v1_employees_api.retrieve_employee_role(role_id: role_id)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -330,7 +330,7 @@ result = v1_employees_api.update_employee_role(role_id: role_id, body: body)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -380,7 +380,7 @@ result = v1_employees_api.list_timecards()
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -423,7 +423,7 @@ result = v1_employees_api.create_timecard(body: body)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -469,7 +469,7 @@ result = v1_employees_api.delete_timecard(timecard_id: timecard_id)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -506,7 +506,7 @@ result = v1_employees_api.retrieve_timecard(timecard_id: timecard_id)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -544,7 +544,7 @@ result = v1_employees_api.update_timecard(timecard_id: timecard_id, body: body)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -583,7 +583,7 @@ result = v1_employees_api.list_timecard_events(timecard_id: timecard_id)
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -621,7 +621,7 @@ result = v1_employees_api.list_cash_drawer_shifts(location_id: location_id, )
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 
@@ -656,7 +656,7 @@ result = v1_employees_api.retrieve_cash_drawer_shift(location_id: location_id, s
 if result.success?
   puts result.data
 elsif result.error?
-  warn result.errors
+  warn result.data
 end
 ```
 

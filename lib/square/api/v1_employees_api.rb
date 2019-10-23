@@ -26,9 +26,9 @@ module Square
     # @param [String] end_created_at Optional parameter: If filtering results by
     # their created_at field, the end of the requested reporting period, in ISO
     # 8601 format.
-    # @param [V1EmployeeStatus] status Optional parameter: If provided, the
-    # endpoint returns only employee entities with the specified status (ACTIVE
-    # or INACTIVE).
+    # @param [V1ListEmployeesRequestStatus] status Optional parameter: If
+    # provided, the endpoint returns only employee entities with the specified
+    # status (ACTIVE or INACTIVE).
     # @param [String] external_id Optional parameter: If provided, the endpoint
     # returns only employee entities with the specified external_id.
     # @param [Integer] limit Optional parameter: The maximum integer number of
