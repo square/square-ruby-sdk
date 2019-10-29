@@ -25,6 +25,8 @@ jobs:
 notifications:
   slack:
     secure: HY0ZG1ik+8MtoFKrNLBCYmWpCdVpSnyM5WbpRq70WbfNg1Qm6xE5hc+Y7WI+MJsPyX0R7xkR3IvmvmNY8vP+dzwECdvR7dsgRGvYXb+RpVVPERwHhxTEop94PdMoLXoQGNqAUv1Mw/0KxuwRH+dFtf9nIgTf1N8DSZjML51tzbvwhXQM2VgUbkU7xTXQYFjAGq/Fr8Hbr5TVY6bum+v7OKQq+yaOxFTgByEkhQtsDOmNmxYoIHj2yS2PTrTEvY6caPKfK6ZleNHaCTsZx2p5wyFunhSKV2eFNJDE8kasnMqOukdX1eERJIn1fOd9oL3KaBsMkQybtq+XNJctbLedz9oj5HxcRPoadniqKJDeOKOOvElTl/y18j+riRFW6M8PClNo1T5mf6+5wUFCkowPRlMFLdpbfJxlo3Mdw7gvtaujMSPMSc4f3snryejBe7MG9sV3nU8YD2TGR4K2XRWtMaBIn28lstk3Ax/A9FMgyYpTw0zoIW40mVzLYQV7a8ZmUykhfh4sBVBI0hdWj5HM/mwJbtabR7skAT9IlloLcMz8jTJ/+joH3DS1Ijst9U866ahoEHHx7/7FT0MQOD1oAmbMmMeOlzqA8ry1aRNJGn3WMCDDowbS62WfhyNnILQ4eUSUTCLftcpw31IQzBi/fOWuMRXJZb35tTwtaui3ezY=
+    on_success: change
+    on_failure: always
     template:
       - "@oncall"
       - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch} in PR <%{pull_request_url}|#%{pull_request_number}> by %{author} %{result} in %{duration}"
