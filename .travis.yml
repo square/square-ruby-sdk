@@ -11,14 +11,21 @@ env:
   - secure: dRllu+yzOsDEyFdU/Q0xkPIk3xNCTCvXXV/PLuQF/h/vLLQnKDHw5BlKKxf57omzKSQgqGQYKIxFwpZHyH1EG2rWKrJ56ZPgCdmz3Q22OyyaZ7ox0oxLw/ixC72yMQG1PCIIKiKSpT9yeeykhQJSgKCdNyFh8S4bes/GxDBRWzst13LvQ8sBtyn8kU01uuZ+9JsZ6J+uJ1mRZp0zVodi/VPpzrypks8lJ31f5T4xWIqI41edACPwUo8bGp8nnA97IFKLJyOti2e8sezNSW1voAwraq+bpfj3T746z+Wn6AiW2MVcZXAkEreOOIva8Xx3K2PBiO2oH1xK0y4tSbs2HXCIw8L88A76cf6Cej61yYtunEL/ERaLr89t+KFxqVE4WoGIJ4WtcmypmP9WN912WjoB5YtFn1RhTJ/mHARmdo2+vKKKAFjD+B0y8HZCd9UrrQQrpSnf1DfljmsBGWHFWvxG3CqoWZUgYSlxmmPYJfOG8S103z+t2D6xnlEC+RbBZ2QWz+hqrOl8NiJ9BQe088EYUL4YUjDDDt45jkfQDUJ4iD4lLOJ8owZnLOlu88x0SLln7/BBANw1LZQneKPeqL+6Ksq5BoMCpBed4BSeseHxouUpS0YYP2JHs6MfIUnBXl9NMbPgGpRSKAu1Rq4gkzuc+U0kIUJMoS8sFktT+a4=
 jobs:
   include:
-    - stage: deploy
-      rvm: 2.4.6
-      deploy:
-        provider: rubygems
-        api_key:
-          secure: Plrf7CrIRXQl+NBMeAvOa1K0aLR07WMtqTUJ+wD69q5tBzZQ+T2oBdt29G9wW1R+5jxx+lP0cR9jhphsb1gNQie955BNtj366YkE7uUK4VkRDKvv7yr+GNhrCAXEp6XGg8TI+3tAM7nf6MsAGUwCyzbUVYiF8VD10vmYR2vw0RjOYb43HsupId11HNch0jDmXb42nnTv1XhHJaMoKMdOdE54oirtkTYS35wSwM96lyYJIOthCEErK1GDElGD7dmaoecjhNxQtNkO50NXBt6p6MSPC+nbnoheMYsLpm7ab13QJ+2OYvnWKk5A0z9XhLy5POPj2mOuYFu7sol2v7YzoHv6PH8TVDg+MgXTfXr2favtPcOCEksijWT7gVMYcI5hocuOjTPuyEo29dsjfUGpxbqQe2H0e74blM35327pQTmkL2gaMKLf2m8K3jz+/xZFD9Iz1yhvxmNavVzc4O4ZOe3HdH1nQORRciAJWY+X8sbAFJY9yrIXPYfsUtVXsVROlaR6BRx4Dr72SblyccpbTPsn+PuOWWKFPD+N1PB/oXPnu6IzD7SP7F6uEUAeGy0Otq0pFKeC3zRXyoGTUF1buMzJ8ORT9bYUJyzrprZ7AKXHjh9DJxniRlnX3sgn8pEDuEJI/lAodKWKqiamudcI7Po2oo2+bnPBVmtiXjFk/6g=
-        gemspec: square.gemspec
-        gem: square.rb
-        on:
-          branch: master
-          repo: square/square-ruby-sdk
+  - stage: deploy
+    rvm: 2.4.6
+    deploy:
+      provider: rubygems
+      api_key:
+        secure: Plrf7CrIRXQl+NBMeAvOa1K0aLR07WMtqTUJ+wD69q5tBzZQ+T2oBdt29G9wW1R+5jxx+lP0cR9jhphsb1gNQie955BNtj366YkE7uUK4VkRDKvv7yr+GNhrCAXEp6XGg8TI+3tAM7nf6MsAGUwCyzbUVYiF8VD10vmYR2vw0RjOYb43HsupId11HNch0jDmXb42nnTv1XhHJaMoKMdOdE54oirtkTYS35wSwM96lyYJIOthCEErK1GDElGD7dmaoecjhNxQtNkO50NXBt6p6MSPC+nbnoheMYsLpm7ab13QJ+2OYvnWKk5A0z9XhLy5POPj2mOuYFu7sol2v7YzoHv6PH8TVDg+MgXTfXr2favtPcOCEksijWT7gVMYcI5hocuOjTPuyEo29dsjfUGpxbqQe2H0e74blM35327pQTmkL2gaMKLf2m8K3jz+/xZFD9Iz1yhvxmNavVzc4O4ZOe3HdH1nQORRciAJWY+X8sbAFJY9yrIXPYfsUtVXsVROlaR6BRx4Dr72SblyccpbTPsn+PuOWWKFPD+N1PB/oXPnu6IzD7SP7F6uEUAeGy0Otq0pFKeC3zRXyoGTUF1buMzJ8ORT9bYUJyzrprZ7AKXHjh9DJxniRlnX3sgn8pEDuEJI/lAodKWKqiamudcI7Po2oo2+bnPBVmtiXjFk/6g=
+      gemspec: square.gemspec
+      gem: square.rb
+      on:
+        branch: master
+        repo: square/square-ruby-sdk
+notifications:
+  slack:
+    on_failure: change
+    on_success: change
+    template:
+    - "@oncall Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch} in PR <%{pull_request_url}|#%{pull_request_number}> by %{author} %{result} in %{duration}"
+    secure: VvZiRsoZUrVZYj0XnG+3dIcD3PEsjjJKgRDA1OHs0liPcc10iGV4FlaQSEiMAaknZrXG0gDQRxAx4HxEAjx8Wq0Kdp3NSsFett1uIMxR7D1u5K7hFZG3gN+X/3iFWO+Z8rLsoWuvUBfHZateWCObD48GQsyd5G7oQ9v1gJUuBgqCj4oKJd4V6Iww/u06Lum/SXO4A4aQy/FHZRqtMZ4QIGhFzzopSvxtCN90Gx7XHUhXpiOCEKshs6OW/+LyqWPukCW5iBhnh/r6uEVYLtnnbpkhp2hQRcoHVhNhL+MmZeupMe2paF2Y33xxXQQov+jGZHOI225Z1/weIiw38iy7OT0nZ4zgqgDupAMEG1MS4EsILtza2dOMn1NjLA1S2XrT5KWJvHjnZjP6eZpy49eJFwyB4tfhkmGms7t3EHqP7QaV2qwLys5ziKsbdt0HOpBHJvTecsJ8sQgYhlUUwXYDyjdjV7Nw8QkHs9xsqp8J8olZpzmfq185L31gfdXgv3+3FJj99YWwxq7cZXOBGhslRs7ttSNsN4yqatxUUaCkD+DJLJkVPIu0M/8vTqSyOPfR7M4nJB1MDwVPOaz+YFStcFmE/eS+pve4guV87axUvie6Jk9xEMjcjCStgS/M59AhX6buH4sAYmXUGY5md3kc6anjtTO2kSdfrnJcp1lwqOY=
