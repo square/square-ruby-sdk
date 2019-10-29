@@ -26,9 +26,9 @@ notifications:
   slack:
     secure: AKVo8jTy88L6GJF5/l2gOqYe7AYIoQtFZORP/5tFdaQdcpNd4WCbLX816FoagfH0cBQX0xR7EJuTZtjzCrSYJABuw3esFHMwMiP0zT4OrQOHX5vHzCfDRI2sqF2qh0v/CuqDPUQ9WsJzo3lUmlGVBJdIY3b+F17N9h99dom6SAmHe0z3qcwajidAKeKyxOdM1w1Rj+Zq84SyuK8ZFPSR2BQVqy6+JSPnvjAIQWHs9C/myRAxwVC1YneNwMiO3jOokc6HxJkDqdfS2YSHBO5pb/LmHs5Ew+K43p4aTBqW+0FEcMUEcLFiTRQD+N+M6lE77w5qSrapXzauLir21l78u+yyNNR2n+0iOSkbglCwapatTHvCvRGHqK+6/gSif1z9xTBag/SDGNI8qXrD0ZL/xjnoaCo1hGkB8oMa1nMsYevC9m72sQLpO9Oxo9KHH9AA6MRjJN0MJb5Es/KGg+WOFn5Q/RryplWaf71WH0Bd98uJ+Zb1ln7LLD0l48jkDPxhSVhBAjN7pM/59HFU6+5tSfxHpSHUTBq00QyVOzd4adyrIxuy+ibjuDoQDgiqPqzuiVjl+rXwf2MMeMmKatSsQSheD36lcuXoHyyAq7tQn+BhjTgyAgFoyUYY3xWl7SyVgzHSARHKADYUZojtFWc2QE/JWIkS9ptEf/La3/d8eWU=
     on_success: change
-        template:
-          - "@oncall"
-          - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch} in PR <%{pull_request_url}|#%{pull_request_number}> by %{author} %{result} in %{duration}"
+    template:
+      - "@oncall"
+      - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch} in PR <%{pull_request_url}|#%{pull_request_number}> by %{author} %{result} in %{duration}"
   email:
     recipients:
       - dexteam-external@squareup.com
