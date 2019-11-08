@@ -137,7 +137,7 @@ module Square
     # Parses JSON string.
     # @param [String] A JSON string.
     def self.json_deserialize(json)
-      return JSON.parse(json, symbolize_names: true)
+      JSON.parse(json, symbolize_names: true)
     rescue StandardError
       raise TypeError, 'Server responded with invalid JSON.'
     end
@@ -166,6 +166,7 @@ module Square
       a.each do |key, value_a|
         b.each do |k, value_b|
           next unless key == k
+
           x[k] = []
           if value_a.instance_of? Array
             value_a.each do |v|

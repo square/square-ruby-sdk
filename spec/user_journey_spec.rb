@@ -14,18 +14,18 @@ describe "UserJourney" do
 
   let :customer do
     {
-        "given_name": "Amelia",
-        "family_name": "Earhart",
-        "phone_number": phone_number,
-        "note": "a customer",
-        "address": {
-            "address_line_1": "500 Electric Ave",
-            "address_line_2": "Suite 600",
-            "locality": "New York",
-            "administrative_district_level_1": "NY",
-            "postal_code": postal_code,
-            "country": "US"
-        }
+      "given_name": "Amelia",
+      "family_name": "Earhart",
+      "phone_number": phone_number,
+      "note": "a customer",
+      "address": {
+        "address_line_1": "500 Electric Ave",
+        "address_line_2": "Suite 600",
+        "locality": "New York",
+        "administrative_district_level_1": "NY",
+        "postal_code": postal_code,
+        "country": "US"
+      }
     }
   end
 
@@ -70,7 +70,6 @@ describe "UserJourney" do
     end
   end
 
-
   # There is no sandbox support for V1 endpoints as production token is required for the following tests
   # describe 'V1 Category' do
   #   it 'should succeed for each endpoint call' do
@@ -110,7 +109,6 @@ describe "UserJourney" do
       # create
       response = sq.customers.create_customer(body: customer)
       assert_equal response.data.customer[:phone_number], phone_number
-
 
       assert_equal response.status_code, 200
       created_customer = response.data.customer
