@@ -30,9 +30,8 @@ module Square
     # newest first).  Default value: `DESC`
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
-    # results for your original query.  See
-    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
-    # for more information.
+    # results for your original query.  See [Paginating
+    # results](#paginatingresults) for more information.
     # @return [ListAdditionalRecipientReceivableRefundsResponse Hash] response from the API call
     def list_additional_recipient_receivable_refunds(location_id:,
                                                      begin_time: nil,
@@ -96,9 +95,8 @@ module Square
     # newest first).  Default value: `DESC`
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
-    # results for your original query.  See
-    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
-    # for more information.
+    # results for your original query.  See [Paginating
+    # results](#paginatingresults) for more information.
     # @return [ListAdditionalRecipientReceivablesResponse Hash] response from the API call
     def list_additional_recipient_receivables(location_id:,
                                               begin_time: nil,

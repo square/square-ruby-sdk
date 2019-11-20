@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `client_id` | `String` | Optional | Your application's ID, available from the [application dashboard](https://connect.squareup.com/apps). |
+| `client_id` | `String` | Optional | The Square issued ID for your application, available from the<br>[application dashboard](https://connect.squareup.com/apps). |
 | `access_token` | `String` | Optional | The access token of the merchant whose token you want to revoke.<br>Do not provide a value for merchant_id if you provide this parameter. |
 | `merchant_id` | `String` | Optional | The ID of the merchant whose token you want to revoke.<br>Do not provide a value for access_token if you provide this parameter. |
 

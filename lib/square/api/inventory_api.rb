@@ -202,9 +202,9 @@ module Square
     # empty list queries all locations.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
-    # results for the original query.  See
-    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
-    # for more information.
+    # results for the original query.  See the
+    # [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pa
+    # gination) guide for more information.
     # @return [RetrieveInventoryCountResponse Hash] response from the API call
     def retrieve_inventory_count(catalog_object_id:,
                                  location_ids: nil,
@@ -257,9 +257,9 @@ module Square
     # empty list queries all locations.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
-    # results for the original query.  See
-    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
-    # for more information.
+    # results for the original query.  See the
+    # [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pa
+    # gination) guide for more information.
     # @return [RetrieveInventoryChangesResponse Hash] response from the API call
     def retrieve_inventory_changes(catalog_object_id:,
                                    location_ids: nil,

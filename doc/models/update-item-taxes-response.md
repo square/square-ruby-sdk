@@ -8,8 +8,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | The set of [Error](#type-error)s encountered. |
-| `updated_at` | `String` | Optional | The database [timestamp](#workingwithdates) of this update in RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z". |
+| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Information on any errors encountered. |
+| `updated_at` | `String` | Optional | The database [timestamp](https://developer.squareup.com/docs/build-basics/working-with-date) of this update in RFC 3339 format, e.g., `2016-09-04T23:59:33.123Z`. |
 
 ### Example (as JSON)
 

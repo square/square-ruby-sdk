@@ -11,12 +11,13 @@ locations_api = client.locations
 ## Methods
 
 * [List Locations](/doc/locations.md#list-locations)
+* [Create Location](/doc/locations.md#create-location)
 * [Retrieve Location](/doc/locations.md#retrieve-location)
 * [Update Location](/doc/locations.md#update-location)
 
 ## List Locations
 
-Provides the details for all of a business's locations.
+Provides information of all locations of a business.
 
 Most other Connect API endpoints have a required `location_id` path parameter.
 The `id` field of the [`Location`](#type-location) objects returned by this
@@ -34,6 +35,47 @@ def list_locations
 
 ```ruby
 result = locations_api.list_locations()
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+## Create Location
+
+Creates a location.
+For more information about locations, see [Locations API Overview](https://developer.squareup.com/docs/locations-api).
+
+```ruby
+def create_location(body:)
+```
+
+### Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Create Location Request Hash`](/doc/models/create-location-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+### Response Type
+
+[`Create Location Response Hash`](/doc/models/create-location-response.md)
+
+### Example Usage
+
+```ruby
+body = {}
+body[:location] = {}
+body[:location][:name] = 'New location name'
+body[:location][:address] = {}
+body[:location][:address][:address_line_1] = '1234 Peachtree St. NE'
+body[:location][:address][:locality] = 'Atlanta'
+body[:location][:address][:administrative_district_level_1] = 'GA'
+body[:location][:address][:postal_code] = '30309'
+body[:location][:description] = 'My new location.'
+
+result = locations_api.create_location(body: body)
 
 if result.success?
   puts result.data
@@ -76,7 +118,7 @@ end
 
 ## Update Location
 
-Updates the `Location` specified by the given ID.
+Updates a location.
 
 ```ruby
 def update_location(location_id:,
@@ -99,6 +141,25 @@ def update_location(location_id:,
 ```ruby
 location_id = 'location_id4'
 body = {}
+body[:location] = {}
+body[:location][:name] = 'Updated nickname'
+body[:location][:address] = {}
+body[:location][:address][:address_line_1] = '1234 Peachtree St. NE'
+body[:location][:address][:locality] = 'Atlanta'
+body[:location][:address][:administrative_district_level_1] = 'GA'
+body[:location][:address][:postal_code] = '30309'
+body[:location][:business_hours] = {}
+body[:location][:business_hours][:periods] = []
+
+
+body[:location][:business_hours][:periods][0] = {}
+body[:location][:business_hours][:periods][0][:day_of_week] = 'MON'
+body[:location][:business_hours][:periods][0][:start_local_time] = '09:00'
+body[:location][:business_hours][:periods][0][:end_local_time] = '17:00'
+
+body[:location][:description] = 'Updated description'
+body[:location][:twitter_username] = 'twitter'
+body[:location][:instagram_username] = 'instagram'
 
 result = locations_api.update_location(location_id: location_id, body: body)
 

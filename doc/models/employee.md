@@ -1,7 +1,6 @@
 ## Employee
 
-An employee created in the **Square Dashboard** account of a business. 
-Used by the Labor API.
+An employee object that is used by the external API.
 
 ### Structure
 
@@ -11,12 +10,12 @@ Used by the Labor API.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `String` | Optional | UUID for this `Employee`. |
-| `first_name` | `String` | Optional | Given (first) name of the employee. |
-| `last_name` | `String` | Optional | Family (last) name of the employee |
-| `email` | `String` | Optional | Email of the employee |
-| `phone_number` | `String` | Optional | Phone number of the employee in E.164 format, i.e. "+12125554250" |
-| `location_ids` | `Array<String>` | Optional | A list of location IDs where this employee has access. |
+| `id` | `String` | Optional | UUID for this object. |
+| `first_name` | `String` | Optional | The employee's first name. |
+| `last_name` | `String` | Optional | The employee's last name. |
+| `email` | `String` | Optional | The employee's email address |
+| `phone_number` | `String` | Optional | The employee's phone number in E.164 format, i.e. "+12125554250" |
+| `location_ids` | `Array<String>` | Optional | A list of location IDs where this employee has access to. |
 | `status` | [`String (Employee Status)`](/doc/models/employee-status.md) | Optional | The status of the Employee being retrieved. |
 | `created_at` | `String` | Optional | A read-only timestamp in RFC 3339 format. |
 | `updated_at` | `String` | Optional | A read-only timestamp in RFC 3339 format. |

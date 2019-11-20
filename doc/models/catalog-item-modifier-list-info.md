@@ -1,6 +1,7 @@
 ## Catalog Item Modifier List Info
 
-Controls the properties of a [CatalogModifierList](#type-catalogmodifierlist) as it applies to this [CatalogItem](#type-catalogitem).
+Controls the properties of a `CatalogModifierList` as it applies to
+this `CatalogItem`.
 
 ### Structure
 
@@ -10,11 +11,11 @@ Controls the properties of a [CatalogModifierList](#type-catalogmodifierlist) as
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `modifier_list_id` | `String` |  | The ID of the [CatalogModifierList](#type-catalogmodifierlist) controlled by this [CatalogModifierListInfo](#type-catalogmodifierlistinfo). |
-| `modifier_overrides` | [`Array<Catalog Modifier Override Hash>`](/doc/models/catalog-modifier-override.md) | Optional | A set of [CatalogModifierOverride](#type-catalogmodifieroverride) objects that override whether a given [CatalogModifier](#type-catalogmodifier) is enabled by default. |
-| `min_selected_modifiers` | `Integer` | Optional | If zero or larger, the smallest number of [CatalogModifier](#type-catalogmodifier)s that must be selected from this [CatalogModifierList](#type-catalogmodifierlist). |
-| `max_selected_modifiers` | `Integer` | Optional | If zero or larger, the largest number of [CatalogModifier](#type-catalogmodifier)s that can be selected from this [CatalogModifierList](#type-catalogmodifierlist). |
-| `enabled` | `Boolean` | Optional | If `true`, enable this [CatalogModifierList](#type-catalogmodifierlist). |
+| `modifier_list_id` | `String` |  | The ID of the `CatalogModifierList` controlled by this `CatalogModifierListInfo`. |
+| `modifier_overrides` | [`Array<Catalog Modifier Override Hash>`](/doc/models/catalog-modifier-override.md) | Optional | A set of `CatalogModifierOverride` objects that override whether a given `CatalogModifier` is enabled by default. |
+| `min_selected_modifiers` | `Integer` | Optional | If 0 or larger, the smallest number of `CatalogModifier`s that must be selected from this `CatalogModifierList`. |
+| `max_selected_modifiers` | `Integer` | Optional | If 0 or larger, the largest number of `CatalogModifier`s that can be selected from this `CatalogModifierList`. |
+| `enabled` | `Boolean` | Optional | If `true`, enable this `CatalogModifierList`. |
 
 ### Example (as JSON)
 

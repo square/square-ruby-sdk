@@ -1,6 +1,6 @@
 ## Catalog Item Option
 
-A group of variations for a [CatalogItem](#type-catalogitem)'s.
+A group of variations for a `CatalogItem`.
 
 ### Structure
 
@@ -12,10 +12,10 @@ A group of variations for a [CatalogItem](#type-catalogitem)'s.
 |  --- | --- | --- | --- |
 | `name` | `String` | Optional | The item option's display name for the seller. Must be unique across<br>all item options. Searchable. |
 | `display_name` | `String` | Optional | The item option's display name for the customer. Searchable. |
-| `description` | `String` | Optional | The item option's human-readable description. Displays for in the Square<br>Point of Sale app for the seller and in the Online Store or on receipts for the buyer. |
+| `description` | `String` | Optional | The item option's human-readable description. Displayed in the Square<br>Point of Sale app for the seller and in the Online Store or on receipts for<br>the buyer. |
 | `show_colors` | `Boolean` | Optional | If true, display colors for entries in `values` when present. |
-| `values` | [`Array<Catalog Object Hash>`](/doc/models/catalog-object.md) | Optional | A list of [CatalogObject](#type-catalogobject)s containing the<br>[CatalogItemOptionValue](#type-catalogitemoptionvalue)s for this item. |
-| `item_count` | `Long` | Optional | The number of [CatalogItem](#type-catalogitem)s currently associated<br>with this item option. Present only if the `include_counts` was specified<br>in the request. Any count over 100 will be returned as `100`. |
+| `values` | [`Array<Catalog Object Hash>`](/doc/models/catalog-object.md) | Optional | A list of CatalogObjects containing the<br>`CatalogItemOptionValue`s for this item. |
+| `item_count` | `Long` | Optional | The number of `CatalogItem`s currently associated<br>with this item option. Present only if the `include_counts` was specified<br>in the request. Any count over 100 will be returned as `100`. |
 
 ### Example (as JSON)
 

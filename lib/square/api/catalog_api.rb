@@ -136,6 +136,89 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
+    # Upload an image file to create a new [CatalogImage](#type-catalogimage)
+    # for an existing
+    # [CatalogObject](#type-catalogobject). Images can be uploaded and linked in
+    # this request or created independently
+    # (without an object assignment) and linked to a
+    # [CatalogObject](#type-catalogobject) at a later time.
+    # CreateCatalogImage accepts HTTP multipart/form-data requests with a JSON
+    # part and an image file part in
+    # JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB. The
+    # following is an example of such an HTTP request:
+    # ```
+    # POST /v2/catalog/images
+    # Accept: application/json
+    # Content-Type: multipart/form-data;boundary="boundary"
+    # Square-Version: XXXX-XX-XX
+    # Authorization: Bearer {ACCESS_TOKEN}
+    # --boundary
+    # Content-Disposition: form-data; name="request"
+    # Content-Type: application/json
+    # {
+    # "idempotency_key":"528dea59-7bfb-43c1-bd48-4a6bba7dd61f86",
+    # "object_id": "ND6EA5AAJEO5WL3JNNIAQA32",
+    # "image":{
+    # "id":"#TEMP_ID",
+    # "type":"IMAGE",
+    # "image_data":{
+    # "caption":"A picture of a cup of coffee"
+    # }
+    # }
+    # }
+    # --boundary
+    # Content-Disposition: form-data; name="image"; filename="Coffee.jpg"
+    # Content-Type: image/jpeg
+    # {ACTUAL_IMAGE_BYTES}
+    # --boundary
+    # ```
+    # Additional information and an example cURL request can be found in the
+    # [Create a Catalog Image
+    # recipe](https://developer.squareup.com/docs/more-apis/catalog/cookbook/cre
+    # ate-catalog-images).
+    # @param [CreateCatalogImageRequest] request Optional parameter: Example:
+    # @param [File | UploadIO] image_file Optional parameter: Example:
+    # @return [CreateCatalogImageResponse Hash] response from the API call
+    def create_catalog_image(request: nil,
+                             image_file: nil)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/catalog/images'
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json'
+      }
+
+      # Prepare form parameters.
+      _parameters = {
+        'request' => Faraday::UploadIO.new(
+          StringIO.new(request.to_json),
+          'application/json'
+        ),
+        'image_file' => Faraday::UploadIO.new(
+          image_file,
+          'image/jpeg'
+        )
+      }
+      _parameters = APIHelper.form_encode_parameters(_parameters)
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.post(
+        _query_url,
+        headers: _headers,
+        parameters: _parameters
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(_response, data: decoded, errors: _errors)
+    end
+
     # Returns information about the Square Catalog API, such as batch size
     # limits for `BatchUpsertCatalogObjects`.
     # @return [CatalogInfoResponse Hash] response from the API call
@@ -185,9 +268,8 @@ module Square
     # @param [String] types Optional parameter: An optional case-insensitive,
     # comma-separated list of object types to retrieve, for example
     # `ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.  The legal values are taken from the
-    # [CatalogObjectType](#type-catalogobjecttype) enumeration, namely `ITEM`,
-    # `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`, `MODIFIER`,
-    # `MODIFIER_LIST`, or `IMAGE`.
+    # CatalogObjectType enum: `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`,
+    # `TAX`, `MODIFIER`, `MODIFIER_LIST`, or `IMAGE`.
     # @return [ListCatalogResponse Hash] response from the API call
     def list_catalog(cursor: nil,
                      types: nil)
@@ -260,11 +342,10 @@ module Square
     # are also deleted. For example, deleting a [CatalogItem](#type-catalogitem)
     # will also delete all of its
     # [CatalogItemVariation](#type-catalogitemvariation) children.
-    # @param [String] object_id Required parameter: The ID of the
-    # [CatalogObject](#type-catalogobject) to be deleted. When an object is
-    # deleted, other objects in the graph that depend on that object will be
-    # deleted as well (for example, deleting a [CatalogItem](#type-catalogitem)
-    # will delete its [CatalogItemVariation](#type-catalogitemvariation)s).
+    # @param [String] object_id Required parameter: The ID of the catalog object
+    # to be deleted. When an object is deleted, other objects in the graph that
+    # depend on that object will be deleted as well (for example, deleting a
+    # catalog item will delete its catalog item variations).
     # @return [DeleteCatalogObjectResponse Hash] response from the API call
     def delete_catalog_object(object_id:)
       # Prepare query url.
@@ -304,18 +385,16 @@ module Square
     # [CatalogModifierList](#type-catalogmodifierlist) objects, and the ids of
     # any [CatalogTax](#type-catalogtax) objects that apply to it.
     # @param [String] object_id Required parameter: The object ID of any type of
-    # [CatalogObject](#type-catalogobject)s to be retrieved.
+    # catalog objects to be retrieved.
     # @param [Boolean] include_related_objects Optional parameter: If `true`,
     # the response will include additional objects that are related to the
     # requested object, as follows:  If the `object` field of the response
-    # contains a [CatalogItem](#type-catalogitem), its associated
-    # [CatalogCategory](#type-catalogcategory),
-    # [CatalogTax](#type-catalogtax)es, [CatalogImage](#type-catalogimage)s and
-    # [CatalogModifierList](#type-catalogmodifierlist)s will be returned in the
+    # contains a CatalogItem, its associated CatalogCategory, CatalogTax
+    # objects, CatalogImages and CatalogModifierLists will be returned in the
     # `related_objects` field of the response. If the `object` field of the
-    # response contains a [CatalogItemVariation](#type-catalogitemvariation),
-    # its parent [CatalogItem](#type-catalogitem) will be returned in the
-    # `related_objects` field of  the response.  Default value: `false`
+    # response contains a CatalogItemVariation, its parent CatalogItem will be
+    # returned in the `related_objects` field of the response.  Default value:
+    # `false`
     # @return [RetrieveCatalogObjectResponse Hash] response from the API call
     def retrieve_catalog_object(object_id:,
                                 include_related_objects: nil)
@@ -359,6 +438,16 @@ module Square
     # [CatalogQueryItemsForTax](#type-catalogqueryitemsfortax), and
     # [CatalogQueryItemsForModifierList](#type-catalogqueryitemsformodifierlist)
     # .
+    # --
+    # --
+    # Future end of the above comment:
+    # [CatalogQueryItemsForTax](#type-catalogqueryitemsfortax),
+    # [CatalogQueryItemsForModifierList](#type-catalogqueryitemsformodifierlist)
+    # ,
+    # [CatalogQueryItemsForItemOptions](#type-catalogqueryitemsforitemoptions),
+    # and
+    # [CatalogQueryItemVariationsForItemOptionValues](#type-catalogqueryitemvari
+    # ationsforitemoptionvalues).
     # @param [SearchCatalogObjectsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.

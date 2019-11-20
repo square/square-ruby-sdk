@@ -10,9 +10,19 @@ module Square
       super(config, http_call_back: http_call_back)
     end
 
-    # Get a business's information.
+    # Get the general information for a business.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-locat
+    # ions)
+    # ---
     # @return [V1Merchant Hash] response from the API call
     def retrieve_business
+      warn 'Endpoint retrieve_business in V1LocationsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/me'
@@ -37,9 +47,20 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Provides details for a business's locations, including their IDs.
+    # Provides details for all business locations associated with a Square
+    # account, including the Square-assigned object ID for the location.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-locat
+    # ions)
+    # ---
     # @return [List of V1Merchant Hash] response from the API call
     def list_locations
+      warn 'Endpoint list_locations in V1LocationsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/me/locations'

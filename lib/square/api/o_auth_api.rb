@@ -31,7 +31,7 @@ module Square
     # Replace `APPLICATION_SECRET` with the application secret on the
     # Credentials
     # page in the [application dashboard](https://connect.squareup.com/apps).
-    # @param [String] client_id Required parameter: Your application's ID,
+    # @param [String] client_id Required parameter: Your application ID,
     # available from the [application
     # dashboard](https://connect.squareup.com/apps).
     # @param [RenewTokenRequest] body Required parameter: An object containing

@@ -9,11 +9,11 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '3.20191023.0'
+      '3.20191120.0'
     end
 
     def square_version
-      '2019-10-23'
+      '2019-11-20'
     end
 
     # Access to mobile_authorization controller.

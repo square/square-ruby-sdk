@@ -10,11 +10,21 @@ module Square
       super(config, http_call_back: http_call_back)
     end
 
-    # Lists all of a location's item categories.
+    # Lists all the item categories for a given location.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the location to
     # list categories for.
     # @return [List of V1Category Hash] response from the API call
     def list_categories(location_id:)
+      warn 'Endpoint list_categories in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/categories'
@@ -44,6 +54,15 @@ module Square
     end
 
     # Creates an item category.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the location to
     # create an item for.
     # @param [V1Category] body Required parameter: An object containing the
@@ -52,6 +71,7 @@ module Square
     # @return [V1Category Hash] response from the API call
     def create_category(location_id:,
                         body:)
+      warn 'Endpoint create_category in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/categories'
@@ -83,7 +103,16 @@ module Square
     end
 
     # Deletes an existing item category.
-    # *Note**: DeleteCategory returns nothing on success but Connect SDKs
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
+    # __DeleteCategory__ returns nothing on success but Connect SDKs
     # map the empty response to an empty `V1DeleteCategoryRequest` object
     # as documented below.
     # @param [String] location_id Required parameter: The ID of the item's
@@ -93,6 +122,7 @@ module Square
     # @return [V1Category Hash] response from the API call
     def delete_category(location_id:,
                         category_id:)
+      warn 'Endpoint delete_category in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/categories/{category_id}'
@@ -123,6 +153,15 @@ module Square
     end
 
     # Modifies the details of an existing item category.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the category's
     # associated location.
     # @param [String] category_id Required parameter: The ID of the category to
@@ -134,6 +173,7 @@ module Square
     def update_category(location_id:,
                         category_id:,
                         body:)
+      warn 'Endpoint update_category in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/categories/{category_id}'
@@ -165,11 +205,21 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Lists all of a location's discounts.
+    # Lists all the discounts for a given location.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the location to
     # list categories for.
     # @return [List of V1Discount Hash] response from the API call
     def list_discounts(location_id:)
+      warn 'Endpoint list_discounts in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/discounts'
@@ -199,6 +249,15 @@ module Square
     end
 
     # Creates a discount.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the location to
     # create an item for.
     # @param [V1Discount] body Required parameter: An object containing the
@@ -207,6 +266,7 @@ module Square
     # @return [V1Discount Hash] response from the API call
     def create_discount(location_id:,
                         body:)
+      warn 'Endpoint create_discount in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/discounts'
@@ -238,7 +298,16 @@ module Square
     end
 
     # Deletes an existing discount.
-    # *Note**: DeleteDiscount returns nothing on success but Connect SDKs
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
+    # __DeleteDiscount__ returns nothing on success but Connect SDKs
     # map the empty response to an empty `V1DeleteDiscountRequest` object
     # as documented below.
     # @param [String] location_id Required parameter: The ID of the item's
@@ -248,6 +317,7 @@ module Square
     # @return [V1Discount Hash] response from the API call
     def delete_discount(location_id:,
                         discount_id:)
+      warn 'Endpoint delete_discount in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/discounts/{discount_id}'
@@ -278,6 +348,15 @@ module Square
     end
 
     # Modifies the details of an existing discount.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the category's
     # associated location.
     # @param [String] discount_id Required parameter: The ID of the discount to
@@ -289,6 +368,7 @@ module Square
     def update_discount(location_id:,
                         discount_id:,
                         body:)
+      warn 'Endpoint update_discount in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/discounts/{discount_id}'
@@ -320,11 +400,21 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Lists all of a location's fees (taxes).
+    # Lists all the fees (taxes) for a given location.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the location to
     # list fees for.
     # @return [List of V1Fee Hash] response from the API call
     def list_fees(location_id:)
+      warn 'Endpoint list_fees in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/fees'
@@ -354,6 +444,15 @@ module Square
     end
 
     # Creates a fee (tax).
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the location to
     # create a fee for.
     # @param [V1Fee] body Required parameter: An object containing the fields to
@@ -362,6 +461,7 @@ module Square
     # @return [V1Fee Hash] response from the API call
     def create_fee(location_id:,
                    body:)
+      warn 'Endpoint create_fee in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/fees'
@@ -393,7 +493,16 @@ module Square
     end
 
     # Deletes an existing fee (tax).
-    # *Note**: DeleteFee returns nothing on success but Connect SDKs
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
+    # __DeleteFee__ returns nothing on success but Connect SDKs
     # map the empty response to an empty `V1DeleteFeeRequest` object
     # as documented below.
     # @param [String] location_id Required parameter: The ID of the fee's
@@ -402,6 +511,7 @@ module Square
     # @return [V1Fee Hash] response from the API call
     def delete_fee(location_id:,
                    fee_id:)
+      warn 'Endpoint delete_fee in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/fees/{fee_id}'
@@ -432,6 +542,15 @@ module Square
     end
 
     # Modifies the details of an existing fee (tax).
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the fee's
     # associated location.
     # @param [String] fee_id Required parameter: The ID of the fee to edit.
@@ -442,6 +561,7 @@ module Square
     def update_fee(location_id:,
                    fee_id:,
                    body:)
+      warn 'Endpoint update_fee in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/fees/{fee_id}'
@@ -473,8 +593,17 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Provides inventory information for all of a merchant's inventory-enabled
-    # item variations.
+    # Provides inventory information for all inventory-enabled item
+    # variations.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the item's
     # associated location.
     # @param [Integer] limit Optional parameter: The maximum number of inventory
@@ -486,6 +615,7 @@ module Square
     def list_inventory(location_id:,
                        limit: nil,
                        batch_token: nil)
+      warn 'Endpoint list_inventory in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/inventory'
@@ -519,7 +649,16 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Adjusts an item variation's current available inventory.
+    # Adjusts the current available inventory of an item variation.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the item's
     # associated location.
     # @param [String] variation_id Required parameter: The ID of the variation
@@ -531,6 +670,7 @@ module Square
     def adjust_inventory(location_id:,
                          variation_id:,
                          body:)
+      warn 'Endpoint adjust_inventory in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/inventory/{variation_id}'
@@ -562,7 +702,16 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Provides summary information for all of a location's items.
+    # Provides summary information of all items for a given location.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the location to
     # list items for.
     # @param [String] batch_token Optional parameter: A pagination cursor to
@@ -571,6 +720,7 @@ module Square
     # @return [List of V1Item Hash] response from the API call
     def list_items(location_id:,
                    batch_token: nil)
+      warn 'Endpoint list_items in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/items'
@@ -603,17 +753,26 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Creates an item and at least one variation for it. Item-related
-    # entities include fields you can use to associate them with entities in a
-    # non-Square system.
-    # When you create an item-related entity, you can optionally specify its
-    # `id`. This value must be unique among all IDs ever specified for the
-    # account, including those specified by other applications. You can never
-    # reuse an entity ID. If you do not specify an ID, Square generates one
-    # for the entity.
+    # Creates an item and at least one variation for it.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
+    # Item-related entities include fields you can use to associate them with
+    # entities in a non-Square system.
+    # When you create an item-related entity, you can optionally specify `id`.
+    # This value must be unique among all IDs ever specified for the account,
+    # including those specified by other applications. You can never reuse an
+    # entity ID. If you do not specify an ID, Square generates one for the
+    # entity.
     # Item variations have a `user_data` string that lets you associate
-    # arbitrary metadata with the variation. The string cannot exceed 255
-    # characters.
+    # arbitrary
+    # metadata with the variation. The string cannot exceed 255 characters.
     # @param [String] location_id Required parameter: The ID of the location to
     # create an item for.
     # @param [V1Item] body Required parameter: An object containing the fields
@@ -622,6 +781,7 @@ module Square
     # @return [V1Item Hash] response from the API call
     def create_item(location_id:,
                     body:)
+      warn 'Endpoint create_item in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/items'
@@ -653,7 +813,16 @@ module Square
     end
 
     # Deletes an existing item and all item variations associated with it.
-    # *Note**: DeleteItem returns nothing on success but Connect SDKs
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
+    # __DeleteItem__ returns nothing on success but Connect SDKs
     # map the empty response to an empty `V1DeleteItemRequest` object
     # as documented below.
     # @param [String] location_id Required parameter: The ID of the item's
@@ -663,6 +832,7 @@ module Square
     # @return [V1Item Hash] response from the API call
     def delete_item(location_id:,
                     item_id:)
+      warn 'Endpoint delete_item in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/items/{item_id}'
@@ -694,12 +864,22 @@ module Square
 
     # Provides the details for a single item, including associated modifier
     # lists and fees.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the item's
     # associated location.
     # @param [String] item_id Required parameter: The item's ID.
     # @return [V1Item Hash] response from the API call
     def retrieve_item(location_id:,
                       item_id:)
+      warn 'Endpoint retrieve_item in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/items/{item_id}'
@@ -730,6 +910,15 @@ module Square
     end
 
     # Modifies the core details of an existing item.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the item's
     # associated location.
     # @param [String] item_id Required parameter: The ID of the item to
@@ -741,6 +930,7 @@ module Square
     def update_item(location_id:,
                     item_id:,
                     body:)
+      warn 'Endpoint update_item in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/items/{item_id}'
@@ -772,8 +962,17 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Removes a fee assocation from an item, meaning the fee is no longer
-    # automatically applied to the item in Square Register.
+    # Removes a fee assocation from an item so the fee is no longer
+    # automatically applied to the item in Square Point of Sale.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the fee's
     # associated location.
     # @param [String] item_id Required parameter: The ID of the item to add the
@@ -783,6 +982,7 @@ module Square
     def remove_fee(location_id:,
                    item_id:,
                    fee_id:)
+      warn 'Endpoint remove_fee in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/items/{item_id}/fees/{fee_id}'
@@ -813,8 +1013,17 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Associates a fee with an item, meaning the fee is automatically applied to
-    # the item in Square Register.
+    # Associates a fee with an item so the fee is automatically applied to
+    # the item in Square Point of Sale.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the fee's
     # associated location.
     # @param [String] item_id Required parameter: The ID of the item to add the
@@ -824,6 +1033,7 @@ module Square
     def apply_fee(location_id:,
                   item_id:,
                   fee_id:)
+      warn 'Endpoint apply_fee in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/items/{item_id}/fees/{fee_id}'
@@ -854,8 +1064,17 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Removes a modifier list association from an item, meaning modifier options
-    # from the list can no longer be applied to the item.
+    # Removes a modifier list association from an item so the modifier
+    # options from the list can no longer be applied to the item.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the item's
     # associated location.
     # @param [String] modifier_list_id Required parameter: The ID of the
@@ -866,6 +1085,7 @@ module Square
     def remove_modifier_list(location_id:,
                              modifier_list_id:,
                              item_id:)
+      warn 'Endpoint remove_modifier_list in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/items/{item_id}/modifier-lists/{modifier_list_id}'
@@ -896,8 +1116,17 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Associates a modifier list with an item, meaning modifier options from the
-    # list can be applied to the item.
+    # Associates a modifier list with an item so the associated modifier
+    # options can be applied to the item.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the item's
     # associated location.
     # @param [String] modifier_list_id Required parameter: The ID of the
@@ -908,6 +1137,7 @@ module Square
     def apply_modifier_list(location_id:,
                             modifier_list_id:,
                             item_id:)
+      warn 'Endpoint apply_modifier_list in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/items/{item_id}/modifier-lists/{modifier_list_id}'
@@ -939,6 +1169,15 @@ module Square
     end
 
     # Creates an item variation for an existing item.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the item's
     # associated location.
     # @param [String] item_id Required parameter: The item's ID.
@@ -949,6 +1188,7 @@ module Square
     def create_variation(location_id:,
                          item_id:,
                          body:)
+      warn 'Endpoint create_variation in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/items/{item_id}/variations'
@@ -981,7 +1221,16 @@ module Square
     end
 
     # Deletes an existing item variation from an item.
-    # *Note**: DeleteVariation returns nothing on success but Connect SDKs
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
+    # __DeleteVariation__ returns nothing on success but Connect SDKs
     # map the empty response to an empty `V1DeleteVariationRequest` object
     # as documented below.
     # @param [String] location_id Required parameter: The ID of the item's
@@ -994,6 +1243,7 @@ module Square
     def delete_variation(location_id:,
                          item_id:,
                          variation_id:)
+      warn 'Endpoint delete_variation in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/items/{item_id}/variations/{variation_id}'
@@ -1025,6 +1275,15 @@ module Square
     end
 
     # Modifies the details of an existing item variation.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the item's
     # associated location.
     # @param [String] item_id Required parameter: The ID of the item to
@@ -1039,6 +1298,7 @@ module Square
                          item_id:,
                          variation_id:,
                          body:)
+      warn 'Endpoint update_variation in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/items/{item_id}/variations/{variation_id}'
@@ -1071,11 +1331,21 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Lists all of a location's modifier lists.
+    # Lists all the modifier lists for a given location.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the location to
     # list modifier lists for.
     # @return [List of V1ModifierList Hash] response from the API call
     def list_modifier_lists(location_id:)
+      warn 'Endpoint list_modifier_lists in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/modifier-lists'
@@ -1104,7 +1374,16 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Creates an item modifier list and at least one modifier option for it.
+    # Creates an item modifier list and at least 1 modifier option for it.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the location to
     # create a modifier list for.
     # @param [V1ModifierList] body Required parameter: An object containing the
@@ -1113,6 +1392,7 @@ module Square
     # @return [V1ModifierList Hash] response from the API call
     def create_modifier_list(location_id:,
                              body:)
+      warn 'Endpoint create_modifier_list in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/modifier-lists'
@@ -1145,7 +1425,16 @@ module Square
 
     # Deletes an existing item modifier list and all modifier options
     # associated with it.
-    # *Note**: DeleteModifierList returns nothing on success but Connect SDKs
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
+    # __DeleteModifierList__ returns nothing on success but Connect SDKs
     # map the empty response to an empty `V1DeleteModifierListRequest` object
     # as documented below.
     # @param [String] location_id Required parameter: The ID of the item's
@@ -1155,6 +1444,7 @@ module Square
     # @return [V1ModifierList Hash] response from the API call
     def delete_modifier_list(location_id:,
                              modifier_list_id:)
+      warn 'Endpoint delete_modifier_list in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/modifier-lists/{modifier_list_id}'
@@ -1185,6 +1475,15 @@ module Square
     end
 
     # Provides the details for a single modifier list.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the item's
     # associated location.
     # @param [String] modifier_list_id Required parameter: The modifier list's
@@ -1192,6 +1491,7 @@ module Square
     # @return [V1ModifierList Hash] response from the API call
     def retrieve_modifier_list(location_id:,
                                modifier_list_id:)
+      warn 'Endpoint retrieve_modifier_list in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/modifier-lists/{modifier_list_id}'
@@ -1222,6 +1522,15 @@ module Square
     end
 
     # Modifies the details of an existing item modifier list.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the item's
     # associated location.
     # @param [String] modifier_list_id Required parameter: The ID of the
@@ -1233,6 +1542,7 @@ module Square
     def update_modifier_list(location_id:,
                              modifier_list_id:,
                              body:)
+      warn 'Endpoint update_modifier_list in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/modifier-lists/{modifier_list_id}'
@@ -1265,6 +1575,15 @@ module Square
     end
 
     # Creates an item modifier option and adds it to a modifier list.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the item's
     # associated location.
     # @param [String] modifier_list_id Required parameter: The ID of the
@@ -1276,6 +1595,7 @@ module Square
     def create_modifier_option(location_id:,
                                modifier_list_id:,
                                body:)
+      warn 'Endpoint create_modifier_option in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/modifier-lists/{modifier_list_id}/modifier-options'
@@ -1308,9 +1628,18 @@ module Square
     end
 
     # Deletes an existing item modifier option from a modifier list.
-    # *Note**: DeleteModifierOption returns nothing on success but Connect SDKs
-    # map the empty response to an empty `V1DeleteModifierOptionRequest` object
-    # as documented below.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
+    # __DeleteModifierOption__ returns nothing on success but Connect
+    # SDKs map the empty response to an empty `V1DeleteModifierOptionRequest`
+    # object.
     # @param [String] location_id Required parameter: The ID of the item's
     # associated location.
     # @param [String] modifier_list_id Required parameter: The ID of the
@@ -1321,6 +1650,7 @@ module Square
     def delete_modifier_option(location_id:,
                                modifier_list_id:,
                                modifier_option_id:)
+      warn 'Endpoint delete_modifier_option in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/modifier-lists/{modifier_list_id}/modifier-options/{modifier_option_id}'
@@ -1352,6 +1682,15 @@ module Square
     end
 
     # Modifies the details of an existing item modifier option.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the item's
     # associated location.
     # @param [String] modifier_list_id Required parameter: The ID of the
@@ -1366,6 +1705,7 @@ module Square
                                modifier_list_id:,
                                modifier_option_id:,
                                body:)
+      warn 'Endpoint update_modifier_option in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/modifier-lists/{modifier_list_id}/modifier-options/{modifier_option_id}'
@@ -1398,11 +1738,22 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Lists all of a location's Favorites pages in Square Register.
+    # Lists all Favorites pages (in Square Point of Sale) for a given
+    # location.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the location to
     # list Favorites pages for.
     # @return [List of V1Page Hash] response from the API call
     def list_pages(location_id:)
+      warn 'Endpoint list_pages in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/pages'
@@ -1431,7 +1782,16 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Creates a Favorites page in Square Register.
+    # Creates a Favorites page in Square Point of Sale.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the location to
     # create an item for.
     # @param [V1Page] body Required parameter: An object containing the fields
@@ -1440,6 +1800,7 @@ module Square
     # @return [V1Page Hash] response from the API call
     def create_page(location_id:,
                     body:)
+      warn 'Endpoint create_page in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/pages'
@@ -1471,9 +1832,17 @@ module Square
     end
 
     # Deletes an existing Favorites page and all of its cells.
-    # *Note**: DeletePage returns nothing on success but Connect SDKs
-    # map the empty response to an empty `V1DeletePageRequest` object
-    # as documented below.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
+    # __DeletePage__ returns nothing on success but Connect SDKs
+    # map the empty response to an empty `V1DeletePageRequest` object.
     # @param [String] location_id Required parameter: The ID of the Favorites
     # page's associated location.
     # @param [String] page_id Required parameter: The ID of the page to
@@ -1481,6 +1850,7 @@ module Square
     # @return [V1Page Hash] response from the API call
     def delete_page(location_id:,
                     page_id:)
+      warn 'Endpoint delete_page in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/pages/{page_id}'
@@ -1510,7 +1880,16 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Modifies the details of a Favorites page in Square Register.
+    # Modifies the details of a Favorites page in Square Point of Sale.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the Favorites
     # page's associated location
     # @param [String] page_id Required parameter: The ID of the page to
@@ -1522,6 +1901,7 @@ module Square
     def update_page(location_id:,
                     page_id:,
                     body:)
+      warn 'Endpoint update_page in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/pages/{page_id}'
@@ -1553,8 +1933,17 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Deletes a cell from a Favorites page in Square Register.
-    # *Note**: DeletePageCell returns nothing on success but Connect SDKs
+    # Deletes a cell from a Favorites page in Square Point of Sale.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
+    # __DeletePageCell__ returns nothing on success but Connect SDKs
     # map the empty response to an empty `V1DeletePageCellRequest` object
     # as documented below.
     # @param [String] location_id Required parameter: The ID of the Favorites
@@ -1571,6 +1960,7 @@ module Square
                          page_id:,
                          row: nil,
                          column: nil)
+      warn 'Endpoint delete_page_cell in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/pages/{page_id}/cells'
@@ -1605,7 +1995,16 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Modifies a cell of a Favorites page in Square Register.
+    # Modifies a cell of a Favorites page in Square Point of Sale.
+    # ---
+    # - __Deprecation date__: 2019-11-20
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
+    # recated): 2020-11-18
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-items
+    # )
+    # ---
     # @param [String] location_id Required parameter: The ID of the Favorites
     # page's associated location.
     # @param [String] page_id Required parameter: The ID of the page the cell
@@ -1617,6 +2016,7 @@ module Square
     def update_page_cell(location_id:,
                          page_id:,
                          body:)
+      warn 'Endpoint update_page_cell in V1ItemsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/pages/{page_id}/cells'

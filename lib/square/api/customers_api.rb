@@ -13,14 +13,14 @@ module Square
     # Lists a business's customers.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
-    # results for your original query.  See
-    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
+    # results for your original query.  See the [Pagination
+    # guide](https://developer.squareup.com/docs/working-with-apis/pagination)
     # for more information.
     # @param [CustomerSortField] sort_field Optional parameter: Indicates how
-    # Customers should be sorted. Default: `DEFAULT`.
+    # Customers should be sorted.  Default: `DEFAULT`.
     # @param [SortOrder] sort_order Optional parameter: Indicates whether
     # Customers should be sorted in ascending (`ASC`) or descending (`DESC`)
-    # order. Default: `ASC`.
+    # order.  Default: `ASC`.
     # @return [ListCustomersResponse Hash] response from the API call
     def list_customers(cursor: nil,
                        sort_field: nil,
@@ -208,10 +208,9 @@ module Square
     # You cannot edit a customer's cards on file with this endpoint. To make
     # changes
     # to a card on file, you must delete the existing card on file with the
-    # [DeleteCustomerCard](#endpoint-customers-deletecustomercard) endpoint,
-    # then
-    # create a new one with the
-    # [CreateCustomerCard](#endpoint-customers-createcustomercard) endpoint.
+    # [DeleteCustomerCard](#endpoint-deletecustomercard) endpoint, then create a
+    # new one with the
+    # [CreateCustomerCard](#endpoint-createcustomercard) endpoint.
     # @param [String] customer_id Required parameter: The ID of the customer to
     # update.
     # @param [UpdateCustomerRequest] body Required parameter: An object
@@ -255,8 +254,6 @@ module Square
     # calls with the same card nonce return the same card record that was
     # created
     # with the provided nonce during the _first_ call.
-    # Cards on file are automatically updated on a monthly basis to confirm they
-    # are still valid and can be charged.
     # @param [String] customer_id Required parameter: The Square ID of the
     # customer profile the card is linked to.
     # @param [CreateCustomerCardRequest] body Required parameter: An object

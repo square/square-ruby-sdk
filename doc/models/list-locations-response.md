@@ -1,7 +1,7 @@
 ## List Locations Response
 
 Defines the fields that are included in the response body of
-a request to the ListLocations endpoint.
+a request to the __ListLocations__ endpoint.
 
 One of `errors` or `locations` is present in a given response (never both).
 
@@ -14,7 +14,7 @@ One of `errors` or `locations` is present in a given response (never both).
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `locations` | [`Array<Location Hash>`](/doc/models/location.md) | Optional | The business's locations. |
+| `locations` | [`Array<Location Hash>`](/doc/models/location.md) | Optional | The business locations. |
 
 ### Example (as JSON)
 

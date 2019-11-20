@@ -18,9 +18,9 @@ module Square
     # activate
     # Web Apple Pay with Square for merchants using their platform.
     # To learn more about Apple Pay on Web see the Apple Pay section in the
-    # [Embedding the Square Payment
-    # Form](https://developer.squareup.com/docs/payment-form/add-digital-wallets
-    # /apple-pay) guide.
+    # [Square Payment Form
+    # Walkthrough](https://developer.squareup.com/docs/docs/payment-form/payment
+    # -form-walkthrough).
     # @param [RegisterDomainRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
