@@ -10,8 +10,8 @@ Latitude and longitude coordinates.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `latitude` | `Float` | Optional | The coordinate's latitude expressed in degrees. |
-| `longitude` | `Float` | Optional | The coordinate's longitude expressed in degrees. |
+| `latitude` | `Float` | Optional | The latitude of the coordinate expressed in degrees. |
+| `longitude` | `Float` | Optional | The longitude of the coordinate expressed in degrees. |
 
 ### Example (as JSON)
 

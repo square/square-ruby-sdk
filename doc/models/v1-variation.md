@@ -13,7 +13,7 @@ V1Variation
 | `id` | `String` | Optional | The item variation's unique ID. |
 | `name` | `String` | Optional | The item variation's name. |
 | `item_id` | `String` | Optional | The ID of the variation's associated item. |
-| `ordinal` | `Integer` | Optional | Indicates the variation's list position when displayed in Square Register and the merchant dashboard. If more than one variation for the same item has the same ordinal value, those variations are displayed in alphabetical order |
+| `ordinal` | `Integer` | Optional | Indicates the variation's list position when displayed in Square Point of Sale and the merchant dashboard. If more than one variation for the same item has the same ordinal value, those variations are displayed in alphabetical order |
 | `pricing_type` | [`String (V1 Variation Pricing Type)`](/doc/models/v1-variation-pricing-type.md) | Optional | - |
 | `price_money` | [`V1 Money Hash`](/doc/models/v1-money.md) | Optional | - |
 | `sku` | `String` | Optional | The item variation's SKU, if any. |

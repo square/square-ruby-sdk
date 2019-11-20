@@ -8,9 +8,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | The set of [Error](#type-error)s encountered. |
+| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Information on any errors encountered. |
 | `catalog_object` | [`Catalog Object Hash`](/doc/models/catalog-object.md) | Optional | - |
-| `id_mappings` | [`Array<Catalog Id Mapping Hash>`](/doc/models/catalog-id-mapping.md) | Optional | The mapping between client and server IDs for this Upsert. |
+| `id_mappings` | [`Array<Catalog Id Mapping Hash>`](/doc/models/catalog-id-mapping.md) | Optional | The mapping between client and server IDs for this upsert. |
 
 ### Example (as JSON)
 

@@ -8,9 +8,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `item_ids` | `Array<String>` |  | The [CatalogItem](#type-catalogitem)s whose [CatalogModifierList](#type-catalogmodifierlist)s are being updated. |
-| `modifier_lists_to_enable` | `Array<String>` | Optional | The set of [CatalogModifierList](#type-catalogmodifierlist)s (referenced by ID) to enable for the [CatalogItem](#type-catalogitem). |
-| `modifier_lists_to_disable` | `Array<String>` | Optional | The set of [CatalogModifierList](#type-catalogmodifierlist)s (referenced by ID) to disable for the [CatalogItem](#type-catalogitem). |
+| `item_ids` | `Array<String>` |  | The IDs of the catalog items associated with the CatalogModifierList objects being updated. |
+| `modifier_lists_to_enable` | `Array<String>` | Optional | The IDs of the CatalogModifierList objects to enable for the CatalogItem. |
+| `modifier_lists_to_disable` | `Array<String>` | Optional | The IDs of the CatalogModifierList objects to disable for the CatalogItem. |
 
 ### Example (as JSON)
 

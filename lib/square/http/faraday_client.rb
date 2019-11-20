@@ -23,7 +23,7 @@ module Square
                                 backoff_factor: backoff_factor
         faraday.adapter Faraday.default_adapter
         faraday.options[:params_encoder] = Faraday::FlatParamsEncoder
-        faraday.options[:timeout] = timeout if timeout.positive?
+        faraday.options[:timeout] = timeout if timeout > 0
       end
     end
 
@@ -34,7 +34,9 @@ module Square
         http_request.query_url
       ) do |request|
         request.headers = http_request.headers
-        request.body = http_request.parameters unless http_request.parameters.empty?
+        unless http_request.parameters.empty?
+          request.body = http_request.parameters
+        end
       end
       convert_response(response, http_request)
     end
@@ -46,7 +48,9 @@ module Square
         http_request.query_url
       ) do |request|
         request.headers = http_request.headers
-        request.body = http_request.parameters unless http_request.parameters.empty?
+        unless http_request.parameters.empty?
+          request.body = http_request.parameters
+        end
       end
       convert_response(response, http_request)
     end

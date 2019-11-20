@@ -13,31 +13,34 @@ module Square
       @http_call_back = http_call_back
 
       @global_headers = {
-        'user-agent' => 'Square-Ruby-SDK/3.20191023.0',
-        'Square-Version' => '2019-10-23'
+        'user-agent' => 'Square-Ruby-SDK/3.20191120.0',
+        'Square-Version' => '2019-11-20'
       }
     end
 
     def validate_parameters(args)
       args.each do |_name, value|
-        raise ArgumentError, "Required parameter #{_name} cannot be nil." if value.nil?
+        if value.nil?
+          raise ArgumentError, "Required parameter #{_name} cannot be nil."
+        end
       end
     end
 
     def execute_request(request, binary: false)
-      @http_call_back&.on_before_request(request)
+      @http_call_back.on_before_request(request) if @http_call_back
 
       APIHelper.clean_hash(request.headers)
       request.headers.merge!(@global_headers)
-      request.headers.merge!(config.additional_headers) unless config.additional_headers.nil?
+      unless config.additional_headers.nil?
+        request.headers.merge!(config.additional_headers)
+      end
 
       response = if binary
                    config.http_client.execute_as_binary(request)
                  else
                    config.http_client.execute_as_string(request)
                  end
-
-      @http_call_back&.on_after_response(response)
+      @http_call_back.on_after_response(response) if @http_call_back
 
       response
     end

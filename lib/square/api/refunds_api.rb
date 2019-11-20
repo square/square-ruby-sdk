@@ -29,12 +29,12 @@ module Square
     # @param [String] location_id Optional parameter: ID of location associated
     # with payment.
     # @param [String] status Optional parameter: If provided, only refunds with
-    # the given status are returned.  For a list of refund status values, see
+    # the given status are returned. For a list of refund status values, see
     # [PaymentRefund](#type-paymentrefund).  Default: If omitted refunds are
     # returned regardless of status.
     # @param [String] source_type Optional parameter: If provided, only refunds
-    # with the given source type are returned.  - `CARD` - List refunds only for
-    # payments where card was specified as payment  source.  Default: If omitted
+    # with the given source type are returned. - `CARD` - List refunds only for
+    # payments where card was specified as payment source.  Default: If omitted
     # refunds are returned regardless of source type.
     # @return [ListPaymentRefundsResponse Hash] response from the API call
     def list_payment_refunds(begin_time: nil,

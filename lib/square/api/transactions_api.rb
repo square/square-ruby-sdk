@@ -34,9 +34,8 @@ module Square
     # newest first).  Default value: `DESC`
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
-    # results for your original query.  See
-    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
-    # for more information.
+    # results for your original query.  See [Paginating
+    # results](#paginatingresults) for more information.
     # @return [ListRefundsResponse Hash] response from the API call
     def list_refunds(location_id:,
                      begin_time: nil,
@@ -100,9 +99,8 @@ module Square
     # newest first).  Default value: `DESC`
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
-    # results for your original query.  See
-    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
-    # for more information.
+    # results for your original query.  See [Paginating
+    # results](#paginatingresults) for more information.
     # @return [ListTransactionsResponse Hash] response from the API call
     def list_transactions(location_id:,
                           begin_time: nil,
@@ -154,10 +152,16 @@ module Square
     # - Values for the `customer_card_id` and `customer_id` parameters (to
     # charge
     # a customer's card on file)
+    # In order for an eCommerce payment to potentially qualify for
+    # [Square chargeback protection](https://squareup.com/help/article/5394),
+    # you
+    # _must_ provide values for the following parameters in your request:
+    # - `buyer_email_address`
+    # - At least one of `billing_address` or `shipping_address`
     # When this response is returned, the amount of Square's processing fee
     # might not yet be
     # calculated. To obtain the processing fee, wait about ten seconds and call
-    # [RetrieveTransaction](#endpoint-transactions-retrievetransaction). See the
+    # [RetrieveTransaction](#endpoint-retrievetransaction). See the
     # `processing_fee_money`
     # field of each [Tender included](#type-tender) in the transaction.
     # @param [String] location_id Required parameter: The ID of the location to
@@ -240,12 +244,12 @@ module Square
     end
 
     # Captures a transaction that was created with the
-    # [Charge](#endpoint-transactions-charge)
+    # [Charge](#endpoint-charge)
     # endpoint with a `delay_capture` value of `true`.
-    # See the [Delay Capture of
-    # Funds](https://developer.squareup.com/docs/transactions-api/cookbook/delay
-    # -capture)
-    # recipe for more information.
+    # See [Delayed capture
+    # transactions](https://developer.squareup.com/docs/payments/transactions/ov
+    # erview#delayed-capture)
+    # for more information.
     # @param [String] location_id Required parameter: Example:
     # @param [String] transaction_id Required parameter: Example:
     # @return [CaptureTransactionResponse Hash] response from the API call
@@ -334,13 +338,12 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Cancels a transaction that was created with the
-    # [Charge](#endpoint-transactions-charge)
+    # Cancels a transaction that was created with the [Charge](#endpoint-charge)
     # endpoint with a `delay_capture` value of `true`.
-    # See the [Delay Capture of
-    # Funds](https://developer.squareup.com/docs/transactions-api/cookbook/delay
-    # -capture)
-    # recipe for more information.
+    # See [Delayed capture
+    # transactions](https://developer.squareup.com/docs/payments/transactions/ov
+    # erview#delayed-capture)
+    # for more information.
     # @param [String] location_id Required parameter: Example:
     # @param [String] transaction_id Required parameter: Example:
     # @return [VoidTransactionResponse Hash] response from the API call

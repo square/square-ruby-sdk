@@ -15,7 +15,7 @@ employees_api = client.employees
 
 ## List Employees
 
-Gets a list of `Employee` objects for a business.
+ListEmployees
 
 ```ruby
 def list_employees(location_id: nil,
@@ -28,7 +28,7 @@ def list_employees(location_id: nil,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `location_id` | `String` | Query, Optional | Filter employees returned to only those that are associated with the<br>specified location. |
+| `location_id` | `String` | Query, Optional | Filter employees returned to only those that are associated with the specified location. |
 | `status` | [`String (Employee Status)`](/doc/models/employee-status.md) | Query, Optional | Specifies the EmployeeStatus to filter the employee by. |
 | `limit` | `Integer` | Query, Optional | The number of employees to be returned on each page. |
 | `cursor` | `String` | Query, Optional | The token required to retrieve the specified page of results. |
@@ -51,7 +51,7 @@ end
 
 ## Retrieve Employee
 
-Gets an `Employee` by Square-assigned employee `ID` (UUID)
+RetrieveEmployee
 
 ```ruby
 def retrieve_employee(id:)

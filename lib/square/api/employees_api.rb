@@ -10,7 +10,7 @@ module Square
       super(config, http_call_back: http_call_back)
     end
 
-    # Gets a list of `Employee` objects for a business.
+    # ListEmployees
     # @param [String] location_id Optional parameter: Filter employees returned
     # to only those that are associated with the specified location.
     # @param [EmployeeStatus] status Optional parameter: Specifies the
@@ -55,7 +55,7 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Gets an `Employee` by Square-assigned employee `ID` (UUID)
+    # RetrieveEmployee
     # @param [String] id Required parameter: UUID for the employee that was
     # requested.
     # @return [RetrieveEmployeeResponse Hash] response from the API call

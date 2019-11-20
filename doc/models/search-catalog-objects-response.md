@@ -8,11 +8,11 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | The set of [Error](#type-error)s encountered. |
+| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Information on any errors encountered. |
 | `cursor` | `String` | Optional | The pagination cursor to be used in a subsequent request. If unset, this is the final response.<br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
-| `objects` | [`Array<Catalog Object Hash>`](/doc/models/catalog-object.md) | Optional | The [CatalogObject](#type-catalogobject)s returned. |
-| `related_objects` | [`Array<Catalog Object Hash>`](/doc/models/catalog-object.md) | Optional | A list of [CatalogObject](#type-catalogobject)s referenced by the objects in the `objects` field. |
-| `latest_time` | `String` | Optional | When the associated product catalog was last updated. Will match the value for `end_time` or `cursor` if<br>either field is included in the `SearchCatalog` request. |
+| `objects` | [`Array<Catalog Object Hash>`](/doc/models/catalog-object.md) | Optional | The CatalogObjects returned. |
+| `related_objects` | [`Array<Catalog Object Hash>`](/doc/models/catalog-object.md) | Optional | A list of CatalogObjects referenced by the objects in the `objects` field. |
+| `latest_time` | `String` | Optional | When the associated product catalog was last updated. Will<br>match the value for `end_time` or `cursor` if either field is included in the `SearchCatalog` request. |
 
 ### Example (as JSON)
 

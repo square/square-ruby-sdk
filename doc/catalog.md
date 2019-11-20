@@ -13,6 +13,7 @@ catalog_api = client.catalog
 * [Batch Delete Catalog Objects](/doc/catalog.md#batch-delete-catalog-objects)
 * [Batch Retrieve Catalog Objects](/doc/catalog.md#batch-retrieve-catalog-objects)
 * [Batch Upsert Catalog Objects](/doc/catalog.md#batch-upsert-catalog-objects)
+* [Create Catalog Image](/doc/catalog.md#create-catalog-image)
 * [Catalog Info](/doc/catalog.md#catalog-info)
 * [List Catalog](/doc/catalog.md#list-catalog)
 * [Upsert Catalog Object](/doc/catalog.md#upsert-catalog-object)
@@ -203,6 +204,82 @@ elsif result.error?
 end
 ```
 
+## Create Catalog Image
+
+Upload an image file to create a new [CatalogImage](#type-catalogimage) for an existing
+[CatalogObject](#type-catalogobject). Images can be uploaded and linked in this request or created independently
+(without an object assignment) and linked to a [CatalogObject](#type-catalogobject) at a later time.
+
+CreateCatalogImage accepts HTTP multipart/form-data requests with a JSON part and an image file part in
+JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB. The following is an example of such an HTTP request:
+
+```
+POST /v2/catalog/images
+Accept: application/json
+Content-Type: multipart/form-data;boundary="boundary"
+Square-Version: XXXX-XX-XX
+Authorization: Bearer {ACCESS_TOKEN}
+
+--boundary
+Content-Disposition: form-data; name="request"
+Content-Type: application/json
+
+{
+"idempotency_key":"528dea59-7bfb-43c1-bd48-4a6bba7dd61f86",
+"object_id": "ND6EA5AAJEO5WL3JNNIAQA32",
+"image":{
+"id":"#TEMP_ID",
+"type":"IMAGE",
+"image_data":{
+"caption":"A picture of a cup of coffee"
+}
+}
+}
+--boundary
+Content-Disposition: form-data; name="image"; filename="Coffee.jpg"
+Content-Type: image/jpeg
+
+{ACTUAL_IMAGE_BYTES}
+--boundary
+```
+
+Additional information and an example cURL request can be found in the [Create a Catalog Image recipe](https://developer.squareup.com/docs/more-apis/catalog/cookbook/create-catalog-images).
+
+```ruby
+def create_catalog_image(request: nil,
+                         image_file: nil)
+```
+
+### Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `request` | [`Create Catalog Image Request Hash`](/doc/models/create-catalog-image-request.md) | Form, Optional | - |
+| `image_file` | `File | UploadIO` | Form, Optional | - |
+
+### Response Type
+
+[`Create Catalog Image Response Hash`](/doc/models/create-catalog-image-response.md)
+
+### Example Usage
+
+```ruby
+request = {}
+request[:idempotency_key] = '528dea59-7bfb-43c1-bd48-4a6bba7dd61f86'
+request[:object_id] = 'ND6EA5AAJEO5WL3JNNIAQA32'
+request[:image] = {}
+request[:image][:type] = 'IMAGE'
+request[:image][:id] = '#TEMP_ID'
+
+result = catalog_api.create_catalog_image(request: request, )
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
 ## Catalog Info
 
 Returns information about the Square Catalog API, such as batch size
@@ -250,7 +327,7 @@ def list_catalog(cursor: nil,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `cursor` | `String` | Query, Optional | The pagination cursor returned in the previous response. Leave unset for an initial request.<br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
-| `types` | `String` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve, for example<br>`ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.<br><br>The legal values are taken from the [CatalogObjectType](#type-catalogobjecttype)<br>enumeration, namely `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, or `IMAGE`. |
+| `types` | `String` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve, for example<br>`ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.<br><br>The legal values are taken from the CatalogObjectType enum:<br>`ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, or `IMAGE`. |
 
 ### Response Type
 
@@ -325,7 +402,7 @@ def delete_catalog_object(object_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `object_id` | `String` | Template, Required | The ID of the [CatalogObject](#type-catalogobject) to be deleted. When an object is deleted, other<br>objects in the graph that depend on that object will be deleted as well (for example, deleting a<br>[CatalogItem](#type-catalogitem) will delete its [CatalogItemVariation](#type-catalogitemvariation)s). |
+| `object_id` | `String` | Template, Required | The ID of the catalog object to be deleted. When an object is deleted, other<br>objects in the graph that depend on that object will be deleted as well (for example, deleting a<br>catalog item will delete its catalog item variations). |
 
 ### Response Type
 
@@ -364,8 +441,8 @@ def retrieve_catalog_object(object_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `object_id` | `String` | Template, Required | The object ID of any type of [CatalogObject](#type-catalogobject)s to be retrieved. |
-| `include_related_objects` | `Boolean` | Query, Optional | If `true`, the response will include additional objects that are related to the<br>requested object, as follows:<br><br>If the `object` field of the response contains a [CatalogItem](#type-catalogitem),<br>its associated [CatalogCategory](#type-catalogcategory), [CatalogTax](#type-catalogtax)es,<br>[CatalogImage](#type-catalogimage)s and [CatalogModifierList](#type-catalogmodifierlist)s<br>will be returned in the `related_objects` field of the response. If the `object`<br>field of the response contains a [CatalogItemVariation](#type-catalogitemvariation),<br>its parent [CatalogItem](#type-catalogitem) will be returned in the `related_objects` field of <br>the response.<br><br>Default value: `false` |
+| `object_id` | `String` | Template, Required | The object ID of any type of catalog objects to be retrieved. |
+| `include_related_objects` | `Boolean` | Query, Optional | If `true`, the response will include additional objects that are related to the<br>requested object, as follows:<br><br>If the `object` field of the response contains a CatalogItem,<br>its associated CatalogCategory, CatalogTax objects,<br>CatalogImages and CatalogModifierLists<br>will be returned in the `related_objects` field of the response. If the `object`<br>field of the response contains a CatalogItemVariation,<br>its parent CatalogItem will be returned in the `related_objects` field of<br>the response.<br><br>Default value: `false` |
 
 ### Response Type
 
@@ -394,6 +471,13 @@ Queries the targeted catalog using a variety of query types:
 [CatalogQueryText](#type-catalogquerytext),
 [CatalogQueryItemsForTax](#type-catalogqueryitemsfortax), and
 [CatalogQueryItemsForModifierList](#type-catalogqueryitemsformodifierlist).
+--
+--
+Future end of the above comment:
+[CatalogQueryItemsForTax](#type-catalogqueryitemsfortax),
+[CatalogQueryItemsForModifierList](#type-catalogqueryitemsformodifierlist),
+[CatalogQueryItemsForItemOptions](#type-catalogqueryitemsforitemoptions), and
+[CatalogQueryItemVariationsForItemOptionValues](#type-catalogqueryitemvariationsforitemoptionvalues).
 
 ```ruby
 def search_catalog_objects(body:)

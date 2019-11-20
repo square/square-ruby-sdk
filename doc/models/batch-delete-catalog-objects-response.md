@@ -8,9 +8,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | The set of [Error](#type-error)s encountered. |
-| `deleted_object_ids` | `Array<String>` | Optional | The IDs of all [CatalogObject](#type-catalogobject)s deleted by this request. |
-| `deleted_at` | `String` | Optional | The database [timestamp](#workingwithdates) of this deletion in RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z". |
+| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | The set of Errors encountered. |
+| `deleted_object_ids` | `Array<String>` | Optional | The IDs of all CatalogObjects deleted by this request. |
+| `deleted_at` | `String` | Optional | The database [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates) of this deletion in RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z". |
 
 ### Example (as JSON)
 
