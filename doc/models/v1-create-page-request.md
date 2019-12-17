@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`V1 Page Hash`](/doc/models/v1-page.md) | Optional | V1Page |
+| `body` | [`V1 Page Hash`]($m/V1Page) | Optional | V1Page |
 
 ### Example (as JSON)
 

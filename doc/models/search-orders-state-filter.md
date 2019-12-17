@@ -10,7 +10,7 @@ Filter by current Order `state`.
 
 | Name | Type | Description |
 |  --- | --- | --- |
-| `states` | [`Array<String (Order State)>`](/doc/models/order-state.md) | States to filter for.<br>See [OrderState](#type-orderstate) for possible values |
+| `states` | [`Array<String (Order State)>`]($m/OrderState) | States to filter for.<br>See [OrderState](#type-orderstate) for possible values |
 
 ### Example (as JSON)
 

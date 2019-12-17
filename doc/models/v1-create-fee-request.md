@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`V1 Fee Hash`](/doc/models/v1-fee.md) | Optional | V1Fee |
+| `body` | [`V1 Fee Hash`]($m/V1Fee) | Optional | V1Fee |
 
 ### Example (as JSON)
 

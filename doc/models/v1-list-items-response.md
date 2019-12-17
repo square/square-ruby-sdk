@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `items` | [`Array<V1 Item Hash>`](/doc/models/v1-item.md) | Optional | - |
+| `items` | [`Array<V1 Item Hash>`]($m/V1Item) | Optional | - |
 
 ### Example (as JSON)
 

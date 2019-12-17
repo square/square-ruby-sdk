@@ -49,7 +49,7 @@ def list_payments(begin_time: nil,
 
 ### Response Type
 
-[`List Payments Response Hash`](/doc/models/list-payments-response.md)
+[`List Payments Response Hash`]($m/ListPaymentsResponse)
 
 ### Example Usage
 
@@ -87,11 +87,11 @@ def create_payment(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Create Payment Request Hash`](/doc/models/create-payment-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Payment Request Hash`]($m/CreatePaymentRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Create Payment Response Hash`](/doc/models/create-payment-response.md)
+[`Create Payment Response Hash`]($m/CreatePaymentResponse)
 
 ### Example Usage
 
@@ -141,11 +141,11 @@ def cancel_payment_by_idempotency_key(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Cancel Payment by Idempotency Key Request Hash`](/doc/models/cancel-payment-by-idempotency-key-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Cancel Payment by Idempotency Key Request Hash`]($m/CancelPaymentByIdempotencyKeyRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Cancel Payment by Idempotency Key Response Hash`](/doc/models/cancel-payment-by-idempotency-key-response.md)
+[`Cancel Payment by Idempotency Key Response Hash`]($m/CancelPaymentByIdempotencyKeyResponse)
 
 ### Example Usage
 
@@ -178,7 +178,7 @@ def get_payment(payment_id:)
 
 ### Response Type
 
-[`Get Payment Response Hash`](/doc/models/get-payment-response.md)
+[`Get Payment Response Hash`]($m/GetPaymentResponse)
 
 ### Example Usage
 
@@ -212,7 +212,7 @@ def cancel_payment(payment_id:)
 
 ### Response Type
 
-[`Cancel Payment Response Hash`](/doc/models/cancel-payment-response.md)
+[`Cancel Payment Response Hash`]($m/CancelPaymentResponse)
 
 ### Example Usage
 
@@ -249,7 +249,7 @@ def complete_payment(payment_id:)
 
 ### Response Type
 
-[`Complete Payment Response Hash`](/doc/models/complete-payment-response.md)
+[`Complete Payment Response Hash`]($m/CompletePaymentResponse)
 
 ### Example Usage
 

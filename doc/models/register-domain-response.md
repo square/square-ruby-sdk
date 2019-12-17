@@ -14,7 +14,7 @@ Either `errors` or `status` will be present in a given response (never both).
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `status` | [`String (Register Domain Response Status)`](/doc/models/register-domain-response-status.md) | Optional | The status of domain registration. |
+| `status` | [`String (Register Domain Response Status)`]($m/RegisterDomainResponseStatus) | Optional | The status of domain registration. |
 
 ### Example (as JSON)
 

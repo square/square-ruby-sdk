@@ -23,9 +23,9 @@ alternatively specify a name and price instead.
 | `variation_name` | `String` | Optional | Only used for ad hoc line items. The variation name of the line item. This value cannot exceed 255 characters.<br><br>If this value is not set for an ad hoc line item, the default value of `Regular` is used.<br><br>Do not provide a value for this field if you provide a value for the `catalog_object_id`. |
 | `note` | `String` | Optional | The note of the line item. This value cannot exceed 500 characters. |
 | `catalog_object_id` | `String` | Optional | Only used for Catalog line items.<br>The catalog object ID for an existing [CatalogItemVariation](#type-catalogitemvariation).<br><br>Do not provide a value for this field if you provide a value for `name` and `base_price_money`. |
-| `modifiers` | [`Array<Create Order Request Modifier Hash>`](/doc/models/create-order-request-modifier.md) | Optional | Only used for Catalog line items. The modifiers to include on the line item. |
-| `taxes` | [`Array<Create Order Request Tax Hash>`](/doc/models/create-order-request-tax.md) | Optional | The taxes to include on the line item. |
-| `discounts` | [`Array<Create Order Request Discount Hash>`](/doc/models/create-order-request-discount.md) | Optional | The discounts to include on the line item. |
+| `modifiers` | [`Array<Create Order Request Modifier Hash>`]($m/CreateOrderRequestModifier) | Optional | Only used for Catalog line items. The modifiers to include on the line item. |
+| `taxes` | [`Array<Create Order Request Tax Hash>`]($m/CreateOrderRequestTax) | Optional | The taxes to include on the line item. |
+| `discounts` | [`Array<Create Order Request Discount Hash>`]($m/CreateOrderRequestDiscount) | Optional | The discounts to include on the line item. |
 
 ### Example (as JSON)
 

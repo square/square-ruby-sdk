@@ -8,7 +8,7 @@
 
 | Name | Type | Description |
 |  --- | --- | --- |
-| `body` | [`V1 Timecard Hash`](/doc/models/v1-timecard.md) | Represents a timecard for an employee. |
+| `body` | [`V1 Timecard Hash`]($m/V1Timecard) | Represents a timecard for an employee. |
 
 ### Example (as JSON)
 

@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `items` | [`Array<V1 Refund Hash>`](/doc/models/v1-refund.md) | Optional | - |
+| `items` | [`Array<V1 Refund Hash>`]($m/V1Refund) | Optional | - |
 
 ### Example (as JSON)
 

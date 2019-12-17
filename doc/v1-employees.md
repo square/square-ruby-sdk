@@ -47,19 +47,19 @@ def list_employees(order: nil,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | The order in which employees are listed in the response, based on their created_at field.      Default value: ASC |
+| `order` | [`String (Sort Order)`]($m/SortOrder) | Query, Optional | The order in which employees are listed in the response, based on their created_at field.      Default value: ASC |
 | `begin_updated_at` | `String` | Query, Optional | If filtering results by their updated_at field, the beginning of the requested reporting period, in ISO 8601 format |
 | `end_updated_at` | `String` | Query, Optional | If filtering results by there updated_at field, the end of the requested reporting period, in ISO 8601 format. |
 | `begin_created_at` | `String` | Query, Optional | If filtering results by their created_at field, the beginning of the requested reporting period, in ISO 8601 format. |
 | `end_created_at` | `String` | Query, Optional | If filtering results by their created_at field, the end of the requested reporting period, in ISO 8601 format. |
-| `status` | [`String (V1 List Employees Request Status)`](/doc/models/v1-list-employees-request-status.md) | Query, Optional | If provided, the endpoint returns only employee entities with the specified status (ACTIVE or INACTIVE). |
+| `status` | [`String (V1 List Employees Request Status)`]($m/V1ListEmployeesRequestStatus) | Query, Optional | If provided, the endpoint returns only employee entities with the specified status (ACTIVE or INACTIVE). |
 | `external_id` | `String` | Query, Optional | If provided, the endpoint returns only employee entities with the specified external_id. |
 | `limit` | `Integer` | Query, Optional | The maximum integer number of employee entities to return in a single response. Default 100, maximum 200. |
 | `batch_token` | `String` | Query, Optional | A pagination cursor to retrieve the next set of results for your<br>original query to the endpoint. |
 
 ### Response Type
 
-[`Array<V1 Employee Hash>`](/doc/models/v1-employee.md)
+[`Array<V1 Employee Hash>`]($m/V1Employee)
 
 ### Example Usage
 
@@ -94,11 +94,11 @@ def create_employee(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`V1 Employee Hash`](/doc/models/v1-employee.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Employee Hash`]($m/V1Employee) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Employee Hash`](/doc/models/v1-employee.md)
+[`V1 Employee Hash`]($m/V1Employee)
 
 ### Example Usage
 
@@ -132,7 +132,7 @@ def retrieve_employee(employee_id:)
 
 ### Response Type
 
-[`V1 Employee Hash`](/doc/models/v1-employee.md)
+[`V1 Employee Hash`]($m/V1Employee)
 
 ### Example Usage
 
@@ -162,11 +162,11 @@ def update_employee(employee_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `employee_id` | `String` | Template, Required | The ID of the role to modify. |
-| `body` | [`V1 Employee Hash`](/doc/models/v1-employee.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Employee Hash`]($m/V1Employee) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Employee Hash`](/doc/models/v1-employee.md)
+[`V1 Employee Hash`]($m/V1Employee)
 
 ### Example Usage
 
@@ -199,13 +199,13 @@ def list_employee_roles(order: nil,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | The order in which employees are listed in the response, based on their created_at field.Default value: ASC |
+| `order` | [`String (Sort Order)`]($m/SortOrder) | Query, Optional | The order in which employees are listed in the response, based on their created_at field.Default value: ASC |
 | `limit` | `Integer` | Query, Optional | The maximum integer number of employee entities to return in a single response. Default 100, maximum 200. |
 | `batch_token` | `String` | Query, Optional | A pagination cursor to retrieve the next set of results for your<br>original query to the endpoint. |
 
 ### Response Type
 
-[`Array<V1 Employee Role Hash>`](/doc/models/v1-employee-role.md)
+[`Array<V1 Employee Role Hash>`]($m/V1EmployeeRole)
 
 ### Example Usage
 
@@ -243,11 +243,11 @@ def create_employee_role(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`V1 Employee Role Hash`](/doc/models/v1-employee-role.md) | Body, Required | An EmployeeRole object with a name and permissions, and an optional owner flag. |
+| `body` | [`V1 Employee Role Hash`]($m/V1EmployeeRole) | Body, Required | An EmployeeRole object with a name and permissions, and an optional owner flag. |
 
 ### Response Type
 
-[`V1 Employee Role Hash`](/doc/models/v1-employee-role.md)
+[`V1 Employee Role Hash`]($m/V1EmployeeRole)
 
 ### Example Usage
 
@@ -281,7 +281,7 @@ def retrieve_employee_role(role_id:)
 
 ### Response Type
 
-[`V1 Employee Role Hash`](/doc/models/v1-employee-role.md)
+[`V1 Employee Role Hash`]($m/V1EmployeeRole)
 
 ### Example Usage
 
@@ -311,11 +311,11 @@ def update_employee_role(role_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `role_id` | `String` | Template, Required | The ID of the role to modify. |
-| `body` | [`V1 Employee Role Hash`](/doc/models/v1-employee-role.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Employee Role Hash`]($m/V1EmployeeRole) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Employee Role Hash`](/doc/models/v1-employee-role.md)
+[`V1 Employee Role Hash`]($m/V1EmployeeRole)
 
 ### Example Usage
 
@@ -356,7 +356,7 @@ def list_timecards(order: nil,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | The order in which timecards are listed in the response, based on their created_at field. |
+| `order` | [`String (Sort Order)`]($m/SortOrder) | Query, Optional | The order in which timecards are listed in the response, based on their created_at field. |
 | `employee_id` | `String` | Query, Optional | If provided, the endpoint returns only timecards for the employee with the specified ID. |
 | `begin_clockin_time` | `String` | Query, Optional | If filtering results by their clockin_time field, the beginning of the requested reporting period, in ISO 8601 format. |
 | `end_clockin_time` | `String` | Query, Optional | If filtering results by their clockin_time field, the end of the requested reporting period, in ISO 8601 format. |
@@ -370,7 +370,7 @@ def list_timecards(order: nil,
 
 ### Response Type
 
-[`Array<V1 Timecard Hash>`](/doc/models/v1-timecard.md)
+[`Array<V1 Timecard Hash>`]($m/V1Timecard)
 
 ### Example Usage
 
@@ -406,11 +406,11 @@ def create_timecard(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`V1 Timecard Hash`](/doc/models/v1-timecard.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Timecard Hash`]($m/V1Timecard) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Timecard Hash`](/doc/models/v1-timecard.md)
+[`V1 Timecard Hash`]($m/V1Timecard)
 
 ### Example Usage
 
@@ -494,7 +494,7 @@ def retrieve_timecard(timecard_id:)
 
 ### Response Type
 
-[`V1 Timecard Hash`](/doc/models/v1-timecard.md)
+[`V1 Timecard Hash`]($m/V1Timecard)
 
 ### Example Usage
 
@@ -526,11 +526,11 @@ def update_timecard(timecard_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `timecard_id` | `String` | Template, Required | TThe ID of the timecard to modify. |
-| `body` | [`V1 Timecard Hash`](/doc/models/v1-timecard.md) | Body, Required | An object containing the fields to POST for the request.<br>See the corresponding object definition for field details. |
+| `body` | [`V1 Timecard Hash`]($m/V1Timecard) | Body, Required | An object containing the fields to POST for the request.<br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Timecard Hash`](/doc/models/v1-timecard.md)
+[`V1 Timecard Hash`]($m/V1Timecard)
 
 ### Example Usage
 
@@ -571,7 +571,7 @@ def list_timecard_events(timecard_id:)
 
 ### Response Type
 
-[`Array<V1 Timecard Event Hash>`](/doc/models/v1-timecard-event.md)
+[`Array<V1 Timecard Event Hash>`]($m/V1TimecardEvent)
 
 ### Example Usage
 
@@ -603,13 +603,13 @@ def list_cash_drawer_shifts(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the location to list cash drawer shifts for. |
-| `order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | The order in which cash drawer shifts are listed in the response, based on their created_at field. Default value: ASC |
+| `order` | [`String (Sort Order)`]($m/SortOrder) | Query, Optional | The order in which cash drawer shifts are listed in the response, based on their created_at field. Default value: ASC |
 | `begin_time` | `String` | Query, Optional | The beginning of the requested reporting period, in ISO 8601 format. Default value: The current time minus 90 days. |
 | `end_time` | `String` | Query, Optional | The beginning of the requested reporting period, in ISO 8601 format. Default value: The current time. |
 
 ### Response Type
 
-[`Array<V1 Cash Drawer Shift Hash>`](/doc/models/v1-cash-drawer-shift.md)
+[`Array<V1 Cash Drawer Shift Hash>`]($m/V1CashDrawerShift)
 
 ### Example Usage
 
@@ -643,7 +643,7 @@ def retrieve_cash_drawer_shift(location_id:,
 
 ### Response Type
 
-[`V1 Cash Drawer Shift Hash`](/doc/models/v1-cash-drawer-shift.md)
+[`V1 Cash Drawer Shift Hash`]($m/V1CashDrawerShift)
 
 ### Example Usage
 

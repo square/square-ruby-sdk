@@ -38,7 +38,7 @@ def list_bank_accounts(location_id:)
 
 ### Response Type
 
-[`Array<V1 Bank Account Hash>`](/doc/models/v1-bank-account.md)
+[`Array<V1 Bank Account Hash>`]($m/V1BankAccount)
 
 ### Example Usage
 
@@ -72,7 +72,7 @@ def retrieve_bank_account(location_id:,
 
 ### Response Type
 
-[`V1 Bank Account Hash`](/doc/models/v1-bank-account.md)
+[`V1 Bank Account Hash`]($m/V1BankAccount)
 
 ### Example Usage
 
@@ -105,13 +105,13 @@ def list_orders(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the location to list online store orders for. |
-| `order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | TThe order in which payments are listed in the response. |
+| `order` | [`String (Sort Order)`]($m/SortOrder) | Query, Optional | TThe order in which payments are listed in the response. |
 | `limit` | `Integer` | Query, Optional | The maximum number of payments to return in a single response. This value cannot exceed 200. |
 | `batch_token` | `String` | Query, Optional | A pagination cursor to retrieve the next set of results for your<br>original query to the endpoint. |
 
 ### Response Type
 
-[`Array<V1 Order Hash>`](/doc/models/v1-order.md)
+[`Array<V1 Order Hash>`]($m/V1Order)
 
 ### Example Usage
 
@@ -145,7 +145,7 @@ def retrieve_order(location_id:,
 
 ### Response Type
 
-[`V1 Order Hash`](/doc/models/v1-order.md)
+[`V1 Order Hash`]($m/V1Order)
 
 ### Example Usage
 
@@ -178,11 +178,11 @@ def update_order(location_id:,
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the order's associated location. |
 | `order_id` | `String` | Template, Required | The order's Square-issued ID. You obtain this value from Order objects returned by the List Orders endpoint |
-| `body` | [`V1 Update Order Request Hash`](/doc/models/v1-update-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Update Order Request Hash`]($m/V1UpdateOrderRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Order Hash`](/doc/models/v1-order.md)
+[`V1 Order Hash`]($m/V1Order)
 
 ### Example Usage
 
@@ -230,7 +230,7 @@ def list_payments(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the location to list payments for. If you specify me, this endpoint returns payments aggregated from all of the business's locations. |
-| `order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | The order in which payments are listed in the response. |
+| `order` | [`String (Sort Order)`]($m/SortOrder) | Query, Optional | The order in which payments are listed in the response. |
 | `begin_time` | `String` | Query, Optional | The beginning of the requested reporting period, in ISO 8601 format. If this value is before January 1, 2013 (2013-01-01T00:00:00Z), this endpoint returns an error. Default value: The current time minus one year. |
 | `end_time` | `String` | Query, Optional | The end of the requested reporting period, in ISO 8601 format. If this value is more than one year greater than begin_time, this endpoint returns an error. Default value: The current time. |
 | `limit` | `Integer` | Query, Optional | The maximum number of payments to return in a single response. This value cannot exceed 200. |
@@ -239,7 +239,7 @@ def list_payments(location_id:,
 
 ### Response Type
 
-[`Array<V1 Payment Hash>`](/doc/models/v1-payment.md)
+[`Array<V1 Payment Hash>`]($m/V1Payment)
 
 ### Example Usage
 
@@ -273,7 +273,7 @@ def retrieve_payment(location_id:,
 
 ### Response Type
 
-[`V1 Payment Hash`](/doc/models/v1-payment.md)
+[`V1 Payment Hash`]($m/V1Payment)
 
 ### Example Usage
 
@@ -308,7 +308,7 @@ def list_refunds(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the location to list refunds for. |
-| `order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | TThe order in which payments are listed in the response. |
+| `order` | [`String (Sort Order)`]($m/SortOrder) | Query, Optional | TThe order in which payments are listed in the response. |
 | `begin_time` | `String` | Query, Optional | The beginning of the requested reporting period, in ISO 8601 format. If this value is before January 1, 2013 (2013-01-01T00:00:00Z), this endpoint returns an error. Default value: The current time minus one year. |
 | `end_time` | `String` | Query, Optional | The end of the requested reporting period, in ISO 8601 format. If this value is more than one year greater than begin_time, this endpoint returns an error. Default value: The current time. |
 | `limit` | `Integer` | Query, Optional | The approximate number of refunds to return in a single response. Default: 100. Max: 200. Response may contain more results than the prescribed limit when refunds are made simultaneously to multiple tenders in a payment or when refunds are generated in an exchange to account for the value of returned goods. |
@@ -316,7 +316,7 @@ def list_refunds(location_id:,
 
 ### Response Type
 
-[`Array<V1 Refund Hash>`](/doc/models/v1-refund.md)
+[`Array<V1 Refund Hash>`]($m/V1Refund)
 
 ### Example Usage
 
@@ -357,11 +357,11 @@ def create_refund(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the original payment's associated location. |
-| `body` | [`V1 Create Refund Request Hash`](/doc/models/v1-create-refund-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Create Refund Request Hash`]($m/V1CreateRefundRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Refund Hash`](/doc/models/v1-refund.md)
+[`V1 Refund Hash`]($m/V1Refund)
 
 ### Example Usage
 
@@ -404,17 +404,17 @@ def list_settlements(location_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `location_id` | `String` | Template, Required | The ID of the location to list settlements for. If you specify me, this endpoint returns payments aggregated from all of the business's locations. |
-| `order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | TThe order in which payments are listed in the response. |
+| `location_id` | `String` | Template, Required | The ID of the location to list settlements for. |
+| `order` | [`String (Sort Order)`]($m/SortOrder) | Query, Optional | TThe order in which payments are listed in the response. |
 | `begin_time` | `String` | Query, Optional | The beginning of the requested reporting period, in ISO 8601 format. If this value is before January 1, 2013 (2013-01-01T00:00:00Z), this endpoint returns an error. Default value: The current time minus one year. |
 | `end_time` | `String` | Query, Optional | The end of the requested reporting period, in ISO 8601 format. If this value is more than one year greater than begin_time, this endpoint returns an error. Default value: The current time. |
 | `limit` | `Integer` | Query, Optional | The maximum number of payments to return in a single response. This value cannot exceed 200. |
-| `status` | [`String (V1 List Settlements Request Status)`](/doc/models/v1-list-settlements-request-status.md) | Query, Optional | Provide this parameter to retrieve only settlements with a particular status (SENT or FAILED). |
+| `status` | [`String (V1 List Settlements Request Status)`]($m/V1ListSettlementsRequestStatus) | Query, Optional | Provide this parameter to retrieve only settlements with a particular status (SENT or FAILED). |
 | `batch_token` | `String` | Query, Optional | A pagination cursor to retrieve the next set of results for your<br>original query to the endpoint. |
 
 ### Response Type
 
-[`Array<V1 Settlement Hash>`](/doc/models/v1-settlement.md)
+[`Array<V1 Settlement Hash>`]($m/V1Settlement)
 
 ### Example Usage
 
@@ -464,7 +464,7 @@ def retrieve_settlement(location_id:,
 
 ### Response Type
 
-[`V1 Settlement Hash`](/doc/models/v1-settlement.md)
+[`V1 Settlement Hash`]($m/V1Settlement)
 
 ### Example Usage
 

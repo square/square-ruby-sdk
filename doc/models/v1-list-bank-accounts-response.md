@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `items` | [`Array<V1 Bank Account Hash>`](/doc/models/v1-bank-account.md) | Optional | - |
+| `items` | [`Array<V1 Bank Account Hash>`]($m/V1BankAccount) | Optional | - |
 
 ### Example (as JSON)
 

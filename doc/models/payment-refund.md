@@ -16,7 +16,7 @@ the original payment and the amount of money refunded.
 | `location_id` | `String` | Optional | Location ID associated with the payment this refund is attached to. |
 | `amount_money` | [`Money Hash`](/doc/models/money.md) |  | Represents an amount of money. `Money` fields can be signed or unsigned.<br>Fields that do not explicitly define whether they are signed or unsigned are<br>considered unsigned and can only hold positive amounts. For signed fields, the<br>sign of the value indicates the purpose of the money transfer. See<br>[Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)<br>for more information. |
 | `app_fee_money` | [`Money Hash`](/doc/models/money.md) | Optional | Represents an amount of money. `Money` fields can be signed or unsigned.<br>Fields that do not explicitly define whether they are signed or unsigned are<br>considered unsigned and can only hold positive amounts. For signed fields, the<br>sign of the value indicates the purpose of the money transfer. See<br>[Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)<br>for more information. |
-| `processing_fee` | [`Array<Processing Fee Hash>`](/doc/models/processing-fee.md) | Optional | Processing fees and fee adjustments assessed by Square on this refund. |
+| `processing_fee` | [`Array<Processing Fee Hash>`]($m/ProcessingFee) | Optional | Processing fees and fee adjustments assessed by Square on this refund. |
 | `payment_id` | `String` | Optional | The ID of the payment assocated with this refund. |
 | `order_id` | `String` | Optional | The ID of the order associated with the refund. |
 | `reason` | `String` | Optional | The reason for the refund. |

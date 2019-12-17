@@ -48,12 +48,12 @@ def list_refunds(location_id:,
 | `location_id` | `String` | Template, Required | The ID of the location to list refunds for. |
 | `begin_time` | `String` | Query, Optional | The beginning of the requested reporting period, in RFC 3339 format.<br><br>See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.<br><br>Default value: The current time minus one year. |
 | `end_time` | `String` | Query, Optional | The end of the requested reporting period, in RFC 3339 format.<br><br>See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.<br><br>Default value: The current time. |
-| `sort_order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | The order in which results are listed in the response (`ASC` for<br>oldest first, `DESC` for newest first).<br><br>Default value: `DESC` |
+| `sort_order` | [`String (Sort Order)`]($m/SortOrder) | Query, Optional | The order in which results are listed in the response (`ASC` for<br>oldest first, `DESC` for newest first).<br><br>Default value: `DESC` |
 | `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>See [Paginating results](#paginatingresults) for more information. |
 
 ### Response Type
 
-[`List Refunds Response Hash`](/doc/models/list-refunds-response.md)
+[`List Refunds Response Hash`]($m/ListRefundsResponse)
 
 ### Example Usage
 
@@ -95,12 +95,12 @@ def list_transactions(location_id:,
 | `location_id` | `String` | Template, Required | The ID of the location to list transactions for. |
 | `begin_time` | `String` | Query, Optional | The beginning of the requested reporting period, in RFC 3339 format.<br><br>See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.<br><br>Default value: The current time minus one year. |
 | `end_time` | `String` | Query, Optional | The end of the requested reporting period, in RFC 3339 format.<br><br>See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.<br><br>Default value: The current time. |
-| `sort_order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | The order in which results are listed in the response (`ASC` for<br>oldest first, `DESC` for newest first).<br><br>Default value: `DESC` |
+| `sort_order` | [`String (Sort Order)`]($m/SortOrder) | Query, Optional | The order in which results are listed in the response (`ASC` for<br>oldest first, `DESC` for newest first).<br><br>Default value: `DESC` |
 | `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>See [Paginating results](#paginatingresults) for more information. |
 
 ### Response Type
 
-[`List Transactions Response Hash`](/doc/models/list-transactions-response.md)
+[`List Transactions Response Hash`]($m/ListTransactionsResponse)
 
 ### Example Usage
 
@@ -151,11 +151,11 @@ def charge(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the location to associate the created transaction with. |
-| `body` | [`Charge Request Hash`](/doc/models/charge-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Charge Request Hash`]($m/ChargeRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Charge Response Hash`](/doc/models/charge-response.md)
+[`Charge Response Hash`]($m/ChargeResponse)
 
 ### Example Usage
 
@@ -223,7 +223,7 @@ def retrieve_transaction(location_id:,
 
 ### Response Type
 
-[`Retrieve Transaction Response Hash`](/doc/models/retrieve-transaction-response.md)
+[`Retrieve Transaction Response Hash`]($m/RetrieveTransactionResponse)
 
 ### Example Usage
 
@@ -262,7 +262,7 @@ def capture_transaction(location_id:,
 
 ### Response Type
 
-[`Capture Transaction Response Hash`](/doc/models/capture-transaction-response.md)
+[`Capture Transaction Response Hash`]($m/CaptureTransactionResponse)
 
 ### Example Usage
 
@@ -305,11 +305,11 @@ def create_refund(location_id:,
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the original transaction's associated location. |
 | `transaction_id` | `String` | Template, Required | The ID of the original transaction that includes the tender to refund. |
-| `body` | [`Create Refund Request Hash`](/doc/models/create-refund-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Refund Request Hash`]($m/CreateRefundRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Create Refund Response Hash`](/doc/models/create-refund-response.md)
+[`Create Refund Response Hash`]($m/CreateRefundResponse)
 
 ### Example Usage
 
@@ -355,7 +355,7 @@ def void_transaction(location_id:,
 
 ### Response Type
 
-[`Void Transaction Response Hash`](/doc/models/void-transaction-response.md)
+[`Void Transaction Response Hash`]($m/VoidTransactionResponse)
 
 ### Example Usage
 

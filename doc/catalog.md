@@ -44,11 +44,11 @@ def batch_delete_catalog_objects(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Batch Delete Catalog Objects Request Hash`](/doc/models/batch-delete-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Batch Delete Catalog Objects Request Hash`]($m/BatchDeleteCatalogObjectsRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Batch Delete Catalog Objects Response Hash`](/doc/models/batch-delete-catalog-objects-response.md)
+[`Batch Delete Catalog Objects Response Hash`]($m/BatchDeleteCatalogObjectsResponse)
 
 ### Example Usage
 
@@ -82,11 +82,11 @@ def batch_retrieve_catalog_objects(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Batch Retrieve Catalog Objects Request Hash`](/doc/models/batch-retrieve-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Batch Retrieve Catalog Objects Request Hash`]($m/BatchRetrieveCatalogObjectsRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Batch Retrieve Catalog Objects Response Hash`](/doc/models/batch-retrieve-catalog-objects-response.md)
+[`Batch Retrieve Catalog Objects Response Hash`]($m/BatchRetrieveCatalogObjectsResponse)
 
 ### Example Usage
 
@@ -124,11 +124,11 @@ def batch_upsert_catalog_objects(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Batch Upsert Catalog Objects Request Hash`](/doc/models/batch-upsert-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Batch Upsert Catalog Objects Request Hash`]($m/BatchUpsertCatalogObjectsRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Batch Upsert Catalog Objects Response Hash`](/doc/models/batch-upsert-catalog-objects-response.md)
+[`Batch Upsert Catalog Objects Response Hash`]($m/BatchUpsertCatalogObjectsResponse)
 
 ### Example Usage
 
@@ -254,12 +254,12 @@ def create_catalog_image(request: nil,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `request` | [`Create Catalog Image Request Hash`](/doc/models/create-catalog-image-request.md) | Form, Optional | - |
+| `request` | [`Create Catalog Image Request Hash`]($m/CreateCatalogImageRequest) | Form, Optional | - |
 | `image_file` | `File | UploadIO` | Form, Optional | - |
 
 ### Response Type
 
-[`Create Catalog Image Response Hash`](/doc/models/create-catalog-image-response.md)
+[`Create Catalog Image Response Hash`]($m/CreateCatalogImageResponse)
 
 ### Example Usage
 
@@ -291,7 +291,7 @@ def catalog_info
 
 ### Response Type
 
-[`Catalog Info Response Hash`](/doc/models/catalog-info-response.md)
+[`Catalog Info Response Hash`]($m/CatalogInfoResponse)
 
 ### Example Usage
 
@@ -331,7 +331,7 @@ def list_catalog(cursor: nil,
 
 ### Response Type
 
-[`List Catalog Response Hash`](/doc/models/list-catalog-response.md)
+[`List Catalog Response Hash`]($m/ListCatalogResponse)
 
 ### Example Usage
 
@@ -357,11 +357,11 @@ def upsert_catalog_object(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Upsert Catalog Object Request Hash`](/doc/models/upsert-catalog-object-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Upsert Catalog Object Request Hash`]($m/UpsertCatalogObjectRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Upsert Catalog Object Response Hash`](/doc/models/upsert-catalog-object-response.md)
+[`Upsert Catalog Object Response Hash`]($m/UpsertCatalogObjectResponse)
 
 ### Example Usage
 
@@ -406,7 +406,7 @@ def delete_catalog_object(object_id:)
 
 ### Response Type
 
-[`Delete Catalog Object Response Hash`](/doc/models/delete-catalog-object-response.md)
+[`Delete Catalog Object Response Hash`]($m/DeleteCatalogObjectResponse)
 
 ### Example Usage
 
@@ -446,7 +446,7 @@ def retrieve_catalog_object(object_id:,
 
 ### Response Type
 
-[`Retrieve Catalog Object Response Hash`](/doc/models/retrieve-catalog-object-response.md)
+[`Retrieve Catalog Object Response Hash`]($m/RetrieveCatalogObjectResponse)
 
 ### Example Usage
 
@@ -487,11 +487,11 @@ def search_catalog_objects(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Search Catalog Objects Request Hash`](/doc/models/search-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Search Catalog Objects Request Hash`]($m/SearchCatalogObjectsRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Search Catalog Objects Response Hash`](/doc/models/search-catalog-objects-response.md)
+[`Search Catalog Objects Response Hash`]($m/SearchCatalogObjectsResponse)
 
 ### Example Usage
 
@@ -527,11 +527,11 @@ def update_item_modifier_lists(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Update Item Modifier Lists Request Hash`](/doc/models/update-item-modifier-lists-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Update Item Modifier Lists Request Hash`]($m/UpdateItemModifierListsRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Update Item Modifier Lists Response Hash`](/doc/models/update-item-modifier-lists-response.md)
+[`Update Item Modifier Lists Response Hash`]($m/UpdateItemModifierListsResponse)
 
 ### Example Usage
 
@@ -564,11 +564,11 @@ def update_item_taxes(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Update Item Taxes Request Hash`](/doc/models/update-item-taxes-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Update Item Taxes Request Hash`]($m/UpdateItemTaxesRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Update Item Taxes Response Hash`](/doc/models/update-item-taxes-response.md)
+[`Update Item Taxes Response Hash`]($m/UpdateItemTaxesResponse)
 
 ### Example Usage
 

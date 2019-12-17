@@ -8,7 +8,7 @@
 
 | Name | Type | Description |
 |  --- | --- | --- |
-| `body` | [`V1 Discount Hash`](/doc/models/v1-discount.md) | V1Discount |
+| `body` | [`V1 Discount Hash`]($m/V1Discount) | V1Discount |
 
 ### Example (as JSON)
 

@@ -36,7 +36,7 @@ def list_merchants(cursor: nil)
 
 ### Response Type
 
-[`List Merchants Response Hash`](/doc/models/list-merchants-response.md)
+[`List Merchants Response Hash`]($m/ListMerchantsResponse)
 
 ### Example Usage
 
@@ -66,7 +66,7 @@ def retrieve_merchant(merchant_id:)
 
 ### Response Type
 
-[`Retrieve Merchant Response Hash`](/doc/models/retrieve-merchant-response.md)
+[`Retrieve Merchant Response Hash`]($m/RetrieveMerchantResponse)
 
 ### Example Usage
 

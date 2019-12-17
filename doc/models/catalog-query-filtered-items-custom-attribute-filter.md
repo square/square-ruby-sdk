@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `filter_type` | [`String (Catalog Query Filtered Items Custom Attribute Filter Filter Type)`](/doc/models/catalog-query-filtered-items-custom-attribute-filter-filter-type.md) | Optional | - |
+| `filter_type` | [`String (Catalog Query Filtered Items Custom Attribute Filter Filter Type)`]($m/CatalogQueryFilteredItemsCustomAttributeFilterFilterType) | Optional | - |
 | `custom_attribute_definition_ids` | `Array<String>` | Optional | - |
 | `custom_attribute_value_exact` | `String` | Optional | - |
 | `custom_attribute_value_prefix` | `String` | Optional | - |

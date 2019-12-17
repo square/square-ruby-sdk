@@ -31,11 +31,11 @@ def create_mobile_authorization_code(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Create Mobile Authorization Code Request Hash`](/doc/models/create-mobile-authorization-code-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Mobile Authorization Code Request Hash`]($m/CreateMobileAuthorizationCodeRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Create Mobile Authorization Code Response Hash`](/doc/models/create-mobile-authorization-code-response.md)
+[`Create Mobile Authorization Code Response Hash`]($m/CreateMobileAuthorizationCodeResponse)
 
 ### Example Usage
 

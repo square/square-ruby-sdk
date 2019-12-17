@@ -35,7 +35,7 @@ def retrieve_inventory_adjustment(adjustment_id:)
 
 ### Response Type
 
-[`Retrieve Inventory Adjustment Response Hash`](/doc/models/retrieve-inventory-adjustment-response.md)
+[`Retrieve Inventory Adjustment Response Hash`]($m/RetrieveInventoryAdjustmentResponse)
 
 ### Example Usage
 
@@ -67,11 +67,11 @@ def batch_change_inventory(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Batch Change Inventory Request Hash`](/doc/models/batch-change-inventory-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Batch Change Inventory Request Hash`]($m/BatchChangeInventoryRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Batch Change Inventory Response Hash`](/doc/models/batch-change-inventory-response.md)
+[`Batch Change Inventory Response Hash`]($m/BatchChangeInventoryResponse)
 
 ### Example Usage
 
@@ -122,11 +122,11 @@ def batch_retrieve_inventory_changes(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Batch Retrieve Inventory Changes Request Hash`](/doc/models/batch-retrieve-inventory-changes-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Batch Retrieve Inventory Changes Request Hash`]($m/BatchRetrieveInventoryChangesRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Batch Retrieve Inventory Changes Response Hash`](/doc/models/batch-retrieve-inventory-changes-response.md)
+[`Batch Retrieve Inventory Changes Response Hash`]($m/BatchRetrieveInventoryChangesResponse)
 
 ### Example Usage
 
@@ -170,11 +170,11 @@ def batch_retrieve_inventory_counts(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Batch Retrieve Inventory Counts Request Hash`](/doc/models/batch-retrieve-inventory-counts-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Batch Retrieve Inventory Counts Request Hash`]($m/BatchRetrieveInventoryCountsRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Batch Retrieve Inventory Counts Response Hash`](/doc/models/batch-retrieve-inventory-counts-response.md)
+[`Batch Retrieve Inventory Counts Response Hash`]($m/BatchRetrieveInventoryCountsResponse)
 
 ### Example Usage
 
@@ -210,7 +210,7 @@ def retrieve_inventory_physical_count(physical_count_id:)
 
 ### Response Type
 
-[`Retrieve Inventory Physical Count Response Hash`](/doc/models/retrieve-inventory-physical-count-response.md)
+[`Retrieve Inventory Physical Count Response Hash`]($m/RetrieveInventoryPhysicalCountResponse)
 
 ### Example Usage
 
@@ -249,7 +249,7 @@ def retrieve_inventory_count(catalog_object_id:,
 
 ### Response Type
 
-[`Retrieve Inventory Count Response Hash`](/doc/models/retrieve-inventory-count-response.md)
+[`Retrieve Inventory Count Response Hash`]($m/RetrieveInventoryCountResponse)
 
 ### Example Usage
 
@@ -294,7 +294,7 @@ def retrieve_inventory_changes(catalog_object_id:,
 
 ### Response Type
 
-[`Retrieve Inventory Changes Response Hash`](/doc/models/retrieve-inventory-changes-response.md)
+[`Retrieve Inventory Changes Response Hash`]($m/RetrieveInventoryChangesResponse)
 
 ### Example Usage
 
