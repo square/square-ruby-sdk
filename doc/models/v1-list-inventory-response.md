@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `items` | [`Array<V1 Inventory Entry Hash>`](/doc/models/v1-inventory-entry.md) | Optional | - |
+| `items` | [`Array<V1 Inventory Entry Hash>`]($m/V1InventoryEntry) | Optional | - |
 
 ### Example (as JSON)
 

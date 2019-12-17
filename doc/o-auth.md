@@ -50,12 +50,12 @@ def renew_token(client_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `client_id` | `String` | Template, Required | Your application ID, available from the [application dashboard](https://connect.squareup.com/apps). |
-| `body` | [`Renew Token Request Hash`](/doc/models/renew-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Renew Token Request Hash`]($m/RenewTokenRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 | `authorization` | `String` | Header, Required | Client APPLICATION_SECRET |
 
 ### Response Type
 
-[`Renew Token Response Hash`](/doc/models/renew-token-response.md)
+[`Renew Token Response Hash`]($m/RenewTokenResponse)
 
 ### Example Usage
 
@@ -104,12 +104,12 @@ def revoke_token(body:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Revoke Token Request Hash`](/doc/models/revoke-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Revoke Token Request Hash`]($m/RevokeTokenRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 | `authorization` | `String` | Header, Required | Client APPLICATION_SECRET |
 
 ### Response Type
 
-[`Revoke Token Response Hash`](/doc/models/revoke-token-response.md)
+[`Revoke Token Response Hash`]($m/RevokeTokenResponse)
 
 ### Example Usage
 
@@ -154,11 +154,11 @@ def obtain_token(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Obtain Token Request Hash`](/doc/models/obtain-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Obtain Token Request Hash`]($m/ObtainTokenRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Obtain Token Response Hash`](/doc/models/obtain-token-response.md)
+[`Obtain Token Response Hash`]($m/ObtainTokenResponse)
 
 ### Example Usage
 

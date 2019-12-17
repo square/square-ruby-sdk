@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `items` | [`Array<V1 Settlement Hash>`](/doc/models/v1-settlement.md) | Optional | - |
+| `items` | [`Array<V1 Settlement Hash>`]($m/V1Settlement) | Optional | - |
 
 ### Example (as JSON)
 

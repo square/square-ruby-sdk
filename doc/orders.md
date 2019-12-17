@@ -39,11 +39,11 @@ def create_order(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the business location to associate the order with. |
-| `body` | [`Create Order Request Hash`](/doc/models/create-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Order Request Hash`]($m/CreateOrderRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Create Order Response Hash`](/doc/models/create-order-response.md)
+[`Create Order Response Hash`]($m/CreateOrderResponse)
 
 ### Example Usage
 
@@ -76,11 +76,11 @@ def batch_retrieve_orders(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the orders' associated location. |
-| `body` | [`Batch Retrieve Orders Request Hash`](/doc/models/batch-retrieve-orders-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Batch Retrieve Orders Request Hash`]($m/BatchRetrieveOrdersRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Batch Retrieve Orders Response Hash`](/doc/models/batch-retrieve-orders-response.md)
+[`Batch Retrieve Orders Response Hash`]($m/BatchRetrieveOrdersResponse)
 
 ### Example Usage
 
@@ -130,11 +130,11 @@ def update_order(location_id:,
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the order's associated location. |
 | `order_id` | `String` | Template, Required | The ID of the order to update. |
-| `body` | [`Update Order Request Hash`](/doc/models/update-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Update Order Request Hash`]($m/UpdateOrderRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Update Order Response Hash`](/doc/models/update-order-response.md)
+[`Update Order Response Hash`]($m/UpdateOrderResponse)
 
 ### Example Usage
 
@@ -180,11 +180,11 @@ def search_orders(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Search Orders Request Hash`](/doc/models/search-orders-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Search Orders Request Hash`]($m/SearchOrdersRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Search Orders Response Hash`](/doc/models/search-orders-response.md)
+[`Search Orders Response Hash`]($m/SearchOrdersResponse)
 
 ### Example Usage
 
@@ -243,11 +243,11 @@ def pay_order(order_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `order_id` | `String` | Template, Required | The ID of the order being paid. |
-| `body` | [`Pay Order Request Hash`](/doc/models/pay-order-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Pay Order Request Hash`]($m/PayOrderRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Pay Order Response Hash`](/doc/models/pay-order-response.md)
+[`Pay Order Response Hash`]($m/PayOrderResponse)
 
 ### Example Usage
 

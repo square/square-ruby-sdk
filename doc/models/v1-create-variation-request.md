@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`V1 Variation Hash`](/doc/models/v1-variation.md) | Optional | V1Variation |
+| `body` | [`V1 Variation Hash`]($m/V1Variation) | Optional | V1Variation |
 
 ### Example (as JSON)
 

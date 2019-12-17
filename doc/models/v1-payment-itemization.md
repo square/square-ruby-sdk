@@ -28,18 +28,18 @@ price of items might have changed since the payment was processed.
 |  --- | --- | --- | --- |
 | `name` | `String` | Optional | The item's name. |
 | `quantity` | `Float` | Optional | The quantity of the item purchased. This can be a decimal value. |
-| `itemization_type` | [`String (V1 Payment Itemization Itemization Type)`](/doc/models/v1-payment-itemization-itemization-type.md) | Optional | - |
-| `item_detail` | [`V1 Payment Item Detail Hash`](/doc/models/v1-payment-item-detail.md) | Optional | V1PaymentItemDetail |
+| `itemization_type` | [`String (V1 Payment Itemization Itemization Type)`]($m/V1PaymentItemizationItemizationType) | Optional | - |
+| `item_detail` | [`V1 Payment Item Detail Hash`]($m/V1PaymentItemDetail) | Optional | V1PaymentItemDetail |
 | `notes` | `String` | Optional | Notes entered by the merchant about the item at the time of payment, if any. |
 | `item_variation_name` | `String` | Optional | The name of the item variation purchased, if any. |
-| `total_money` | [`V1 Money Hash`](/doc/models/v1-money.md) | Optional | - |
-| `single_quantity_money` | [`V1 Money Hash`](/doc/models/v1-money.md) | Optional | - |
-| `gross_sales_money` | [`V1 Money Hash`](/doc/models/v1-money.md) | Optional | - |
-| `discount_money` | [`V1 Money Hash`](/doc/models/v1-money.md) | Optional | - |
-| `net_sales_money` | [`V1 Money Hash`](/doc/models/v1-money.md) | Optional | - |
-| `taxes` | [`Array<V1 Payment Tax Hash>`](/doc/models/v1-payment-tax.md) | Optional | All taxes applied to this itemization. |
-| `discounts` | [`Array<V1 Payment Discount Hash>`](/doc/models/v1-payment-discount.md) | Optional | All discounts applied to this itemization. |
-| `modifiers` | [`Array<V1 Payment Modifier Hash>`](/doc/models/v1-payment-modifier.md) | Optional | All modifier options applied to this itemization. |
+| `total_money` | [`V1 Money Hash`]($m/V1Money) | Optional | - |
+| `single_quantity_money` | [`V1 Money Hash`]($m/V1Money) | Optional | - |
+| `gross_sales_money` | [`V1 Money Hash`]($m/V1Money) | Optional | - |
+| `discount_money` | [`V1 Money Hash`]($m/V1Money) | Optional | - |
+| `net_sales_money` | [`V1 Money Hash`]($m/V1Money) | Optional | - |
+| `taxes` | [`Array<V1 Payment Tax Hash>`]($m/V1PaymentTax) | Optional | All taxes applied to this itemization. |
+| `discounts` | [`Array<V1 Payment Discount Hash>`]($m/V1PaymentDiscount) | Optional | All discounts applied to this itemization. |
+| `modifiers` | [`Array<V1 Payment Modifier Hash>`]($m/V1PaymentModifier) | Optional | All modifier options applied to this itemization. |
 
 ### Example (as JSON)
 

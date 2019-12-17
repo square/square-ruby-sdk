@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `items` | [`Array<V1 Merchant Hash>`](/doc/models/v1-merchant.md) | Optional | - |
+| `items` | [`Array<V1 Merchant Hash>`]($m/V1Merchant) | Optional | - |
 
 ### Example (as JSON)
 

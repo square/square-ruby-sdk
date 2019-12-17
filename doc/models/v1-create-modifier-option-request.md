@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`V1 Modifier Option Hash`](/doc/models/v1-modifier-option.md) | Optional | V1ModifierOption |
+| `body` | [`V1 Modifier Option Hash`]($m/V1ModifierOption) | Optional | V1ModifierOption |
 
 ### Example (as JSON)
 

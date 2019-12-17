@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `items` | [`Array<V1 Page Hash>`](/doc/models/v1-page.md) | Optional | - |
+| `items` | [`Array<V1 Page Hash>`]($m/V1Page) | Optional | - |
 
 ### Example (as JSON)
 

@@ -12,7 +12,7 @@ the request resulted in errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `workweek_config` | [`Workweek Config Hash`](/doc/models/workweek-config.md) | Optional | Sets the Day of the week and hour of the day that a business starts a <br>work week. Used for the calculation of overtime pay. |
+| `workweek_config` | [`Workweek Config Hash`]($m/WorkweekConfig) | Optional | Sets the Day of the week and hour of the day that a business starts a <br>work week. Used for the calculation of overtime pay. |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ### Example (as JSON)

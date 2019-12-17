@@ -10,7 +10,7 @@ V1UpdateOrderRequest
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `action` | [`String (V1 Update Order Request Action)`](/doc/models/v1-update-order-request-action.md) |  | - |
+| `action` | [`String (V1 Update Order Request Action)`]($m/V1UpdateOrderRequestAction) |  | - |
 | `shipped_tracking_number` | `String` | Optional | The tracking number of the shipment associated with the order. Only valid if action is COMPLETE. |
 | `completed_note` | `String` | Optional | A merchant-specified note about the completion of the order. Only valid if action is COMPLETE. |
 | `refunded_note` | `String` | Optional | A merchant-specified note about the refunding of the order. Only valid if action is REFUND. |

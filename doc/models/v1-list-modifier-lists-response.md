@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `items` | [`Array<V1 Modifier List Hash>`](/doc/models/v1-modifier-list.md) | Optional | - |
+| `items` | [`Array<V1 Modifier List Hash>`]($m/V1ModifierList) | Optional | - |
 
 ### Example (as JSON)
 

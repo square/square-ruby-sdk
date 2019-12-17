@@ -12,8 +12,8 @@ ListCustomers endpoint.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `cursor` | `String` | Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information. |
-| `sort_field` | [`String (Customer Sort Field)`](/doc/models/customer-sort-field.md) | Optional | Indicates the sort criteria for a list of Customers. |
-| `sort_order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Optional | The order (e.g., chronological or alphabetical) in which results from a request are returned. |
+| `sort_field` | [`String (Customer Sort Field)`]($m/CustomerSortField) | Optional | Indicates the sort criteria for a list of Customers. |
+| `sort_order` | [`String (Sort Order)`]($m/SortOrder) | Optional | The order (e.g., chronological or alphabetical) in which results from a request are returned. |
 
 ### Example (as JSON)
 
