@@ -10,7 +10,7 @@ Group of standard measurement units.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `standard_unit_descriptions` | [`Array<Standard Unit Description Hash>`]($m/StandardUnitDescription) | Optional | List of standard (non-custom) measurement units in this description group. |
+| `standard_unit_descriptions` | [`Array<Standard Unit Description Hash>`](/doc/models/standard-unit-description.md) | Optional | List of standard (non-custom) measurement units in this description group. |
 | `language_code` | `String` | Optional | IETF language tag. |
 
 ### Example (as JSON)

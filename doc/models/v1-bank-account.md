@@ -17,7 +17,7 @@ V1BankAccount
 | `routing_number` | `String` | Optional | The bank account's routing number. |
 | `account_number_suffix` | `String` | Optional | The last few digits of the bank account number. |
 | `currency_code` | `String` | Optional | The currency code of the currency associated with the bank account, in ISO 4217 format. For example, the currency code for US dollars is USD. |
-| `type` | [`String (V1 Bank Account Type)`]($m/V1BankAccountType) | Optional | - |
+| `type` | [`String (V1 Bank Account Type)`](/doc/models/v1-bank-account-type.md) | Optional | - |
 
 ### Example (as JSON)
 

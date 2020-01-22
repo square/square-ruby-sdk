@@ -28,11 +28,11 @@ def register_domain(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Register Domain Request Hash`]($m/RegisterDomainRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Register Domain Request Hash`](/doc/models/register-domain-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Register Domain Response Hash`]($m/RegisterDomainResponse)
+[`Register Domain Response Hash`](/doc/models/register-domain-response.md)
 
 ### Example Usage
 

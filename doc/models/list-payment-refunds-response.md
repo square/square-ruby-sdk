@@ -14,7 +14,7 @@ One of `errors` or `refunds` is present in a given response (never both).
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Information on errors encountered during the request. |
-| `refunds` | [`Array<Payment Refund Hash>`]($m/PaymentRefund) | Optional | The list of requested refunds. |
+| `refunds` | [`Array<Payment Refund Hash>`](/doc/models/payment-refund.md) | Optional | The list of requested refunds. |
 | `cursor` | `String` | Optional | The pagination cursor to be used in a subsequent request. If empty,<br>this is the final response.<br><br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
 
 ### Example (as JSON)

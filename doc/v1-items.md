@@ -75,7 +75,7 @@ def list_categories(location_id:)
 
 ### Response Type
 
-[`Array<V1 Category Hash>`]($m/V1Category)
+[`Array<V1 Category Hash>`](/doc/models/v1-category.md)
 
 ### Example Usage
 
@@ -113,11 +113,11 @@ def create_category(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the location to create an item for. |
-| `body` | [`V1 Category Hash`]($m/V1Category) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Category Hash`](/doc/models/v1-category.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Category Hash`]($m/V1Category)
+[`V1 Category Hash`](/doc/models/v1-category.md)
 
 ### Example Usage
 
@@ -164,7 +164,7 @@ def delete_category(location_id:,
 
 ### Response Type
 
-[`V1 Category Hash`]($m/V1Category)
+[`V1 Category Hash`](/doc/models/v1-category.md)
 
 ### Example Usage
 
@@ -205,11 +205,11 @@ def update_category(location_id:,
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the category's associated location. |
 | `category_id` | `String` | Template, Required | The ID of the category to edit. |
-| `body` | [`V1 Category Hash`]($m/V1Category) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Category Hash`](/doc/models/v1-category.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Category Hash`]($m/V1Category)
+[`V1 Category Hash`](/doc/models/v1-category.md)
 
 ### Example Usage
 
@@ -251,7 +251,7 @@ def list_discounts(location_id:)
 
 ### Response Type
 
-[`Array<V1 Discount Hash>`]($m/V1Discount)
+[`Array<V1 Discount Hash>`](/doc/models/v1-discount.md)
 
 ### Example Usage
 
@@ -289,11 +289,11 @@ def create_discount(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the location to create an item for. |
-| `body` | [`V1 Discount Hash`]($m/V1Discount) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Discount Hash`](/doc/models/v1-discount.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Discount Hash`]($m/V1Discount)
+[`V1 Discount Hash`](/doc/models/v1-discount.md)
 
 ### Example Usage
 
@@ -340,7 +340,7 @@ def delete_discount(location_id:,
 
 ### Response Type
 
-[`V1 Discount Hash`]($m/V1Discount)
+[`V1 Discount Hash`](/doc/models/v1-discount.md)
 
 ### Example Usage
 
@@ -381,11 +381,11 @@ def update_discount(location_id:,
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the category's associated location. |
 | `discount_id` | `String` | Template, Required | The ID of the discount to edit. |
-| `body` | [`V1 Discount Hash`]($m/V1Discount) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Discount Hash`](/doc/models/v1-discount.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Discount Hash`]($m/V1Discount)
+[`V1 Discount Hash`](/doc/models/v1-discount.md)
 
 ### Example Usage
 
@@ -427,7 +427,7 @@ def list_fees(location_id:)
 
 ### Response Type
 
-[`Array<V1 Fee Hash>`]($m/V1Fee)
+[`Array<V1 Fee Hash>`](/doc/models/v1-fee.md)
 
 ### Example Usage
 
@@ -465,11 +465,11 @@ def create_fee(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the location to create a fee for. |
-| `body` | [`V1 Fee Hash`]($m/V1Fee) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Fee Hash`](/doc/models/v1-fee.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Fee Hash`]($m/V1Fee)
+[`V1 Fee Hash`](/doc/models/v1-fee.md)
 
 ### Example Usage
 
@@ -516,7 +516,7 @@ def delete_fee(location_id:,
 
 ### Response Type
 
-[`V1 Fee Hash`]($m/V1Fee)
+[`V1 Fee Hash`](/doc/models/v1-fee.md)
 
 ### Example Usage
 
@@ -557,11 +557,11 @@ def update_fee(location_id:,
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the fee's associated location. |
 | `fee_id` | `String` | Template, Required | The ID of the fee to edit. |
-| `body` | [`V1 Fee Hash`]($m/V1Fee) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Fee Hash`](/doc/models/v1-fee.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Fee Hash`]($m/V1Fee)
+[`V1 Fee Hash`](/doc/models/v1-fee.md)
 
 ### Example Usage
 
@@ -608,7 +608,7 @@ def list_inventory(location_id:,
 
 ### Response Type
 
-[`Array<V1 Inventory Entry Hash>`]($m/V1InventoryEntry)
+[`Array<V1 Inventory Entry Hash>`](/doc/models/v1-inventory-entry.md)
 
 ### Example Usage
 
@@ -648,11 +648,11 @@ def adjust_inventory(location_id:,
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the item's associated location. |
 | `variation_id` | `String` | Template, Required | The ID of the variation to adjust inventory information for. |
-| `body` | [`V1 Adjust Inventory Request Hash`]($m/V1AdjustInventoryRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Adjust Inventory Request Hash`](/doc/models/v1-adjust-inventory-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Inventory Entry Hash`]($m/V1InventoryEntry)
+[`V1 Inventory Entry Hash`](/doc/models/v1-inventory-entry.md)
 
 ### Example Usage
 
@@ -696,7 +696,7 @@ def list_items(location_id:,
 
 ### Response Type
 
-[`Array<V1 Item Hash>`]($m/V1Item)
+[`Array<V1 Item Hash>`](/doc/models/v1-item.md)
 
 ### Example Usage
 
@@ -746,11 +746,11 @@ def create_item(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the location to create an item for. |
-| `body` | [`V1 Item Hash`]($m/V1Item) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Item Hash`](/doc/models/v1-item.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Item Hash`]($m/V1Item)
+[`V1 Item Hash`](/doc/models/v1-item.md)
 
 ### Example Usage
 
@@ -797,7 +797,7 @@ def delete_item(location_id:,
 
 ### Response Type
 
-[`V1 Item Hash`]($m/V1Item)
+[`V1 Item Hash`](/doc/models/v1-item.md)
 
 ### Example Usage
 
@@ -841,7 +841,7 @@ def retrieve_item(location_id:,
 
 ### Response Type
 
-[`V1 Item Hash`]($m/V1Item)
+[`V1 Item Hash`](/doc/models/v1-item.md)
 
 ### Example Usage
 
@@ -882,11 +882,11 @@ def update_item(location_id:,
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the item's associated location. |
 | `item_id` | `String` | Template, Required | The ID of the item to modify. |
-| `body` | [`V1 Item Hash`]($m/V1Item) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Item Hash`](/doc/models/v1-item.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Item Hash`]($m/V1Item)
+[`V1 Item Hash`](/doc/models/v1-item.md)
 
 ### Example Usage
 
@@ -933,7 +933,7 @@ def remove_fee(location_id:,
 
 ### Response Type
 
-[`V1 Item Hash`]($m/V1Item)
+[`V1 Item Hash`](/doc/models/v1-item.md)
 
 ### Example Usage
 
@@ -980,7 +980,7 @@ def apply_fee(location_id:,
 
 ### Response Type
 
-[`V1 Item Hash`]($m/V1Item)
+[`V1 Item Hash`](/doc/models/v1-item.md)
 
 ### Example Usage
 
@@ -1027,7 +1027,7 @@ def remove_modifier_list(location_id:,
 
 ### Response Type
 
-[`V1 Item Hash`]($m/V1Item)
+[`V1 Item Hash`](/doc/models/v1-item.md)
 
 ### Example Usage
 
@@ -1074,7 +1074,7 @@ def apply_modifier_list(location_id:,
 
 ### Response Type
 
-[`V1 Item Hash`]($m/V1Item)
+[`V1 Item Hash`](/doc/models/v1-item.md)
 
 ### Example Usage
 
@@ -1116,11 +1116,11 @@ def create_variation(location_id:,
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the item's associated location. |
 | `item_id` | `String` | Template, Required | The item's ID. |
-| `body` | [`V1 Variation Hash`]($m/V1Variation) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Variation Hash`](/doc/models/v1-variation.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Variation Hash`]($m/V1Variation)
+[`V1 Variation Hash`](/doc/models/v1-variation.md)
 
 ### Example Usage
 
@@ -1170,7 +1170,7 @@ def delete_variation(location_id:,
 
 ### Response Type
 
-[`V1 Variation Hash`]($m/V1Variation)
+[`V1 Variation Hash`](/doc/models/v1-variation.md)
 
 ### Example Usage
 
@@ -1214,11 +1214,11 @@ def update_variation(location_id:,
 | `location_id` | `String` | Template, Required | The ID of the item's associated location. |
 | `item_id` | `String` | Template, Required | The ID of the item to modify. |
 | `variation_id` | `String` | Template, Required | The ID of the variation to modify. |
-| `body` | [`V1 Variation Hash`]($m/V1Variation) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Variation Hash`](/doc/models/v1-variation.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Variation Hash`]($m/V1Variation)
+[`V1 Variation Hash`](/doc/models/v1-variation.md)
 
 ### Example Usage
 
@@ -1261,7 +1261,7 @@ def list_modifier_lists(location_id:)
 
 ### Response Type
 
-[`Array<V1 Modifier List Hash>`]($m/V1ModifierList)
+[`Array<V1 Modifier List Hash>`](/doc/models/v1-modifier-list.md)
 
 ### Example Usage
 
@@ -1299,11 +1299,11 @@ def create_modifier_list(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the location to create a modifier list for. |
-| `body` | [`V1 Modifier List Hash`]($m/V1ModifierList) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Modifier List Hash`](/doc/models/v1-modifier-list.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Modifier List Hash`]($m/V1ModifierList)
+[`V1 Modifier List Hash`](/doc/models/v1-modifier-list.md)
 
 ### Example Usage
 
@@ -1351,7 +1351,7 @@ def delete_modifier_list(location_id:,
 
 ### Response Type
 
-[`V1 Modifier List Hash`]($m/V1ModifierList)
+[`V1 Modifier List Hash`](/doc/models/v1-modifier-list.md)
 
 ### Example Usage
 
@@ -1394,7 +1394,7 @@ def retrieve_modifier_list(location_id:,
 
 ### Response Type
 
-[`V1 Modifier List Hash`]($m/V1ModifierList)
+[`V1 Modifier List Hash`](/doc/models/v1-modifier-list.md)
 
 ### Example Usage
 
@@ -1435,11 +1435,11 @@ def update_modifier_list(location_id:,
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the item's associated location. |
 | `modifier_list_id` | `String` | Template, Required | The ID of the modifier list to edit. |
-| `body` | [`V1 Update Modifier List Request Hash`]($m/V1UpdateModifierListRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Update Modifier List Request Hash`](/doc/models/v1-update-modifier-list-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Modifier List Hash`]($m/V1ModifierList)
+[`V1 Modifier List Hash`](/doc/models/v1-modifier-list.md)
 
 ### Example Usage
 
@@ -1481,11 +1481,11 @@ def create_modifier_option(location_id:,
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the item's associated location. |
 | `modifier_list_id` | `String` | Template, Required | The ID of the modifier list to edit. |
-| `body` | [`V1 Modifier Option Hash`]($m/V1ModifierOption) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Modifier Option Hash`](/doc/models/v1-modifier-option.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Modifier Option Hash`]($m/V1ModifierOption)
+[`V1 Modifier Option Hash`](/doc/models/v1-modifier-option.md)
 
 ### Example Usage
 
@@ -1535,7 +1535,7 @@ def delete_modifier_option(location_id:,
 
 ### Response Type
 
-[`V1 Modifier Option Hash`]($m/V1ModifierOption)
+[`V1 Modifier Option Hash`](/doc/models/v1-modifier-option.md)
 
 ### Example Usage
 
@@ -1579,11 +1579,11 @@ def update_modifier_option(location_id:,
 | `location_id` | `String` | Template, Required | The ID of the item's associated location. |
 | `modifier_list_id` | `String` | Template, Required | The ID of the modifier list to edit. |
 | `modifier_option_id` | `String` | Template, Required | The ID of the modifier list to edit. |
-| `body` | [`V1 Modifier Option Hash`]($m/V1ModifierOption) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Modifier Option Hash`](/doc/models/v1-modifier-option.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Modifier Option Hash`]($m/V1ModifierOption)
+[`V1 Modifier Option Hash`](/doc/models/v1-modifier-option.md)
 
 ### Example Usage
 
@@ -1627,7 +1627,7 @@ def list_pages(location_id:)
 
 ### Response Type
 
-[`Array<V1 Page Hash>`]($m/V1Page)
+[`Array<V1 Page Hash>`](/doc/models/v1-page.md)
 
 ### Example Usage
 
@@ -1665,11 +1665,11 @@ def create_page(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the location to create an item for. |
-| `body` | [`V1 Page Hash`]($m/V1Page) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Page Hash`](/doc/models/v1-page.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Page Hash`]($m/V1Page)
+[`V1 Page Hash`](/doc/models/v1-page.md)
 
 ### Example Usage
 
@@ -1715,7 +1715,7 @@ def delete_page(location_id:,
 
 ### Response Type
 
-[`V1 Page Hash`]($m/V1Page)
+[`V1 Page Hash`](/doc/models/v1-page.md)
 
 ### Example Usage
 
@@ -1756,11 +1756,11 @@ def update_page(location_id:,
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the Favorites page's associated location |
 | `page_id` | `String` | Template, Required | The ID of the page to modify. |
-| `body` | [`V1 Page Hash`]($m/V1Page) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Page Hash`](/doc/models/v1-page.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Page Hash`]($m/V1Page)
+[`V1 Page Hash`](/doc/models/v1-page.md)
 
 ### Example Usage
 
@@ -1812,7 +1812,7 @@ def delete_page_cell(location_id:,
 
 ### Response Type
 
-[`V1 Page Hash`]($m/V1Page)
+[`V1 Page Hash`](/doc/models/v1-page.md)
 
 ### Example Usage
 
@@ -1853,11 +1853,11 @@ def update_page_cell(location_id:,
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the Favorites page's associated location. |
 | `page_id` | `String` | Template, Required | The ID of the page the cell belongs to. |
-| `body` | [`V1 Page Cell Hash`]($m/V1PageCell) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`V1 Page Cell Hash`](/doc/models/v1-page-cell.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`V1 Page Hash`]($m/V1Page)
+[`V1 Page Hash`](/doc/models/v1-page.md)
 
 ### Example Usage
 

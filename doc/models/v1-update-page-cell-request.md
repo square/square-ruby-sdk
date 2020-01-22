@@ -8,7 +8,7 @@
 
 | Name | Type | Description |
 |  --- | --- | --- |
-| `body` | [`V1 Page Cell Hash`]($m/V1PageCell) | V1PageCell |
+| `body` | [`V1 Page Cell Hash`](/doc/models/v1-page-cell.md) | V1PageCell |
 
 ### Example (as JSON)
 

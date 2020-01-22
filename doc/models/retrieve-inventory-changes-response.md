@@ -9,7 +9,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `changes` | [`Array<Inventory Change Hash>`]($m/InventoryChange) | Optional | The set of inventory changes for the requested object and locations. |
+| `changes` | [`Array<Inventory Change Hash>`](/doc/models/inventory-change.md) | Optional | The set of inventory changes for the requested object and locations. |
 | `cursor` | `String` | Optional | The pagination cursor to be used in a subsequent request. If unset,<br>this is the final response.<br><br>See the [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) guide for more information. |
 
 ### Example (as JSON)

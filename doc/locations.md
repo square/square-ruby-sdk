@@ -29,7 +29,7 @@ def list_locations
 
 ### Response Type
 
-[`List Locations Response Hash`]($m/ListLocationsResponse)
+[`List Locations Response Hash`](/doc/models/list-locations-response.md)
 
 ### Example Usage
 
@@ -56,11 +56,11 @@ def create_location(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Create Location Request Hash`]($m/CreateLocationRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Location Request Hash`](/doc/models/create-location-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Create Location Response Hash`]($m/CreateLocationResponse)
+[`Create Location Response Hash`](/doc/models/create-location-response.md)
 
 ### Example Usage
 
@@ -100,7 +100,7 @@ def retrieve_location(location_id:)
 
 ### Response Type
 
-[`Retrieve Location Response Hash`]($m/RetrieveLocationResponse)
+[`Retrieve Location Response Hash`](/doc/models/retrieve-location-response.md)
 
 ### Example Usage
 
@@ -130,11 +130,11 @@ def update_location(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the location to update. |
-| `body` | [`Update Location Request Hash`]($m/UpdateLocationRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Update Location Request Hash`](/doc/models/update-location-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Update Location Response Hash`]($m/UpdateLocationResponse)
+[`Update Location Response Hash`](/doc/models/update-location-response.md)
 
 ### Example Usage
 

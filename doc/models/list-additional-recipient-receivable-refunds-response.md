@@ -14,7 +14,7 @@ One of `errors` or `additional_recipient_receivable_refunds` is present in a giv
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `receivable_refunds` | [`Array<Additional Recipient Receivable Refund Hash>`]($m/AdditionalRecipientReceivableRefund) | Optional | An array of AdditionalRecipientReceivableRefunds that match your query. |
+| `receivable_refunds` | [`Array<Additional Recipient Receivable Refund Hash>`](/doc/models/additional-recipient-receivable-refund.md) | Optional | An array of AdditionalRecipientReceivableRefunds that match your query. |
 | `cursor` | `String` | Optional | A pagination cursor for retrieving the next set of results,<br>if any remain. Provide this value as the `cursor` parameter in a subsequent<br>request to this endpoint.<br><br>See [Paginating results](#paginatingresults) for more information. |
 
 ### Example (as JSON)

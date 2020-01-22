@@ -12,7 +12,7 @@ the request resulted in errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `employee_wage` | [`Employee Wage Hash`]($m/EmployeeWage) | Optional | The hourly wage rate that an employee will earn on a `Shift` for doing the job<br>specified by the `title` property of this object. |
+| `employee_wage` | [`Employee Wage Hash`](/doc/models/employee-wage.md) | Optional | The hourly wage rate that an employee will earn on a `Shift` for doing the job<br>specified by the `title` property of this object. |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ### Example (as JSON)
