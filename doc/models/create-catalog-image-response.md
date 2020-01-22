@@ -9,7 +9,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Information on any errors encountered. |
-| `image` | [`Catalog Object Hash`]($m/CatalogObject) | Optional | - |
+| `image` | [`Catalog Object Hash`](/doc/models/catalog-object.md) | Optional | - |
 
 ### Example (as JSON)
 

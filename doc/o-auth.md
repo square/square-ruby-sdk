@@ -50,12 +50,12 @@ def renew_token(client_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `client_id` | `String` | Template, Required | Your application ID, available from the [application dashboard](https://connect.squareup.com/apps). |
-| `body` | [`Renew Token Request Hash`]($m/RenewTokenRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Renew Token Request Hash`](/doc/models/renew-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 | `authorization` | `String` | Header, Required | Client APPLICATION_SECRET |
 
 ### Response Type
 
-[`Renew Token Response Hash`]($m/RenewTokenResponse)
+[`Renew Token Response Hash`](/doc/models/renew-token-response.md)
 
 ### Example Usage
 
@@ -104,12 +104,12 @@ def revoke_token(body:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Revoke Token Request Hash`]($m/RevokeTokenRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Revoke Token Request Hash`](/doc/models/revoke-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 | `authorization` | `String` | Header, Required | Client APPLICATION_SECRET |
 
 ### Response Type
 
-[`Revoke Token Response Hash`]($m/RevokeTokenResponse)
+[`Revoke Token Response Hash`](/doc/models/revoke-token-response.md)
 
 ### Example Usage
 
@@ -154,19 +154,20 @@ def obtain_token(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Obtain Token Request Hash`]($m/ObtainTokenRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Obtain Token Request Hash`](/doc/models/obtain-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Obtain Token Response Hash`]($m/ObtainTokenResponse)
+[`Obtain Token Response Hash`](/doc/models/obtain-token-response.md)
 
 ### Example Usage
 
 ```ruby
 body = {}
-body[:client_id] = 'client_id8'
-body[:client_secret] = 'client_secret4'
-body[:grant_type] = 'grant_type8'
+body[:client_id] = 'APPLICATION_ID'
+body[:client_secret] = 'APPLICATION_SECRET'
+body[:code] = 'CODE_FROM_AUTHORIZE'
+body[:grant_type] = 'authorization_code'
 
 result = o_auth_api.obtain_token(body: body)
 

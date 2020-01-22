@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `order` | [`String (Sort Order)`]($m/SortOrder) | Optional | The order (e.g., chronological or alphabetical) in which results from a request are returned. |
+| `order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Optional | The order (e.g., chronological or alphabetical) in which results from a request are returned. |
 | `employee_id` | `String` | Optional | If provided, the endpoint returns only timecards for the employee with the specified ID. |
 | `begin_clockin_time` | `String` | Optional | If filtering results by their clockin_time field, the beginning of the requested reporting period, in ISO 8601 format. |
 | `end_clockin_time` | `String` | Optional | If filtering results by their clockin_time field, the end of the requested reporting period, in ISO 8601 format. |

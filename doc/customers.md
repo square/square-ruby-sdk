@@ -34,12 +34,12 @@ def list_customers(cursor: nil,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information. |
-| `sort_field` | [`String (Customer Sort Field)`]($m/CustomerSortField) | Query, Optional | Indicates how Customers should be sorted.<br><br>Default: `DEFAULT`. |
-| `sort_order` | [`String (Sort Order)`]($m/SortOrder) | Query, Optional | Indicates whether Customers should be sorted in ascending (`ASC`) or<br>descending (`DESC`) order.<br><br>Default: `ASC`. |
+| `sort_field` | [`String (Customer Sort Field)`](/doc/models/customer-sort-field.md) | Query, Optional | Indicates how Customers should be sorted.<br><br>Default: `DEFAULT`. |
+| `sort_order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | Indicates whether Customers should be sorted in ascending (`ASC`) or<br>descending (`DESC`) order.<br><br>Default: `ASC`. |
 
 ### Response Type
 
-[`List Customers Response Hash`]($m/ListCustomersResponse)
+[`List Customers Response Hash`](/doc/models/list-customers-response.md)
 
 ### Example Usage
 
@@ -74,11 +74,11 @@ def create_customer(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Create Customer Request Hash`]($m/CreateCustomerRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Customer Request Hash`](/doc/models/create-customer-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Create Customer Response Hash`]($m/CreateCustomerResponse)
+[`Create Customer Response Hash`](/doc/models/create-customer-response.md)
 
 ### Example Usage
 
@@ -122,11 +122,11 @@ def search_customers(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Search Customers Request Hash`]($m/SearchCustomersRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Search Customers Request Hash`](/doc/models/search-customers-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Search Customers Response Hash`]($m/SearchCustomersResponse)
+[`Search Customers Response Hash`](/doc/models/search-customers-response.md)
 
 ### Example Usage
 
@@ -172,7 +172,7 @@ def delete_customer(customer_id:)
 
 ### Response Type
 
-[`Delete Customer Response Hash`]($m/DeleteCustomerResponse)
+[`Delete Customer Response Hash`](/doc/models/delete-customer-response.md)
 
 ### Example Usage
 
@@ -204,7 +204,7 @@ def retrieve_customer(customer_id:)
 
 ### Response Type
 
-[`Retrieve Customer Response Hash`]($m/RetrieveCustomerResponse)
+[`Retrieve Customer Response Hash`](/doc/models/retrieve-customer-response.md)
 
 ### Example Usage
 
@@ -241,11 +241,11 @@ def update_customer(customer_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `customer_id` | `String` | Template, Required | The ID of the customer to update. |
-| `body` | [`Update Customer Request Hash`]($m/UpdateCustomerRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Update Customer Request Hash`](/doc/models/update-customer-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Update Customer Response Hash`]($m/UpdateCustomerResponse)
+[`Update Customer Response Hash`](/doc/models/update-customer-response.md)
 
 ### Example Usage
 
@@ -283,11 +283,11 @@ def create_customer_card(customer_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `customer_id` | `String` | Template, Required | The Square ID of the customer profile the card is linked to. |
-| `body` | [`Create Customer Card Request Hash`]($m/CreateCustomerCardRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Customer Card Request Hash`](/doc/models/create-customer-card-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Create Customer Card Response Hash`]($m/CreateCustomerCardResponse)
+[`Create Customer Card Response Hash`](/doc/models/create-customer-card-response.md)
 
 ### Example Usage
 
@@ -331,7 +331,7 @@ def delete_customer_card(customer_id:,
 
 ### Response Type
 
-[`Delete Customer Card Response Hash`]($m/DeleteCustomerCardResponse)
+[`Delete Customer Card Response Hash`](/doc/models/delete-customer-card-response.md)
 
 ### Example Usage
 

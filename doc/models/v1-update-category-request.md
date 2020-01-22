@@ -8,7 +8,7 @@
 
 | Name | Type | Description |
 |  --- | --- | --- |
-| `body` | [`V1 Category Hash`]($m/V1Category) | V1Category |
+| `body` | [`V1 Category Hash`](/doc/models/v1-category.md) | V1Category |
 
 ### Example (as JSON)
 

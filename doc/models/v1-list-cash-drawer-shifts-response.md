@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `items` | [`Array<V1 Cash Drawer Shift Hash>`]($m/V1CashDrawerShift) | Optional | - |
+| `items` | [`Array<V1 Cash Drawer Shift Hash>`](/doc/models/v1-cash-drawer-shift.md) | Optional | - |
 
 ### Example (as JSON)
 

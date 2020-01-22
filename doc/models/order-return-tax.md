@@ -18,10 +18,10 @@ order subtotal.
 | `source_tax_uid` | `String` | Optional | `uid` of the Tax from the Order which contains the original charge of this tax. |
 | `catalog_object_id` | `String` | Optional | The catalog object id referencing [CatalogTax](#type-catalogtax). |
 | `name` | `String` | Optional | The tax's name. |
-| `type` | [`String (Order Line Item Tax Type)`]($m/OrderLineItemTaxType) | Optional | Indicates how the tax is applied to the associated line item or order. |
+| `type` | [`String (Order Line Item Tax Type)`](/doc/models/order-line-item-tax-type.md) | Optional | Indicates how the tax is applied to the associated line item or order. |
 | `percentage` | `String` | Optional | The percentage of the tax, as a string representation of a decimal number.<br>For example, a value of `"7.25"` corresponds to a percentage of 7.25%. |
 | `applied_money` | [`Money Hash`](/doc/models/money.md) | Optional | Represents an amount of money. `Money` fields can be signed or unsigned.<br>Fields that do not explicitly define whether they are signed or unsigned are<br>considered unsigned and can only hold positive amounts. For signed fields, the<br>sign of the value indicates the purpose of the money transfer. See<br>[Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)<br>for more information. |
-| `scope` | [`String (Order Line Item Tax Scope)`]($m/OrderLineItemTaxScope) | Optional | Indicates whether this is a line item or order level tax. |
+| `scope` | [`String (Order Line Item Tax Scope)`](/doc/models/order-line-item-tax-scope.md) | Optional | Indicates whether this is a line item or order level tax. |
 
 ### Example (as JSON)
 

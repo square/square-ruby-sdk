@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `items` | [`Array<V1 Timecard Event Hash>`]($m/V1TimecardEvent) | Optional | - |
+| `items` | [`Array<V1 Timecard Event Hash>`](/doc/models/v1-timecard-event.md) | Optional | - |
 
 ### Example (as JSON)
 

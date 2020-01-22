@@ -11,8 +11,8 @@ for customer profiles.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `filter` | [`Customer Filter Hash`]($m/CustomerFilter) | Optional | Represents a set of `CustomerQuery` filters used to limit the set of<br>`Customers` returned by SearchCustomers. |
-| `sort` | [`Customer Sort Hash`]($m/CustomerSort) | Optional | Indicates the field to use for sorting customer profiles. |
+| `filter` | [`Customer Filter Hash`](/doc/models/customer-filter.md) | Optional | Represents a set of `CustomerQuery` filters used to limit the set of<br>`Customers` returned by SearchCustomers. |
+| `sort` | [`Customer Sort Hash`](/doc/models/customer-sort.md) | Optional | Indicates the field to use for sorting customer profiles. |
 
 ### Example (as JSON)
 

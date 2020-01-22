@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `items` | [`Array<V1 Employee Role Hash>`]($m/V1EmployeeRole) | Optional | - |
+| `items` | [`Array<V1 Employee Role Hash>`](/doc/models/v1-employee-role.md) | Optional | - |
 
 ### Example (as JSON)
 

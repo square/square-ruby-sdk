@@ -14,7 +14,7 @@ end based on summing all cash drawer shift events.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `String` | Optional | The shift unique ID. |
-| `state` | [`String (Cash Drawer Shift State)`]($m/CashDrawerShiftState) | Optional | The current state of a cash drawer shift. |
+| `state` | [`String (Cash Drawer Shift State)`](/doc/models/cash-drawer-shift-state.md) | Optional | The current state of a cash drawer shift. |
 | `opened_at` | `String` | Optional | The shift start time in ISO 8601 format. |
 | `ended_at` | `String` | Optional | The shift end time in ISO 8601 format. |
 | `closed_at` | `String` | Optional | The shift close time in ISO 8601 format. |

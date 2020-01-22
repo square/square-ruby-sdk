@@ -9,8 +9,8 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | The set of errors encountered. |
-| `limits` | [`Catalog Info Response Limits Hash`]($m/CatalogInfoResponseLimits) | Optional | - |
-| `standard_unit_description_group` | [`Standard Unit Description Group Hash`]($m/StandardUnitDescriptionGroup) | Optional | Group of standard measurement units. |
+| `limits` | [`Catalog Info Response Limits Hash`](/doc/models/catalog-info-response-limits.md) | Optional | - |
+| `standard_unit_description_group` | [`Standard Unit Description Group Hash`](/doc/models/standard-unit-description-group.md) | Optional | Group of standard measurement units. |
 
 ### Example (as JSON)
 

@@ -14,7 +14,7 @@ One of `errors` or `additional_recipient_receivables` is present in a given resp
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `receivables` | [`Array<Additional Recipient Receivable Hash>`]($m/AdditionalRecipientReceivable) | Optional | An array of AdditionalRecipientReceivables that match your query. |
+| `receivables` | [`Array<Additional Recipient Receivable Hash>`](/doc/models/additional-recipient-receivable.md) | Optional | An array of AdditionalRecipientReceivables that match your query. |
 | `cursor` | `String` | Optional | A pagination cursor for retrieving the next set of results,<br>if any remain. Provide this value as the `cursor` parameter in a subsequent<br>request to this endpoint.<br><br>See [Paginating results](#paginatingresults) for more information. |
 
 ### Example (as JSON)

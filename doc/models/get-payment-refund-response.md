@@ -15,7 +15,7 @@ present, or it may be present in a FAILED state.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Information on errors encountered during the request. |
-| `refund` | [`Payment Refund Hash`]($m/PaymentRefund) | Optional | Represents a refund of a payment made using Square. Contains information on<br>the original payment and the amount of money refunded. |
+| `refund` | [`Payment Refund Hash`](/doc/models/payment-refund.md) | Optional | Represents a refund of a payment made using Square. Contains information on<br>the original payment and the amount of money refunded. |
 
 ### Example (as JSON)
 

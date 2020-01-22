@@ -9,9 +9,9 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Information on any errors that encountered. |
-| `objects` | [`Array<Catalog Object Hash>`]($m/CatalogObject) | Optional | The created successfully created CatalogObjects. |
+| `objects` | [`Array<Catalog Object Hash>`](/doc/models/catalog-object.md) | Optional | The created successfully created CatalogObjects. |
 | `updated_at` | `String` | Optional | The database [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates) of this update in RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z". |
-| `id_mappings` | [`Array<Catalog Id Mapping Hash>`]($m/CatalogIdMapping) | Optional | The mapping between client and server IDs for this upsert. |
+| `id_mappings` | [`Array<Catalog Id Mapping Hash>`](/doc/models/catalog-id-mapping.md) | Optional | The mapping between client and server IDs for this upsert. |
 
 ### Example (as JSON)
 

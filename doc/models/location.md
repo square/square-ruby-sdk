@@ -12,8 +12,8 @@
 | `name` | `String` | Optional | The name of the location.<br>This information appears in the dashboard as the nickname. |
 | `address` | [`Address Hash`](/doc/models/address.md) | Optional | Represents a physical address. |
 | `timezone` | `String` | Optional | The [IANA Timezone](https://www.iana.org/time-zones) identifier for<br>the timezone of the location. |
-| `capabilities` | [`Array<String (Location Capability)>`]($m/LocationCapability) | Optional | The Square features that are enabled for the location.<br>See [LocationCapability](#type-locationcapability) for possible values.<br>See [LocationCapability](#type-locationcapability) for possible values |
-| `status` | [`String (Location Status)`]($m/LocationStatus) | Optional | The status of the location, whether a location is active or inactive. |
+| `capabilities` | [`Array<String (Location Capability)>`](/doc/models/location-capability.md) | Optional | The Square features that are enabled for the location.<br>See [LocationCapability](#type-locationcapability) for possible values.<br>See [LocationCapability](#type-locationcapability) for possible values |
+| `status` | [`String (Location Status)`](/doc/models/location-status.md) | Optional | The status of the location, whether a location is active or inactive. |
 | `created_at` | `String` | Optional | The time when the location was created, in RFC 3339 format. |
 | `merchant_id` | `String` | Optional | The ID of the merchant that owns the location. |
 | `country` | [`String (Country)`](/doc/models/country.md) | Optional | Indicates the country associated with another entity, such as a business.<br>Values are in [ISO 3166-1-alpha-2 format](http://www.iso.org/iso/home/standards/country_codes.htm). |
@@ -21,9 +21,9 @@
 | `currency` | [`String (Currency)`](/doc/models/currency.md) | Optional | Indicates the associated currency for an amount of money. Values correspond<br>to [ISO 4217](https://wikipedia.org/wiki/ISO_4217). |
 | `phone_number` | `String` | Optional | The phone number of the location in human readable format. |
 | `business_name` | `String` | Optional | The business name of the location<br>This is the name visible to the customers of the location.<br>For example, this name appears on customer receipts. |
-| `type` | [`String (Location Type)`]($m/LocationType) | Optional | A location's physical or mobile type. |
+| `type` | [`String (Location Type)`](/doc/models/location-type.md) | Optional | A location's physical or mobile type. |
 | `website_url` | `String` | Optional | The website URL of the location. |
-| `business_hours` | [`Business Hours Hash`]($m/BusinessHours) | Optional | Represents the hours of operation for a business location. |
+| `business_hours` | [`Business Hours Hash`](/doc/models/business-hours.md) | Optional | Represents the hours of operation for a business location. |
 | `business_email` | `String` | Optional | The email of the location.<br>This email is visible to the customers of the location.<br>For example, the email appears on customer receipts. |
 | `description` | `String` | Optional | The description of the location. |
 | `twitter_username` | `String` | Optional | The Twitter username of the location without the '&#64;' symbol. |

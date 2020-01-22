@@ -31,7 +31,7 @@ def retrieve_business
 
 ### Response Type
 
-[`V1 Merchant Hash`]($m/V1Merchant)
+[`V1 Merchant Hash`](/doc/models/v1-merchant.md)
 
 ### Example Usage
 
@@ -64,7 +64,7 @@ def list_locations
 
 ### Response Type
 
-[`Array<V1 Merchant Hash>`]($m/V1Merchant)
+[`Array<V1 Merchant Hash>`](/doc/models/v1-merchant.md)
 
 ### Example Usage
 

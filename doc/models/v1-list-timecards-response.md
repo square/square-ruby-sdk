@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `items` | [`Array<V1 Timecard Hash>`]($m/V1Timecard) | Optional | - |
+| `items` | [`Array<V1 Timecard Hash>`](/doc/models/v1-timecard.md) | Optional | - |
 
 ### Example (as JSON)
 

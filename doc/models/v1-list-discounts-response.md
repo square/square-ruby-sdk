@@ -8,7 +8,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `items` | [`Array<V1 Discount Hash>`]($m/V1Discount) | Optional | - |
+| `items` | [`Array<V1 Discount Hash>`](/doc/models/v1-discount.md) | Optional | - |
 
 ### Example (as JSON)
 

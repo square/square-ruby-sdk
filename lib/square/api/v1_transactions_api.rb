@@ -449,9 +449,10 @@ module Square
     # *Note**: the ListSettlements endpoint does not provide entry
     # information.
     # @param [String] location_id Required parameter: The ID of the location to
-    # list settlements for.
-    # @param [SortOrder] order Optional parameter: TThe order in which payments
-    # are listed in the response.
+    # list settlements for. If you specify me, this endpoint returns settlements
+    # aggregated from all of the business's locations.
+    # @param [SortOrder] order Optional parameter: The order in which
+    # settlements are listed in the response.
     # @param [String] begin_time Optional parameter: The beginning of the
     # requested reporting period, in ISO 8601 format. If this value is before
     # January 1, 2013 (2013-01-01T00:00:00Z), this endpoint returns an error.
@@ -460,8 +461,9 @@ module Square
     # reporting period, in ISO 8601 format. If this value is more than one year
     # greater than begin_time, this endpoint returns an error. Default value:
     # The current time.
-    # @param [Integer] limit Optional parameter: The maximum number of payments
-    # to return in a single response. This value cannot exceed 200.
+    # @param [Integer] limit Optional parameter: The maximum number of
+    # settlements to return in a single response. This value cannot exceed
+    # 200.
     # @param [V1ListSettlementsRequestStatus] status Optional parameter: Provide
     # this parameter to retrieve only settlements with a particular status (SENT
     # or FAILED).

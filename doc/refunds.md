@@ -44,7 +44,7 @@ def list_payment_refunds(begin_time: nil,
 
 ### Response Type
 
-[`List Payment Refunds Response Hash`]($m/ListPaymentRefundsResponse)
+[`List Payment Refunds Response Hash`](/doc/models/list-payment-refunds-response.md)
 
 ### Example Usage
 
@@ -72,11 +72,11 @@ def refund_payment(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Refund Payment Request Hash`]($m/RefundPaymentRequest) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Refund Payment Request Hash`](/doc/models/refund-payment-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
-[`Refund Payment Response Hash`]($m/RefundPaymentResponse)
+[`Refund Payment Response Hash`](/doc/models/refund-payment-response.md)
 
 ### Example Usage
 
@@ -113,7 +113,7 @@ def get_payment_refund(refund_id:)
 
 ### Response Type
 
-[`Get Payment Refund Response Hash`]($m/GetPaymentRefundResponse)
+[`Get Payment Refund Response Hash`](/doc/models/get-payment-refund-response.md)
 
 ### Example Usage
 
