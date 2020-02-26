@@ -209,6 +209,7 @@ body[:batches][0][:objects][1][:item_data][:variations][1][:item_variation_data]
   }
 }
 
+
 body[:batches][0][:objects][2] = {}
 body[:batches][0][:objects][2][:type] = 'CATEGORY'
 body[:batches][0][:objects][2][:id] = '#Beverages'
@@ -229,6 +230,8 @@ body[:batches][0][:objects][3][:tax_data] = {
   applies_to_custom_amounts: true,
   enabled: true
 }
+
+
 
 result = catalog_api.batch_upsert_catalog_objects(body: body)
 

@@ -7,6 +7,9 @@ require 'logging'
 require_relative 'square/api_helper.rb'
 require_relative 'square/client.rb'
 
+# Utilities
+require_relative 'square/utilities/file_wrapper.rb'
+
 # Http
 require_relative 'square/http/api_response.rb'
 require_relative 'square/http/http_call_back.rb'
@@ -33,9 +36,11 @@ require_relative 'square/api/v1_employees_api.rb'
 require_relative 'square/api/v1_transactions_api.rb'
 require_relative 'square/api/v1_items_api.rb'
 require_relative 'square/api/apple_pay_api.rb'
+require_relative 'square/api/bank_accounts_api.rb'
 require_relative 'square/api/cash_drawers_api.rb'
 require_relative 'square/api/catalog_api.rb'
 require_relative 'square/api/customers_api.rb'
+require_relative 'square/api/disputes_api.rb'
 require_relative 'square/api/employees_api.rb'
 require_relative 'square/api/inventory_api.rb'
 require_relative 'square/api/labor_api.rb'

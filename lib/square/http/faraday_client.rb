@@ -29,9 +29,7 @@ module Square
         http_request.query_url
       ) do |request|
         request.headers = http_request.headers
-        unless http_request.parameters.empty?
-          request.body = http_request.parameters
-        end
+        request.body = http_request.parameters
       end
       convert_response(response, http_request)
     end
@@ -43,9 +41,7 @@ module Square
         http_request.query_url
       ) do |request|
         request.headers = http_request.headers
-        unless http_request.parameters.empty?
-          request.body = http_request.parameters
-        end
+        request.body = http_request.parameters
       end
       convert_response(response, http_request)
     end

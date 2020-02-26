@@ -21,8 +21,9 @@ module Square
     # results for the original query.  See
     # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
     # for more information.
-    # @param [String] location_id Optional parameter: ID of location associated
-    # with payment
+    # @param [String] location_id Optional parameter: Limit results to the
+    # location supplied. By default, results are returned for all locations
+    # associated with the merchant.
     # @param [Long] total Optional parameter: The exact amount in the
     # total_money for a `Payment`.
     # @param [String] last_4 Optional parameter: The last 4 digits of `Payment`
@@ -118,16 +119,17 @@ module Square
     end
 
     # Cancels (voids) a payment identified by the idempotency key that is
-    # specified in the request.
-    # Use this method when status of a CreatePayment request is unknown.
-    # For example, after you send a CreatePayment
-    # request a network error occurs and you don't get a response. In this case,
-    # you can direct
-    # Square to cancel the payment using this endpoint. In the request, you
-    # provide the same idempotency
-    # key that you provided in your CreatePayment request you want  to cancel.
-    # After cancelling the
-    # payment, you can submit your CreatePayment request again.
+    # specified in the
+    # request.
+    # Use this method when status of a CreatePayment request is unknown. For
+    # example, after you send a
+    # CreatePayment request a network error occurs and you don't get a response.
+    # In this case, you can
+    # direct Square to cancel the payment using this endpoint. In the request,
+    # you provide the same
+    # idempotency key that you provided in your CreatePayment request you want
+    # to cancel. After
+    # cancelling the payment, you can submit your CreatePayment request again.
     # Note that if no payment with the specified idempotency key is found, no
     # action is taken, the end
     # point returns successfully.
