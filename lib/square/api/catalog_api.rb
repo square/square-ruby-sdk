@@ -181,6 +181,14 @@ module Square
       _query_builder << '/v2/catalog/images'
       _query_url = APIHelper.clean_url _query_builder
 
+      if image_file.is_a? FileWrapper
+        image_file_wrapper = image_file.file
+        image_file_content_type = image_file.content_type
+      else
+        image_file_wrapper = image_file
+        image_file_content_type = 'image/jpeg'
+      end
+
       # Prepare headers.
       _headers = {
         'accept' => 'application/json'
@@ -193,8 +201,8 @@ module Square
           'application/json'
         ),
         'image_file' => Faraday::UploadIO.new(
-          image_file,
-          'image/jpeg'
+          image_file_wrapper,
+          image_file_content_type
         )
       }
       _parameters = APIHelper.form_encode_parameters(_parameters)

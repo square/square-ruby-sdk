@@ -345,6 +345,15 @@ module Square
     end
 
     # Provides summary information for all of a business's employee timecards.
+    # ---
+    # - __Deprecation date__: 2020-02-26
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycl
+    # e#deprecated): 2021-02-26
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-
+    # timecards)
+    # ---
     # @param [SortOrder] order Optional parameter: The order in which timecards
     # are listed in the response, based on their created_at field.
     # @param [String] employee_id Optional parameter: If provided, the endpoint
@@ -389,6 +398,7 @@ module Square
                        deleted: nil,
                        limit: nil,
                        batch_token: nil)
+      warn 'Endpoint list_timecards in V1EmployeesApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/me/timecards'
@@ -429,7 +439,17 @@ module Square
 
     # Creates a timecard for an employee and clocks them in with an
     # `API_CREATE` event and a `clockin_time` set to the current time unless
-    # the request provides a different value. To import timecards from another
+    # the request provides a different value.
+    # ---
+    # - __Deprecation date__: 2020-02-26
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycl
+    # e#deprecated): 2021-02-26
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-
+    # timecards)
+    # ---
+    # To import timecards from another
     # system (rather than clocking someone in). Specify the `clockin_time`
     # and* `clockout_time` in the request.
     # Timecards correspond to exactly one shift for a given employee, bounded
@@ -442,6 +462,7 @@ module Square
     # for field details.
     # @return [V1Timecard Hash] response from the API call
     def create_timecard(body:)
+      warn 'Endpoint create_timecard in V1EmployeesApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/me/timecards'
@@ -472,6 +493,15 @@ module Square
     # Square Dashboard. Deleted timecards are still accessible through
     # Connect API endpoints, but cannot be modified. The `deleted` field of
     # the `Timecard` object indicates whether the timecard has been deleted.
+    # ---
+    # - __Deprecation date__: 2020-02-26
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycl
+    # e#deprecated): 2021-02-26
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-
+    # timecards)
+    # ---
     # *Note**: By default, deleted timecards appear alongside valid timecards in
     # results returned by the
     # [ListTimecards](#endpoint-v1employees-listtimecards)
@@ -486,6 +516,7 @@ module Square
     # delete.
     # @return [Object] response from the API call
     def delete_timecard(timecard_id:)
+      warn 'Endpoint delete_timecard in V1EmployeesApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/me/timecards/{timecard_id}'
@@ -507,6 +538,15 @@ module Square
     end
 
     # Provides the details for a single timecard.
+    # ---
+    # - __Deprecation date__: 2020-02-26
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycl
+    # e#deprecated): 2021-02-26
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-
+    # timecards)
+    # ---
     # <aside>
     # Only approved accounts can manage their employees with Square.
     # Unapproved accounts cannot use employee management features with the
@@ -515,6 +555,7 @@ module Square
     # @param [String] timecard_id Required parameter: The timecard's ID.
     # @return [V1Timecard Hash] response from the API call
     def retrieve_timecard(timecard_id:)
+      warn 'Endpoint retrieve_timecard in V1EmployeesApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/me/timecards/{timecard_id}'
@@ -546,6 +587,15 @@ module Square
     # Modifies the details of a timecard with an `API_EDIT` event for
     # the timecard. Updating an active timecard with a `clockout_time`
     # clocks the employee out.
+    # ---
+    # - __Deprecation date__: 2020-02-26
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycl
+    # e#deprecated): 2021-02-26
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-
+    # timecards)
+    # ---
     # @param [String] timecard_id Required parameter: TThe ID of the timecard to
     # modify.
     # @param [V1Timecard] body Required parameter: An object containing the
@@ -554,6 +604,7 @@ module Square
     # @return [V1Timecard Hash] response from the API call
     def update_timecard(timecard_id:,
                         body:)
+      warn 'Endpoint update_timecard in V1EmployeesApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/me/timecards/{timecard_id}'
@@ -586,6 +637,15 @@ module Square
 
     # Provides summary information for all events associated with a
     # particular timecard.
+    # ---
+    # - __Deprecation date__: 2020-02-26
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycl
+    # e#deprecated): 2021-02-26
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-
+    # timecards)
+    # ---
     # <aside>
     # Only approved accounts can manage their employees with Square.
     # Unapproved accounts cannot use employee management features with the
@@ -595,6 +655,7 @@ module Square
     # list events for.
     # @return [List of V1TimecardEvent Hash] response from the API call
     def list_timecard_events(timecard_id:)
+      warn 'Endpoint list_timecard_events in V1EmployeesApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/me/timecards/{timecard_id}/events'
@@ -625,6 +686,15 @@ module Square
 
     # Provides the details for all of a location's cash drawer shifts during a
     # date range. The date range you specify cannot exceed 90 days.
+    # ---
+    # - __Deprecation date__: 2020-02-26
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycl
+    # e#deprecated): 2021-02-26
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-
+    # cashdrawershifts)
+    # ---
     # @param [String] location_id Required parameter: The ID of the location to
     # list cash drawer shifts for.
     # @param [SortOrder] order Optional parameter: The order in which cash
@@ -641,6 +711,7 @@ module Square
                                 order: nil,
                                 begin_time: nil,
                                 end_time: nil)
+      warn 'Endpoint list_cash_drawer_shifts in V1EmployeesApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/cash-drawer-shifts'
@@ -677,12 +748,22 @@ module Square
 
     # Provides the details for a single cash drawer shift, including all events
     # that occurred during the shift.
+    # ---
+    # - __Deprecation date__: 2020-02-26
+    # - [__Retirement
+    # date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycl
+    # e#deprecated): 2021-02-26
+    # - [Migration
+    # guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-
+    # cashdrawershifts)
+    # ---
     # @param [String] location_id Required parameter: The ID of the location to
     # list cash drawer shifts for.
     # @param [String] shift_id Required parameter: The shift's ID.
     # @return [V1CashDrawerShift Hash] response from the API call
     def retrieve_cash_drawer_shift(location_id:,
                                    shift_id:)
+      warn 'Endpoint retrieve_cash_drawer_shift in V1EmployeesApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/cash-drawer-shifts/{shift_id}'

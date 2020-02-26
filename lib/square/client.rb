@@ -4,11 +4,11 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '4.1.0.20200122'
+      '5.0.0.20200226'
     end
 
     def square_version
-      '2020-01-22'
+      '2020-02-26'
     end
 
     # Access to mobile_authorization controller.
@@ -53,6 +53,12 @@ module Square
       @apple_pay ||= ApplePayApi.new config
     end
 
+    # Access to bank_accounts controller.
+    # @return [BankAccountsApi] Returns the controller instance.
+    def bank_accounts
+      @bank_accounts ||= BankAccountsApi.new config
+    end
+
     # Access to cash_drawers controller.
     # @return [CashDrawersApi] Returns the controller instance.
     def cash_drawers
@@ -69,6 +75,12 @@ module Square
     # @return [CustomersApi] Returns the controller instance.
     def customers
       @customers ||= CustomersApi.new config
+    end
+
+    # Access to disputes controller.
+    # @return [DisputesApi] Returns the controller instance.
+    def disputes
+      @disputes ||= DisputesApi.new config
     end
 
     # Access to employees controller.
