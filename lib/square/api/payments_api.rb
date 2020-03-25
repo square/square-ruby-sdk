@@ -127,7 +127,7 @@ module Square
     # In this case, you can
     # direct Square to cancel the payment using this endpoint. In the request,
     # you provide the same
-    # idempotency key that you provided in your CreatePayment request you want
+    # idempotency key that you provided in your CreatePayment request you want 
     # to cancel. After
     # cancelling the payment, you can submit your CreatePayment request again.
     # Note that if no payment with the specified idempotency key is found, no
@@ -246,8 +246,12 @@ module Square
     # elayed-payments).
     # @param [String] payment_id Required parameter: Unique ID identifying the
     # payment to be completed.
+    # @param [Object] body Required parameter: An object containing the fields
+    # to POST for the request.  See the corresponding object definition for
+    # field details.
     # @return [CompletePaymentResponse Hash] response from the API call
-    def complete_payment(payment_id:)
+    def complete_payment(payment_id:,
+                         body:)
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/payments/{payment_id}/complete'
@@ -259,13 +263,15 @@ module Square
 
       # Prepare headers.
       _headers = {
-        'accept' => 'application/json'
+        'accept' => 'application/json',
+        'content-type' => 'application/json; charset=utf-8'
       }
 
       # Prepare and execute HttpRequest.
       _request = config.http_client.post(
         _query_url,
-        headers: _headers
+        headers: _headers,
+        parameters: body.to_json
       )
       OAuth2.apply(config, _request)
       _response = execute_request(_request)

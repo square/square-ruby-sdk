@@ -239,7 +239,8 @@ the payment using this endpoint. For more information, see
 [Delayed Payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments).
 
 ```ruby
-def complete_payment(payment_id:)
+def complete_payment(payment_id:,
+                     body:)
 ```
 
 ### Parameters
@@ -247,6 +248,7 @@ def complete_payment(payment_id:)
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `payment_id` | `String` | Template, Required | Unique ID identifying the payment to be completed. |
+| `body` | `Object` | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
@@ -256,8 +258,9 @@ def complete_payment(payment_id:)
 
 ```ruby
 payment_id = 'payment_id0'
+body = JSON.parse('{"key1":"val1","key2":"val2"}')
 
-result = payments_api.complete_payment(payment_id: payment_id)
+result = payments_api.complete_payment(payment_id: payment_id, body: body)
 
 if result.success?
   puts result.data

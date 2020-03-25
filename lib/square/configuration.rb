@@ -36,7 +36,7 @@ module Square
       @backoff_factor = backoff_factor
 
       # Current API environment
-      @environment = environment
+      @environment = String(environment)
 
       # OAuth 2.0 Access Token
       @access_token = access_token
@@ -73,21 +73,21 @@ module Square
     end
 
     # All the environments the SDK can run in.
-    @environments = {
+    ENVIRONMENTS = {
       'production' => {
         'default' => 'https://connect.squareup.com'
       },
       'sandbox' => {
         'default' => 'https://connect.squareupsandbox.com'
       }
-    }
+    }.freeze
 
     # Generates the appropriate base URI for the environment and the server.
     # @param [Configuration::Server] The server enum for which the base URI is
     # required.
     # @return [String] The base URI.
     def get_base_uri(server = 'default')
-      self.class.environments[environment][server].clone
+      ENVIRONMENTS[environment][server].clone
     end
   end
 end
