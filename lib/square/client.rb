@@ -4,11 +4,11 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '5.1.0.20200325'
+      '5.2.0.20200422'
     end
 
     def square_version
-      '2020-03-25'
+      '2020-04-22'
     end
 
     # Access to mobile_authorization controller.
@@ -75,6 +75,24 @@ module Square
     # @return [CustomersApi] Returns the controller instance.
     def customers
       @customers ||= CustomersApi.new config
+    end
+
+    # Access to customer_groups controller.
+    # @return [CustomerGroupsApi] Returns the controller instance.
+    def customer_groups
+      @customer_groups ||= CustomerGroupsApi.new config
+    end
+
+    # Access to customer_segments controller.
+    # @return [CustomerSegmentsApi] Returns the controller instance.
+    def customer_segments
+      @customer_segments ||= CustomerSegmentsApi.new config
+    end
+
+    # Access to devices controller.
+    # @return [DevicesApi] Returns the controller instance.
+    def devices
+      @devices ||= DevicesApi.new config
     end
 
     # Access to disputes controller.
@@ -147,6 +165,12 @@ module Square
     # @return [RefundsApi] Returns the controller instance.
     def refunds
       @refunds ||= RefundsApi.new config
+    end
+
+    # Access to terminal controller.
+    # @return [TerminalApi] Returns the controller instance.
+    def terminal
+      @terminal ||= TerminalApi.new config
     end
 
     def initialize(timeout: 60, max_retries: 0, retry_interval: 1,

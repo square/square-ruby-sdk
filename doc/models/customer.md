@@ -11,9 +11,9 @@ cards on file associated with it.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `String` |  | A unique, Square-assigned object ID. |
-| `created_at` | `String` |  | The time when the customer profile was created, in RFC 3339 format. |
-| `updated_at` | `String` |  | The time when the customer profile was last updated, in RFC 3339 format. |
+| `id` | `String` |  | A unique Square-assigned ID for the customer profile. |
+| `created_at` | `String` |  | The timestamp when the customer profile was created, in RFC 3339 format. |
+| `updated_at` | `String` |  | The timestamp when the customer profile was last updated, in RFC 3339 format. |
 | `cards` | [`Array<Card Hash>`](/doc/models/card.md) | Optional | Payment details of cards stored on file for the customer profile. |
 | `given_name` | `String` | Optional | The given (i.e., first) name associated with the customer profile. |
 | `family_name` | `String` | Optional | The family (i.e., last) name associated with the customer profile. |
@@ -26,8 +26,10 @@ cards on file associated with it.
 | `reference_id` | `String` | Optional | An optional, second ID used to associate the customer profile with an<br>entity in another system. |
 | `note` | `String` | Optional | A custom note associated with the customer profile. |
 | `preferences` | [`Customer Preferences Hash`](/doc/models/customer-preferences.md) | Optional | Represents communication preferences for the customer profile. |
-| `groups` | [`Array<Customer Group Info Hash>`](/doc/models/customer-group-info.md) | Optional | The groups the customer belongs to. |
+| `groups` | [`Array<Customer Group Info Hash>`](/doc/models/customer-group-info.md) | Optional | The customer groups and segments the customer belongs to. This deprecated field is replaced with dedicated `group_ids` for customer groups and `segment_ids` for customer segments. |
 | `creation_source` | [`String (Customer Creation Source)`](/doc/models/customer-creation-source.md) | Optional | Indicates the method used to create the customer profile. |
+| `group_ids` | `Array<String>` | Optional | The IDs of customer groups the customer belongs to. |
+| `segment_ids` | `Array<String>` | Optional | The IDs of segments the customer belongs to. |
 
 ### Example (as JSON)
 
@@ -49,7 +51,9 @@ cards on file associated with it.
   "note": null,
   "preferences": null,
   "groups": null,
-  "creation_source": null
+  "creation_source": null,
+  "group_ids": null,
+  "segment_ids": null
 }
 ```
 
