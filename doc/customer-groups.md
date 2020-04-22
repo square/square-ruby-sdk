@@ -50,7 +50,7 @@ end
 
 Creates a new customer group for a business. 
 
-The request must include at least the `name` value of the group.
+The request must include the `name` value of the group.
 
 ```ruby
 def create_customer_group(body:)

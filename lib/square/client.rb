@@ -4,7 +4,7 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '5.2.0.20200422'
+      '5.2.1.20200422'
     end
 
     def square_version

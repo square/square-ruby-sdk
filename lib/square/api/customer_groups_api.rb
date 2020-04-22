@@ -42,7 +42,7 @@ module Square
     end
 
     # Creates a new customer group for a business.
-    # The request must include at least the `name` value of the group.
+    # The request must include the `name` value of the group.
     # @param [CreateCustomerGroupRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
