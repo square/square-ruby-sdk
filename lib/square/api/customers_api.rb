@@ -323,5 +323,83 @@ module Square
       _errors = APIHelper.map_response(decoded, ['errors'])
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
+
+    # Removes a customer membership from a customer group.
+    # The customer is identified by the `customer_id` value
+    # and the customer group is identified by the `group_id` value.
+    # @param [String] customer_id Required parameter: The ID of the customer to
+    # remove from the group.
+    # @param [String] group_id Required parameter: The ID of the customer group
+    # to remove the customer from.
+    # @return [RemoveGroupFromCustomerResponse Hash] response from the API call
+    def remove_group_from_customer(customer_id:,
+                                   group_id:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/customers/{customer_id}/groups/{group_id}'
+      _query_builder = APIHelper.append_url_with_template_parameters(
+        _query_builder,
+        'customer_id' => customer_id,
+        'group_id' => group_id
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.delete(
+        _query_url,
+        headers: _headers
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(_response, data: decoded, errors: _errors)
+    end
+
+    # Adds a customer membership to a customer group.
+    # The customer is identified by the `customer_id` value
+    # and the customer group is identified by the `group_id` value.
+    # @param [String] customer_id Required parameter: The ID of the customer to
+    # add to a group.
+    # @param [String] group_id Required parameter: The ID of the customer group
+    # to add the customer to.
+    # @return [AddGroupToCustomerResponse Hash] response from the API call
+    def add_group_to_customer(customer_id:,
+                              group_id:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/customers/{customer_id}/groups/{group_id}'
+      _query_builder = APIHelper.append_url_with_template_parameters(
+        _query_builder,
+        'customer_id' => customer_id,
+        'group_id' => group_id
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.put(
+        _query_url,
+        headers: _headers
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(_response, data: decoded, errors: _errors)
+    end
   end
 end
