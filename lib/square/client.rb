@@ -4,11 +4,11 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '5.2.2.20200422'
+      '5.3.0.20200528'
     end
 
     def square_version
-      '2020-04-22'
+      '2020-05-28'
     end
 
     # Access to mobile_authorization controller.
@@ -147,6 +147,12 @@ module Square
     # @return [TransactionsApi] Returns the controller instance.
     def transactions
       @transactions ||= TransactionsApi.new config
+    end
+
+    # Access to loyalty controller.
+    # @return [LoyaltyApi] Returns the controller instance.
+    def loyalty
+      @loyalty ||= LoyaltyApi.new config
     end
 
     # Access to merchants controller.
