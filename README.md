@@ -56,6 +56,7 @@ gem 'square.rb'
 * [Devices]
 
 ### Team
+* [Team]
 * [Employees]
 * [Labor]
 * [Cash Drawers]
@@ -282,6 +283,7 @@ You can also use the Square API to create applications or services that work wit
 [Devices]: doc/devices.md
 [Disputes]: doc/disputes.md
 [Terminal]: doc/terminal.md
+[Team]: doc/team.md
 [Cash Drawers]: doc/cash-drawers.md
 [Customer Groups]: doc/customer-groups.md
 [Customer Segments]: doc/customer-segments.md

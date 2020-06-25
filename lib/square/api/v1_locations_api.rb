@@ -6,15 +6,6 @@ module Square
     end
 
     # Get the general information for a business.
-    # ---
-    # - __Deprecation date__: 2019-11-20
-    # - [__Retirement
-    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
-    # recated): 2020-11-18
-    # - [Migration
-    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-locat
-    # ions)
-    # ---
     # @return [V1Merchant Hash] response from the API call
     def retrieve_business
       warn 'Endpoint retrieve_business in V1LocationsApi is deprecated'
@@ -44,15 +35,6 @@ module Square
 
     # Provides details for all business locations associated with a Square
     # account, including the Square-assigned object ID for the location.
-    # ---
-    # - __Deprecation date__: 2019-11-20
-    # - [__Retirement
-    # date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#dep
-    # recated): 2020-11-18
-    # - [Migration
-    # guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-locat
-    # ions)
-    # ---
     # @return [List of V1Merchant Hash] response from the API call
     def list_locations
       warn 'Endpoint list_locations in V1LocationsApi is deprecated'

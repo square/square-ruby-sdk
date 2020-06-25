@@ -8,15 +8,6 @@ module Square
     # Provides non-confidential details for all of a location's associated bank
     # accounts. This endpoint does not provide full bank account numbers, and
     # there is no way to obtain a full bank account number with the Connect API.
-    # ---
-    # - __Deprecation date__: 2020-02-26
-    # - [__Retirement
-    # date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycl
-    # e#deprecated): 2021-02-26
-    # - [Migration
-    # guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-
-    # bankaccounts)
-    # ---
     # @param [String] location_id Required parameter: The ID of the location to
     # list bank accounts for.
     # @return [List of V1BankAccount Hash] response from the API call
@@ -53,15 +44,6 @@ module Square
     # Provides non-confidential details for a merchant's associated bank
     # account. This endpoint does not provide full bank account numbers, and
     # there is no way to obtain a full bank account number with the Connect API.
-    # ---
-    # - __Deprecation date__: 2020-02-26
-    # - [__Retirement
-    # date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycl
-    # e#deprecated): 2021-02-26
-    # - [Migration
-    # guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-
-    # bankaccounts)
-    # ---
     # @param [String] location_id Required parameter: The ID of the bank
     # account's associated location.
     # @param [String] bank_account_id Required parameter: The bank account's
@@ -272,7 +254,7 @@ module Square
                       end_time: nil,
                       limit: nil,
                       batch_token: nil,
-                      include_partial: nil)
+                      include_partial: false)
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/payments'

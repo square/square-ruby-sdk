@@ -139,34 +139,7 @@ module Square
     # [CatalogObject](#type-catalogobject) at a later time.
     # CreateCatalogImage accepts HTTP multipart/form-data requests with a JSON
     # part and an image file part in
-    # JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB. The
-    # following is an example of such an HTTP request:
-    # ```
-    # POST /v2/catalog/images
-    # Accept: application/json
-    # Content-Type: multipart/form-data;boundary="boundary"
-    # Square-Version: XXXX-XX-XX
-    # Authorization: Bearer {ACCESS_TOKEN}
-    # --boundary
-    # Content-Disposition: form-data; name="request"
-    # Content-Type: application/json
-    # {
-    # "idempotency_key":"528dea59-7bfb-43c1-bd48-4a6bba7dd61f86",
-    # "object_id": "ND6EA5AAJEO5WL3JNNIAQA32",
-    # "image":{
-    # "id":"#TEMP_ID",
-    # "type":"IMAGE",
-    # "image_data":{
-    # "caption":"A picture of a cup of coffee"
-    # }
-    # }
-    # }
-    # --boundary
-    # Content-Disposition: form-data; name="image"; filename="Coffee.jpg"
-    # Content-Type: image/jpeg
-    # {ACTUAL_IMAGE_BYTES}
-    # --boundary
-    # ```
+    # JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
     # Additional information and an example cURL request can be found in the
     # [Create a Catalog Image
     # recipe](https://developer.squareup.com/docs/more-apis/catalog/cookbook/cre
@@ -400,7 +373,7 @@ module Square
     # `false`
     # @return [RetrieveCatalogObjectResponse Hash] response from the API call
     def retrieve_catalog_object(object_id:,
-                                include_related_objects: nil)
+                                include_related_objects: false)
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/catalog/object/{object_id}'
@@ -433,22 +406,20 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Queries the targeted catalog using a variety of query types:
-    # [CatalogQuerySortedAttribute](#type-catalogquerysortedattribute),
-    # [CatalogQueryExact](#type-catalogqueryexact),
-    # [CatalogQueryRange](#type-catalogqueryrange),
-    # [CatalogQueryText](#type-catalogquerytext),
-    # [CatalogQueryItemsForTax](#type-catalogqueryitemsfortax), and
-    # [CatalogQueryItemsForModifierList](#type-catalogqueryitemsformodifierlist)
-    # .
-    # --
-    # --
-    # Future end of the above comment:
-    # [CatalogQueryItemsForTax](#type-catalogqueryitemsfortax),
+    # Queries the targeted catalog using a variety of query expressions.
+    # Supported query expressions are of the following types:
+    # - [CatalogQuerySortedAttribute](#type-catalogquerysortedattribute),
+    # - [CatalogQueryExact](#type-catalogqueryexact),
+    # - [CatalogQueryRange](#type-catalogqueryrange),
+    # - [CatalogQueryText](#type-catalogquerytext),
+    # - [CatalogQueryItemsForTax](#type-catalogqueryitemsfortax),
+    # -
     # [CatalogQueryItemsForModifierList](#type-catalogqueryitemsformodifierlist)
     # ,
+    # -
     # [CatalogQueryItemsForItemOptions](#type-catalogqueryitemsforitemoptions),
     # and
+    # -
     # [CatalogQueryItemVariationsForItemOptionValues](#type-catalogqueryitemvari
     # ationsforitemoptionvalues).
     # @param [SearchCatalogObjectsRequest] body Required parameter: An object

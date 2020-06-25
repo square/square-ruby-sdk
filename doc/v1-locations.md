@@ -17,14 +17,6 @@ v1_locations_api = client.v1_locations
 
 Get the general information for a business.
 
----
-
-- __Deprecation date__: 2019-11-20
-- [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-- [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-locations)
-
----
-
 ```ruby
 def retrieve_business
 ```
@@ -49,14 +41,6 @@ end
 
 Provides details for all business locations associated with a Square
 account, including the Square-assigned object ID for the location.
-
----
-
-- __Deprecation date__: 2019-11-20
-- [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2020-11-18
-- [Migration guide](https://developer.squareup.com/docs/migrate-from-v1/guides/v1-locations)
-
----
 
 ```ruby
 def list_locations
