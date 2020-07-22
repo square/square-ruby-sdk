@@ -9,6 +9,7 @@ module Square
     attr_reader :retry_interval
     attr_reader :backoff_factor
     attr_reader :environment
+    attr_reader :square_version
     attr_reader :access_token
 
     def additional_headers
@@ -21,7 +22,8 @@ module Square
 
     def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
                    backoff_factor: 1, environment: 'production',
-                   access_token: 'TODO: Replace', additional_headers: {})
+                   square_version: '2020-07-22', access_token: 'TODO: Replace',
+                   additional_headers: {})
       # The value to use for connection timeout
       @timeout = timeout
 
@@ -38,6 +40,9 @@ module Square
       # Current API environment
       @environment = String(environment)
 
+      # Square Connect API versions
+      @square_version = square_version
+
       # OAuth 2.0 Access Token
       @access_token = access_token
 
@@ -49,20 +54,23 @@ module Square
     end
 
     def clone_with(timeout: nil, max_retries: nil, retry_interval: nil,
-                   backoff_factor: nil, environment: nil, access_token: nil,
-                   additional_headers: nil)
+                   backoff_factor: nil, environment: nil, square_version: nil,
+                   access_token: nil, additional_headers: nil)
       timeout ||= self.timeout
       max_retries ||= self.max_retries
       retry_interval ||= self.retry_interval
       backoff_factor ||= self.backoff_factor
       environment ||= self.environment
+      square_version ||= self.square_version
       access_token ||= self.access_token
       additional_headers ||= self.additional_headers
 
       Configuration.new(timeout: timeout, max_retries: max_retries,
                         retry_interval: retry_interval,
                         backoff_factor: backoff_factor,
-                        environment: environment, access_token: access_token,
+                        environment: environment,
+                        square_version: square_version,
+                        access_token: access_token,
                         additional_headers: additional_headers)
     end
 

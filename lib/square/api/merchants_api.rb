@@ -48,7 +48,8 @@ module Square
 
     # Retrieve a `Merchant` object for the given `merchant_id`.
     # @param [String] merchant_id Required parameter: The ID of the merchant to
-    # retrieve.
+    # retrieve. If the string "me" is supplied as the ID, then retrieve the
+    # merchant that is currently accessible to this call.
     # @return [RetrieveMerchantResponse Hash] response from the API call
     def retrieve_merchant(merchant_id:)
       # Prepare query url.

@@ -86,7 +86,10 @@ end
 
 ## Retrieve Location
 
-Retrieves details of a location.
+Retrieves details of a location. You can specify "main" 
+as the location ID to retrieve details of the 
+main location. For more information, 
+see [Locations API Overview](https://developer.squareup.com/docs/docs/locations-api).
 
 ```ruby
 def retrieve_location(location_id:)
@@ -96,7 +99,7 @@ def retrieve_location(location_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `location_id` | `String` | Template, Required | The ID of the location to retrieve. |
+| `location_id` | `String` | Template, Required | The ID of the location to retrieve. If you specify the string "main",<br>then the endpoint returns the main location. |
 
 ### Response Type
 

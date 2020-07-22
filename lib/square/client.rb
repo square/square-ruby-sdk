@@ -4,11 +4,11 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '6.0.0.20200625'
+      '6.1.0.20200722'
     end
 
     def square_version
-      '2020-06-25'
+      config.square_version
     end
 
     # Access to mobile_authorization controller.
@@ -113,6 +113,12 @@ module Square
       @inventory ||= InventoryApi.new config
     end
 
+    # Access to invoices controller.
+    # @return [InvoicesApi] Returns the controller instance.
+    def invoices
+      @invoices ||= InvoicesApi.new config
+    end
+
     # Access to labor controller.
     # @return [LaborApi] Returns the controller instance.
     def labor
@@ -187,13 +193,14 @@ module Square
 
     def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
                    backoff_factor: 1, environment: 'production',
-                   access_token: 'TODO: Replace', additional_headers: {},
-                   config: nil)
+                   square_version: '2020-07-22', access_token: 'TODO: Replace',
+                   additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(timeout: timeout, max_retries: max_retries,
                                     retry_interval: retry_interval,
                                     backoff_factor: backoff_factor,
                                     environment: environment,
+                                    square_version: square_version,
                                     access_token: access_token,
                                     additional_headers: additional_headers)
                 else

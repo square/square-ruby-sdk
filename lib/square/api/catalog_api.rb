@@ -131,14 +131,13 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Upload an image file to create a new [CatalogImage](#type-catalogimage)
-    # for an existing
-    # [CatalogObject](#type-catalogobject). Images can be uploaded and linked in
-    # this request or created independently
-    # (without an object assignment) and linked to a
-    # [CatalogObject](#type-catalogobject) at a later time.
-    # CreateCatalogImage accepts HTTP multipart/form-data requests with a JSON
-    # part and an image file part in
+    # Uploads an image file to be represented by an
+    # [CatalogImage](#type-catalogimage) object linked to an existing
+    # [CatalogObject](#type-catalogobject) instance. A call to this endpoint can
+    # upload an image, link an image to
+    # a catalog object, or do both.
+    # This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data
+    # requests with a JSON part and an image file part in
     # JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
     # Additional information and an example cURL request can be found in the
     # [Create a Catalog Image
@@ -195,8 +194,8 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Returns information about the Square Catalog API, such as batch size
-    # limits for `BatchUpsertCatalogObjects`.
+    # Retrieves information about the Square Catalog API, such as batch size
+    # limits that can be used by the `BatchUpsertCatalogObjects` endpoint.
     # @return [CatalogInfoResponse Hash] response from the API call
     def catalog_info
       # Prepare query url.
@@ -406,22 +405,23 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Queries the targeted catalog using a variety of query expressions.
-    # Supported query expressions are of the following types:
-    # - [CatalogQuerySortedAttribute](#type-catalogquerysortedattribute),
-    # - [CatalogQueryExact](#type-catalogqueryexact),
-    # - [CatalogQueryRange](#type-catalogqueryrange),
-    # - [CatalogQueryText](#type-catalogquerytext),
-    # - [CatalogQueryItemsForTax](#type-catalogqueryitemsfortax),
-    # -
-    # [CatalogQueryItemsForModifierList](#type-catalogqueryitemsformodifierlist)
-    # ,
-    # -
-    # [CatalogQueryItemsForItemOptions](#type-catalogqueryitemsforitemoptions),
-    # and
-    # -
-    # [CatalogQueryItemVariationsForItemOptionValues](#type-catalogqueryitemvari
-    # ationsforitemoptionvalues).
+    # Searches for [CatalogObject](#type-CatalogObject) of any types against
+    # supported search attribute values,
+    # excluding custom attribute values on items or item variations, against one
+    # or more of the specified query expressions,
+    # This (`SearchCatalogObjects`) endpoint differs from the
+    # [SearchCatalogItems](#endpoint-Catalog-SearchCatalogItems)
+    # endpoint in the following aspects:
+    # - `SearchCatalogItems` can only search for items or item variations,
+    # whereas `SearchCatalogObjects` can search for any type of catalog objects.
+    # - `SearchCatalogItems` supports the custom attribute query filters to
+    # return items or item variations that contain custom attribute values,
+    # where `SearchCatalogObjects` does not.
+    # - `SearchCatalogItems` does not support the `include_deleted_objects`
+    # filter to search for deleted items or item variations, whereas
+    # `SearchCatalogObjects` does.
+    # - The both endpoints have different call conventions, including the query
+    # filter formats.
     # @param [SearchCatalogObjectsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -430,6 +430,54 @@ module Square
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/catalog/search'
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json',
+        'content-type' => 'application/json; charset=utf-8'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.post(
+        _query_url,
+        headers: _headers,
+        parameters: body.to_json
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(_response, data: decoded, errors: _errors)
+    end
+
+    # Searches for catalog items or item variations by matching supported search
+    # attribute values, including
+    # custom attribute values, against one or more of the specified query
+    # expressions,
+    # This (`SearchCatalogItems`) endpoint differs from the
+    # [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects)
+    # endpoint in the following aspects:
+    # - `SearchCatalogItems` can only search for items or item variations,
+    # whereas `SearchCatalogObjects` can search for any type of catalog objects.
+    # - `SearchCatalogItems` supports the custom attribute query filters to
+    # return items or item variations that contain custom attribute values,
+    # where `SearchCatalogObjects` does not.
+    # - `SearchCatalogItems` does not support the `include_deleted_objects`
+    # filter to search for deleted items or item variations, whereas
+    # `SearchCatalogObjects` does.
+    # - The both endpoints use different call conventions, including the query
+    # filter formats.
+    # @param [SearchCatalogItemsRequest] body Required parameter: An object
+    # containing the fields to POST for the request.  See the corresponding
+    # object definition for field details.
+    # @return [SearchCatalogItemsResponse Hash] response from the API call
+    def search_catalog_items(body:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/catalog/search-catalog-items'
       _query_url = APIHelper.clean_url _query_builder
 
       # Prepare headers.
