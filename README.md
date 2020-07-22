@@ -38,6 +38,9 @@ gem 'square.rb'
 ### Orders
 * [Orders]
 
+### Invoices
+* [Invoices]
+
 ### Items
 * [Catalog]
 * [Inventory]
@@ -299,6 +302,7 @@ You can also use the Square API to create applications or services that work wit
 [Locations]: doc/locations.md
 [Merchants]: doc/merchants.md
 [Orders]: doc/orders.md
+[Invoices]: doc/invoices.md
 [Apple Pay]: doc/apple-pay.md
 [Refunds]: doc/refunds.md
 [Reporting]: doc/reporting.md

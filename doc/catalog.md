@@ -20,6 +20,7 @@ catalog_api = client.catalog
 * [Delete Catalog Object](/doc/catalog.md#delete-catalog-object)
 * [Retrieve Catalog Object](/doc/catalog.md#retrieve-catalog-object)
 * [Search Catalog Objects](/doc/catalog.md#search-catalog-objects)
+* [Search Catalog Items](/doc/catalog.md#search-catalog-items)
 * [Update Item Modifier Lists](/doc/catalog.md#update-item-modifier-lists)
 * [Update Item Taxes](/doc/catalog.md#update-item-taxes)
 
@@ -227,12 +228,12 @@ end
 
 ## Create Catalog Image
 
-Upload an image file to create a new [CatalogImage](#type-catalogimage) for an existing
-[CatalogObject](#type-catalogobject). Images can be uploaded and linked in this request or created independently
-(without an object assignment) and linked to a [CatalogObject](#type-catalogobject) at a later time.
+Uploads an image file to be represented by an [CatalogImage](#type-catalogimage) object linked to an existing
+[CatalogObject](#type-catalogobject) instance. A call to this endpoint can upload an image, link an image to
+a catalog object, or do both.
 
-CreateCatalogImage accepts HTTP multipart/form-data requests with a JSON part and an image file part in
-JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB. 
+This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
+JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
 
 Additional information and an example cURL request can be found in the [Create a Catalog Image recipe](https://developer.squareup.com/docs/more-apis/catalog/cookbook/create-catalog-images).
 
@@ -275,8 +276,8 @@ end
 
 ## Catalog Info
 
-Returns information about the Square Catalog API, such as batch size
-limits for `BatchUpsertCatalogObjects`.
+Retrieves information about the Square Catalog API, such as batch size
+limits that can be used by the `BatchUpsertCatalogObjects` endpoint.
 
 ```ruby
 def catalog_info
@@ -457,17 +458,16 @@ end
 
 ## Search Catalog Objects
 
-Queries the targeted catalog using a variety of query expressions.
+Searches for [CatalogObject](#type-CatalogObject) of any types against supported search attribute values, 
+excluding custom attribute values on items or item variations, against one or more of the specified query expressions, 
 
-Supported query expressions are of the following types:
-- [CatalogQuerySortedAttribute](#type-catalogquerysortedattribute),
-- [CatalogQueryExact](#type-catalogqueryexact),
-- [CatalogQueryRange](#type-catalogqueryrange),
-- [CatalogQueryText](#type-catalogquerytext),
-- [CatalogQueryItemsForTax](#type-catalogqueryitemsfortax),
-- [CatalogQueryItemsForModifierList](#type-catalogqueryitemsformodifierlist),
-- [CatalogQueryItemsForItemOptions](#type-catalogqueryitemsforitemoptions), and
-- [CatalogQueryItemVariationsForItemOptionValues](#type-catalogqueryitemvariationsforitemoptionvalues).
+This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](#endpoint-Catalog-SearchCatalogItems)
+endpoint in the following aspects:
+
+- `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+- `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+- `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+- The both endpoints have different call conventions, including the query filter formats.
 
 ```ruby
 def search_catalog_objects(body:)
@@ -495,6 +495,74 @@ body[:query][:prefix_query][:attribute_prefix] = 'tea'
 body[:limit] = 100
 
 result = catalog_api.search_catalog_objects(body: body)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+## Search Catalog Items
+
+Searches for catalog items or item variations by matching supported search attribute values, including
+custom attribute values, against one or more of the specified query expressions, 
+
+This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects)
+endpoint in the following aspects:
+
+- `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+- `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+- `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+- The both endpoints use different call conventions, including the query filter formats.
+
+```ruby
+def search_catalog_items(body:)
+```
+
+### Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Search Catalog Items Request Hash`](/doc/models/search-catalog-items-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+### Response Type
+
+[`Search Catalog Items Response Hash`](/doc/models/search-catalog-items-response.md)
+
+### Example Usage
+
+```ruby
+body = {}
+body[:text_filter] = 'red'
+body[:category_ids] = ['WINE_CATEGORY_ID']
+body[:stock_levels] = ['OUT', 'LOW']
+body[:enabled_location_ids] = ['ATL_LOCATION_ID']
+body[:limit] = 100
+body[:sort_order] = 'ASC'
+body[:product_types] = ['REGULAR']
+body[:custom_attribute_filters] = []
+
+
+body[:custom_attribute_filters][0] = {}
+body[:custom_attribute_filters][0][:custom_attribute_definition_id] = 'VEGAN_DEFINITION_ID'
+body[:custom_attribute_filters][0][:bool_filter] = true
+
+body[:custom_attribute_filters][1] = {}
+body[:custom_attribute_filters][1][:custom_attribute_definition_id] = 'BRAND_DEFINITION_ID'
+body[:custom_attribute_filters][1][:string_filter] = 'Dark Horse'
+
+body[:custom_attribute_filters][2] = {}
+body[:custom_attribute_filters][2][:key] = 'VINTAGE'
+body[:custom_attribute_filters][2][:number_filter] = {}
+body[:custom_attribute_filters][2][:number_filter][:min] = '2017'
+body[:custom_attribute_filters][2][:number_filter][:max] = '2018'
+
+body[:custom_attribute_filters][3] = {}
+body[:custom_attribute_filters][3][:custom_attribute_definition_id] = 'VARIETAL_DEFINITION_ID'
+
+
+result = catalog_api.search_catalog_items(body: body)
 
 if result.success?
   puts result.data
