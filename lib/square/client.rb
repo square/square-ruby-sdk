@@ -4,7 +4,7 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '6.1.0.20200722'
+      '6.2.0.20200812'
     end
 
     def square_version
@@ -179,6 +179,12 @@ module Square
       @refunds ||= RefundsApi.new config
     end
 
+    # Access to subscriptions controller.
+    # @return [SubscriptionsApi] Returns the controller instance.
+    def subscriptions
+      @subscriptions ||= SubscriptionsApi.new config
+    end
+
     # Access to team controller.
     # @return [TeamApi] Returns the controller instance.
     def team
@@ -193,7 +199,7 @@ module Square
 
     def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
                    backoff_factor: 1, environment: 'production',
-                   square_version: '2020-07-22', access_token: 'TODO: Replace',
+                   square_version: '2020-08-12', access_token: 'TODO: Replace',
                    additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(timeout: timeout, max_retries: max_retries,
