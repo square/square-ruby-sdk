@@ -253,8 +253,10 @@ module Square
       _query_builder << '/v2/catalog/list'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'cursor' => cursor,
-        'types' => types
+        {
+          'cursor' => cursor,
+          'types' => types
+        }
       )
       _query_url = APIHelper.clean_url _query_builder
 

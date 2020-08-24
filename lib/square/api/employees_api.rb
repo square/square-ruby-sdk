@@ -24,10 +24,12 @@ module Square
       _query_builder << '/v2/employees'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'status' => status,
-        'limit' => limit,
-        'cursor' => cursor
+        {
+          'location_id' => location_id,
+          'status' => status,
+          'limit' => limit,
+          'cursor' => cursor
+        }
       )
       _query_url = APIHelper.clean_url _query_builder
 

@@ -22,9 +22,11 @@ module Square
       _query_builder << '/v2/labor/break-types'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'limit' => limit,
-        'cursor' => cursor
+        {
+          'location_id' => location_id,
+          'limit' => limit,
+          'cursor' => cursor
+        }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -214,9 +216,11 @@ module Square
       _query_builder << '/v2/labor/employee-wages'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'employee_id' => employee_id,
-        'limit' => limit,
-        'cursor' => cursor
+        {
+          'employee_id' => employee_id,
+          'limit' => limit,
+          'cursor' => cursor
+        }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -487,8 +491,10 @@ module Square
       _query_builder << '/v2/labor/workweek-configs'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'limit' => limit,
-        'cursor' => cursor
+        {
+          'limit' => limit,
+          'cursor' => cursor
+        }
       )
       _query_url = APIHelper.clean_url _query_builder
 

@@ -44,14 +44,16 @@ module Square
       _query_builder << '/v2/payments'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'begin_time' => begin_time,
-        'end_time' => end_time,
-        'sort_order' => sort_order,
-        'cursor' => cursor,
-        'location_id' => location_id,
-        'total' => total,
-        'last_4' => last_4,
-        'card_brand' => card_brand
+        {
+          'begin_time' => begin_time,
+          'end_time' => end_time,
+          'sort_order' => sort_order,
+          'cursor' => cursor,
+          'location_id' => location_id,
+          'total' => total,
+          'last_4' => last_4,
+          'card_brand' => card_brand
+        }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -127,7 +129,7 @@ module Square
     # In this case, you can
     # direct Square to cancel the payment using this endpoint. In the request,
     # you provide the same
-    # idempotency key that you provided in your CreatePayment request you want 
+    # idempotency key that you provided in your CreatePayment request you want
     # to cancel. After
     # cancelling the payment, you can submit your CreatePayment request again.
     # Note that if no payment with the specified idempotency key is found, no
