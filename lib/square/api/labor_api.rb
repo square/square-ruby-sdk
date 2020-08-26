@@ -209,6 +209,7 @@ module Square
     def list_employee_wages(employee_id: nil,
                             limit: nil,
                             cursor: nil)
+      warn 'Endpoint list_employee_wages in LaborApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/labor/employee-wages'
@@ -244,6 +245,7 @@ module Square
     # retrieved.
     # @return [GetEmployeeWageResponse Hash] response from the API call
     def get_employee_wage(id:)
+      warn 'Endpoint get_employee_wage in LaborApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/labor/employee-wages/{id}'
@@ -464,6 +466,81 @@ module Square
         _query_url,
         headers: _headers,
         parameters: body.to_json
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(_response, data: decoded, errors: _errors)
+    end
+
+    # Returns a paginated list of `TeamMemberWage` instances for a business.
+    # @param [String] team_member_id Optional parameter: Filter wages returned
+    # to only those that are associated with the specified team member.
+    # @param [Integer] limit Optional parameter: Maximum number of Team Member
+    # Wages to return per page. Can range between 1 and 200. The default is the
+    # maximum at 200.
+    # @param [String] cursor Optional parameter: Pointer to the next page of
+    # Employee Wage results to fetch.
+    # @return [ListTeamMemberWagesResponse Hash] response from the API call
+    def list_team_member_wages(team_member_id: nil,
+                               limit: nil,
+                               cursor: nil)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/labor/team-member-wages'
+      _query_builder = APIHelper.append_url_with_query_parameters(
+        _query_builder,
+        'team_member_id' => team_member_id,
+        'limit' => limit,
+        'cursor' => cursor
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.get(
+        _query_url,
+        headers: _headers
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(_response, data: decoded, errors: _errors)
+    end
+
+    # Returns a single `TeamMemberWage` specified by id.
+    # @param [String] id Required parameter: UUID for the `TeamMemberWage` being
+    # retrieved.
+    # @return [GetTeamMemberWageResponse Hash] response from the API call
+    def get_team_member_wage(id:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/labor/team-member-wages/{id}'
+      _query_builder = APIHelper.append_url_with_template_parameters(
+        _query_builder,
+        'id' => id
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.get(
+        _query_url,
+        headers: _headers
       )
       OAuth2.apply(config, _request)
       _response = execute_request(_request)

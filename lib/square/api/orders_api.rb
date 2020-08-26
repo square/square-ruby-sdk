@@ -16,21 +16,14 @@ module Square
     # To learn more about the Orders API, see the
     # [Orders API
     # Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
-    # @param [String] location_id Required parameter: The ID of the business
-    # location to associate the order with.
     # @param [CreateOrderRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
     # @return [CreateOrderResponse Hash] response from the API call
-    def create_order(location_id:,
-                     body:)
+    def create_order(body:)
       # Prepare query url.
       _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/{location_id}/orders'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => location_id
-      )
+      _query_builder << '/v2/orders'
       _query_url = APIHelper.clean_url _query_builder
 
       # Prepare headers.
@@ -57,21 +50,14 @@ module Square
     # Retrieves a set of [Order](#type-order)s by their IDs.
     # If a given Order ID does not exist, the ID is ignored instead of
     # generating an error.
-    # @param [String] location_id Required parameter: The ID of the orders'
-    # associated location.
     # @param [BatchRetrieveOrdersRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
     # @return [BatchRetrieveOrdersResponse Hash] response from the API call
-    def batch_retrieve_orders(location_id:,
-                              body:)
+    def batch_retrieve_orders(body:)
       # Prepare query url.
       _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/{location_id}/orders/batch-retrieve'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => location_id
-      )
+      _query_builder << '/v2/orders/batch-retrieve'
       _query_url = APIHelper.clean_url _query_builder
 
       # Prepare headers.
@@ -82,68 +68,6 @@ module Square
 
       # Prepare and execute HttpRequest.
       _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
-    end
-
-    # Updates an open [Order](#type-order) by adding, replacing, or deleting
-    # fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated.
-    # An UpdateOrder request requires the following:
-    # - The `order_id` in the endpoint path, identifying the order to update.
-    # - The latest `version` of the order to update.
-    # - The [sparse
-    # order](https://developer.squareup.com/docs/orders-api/manage-orders#sparse
-    # -order-objects)
-    # containing only the fields to update and the version the update is
-    # being applied to.
-    # - If deleting fields, the [dot notation
-    # paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot
-    # -notation)
-    # identifying fields to clear.
-    # To pay for an order, please refer to the [Pay for
-    # Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders)
-    # guide.
-    # To learn more about the Orders API, see the
-    # [Orders API
-    # Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
-    # @param [String] location_id Required parameter: The ID of the order's
-    # associated location.
-    # @param [String] order_id Required parameter: The ID of the order to
-    # update.
-    # @param [UpdateOrderRequest] body Required parameter: An object containing
-    # the fields to POST for the request.  See the corresponding object
-    # definition for field details.
-    # @return [UpdateOrderResponse Hash] response from the API call
-    def update_order(location_id:,
-                     order_id:,
-                     body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/{location_id}/orders/{order_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => location_id,
-        'order_id' => order_id
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.put(
         _query_url,
         headers: _headers,
         parameters: body.to_json
@@ -223,6 +147,64 @@ module Square
 
       # Prepare and execute HttpRequest.
       _request = config.http_client.post(
+        _query_url,
+        headers: _headers,
+        parameters: body.to_json
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(_response, data: decoded, errors: _errors)
+    end
+
+    # Updates an open [Order](#type-order) by adding, replacing, or deleting
+    # fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated.
+    # An UpdateOrder request requires the following:
+    # - The `order_id` in the endpoint path, identifying the order to update.
+    # - The latest `version` of the order to update.
+    # - The [sparse
+    # order](https://developer.squareup.com/docs/orders-api/manage-orders#sparse
+    # -order-objects)
+    # containing only the fields to update and the version the update is
+    # being applied to.
+    # - If deleting fields, the [dot notation
+    # paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot
+    # -notation)
+    # identifying fields to clear.
+    # To pay for an order, please refer to the [Pay for
+    # Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders)
+    # guide.
+    # To learn more about the Orders API, see the
+    # [Orders API
+    # Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
+    # @param [String] order_id Required parameter: The ID of the order to
+    # update.
+    # @param [UpdateOrderRequest] body Required parameter: An object containing
+    # the fields to POST for the request.  See the corresponding object
+    # definition for field details.
+    # @return [UpdateOrderResponse Hash] response from the API call
+    def update_order(order_id:,
+                     body:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/orders/{order_id}'
+      _query_builder = APIHelper.append_url_with_template_parameters(
+        _query_builder,
+        'order_id' => order_id
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json',
+        'content-type' => 'application/json; charset=utf-8'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.put(
         _query_url,
         headers: _headers,
         parameters: body.to_json

@@ -48,14 +48,21 @@ def create_loyalty_account(body:)
 ```ruby
 body = {}
 body[:loyalty_account] = {}
+body[:loyalty_account][:id] = 'id2'
 body[:loyalty_account][:mappings] = []
 
 
 body[:loyalty_account][:mappings][0] = {}
+body[:loyalty_account][:mappings][0][:id] = 'id0'
 body[:loyalty_account][:mappings][0][:type] = 'PHONE'
 body[:loyalty_account][:mappings][0][:value] = '+14155551234'
+body[:loyalty_account][:mappings][0][:created_at] = 'created_at8'
 
 body[:loyalty_account][:program_id] = 'd619f755-2d17-41f3-990d-c04ecedd64dd'
+body[:loyalty_account][:balance] = 14
+body[:loyalty_account][:lifetime_points] = 38
+body[:loyalty_account][:customer_id] = 'customer_id0'
+body[:loyalty_account][:enrolled_at] = 'enrolled_at2'
 body[:idempotency_key] = 'ec78c477-b1c3-4899-a209-a4e71337c996'
 
 result = loyalty_api.create_loyalty_account(body: body)
@@ -96,10 +103,13 @@ body[:query][:mappings] = []
 
 
 body[:query][:mappings][0] = {}
+body[:query][:mappings][0][:id] = 'id4'
 body[:query][:mappings][0][:type] = 'PHONE'
 body[:query][:mappings][0][:value] = '+14155551234'
+body[:query][:mappings][0][:created_at] = 'created_at8'
 
 body[:limit] = 10
+body[:cursor] = 'cursor0'
 
 result = loyalty_api.search_loyalty_accounts(body: body)
 
@@ -179,6 +189,8 @@ def accumulate_loyalty_points(account_id:,
 account_id = 'account_id2'
 body = {}
 body[:accumulate_points] = {}
+body[:accumulate_points][:loyalty_program_id] = 'loyalty_program_id8'
+body[:accumulate_points][:points] = 90
 body[:accumulate_points][:order_id] = 'RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY'
 body[:idempotency_key] = '58b90739-c3e8-4b11-85f7-e636d48d72cb'
 body[:location_id] = 'P034NEENMD09F'
@@ -223,7 +235,9 @@ account_id = 'account_id2'
 body = {}
 body[:idempotency_key] = 'idempotency_key2'
 body[:adjust_points] = {}
+body[:adjust_points][:loyalty_program_id] = 'loyalty_program_id4'
 body[:adjust_points][:points] = 112
+body[:adjust_points][:reason] = 'reason0'
 
 result = loyalty_api.adjust_loyalty_points(account_id: account_id, body: body)
 
@@ -265,9 +279,20 @@ def search_loyalty_events(body:)
 body = {}
 body[:query] = {}
 body[:query][:filter] = {}
+body[:query][:filter][:loyalty_account_filter] = {}
+body[:query][:filter][:loyalty_account_filter][:loyalty_account_id] = 'loyalty_account_id6'
+body[:query][:filter][:type_filter] = {}
+body[:query][:filter][:type_filter][:types] = ['DELETE_REWARD', 'ADJUST_POINTS', 'EXPIRE_POINTS']
+body[:query][:filter][:date_time_filter] = {}
+body[:query][:filter][:date_time_filter][:created_at] = {}
+body[:query][:filter][:date_time_filter][:created_at][:start_at] = 'start_at8'
+body[:query][:filter][:date_time_filter][:created_at][:end_at] = 'end_at4'
+body[:query][:filter][:location_filter] = {}
+body[:query][:filter][:location_filter][:location_ids] = ['location_ids2', 'location_ids3', 'location_ids4']
 body[:query][:filter][:order_filter] = {}
 body[:query][:filter][:order_filter][:order_id] = 'PyATxhYLfsMqpVkcKJITPydgEYfZY'
 body[:limit] = 30
+body[:cursor] = 'cursor0'
 
 result = loyalty_api.search_loyalty_events(body: body)
 
@@ -339,6 +364,9 @@ def calculate_loyalty_points(program_id:,
 program_id = 'program_id0'
 body = {}
 body[:order_id] = 'RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY'
+body[:transaction_amount_money] = {}
+body[:transaction_amount_money][:amount] = 72
+body[:transaction_amount_money][:currency] = 'UZS'
 
 result = loyalty_api.calculate_loyalty_points(program_id: program_id, body: body)
 
@@ -381,9 +409,13 @@ def create_loyalty_reward(body:)
 ```ruby
 body = {}
 body[:reward] = {}
+body[:reward][:id] = 'id4'
+body[:reward][:status] = 'REDEEMED'
 body[:reward][:loyalty_account_id] = '5adcb100-07f1-4ee7-b8c6-6bb9ebc474bd'
 body[:reward][:reward_tier_id] = 'e1b39225-9da5-43d1-a5db-782cdd8ad94f'
+body[:reward][:points] = 230
 body[:reward][:order_id] = 'RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY'
+body[:reward][:created_at] = 'created_at2'
 body[:idempotency_key] = '18c2e5ea-a620-4b1f-ad60-7b167285e451'
 
 result = loyalty_api.create_loyalty_reward(body: body)
@@ -427,7 +459,9 @@ def search_loyalty_rewards(body:)
 body = {}
 body[:query] = {}
 body[:query][:loyalty_account_id] = '5adcb100-07f1-4ee7-b8c6-6bb9ebc474bd'
+body[:query][:status] = 'REDEEMED'
 body[:limit] = 10
+body[:cursor] = 'cursor0'
 
 result = loyalty_api.search_loyalty_rewards(body: body)
 

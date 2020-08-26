@@ -48,8 +48,10 @@ def list_invoices(location_id:,
 
 ```ruby
 location_id = 'location_id4'
+cursor = 'cursor6'
+limit = 172
 
-result = invoices_api.list_invoices(location_id: location_id, )
+result = invoices_api.list_invoices(location_id: location_id, cursor: cursor, limit: limit)
 
 if result.success?
   puts result.data
@@ -86,24 +88,42 @@ def create_invoice(body:)
 ```ruby
 body = {}
 body[:invoice] = {}
+body[:invoice][:id] = 'id0'
+body[:invoice][:version] = 38
 body[:invoice][:location_id] = 'ES0RJRZYEC39A'
 body[:invoice][:order_id] = 'CAISENgvlJ6jLWAzERDzjyHVybY'
 body[:invoice][:primary_recipient] = {}
 body[:invoice][:primary_recipient][:customer_id] = 'JDKYHBWT1D4F8MFH63DBMEN8Y4'
+body[:invoice][:primary_recipient][:given_name] = 'given_name6'
+body[:invoice][:primary_recipient][:family_name] = 'family_name8'
+body[:invoice][:primary_recipient][:email_address] = 'email_address2'
+body[:invoice][:primary_recipient][:address] = {}
+body[:invoice][:primary_recipient][:address][:address_line_1] = 'address_line_10'
+body[:invoice][:primary_recipient][:address][:address_line_2] = 'address_line_20'
+body[:invoice][:primary_recipient][:address][:address_line_3] = 'address_line_36'
+body[:invoice][:primary_recipient][:address][:locality] = 'locality0'
+body[:invoice][:primary_recipient][:address][:sublocality] = 'sublocality0'
 body[:invoice][:payment_requests] = []
 
 
 body[:invoice][:payment_requests][0] = {}
+body[:invoice][:payment_requests][0][:uid] = 'uid4'
 body[:invoice][:payment_requests][0][:request_method] = 'EMAIL'
 body[:invoice][:payment_requests][0][:request_type] = 'BALANCE'
 body[:invoice][:payment_requests][0][:due_date] = '2030-01-24'
+body[:invoice][:payment_requests][0][:fixed_amount_requested_money] = {}
+body[:invoice][:payment_requests][0][:fixed_amount_requested_money][:amount] = 52
+body[:invoice][:payment_requests][0][:fixed_amount_requested_money][:currency] = 'USS'
 body[:invoice][:payment_requests][0][:tipping_enabled] = true
 body[:invoice][:payment_requests][0][:reminders] = []
 
 
 body[:invoice][:payment_requests][0][:reminders][0] = {}
+body[:invoice][:payment_requests][0][:reminders][0][:uid] = 'uid2'
 body[:invoice][:payment_requests][0][:reminders][0][:relative_scheduled_days] = -1
 body[:invoice][:payment_requests][0][:reminders][0][:message] = 'Your invoice is due tomorrow'
+body[:invoice][:payment_requests][0][:reminders][0][:status] = 'PENDING'
+body[:invoice][:payment_requests][0][:reminders][0][:sent_at] = 'sent_at2'
 
 
 body[:invoice][:invoice_number] = 'inv-100'
@@ -157,6 +177,8 @@ body[:query][:filter][:customer_ids] = ['JDKYHBWT1D4F8MFH63DBMEN8Y4']
 body[:query][:sort] = {}
 body[:query][:sort][:field] = 'INVOICE_SORT_DATE'
 body[:query][:sort][:order] = 'DESC'
+body[:limit] = 164
+body[:cursor] = 'cursor0'
 
 result = invoices_api.search_invoices(body: body)
 
@@ -194,8 +216,9 @@ def delete_invoice(invoice_id:,
 
 ```ruby
 invoice_id = 'invoice_id0'
+version = 172
 
-result = invoices_api.delete_invoice(invoice_id: invoice_id, )
+result = invoices_api.delete_invoice(invoice_id: invoice_id, version: version)
 
 if result.success?
   puts result.data
@@ -266,11 +289,32 @@ def update_invoice(invoice_id:,
 invoice_id = 'invoice_id0'
 body = {}
 body[:invoice] = {}
+body[:invoice][:id] = 'id0'
+body[:invoice][:version] = 38
+body[:invoice][:location_id] = 'location_id4'
+body[:invoice][:order_id] = 'order_id6'
+body[:invoice][:primary_recipient] = {}
+body[:invoice][:primary_recipient][:customer_id] = 'customer_id2'
+body[:invoice][:primary_recipient][:given_name] = 'given_name6'
+body[:invoice][:primary_recipient][:family_name] = 'family_name8'
+body[:invoice][:primary_recipient][:email_address] = 'email_address2'
+body[:invoice][:primary_recipient][:address] = {}
+body[:invoice][:primary_recipient][:address][:address_line_1] = 'address_line_10'
+body[:invoice][:primary_recipient][:address][:address_line_2] = 'address_line_20'
+body[:invoice][:primary_recipient][:address][:address_line_3] = 'address_line_36'
+body[:invoice][:primary_recipient][:address][:locality] = 'locality0'
+body[:invoice][:primary_recipient][:address][:sublocality] = 'sublocality0'
 body[:invoice][:payment_requests] = []
 
 
 body[:invoice][:payment_requests][0] = {}
 body[:invoice][:payment_requests][0][:uid] = '2da7964f-f3d2-4f43-81e8-5aa220bf3355'
+body[:invoice][:payment_requests][0][:request_method] = 'EMAIL'
+body[:invoice][:payment_requests][0][:request_type] = 'DEPOSIT'
+body[:invoice][:payment_requests][0][:due_date] = 'due_date2'
+body[:invoice][:payment_requests][0][:fixed_amount_requested_money] = {}
+body[:invoice][:payment_requests][0][:fixed_amount_requested_money][:amount] = 52
+body[:invoice][:payment_requests][0][:fixed_amount_requested_money][:currency] = 'USS'
 body[:invoice][:payment_requests][0][:tipping_enabled] = false
 
 body[:idempotency_key] = '4ee82288-0910-499e-ab4c-5d0071dad1be'

@@ -41,7 +41,9 @@ def list_merchants(cursor: nil)
 ### Example Usage
 
 ```ruby
-result = merchants_api.list_merchants()
+cursor = 210
+
+result = merchants_api.list_merchants(cursor: cursor)
 
 if result.success?
   puts result.data
