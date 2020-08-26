@@ -242,8 +242,9 @@ module Square
     # [Location](#type-location)s.
     # Results are paginated and sorted in descending order according to their
     # `occurred_at` timestamp (newest first).
-    # There are no limits on how far back the caller can page. This endpoint is
-    # useful when displaying recent changes for a specific item. For more
+    # There are no limits on how far back the caller can page. This endpoint can
+    # be
+    # used to display recent changes for a specific item. For more
     # sophisticated queries, use a batch endpoint.
     # @param [String] catalog_object_id Required parameter: ID of the
     # [CatalogObject](#type-catalogobject) to retrieve.

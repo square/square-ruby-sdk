@@ -41,7 +41,11 @@ def list_bank_accounts(cursor: nil,
 ### Example Usage
 
 ```ruby
-result = bank_accounts_api.list_bank_accounts()
+cursor = 'cursor6'
+limit = 172
+location_id = 'location_id4'
+
+result = bank_accounts_api.list_bank_accounts(cursor: cursor, limit: limit, location_id: location_id)
 
 if result.success?
   puts result.data

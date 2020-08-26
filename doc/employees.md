@@ -28,7 +28,7 @@ def list_employees(location_id: nil,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `location_id` | `String` | Query, Optional | Filter employees returned to only those that are associated with the specified location. |
+| `location_id` | `String` | Query, Optional | - |
 | `status` | [`String (Employee Status)`](/doc/models/employee-status.md) | Query, Optional | Specifies the EmployeeStatus to filter the employee by. |
 | `limit` | `Integer` | Query, Optional | The number of employees to be returned on each page. |
 | `cursor` | `String` | Query, Optional | The token required to retrieve the specified page of results. |
@@ -40,7 +40,12 @@ def list_employees(location_id: nil,
 ### Example Usage
 
 ```ruby
-result = employees_api.list_employees()
+location_id = 'location_id4'
+status = 'ACTIVE'
+limit = 172
+cursor = 'cursor6'
+
+result = employees_api.list_employees(location_id: location_id, status: status, limit: limit, cursor: cursor)
 
 if result.success?
   puts result.data

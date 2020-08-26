@@ -34,7 +34,9 @@ def list_customer_segments(cursor: nil)
 ### Example Usage
 
 ```ruby
-result = customer_segments_api.list_customer_segments()
+cursor = 'cursor6'
+
+result = customer_segments_api.list_customer_segments(cursor: cursor)
 
 if result.success?
   puts result.data

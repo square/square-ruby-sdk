@@ -54,7 +54,16 @@ def list_payments(begin_time: nil,
 ### Example Usage
 
 ```ruby
-result = payments_api.list_payments()
+begin_time = 'begin_time2'
+end_time = 'end_time2'
+sort_order = 'sort_order0'
+cursor = 'cursor6'
+location_id = 'location_id4'
+total = 10
+last_4 = 'last_42'
+card_brand = 'card_brand6'
+
+result = payments_api.list_payments(begin_time: begin_time, end_time: end_time, sort_order: sort_order, cursor: cursor, location_id: location_id, total: total, last_4: last_4, card_brand: card_brand)
 
 if result.success?
   puts result.data
@@ -102,10 +111,15 @@ body[:idempotency_key] = '4935a656-a929-4792-b97c-8848be85c27c'
 body[:amount_money] = {}
 body[:amount_money][:amount] = 200
 body[:amount_money][:currency] = 'USD'
+body[:tip_money] = {}
+body[:tip_money][:amount] = 198
+body[:tip_money][:currency] = 'CHF'
 body[:app_fee_money] = {}
 body[:app_fee_money][:amount] = 10
 body[:app_fee_money][:currency] = 'USD'
+body[:delay_duration] = 'delay_duration6'
 body[:autocomplete] = true
+body[:order_id] = 'order_id0'
 body[:customer_id] = 'VDKXEEKPJN48QDG3BGGFAK05P8'
 body[:location_id] = 'XK3DBG77NJBFX'
 body[:reference_id] = '123456'

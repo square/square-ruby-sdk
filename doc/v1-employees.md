@@ -64,7 +64,17 @@ def list_employees(order: nil,
 ### Example Usage
 
 ```ruby
-result = v1_employees_api.list_employees()
+order = 'DESC'
+begin_updated_at = 'begin_updated_at6'
+end_updated_at = 'end_updated_at4'
+begin_created_at = 'begin_created_at6'
+end_created_at = 'end_created_at8'
+status = 'ACTIVE'
+external_id = 'external_id6'
+limit = 172
+batch_token = 'batch_token2'
+
+result = v1_employees_api.list_employees(order: order, begin_updated_at: begin_updated_at, end_updated_at: end_updated_at, begin_created_at: begin_created_at, end_created_at: end_created_at, status: status, external_id: external_id, limit: limit, batch_token: batch_token)
 
 if result.success?
   puts result.data
@@ -104,8 +114,13 @@ def create_employee(body:)
 
 ```ruby
 body = {}
+body[:id] = 'id6'
 body[:first_name] = 'first_name6'
 body[:last_name] = 'last_name4'
+body[:role_ids] = ['role_ids0', 'role_ids1']
+body[:authorized_location_ids] = ['authorized_location_ids7', 'authorized_location_ids8']
+body[:email] = 'email0'
+body[:status] = 'ACTIVE'
 
 result = v1_employees_api.create_employee(body: body)
 
@@ -173,8 +188,13 @@ def update_employee(employee_id:,
 ```ruby
 employee_id = 'employee_id0'
 body = {}
+body[:id] = 'id6'
 body[:first_name] = 'first_name6'
 body[:last_name] = 'last_name4'
+body[:role_ids] = ['role_ids0', 'role_ids1']
+body[:authorized_location_ids] = ['authorized_location_ids7', 'authorized_location_ids8']
+body[:email] = 'email0'
+body[:status] = 'ACTIVE'
 
 result = v1_employees_api.update_employee(employee_id: employee_id, body: body)
 
@@ -210,7 +230,11 @@ def list_employee_roles(order: nil,
 ### Example Usage
 
 ```ruby
-result = v1_employees_api.list_employee_roles()
+order = 'DESC'
+limit = 172
+batch_token = 'batch_token2'
+
+result = v1_employees_api.list_employee_roles(order: order, limit: limit, batch_token: batch_token)
 
 if result.success?
   puts result.data
@@ -253,8 +277,12 @@ def create_employee_role(body:)
 
 ```ruby
 body = {}
+body[:id] = 'id6'
 body[:name] = 'name6'
 body[:permissions] = ['REGISTER_APPLY_RESTRICTED_DISCOUNTS', 'REGISTER_CHANGE_SETTINGS', 'REGISTER_EDIT_ITEM']
+body[:is_owner] = false
+body[:created_at] = 'created_at4'
+body[:updated_at] = 'updated_at8'
 
 result = v1_employees_api.create_employee_role(body: body)
 
@@ -322,8 +350,12 @@ def update_employee_role(role_id:,
 ```ruby
 role_id = 'role_id6'
 body = {}
+body[:id] = 'id6'
 body[:name] = 'name6'
 body[:permissions] = ['REGISTER_APPLY_RESTRICTED_DISCOUNTS', 'REGISTER_CHANGE_SETTINGS', 'REGISTER_EDIT_ITEM']
+body[:is_owner] = false
+body[:created_at] = 'created_at4'
+body[:updated_at] = 'updated_at8'
 
 result = v1_employees_api.update_employee_role(role_id: role_id, body: body)
 
@@ -375,7 +407,19 @@ def list_timecards(order: nil,
 ### Example Usage
 
 ```ruby
-result = v1_employees_api.list_timecards()
+order = 'DESC'
+employee_id = 'employee_id0'
+begin_clockin_time = 'begin_clockin_time8'
+end_clockin_time = 'end_clockin_time2'
+begin_clockout_time = 'begin_clockout_time0'
+end_clockout_time = 'end_clockout_time2'
+begin_updated_at = 'begin_updated_at6'
+end_updated_at = 'end_updated_at4'
+deleted = false
+limit = 172
+batch_token = 'batch_token2'
+
+result = v1_employees_api.list_timecards(order: order, employee_id: employee_id, begin_clockin_time: begin_clockin_time, end_clockin_time: end_clockin_time, begin_clockout_time: begin_clockout_time, end_clockout_time: end_clockout_time, begin_updated_at: begin_updated_at, end_updated_at: end_updated_at, deleted: deleted, limit: limit, batch_token: batch_token)
 
 if result.success?
   puts result.data
@@ -418,7 +462,12 @@ def create_timecard(body:)
 
 ```ruby
 body = {}
+body[:id] = 'id6'
 body[:employee_id] = 'employee_id4'
+body[:deleted] = false
+body[:clockin_time] = 'clockin_time2'
+body[:clockout_time] = 'clockout_time2'
+body[:clockin_location_id] = 'clockin_location_id4'
 
 result = v1_employees_api.create_timecard(body: body)
 
@@ -540,7 +589,12 @@ def update_timecard(timecard_id:,
 ```ruby
 timecard_id = 'timecard_id0'
 body = {}
+body[:id] = 'id6'
 body[:employee_id] = 'employee_id4'
+body[:deleted] = false
+body[:clockin_time] = 'clockin_time2'
+body[:clockout_time] = 'clockout_time2'
+body[:clockin_location_id] = 'clockin_location_id4'
 
 result = v1_employees_api.update_timecard(timecard_id: timecard_id, body: body)
 
@@ -619,8 +673,11 @@ def list_cash_drawer_shifts(location_id:,
 
 ```ruby
 location_id = 'location_id4'
+order = 'DESC'
+begin_time = 'begin_time2'
+end_time = 'end_time2'
 
-result = v1_employees_api.list_cash_drawer_shifts(location_id: location_id, )
+result = v1_employees_api.list_cash_drawer_shifts(location_id: location_id, order: order, begin_time: begin_time, end_time: end_time)
 
 if result.success?
   puts result.data
