@@ -209,23 +209,23 @@ module Square
           obj.each do |value|
             abc = if formatting == 'unindexed'
                     APIHelper.form_encode(value, instance_name + '[]',
-                                          formatting: formatting)
+                                          {formatting: formatting})
                   else
                     APIHelper.form_encode(value, instance_name,
-                                          formatting: formatting)
+                                          {formatting: formatting})
                   end
             retval = APIHelper.custom_merge(retval, abc)
           end
         else
           obj.each_with_index do |value, index|
             retval.merge!(APIHelper.form_encode(value, instance_name + '[' +
-              index.to_s + ']', formatting: formatting))
+              index.to_s + ']', {formatting: formatting}))
           end
         end
       elsif obj.instance_of? Hash
         obj.each do |key, value|
           retval.merge!(APIHelper.form_encode(value, instance_name + '[' +
-            key.to_s + ']', formatting: formatting))
+            key.to_s + ']', {formatting: formatting}))
         end
       elsif obj.instance_of? File
         retval[instance_name] = UploadIO.new(

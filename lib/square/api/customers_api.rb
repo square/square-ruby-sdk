@@ -31,9 +31,11 @@ module Square
       _query_builder << '/v2/customers'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'cursor' => cursor,
-        'sort_field' => sort_field,
-        'sort_order' => sort_order
+        {
+          'cursor' => cursor,
+          'sort_field' => sort_field,
+          'sort_order' => sort_order
+        }
       )
       _query_url = APIHelper.clean_url _query_builder
 

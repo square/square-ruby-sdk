@@ -45,13 +45,15 @@ module Square
       _query_builder << '/v2/refunds'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'begin_time' => begin_time,
-        'end_time' => end_time,
-        'sort_order' => sort_order,
-        'cursor' => cursor,
-        'location_id' => location_id,
-        'status' => status,
-        'source_type' => source_type
+        {
+          'begin_time' => begin_time,
+          'end_time' => end_time,
+          'sort_order' => sort_order,
+          'cursor' => cursor,
+          'location_id' => location_id,
+          'status' => status,
+          'source_type' => source_type
+        }
       )
       _query_url = APIHelper.clean_url _query_builder
 
