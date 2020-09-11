@@ -6,8 +6,7 @@ module Square
     end
 
     # ListEmployees
-    # @param [String] location_id Optional parameter: Filter employees returned
-    # to only those that are associated with the specified location.
+    # @param [String] location_id Optional parameter: Example:
     # @param [EmployeeStatus] status Optional parameter: Specifies the
     # EmployeeStatus to filter the employee by.
     # @param [Integer] limit Optional parameter: The number of employees to be
@@ -19,6 +18,7 @@ module Square
                        status: nil,
                        limit: nil,
                        cursor: nil)
+      warn 'Endpoint list_employees in EmployeesApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/employees'
@@ -55,6 +55,7 @@ module Square
     # requested.
     # @return [RetrieveEmployeeResponse Hash] response from the API call
     def retrieve_employee(id:)
+      warn 'Endpoint retrieve_employee in EmployeesApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/employees/{id}'

@@ -20,6 +20,7 @@ catalog_api = client.catalog
 * [Delete Catalog Object](/doc/catalog.md#delete-catalog-object)
 * [Retrieve Catalog Object](/doc/catalog.md#retrieve-catalog-object)
 * [Search Catalog Objects](/doc/catalog.md#search-catalog-objects)
+* [Search Catalog Items](/doc/catalog.md#search-catalog-items)
 * [Update Item Modifier Lists](/doc/catalog.md#update-item-modifier-lists)
 * [Update Item Taxes](/doc/catalog.md#update-item-taxes)
 
@@ -145,10 +146,24 @@ body[:batches][0][:objects] = []
 body[:batches][0][:objects][0] = {}
 body[:batches][0][:objects][0][:type] = 'ITEM'
 body[:batches][0][:objects][0][:id] = '#Tea'
+body[:batches][0][:objects][0][:updated_at] = 'updated_at6'
+body[:batches][0][:objects][0][:version] = 252
+body[:batches][0][:objects][0][:is_deleted] = false
+body[:batches][0][:objects][0][:custom_attribute_values] = {}
+body[:batches][0][:objects][0][:catalog_v1_ids] = []
+
+
+body[:batches][0][:objects][0][:catalog_v1_ids][0] = {}
+body[:batches][0][:objects][0][:catalog_v1_ids][0][:catalog_v1_id] = 'catalog_v1_id4'
+body[:batches][0][:objects][0][:catalog_v1_ids][0][:location_id] = 'location_id4'
+
 body[:batches][0][:objects][0][:present_at_all_locations] = true
 body[:batches][0][:objects][0][:item_data] = {}
 body[:batches][0][:objects][0][:item_data][:name] = 'Tea'
 body[:batches][0][:objects][0][:item_data][:description] = 'Hot Leaf Juice'
+body[:batches][0][:objects][0][:item_data][:abbreviation] = 'abbreviation0'
+body[:batches][0][:objects][0][:item_data][:label_color] = 'label_color0'
+body[:batches][0][:objects][0][:item_data][:available_online] = false
 body[:batches][0][:objects][0][:item_data][:category_id] = '#Beverages'
 body[:batches][0][:objects][0][:item_data][:tax_ids] = ['#SalesTax']
 body[:batches][0][:objects][0][:item_data][:variations] = []
@@ -157,24 +172,52 @@ body[:batches][0][:objects][0][:item_data][:variations] = []
 body[:batches][0][:objects][0][:item_data][:variations][0] = {}
 body[:batches][0][:objects][0][:item_data][:variations][0][:type] = 'ITEM_VARIATION'
 body[:batches][0][:objects][0][:item_data][:variations][0][:id] = '#Tea_Mug'
+body[:batches][0][:objects][0][:item_data][:variations][0][:updated_at] = 'updated_at5'
+body[:batches][0][:objects][0][:item_data][:variations][0][:version] = 99
+body[:batches][0][:objects][0][:item_data][:variations][0][:is_deleted] = true
+body[:batches][0][:objects][0][:item_data][:variations][0][:custom_attribute_values] = {}
+body[:batches][0][:objects][0][:item_data][:variations][0][:catalog_v1_ids] = []
+
+
+body[:batches][0][:objects][0][:item_data][:variations][0][:catalog_v1_ids][0] = {}
+body[:batches][0][:objects][0][:item_data][:variations][0][:catalog_v1_ids][0][:catalog_v1_id] = 'catalog_v1_id3'
+body[:batches][0][:objects][0][:item_data][:variations][0][:catalog_v1_ids][0][:location_id] = 'location_id3'
+
 body[:batches][0][:objects][0][:item_data][:variations][0][:present_at_all_locations] = true
-body[:batches][0][:objects][0][:item_data][:variations][0][:item_variation_data] = {
-  item_id: "#Tea",
-  name: "Mug",
-  pricing_type: "FIXED_PRICING",
-  price_money: {
-    amount: 150,
-    currency: "USD"
-  }
-}
+body[:batches][0][:objects][0][:item_data][:variations][0][:item_variation_data] = {}
+body[:batches][0][:objects][0][:item_data][:variations][0][:item_variation_data][:item_id] = '#Tea'
+body[:batches][0][:objects][0][:item_data][:variations][0][:item_variation_data][:name] = 'Mug'
+body[:batches][0][:objects][0][:item_data][:variations][0][:item_variation_data][:sku] = 'sku9'
+body[:batches][0][:objects][0][:item_data][:variations][0][:item_variation_data][:upc] = 'upc7'
+body[:batches][0][:objects][0][:item_data][:variations][0][:item_variation_data][:ordinal] = 149
+body[:batches][0][:objects][0][:item_data][:variations][0][:item_variation_data][:pricing_type] = 'FIXED_PRICING'
+
 
 body[:batches][0][:objects][1] = {}
 body[:batches][0][:objects][1][:type] = 'ITEM'
 body[:batches][0][:objects][1][:id] = '#Coffee'
+body[:batches][0][:objects][1][:updated_at] = 'updated_at7'
+body[:batches][0][:objects][1][:version] = 253
+body[:batches][0][:objects][1][:is_deleted] = true
+body[:batches][0][:objects][1][:custom_attribute_values] = {}
+body[:batches][0][:objects][1][:catalog_v1_ids] = []
+
+
+body[:batches][0][:objects][1][:catalog_v1_ids][0] = {}
+body[:batches][0][:objects][1][:catalog_v1_ids][0][:catalog_v1_id] = 'catalog_v1_id5'
+body[:batches][0][:objects][1][:catalog_v1_ids][0][:location_id] = 'location_id5'
+
+body[:batches][0][:objects][1][:catalog_v1_ids][1] = {}
+body[:batches][0][:objects][1][:catalog_v1_ids][1][:catalog_v1_id] = 'catalog_v1_id6'
+body[:batches][0][:objects][1][:catalog_v1_ids][1][:location_id] = 'location_id6'
+
 body[:batches][0][:objects][1][:present_at_all_locations] = true
 body[:batches][0][:objects][1][:item_data] = {}
 body[:batches][0][:objects][1][:item_data][:name] = 'Coffee'
 body[:batches][0][:objects][1][:item_data][:description] = 'Hot Bean Juice'
+body[:batches][0][:objects][1][:item_data][:abbreviation] = 'abbreviation9'
+body[:batches][0][:objects][1][:item_data][:label_color] = 'label_color9'
+body[:batches][0][:objects][1][:item_data][:available_online] = true
 body[:batches][0][:objects][1][:item_data][:category_id] = '#Beverages'
 body[:batches][0][:objects][1][:item_data][:tax_ids] = ['#SalesTax']
 body[:batches][0][:objects][1][:item_data][:variations] = []
@@ -183,51 +226,111 @@ body[:batches][0][:objects][1][:item_data][:variations] = []
 body[:batches][0][:objects][1][:item_data][:variations][0] = {}
 body[:batches][0][:objects][1][:item_data][:variations][0][:type] = 'ITEM_VARIATION'
 body[:batches][0][:objects][1][:item_data][:variations][0][:id] = '#Coffee_Regular'
+body[:batches][0][:objects][1][:item_data][:variations][0][:updated_at] = 'updated_at4'
+body[:batches][0][:objects][1][:item_data][:variations][0][:version] = 100
+body[:batches][0][:objects][1][:item_data][:variations][0][:is_deleted] = false
+body[:batches][0][:objects][1][:item_data][:variations][0][:custom_attribute_values] = {}
+body[:batches][0][:objects][1][:item_data][:variations][0][:catalog_v1_ids] = []
+
+
+body[:batches][0][:objects][1][:item_data][:variations][0][:catalog_v1_ids][0] = {}
+body[:batches][0][:objects][1][:item_data][:variations][0][:catalog_v1_ids][0][:catalog_v1_id] = 'catalog_v1_id4'
+body[:batches][0][:objects][1][:item_data][:variations][0][:catalog_v1_ids][0][:location_id] = 'location_id4'
+
+body[:batches][0][:objects][1][:item_data][:variations][0][:catalog_v1_ids][1] = {}
+body[:batches][0][:objects][1][:item_data][:variations][0][:catalog_v1_ids][1][:catalog_v1_id] = 'catalog_v1_id5'
+body[:batches][0][:objects][1][:item_data][:variations][0][:catalog_v1_ids][1][:location_id] = 'location_id5'
+
 body[:batches][0][:objects][1][:item_data][:variations][0][:present_at_all_locations] = true
-body[:batches][0][:objects][1][:item_data][:variations][0][:item_variation_data] = {
-  item_id: "#Coffee",
-  name: "Regular",
-  pricing_type: "FIXED_PRICING",
-  price_money: {
-    amount: 250,
-    currency: "USD"
-  }
-}
+body[:batches][0][:objects][1][:item_data][:variations][0][:item_variation_data] = {}
+body[:batches][0][:objects][1][:item_data][:variations][0][:item_variation_data][:item_id] = '#Coffee'
+body[:batches][0][:objects][1][:item_data][:variations][0][:item_variation_data][:name] = 'Regular'
+body[:batches][0][:objects][1][:item_data][:variations][0][:item_variation_data][:sku] = 'sku8'
+body[:batches][0][:objects][1][:item_data][:variations][0][:item_variation_data][:upc] = 'upc6'
+body[:batches][0][:objects][1][:item_data][:variations][0][:item_variation_data][:ordinal] = 150
+body[:batches][0][:objects][1][:item_data][:variations][0][:item_variation_data][:pricing_type] = 'FIXED_PRICING'
 
 body[:batches][0][:objects][1][:item_data][:variations][1] = {}
 body[:batches][0][:objects][1][:item_data][:variations][1][:type] = 'ITEM_VARIATION'
 body[:batches][0][:objects][1][:item_data][:variations][1][:id] = '#Coffee_Large'
+body[:batches][0][:objects][1][:item_data][:variations][1][:updated_at] = 'updated_at3'
+body[:batches][0][:objects][1][:item_data][:variations][1][:version] = 101
+body[:batches][0][:objects][1][:item_data][:variations][1][:is_deleted] = true
+body[:batches][0][:objects][1][:item_data][:variations][1][:custom_attribute_values] = {}
+body[:batches][0][:objects][1][:item_data][:variations][1][:catalog_v1_ids] = []
+
+
+body[:batches][0][:objects][1][:item_data][:variations][1][:catalog_v1_ids][0] = {}
+body[:batches][0][:objects][1][:item_data][:variations][1][:catalog_v1_ids][0][:catalog_v1_id] = 'catalog_v1_id5'
+body[:batches][0][:objects][1][:item_data][:variations][1][:catalog_v1_ids][0][:location_id] = 'location_id5'
+
+body[:batches][0][:objects][1][:item_data][:variations][1][:catalog_v1_ids][1] = {}
+body[:batches][0][:objects][1][:item_data][:variations][1][:catalog_v1_ids][1][:catalog_v1_id] = 'catalog_v1_id6'
+body[:batches][0][:objects][1][:item_data][:variations][1][:catalog_v1_ids][1][:location_id] = 'location_id6'
+
+body[:batches][0][:objects][1][:item_data][:variations][1][:catalog_v1_ids][2] = {}
+body[:batches][0][:objects][1][:item_data][:variations][1][:catalog_v1_ids][2][:catalog_v1_id] = 'catalog_v1_id7'
+body[:batches][0][:objects][1][:item_data][:variations][1][:catalog_v1_ids][2][:location_id] = 'location_id7'
+
 body[:batches][0][:objects][1][:item_data][:variations][1][:present_at_all_locations] = true
-body[:batches][0][:objects][1][:item_data][:variations][1][:item_variation_data] = {
-  item_id: "#Coffee",
-  name: "Large",
-  pricing_type: "FIXED_PRICING",
-  price_money: {
-    amount: 350,
-    currency: "USD"
-  }
-}
+body[:batches][0][:objects][1][:item_data][:variations][1][:item_variation_data] = {}
+body[:batches][0][:objects][1][:item_data][:variations][1][:item_variation_data][:item_id] = '#Coffee'
+body[:batches][0][:objects][1][:item_data][:variations][1][:item_variation_data][:name] = 'Large'
+body[:batches][0][:objects][1][:item_data][:variations][1][:item_variation_data][:sku] = 'sku7'
+body[:batches][0][:objects][1][:item_data][:variations][1][:item_variation_data][:upc] = 'upc5'
+body[:batches][0][:objects][1][:item_data][:variations][1][:item_variation_data][:ordinal] = 151
+body[:batches][0][:objects][1][:item_data][:variations][1][:item_variation_data][:pricing_type] = 'FIXED_PRICING'
+
 
 body[:batches][0][:objects][2] = {}
 body[:batches][0][:objects][2][:type] = 'CATEGORY'
 body[:batches][0][:objects][2][:id] = '#Beverages'
+body[:batches][0][:objects][2][:updated_at] = 'updated_at8'
+body[:batches][0][:objects][2][:version] = 254
+body[:batches][0][:objects][2][:is_deleted] = false
+body[:batches][0][:objects][2][:custom_attribute_values] = {}
+body[:batches][0][:objects][2][:catalog_v1_ids] = []
+
+
+body[:batches][0][:objects][2][:catalog_v1_ids][0] = {}
+body[:batches][0][:objects][2][:catalog_v1_ids][0][:catalog_v1_id] = 'catalog_v1_id6'
+body[:batches][0][:objects][2][:catalog_v1_ids][0][:location_id] = 'location_id6'
+
+body[:batches][0][:objects][2][:catalog_v1_ids][1] = {}
+body[:batches][0][:objects][2][:catalog_v1_ids][1][:catalog_v1_id] = 'catalog_v1_id7'
+body[:batches][0][:objects][2][:catalog_v1_ids][1][:location_id] = 'location_id7'
+
+body[:batches][0][:objects][2][:catalog_v1_ids][2] = {}
+body[:batches][0][:objects][2][:catalog_v1_ids][2][:catalog_v1_id] = 'catalog_v1_id8'
+body[:batches][0][:objects][2][:catalog_v1_ids][2][:location_id] = 'location_id8'
+
 body[:batches][0][:objects][2][:present_at_all_locations] = true
-body[:batches][0][:objects][2][:category_data] = {
-  name: "Beverages"
-}
+body[:batches][0][:objects][2][:category_data] = {}
+body[:batches][0][:objects][2][:category_data][:name] = 'Beverages'
 
 body[:batches][0][:objects][3] = {}
 body[:batches][0][:objects][3][:type] = 'TAX'
 body[:batches][0][:objects][3][:id] = '#SalesTax'
+body[:batches][0][:objects][3][:updated_at] = 'updated_at9'
+body[:batches][0][:objects][3][:version] = 255
+body[:batches][0][:objects][3][:is_deleted] = true
+body[:batches][0][:objects][3][:custom_attribute_values] = {}
+body[:batches][0][:objects][3][:catalog_v1_ids] = []
+
+
+body[:batches][0][:objects][3][:catalog_v1_ids][0] = {}
+body[:batches][0][:objects][3][:catalog_v1_ids][0][:catalog_v1_id] = 'catalog_v1_id7'
+body[:batches][0][:objects][3][:catalog_v1_ids][0][:location_id] = 'location_id7'
+
 body[:batches][0][:objects][3][:present_at_all_locations] = true
-body[:batches][0][:objects][3][:tax_data] = {
-  name: "Sales Tax",
-  calculation_phase: "TAX_SUBTOTAL_PHASE",
-  inclusion_type: "ADDITIVE",
-  percentage: "5.0",
-  applies_to_custom_amounts: true,
-  enabled: true
-}
+body[:batches][0][:objects][3][:tax_data] = {}
+body[:batches][0][:objects][3][:tax_data][:name] = 'Sales Tax'
+body[:batches][0][:objects][3][:tax_data][:calculation_phase] = 'TAX_SUBTOTAL_PHASE'
+body[:batches][0][:objects][3][:tax_data][:inclusion_type] = 'ADDITIVE'
+body[:batches][0][:objects][3][:tax_data][:percentage] = '5.0'
+body[:batches][0][:objects][3][:tax_data][:applies_to_custom_amounts] = true
+body[:batches][0][:objects][3][:tax_data][:enabled] = true
+
 
 
 result = catalog_api.batch_upsert_catalog_objects(body: body)
@@ -241,42 +344,12 @@ end
 
 ## Create Catalog Image
 
-Upload an image file to create a new [CatalogImage](#type-catalogimage) for an existing
-[CatalogObject](#type-catalogobject). Images can be uploaded and linked in this request or created independently
-(without an object assignment) and linked to a [CatalogObject](#type-catalogobject) at a later time.
+Uploads an image file to be represented by an [CatalogImage](#type-catalogimage) object linked to an existing
+[CatalogObject](#type-catalogobject) instance. A call to this endpoint can upload an image, link an image to
+a catalog object, or do both.
 
-CreateCatalogImage accepts HTTP multipart/form-data requests with a JSON part and an image file part in
-JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB. The following is an example of such an HTTP request:
-
-```
-POST /v2/catalog/images
-Accept: application/json
-Content-Type: multipart/form-data;boundary="boundary"
-Square-Version: XXXX-XX-XX
-Authorization: Bearer {ACCESS_TOKEN}
-
---boundary
-Content-Disposition: form-data; name="request"
-Content-Type: application/json
-
-{
-"idempotency_key":"528dea59-7bfb-43c1-bd48-4a6bba7dd61f86",
-"object_id": "ND6EA5AAJEO5WL3JNNIAQA32",
-"image":{
-"id":"#TEMP_ID",
-"type":"IMAGE",
-"image_data":{
-"caption":"A picture of a cup of coffee"
-}
-}
-}
---boundary
-Content-Disposition: form-data; name="image"; filename="Coffee.jpg"
-Content-Type: image/jpeg
-
-{ACTUAL_IMAGE_BYTES}
---boundary
-```
+This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
+JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
 
 Additional information and an example cURL request can be found in the [Create a Catalog Image recipe](https://developer.squareup.com/docs/more-apis/catalog/cookbook/create-catalog-images).
 
@@ -305,8 +378,24 @@ request[:object_id] = 'ND6EA5AAJEO5WL3JNNIAQA32'
 request[:image] = {}
 request[:image][:type] = 'IMAGE'
 request[:image][:id] = '#TEMP_ID'
+request[:image][:updated_at] = 'updated_at4'
+request[:image][:version] = 68
+request[:image][:is_deleted] = false
+request[:image][:custom_attribute_values] = {}
+request[:image][:catalog_v1_ids] = []
 
-result = catalog_api.create_catalog_image(request: request, )
+
+request[:image][:catalog_v1_ids][0] = {}
+request[:image][:catalog_v1_ids][0][:catalog_v1_id] = 'catalog_v1_id4'
+request[:image][:catalog_v1_ids][0][:location_id] = 'location_id4'
+
+request[:image][:image_data] = {}
+request[:image][:image_data][:name] = 'name0'
+request[:image][:image_data][:url] = 'url4'
+request[:image][:image_data][:caption] = 'A picture of a cup of coffee'
+image_file = FileWrapper.new(File::open('dummy_file', 'rb'), content_type: 'optional-content-type')
+
+result = catalog_api.create_catalog_image(request: request, image_file: image_file)
 
 if result.success?
   puts result.data
@@ -317,8 +406,8 @@ end
 
 ## Catalog Info
 
-Returns information about the Square Catalog API, such as batch size
-limits for `BatchUpsertCatalogObjects`.
+Retrieves information about the Square Catalog API, such as batch size
+limits that can be used by the `BatchUpsertCatalogObjects` endpoint.
 
 ```ruby
 def catalog_info
@@ -371,7 +460,10 @@ def list_catalog(cursor: nil,
 ### Example Usage
 
 ```ruby
-result = catalog_api.list_catalog()
+cursor = 'cursor6'
+types = 'types6'
+
+result = catalog_api.list_catalog(cursor: cursor, types: types)
 
 if result.success?
   puts result.data
@@ -406,10 +498,31 @@ body[:idempotency_key] = 'af3d1afc-7212-4300-b463-0bfc5314a5ae'
 body[:object] = {}
 body[:object][:type] = 'ITEM'
 body[:object][:id] = '#Cocoa'
+body[:object][:updated_at] = 'updated_at8'
+body[:object][:version] = 252
+body[:object][:is_deleted] = false
+body[:object][:custom_attribute_values] = {}
+body[:object][:catalog_v1_ids] = []
+
+
+body[:object][:catalog_v1_ids][0] = {}
+body[:object][:catalog_v1_ids][0][:catalog_v1_id] = 'catalog_v1_id0'
+body[:object][:catalog_v1_ids][0][:location_id] = 'location_id0'
+
+body[:object][:catalog_v1_ids][1] = {}
+body[:object][:catalog_v1_ids][1][:catalog_v1_id] = 'catalog_v1_id1'
+body[:object][:catalog_v1_ids][1][:location_id] = 'location_id1'
+
+body[:object][:catalog_v1_ids][2] = {}
+body[:object][:catalog_v1_ids][2][:catalog_v1_id] = 'catalog_v1_id2'
+body[:object][:catalog_v1_ids][2][:location_id] = 'location_id2'
+
 body[:object][:item_data] = {}
 body[:object][:item_data][:name] = 'Cocoa'
 body[:object][:item_data][:description] = 'Hot chocolate'
 body[:object][:item_data][:abbreviation] = 'Ch'
+body[:object][:item_data][:label_color] = 'label_color4'
+body[:object][:item_data][:available_online] = false
 
 result = catalog_api.upsert_catalog_object(body: body)
 
@@ -469,7 +582,7 @@ any [CatalogTax](#type-catalogtax) objects that apply to it.
 
 ```ruby
 def retrieve_catalog_object(object_id:,
-                            include_related_objects: nil)
+                            include_related_objects: false)
 ```
 
 ### Parameters
@@ -487,8 +600,9 @@ def retrieve_catalog_object(object_id:,
 
 ```ruby
 object_id = 'object_id8'
+include_related_objects = false
 
-result = catalog_api.retrieve_catalog_object(object_id: object_id, )
+result = catalog_api.retrieve_catalog_object(object_id: object_id, include_related_objects: include_related_objects)
 
 if result.success?
   puts result.data
@@ -499,20 +613,16 @@ end
 
 ## Search Catalog Objects
 
-Queries the targeted catalog using a variety of query types:
-[CatalogQuerySortedAttribute](#type-catalogquerysortedattribute),
-[CatalogQueryExact](#type-catalogqueryexact),
-[CatalogQueryRange](#type-catalogqueryrange),
-[CatalogQueryText](#type-catalogquerytext),
-[CatalogQueryItemsForTax](#type-catalogqueryitemsfortax), and
-[CatalogQueryItemsForModifierList](#type-catalogqueryitemsformodifierlist).
---
---
-Future end of the above comment:
-[CatalogQueryItemsForTax](#type-catalogqueryitemsfortax),
-[CatalogQueryItemsForModifierList](#type-catalogqueryitemsformodifierlist),
-[CatalogQueryItemsForItemOptions](#type-catalogqueryitemsforitemoptions), and
-[CatalogQueryItemVariationsForItemOptionValues](#type-catalogqueryitemvariationsforitemoptionvalues).
+Searches for [CatalogObject](#type-CatalogObject) of any types against supported search attribute values, 
+excluding custom attribute values on items or item variations, against one or more of the specified query expressions, 
+
+This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](#endpoint-Catalog-SearchCatalogItems)
+endpoint in the following aspects:
+
+- `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+- `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+- `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+- The both endpoints have different call conventions, including the query filter formats.
 
 ```ruby
 def search_catalog_objects(body:)
@@ -532,14 +642,120 @@ def search_catalog_objects(body:)
 
 ```ruby
 body = {}
+body[:cursor] = 'cursor0'
 body[:object_types] = ['ITEM']
+body[:include_deleted_objects] = false
+body[:include_related_objects] = false
+body[:begin_time] = 'begin_time4'
 body[:query] = {}
+body[:query][:sorted_attribute_query] = {}
+body[:query][:sorted_attribute_query][:attribute_name] = 'attribute_name6'
+body[:query][:sorted_attribute_query][:initial_attribute_value] = 'initial_attribute_value4'
+body[:query][:sorted_attribute_query][:sort_order] = 'DESC'
+body[:query][:exact_query] = {}
+body[:query][:exact_query][:attribute_name] = 'attribute_name2'
+body[:query][:exact_query][:attribute_value] = 'attribute_value2'
 body[:query][:prefix_query] = {}
 body[:query][:prefix_query][:attribute_name] = 'name'
 body[:query][:prefix_query][:attribute_prefix] = 'tea'
+body[:query][:range_query] = {}
+body[:query][:range_query][:attribute_name] = 'attribute_name6'
+body[:query][:range_query][:attribute_min_value] = 14
+body[:query][:range_query][:attribute_max_value] = 180
+body[:query][:text_query] = {}
+body[:query][:text_query][:keywords] = ['keywords7']
 body[:limit] = 100
 
 result = catalog_api.search_catalog_objects(body: body)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+## Search Catalog Items
+
+Searches for catalog items or item variations by matching supported search attribute values, including
+custom attribute values, against one or more of the specified query expressions, 
+
+This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects)
+endpoint in the following aspects:
+
+- `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+- `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+- `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+- The both endpoints use different call conventions, including the query filter formats.
+
+```ruby
+def search_catalog_items(body:)
+```
+
+### Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Search Catalog Items Request Hash`](/doc/models/search-catalog-items-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+### Response Type
+
+[`Search Catalog Items Response Hash`](/doc/models/search-catalog-items-response.md)
+
+### Example Usage
+
+```ruby
+body = {}
+body[:text_filter] = 'red'
+body[:category_ids] = ['WINE_CATEGORY_ID']
+body[:stock_levels] = ['OUT', 'LOW']
+body[:enabled_location_ids] = ['ATL_LOCATION_ID']
+body[:cursor] = 'cursor0'
+body[:limit] = 100
+body[:sort_order] = 'ASC'
+body[:product_types] = ['REGULAR']
+body[:custom_attribute_filters] = []
+
+
+body[:custom_attribute_filters][0] = {}
+body[:custom_attribute_filters][0][:custom_attribute_definition_id] = 'VEGAN_DEFINITION_ID'
+body[:custom_attribute_filters][0][:key] = 'key2'
+body[:custom_attribute_filters][0][:string_filter] = 'string_filter4'
+body[:custom_attribute_filters][0][:number_filter] = {}
+body[:custom_attribute_filters][0][:number_filter][:min] = 'min0'
+body[:custom_attribute_filters][0][:number_filter][:max] = 'max2'
+body[:custom_attribute_filters][0][:selection_uids_filter] = ['selection_uids_filter2', 'selection_uids_filter3']
+body[:custom_attribute_filters][0][:bool_filter] = true
+
+body[:custom_attribute_filters][1] = {}
+body[:custom_attribute_filters][1][:custom_attribute_definition_id] = 'BRAND_DEFINITION_ID'
+body[:custom_attribute_filters][1][:key] = 'key3'
+body[:custom_attribute_filters][1][:string_filter] = 'Dark Horse'
+body[:custom_attribute_filters][1][:number_filter] = {}
+body[:custom_attribute_filters][1][:number_filter][:min] = 'min1'
+body[:custom_attribute_filters][1][:number_filter][:max] = 'max1'
+body[:custom_attribute_filters][1][:selection_uids_filter] = ['selection_uids_filter1']
+
+body[:custom_attribute_filters][2] = {}
+body[:custom_attribute_filters][2][:custom_attribute_definition_id] = 'custom_attribute_definition_id8'
+body[:custom_attribute_filters][2][:key] = 'VINTAGE'
+body[:custom_attribute_filters][2][:string_filter] = 'string_filter6'
+body[:custom_attribute_filters][2][:number_filter] = {}
+body[:custom_attribute_filters][2][:number_filter][:min] = '2017'
+body[:custom_attribute_filters][2][:number_filter][:max] = '2018'
+body[:custom_attribute_filters][2][:selection_uids_filter] = ['selection_uids_filter0', 'selection_uids_filter1', 'selection_uids_filter2']
+
+body[:custom_attribute_filters][3] = {}
+body[:custom_attribute_filters][3][:custom_attribute_definition_id] = 'VARIETAL_DEFINITION_ID'
+body[:custom_attribute_filters][3][:key] = 'key5'
+body[:custom_attribute_filters][3][:string_filter] = 'string_filter7'
+body[:custom_attribute_filters][3][:number_filter] = {}
+body[:custom_attribute_filters][3][:number_filter][:min] = 'min3'
+body[:custom_attribute_filters][3][:number_filter][:max] = 'max9'
+body[:custom_attribute_filters][3][:selection_uids_filter] = ['selection_uids_filter9', 'selection_uids_filter0']
+
+
+result = catalog_api.search_catalog_items(body: body)
 
 if result.success?
   puts result.data

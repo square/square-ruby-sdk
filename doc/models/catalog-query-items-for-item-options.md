@@ -1,5 +1,7 @@
 ## Catalog Query Items for Item Options
 
+The query filter to return the items containing the specified item option IDs.
+
 ### Structure
 
 `CatalogQueryItemsForItemOptions`
@@ -14,7 +16,9 @@
 
 ```json
 {
-  "item_option_ids": null
+  "item_option_ids": [
+    "item_option_ids9"
+  ]
 }
 ```
 

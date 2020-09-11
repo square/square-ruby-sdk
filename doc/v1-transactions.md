@@ -26,14 +26,6 @@ v1_transactions_api = client.v1_transactions
 
 Provides non-confidential details for all of a location's associated bank accounts. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
 
----
-
-- __Deprecation date__: 2020-02-26
-- [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-- [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
-
----
-
 ```ruby
 def list_bank_accounts(location_id:)
 ```
@@ -65,14 +57,6 @@ end
 ## Retrieve Bank Account
 
 Provides non-confidential details for a merchant's associated bank account. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
-
----
-
-- __Deprecation date__: 2020-02-26
-- [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-- [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-bankaccounts)
-
----
 
 ```ruby
 def retrieve_bank_account(location_id:,
@@ -133,8 +117,11 @@ def list_orders(location_id:,
 
 ```ruby
 location_id = 'location_id4'
+order = 'DESC'
+limit = 172
+batch_token = 'batch_token2'
 
-result = v1_transactions_api.list_orders(location_id: location_id, )
+result = v1_transactions_api.list_orders(location_id: location_id, order: order, limit: limit, batch_token: batch_token)
 
 if result.success?
   puts result.data
@@ -207,6 +194,10 @@ location_id = 'location_id4'
 order_id = 'order_id6'
 body = {}
 body[:action] = 'REFUND'
+body[:shipped_tracking_number] = 'shipped_tracking_number6'
+body[:completed_note] = 'completed_note6'
+body[:refunded_note] = 'refunded_note0'
+body[:canceled_note] = 'canceled_note4'
 
 result = v1_transactions_api.update_order(location_id: location_id, order_id: order_id, body: body)
 
@@ -238,7 +229,7 @@ def list_payments(location_id:,
                   end_time: nil,
                   limit: nil,
                   batch_token: nil,
-                  include_partial: nil)
+                  include_partial: false)
 ```
 
 ### Parameters
@@ -261,8 +252,14 @@ def list_payments(location_id:,
 
 ```ruby
 location_id = 'location_id4'
+order = 'DESC'
+begin_time = 'begin_time2'
+end_time = 'end_time2'
+limit = 172
+batch_token = 'batch_token2'
+include_partial = false
 
-result = v1_transactions_api.list_payments(location_id: location_id, )
+result = v1_transactions_api.list_payments(location_id: location_id, order: order, begin_time: begin_time, end_time: end_time, limit: limit, batch_token: batch_token, include_partial: include_partial)
 
 if result.success?
   puts result.data
@@ -338,8 +335,13 @@ def list_refunds(location_id:,
 
 ```ruby
 location_id = 'location_id4'
+order = 'DESC'
+begin_time = 'begin_time2'
+end_time = 'end_time2'
+limit = 172
+batch_token = 'batch_token2'
 
-result = v1_transactions_api.list_refunds(location_id: location_id, )
+result = v1_transactions_api.list_refunds(location_id: location_id, order: order, begin_time: begin_time, end_time: end_time, limit: limit, batch_token: batch_token)
 
 if result.success?
   puts result.data
@@ -387,6 +389,10 @@ body = {}
 body[:payment_id] = 'payment_id6'
 body[:type] = 'FULL'
 body[:reason] = 'reason8'
+body[:refunded_money] = {}
+body[:refunded_money][:amount] = 222
+body[:refunded_money][:currency_code] = 'CLF'
+body[:request_idempotence_key] = 'request_idempotence_key2'
 
 result = v1_transactions_api.create_refund(location_id: location_id, body: body)
 
@@ -436,8 +442,14 @@ def list_settlements(location_id:,
 
 ```ruby
 location_id = 'location_id4'
+order = 'DESC'
+begin_time = 'begin_time2'
+end_time = 'end_time2'
+limit = 172
+status = 'SENT'
+batch_token = 'batch_token2'
 
-result = v1_transactions_api.list_settlements(location_id: location_id, )
+result = v1_transactions_api.list_settlements(location_id: location_id, order: order, begin_time: begin_time, end_time: end_time, limit: limit, status: status, batch_token: batch_token)
 
 if result.success?
   puts result.data

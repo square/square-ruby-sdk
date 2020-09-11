@@ -22,9 +22,9 @@ See [Handling errors](#handlingerrors) for more information.
 ```json
 {
   "category": "INVALID_REQUEST_ERROR",
-  "code": "CARD_DECLINED_CALL_ISSUER",
-  "detail": null,
-  "field": null
+  "code": "TEMPORARY_ERROR",
+  "detail": "detail6",
+  "field": "field6"
 }
 ```
 

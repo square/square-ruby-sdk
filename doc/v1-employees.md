@@ -64,7 +64,17 @@ def list_employees(order: nil,
 ### Example Usage
 
 ```ruby
-result = v1_employees_api.list_employees()
+order = 'DESC'
+begin_updated_at = 'begin_updated_at6'
+end_updated_at = 'end_updated_at4'
+begin_created_at = 'begin_created_at6'
+end_created_at = 'end_created_at8'
+status = 'ACTIVE'
+external_id = 'external_id6'
+limit = 172
+batch_token = 'batch_token2'
+
+result = v1_employees_api.list_employees(order: order, begin_updated_at: begin_updated_at, end_updated_at: end_updated_at, begin_created_at: begin_created_at, end_created_at: end_created_at, status: status, external_id: external_id, limit: limit, batch_token: batch_token)
 
 if result.success?
   puts result.data
@@ -104,8 +114,13 @@ def create_employee(body:)
 
 ```ruby
 body = {}
+body[:id] = 'id6'
 body[:first_name] = 'first_name6'
 body[:last_name] = 'last_name4'
+body[:role_ids] = ['role_ids0', 'role_ids1']
+body[:authorized_location_ids] = ['authorized_location_ids7', 'authorized_location_ids8']
+body[:email] = 'email0'
+body[:status] = 'ACTIVE'
 
 result = v1_employees_api.create_employee(body: body)
 
@@ -173,8 +188,13 @@ def update_employee(employee_id:,
 ```ruby
 employee_id = 'employee_id0'
 body = {}
+body[:id] = 'id6'
 body[:first_name] = 'first_name6'
 body[:last_name] = 'last_name4'
+body[:role_ids] = ['role_ids0', 'role_ids1']
+body[:authorized_location_ids] = ['authorized_location_ids7', 'authorized_location_ids8']
+body[:email] = 'email0'
+body[:status] = 'ACTIVE'
 
 result = v1_employees_api.update_employee(employee_id: employee_id, body: body)
 
@@ -210,7 +230,11 @@ def list_employee_roles(order: nil,
 ### Example Usage
 
 ```ruby
-result = v1_employees_api.list_employee_roles()
+order = 'DESC'
+limit = 172
+batch_token = 'batch_token2'
+
+result = v1_employees_api.list_employee_roles(order: order, limit: limit, batch_token: batch_token)
 
 if result.success?
   puts result.data
@@ -253,8 +277,12 @@ def create_employee_role(body:)
 
 ```ruby
 body = {}
+body[:id] = 'id6'
 body[:name] = 'name6'
 body[:permissions] = ['REGISTER_APPLY_RESTRICTED_DISCOUNTS', 'REGISTER_CHANGE_SETTINGS', 'REGISTER_EDIT_ITEM']
+body[:is_owner] = false
+body[:created_at] = 'created_at4'
+body[:updated_at] = 'updated_at8'
 
 result = v1_employees_api.create_employee_role(body: body)
 
@@ -322,8 +350,12 @@ def update_employee_role(role_id:,
 ```ruby
 role_id = 'role_id6'
 body = {}
+body[:id] = 'id6'
 body[:name] = 'name6'
 body[:permissions] = ['REGISTER_APPLY_RESTRICTED_DISCOUNTS', 'REGISTER_CHANGE_SETTINGS', 'REGISTER_EDIT_ITEM']
+body[:is_owner] = false
+body[:created_at] = 'created_at4'
+body[:updated_at] = 'updated_at8'
 
 result = v1_employees_api.update_employee_role(role_id: role_id, body: body)
 
@@ -338,14 +370,6 @@ end
 
 Provides summary information for all of a business's employee timecards.
 
----
-
-- __Deprecation date__: 2020-02-26
-- [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-- [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
-
----
-
 ```ruby
 def list_timecards(order: nil,
                    employee_id: nil,
@@ -355,7 +379,7 @@ def list_timecards(order: nil,
                    end_clockout_time: nil,
                    begin_updated_at: nil,
                    end_updated_at: nil,
-                   deleted: nil,
+                   deleted: false,
                    limit: nil,
                    batch_token: nil)
 ```
@@ -383,7 +407,19 @@ def list_timecards(order: nil,
 ### Example Usage
 
 ```ruby
-result = v1_employees_api.list_timecards()
+order = 'DESC'
+employee_id = 'employee_id0'
+begin_clockin_time = 'begin_clockin_time8'
+end_clockin_time = 'end_clockin_time2'
+begin_clockout_time = 'begin_clockout_time0'
+end_clockout_time = 'end_clockout_time2'
+begin_updated_at = 'begin_updated_at6'
+end_updated_at = 'end_updated_at4'
+deleted = false
+limit = 172
+batch_token = 'batch_token2'
+
+result = v1_employees_api.list_timecards(order: order, employee_id: employee_id, begin_clockin_time: begin_clockin_time, end_clockin_time: end_clockin_time, begin_clockout_time: begin_clockout_time, end_clockout_time: end_clockout_time, begin_updated_at: begin_updated_at, end_updated_at: end_updated_at, deleted: deleted, limit: limit, batch_token: batch_token)
 
 if result.success?
   puts result.data
@@ -397,15 +433,6 @@ end
 Creates a timecard for an employee and clocks them in with an
 `API_CREATE` event and a `clockin_time` set to the current time unless
 the request provides a different value.
-
----
-
-- __Deprecation date__: 2020-02-26
-- [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-- [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
-
----
-
 
 To import timecards from another
 system (rather than clocking someone in). Specify the `clockin_time`
@@ -435,7 +462,12 @@ def create_timecard(body:)
 
 ```ruby
 body = {}
+body[:id] = 'id6'
 body[:employee_id] = 'employee_id4'
+body[:deleted] = false
+body[:clockin_time] = 'clockin_time2'
+body[:clockout_time] = 'clockout_time2'
+body[:clockin_location_id] = 'clockin_location_id4'
 
 result = v1_employees_api.create_timecard(body: body)
 
@@ -453,24 +485,15 @@ Square Dashboard. Deleted timecards are still accessible through
 Connect API endpoints, but cannot be modified. The `deleted` field of
 the `Timecard` object indicates whether the timecard has been deleted.
 
----
 
-- __Deprecation date__: 2020-02-26
-- [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-- [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
-
----
-
-*Note**: By default, deleted timecards appear alongside valid timecards in
+__Note__: By default, deleted timecards appear alongside valid timecards in
 results returned by the [ListTimecards](#endpoint-v1employees-listtimecards)
 endpoint. To filter deleted timecards, include the `deleted` query
 parameter in the list request.
 
-<aside>
 Only approved accounts can manage their employees with Square.
 Unapproved accounts cannot use employee management features with the
 API.
-</aside>
 
 ```ruby
 def delete_timecard(timecard_id:)
@@ -504,13 +527,6 @@ end
 
 Provides the details for a single timecard.
 
----
-
-- __Deprecation date__: 2020-02-26
-- [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-- [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
-
----
 
 <aside>
 Only approved accounts can manage their employees with Square.
@@ -552,14 +568,6 @@ Modifies the details of a timecard with an `API_EDIT` event for
 the timecard. Updating an active timecard with a `clockout_time`
 clocks the employee out.
 
----
-
-- __Deprecation date__: 2020-02-26
-- [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-- [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
-
----
-
 ```ruby
 def update_timecard(timecard_id:,
                     body:)
@@ -581,7 +589,12 @@ def update_timecard(timecard_id:,
 ```ruby
 timecard_id = 'timecard_id0'
 body = {}
+body[:id] = 'id6'
 body[:employee_id] = 'employee_id4'
+body[:deleted] = false
+body[:clockin_time] = 'clockin_time2'
+body[:clockout_time] = 'clockout_time2'
+body[:clockin_location_id] = 'clockin_location_id4'
 
 result = v1_employees_api.update_timecard(timecard_id: timecard_id, body: body)
 
@@ -597,13 +610,6 @@ end
 Provides summary information for all events associated with a
 particular timecard.
 
----
-
-- __Deprecation date__: 2020-02-26
-- [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-- [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-timecards)
-
----
 
 <aside>
 Only approved accounts can manage their employees with Square.
@@ -643,14 +649,6 @@ end
 
 Provides the details for all of a location's cash drawer shifts during a date range. The date range you specify cannot exceed 90 days.
 
----
-
-- __Deprecation date__: 2020-02-26
-- [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-- [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-cashdrawershifts)
-
----
-
 ```ruby
 def list_cash_drawer_shifts(location_id:,
                             order: nil,
@@ -675,8 +673,11 @@ def list_cash_drawer_shifts(location_id:,
 
 ```ruby
 location_id = 'location_id4'
+order = 'DESC'
+begin_time = 'begin_time2'
+end_time = 'end_time2'
 
-result = v1_employees_api.list_cash_drawer_shifts(location_id: location_id, )
+result = v1_employees_api.list_cash_drawer_shifts(location_id: location_id, order: order, begin_time: begin_time, end_time: end_time)
 
 if result.success?
   puts result.data
@@ -688,14 +689,6 @@ end
 ## Retrieve Cash Drawer Shift
 
 Provides the details for a single cash drawer shift, including all events that occurred during the shift.
-
----
-
-- __Deprecation date__: 2020-02-26
-- [__Retirement date__](https://developer.squareup.com/docs/docs/build-basics/api-lifecycle#deprecated): 2021-02-26
-- [Migration guide](https://developer.squareup.com/docs/docs/migrate-from-v1/guides/v1-cashdrawershifts)
-
----
 
 ```ruby
 def retrieve_cash_drawer_shift(location_id:,

@@ -1,5 +1,7 @@
 ## Catalog Query Item Variations for Item Option Values
 
+The query filter to return the item variations containing the specified item option value IDs.
+
 ### Structure
 
 `CatalogQueryItemVariationsForItemOptionValues`
@@ -14,7 +16,10 @@
 
 ```json
 {
-  "item_option_value_ids": null
+  "item_option_value_ids": [
+    "item_option_value_ids0",
+    "item_option_value_ids1"
+  ]
 }
 ```
 

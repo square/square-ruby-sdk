@@ -117,6 +117,8 @@ def revoke_token(body:,
 body = {}
 body[:client_id] = 'CLIENT_ID'
 body[:access_token] = 'ACCESS_TOKEN'
+body[:merchant_id] = 'merchant_id6'
+body[:revoke_only_access_token] = false
 authorization = 'Client CLIENT_SECRET'
 
 result = o_auth_api.revoke_token(body: body, authorization: authorization)
@@ -167,7 +169,10 @@ body = {}
 body[:client_id] = 'APPLICATION_ID'
 body[:client_secret] = 'APPLICATION_SECRET'
 body[:code] = 'CODE_FROM_AUTHORIZE'
+body[:redirect_uri] = 'redirect_uri4'
 body[:grant_type] = 'authorization_code'
+body[:refresh_token] = 'refresh_token6'
+body[:migration_token] = 'migration_token4'
 
 result = o_auth_api.obtain_token(body: body)
 

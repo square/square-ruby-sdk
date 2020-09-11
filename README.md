@@ -38,6 +38,12 @@ gem 'square.rb'
 ### Orders
 * [Orders]
 
+### Subscriptions
+* [Subscriptions]
+
+### Invoices
+* [Invoices]
+
 ### Items
 * [Catalog]
 * [Inventory]
@@ -56,6 +62,7 @@ gem 'square.rb'
 * [Devices]
 
 ### Team
+* [Team]
 * [Employees]
 * [Labor]
 * [Cash Drawers]
@@ -73,7 +80,6 @@ gem 'square.rb'
 * [V1 Transactions]
 * [V1 Items]
 * [Transactions]
-* [Reporting]
 
 ## Usage
 
@@ -282,6 +288,7 @@ You can also use the Square API to create applications or services that work wit
 [Devices]: doc/devices.md
 [Disputes]: doc/disputes.md
 [Terminal]: doc/terminal.md
+[Team]: doc/team.md
 [Cash Drawers]: doc/cash-drawers.md
 [Customer Groups]: doc/customer-groups.md
 [Customer Segments]: doc/customer-segments.md
@@ -297,9 +304,9 @@ You can also use the Square API to create applications or services that work wit
 [Locations]: doc/locations.md
 [Merchants]: doc/merchants.md
 [Orders]: doc/orders.md
+[Invoices]: doc/invoices.md
 [Apple Pay]: doc/apple-pay.md
 [Refunds]: doc/refunds.md
-[Reporting]: doc/reporting.md
 [Mobile Authorization]: doc/mobile-authorization.md
 [O Auth]: doc/o-auth.md
 [V1 Locations]: doc/v1-locations.md
@@ -307,3 +314,4 @@ You can also use the Square API to create applications or services that work wit
 [V1 Transactions]: doc/v1-transactions.md
 [V1 Items]: doc/v1-items.md
 [Transactions]: doc/transactions.md
+[Subscriptions]: doc/subscriptions.md

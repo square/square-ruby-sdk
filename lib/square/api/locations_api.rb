@@ -71,9 +71,14 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Retrieves details of a location.
+    # Retrieves details of a location. You can specify "main"
+    # as the location ID to retrieve details of the
+    # main location. For more information,
+    # see [Locations API
+    # Overview](https://developer.squareup.com/docs/docs/locations-api).
     # @param [String] location_id Required parameter: The ID of the location to
-    # retrieve.
+    # retrieve. If you specify the string "main", then the endpoint returns the
+    # main location.
     # @return [RetrieveLocationResponse Hash] response from the API call
     def retrieve_location(location_id:)
       # Prepare query url.

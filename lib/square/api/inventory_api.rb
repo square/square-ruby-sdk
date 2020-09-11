@@ -242,8 +242,9 @@ module Square
     # [Location](#type-location)s.
     # Results are paginated and sorted in descending order according to their
     # `occurred_at` timestamp (newest first).
-    # There are no limits on how far back the caller can page. This endpoint is
-    # useful when displaying recent changes for a specific item. For more
+    # There are no limits on how far back the caller can page. This endpoint can
+    # be
+    # used to display recent changes for a specific item. For more
     # sophisticated queries, use a batch endpoint.
     # @param [String] catalog_object_id Required parameter: ID of the
     # [CatalogObject](#type-catalogobject) to retrieve.
@@ -253,8 +254,8 @@ module Square
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
     # results for the original query.  See the
-    # [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pa
-    # gination) guide for more information.
+    # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
+    # ion) guide for more information.
     # @return [RetrieveInventoryChangesResponse Hash] response from the API call
     def retrieve_inventory_changes(catalog_object_id:,
                                    location_ids: nil,

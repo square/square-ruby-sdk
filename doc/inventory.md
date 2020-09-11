@@ -84,13 +84,27 @@ body[:changes] = []
 body[:changes][0] = {}
 body[:changes][0][:type] = 'PHYSICAL_COUNT'
 body[:changes][0][:physical_count] = {}
+body[:changes][0][:physical_count][:id] = 'id0'
 body[:changes][0][:physical_count][:reference_id] = '1536bfbf-efed-48bf-b17d-a197141b2a92'
 body[:changes][0][:physical_count][:catalog_object_id] = 'W62UWFY35CWMYGVWK6TWJDNI'
+body[:changes][0][:physical_count][:catalog_object_type] = 'catalog_object_type4'
 body[:changes][0][:physical_count][:state] = 'IN_STOCK'
 body[:changes][0][:physical_count][:location_id] = 'C6W5YS5QM06F5'
 body[:changes][0][:physical_count][:quantity] = '53'
 body[:changes][0][:physical_count][:employee_id] = 'LRK57NSQ5X7PUD05'
 body[:changes][0][:physical_count][:occurred_at] = '2016-11-16T22:25:24.878Z'
+body[:changes][0][:adjustment] = {}
+body[:changes][0][:adjustment][:id] = 'id6'
+body[:changes][0][:adjustment][:reference_id] = 'reference_id4'
+body[:changes][0][:adjustment][:from_state] = 'SOLD'
+body[:changes][0][:adjustment][:to_state] = 'IN_TRANSIT_TO'
+body[:changes][0][:adjustment][:location_id] = 'location_id0'
+body[:changes][0][:transfer] = {}
+body[:changes][0][:transfer][:id] = 'id0'
+body[:changes][0][:transfer][:reference_id] = 'reference_id8'
+body[:changes][0][:transfer][:state] = 'SOLD'
+body[:changes][0][:transfer][:from_location_id] = 'from_location_id2'
+body[:changes][0][:transfer][:to_location_id] = 'to_location_id2'
 
 body[:ignore_unchanged_counts] = true
 
@@ -183,6 +197,8 @@ body = {}
 body[:catalog_object_ids] = ['W62UWFY35CWMYGVWK6TWJDNI']
 body[:location_ids] = ['59TNP9SA8VGDA']
 body[:updated_after] = '2016-11-16T00:00:00.000Z'
+body[:cursor] = 'cursor0'
+body[:states] = ['IN_TRANSIT_TO']
 
 result = inventory_api.batch_retrieve_inventory_counts(body: body)
 
@@ -255,8 +271,10 @@ def retrieve_inventory_count(catalog_object_id:,
 
 ```ruby
 catalog_object_id = 'catalog_object_id6'
+location_ids = 'location_ids0'
+cursor = 'cursor6'
 
-result = inventory_api.retrieve_inventory_count(catalog_object_id: catalog_object_id, )
+result = inventory_api.retrieve_inventory_count(catalog_object_id: catalog_object_id, location_ids: location_ids, cursor: cursor)
 
 if result.success?
   puts result.data
@@ -274,8 +292,8 @@ provided [CatalogObject](#type-catalogobject) at the requested
 Results are paginated and sorted in descending order according to their
 `occurred_at` timestamp (newest first).
 
-There are no limits on how far back the caller can page. This endpoint is
-useful when displaying recent changes for a specific item. For more
+There are no limits on how far back the caller can page. This endpoint can be 
+used to display recent changes for a specific item. For more
 sophisticated queries, use a batch endpoint.
 
 ```ruby
@@ -290,7 +308,7 @@ def retrieve_inventory_changes(catalog_object_id:,
 |  --- | --- | --- | --- |
 | `catalog_object_id` | `String` | Template, Required | ID of the [CatalogObject](#type-catalogobject) to retrieve. |
 | `location_ids` | `String` | Query, Optional | The [Location](#type-location) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See the [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) guide for more information. |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information. |
 
 ### Response Type
 
@@ -300,8 +318,10 @@ def retrieve_inventory_changes(catalog_object_id:,
 
 ```ruby
 catalog_object_id = 'catalog_object_id6'
+location_ids = 'location_ids0'
+cursor = 'cursor6'
 
-result = inventory_api.retrieve_inventory_changes(catalog_object_id: catalog_object_id, )
+result = inventory_api.retrieve_inventory_changes(catalog_object_id: catalog_object_id, location_ids: location_ids, cursor: cursor)
 
 if result.success?
   puts result.data

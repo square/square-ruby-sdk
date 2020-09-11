@@ -54,7 +54,16 @@ def list_payments(begin_time: nil,
 ### Example Usage
 
 ```ruby
-result = payments_api.list_payments()
+begin_time = 'begin_time2'
+end_time = 'end_time2'
+sort_order = 'sort_order0'
+cursor = 'cursor6'
+location_id = 'location_id4'
+total = 10
+last_4 = 'last_42'
+card_brand = 'card_brand6'
+
+result = payments_api.list_payments(begin_time: begin_time, end_time: end_time, sort_order: sort_order, cursor: cursor, location_id: location_id, total: total, last_4: last_4, card_brand: card_brand)
 
 if result.success?
   puts result.data
@@ -102,10 +111,15 @@ body[:idempotency_key] = '4935a656-a929-4792-b97c-8848be85c27c'
 body[:amount_money] = {}
 body[:amount_money][:amount] = 200
 body[:amount_money][:currency] = 'USD'
+body[:tip_money] = {}
+body[:tip_money][:amount] = 198
+body[:tip_money][:currency] = 'CHF'
 body[:app_fee_money] = {}
 body[:app_fee_money][:amount] = 10
 body[:app_fee_money][:currency] = 'USD'
+body[:delay_duration] = 'delay_duration6'
 body[:autocomplete] = true
+body[:order_id] = 'order_id0'
 body[:customer_id] = 'VDKXEEKPJN48QDG3BGGFAK05P8'
 body[:location_id] = 'XK3DBG77NJBFX'
 body[:reference_id] = '123456'
@@ -239,8 +253,7 @@ the payment using this endpoint. For more information, see
 [Delayed Payments](https://developer.squareup.com/docs/payments-api/take-payments#delayed-payments).
 
 ```ruby
-def complete_payment(payment_id:,
-                     body:)
+def complete_payment(payment_id:)
 ```
 
 ### Parameters
@@ -248,7 +261,6 @@ def complete_payment(payment_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `payment_id` | `String` | Template, Required | Unique ID identifying the payment to be completed. |
-| `body` | `Object` | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ### Response Type
 
@@ -258,9 +270,8 @@ def complete_payment(payment_id:,
 
 ```ruby
 payment_id = 'payment_id0'
-body = JSON.parse('{"key1":"val1","key2":"val2"}')
 
-result = payments_api.complete_payment(payment_id: payment_id, body: body)
+result = payments_api.complete_payment(payment_id: payment_id)
 
 if result.success?
   puts result.data

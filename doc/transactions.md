@@ -22,17 +22,6 @@ transactions_api = client.transactions
 
 Lists refunds for one of a business's locations.
 
-Deprecated - recommend using [SearchOrders](#endpoint-orders-searchorders)
-
----
-
-- __Deprecation date__: 2019-08-15
-- [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2021-09-01
-- [Migration guide](https://developer.squareup.com/docs/payments-api/migrate-from-transactions-api)
-
----
-
-
 In addition to full or partial tender refunds processed through Square APIs,
 refunds may result from itemized returns or exchanges through Square's
 Point of Sale applications.
@@ -68,8 +57,12 @@ def list_refunds(location_id:,
 
 ```ruby
 location_id = 'location_id4'
+begin_time = 'begin_time2'
+end_time = 'end_time2'
+sort_order = 'DESC'
+cursor = 'cursor6'
 
-result = transactions_api.list_refunds(location_id: location_id, )
+result = transactions_api.list_refunds(location_id: location_id, begin_time: begin_time, end_time: end_time, sort_order: sort_order, cursor: cursor)
 
 if result.success?
   puts result.data
@@ -81,16 +74,6 @@ end
 ## List Transactions
 
 Lists transactions for a particular location.
-
-Deprecated - recommend using [SearchOrders](#endpoint-orders-searchorders)
----
-
-- __Deprecation date__: 2019-08-15
-- [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2021-09-01
-- [Migration guide](https://developer.squareup.com/docs/payments-api/migrate-from-transactions-api)
-
----
-
 
 Transactions include payment information from sales and exchanges and refund
 information from returns and exchanges.
@@ -123,8 +106,12 @@ def list_transactions(location_id:,
 
 ```ruby
 location_id = 'location_id4'
+begin_time = 'begin_time2'
+end_time = 'end_time2'
+sort_order = 'DESC'
+cursor = 'cursor6'
 
-result = transactions_api.list_transactions(location_id: location_id, )
+result = transactions_api.list_transactions(location_id: location_id, begin_time: begin_time, end_time: end_time, sort_order: sort_order, cursor: cursor)
 
 if result.success?
   puts result.data
@@ -136,16 +123,6 @@ end
 ## Charge
 
 Charges a card represented by a card nonce or a customer's card on file.
-
-Deprecated - recommend using [CreatePayment](#endpoint-payments-createpayment)
-
----
-
-- __Deprecation date__: 2019-08-15
-- [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2021-09-01
-- [Migration guide](https://developer.squareup.com/docs/payments-api/migrate-from-transactions-api)
-
----
 
 Your request to this endpoint must include _either_:
 
@@ -192,19 +169,25 @@ body[:amount_money] = {}
 body[:amount_money][:amount] = 200
 body[:amount_money][:currency] = 'USD'
 body[:card_nonce] = 'card_nonce_from_square_123'
+body[:customer_card_id] = 'customer_card_id6'
 body[:delay_capture] = false
 body[:reference_id] = 'some optional reference id'
 body[:note] = 'some optional note'
 body[:billing_address] = {}
 body[:billing_address][:address_line_1] = '500 Electric Ave'
 body[:billing_address][:address_line_2] = 'Suite 600'
+body[:billing_address][:address_line_3] = 'address_line_38'
 body[:billing_address][:locality] = 'New York'
+body[:billing_address][:sublocality] = 'sublocality2'
 body[:billing_address][:administrative_district_level_1] = 'NY'
 body[:billing_address][:postal_code] = '10003'
 body[:billing_address][:country] = 'US'
 body[:shipping_address] = {}
 body[:shipping_address][:address_line_1] = '123 Main St'
+body[:shipping_address][:address_line_2] = 'address_line_24'
+body[:shipping_address][:address_line_3] = 'address_line_30'
 body[:shipping_address][:locality] = 'San Francisco'
+body[:shipping_address][:sublocality] = 'sublocality4'
 body[:shipping_address][:administrative_district_level_1] = 'CA'
 body[:shipping_address][:postal_code] = '94114'
 body[:shipping_address][:country] = 'US'
@@ -217,6 +200,7 @@ body[:additional_recipients][0][:description] = 'Application fees'
 body[:additional_recipients][0][:amount_money] = {}
 body[:additional_recipients][0][:amount_money][:amount] = 20
 body[:additional_recipients][0][:amount_money][:currency] = 'USD'
+body[:additional_recipients][0][:receivable_id] = 'receivable_id5'
 
 
 result = transactions_api.charge(location_id: location_id, body: body)
@@ -231,15 +215,6 @@ end
 ## Retrieve Transaction
 
 Retrieves details for a single transaction.
-
-Deprecated - recommend using [BatchRetrieveOrders](#endpoint-batchretrieveorders)
----
-
-- __Deprecation date__: 2019-08-15
-- [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2021-09-01
-- [Migration guide](https://developer.squareup.com/docs/payments-api/migrate-from-transactions-api)
-
----
 
 ```ruby
 def retrieve_transaction(location_id:,
@@ -277,13 +252,6 @@ end
 Captures a transaction that was created with the [Charge](#endpoint-charge)
 endpoint with a `delay_capture` value of `true`.
 
----
-
-- __Deprecation date__: 2019-08-15
-- [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2021-09-01
-- [Migration guide](https://developer.squareup.com/docs/payments-api/migrate-from-transactions-api)
-
----
 
 See [Delayed capture transactions](https://developer.squareup.com/docs/payments/transactions/overview#delayed-capture)
 for more information.
@@ -322,17 +290,6 @@ end
 ## Create Refund
 
 Initiates a refund for a previously charged tender.
-
-Deprecated - recommend using [RefundPayment](#endpoint-refunds-refundpayment)
-
----
-
-- __Deprecation date__: 2019-08-15
-- [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2021-09-01
-- [Migration guide](https://developer.squareup.com/docs/payments-api/migrate-from-transactions-api)
-
----
-
 
 You must issue a refund within 120 days of the associated payment. See
 [this article](https://squareup.com/help/us/en/article/5060) for more information
@@ -387,13 +344,6 @@ end
 Cancels a transaction that was created with the [Charge](#endpoint-charge)
 endpoint with a `delay_capture` value of `true`.
 
----
-
-- __Deprecation date__: 2019-08-15
-- [__Retirement date__](https://developer.squareup.com/docs/build-basics/api-lifecycle#deprecated): 2021-09-01
-- [Migration guide](https://developer.squareup.com/docs/payments-api/migrate-from-transactions-api)
-
----
 
 See [Delayed capture transactions](https://developer.squareup.com/docs/payments/transactions/overview#delayed-capture)
 for more information.

@@ -15,7 +15,7 @@
 | `device_options` | [`Device Checkout Options Hash`](/doc/models/device-checkout-options.md) |  | - |
 | `deadline_duration` | `String` | Optional | The duration as an RFC 3339 duration, after which the checkout will be automatically canceled.<br>TerminalCheckouts that are PENDING will be automatically CANCELED and have a cancellation reason<br>of “TIMED\_OUT”.<br><br>Default: 5 minutes from creation<br><br>Maximum: 5 minutes |
 | `status` | `String` | Optional | The status of the `TerminalCheckout`.<br>Options: PENDING, IN\_PROGRESS, CANCELED, COMPLETED |
-| `cancel_reason` | [`String (Terminal Checkout Cancel Reason)`](/doc/models/terminal-checkout-cancel-reason.md) | Optional | - |
+| `cancel_reason` | [`String (Action Cancel Reason)`](/doc/models/action-cancel-reason.md) | Optional | - |
 | `payment_ids` | `Array<String>` | Optional | A list of payments created by this `TerminalCheckout`. |
 | `created_at` | `String` | Optional | The time when the `TerminalCheckout` was created as an RFC 3339 timestamp. |
 | `updated_at` | `String` | Optional | The time when the `TerminalCheckout` was last updated as an RFC 3339 timestamp. |
@@ -24,24 +24,24 @@
 
 ```json
 {
-  "id": null,
+  "id": "id0",
   "amount_money": {
-    "amount": null,
-    "currency": null
+    "amount": 186,
+    "currency": "NGN"
   },
-  "reference_id": null,
-  "note": null,
+  "reference_id": "reference_id2",
+  "note": "note4",
   "device_options": {
     "device_id": "device_id6",
-    "skip_receipt_screen": null,
-    "tip_settings": null
+    "skip_receipt_screen": false,
+    "tip_settings": {
+      "allow_tipping": false,
+      "separate_tip_screen": false,
+      "custom_tip_field": false
+    }
   },
-  "deadline_duration": null,
-  "status": null,
-  "cancel_reason": null,
-  "payment_ids": null,
-  "created_at": null,
-  "updated_at": null
+  "deadline_duration": "deadline_duration8",
+  "status": "status8"
 }
 ```
 

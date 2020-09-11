@@ -4,11 +4,11 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '5.3.0.20200528'
+      '6.3.0.20200826'
     end
 
     def square_version
-      '2020-05-28'
+      config.square_version
     end
 
     # Access to mobile_authorization controller.
@@ -113,6 +113,12 @@ module Square
       @inventory ||= InventoryApi.new config
     end
 
+    # Access to invoices controller.
+    # @return [InvoicesApi] Returns the controller instance.
+    def invoices
+      @invoices ||= InvoicesApi.new config
+    end
+
     # Access to labor controller.
     # @return [LaborApi] Returns the controller instance.
     def labor
@@ -125,22 +131,10 @@ module Square
       @locations ||= LocationsApi.new config
     end
 
-    # Access to reporting controller.
-    # @return [ReportingApi] Returns the controller instance.
-    def reporting
-      @reporting ||= ReportingApi.new config
-    end
-
     # Access to checkout controller.
     # @return [CheckoutApi] Returns the controller instance.
     def checkout
       @checkout ||= CheckoutApi.new config
-    end
-
-    # Access to orders controller.
-    # @return [OrdersApi] Returns the controller instance.
-    def orders
-      @orders ||= OrdersApi.new config
     end
 
     # Access to transactions controller.
@@ -161,6 +155,12 @@ module Square
       @merchants ||= MerchantsApi.new config
     end
 
+    # Access to orders controller.
+    # @return [OrdersApi] Returns the controller instance.
+    def orders
+      @orders ||= OrdersApi.new config
+    end
+
     # Access to payments controller.
     # @return [PaymentsApi] Returns the controller instance.
     def payments
@@ -173,6 +173,18 @@ module Square
       @refunds ||= RefundsApi.new config
     end
 
+    # Access to subscriptions controller.
+    # @return [SubscriptionsApi] Returns the controller instance.
+    def subscriptions
+      @subscriptions ||= SubscriptionsApi.new config
+    end
+
+    # Access to team controller.
+    # @return [TeamApi] Returns the controller instance.
+    def team
+      @team ||= TeamApi.new config
+    end
+
     # Access to terminal controller.
     # @return [TerminalApi] Returns the controller instance.
     def terminal
@@ -181,13 +193,14 @@ module Square
 
     def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
                    backoff_factor: 1, environment: 'production',
-                   access_token: 'TODO: Replace', additional_headers: {},
-                   config: nil)
+                   square_version: '2020-08-26', access_token: 'TODO: Replace',
+                   additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(timeout: timeout, max_retries: max_retries,
                                     retry_interval: retry_interval,
                                     backoff_factor: backoff_factor,
                                     environment: environment,
+                                    square_version: square_version,
                                     access_token: access_token,
                                     additional_headers: additional_headers)
                 else

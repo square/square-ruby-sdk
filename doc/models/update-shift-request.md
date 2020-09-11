@@ -10,14 +10,14 @@ A request to update a `Shift` object.
 
 | Name | Type | Description |
 |  --- | --- | --- |
-| `shift` | [`Shift Hash`](/doc/models/shift.md) | A record of the hourly rate, start, and end times for a single work shift <br>for an employee. May include a record of the start and end times for breaks <br>taken during the shift. |
+| `shift` | [`Shift Hash`](/doc/models/shift.md) | A record of the hourly rate, start, and end times for a single work shift<br>for an employee. May include a record of the start and end times for breaks<br>taken during the shift. |
 
 ### Example (as JSON)
 
 ```json
 {
   "shift": {
-    "employee_id": "ormj0jJJZ5OZIzxrZYJI",
+    "team_member_id": "ormj0jJJZ5OZIzxrZYJI",
     "location_id": "PAA1RJZZKXBFG",
     "start_at": "2019-01-25T03:11:00-05:00",
     "end_at": "2019-01-25T13:11:00-05:00",

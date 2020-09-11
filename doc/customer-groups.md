@@ -37,7 +37,9 @@ def list_customer_groups(cursor: nil)
 ### Example Usage
 
 ```ruby
-result = customer_groups_api.list_customer_groups()
+cursor = 'cursor6'
+
+result = customer_groups_api.list_customer_groups(cursor: cursor)
 
 if result.success?
   puts result.data
@@ -70,8 +72,12 @@ def create_customer_group(body:)
 
 ```ruby
 body = {}
+body[:idempotency_key] = 'idempotency_key2'
 body[:group] = {}
+body[:group][:id] = 'id4'
 body[:group][:name] = 'Loyal Customers'
+body[:group][:created_at] = 'created_at2'
+body[:group][:updated_at] = 'updated_at0'
 
 result = customer_groups_api.create_customer_group(body: body)
 
@@ -172,7 +178,10 @@ def update_customer_group(group_id:,
 group_id = 'group_id0'
 body = {}
 body[:group] = {}
+body[:group][:id] = 'id4'
 body[:group][:name] = 'Loyal Customers'
+body[:group][:created_at] = 'created_at2'
+body[:group][:updated_at] = 'updated_at0'
 
 result = customer_groups_api.update_customer_group(group_id: group_id, body: body)
 

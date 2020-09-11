@@ -21,8 +21,9 @@ module Square
     # results for the original query.  See
     # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
     # for more information.
-    # @param [String] location_id Optional parameter: ID of location associated
-    # with payment.
+    # @param [String] location_id Optional parameter: Limit results to the
+    # location supplied. By default, results are returned for all locations
+    # associated with the merchant.
     # @param [String] status Optional parameter: If provided, only refunds with
     # the given status are returned. For a list of refund status values, see
     # [PaymentRefund](#type-paymentrefund).  Default: If omitted refunds are

@@ -1,5 +1,7 @@
 ## Catalog Modifier Override
 
+Options to control how to override the default behavior of the specified modifier.
+
 ### Structure
 
 `CatalogModifierOverride`
@@ -16,7 +18,7 @@
 ```json
 {
   "modifier_id": "modifier_id2",
-  "on_by_default": null
+  "on_by_default": false
 }
 ```
 

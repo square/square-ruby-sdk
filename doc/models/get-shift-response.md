@@ -12,7 +12,7 @@ the request resulted in errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `shift` | [`Shift Hash`](/doc/models/shift.md) | Optional | A record of the hourly rate, start, and end times for a single work shift <br>for an employee. May include a record of the start and end times for breaks <br>taken during the shift. |
+| `shift` | [`Shift Hash`](/doc/models/shift.md) | Optional | A record of the hourly rate, start, and end times for a single work shift<br>for an employee. May include a record of the start and end times for breaks<br>taken during the shift. |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ### Example (as JSON)
@@ -21,6 +21,7 @@ the request resulted in errors.
 {
   "shift": {
     "id": "T35HMQSN89SV4",
+    "team_member_id": "D71KRMQof6cXGUW0aAv7",
     "employee_id": "D71KRMQof6cXGUW0aAv7",
     "location_id": "PAA1RJZZKXBFG",
     "timezone": "America/New_York",

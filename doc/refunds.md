@@ -38,7 +38,7 @@ def list_payment_refunds(begin_time: nil,
 | `end_time` | `String` | Query, Optional | Timestamp for the end of the requested reporting period, in RFC 3339 format.<br><br>Default: The current time. |
 | `sort_order` | `String` | Query, Optional | The order in which results are listed.<br>- `ASC` - oldest to newest<br>- `DESC` - newest to oldest (default). |
 | `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
-| `location_id` | `String` | Query, Optional | ID of location associated with payment. |
+| `location_id` | `String` | Query, Optional | Limit results to the location supplied. By default, results are returned<br>for all locations associated with the merchant. |
 | `status` | `String` | Query, Optional | If provided, only refunds with the given status are returned.<br>For a list of refund status values, see [PaymentRefund](#type-paymentrefund).<br><br>Default: If omitted refunds are returned regardless of status. |
 | `source_type` | `String` | Query, Optional | If provided, only refunds with the given source type are returned.<br>- `CARD` - List refunds only for payments where card was specified as payment<br>source.<br><br>Default: If omitted refunds are returned regardless of source type. |
 
@@ -49,7 +49,15 @@ def list_payment_refunds(begin_time: nil,
 ### Example Usage
 
 ```ruby
-result = refunds_api.list_payment_refunds()
+begin_time = 'begin_time2'
+end_time = 'end_time2'
+sort_order = 'sort_order0'
+cursor = 'cursor6'
+location_id = 'location_id4'
+status = 'status8'
+source_type = 'source_type0'
+
+result = refunds_api.list_payment_refunds(begin_time: begin_time, end_time: end_time, sort_order: sort_order, cursor: cursor, location_id: location_id, status: status, source_type: source_type)
 
 if result.success?
   puts result.data
@@ -86,7 +94,11 @@ body[:idempotency_key] = 'a7e36d40-d24b-11e8-b568-0800200c9a66'
 body[:amount_money] = {}
 body[:amount_money][:amount] = 100
 body[:amount_money][:currency] = 'USD'
+body[:app_fee_money] = {}
+body[:app_fee_money][:amount] = 114
+body[:app_fee_money][:currency] = 'GEL'
 body[:payment_id] = 'UNOE3kv2BZwqHlJ830RCt5YCuaB'
+body[:reason] = 'reason8'
 
 result = refunds_api.refund_payment(body: body)
 
