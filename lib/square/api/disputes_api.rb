@@ -92,9 +92,6 @@ module Square
     # Square debits the disputed amount from the seller’s Square
     # account. If the Square account balance does not have
     # sufficient funds, Square debits the associated bank account.
-    # For an overview of the Disputes API, see
-    # [Overview](https://developer.squareup.com/docs/docs/disputes-api/overview)
-    # .
     # @param [String] dispute_id Required parameter: ID of the dispute you want
     # to accept.
     # @return [AcceptDisputeResponse Hash] response from the API call
@@ -245,9 +242,6 @@ module Square
     # accepts
     # HTTP multipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG,
     # and TIFF formats.
-    # For more information, see [Challenge a
-    # Dispute](https://developer.squareup.com/docs/docs/disputes-api/process-dis
-    # putes#challenge-a-dispute).
     # @param [String] dispute_id Required parameter: ID of the dispute you want
     # to upload evidence for.
     # @param [CreateDisputeEvidenceFileRequest] request Optional parameter:
@@ -307,11 +301,7 @@ module Square
       ApiResponse.new(_response, data: decoded, errors: _errors)
     end
 
-    # Uploads text to use as evidence for a dispute challenge. For more
-    # information, see
-    # [Challenge a
-    # Dispute](https://developer.squareup.com/docs/docs/disputes-api/process-dis
-    # putes#challenge-a-dispute).
+    # Uploads text to use as evidence for a dispute challenge.
     # @param [String] dispute_id Required parameter: The ID of the dispute you
     # want to upload evidence for.
     # @param [CreateDisputeEvidenceTextRequest] body Required parameter: An
@@ -359,10 +349,7 @@ module Square
     # [CreateDisputeEvidenceText](https://developer.squareup.com/docs/reference/
     # square/disputes-api/create-dispute-evidence-text) endpoints,
     # and evidence automatically provided by Square, when
-    # available. For more information, see
-    # [Challenge a
-    # Dispute](https://developer.squareup.com/docs/docs/disputes-api/process-dis
-    # putes#challenge-a-dispute).
+    # available.
     # @param [String] dispute_id Required parameter: The ID of the dispute you
     # want to submit evidence for.
     # @return [SubmitEvidenceResponse Hash] response from the API call

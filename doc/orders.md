@@ -27,8 +27,7 @@ guide.
 
 You can modify open orders using the [UpdateOrder](#endpoint-orders-updateorder) endpoint.
 
-To learn more about the Orders API, see the
-[Orders API Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
+Create Orders: [https://developer.squareup.com/docs/orders-api/create-orders](https://developer.squareup.com/docs/orders-api/create-orders)
 
 ```ruby
 def create_order(body:)
@@ -177,6 +176,8 @@ end
 Retrieves a set of [Order](#type-order)s by their IDs.
 
 If a given Order ID does not exist, the ID is ignored instead of generating an error.
+
+Retrieve orders: [https://developer.squareup.com/docs/orders-api/manage-orders#retrieve-orders](https://developer.squareup.com/docs/orders-api/manage-orders#retrieve-orders)
 
 ```ruby
 def batch_retrieve_orders(body:)
@@ -336,6 +337,8 @@ offline mode may not be transmitted to Square for up to 72 hours. Offline
 orders have a `created_at` value that reflects the time the order was created,
 not the time it was subsequently transmitted to Square.
 
+Search orders: [https://developer.squareup.com/docs/orders-api/manage-orders#search-orders](https://developer.squareup.com/docs/orders-api/manage-orders#search-orders)
+
 ```ruby
 def search_orders(body:)
 ```
@@ -409,8 +412,7 @@ identifying fields to clear.
 
 To pay for an order, please refer to the [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders) guide.
 
-To learn more about the Orders API, see the
-[Orders API Overview](https://developer.squareup.com/docs/orders-api/what-it-does).
+Update orders: [https://developer.squareup.com/docs/orders-api/manage-orders#update-orders](https://developer.squareup.com/docs/orders-api/manage-orders#update-orders)
 
 ```ruby
 def update_order(order_id:,
@@ -506,7 +508,7 @@ Any approved payments that reference the same `order_id` not specified in the
 - Be approved with [delayed capture](https://developer.squareup.com/docs/payments-api/take-payments#delayed-capture).
 Using a delayed capture payment with PayOrder will complete the approved payment.
 
-Learn how to [pay for orders with a single payment using the Payments API](https://developer.squareup.com/docs/orders-api/pay-for-orders).
+Pay for Orders: [https://developer.squareup.com/docs/orders-api/pay-for-orders](https://developer.squareup.com/docs/orders-api/pay-for-orders)
 
 ```ruby
 def pay_order(order_id:,

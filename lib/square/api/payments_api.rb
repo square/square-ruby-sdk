@@ -22,14 +22,18 @@ module Square
     # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
     # for more information.
     # @param [String] location_id Optional parameter: Limit results to the
-    # location supplied. By default, results are returned for all locations
-    # associated with the merchant.
+    # location supplied. By default, results are returned for the default (main)
+    # location associated with the merchant.
     # @param [Long] total Optional parameter: The exact amount in the
     # total_money for a `Payment`.
     # @param [String] last_4 Optional parameter: The last 4 digits of `Payment`
     # card.
     # @param [String] card_brand Optional parameter: The brand of `Payment`
     # card. For example, `VISA`
+    # @param [Integer] limit Optional parameter: Maximum number of results to be
+    # returned in a single page. It is possible to receive fewer results than
+    # the specified limit on a given page.  If the supplied value is greater
+    # than 100, at most 100 results will be returned.  Default: `100`
     # @return [ListPaymentsResponse Hash] response from the API call
     def list_payments(begin_time: nil,
                       end_time: nil,
@@ -38,7 +42,8 @@ module Square
                       location_id: nil,
                       total: nil,
                       last_4: nil,
-                      card_brand: nil)
+                      card_brand: nil,
+                      limit: nil)
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/payments'
@@ -51,7 +56,8 @@ module Square
         'location_id' => location_id,
         'total' => total,
         'last_4' => last_4,
-        'card_brand' => card_brand
+        'card_brand' => card_brand,
+        'limit' => limit
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -82,9 +88,6 @@ module Square
     # For example, tip money, whether to autocomplete the payment, or a
     # reference ID
     # to correlate this payment with another system.
-    # For more information about these
-    # payment options, see [Take
-    # Payments](https://developer.squareup.com/docs/payments-api/take-payments).
     # The `PAYMENTS_WRITE_ADDITIONAL_RECIPIENTS` OAuth permission is required
     # to enable application fees.
     # @param [CreatePaymentRequest] body Required parameter: An object
@@ -199,10 +202,7 @@ module Square
 
     # Cancels (voids) a payment. If you set `autocomplete` to false when
     # creating a payment,
-    # you can cancel the payment using this endpoint. For more information, see
-    # [Delayed
-    # Payments](https://developer.squareup.com/docs/payments-api/take-payments#d
-    # elayed-payments).
+    # you can cancel the payment using this endpoint.
     # @param [String] payment_id Required parameter: `payment_id` identifying
     # the payment to be canceled.
     # @return [CancelPaymentResponse Hash] response from the API call
@@ -240,10 +240,7 @@ module Square
     # created.
     # If you set autocomplete to false when creating a payment, you can complete
     # (capture)
-    # the payment using this endpoint. For more information, see
-    # [Delayed
-    # Payments](https://developer.squareup.com/docs/payments-api/take-payments#d
-    # elayed-payments).
+    # the payment using this endpoint.
     # @param [String] payment_id Required parameter: Unique ID identifying the
     # payment to be completed.
     # @return [CompletePaymentResponse Hash] response from the API call

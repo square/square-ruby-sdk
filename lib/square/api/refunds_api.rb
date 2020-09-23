@@ -32,6 +32,10 @@ module Square
     # with the given source type are returned. - `CARD` - List refunds only for
     # payments where card was specified as payment source.  Default: If omitted
     # refunds are returned regardless of source type.
+    # @param [Integer] limit Optional parameter: Maximum number of results to be
+    # returned in a single page. It is possible to receive fewer results than
+    # the specified limit on a given page.  If the supplied value is greater
+    # than 100, at most 100 results will be returned.  Default: `100`
     # @return [ListPaymentRefundsResponse Hash] response from the API call
     def list_payment_refunds(begin_time: nil,
                              end_time: nil,
@@ -39,7 +43,8 @@ module Square
                              cursor: nil,
                              location_id: nil,
                              status: nil,
-                             source_type: nil)
+                             source_type: nil,
+                             limit: nil)
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/refunds'
@@ -51,7 +56,8 @@ module Square
         'cursor' => cursor,
         'location_id' => location_id,
         'status' => status,
-        'source_type' => source_type
+        'source_type' => source_type,
+        'limit' => limit
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -75,9 +81,7 @@ module Square
     end
 
     # Refunds a payment. You can refund the entire payment amount or a
-    # portion of it. For more information, see
-    # [Payments and Refunds
-    # Overview](https://developer.squareup.com/docs/payments-api/overview).
+    # portion of it.
     # @param [RefundPaymentRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.

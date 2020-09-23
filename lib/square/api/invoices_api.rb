@@ -8,9 +8,6 @@ module Square
     # Returns a list of invoices for a given location. The response
     # is paginated. If truncated, the response includes a `cursor` that you
     # use in a subsequent request to fetch the next set of invoices.
-    # For more information about retrieving invoices, see [Retrieve
-    # invoices](https://developer.squareup.com/docs/docs/invoices-api/overview#r
-    # etrieve-invoices).
     # @param [String] location_id Required parameter: The ID of the location for
     # which to list invoices.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
@@ -60,8 +57,6 @@ module Square
     # A draft invoice remains in your account and no action is taken.
     # You must publish the invoice before Square can process it (send it to the
     # customer's email address or charge the customer’s card on file).
-    # For more information, see [Manage Invoices Using the Invoices
-    # API](https://developer.squareup.com/docs/docs/invoices-api/overview).
     # @param [CreateInvoiceRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -100,9 +95,6 @@ module Square
     # optionally one customer.
     # The response is paginated. If truncated, the response includes a `cursor`
     # that you use in a subsequent request to fetch the next set of invoices.
-    # For more information about retrieving invoices, see [Retrieve
-    # invoices](https://developer.squareup.com/docs/docs/invoices-api/overview#r
-    # etrieve-invoices).
     # @param [SearchInvoicesRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -217,9 +209,6 @@ module Square
     # as specified in the request.
     # There are no restrictions to updating an invoice in a draft state.
     # However, there are guidelines for updating a published invoice.
-    # For more information, see [Update an
-    # invoice](https://developer.squareup.com/docs/docs/invoices-api/overview#up
-    # date-an-invoice).
     # @param [String] invoice_id Required parameter: The id of the invoice to
     # update.
     # @param [UpdateInvoiceRequest] body Required parameter: An object
@@ -313,10 +302,6 @@ module Square
     # Square emails the invoice or `PARTIALLY_PAID` if Square charge a card on
     # file for a portion of the
     # invoice amount).
-    # For more information, see
-    # [Create and publish an
-    # invoice](https://developer.squareup.com/docs/docs/invoices-api/overview#cr
-    # eate-and-publish-an-invoice).
     # @param [String] invoice_id Required parameter: The id of the invoice to
     # publish.
     # @param [PublishInvoiceRequest] body Required parameter: An object
