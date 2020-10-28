@@ -1,16 +1,17 @@
-## Payment Options
 
-### Structure
+# Payment Options
 
-`PaymentOptions`
+## Structure
 
-### Fields
+`Payment Options`
+
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `autocomplete` | `Boolean` | Optional | Indicates whether the Payment objects created from this `TerminalCheckout` will automatically be<br>COMPLETED or left in an APPROVED state for later modification. |
+| `autocomplete` | `Boolean` | Optional | Indicates whether the Payment objects created from this `TerminalCheckout` will automatically be<br>`COMPLETED` or left in an `APPROVED` state for later modification. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

@@ -43,7 +43,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Retrieve a `Merchant` object for the given `merchant_id`.
@@ -57,7 +59,7 @@ module Square
       _query_builder << '/v2/merchants/{merchant_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'merchant_id' => merchant_id
+        'merchant_id' => { 'value' => merchant_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -77,7 +79,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

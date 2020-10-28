@@ -57,7 +57,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides the summary details for a single cash drawer shift. See
@@ -73,7 +75,7 @@ module Square
       _query_builder << '/v2/cash-drawers/shifts/{shift_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'shift_id' => shift_id
+        'shift_id' => { 'value' => shift_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -97,7 +99,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides a paginated list of events for a single cash drawer shift.
@@ -118,7 +122,7 @@ module Square
       _query_builder << '/v2/cash-drawers/shifts/{shift_id}/events'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'shift_id' => shift_id
+        'shift_id' => { 'value' => shift_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -144,7 +148,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

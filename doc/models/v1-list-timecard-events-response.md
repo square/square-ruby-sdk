@@ -1,16 +1,17 @@
-## V1 List Timecard Events Response
 
-### Structure
+# V1 List Timecard Events Response
 
-`V1ListTimecardEventsResponse`
+## Structure
 
-### Fields
+`V1 List Timecard Events Response`
+
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `items` | [`Array<V1 Timecard Event Hash>`](/doc/models/v1-timecard-event.md) | Optional | - |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

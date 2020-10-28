@@ -49,7 +49,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates a draft [invoice](#type-invoice)
@@ -85,7 +87,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Searches for invoices from a location specified in
@@ -123,7 +127,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Deletes the specified invoice. When an invoice is deleted, the
@@ -144,7 +150,7 @@ module Square
       _query_builder << '/v2/invoices/{invoice_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'invoice_id' => invoice_id
+        'invoice_id' => { 'value' => invoice_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -168,7 +174,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Retrieves an invoice by invoice ID.
@@ -181,7 +189,7 @@ module Square
       _query_builder << '/v2/invoices/{invoice_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'invoice_id' => invoice_id
+        'invoice_id' => { 'value' => invoice_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -201,7 +209,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Updates an invoice by modifying field values, clearing field values, or
@@ -222,7 +232,7 @@ module Square
       _query_builder << '/v2/invoices/{invoice_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'invoice_id' => invoice_id
+        'invoice_id' => { 'value' => invoice_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -244,7 +254,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Cancels an invoice. The seller cannot collect payments for
@@ -264,7 +276,7 @@ module Square
       _query_builder << '/v2/invoices/{invoice_id}/cancel'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'invoice_id' => invoice_id
+        'invoice_id' => { 'value' => invoice_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -286,7 +298,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Publishes the specified draft invoice.
@@ -315,7 +329,7 @@ module Square
       _query_builder << '/v2/invoices/{invoice_id}/publish'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'invoice_id' => invoice_id
+        'invoice_id' => { 'value' => invoice_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -337,7 +351,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

@@ -10,7 +10,7 @@ module Square
     # profiles become available
     # for the listing operation in well under 30 seconds. Occasionally,
     # propagation of the new or updated
-    # profiles can take closer to one minute or longer, espeically during
+    # profiles can take closer to one minute or longer, especially during
     # network incidents and outages.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
@@ -53,7 +53,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates a new customer for a business, which can have associated cards on
@@ -94,11 +96,13 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
-    # Searches the customer profiles associated with a Square account using
-    # one or more supported query filters.
+    # Searches the customer profiles associated with a Square account using a
+    # supported query filter.
     # Calling `SearchCustomers` without any explicit query filter returns all
     # customer profiles ordered alphabetically based on `given_name` and
     # `family_name`.
@@ -106,7 +110,7 @@ module Square
     # profiles become available
     # for the search operation in well under 30 seconds. Occasionally,
     # propagation of the new or updated
-    # profiles can take closer to one minute or longer, espeically during
+    # profiles can take closer to one minute or longer, especially during
     # network incidents and outages.
     # @param [SearchCustomersRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
@@ -136,7 +140,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Deletes a customer from a business, along with any linked cards on file.
@@ -153,7 +159,7 @@ module Square
       _query_builder << '/v2/customers/{customer_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'customer_id' => customer_id
+        'customer_id' => { 'value' => customer_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -173,7 +179,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns details for a single customer.
@@ -186,7 +194,7 @@ module Square
       _query_builder << '/v2/customers/{customer_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'customer_id' => customer_id
+        'customer_id' => { 'value' => customer_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -206,7 +214,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Updates the details of an existing customer. When two profiles are merged
@@ -216,9 +226,9 @@ module Square
     # You cannot edit a customer's cards on file with this endpoint. To make
     # changes
     # to a card on file, you must delete the existing card on file with the
-    # [DeleteCustomerCard](#endpoint-deletecustomercard) endpoint, then create a
-    # new one with the
-    # [CreateCustomerCard](#endpoint-createcustomercard) endpoint.
+    # [DeleteCustomerCard](#endpoint-Customers-deletecustomercard) endpoint,
+    # then create a new one with the
+    # [CreateCustomerCard](#endpoint-Customers-createcustomercard) endpoint.
     # @param [String] customer_id Required parameter: The ID of the customer to
     # update.
     # @param [UpdateCustomerRequest] body Required parameter: An object
@@ -232,7 +242,7 @@ module Square
       _query_builder << '/v2/customers/{customer_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'customer_id' => customer_id
+        'customer_id' => { 'value' => customer_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -254,7 +264,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Adds a card on file to an existing customer.
@@ -275,7 +287,7 @@ module Square
       _query_builder << '/v2/customers/{customer_id}/cards'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'customer_id' => customer_id
+        'customer_id' => { 'value' => customer_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -297,7 +309,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Removes a card on file from a customer.
@@ -313,8 +327,8 @@ module Square
       _query_builder << '/v2/customers/{customer_id}/cards/{card_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'customer_id' => customer_id,
-        'card_id' => card_id
+        'customer_id' => { 'value' => customer_id, 'encode' => true },
+        'card_id' => { 'value' => card_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -334,7 +348,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Removes a group membership from a customer.
@@ -352,8 +368,8 @@ module Square
       _query_builder << '/v2/customers/{customer_id}/groups/{group_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'customer_id' => customer_id,
-        'group_id' => group_id
+        'customer_id' => { 'value' => customer_id, 'encode' => true },
+        'group_id' => { 'value' => group_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -373,7 +389,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Adds a group membership to a customer.
@@ -391,8 +409,8 @@ module Square
       _query_builder << '/v2/customers/{customer_id}/groups/{group_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'customer_id' => customer_id,
-        'group_id' => group_id
+        'customer_id' => { 'value' => customer_id, 'encode' => true },
+        'group_id' => { 'value' => group_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -412,7 +430,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

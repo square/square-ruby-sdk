@@ -44,7 +44,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns a set of objects based on the provided ID.
@@ -83,7 +85,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates or updates up to 10,000 target objects based on the provided
@@ -128,10 +132,12 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
-    # Uploads an image file to be represented by an
+    # Uploads an image file to be represented by a
     # [CatalogImage](#type-catalogimage) object linked to an existing
     # [CatalogObject](#type-catalogobject) instance. A call to this endpoint can
     # upload an image, link an image to
@@ -139,10 +145,6 @@ module Square
     # This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data
     # requests with a JSON part and an image file part in
     # JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
-    # Additional information and an example cURL request can be found in the
-    # [Create a Catalog Image
-    # recipe](https://developer.squareup.com/docs/more-apis/catalog/cookbook/cre
-    # ate-catalog-images).
     # @param [CreateCatalogImageRequest] request Optional parameter: Example:
     # @param [File | UploadIO] image_file Optional parameter: Example:
     # @return [CreateCatalogImageResponse Hash] response from the API call
@@ -191,7 +193,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Retrieves information about the Square Catalog API, such as batch size
@@ -219,7 +223,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns a list of [CatalogObject](#type-catalogobject)s that includes
@@ -274,7 +280,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates or updates the target [CatalogObject](#type-catalogobject).
@@ -306,7 +314,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Deletes a single [CatalogObject](#type-catalogobject) based on the
@@ -328,7 +338,7 @@ module Square
       _query_builder << '/v2/catalog/object/{object_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'object_id' => object_id
+        'object_id' => { 'value' => object_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -348,7 +358,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns a single [CatalogItem](#type-catalogitem) as a
@@ -364,12 +376,12 @@ module Square
     # @param [Boolean] include_related_objects Optional parameter: If `true`,
     # the response will include additional objects that are related to the
     # requested object, as follows:  If the `object` field of the response
-    # contains a CatalogItem, its associated CatalogCategory, CatalogTax
-    # objects, CatalogImages and CatalogModifierLists will be returned in the
+    # contains a `CatalogItem`, its associated `CatalogCategory`, `CatalogTax`,
+    # `CatalogImage` and `CatalogModifierList` objects will be returned in the
     # `related_objects` field of the response. If the `object` field of the
-    # response contains a CatalogItemVariation, its parent CatalogItem will be
-    # returned in the `related_objects` field of the response.  Default value:
-    # `false`
+    # response contains a `CatalogItemVariation`, its parent `CatalogItem` will
+    # be returned in the `related_objects` field of the response.  Default
+    # value: `false`
     # @return [RetrieveCatalogObjectResponse Hash] response from the API call
     def retrieve_catalog_object(object_id:,
                                 include_related_objects: false)
@@ -378,7 +390,7 @@ module Square
       _query_builder << '/v2/catalog/object/{object_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'object_id' => object_id
+        'object_id' => { 'value' => object_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -402,7 +414,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Searches for [CatalogObject](#type-CatalogObject) of any types against
@@ -450,7 +464,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Searches for catalog items or item variations by matching supported search
@@ -498,7 +514,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Updates the [CatalogModifierList](#type-catalogmodifierlist) objects
@@ -532,7 +550,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Updates the [CatalogTax](#type-catalogtax) objects that apply to the
@@ -566,7 +586,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

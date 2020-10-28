@@ -1,17 +1,18 @@
-## Device
 
-### Structure
+# Device
+
+## Structure
 
 `Device`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `String` | Optional | The device's Square-issued ID. |
 | `name` | `String` | Optional | The device's merchant-specified name. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

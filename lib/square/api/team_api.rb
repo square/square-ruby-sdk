@@ -8,8 +8,8 @@ module Square
     # Creates a single `TeamMember` object. The `TeamMember` will be returned on
     # successful creates.
     # You must provide the following values in your request to this endpoint:
-    # - `first_name`
-    # - `last_name`
+    # - `given_name`
+    # - `family_name`
     # Learn about [Troubleshooting the Teams
     # API](https://developer.squareup.com/docs/docs/team/troubleshooting#createt
     # eammember).
@@ -41,7 +41,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates multiple `TeamMember` objects. The created `TeamMember` objects
@@ -82,7 +84,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Updates multiple `TeamMember` objects. The updated `TeamMember` objects
@@ -123,13 +127,15 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns a paginated list of `TeamMember` objects for a business.
     # The list to be returned can be filtered by:
     # - location IDs **and**
-    # - `is_active`
+    # - `status`
     # @param [SearchTeamMembersRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -158,10 +164,12 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
-    # Retrieve a `TeamMember` object for the given `TeamMember.id`
+    # Retrieve a `TeamMember` object for the given `TeamMember.id`.
     # Learn about [Troubleshooting the Teams
     # API](https://developer.squareup.com/docs/docs/team/troubleshooting#retriev
     # eteammember).
@@ -174,7 +182,7 @@ module Square
       _query_builder << '/v2/team-members/{team_member_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'team_member_id' => team_member_id
+        'team_member_id' => { 'value' => team_member_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -194,7 +202,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Updates a single `TeamMember` object. The `TeamMember` will be returned on
@@ -215,7 +225,7 @@ module Square
       _query_builder << '/v2/team-members/{team_member_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'team_member_id' => team_member_id
+        'team_member_id' => { 'value' => team_member_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -237,7 +247,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Retrieve a `WageSetting` object for a team member specified
@@ -254,7 +266,7 @@ module Square
       _query_builder << '/v2/team-members/{team_member_id}/wage-setting'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'team_member_id' => team_member_id
+        'team_member_id' => { 'value' => team_member_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -274,7 +286,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates or updates a `WageSetting` object. The object is created if a
@@ -298,7 +312,7 @@ module Square
       _query_builder << '/v2/team-members/{team_member_id}/wage-setting'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'team_member_id' => team_member_id
+        'team_member_id' => { 'value' => team_member_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -320,7 +334,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

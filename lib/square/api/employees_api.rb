@@ -47,7 +47,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # RetrieveEmployee
@@ -61,7 +63,7 @@ module Square
       _query_builder << '/v2/employees/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => id
+        'id' => { 'value' => id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -81,7 +83,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

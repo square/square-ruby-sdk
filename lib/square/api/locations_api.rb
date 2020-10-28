@@ -6,8 +6,7 @@ module Square
     end
 
     # Provides information of all locations of a business.
-    # Most other Connect API endpoints have a required `location_id` path
-    # parameter.
+    # Many Square API endpoints require a `location_id` parameter.
     # The `id` field of the [`Location`](#type-location) objects returned by
     # this
     # endpoint correspond to that `location_id` parameter.
@@ -34,12 +33,12 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates a location.
-    # For more information about locations, see [Locations API
-    # Overview](https://developer.squareup.com/docs/locations-api).
     # @param [CreateLocationRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -68,14 +67,14 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Retrieves details of a location. You can specify "main"
     # as the location ID to retrieve details of the
-    # main location. For more information,
-    # see [Locations API
-    # Overview](https://developer.squareup.com/docs/docs/locations-api).
+    # main location.
     # @param [String] location_id Required parameter: The ID of the location to
     # retrieve. If you specify the string "main", then the endpoint returns the
     # main location.
@@ -86,7 +85,7 @@ module Square
       _query_builder << '/v2/locations/{location_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -106,7 +105,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Updates a location.
@@ -123,7 +124,7 @@ module Square
       _query_builder << '/v2/locations/{location_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -145,7 +146,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

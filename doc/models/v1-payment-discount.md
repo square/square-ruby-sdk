@@ -1,12 +1,13 @@
-## V1 Payment Discount
+
+# V1 Payment Discount
 
 V1PaymentDiscount
 
-### Structure
+## Structure
 
-`V1PaymentDiscount`
+`V1 Payment Discount`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
@@ -14,7 +15,7 @@ V1PaymentDiscount
 | `applied_money` | [`V1 Money Hash`](/doc/models/v1-money.md) | Optional | - |
 | `discount_id` | `String` | Optional | The ID of the applied discount, if available. Discounts applied in older versions of Square Register might not have an ID. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

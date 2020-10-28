@@ -42,7 +42,7 @@ module Square
       _query_builder << '/v2/locations/{location_id}/refunds'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -69,7 +69,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Lists transactions for a particular location.
@@ -106,7 +108,7 @@ module Square
       _query_builder << '/v2/locations/{location_id}/transactions'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -133,7 +135,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Charges a card represented by a card nonce or a customer's card on file.
@@ -169,7 +173,7 @@ module Square
       _query_builder << '/v2/locations/{location_id}/transactions'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -191,7 +195,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Retrieves details for a single transaction.
@@ -208,8 +214,8 @@ module Square
       _query_builder << '/v2/locations/{location_id}/transactions/{transaction_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'transaction_id' => transaction_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'transaction_id' => { 'value' => transaction_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -229,7 +235,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Captures a transaction that was created with the
@@ -250,8 +258,8 @@ module Square
       _query_builder << '/v2/locations/{location_id}/transactions/{transaction_id}/capture'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'transaction_id' => transaction_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'transaction_id' => { 'value' => transaction_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -271,7 +279,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Initiates a refund for a previously charged tender.
@@ -299,8 +309,8 @@ module Square
       _query_builder << '/v2/locations/{location_id}/transactions/{transaction_id}/refund'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'transaction_id' => transaction_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'transaction_id' => { 'value' => transaction_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -322,7 +332,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Cancels a transaction that was created with the [Charge](#endpoint-charge)
@@ -342,8 +354,8 @@ module Square
       _query_builder << '/v2/locations/{location_id}/transactions/{transaction_id}/void'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'transaction_id' => transaction_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'transaction_id' => { 'value' => transaction_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -363,7 +375,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

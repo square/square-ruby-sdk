@@ -18,7 +18,7 @@ module Square
       _query_builder << '/v1/{location_id}/bank-accounts'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -38,7 +38,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides non-confidential details for a merchant's associated bank
@@ -58,8 +60,8 @@ module Square
       _query_builder << '/v1/{location_id}/bank-accounts/{bank_account_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'bank_account_id' => bank_account_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'bank_account_id' => { 'value' => bank_account_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -79,7 +81,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides summary information for a merchant's online store orders.
@@ -102,7 +106,7 @@ module Square
       _query_builder << '/v1/{location_id}/orders'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -128,7 +132,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides comprehensive information for a single online store order,
@@ -146,8 +152,8 @@ module Square
       _query_builder << '/v1/{location_id}/orders/{order_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'order_id' => order_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'order_id' => { 'value' => order_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -167,7 +173,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Updates the details of an online store order. Every update you perform on
@@ -189,8 +197,8 @@ module Square
       _query_builder << '/v1/{location_id}/orders/{order_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'order_id' => order_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'order_id' => { 'value' => order_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -212,7 +220,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides summary information for all payments taken for a given
@@ -260,7 +270,7 @@ module Square
       _query_builder << '/v1/{location_id}/payments'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -289,7 +299,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides comprehensive information for a single payment.
@@ -307,8 +319,8 @@ module Square
       _query_builder << '/v1/{location_id}/payments/{payment_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'payment_id' => payment_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'payment_id' => { 'value' => payment_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -328,7 +340,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides the details for all refunds initiated by a merchant or any of the
@@ -366,7 +380,7 @@ module Square
       _query_builder << '/v1/{location_id}/refunds'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -394,7 +408,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Issues a refund for a previously processed payment. You must issue
@@ -420,7 +436,7 @@ module Square
       _query_builder << '/v1/{location_id}/refunds'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -442,7 +458,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides summary information for all deposits and withdrawals
@@ -485,7 +503,7 @@ module Square
       _query_builder << '/v1/{location_id}/settlements'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -514,7 +532,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides comprehensive information for a single settlement.
@@ -545,8 +565,8 @@ module Square
       _query_builder << '/v1/{location_id}/settlements/{settlement_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'settlement_id' => settlement_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'settlement_id' => { 'value' => settlement_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -566,7 +586,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

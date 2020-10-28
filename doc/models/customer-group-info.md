@@ -1,19 +1,20 @@
-## Customer Group Info
+
+# Customer Group Info
 
 Contains some brief information about a Customer Group with its identifier included.
 
-### Structure
+## Structure
 
-`CustomerGroupInfo`
+`Customer Group Info`
 
-### Fields
+## Fields
 
 | Name | Type | Description |
 |  --- | --- | --- |
 | `id` | `String` | The ID of the Customer Group. |
 | `name` | `String` | The name of the Customer Group. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

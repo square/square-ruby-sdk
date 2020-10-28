@@ -1,19 +1,20 @@
-## V1 Update Modifier List Request
+
+# V1 Update Modifier List Request
 
 V1UpdateModifierListRequest
 
-### Structure
+## Structure
 
-`V1UpdateModifierListRequest`
+`V1 Update Modifier List Request`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `String` | Optional | The modifier list's name. |
 | `selection_type` | [`String (V1 Update Modifier List Request Selection Type)`](/doc/models/v1-update-modifier-list-request-selection-type.md) | Optional | - |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {
