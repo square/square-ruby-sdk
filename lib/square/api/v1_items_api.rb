@@ -16,7 +16,7 @@ module Square
       _query_builder << '/v1/{location_id}/categories'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -36,7 +36,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates an item category.
@@ -54,7 +56,7 @@ module Square
       _query_builder << '/v1/{location_id}/categories'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -76,7 +78,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Deletes an existing item category.
@@ -96,8 +100,8 @@ module Square
       _query_builder << '/v1/{location_id}/categories/{category_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'category_id' => category_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'category_id' => { 'value' => category_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -117,7 +121,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Modifies the details of an existing item category.
@@ -138,8 +144,8 @@ module Square
       _query_builder << '/v1/{location_id}/categories/{category_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'category_id' => category_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'category_id' => { 'value' => category_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -161,7 +167,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Lists all the discounts for a given location.
@@ -175,7 +183,7 @@ module Square
       _query_builder << '/v1/{location_id}/discounts'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -195,7 +203,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates a discount.
@@ -213,7 +223,7 @@ module Square
       _query_builder << '/v1/{location_id}/discounts'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -235,7 +245,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Deletes an existing discount.
@@ -255,8 +267,8 @@ module Square
       _query_builder << '/v1/{location_id}/discounts/{discount_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'discount_id' => discount_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'discount_id' => { 'value' => discount_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -276,7 +288,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Modifies the details of an existing discount.
@@ -297,8 +311,8 @@ module Square
       _query_builder << '/v1/{location_id}/discounts/{discount_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'discount_id' => discount_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'discount_id' => { 'value' => discount_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -320,7 +334,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Lists all the fees (taxes) for a given location.
@@ -334,7 +350,7 @@ module Square
       _query_builder << '/v1/{location_id}/fees'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -354,7 +370,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates a fee (tax).
@@ -372,7 +390,7 @@ module Square
       _query_builder << '/v1/{location_id}/fees'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -394,7 +412,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Deletes an existing fee (tax).
@@ -413,8 +433,8 @@ module Square
       _query_builder << '/v1/{location_id}/fees/{fee_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'fee_id' => fee_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'fee_id' => { 'value' => fee_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -434,7 +454,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Modifies the details of an existing fee (tax).
@@ -454,8 +476,8 @@ module Square
       _query_builder << '/v1/{location_id}/fees/{fee_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'fee_id' => fee_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'fee_id' => { 'value' => fee_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -477,7 +499,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides inventory information for all inventory-enabled item
@@ -499,7 +523,7 @@ module Square
       _query_builder << '/v1/{location_id}/inventory'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -524,7 +548,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Adjusts the current available inventory of an item variation.
@@ -545,8 +571,8 @@ module Square
       _query_builder << '/v1/{location_id}/inventory/{variation_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'variation_id' => variation_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'variation_id' => { 'value' => variation_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -568,7 +594,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides summary information of all items for a given location.
@@ -586,7 +614,7 @@ module Square
       _query_builder << '/v1/{location_id}/items'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -610,7 +638,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates an item and at least one variation for it.
@@ -638,7 +668,7 @@ module Square
       _query_builder << '/v1/{location_id}/items'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -660,7 +690,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Deletes an existing item and all item variations associated with it.
@@ -680,8 +712,8 @@ module Square
       _query_builder << '/v1/{location_id}/items/{item_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'item_id' => item_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'item_id' => { 'value' => item_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -701,7 +733,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides the details for a single item, including associated modifier
@@ -718,8 +752,8 @@ module Square
       _query_builder << '/v1/{location_id}/items/{item_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'item_id' => item_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'item_id' => { 'value' => item_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -739,7 +773,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Modifies the core details of an existing item.
@@ -760,8 +796,8 @@ module Square
       _query_builder << '/v1/{location_id}/items/{item_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'item_id' => item_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'item_id' => { 'value' => item_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -783,7 +819,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Removes a fee assocation from an item so the fee is no longer
@@ -803,9 +841,9 @@ module Square
       _query_builder << '/v1/{location_id}/items/{item_id}/fees/{fee_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'item_id' => item_id,
-        'fee_id' => fee_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'item_id' => { 'value' => item_id, 'encode' => true },
+        'fee_id' => { 'value' => fee_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -825,7 +863,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Associates a fee with an item so the fee is automatically applied to
@@ -845,9 +885,9 @@ module Square
       _query_builder << '/v1/{location_id}/items/{item_id}/fees/{fee_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'item_id' => item_id,
-        'fee_id' => fee_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'item_id' => { 'value' => item_id, 'encode' => true },
+        'fee_id' => { 'value' => fee_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -867,7 +907,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Removes a modifier list association from an item so the modifier
@@ -888,9 +930,9 @@ module Square
       _query_builder << '/v1/{location_id}/items/{item_id}/modifier-lists/{modifier_list_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'modifier_list_id' => modifier_list_id,
-        'item_id' => item_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'modifier_list_id' => { 'value' => modifier_list_id, 'encode' => true },
+        'item_id' => { 'value' => item_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -910,7 +952,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Associates a modifier list with an item so the associated modifier
@@ -931,9 +975,9 @@ module Square
       _query_builder << '/v1/{location_id}/items/{item_id}/modifier-lists/{modifier_list_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'modifier_list_id' => modifier_list_id,
-        'item_id' => item_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'modifier_list_id' => { 'value' => modifier_list_id, 'encode' => true },
+        'item_id' => { 'value' => item_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -953,7 +997,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates an item variation for an existing item.
@@ -973,8 +1019,8 @@ module Square
       _query_builder << '/v1/{location_id}/items/{item_id}/variations'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'item_id' => item_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'item_id' => { 'value' => item_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -996,7 +1042,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Deletes an existing item variation from an item.
@@ -1019,9 +1067,9 @@ module Square
       _query_builder << '/v1/{location_id}/items/{item_id}/variations/{variation_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'item_id' => item_id,
-        'variation_id' => variation_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'item_id' => { 'value' => item_id, 'encode' => true },
+        'variation_id' => { 'value' => variation_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -1041,7 +1089,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Modifies the details of an existing item variation.
@@ -1065,9 +1115,9 @@ module Square
       _query_builder << '/v1/{location_id}/items/{item_id}/variations/{variation_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'item_id' => item_id,
-        'variation_id' => variation_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'item_id' => { 'value' => item_id, 'encode' => true },
+        'variation_id' => { 'value' => variation_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -1089,7 +1139,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Lists all the modifier lists for a given location.
@@ -1103,7 +1155,7 @@ module Square
       _query_builder << '/v1/{location_id}/modifier-lists'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -1123,7 +1175,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates an item modifier list and at least 1 modifier option for it.
@@ -1141,7 +1195,7 @@ module Square
       _query_builder << '/v1/{location_id}/modifier-lists'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -1163,7 +1217,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Deletes an existing item modifier list and all modifier options
@@ -1184,8 +1240,8 @@ module Square
       _query_builder << '/v1/{location_id}/modifier-lists/{modifier_list_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'modifier_list_id' => modifier_list_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'modifier_list_id' => { 'value' => modifier_list_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -1205,7 +1261,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides the details for a single modifier list.
@@ -1222,8 +1280,8 @@ module Square
       _query_builder << '/v1/{location_id}/modifier-lists/{modifier_list_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'modifier_list_id' => modifier_list_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'modifier_list_id' => { 'value' => modifier_list_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -1243,7 +1301,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Modifies the details of an existing item modifier list.
@@ -1264,8 +1324,8 @@ module Square
       _query_builder << '/v1/{location_id}/modifier-lists/{modifier_list_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'modifier_list_id' => modifier_list_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'modifier_list_id' => { 'value' => modifier_list_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -1287,7 +1347,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates an item modifier option and adds it to a modifier list.
@@ -1308,8 +1370,8 @@ module Square
       _query_builder << '/v1/{location_id}/modifier-lists/{modifier_list_id}/modifier-options'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'modifier_list_id' => modifier_list_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'modifier_list_id' => { 'value' => modifier_list_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -1331,7 +1393,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Deletes an existing item modifier option from a modifier list.
@@ -1354,9 +1418,9 @@ module Square
       _query_builder << '/v1/{location_id}/modifier-lists/{modifier_list_id}/modifier-options/{modifier_option_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'modifier_list_id' => modifier_list_id,
-        'modifier_option_id' => modifier_option_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'modifier_list_id' => { 'value' => modifier_list_id, 'encode' => true },
+        'modifier_option_id' => { 'value' => modifier_option_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -1376,7 +1440,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Modifies the details of an existing item modifier option.
@@ -1400,9 +1466,9 @@ module Square
       _query_builder << '/v1/{location_id}/modifier-lists/{modifier_list_id}/modifier-options/{modifier_option_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'modifier_list_id' => modifier_list_id,
-        'modifier_option_id' => modifier_option_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'modifier_list_id' => { 'value' => modifier_list_id, 'encode' => true },
+        'modifier_option_id' => { 'value' => modifier_option_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -1424,7 +1490,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Lists all Favorites pages (in Square Point of Sale) for a given
@@ -1439,7 +1507,7 @@ module Square
       _query_builder << '/v1/{location_id}/pages'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -1459,7 +1527,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates a Favorites page in Square Point of Sale.
@@ -1477,7 +1547,7 @@ module Square
       _query_builder << '/v1/{location_id}/pages'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -1499,7 +1569,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Deletes an existing Favorites page and all of its cells.
@@ -1518,8 +1590,8 @@ module Square
       _query_builder << '/v1/{location_id}/pages/{page_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'page_id' => page_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'page_id' => { 'value' => page_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -1539,7 +1611,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Modifies the details of a Favorites page in Square Point of Sale.
@@ -1560,8 +1634,8 @@ module Square
       _query_builder << '/v1/{location_id}/pages/{page_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'page_id' => page_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'page_id' => { 'value' => page_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -1583,7 +1657,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Deletes a cell from a Favorites page in Square Point of Sale.
@@ -1610,8 +1686,8 @@ module Square
       _query_builder << '/v1/{location_id}/pages/{page_id}/cells'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'page_id' => page_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'page_id' => { 'value' => page_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -1636,7 +1712,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Modifies a cell of a Favorites page in Square Point of Sale.
@@ -1657,8 +1735,8 @@ module Square
       _query_builder << '/v1/{location_id}/pages/{page_id}/cells'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'page_id' => page_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'page_id' => { 'value' => page_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -1680,7 +1758,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

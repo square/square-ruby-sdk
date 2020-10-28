@@ -36,17 +36,22 @@ module Square
       # Return if there are no parameters to replace.
       return query_builder if parameters.nil?
 
-      # Iterate and append parameters.
-      parameters.each do |key, value|
-        replace_value = ''
-
-        if value.nil?
+      parameters.each do |key, val|
+        if val.nil?
           replace_value = ''
-        elsif value.instance_of? Array
-          value.map! { |element| CGI.escape(element.to_s) }
-          replace_value = value.join('/')
+        elsif val['value'].instance_of? Array
+          if val['encode'] == true
+            val['value'].map! { |element| CGI.escape(element.to_s) }
+          else
+            val['value'].map!(&:to_s)
+          end
+          replace_value = val['value'].join('/')
         else
-          replace_value = CGI.escape(value.to_s)
+          replace_value = if val['encode'] == true
+                            CGI.escape(val['value'].to_s)
+                          else
+                            val['value'].to_s
+                          end
         end
 
         # Find the template parameter and replace it with its value.

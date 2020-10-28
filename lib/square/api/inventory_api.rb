@@ -16,7 +16,7 @@ module Square
       _query_builder << '/v2/inventory/adjustment/{adjustment_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'adjustment_id' => adjustment_id
+        'adjustment_id' => { 'value' => adjustment_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -36,7 +36,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Applies adjustments and counts to the provided item quantities.
@@ -71,7 +73,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns historical physical counts and adjustments based on the
@@ -108,7 +112,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns current counts for the provided
@@ -149,7 +155,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns the [InventoryPhysicalCount](#type-inventoryphysicalcount)
@@ -163,7 +171,7 @@ module Square
       _query_builder << '/v2/inventory/physical-count/{physical_count_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'physical_count_id' => physical_count_id
+        'physical_count_id' => { 'value' => physical_count_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -183,7 +191,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Retrieves the current calculated stock count for a given
@@ -209,7 +219,7 @@ module Square
       _query_builder << '/v2/inventory/{catalog_object_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'catalog_object_id' => catalog_object_id
+        'catalog_object_id' => { 'value' => catalog_object_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -234,7 +244,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns a set of physical counts and inventory adjustments for the
@@ -265,7 +277,7 @@ module Square
       _query_builder << '/v2/inventory/{catalog_object_id}/changes'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'catalog_object_id' => catalog_object_id
+        'catalog_object_id' => { 'value' => catalog_object_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -290,7 +302,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

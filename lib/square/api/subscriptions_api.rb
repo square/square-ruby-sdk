@@ -40,7 +40,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Searches for subscriptions.
@@ -88,7 +90,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Retrieves a subscription.
@@ -101,7 +105,7 @@ module Square
       _query_builder << '/v2/subscriptions/{subscription_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'subscription_id' => subscription_id
+        'subscription_id' => { 'value' => subscription_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -121,7 +125,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Updates a subscription. You can set, modify, and clear the
@@ -139,7 +145,7 @@ module Square
       _query_builder << '/v2/subscriptions/{subscription_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'subscription_id' => subscription_id
+        'subscription_id' => { 'value' => subscription_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -161,7 +167,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Sets the `canceled_date` field to the end of the active billing period.
@@ -175,7 +183,7 @@ module Square
       _query_builder << '/v2/subscriptions/{subscription_id}/cancel'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'subscription_id' => subscription_id
+        'subscription_id' => { 'value' => subscription_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -195,7 +203,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Lists all events for a specific subscription.
@@ -220,7 +230,7 @@ module Square
       _query_builder << '/v2/subscriptions/{subscription_id}/events'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'subscription_id' => subscription_id
+        'subscription_id' => { 'value' => subscription_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -245,7 +255,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

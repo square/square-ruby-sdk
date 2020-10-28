@@ -50,7 +50,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns details of a specific dispute.
@@ -63,7 +65,7 @@ module Square
       _query_builder << '/v2/disputes/{dispute_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'dispute_id' => dispute_id
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -83,7 +85,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Accepts loss on a dispute. Square returns
@@ -101,7 +105,7 @@ module Square
       _query_builder << '/v2/disputes/{dispute_id}/accept'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'dispute_id' => dispute_id
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -121,7 +125,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns a list of evidence associated with a dispute.
@@ -133,7 +139,7 @@ module Square
       _query_builder << '/v2/disputes/{dispute_id}/evidence'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'dispute_id' => dispute_id
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -153,7 +159,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Removes specified evidence from a dispute.
@@ -174,8 +182,8 @@ module Square
       _query_builder << '/v2/disputes/{dispute_id}/evidence/{evidence_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'dispute_id' => dispute_id,
-        'evidence_id' => evidence_id
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true },
+        'evidence_id' => { 'value' => evidence_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -195,7 +203,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns the specific evidence metadata associated with a specific dispute.
@@ -214,8 +224,8 @@ module Square
       _query_builder << '/v2/disputes/{dispute_id}/evidence/{evidence_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'dispute_id' => dispute_id,
-        'evidence_id' => evidence_id
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true },
+        'evidence_id' => { 'value' => evidence_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -235,7 +245,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Uploads a file to use as evidence in a dispute challenge. The endpoint
@@ -256,7 +268,7 @@ module Square
       _query_builder << '/v2/disputes/{dispute_id}/evidence_file'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'dispute_id' => dispute_id
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -298,7 +310,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Uploads text to use as evidence for a dispute challenge.
@@ -315,7 +329,7 @@ module Square
       _query_builder << '/v2/disputes/{dispute_id}/evidence_text'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'dispute_id' => dispute_id
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -337,7 +351,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Submits evidence to the cardholder's bank.
@@ -359,7 +375,7 @@ module Square
       _query_builder << '/v2/disputes/{dispute_id}/submit-evidence'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'dispute_id' => dispute_id
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -379,7 +395,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

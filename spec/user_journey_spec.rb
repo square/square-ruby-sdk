@@ -121,11 +121,8 @@ describe "UserJourney" do
 
       # list
       response = sq.customers.list_customers
-      if response.data != nil
-        assert_equal response.data.to_h.keys, %i[customers]
-        assert_equal response.status_code, 200
-      end
-
+      assert_equal response.data.to_h.keys, %i[customers]
+      assert_equal response.status_code, 200
 
       # update
       response = sq.customers.update_customer(customer_id: created_customer[:id], body: customer2)

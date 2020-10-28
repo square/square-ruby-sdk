@@ -1,64 +1,99 @@
-# Client
 
-## Overview
+# Client Class Documentation
 
-To initialize and authenticate the API client, the following parameters need to be passed.
+The following parameters are configurable for the API Client.
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
+| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2020-10-28'` |
 | `access_token` | `String` | OAuth 2.0 Access Token |
-| `timeout` | `Float` | The value to use for connection timeout <br> **Default: 60.0** |
+| `environment` | `string` | The API environment. <br> **Default: `production`** |
+| `access_token` | `String` | OAuth 2.0 Access Token |
+| `timeout` | `Float` | The value to use for connection timeout. <br> **Default: 60** |
 | `max_retries` | `Integer` | The number of times to retry an endpoint call if it fails. <br> **Default: 0** |
-| `retry_interval` | `Float` | Pause in seconds between retries. <br> **Default: 1.0** |
-| `backoff_factor` | `Float` | The amount to multiply each successive retry's interval amount by in order to provide backoff <br> **Default: 1.0** |
+| `retry_interval` | `Float` | Pause in seconds between retries. <br> **Default: 1** |
+| `backoff_factor` | `Float` | The amount to multiply each successive retry's interval amount by in order to provide backoff. <br> **Default: 1** |
+| `additional_headers` | `String` | Additional headers to add to each API request |
 
-The API client can be initialized using a Configuration object as following.
+The API client can be initialized as following.
 
 ```ruby
 client = Square::Client.new(
+  square_version: '2020-10-28',
   access_token: 'AccessToken',
+  environment: 'production',
 )
 ```
 
-## Available APIs
+API calls return an `ApiResponse` object that includes the following fields:
 
-| API | Instance |
-| --- | --- |
-| [Apple Pay](apple-pay.md) | ```apple_pay_api = client.apple_pay``` |
-| [Bank Accounts](bank-accounts.md) | ```bank_accounts_api = client.bank_accounts``` |
-| [Cash Drawers](cash-drawers.md) | ```cash_drawers_api = client.cash_drawers``` |
-| [Catalog](catalog.md) | ```catalog_api = client.catalog``` |
-| [Checkout](checkout.md) | ```checkout_api = client.checkout``` |
-| [Customer Groups](customer-groups.md) | ```customer_groups_api = client.customer_groups``` |
-| [Customer Segments](customer-segments.md) | ```customer_segments_api = client.customer_segments``` |
-| [Customers](customers.md) | ```customers_api = client.customers``` |
-| [Devices](devices.md) | ```devices_api = client.devices``` |
-| [Disputes](disputes.md) | ```disputes_api = client.disputes``` |
-| [Employees](employees.md) | ```employees_api = client.employees``` |
-| [Inventory](inventory.md) | ```inventory_api = client.inventory``` |
-| [Labor](labor.md) | ```labor_api = client.labor``` |
-| [Locations](locations.md) | ```locations_api = client.locations``` |
-| [Loyalty](loyalty.md) | ```loyalty_api = client.loyalty``` |
-| [Merchants](merchants.md) | ```loyalty_api = client.loyalty``` |
-| [Orders](orders.md) | ```orders_api = client.orders``` |
-| [Payments](payments.md) | ```payments_api = client.payments``` |
-| [Refunds](refunds.md) | ```refunds_api = client.refunds``` |
-| [Team](team.md) | ```team_api = client.team``` |
-| [Terminal](terminal.md) | ```terminal_api = client.terminal``` |
-| [Transactions](transactions.md) | ```transactions_api = client.transactions``` |
+| Field | Description |
+|  --- | --- |
+| `status_code` | Status code of the HTTP response |
+| `reason_phrase` | Reason phrase of the HTTP response |
+| `headers` | Headers of the HTTP response as a Hash |
+| `raw_body` | The body of the HTTP response as a String |
+| `request` | HTTP request info |
+| `errors` | Errors, if they exist |
+| `cursor` | Cursor, if it exists |
+| `body` | The deserialized body of the HTTP response |
+| `data` | Data portion of returned body |
 
-### Authorization
+## Make Calls with the API Client
 
-| API | Instance |
-| --- | --- |
-| [Mobile Authorization](mobile-authorization.md) | ```mobile_authorization_api = client.mobile_authorization``` |
-| [O Auth](o-auth.md) | ```o_auth_api = client.o_auth``` |
+```ruby
+require 'square'
 
-### V1
+client = Square::Client.new(
+  access_token: 'AccessToken',
+)
 
-| API | Instance |
-| --- | --- |
-| [V1 Locations](v1-locations.md) | ```v1_locations_api = client.v1_locations``` |
-| [V1 Employees](v1-employees.md) | ```v1_employees_api = client.v1_employees``` |
-| [V1 Transactions](v1-transactions.md) | ```v1_transactions_api = client.v1_transactions``` |
-| [V1 Items](v1-items.md) | ```v1_items_api = client.v1_items``` |
+locations_api = client.locations
+result = locations_api.list_locations()
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+## SquareClient
+
+Gateway for the SDK. This class acts as a factory for api and also holds the configuration of the SDK.
+
+## Api
+
+| Name | Description |
+|  --- | --- |
+| mobile_authorization | Provides access to MobileAuthorizationApi |
+| o_auth | Provides access to OAuthApi |
+| v1_locations | Provides access to V1LocationsApi |
+| v1_employees | Provides access to V1EmployeesApi |
+| v1_transactions | Provides access to V1TransactionsApi |
+| v1_items | Provides access to V1ItemsApi |
+| apple_pay | Provides access to ApplePayApi |
+| bank_accounts | Provides access to BankAccountsApi |
+| cash_drawers | Provides access to CashDrawersApi |
+| catalog | Provides access to CatalogApi |
+| customers | Provides access to CustomersApi |
+| customer_groups | Provides access to CustomerGroupsApi |
+| customer_segments | Provides access to CustomerSegmentsApi |
+| devices | Provides access to DevicesApi |
+| disputes | Provides access to DisputesApi |
+| employees | Provides access to EmployeesApi |
+| inventory | Provides access to InventoryApi |
+| invoices | Provides access to InvoicesApi |
+| labor | Provides access to LaborApi |
+| locations | Provides access to LocationsApi |
+| checkout | Provides access to CheckoutApi |
+| transactions | Provides access to TransactionsApi |
+| loyalty | Provides access to LoyaltyApi |
+| merchants | Provides access to MerchantsApi |
+| orders | Provides access to OrdersApi |
+| payments | Provides access to PaymentsApi |
+| refunds | Provides access to RefundsApi |
+| subscriptions | Provides access to SubscriptionsApi |
+| team | Provides access to TeamApi |
+| terminal | Provides access to TerminalApi |
+

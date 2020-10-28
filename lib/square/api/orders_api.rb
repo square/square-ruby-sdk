@@ -41,7 +41,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Retrieves a set of [Order](#type-order)s by their IDs.
@@ -75,7 +77,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Calculates an [Order](#type-order).
@@ -107,7 +111,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Search all orders for one or more locations. Orders include all sales,
@@ -154,7 +160,44 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
+    end
+
+    # Retrieves an [Order](#type-order) by ID.
+    # @param [String] order_id Required parameter: The ID of the order to
+    # retrieve.
+    # @return [RetrieveOrderResponse Hash] response from the API call
+    def retrieve_order(order_id:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/orders/{order_id}'
+      _query_builder = APIHelper.append_url_with_template_parameters(
+        _query_builder,
+        'order_id' => { 'value' => order_id, 'encode' => true }
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.get(
+        _query_url,
+        headers: _headers
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Updates an open [Order](#type-order) by adding, replacing, or deleting
@@ -187,7 +230,7 @@ module Square
       _query_builder << '/v2/orders/{order_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'order_id' => order_id
+        'order_id' => { 'value' => order_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -209,7 +252,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Pay for an [order](#type-order) using one or more approved
@@ -244,7 +289,7 @@ module Square
       _query_builder << '/v2/orders/{order_id}/pay'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'order_id' => order_id
+        'order_id' => { 'value' => order_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -266,7 +311,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

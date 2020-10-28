@@ -1,16 +1,17 @@
-## V1 List Items Response
 
-### Structure
+# V1 List Items Response
 
-`V1ListItemsResponse`
+## Structure
 
-### Fields
+`V1 List Items Response`
+
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `items` | [`Array<V1 Item Hash>`](/doc/models/v1-item.md) | Optional | - |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

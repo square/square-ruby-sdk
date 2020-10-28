@@ -1,19 +1,20 @@
-## V1 Order History Entry
+
+# V1 Order History Entry
 
 V1OrderHistoryEntry
 
-### Structure
+## Structure
 
-`V1OrderHistoryEntry`
+`V1 Order History Entry`
 
-### Fields
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `action` | [`String (V1 Order History Entry Action)`](/doc/models/v1-order-history-entry-action.md) | Optional | - |
 | `created_at` | `String` | Optional | The time when the action was performed, in ISO 8601 format. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

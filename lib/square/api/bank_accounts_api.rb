@@ -7,9 +7,6 @@ module Square
 
     # Returns a list of [BankAccount](#type-bankaccount) objects linked to a
     # Square account.
-    # For more information, see
-    # [Bank Accounts
-    # API](https://developer.squareup.com/docs/docs/bank-accounts-api).
     # @param [String] cursor Optional parameter: The pagination cursor returned
     # by a previous call to this endpoint. Use it in the next `ListBankAccounts`
     # request to retrieve the next set  of results.  See the
@@ -53,15 +50,13 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns details of a [BankAccount](#type-bankaccount) identified by V1
     # bank account ID.
-    # For more information, see
-    # [Retrieve a bank account by using an ID issued by V1 Bank Accounts
-    # API](https://developer.squareup.com/docs/docs/bank-accounts-api#retrieve-a
-    # -bank-account-by-using-an-id-issued-by-the-v1-bank-accounts-api).
     # @param [String] v1_bank_account_id Required parameter: Connect V1 ID of
     # the desired `BankAccount`. For more information, see  [Retrieve a bank
     # account by using an ID issued by V1 Bank Accounts
@@ -74,7 +69,7 @@ module Square
       _query_builder << '/v2/bank-accounts/by-v1-id/{v1_bank_account_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'v1_bank_account_id' => v1_bank_account_id
+        'v1_bank_account_id' => { 'value' => v1_bank_account_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -94,13 +89,13 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns details of a [BankAccount](#type-bankaccount)
-    # linked to a Square account. For more information, see
-    # [Bank Accounts
-    # API](https://developer.squareup.com/docs/docs/bank-accounts-api).
+    # linked to a Square account.
     # @param [String] bank_account_id Required parameter: Square-issued ID of
     # the desired `BankAccount`.
     # @return [GetBankAccountResponse Hash] response from the API call
@@ -110,7 +105,7 @@ module Square
       _query_builder << '/v2/bank-accounts/{bank_account_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'bank_account_id' => bank_account_id
+        'bank_account_id' => { 'value' => bank_account_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -130,7 +125,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

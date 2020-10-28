@@ -1,16 +1,17 @@
-## V1 List Employee Roles Response
 
-### Structure
+# V1 List Employee Roles Response
 
-`V1ListEmployeeRolesResponse`
+## Structure
 
-### Fields
+`V1 List Employee Roles Response`
+
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `items` | [`Array<V1 Employee Role Hash>`](/doc/models/v1-employee-role.md) | Optional | - |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

@@ -75,7 +75,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     #  Use the CreateEmployee endpoint to add an employee to a Square
@@ -115,7 +117,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides the details for a single employee.
@@ -127,7 +131,7 @@ module Square
       _query_builder << '/v1/me/employees/{employee_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'employee_id' => employee_id
+        'employee_id' => { 'value' => employee_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -147,7 +151,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # UpdateEmployee
@@ -164,7 +170,7 @@ module Square
       _query_builder << '/v1/me/employees/{employee_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'employee_id' => employee_id
+        'employee_id' => { 'value' => employee_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -186,7 +192,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides summary information for all of a business's employee roles.
@@ -230,7 +238,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates an employee role you can then assign to employees.
@@ -270,7 +280,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides the details for a single employee role.
@@ -282,7 +294,7 @@ module Square
       _query_builder << '/v1/me/roles/{role_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'role_id' => role_id
+        'role_id' => { 'value' => role_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -302,7 +314,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Modifies the details of an employee role.
@@ -319,7 +333,7 @@ module Square
       _query_builder << '/v1/me/roles/{role_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'role_id' => role_id
+        'role_id' => { 'value' => role_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -341,7 +355,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides summary information for all of a business's employee timecards.
@@ -425,7 +441,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates a timecard for an employee and clocks them in with an
@@ -468,7 +486,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Deletes a timecard. Timecards can also be deleted through the
@@ -494,7 +514,7 @@ module Square
       _query_builder << '/v1/me/timecards/{timecard_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'timecard_id' => timecard_id
+        'timecard_id' => { 'value' => timecard_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -506,7 +526,9 @@ module Square
       _response = execute_request(_request)
 
       # Return appropriate response type.
-      ApiResponse.new(_response, data: _response.raw_body)
+      ApiResponse.new(
+        _response, data: _response.raw_body
+      )
     end
 
     # Provides the details for a single timecard.
@@ -524,7 +546,7 @@ module Square
       _query_builder << '/v1/me/timecards/{timecard_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'timecard_id' => timecard_id
+        'timecard_id' => { 'value' => timecard_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -544,7 +566,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Modifies the details of a timecard with an `API_EDIT` event for
@@ -564,7 +588,7 @@ module Square
       _query_builder << '/v1/me/timecards/{timecard_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'timecard_id' => timecard_id
+        'timecard_id' => { 'value' => timecard_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -586,7 +610,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides summary information for all events associated with a
@@ -606,7 +632,7 @@ module Square
       _query_builder << '/v1/me/timecards/{timecard_id}/events'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'timecard_id' => timecard_id
+        'timecard_id' => { 'value' => timecard_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -626,7 +652,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides the details for all of a location's cash drawer shifts during a
@@ -653,7 +681,7 @@ module Square
       _query_builder << '/v1/{location_id}/cash-drawer-shifts'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id
+        'location_id' => { 'value' => location_id, 'encode' => true }
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
@@ -679,7 +707,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Provides the details for a single cash drawer shift, including all events
@@ -696,8 +726,8 @@ module Square
       _query_builder << '/v1/{location_id}/cash-drawer-shifts/{shift_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'shift_id' => shift_id
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'shift_id' => { 'value' => shift_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -717,7 +747,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

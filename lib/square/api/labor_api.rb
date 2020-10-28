@@ -44,7 +44,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates a new `BreakType`.
@@ -88,7 +90,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Deletes an existing `BreakType`.
@@ -102,7 +106,7 @@ module Square
       _query_builder << '/v2/labor/break-types/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => id
+        'id' => { 'value' => id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -122,7 +126,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns a single `BreakType` specified by id.
@@ -135,7 +141,7 @@ module Square
       _query_builder << '/v2/labor/break-types/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => id
+        'id' => { 'value' => id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -155,7 +161,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Updates an existing `BreakType`.
@@ -172,7 +180,7 @@ module Square
       _query_builder << '/v2/labor/break-types/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => id
+        'id' => { 'value' => id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -194,7 +202,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns a paginated list of `EmployeeWage` instances for a business.
@@ -237,7 +247,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns a single `EmployeeWage` specified by id.
@@ -251,7 +263,7 @@ module Square
       _query_builder << '/v2/labor/employee-wages/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => id
+        'id' => { 'value' => id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -271,7 +283,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Creates a new `Shift`.
@@ -319,7 +333,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns a paginated list of `Shift` records for a business.
@@ -363,7 +379,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Deletes a `Shift`.
@@ -376,7 +394,7 @@ module Square
       _query_builder << '/v2/labor/shifts/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => id
+        'id' => { 'value' => id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -396,7 +414,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns a single `Shift` specified by id.
@@ -409,7 +429,7 @@ module Square
       _query_builder << '/v2/labor/shifts/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => id
+        'id' => { 'value' => id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -429,7 +449,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Updates an existing `Shift`.
@@ -451,7 +473,7 @@ module Square
       _query_builder << '/v2/labor/shifts/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => id
+        'id' => { 'value' => id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -473,7 +495,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns a paginated list of `TeamMemberWage` instances for a business.
@@ -515,7 +539,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns a single `TeamMemberWage` specified by id.
@@ -528,7 +554,7 @@ module Square
       _query_builder << '/v2/labor/team-member-wages/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => id
+        'id' => { 'value' => id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -548,7 +574,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Returns a list of `WorkweekConfig` instances for a business.
@@ -585,7 +613,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Updates a `WorkweekConfig`.
@@ -602,7 +632,7 @@ module Square
       _query_builder << '/v2/labor/workweek-configs/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => id
+        'id' => { 'value' => id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -624,7 +654,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

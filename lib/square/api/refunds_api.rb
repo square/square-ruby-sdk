@@ -6,7 +6,7 @@ module Square
     end
 
     # Retrieves a list of refunds for the account making the request.
-    # Max results per page: 100
+    # The maximum results per page is 100.
     # @param [String] begin_time Optional parameter: Timestamp for the beginning
     # of the requested reporting period, in RFC 3339 format.  Default: The
     # current time minus one year.
@@ -77,7 +77,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
     # Refunds a payment. You can refund the entire payment amount or a
@@ -110,10 +112,12 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
 
-    # Retrieves a specific `Refund` using the `refund_id`.
+    # Retrieves a specific refund using the `refund_id`.
     # @param [String] refund_id Required parameter: Unique ID for the desired
     # `PaymentRefund`.
     # @return [GetPaymentRefundResponse Hash] response from the API call
@@ -123,7 +127,7 @@ module Square
       _query_builder << '/v2/refunds/{refund_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'refund_id' => refund_id
+        'refund_id' => { 'value' => refund_id, 'encode' => true }
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -143,7 +147,9 @@ module Square
       # Return appropriate response type.
       decoded = APIHelper.json_deserialize(_response.raw_body)
       _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(_response, data: decoded, errors: _errors)
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
     end
   end
 end

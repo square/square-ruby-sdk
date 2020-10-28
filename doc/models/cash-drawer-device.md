@@ -1,17 +1,18 @@
-## Cash Drawer Device
 
-### Structure
+# Cash Drawer Device
 
-`CashDrawerDevice`
+## Structure
 
-### Fields
+`Cash Drawer Device`
+
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `String` | Optional | The device Square-issued ID |
 | `name` | `String` | Optional | The device merchant-specified name. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {

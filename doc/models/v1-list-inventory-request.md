@@ -1,17 +1,18 @@
-## V1 List Inventory Request
 
-### Structure
+# V1 List Inventory Request
 
-`V1ListInventoryRequest`
+## Structure
 
-### Fields
+`V1 List Inventory Request`
+
+## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `limit` | `Integer` | Optional | The maximum number of inventory entries to return in a single response. This value cannot exceed 1000. |
 | `batch_token` | `String` | Optional | A pagination cursor to retrieve the next set of results for your<br>original query to the endpoint. |
 
-### Example (as JSON)
+## Example (as JSON)
 
 ```json
 {
