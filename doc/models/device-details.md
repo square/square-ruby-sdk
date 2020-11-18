@@ -11,9 +11,9 @@ Details about the device that took the payment.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_id` | `String` | Optional | Square-issued ID of the device. |
-| `device_installation_id` | `String` | Optional | Square-issued installation ID for the device. |
-| `device_name` | `String` | Optional | The name of the device set by the merchant. |
+| `device_id` | `String` | Optional | The Square-issued ID of the device. |
+| `device_installation_id` | `String` | Optional | The Square-issued installation ID for the device. |
+| `device_name` | `String` | Optional | The name of the device set by the seller. |
 
 ## Example (as JSON)
 

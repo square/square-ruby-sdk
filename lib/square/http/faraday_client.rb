@@ -30,7 +30,10 @@ module Square
         http_request.query_url
       ) do |request|
         request.headers = http_request.headers
-        request.body = http_request.parameters
+        unless http_request.http_method == HttpMethodEnum::GET &&
+               http_request.parameters.empty?
+          request.body = http_request.parameters
+        end
       end
       convert_response(response, http_request)
     end
@@ -42,7 +45,10 @@ module Square
         http_request.query_url
       ) do |request|
         request.headers = http_request.headers
-        request.body = http_request.parameters
+        unless http_request.http_method == HttpMethodEnum::GET &&
+               http_request.parameters.empty?
+          request.body = http_request.parameters
+        end
       end
       convert_response(response, http_request)
     end

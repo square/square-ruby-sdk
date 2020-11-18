@@ -15,7 +15,7 @@ One of `errors` or `segments` is present in a given response (never both).
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
 | `segments` | [`Array<Customer Segment Hash>`](/doc/models/customer-segment.md) | Optional | The list of customer segments belonging to the associated Square account. |
-| `cursor` | `String` | Optional | A pagination cursor to be used in subsequent calls to __ListCustomerSegments__<br>to retrieve the next set of query results. Only present only if the request succeeded and<br>additional results are available.<br><br>See the [Pagination guide](https://developer.squareup.com/docs/docs/working-with-apis/pagination) for more information. |
+| `cursor` | `String` | Optional | A pagination cursor to be used in subsequent calls to __ListCustomerSegments__<br>to retrieve the next set of query results. Only present only if the request succeeded and<br>additional results are available.<br><br>See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information. |
 
 ## Example (as JSON)
 

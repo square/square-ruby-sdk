@@ -123,7 +123,7 @@ module Square
     # [CalculateLoyaltyPoints](#endpoint-Loyalty-CalculateLoyaltyPoints) to
     # compute the points. For more information,
     # see [Loyalty Program
-    # Overview](https://developer.squareup.com/docs/docs/loyalty/overview).
+    # Overview](https://developer.squareup.com/docs/loyalty/overview).
     # You then provide the points in a request to this endpoint.
     # @param [String] account_id Required parameter: The [loyalty
     # account](#type-LoyaltyAccount) ID to which to add the points.

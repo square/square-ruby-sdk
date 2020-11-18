@@ -13,7 +13,7 @@ A request to search for loyalty rewards.
 |  --- | --- | --- | --- |
 | `query` | [`Search Loyalty Rewards Request Loyalty Reward Query Hash`](/doc/models/search-loyalty-rewards-request-loyalty-reward-query.md) | Optional | The set of search requirements. |
 | `limit` | `Integer` | Optional | The maximum number of results to return in the response. |
-| `cursor` | `String` | Optional | A pagination cursor returned by a previous call to<br>this endpoint. Provide this to retrieve the next set of<br>results for the original query.<br>For more information,<br>see [Pagination](https://developer.squareup.com/docs/docs/basics/api101/pagination). |
+| `cursor` | `String` | Optional | A pagination cursor returned by a previous call to<br>this endpoint. Provide this to retrieve the next set of<br>results for the original query.<br>For more information,<br>see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination). |
 
 ## Example (as JSON)
 

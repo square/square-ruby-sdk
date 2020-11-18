@@ -63,7 +63,8 @@ module Square
     end
 
     # Provides the summary details for a single cash drawer shift. See
-    # RetrieveCashDrawerShiftEvents for a list of cash drawer shift events.
+    # [ListCashDrawerShiftEvents](#endpoint-CashDrawers-ListCashDrawerShiftEvent
+    # s) for a list of cash drawer shift events.
     # @param [String] location_id Required parameter: The ID of the location to
     # retrieve cash drawer shifts from.
     # @param [String] shift_id Required parameter: The shift ID.

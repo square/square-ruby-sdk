@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'square.rb'
-  s.version = '6.5.0.20201028'
+  s.version = '7.0.0.20201118'
   s.summary = 'square'
   s.description = 'Use Square APIs to manage and run business including payment, customer, product, inventory, and employee management.'
   s.authors = ['Square Developer Platform']
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.add_dependency('faraday-http-cache', '~> 2.2')
   s.add_development_dependency('minitest', '~> 5.14', '>= 5.14.1')
   s.add_development_dependency('minitest-proveit', '~> 1.0')
-  s.required_ruby_version = '~> 2.0'
+  s.required_ruby_version = '>= 2.0'
   s.files = Dir['{bin,lib,man,test,spec}/**/*', 'README*', 'LICENSE*']
   s.require_paths = ['lib']
 end

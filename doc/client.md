@@ -1,25 +1,24 @@
 
 # Client Class Documentation
 
-The following parameters are configurable for the API Client.
+The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2020-10-28'` |
-| `access_token` | `String` | OAuth 2.0 Access Token |
+| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2020-11-18'` |
+| `access_token` | `String` | The OAuth 2.0 Access Token to use for API requests. |
 | `environment` | `string` | The API environment. <br> **Default: `production`** |
-| `access_token` | `String` | OAuth 2.0 Access Token |
 | `timeout` | `Float` | The value to use for connection timeout. <br> **Default: 60** |
 | `max_retries` | `Integer` | The number of times to retry an endpoint call if it fails. <br> **Default: 0** |
 | `retry_interval` | `Float` | Pause in seconds between retries. <br> **Default: 1** |
 | `backoff_factor` | `Float` | The amount to multiply each successive retry's interval amount by in order to provide backoff. <br> **Default: 1** |
 | `additional_headers` | `String` | Additional headers to add to each API request |
 
-The API client can be initialized as following.
+The API client can be initialized as follows:
 
 ```ruby
 client = Square::Client.new(
-  square_version: '2020-10-28',
+  square_version: '2020-11-18',
   access_token: 'AccessToken',
   environment: 'production',
 )
@@ -60,9 +59,9 @@ end
 
 ## SquareClient
 
-Gateway for the SDK. This class acts as a factory for api and also holds the configuration of the SDK.
+The gateway for the SDK. This class acts as a factory for the Apis and also holds the configuration of the SDK.
 
-## Api
+## API
 
 | Name | Description |
 |  --- | --- |
@@ -74,6 +73,7 @@ Gateway for the SDK. This class acts as a factory for api and also holds the con
 | v1_items | Provides access to V1ItemsApi |
 | apple_pay | Provides access to ApplePayApi |
 | bank_accounts | Provides access to BankAccountsApi |
+| bookings | Provides access to BookingsApi |
 | cash_drawers | Provides access to CashDrawersApi |
 | catalog | Provides access to CatalogApi |
 | customers | Provides access to CustomersApi |
