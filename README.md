@@ -56,6 +56,9 @@ gem 'square.rb'
 ### Loyalty
 * [Loyalty]
 
+### Bookings
+* [Bookings]
+
 ### Business
 * [Merchants]
 * [Locations]
@@ -302,6 +305,7 @@ You can also use the Square API to create applications or services that work wit
 [Inventory]: doc/api/inventory.md
 [Labor]: doc/api/labor.md
 [Loyalty]: doc/api/loyalty.md
+[Bookings]: doc/api/bookings.md
 [Locations]: doc/api/locations.md
 [Merchants]: doc/api/merchants.md
 [Orders]: doc/api/orders.md

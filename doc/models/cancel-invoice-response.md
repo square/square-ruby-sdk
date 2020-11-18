@@ -11,7 +11,7 @@ The response returned by the `CancelInvoice` request.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `invoice` | [`Invoice Hash`](/doc/models/invoice.md) | Optional | Stores information about an invoice. You use the Invoices API to create and process<br>invoices. For more information, see [Manage Invoices Using the Invoices API](https://developer.squareup.com/docs/docs/invoices-api/overview). |
+| `invoice` | [`Invoice Hash`](/doc/models/invoice.md) | Optional | Stores information about an invoice. You use the Invoices API to create and process<br>invoices. For more information, see [Manage Invoices Using the Invoices API](https://developer.squareup.com/docs/invoices-api/overview). |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Information about errors encountered during the request. |
 
 ## Example (as JSON)

@@ -10,8 +10,8 @@ module Square
     # @param [String] cursor Optional parameter: The pagination cursor returned
     # by a previous call to this endpoint. Use it in the next `ListBankAccounts`
     # request to retrieve the next set  of results.  See the
-    # [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pa
-    # gination) guide for more information.
+    # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
+    # ion) guide for more information.
     # @param [Integer] limit Optional parameter: Upper limit on the number of
     # bank accounts to return in the response.  Currently, 1000 is the largest
     # supported limit. You can specify a limit  of up to 1000 bank accounts.
@@ -60,8 +60,8 @@ module Square
     # @param [String] v1_bank_account_id Required parameter: Connect V1 ID of
     # the desired `BankAccount`. For more information, see  [Retrieve a bank
     # account by using an ID issued by V1 Bank Accounts
-    # API](https://developer.squareup.com/docs/docs/bank-accounts-api#retrieve-a
-    # -bank-account-by-using-an-id-issued-by-v1-bank-accounts-api).
+    # API](https://developer.squareup.com/docs/bank-accounts-api#retrieve-a-bank
+    # -account-by-using-an-id-issued-by-v1-bank-accounts-api).
     # @return [GetBankAccountByV1IdResponse Hash] response from the API call
     def get_bank_account_by_v1_id(v1_bank_account_id:)
       # Prepare query url.

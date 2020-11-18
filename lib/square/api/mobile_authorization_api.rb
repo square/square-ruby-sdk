@@ -16,8 +16,8 @@ module Square
     # ```
     # Replace `ACCESS_TOKEN` with a
     # [valid production authorization
-    # credential](https://developer.squareup.com/docs/docs/build-basics/access-t
-    # okens).
+    # credential](https://developer.squareup.com/docs/build-basics/access-tokens
+    # ).
     # @param [CreateMobileAuthorizationCodeRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.

@@ -14,7 +14,7 @@ Defines the fields that are included in the response from the
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Information about errors encountered during the request. |
 | `subscriptions` | [`Array<Subscription Hash>`](/doc/models/subscription.md) | Optional | The search result. |
-| `cursor` | `String` | Optional | When a response is truncated, it includes a cursor that you can<br>use in a subsequent request to fetch the next set of subscriptions.<br>If empty, this is the final response.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination). |
+| `cursor` | `String` | Optional | When a response is truncated, it includes a cursor that you can<br>use in a subsequent request to fetch the next set of subscriptions.<br>If empty, this is the final response.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
 
 ## Example (as JSON)
 

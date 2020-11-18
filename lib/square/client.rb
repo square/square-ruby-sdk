@@ -4,7 +4,7 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '6.5.0.20201028'
+      '7.0.0.20201118'
     end
 
     def square_version
@@ -57,6 +57,12 @@ module Square
     # @return [BankAccountsApi] Returns the controller instance.
     def bank_accounts
       @bank_accounts ||= BankAccountsApi.new config
+    end
+
+    # Access to bookings controller.
+    # @return [BookingsApi] Returns the controller instance.
+    def bookings
+      @bookings ||= BookingsApi.new config
     end
 
     # Access to cash_drawers controller.
@@ -193,7 +199,7 @@ module Square
 
     def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
                    backoff_factor: 1, environment: 'production',
-                   square_version: '2020-10-28', access_token: 'TODO: Replace',
+                   square_version: '2020-11-18', access_token: 'TODO: Replace',
                    additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(timeout: timeout, max_retries: max_retries,

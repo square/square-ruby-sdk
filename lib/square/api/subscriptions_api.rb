@@ -60,8 +60,8 @@ module Square
     # customer by subscription creation date.
     # For more information, see
     # [Retrieve
-    # subscriptions](https://developer.squareup.com/docs/docs/subscriptions-api/
-    # overview#retrieve-subscriptions).
+    # subscriptions](https://developer.squareup.com/docs/subscriptions-api/overv
+    # iew#retrieve-subscriptions).
     # @param [SearchSubscriptionsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -217,8 +217,8 @@ module Square
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
     # results for the original query.  For more information, see
-    # [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pa
-    # gination).
+    # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
+    # ion).
     # @param [Integer] limit Optional parameter: The upper limit on the number
     # of subscription events to return  in the response.   Default: `200`
     # @return [ListSubscriptionEventsResponse Hash] response from the API call
