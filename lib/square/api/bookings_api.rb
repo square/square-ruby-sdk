@@ -262,5 +262,47 @@ module Square
         _response, data: decoded, errors: _errors
       )
     end
+
+    # Cancels an existing booking.
+    # @param [String] booking_id Required parameter: The ID of the
+    # [Booking](#type-booking) object representing the to-be-cancelled
+    # booking.
+    # @param [CancelBookingRequest] body Required parameter: An object
+    # containing the fields to POST for the request.  See the corresponding
+    # object definition for field details.
+    # @return [CancelBookingResponse Hash] response from the API call
+    def cancel_booking(booking_id:,
+                       body:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/bookings/{booking_id}/cancel'
+      _query_builder = APIHelper.append_url_with_template_parameters(
+        _query_builder,
+        'booking_id' => { 'value' => booking_id, 'encode' => true }
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json',
+        'content-type' => 'application/json; charset=utf-8'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.post(
+        _query_url,
+        headers: _headers,
+        parameters: body.to_json
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
+    end
   end
 end

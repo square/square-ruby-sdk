@@ -5,20 +5,19 @@ module Square
       super(config, http_call_back: http_call_back)
     end
 
-    # Returns a list of disputes associated
-    # with a particular account.
+    # Returns a list of disputes associated with a particular account.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
-    # a previous call to this endpoint. Provide this to retrieve the next set of
-    # results for the original query. For more information, see
-    # [Paginating](https://developer.squareup.com/docs/basics/api101/pagination)
+    # a previous call to this endpoint. Provide this cursor to retrieve the next
+    # set of results for the original query. For more information, see
+    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
     # .
     # @param [DisputeState] states Optional parameter: The dispute states to
     # filter the result. If not specified, the endpoint returns all open
-    # disputes (dispute status is not `INQUIRY_CLOSED`, `WON`, or `LOST`).
+    # disputes (the dispute status is not `INQUIRY_CLOSED`, `WON`, or `LOST`).
     # @param [String] location_id Optional parameter: The ID of the location for
-    # which to return  a list of disputes. If not specified, the endpoint
-    # returns all open disputes (dispute status is not `INQUIRY_CLOSED`, `WON`,
-    # or  `LOST`) associated with all locations.
+    # which to return a list of disputes. If not specified, the endpoint returns
+    # all open disputes (the dispute status is not `INQUIRY_CLOSED`, `WON`, or
+    # `LOST`) associated with all locations.
     # @return [ListDisputesResponse Hash] response from the API call
     def list_disputes(cursor: nil,
                       states: nil,
@@ -55,7 +54,7 @@ module Square
       )
     end
 
-    # Returns details of a specific dispute.
+    # Returns details about a specific dispute.
     # @param [String] dispute_id Required parameter: The ID of the dispute you
     # want more details about.
     # @return [RetrieveDisputeResponse Hash] response from the API call
@@ -90,14 +89,14 @@ module Square
       )
     end
 
-    # Accepts loss on a dispute. Square returns
-    # the disputed amount to the cardholder and updates the
-    # dispute state to ACCEPTED.
-    # Square debits the disputed amount from the seller’s Square
-    # account. If the Square account balance does not have
-    # sufficient funds, Square debits the associated bank account.
-    # @param [String] dispute_id Required parameter: ID of the dispute you want
-    # to accept.
+    # Accepts the loss on a dispute. Square returns the disputed amount to the
+    # cardholder and
+    # updates the dispute state to ACCEPTED.
+    # Square debits the disputed amount from the seller’s Square account. If the
+    # Square account
+    # does not have sufficient funds, Square debits the associated bank account.
+    # @param [String] dispute_id Required parameter: The ID of the dispute you
+    # want to accept.
     # @return [AcceptDisputeResponse Hash] response from the API call
     def accept_dispute(dispute_id:)
       # Prepare query url.
@@ -165,8 +164,8 @@ module Square
     end
 
     # Removes specified evidence from a dispute.
-    # Square does not send the bank any evidence that
-    # is removed. Also, you cannot remove evidence after
+    # Square does not send the bank any evidence that is removed. Also, you
+    # cannot remove evidence after
     # submitting it to the bank using
     # [SubmitEvidence](https://developer.squareup.com/docs/reference/square/disp
     # utes-api/submit-evidence).
@@ -210,8 +209,8 @@ module Square
 
     # Returns the specific evidence metadata associated with a specific dispute.
     # You must maintain a copy of the evidence you upload if you want to
-    # reference it later. You cannot download the evidence
-    # after you upload it.
+    # reference it later. You cannot
+    # download the evidence after you upload it.
     # @param [String] dispute_id Required parameter: The ID of the dispute that
     # you want to retrieve evidence from.
     # @param [String] evidence_id Required parameter: The ID of the evidence to
@@ -251,13 +250,13 @@ module Square
     end
 
     # Uploads a file to use as evidence in a dispute challenge. The endpoint
-    # accepts
-    # HTTP multipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG,
-    # and TIFF formats.
-    # @param [String] dispute_id Required parameter: ID of the dispute you want
-    # to upload evidence for.
+    # accepts HTTP
+    # multipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG, and TIFF
+    # formats.
+    # @param [String] dispute_id Required parameter: The ID of the dispute you
+    # want to upload evidence for.
     # @param [CreateDisputeEvidenceFileRequest] request Optional parameter:
-    # Defines parameters for a CreateDisputeEvidenceFile request.
+    # Defines the parameters for a `CreateDisputeEvidenceFile` request.
     # @param [File | UploadIO] image_file Optional parameter: Example:
     # @return [CreateDisputeEvidenceFileResponse Hash] response from the API call
     def create_dispute_evidence_file(dispute_id:,
@@ -358,16 +357,15 @@ module Square
 
     # Submits evidence to the cardholder's bank.
     # Before submitting evidence, Square compiles all available evidence. This
-    # includes
-    # evidence uploaded using the
+    # includes evidence uploaded
+    # using the
     # [CreateDisputeEvidenceFile](https://developer.squareup.com/docs/reference/
     # square/disputes-api/create-dispute-evidence-file) and
     # [CreateDisputeEvidenceText](https://developer.squareup.com/docs/reference/
-    # square/disputes-api/create-dispute-evidence-text) endpoints,
-    # and evidence automatically provided by Square, when
-    # available.
-    # @param [String] dispute_id Required parameter: The ID of the dispute you
-    # want to submit evidence for.
+    # square/disputes-api/create-dispute-evidence-text) endpoints and
+    # evidence automatically provided by Square, when available.
+    # @param [String] dispute_id Required parameter: The ID of the dispute that
+    # you want to submit evidence for.
     # @return [SubmitEvidenceResponse Hash] response from the API call
     def submit_evidence(dispute_id:)
       # Prepare query url.

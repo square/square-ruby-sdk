@@ -251,16 +251,23 @@ module Square
     # `ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.  The legal values are taken from the
     # CatalogObjectType enum: `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`,
     # `TAX`, `MODIFIER`, `MODIFIER_LIST`, or `IMAGE`.
+    # @param [Long] catalog_version Optional parameter: The specific version of
+    # the catalog objects to be included in the response.  This allows you to
+    # retrieve historical versions of objects. The specified version value is
+    # matched against the [CatalogObject](#type-catalogobject)s' `version`
+    # attribute.
     # @return [ListCatalogResponse Hash] response from the API call
     def list_catalog(cursor: nil,
-                     types: nil)
+                     types: nil,
+                     catalog_version: nil)
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/catalog/list'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
         'cursor' => cursor,
-        'types' => types
+        'types' => types,
+        'catalog_version' => catalog_version
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -382,9 +389,15 @@ module Square
     # response contains a `CatalogItemVariation`, its parent `CatalogItem` will
     # be returned in the `related_objects` field of the response.  Default
     # value: `false`
+    # @param [Long] catalog_version Optional parameter: Requests objects as of a
+    # specific version of the catalog. This allows you to retrieve historical
+    # versions of objects. The value to retrieve a specific version of an object
+    # can be found in the version field of
+    # [CatalogObject](#type-catalogobject)s.
     # @return [RetrieveCatalogObjectResponse Hash] response from the API call
     def retrieve_catalog_object(object_id:,
-                                include_related_objects: false)
+                                include_related_objects: false,
+                                catalog_version: nil)
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/catalog/object/{object_id}'
@@ -394,7 +407,8 @@ module Square
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'include_related_objects' => include_related_objects
+        'include_related_objects' => include_related_objects,
+        'catalog_version' => catalog_version
       )
       _query_url = APIHelper.clean_url _query_builder
 

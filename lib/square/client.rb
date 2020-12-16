@@ -4,7 +4,7 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '7.0.0.20201118'
+      '8.0.0.20201216'
     end
 
     def square_version
@@ -21,12 +21,6 @@ module Square
     # @return [OAuthApi] Returns the controller instance.
     def o_auth
       @o_auth ||= OAuthApi.new config
-    end
-
-    # Access to v1_locations controller.
-    # @return [V1LocationsApi] Returns the controller instance.
-    def v1_locations
-      @v1_locations ||= V1LocationsApi.new config
     end
 
     # Access to v1_employees controller.
@@ -199,7 +193,7 @@ module Square
 
     def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
                    backoff_factor: 1, environment: 'production',
-                   square_version: '2020-11-18', access_token: 'TODO: Replace',
+                   square_version: '2020-12-16', access_token: 'TODO: Replace',
                    additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(timeout: timeout, max_retries: max_retries,

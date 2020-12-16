@@ -134,8 +134,8 @@ module Square
 
     # Deletes the specified invoice. When an invoice is deleted, the
     # associated Order status changes to CANCELED. You can only delete a draft
-    # invoice (you cannot delete an invoice scheduled for publication, or a
-    # published invoice).
+    # invoice (you cannot delete a published invoice, including one that is
+    # scheduled for processing).
     # @param [String] invoice_id Required parameter: The ID of the invoice to
     # delete.
     # @param [Integer] version Optional parameter: The version of the
@@ -214,12 +214,15 @@ module Square
       )
     end
 
-    # Updates an invoice by modifying field values, clearing field values, or
-    # both
-    # as specified in the request.
-    # There are no restrictions to updating an invoice in a draft state.
-    # However, there are guidelines for updating a published invoice.
-    # @param [String] invoice_id Required parameter: The id of the invoice to
+    # Updates an invoice by modifying fields, clearing fields, or both. For most
+    # updates, you can use a sparse
+    # `Invoice` object to add fields or change values, and use the
+    # `fields_to_clear` field to specify fields to clear.
+    # However, some restrictions apply. For example, you cannot change the
+    # `order_id` or `location_id` field, and you
+    # must provide the complete `custom_fields` list to update a custom field.
+    # Published invoices have additional restrictions.
+    # @param [String] invoice_id Required parameter: The ID of the invoice to
     # update.
     # @param [UpdateInvoiceRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding

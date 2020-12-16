@@ -97,6 +97,7 @@ def batch_retrieve_catalog_objects(body:)
 body = {}
 body[:object_ids] = ['W62UWFY35CWMYGVWK6TWJDNI', 'AA27W3M2GGTF3H6AVPNB77CK']
 body[:include_related_objects] = true
+body[:catalog_version] = 118
 
 result = catalog_api.batch_retrieve_catalog_objects(body: body)
 
@@ -447,7 +448,8 @@ and set the `include_deleted_objects` attribute value to `true`.
 
 ```ruby
 def list_catalog(cursor: nil,
-                 types: nil)
+                 types: nil,
+                 catalog_version: nil)
 ```
 
 ## Parameters
@@ -456,6 +458,7 @@ def list_catalog(cursor: nil,
 |  --- | --- | --- | --- |
 | `cursor` | `String` | Query, Optional | The pagination cursor returned in the previous response. Leave unset for an initial request.<br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
 | `types` | `String` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve, for example<br>`ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.<br><br>The legal values are taken from the CatalogObjectType enum:<br>`ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, or `IMAGE`. |
+| `catalog_version` | `Long` | Query, Optional | The specific version of the catalog objects to be included in the response.<br>This allows you to retrieve historical<br>versions of objects. The specified version value is matched against<br>the [CatalogObject](#type-catalogobject)s' `version` attribute. |
 
 ## Response Type
 
@@ -466,8 +469,9 @@ def list_catalog(cursor: nil,
 ```ruby
 cursor = 'cursor6'
 types = 'types6'
+catalog_version = 126
 
-result = catalog_api.list_catalog(cursor: cursor, types: types)
+result = catalog_api.list_catalog(cursor: cursor, types: types, catalog_version: catalog_version)
 
 if result.success?
   puts result.data
@@ -589,7 +593,8 @@ any [CatalogTax](#type-catalogtax) objects that apply to it.
 
 ```ruby
 def retrieve_catalog_object(object_id:,
-                            include_related_objects: false)
+                            include_related_objects: false,
+                            catalog_version: nil)
 ```
 
 ## Parameters
@@ -598,6 +603,7 @@ def retrieve_catalog_object(object_id:,
 |  --- | --- | --- | --- |
 | `object_id` | `String` | Template, Required | The object ID of any type of catalog objects to be retrieved. |
 | `include_related_objects` | `Boolean` | Query, Optional | If `true`, the response will include additional objects that are related to the<br>requested object, as follows:<br><br>If the `object` field of the response contains a `CatalogItem`, its associated<br>`CatalogCategory`, `CatalogTax`, `CatalogImage` and `CatalogModifierList` objects will<br>be returned in the `related_objects` field of the response. If the `object` field of<br>the response contains a `CatalogItemVariation`, its parent `CatalogItem` will be returned<br>in the `related_objects` field of the response.<br><br>Default value: `false` |
+| `catalog_version` | `Long` | Query, Optional | Requests objects as of a specific version of the catalog. This allows you to retrieve historical<br>versions of objects. The value to retrieve a specific version of an object can be found<br>in the version field of [CatalogObject](#type-catalogobject)s. |
 
 ## Response Type
 
@@ -608,8 +614,9 @@ def retrieve_catalog_object(object_id:,
 ```ruby
 object_id = 'object_id8'
 include_related_objects = false
+catalog_version = 126
 
-result = catalog_api.retrieve_catalog_object(object_id: object_id, include_related_objects: include_related_objects)
+result = catalog_api.retrieve_catalog_object(object_id: object_id, include_related_objects: include_related_objects, catalog_version: catalog_version)
 
 if result.success?
   puts result.data
