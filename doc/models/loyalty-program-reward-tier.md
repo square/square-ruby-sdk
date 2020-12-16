@@ -9,13 +9,14 @@ Describes a loyalty program reward tier.
 
 ## Fields
 
-| Name | Type | Description |
-|  --- | --- | --- |
-| `id` | `String` | The Square-assigned ID of the reward tier. |
-| `points` | `Integer` | The points exchanged for the reward tier. |
-| `name` | `String` | The name of the reward tier. |
-| `definition` | [`Loyalty Program Reward Definition Hash`](/doc/models/loyalty-program-reward-definition.md) | Provides details about the loyalty program reward tier definition. |
-| `created_at` | `String` | The timestamp when the reward tier was created, in RFC 3339 format. |
+| Name | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `String` |  | The Square-assigned ID of the reward tier. |
+| `points` | `Integer` |  | The points exchanged for the reward tier. |
+| `name` | `String` |  | The name of the reward tier. |
+| `definition` | [`Loyalty Program Reward Definition Hash`](/doc/models/loyalty-program-reward-definition.md) |  | Provides details about the reward tier discount. DEPRECATED at version 2020-12-16. Discount details<br>are now defined using a catalog pricing rule and other catalog objects. For more information, see<br>[Get discount details for the reward](https://developer.squareup.com/docs/loyalty-api/overview#get-discount-details). |
+| `created_at` | `String` |  | The timestamp when the reward tier was created, in RFC 3339 format. |
+| `pricing_rule_reference` | [`Catalog Object Reference Hash`](/doc/models/catalog-object-reference.md) | Optional | A reference to a Catalog object at a specific version. In general this is<br>used as an entry point into a graph of catalog objects, where the objects exist<br>at a specific version. |
 
 ## Example (as JSON)
 
@@ -40,7 +41,11 @@ Describes a loyalty program reward tier.
       "currency": "MYR"
     }
   },
-  "created_at": "created_at2"
+  "created_at": "created_at2",
+  "pricing_rule_reference": {
+    "object_id": "object_id0",
+    "catalog_version": 218
+  }
 }
 ```
 

@@ -85,10 +85,8 @@ module Square
     # of `INACTIVE`. Inactive employees cannot sign in to Square Point of Sale
     # until they are activated from the Square Dashboard. Employee status
     # cannot be changed with the Connect API.
-    # <aside class="important">
     # Employee entities cannot be deleted. To disable employee profiles,
     # set the employee's status to <code>INACTIVE</code>
-    # </aside>
     # @param [V1Employee] body Required parameter: An object containing the
     # fields to POST for the request.  See the corresponding object definition
     # for field details.
@@ -617,11 +615,9 @@ module Square
 
     # Provides summary information for all events associated with a
     # particular timecard.
-    # <aside>
     # Only approved accounts can manage their employees with Square.
     # Unapproved accounts cannot use employee management features with the
     # API.
-    # </aside>
     # @param [String] timecard_id Required parameter: The ID of the timecard to
     # list events for.
     # @return [List of V1TimecardEvent Hash] response from the API call

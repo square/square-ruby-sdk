@@ -17,6 +17,7 @@ bookings_api = client.bookings
 * [Retrieve Team Member Booking Profile](/doc/api/bookings.md#retrieve-team-member-booking-profile)
 * [Retrieve Booking](/doc/api/bookings.md#retrieve-booking)
 * [Update Booking](/doc/api/bookings.md#update-booking)
+* [Cancel Booking](/doc/api/bookings.md#cancel-booking)
 
 
 # Create Booking
@@ -283,6 +284,44 @@ body[:booking][:created_at] = 'created_at6'
 body[:booking][:updated_at] = 'updated_at4'
 
 result = bookings_api.update_booking(booking_id: booking_id, body: body)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Cancel Booking
+
+Cancels an existing booking.
+
+```ruby
+def cancel_booking(booking_id:,
+                   body:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `booking_id` | `String` | Template, Required | The ID of the [Booking](#type-booking) object representing the to-be-cancelled booking. |
+| `body` | [`Cancel Booking Request Hash`](/doc/models/cancel-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+[`Cancel Booking Response Hash`](/doc/models/cancel-booking-response.md)
+
+## Example Usage
+
+```ruby
+booking_id = 'booking_id4'
+body = {}
+body[:idempotency_key] = 'idempotency_key2'
+body[:booking_version] = 8
+
+result = bookings_api.cancel_booking(booking_id: booking_id, body: body)
 
 if result.success?
   puts result.data
