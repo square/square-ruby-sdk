@@ -37,8 +37,9 @@ module Square
     # @param [String] The name of the query parameter.
     # @param [String] The value of the query parameter.
     def add_query_parameter(name, value)
+      parameters = { name => value }
       @query_url = APIHelper.append_url_with_query_parameters(@query_url,
-                                                              name => value)
+                                                              parameters)
       @query_url = APIHelper.clean_url(@query_url)
     end
   end

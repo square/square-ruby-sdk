@@ -80,12 +80,17 @@ module Square
     # `TerminalCheckout`
     # @return [GetTerminalCheckoutResponse Hash] response from the API call
     def get_terminal_checkout(checkout_id:)
+      # Prepare parameters.
+      _parameters = {
+        'checkout_id' => { 'value' => checkout_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/terminals/checkouts/{checkout_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'checkout_id' => { 'value' => checkout_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -116,12 +121,17 @@ module Square
     # `TerminalCheckout`
     # @return [CancelTerminalCheckoutResponse Hash] response from the API call
     def cancel_terminal_checkout(checkout_id:)
+      # Prepare parameters.
+      _parameters = {
+        'checkout_id' => { 'value' => checkout_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/terminals/checkouts/{checkout_id}/cancel'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'checkout_id' => { 'value' => checkout_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -221,12 +231,17 @@ module Square
     # desired `TerminalRefund`
     # @return [GetTerminalRefundResponse Hash] response from the API call
     def get_terminal_refund(terminal_refund_id:)
+      # Prepare parameters.
+      _parameters = {
+        'terminal_refund_id' => { 'value' => terminal_refund_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/terminals/refunds/{terminal_refund_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'terminal_refund_id' => { 'value' => terminal_refund_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -257,12 +272,17 @@ module Square
     # desired `TerminalRefund`
     # @return [CancelTerminalRefundResponse Hash] response from the API call
     def cancel_terminal_refund(terminal_refund_id:)
+      # Prepare parameters.
+      _parameters = {
+        'terminal_refund_id' => { 'value' => terminal_refund_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/terminals/refunds/{terminal_refund_id}/cancel'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'terminal_refund_id' => { 'value' => terminal_refund_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

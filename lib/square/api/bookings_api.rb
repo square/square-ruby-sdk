@@ -118,15 +118,20 @@ module Square
                                           limit: nil,
                                           cursor: nil,
                                           location_id: nil)
+      # Prepare parameters.
+      _parameters = {
+        'bookable_only' => bookable_only,
+        'limit' => limit,
+        'cursor' => cursor,
+        'location_id' => location_id
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/bookings/team-member-booking-profiles'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'bookable_only' => bookable_only,
-        'limit' => limit,
-        'cursor' => cursor,
-        'location_id' => location_id
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -156,12 +161,17 @@ module Square
     # member to retrieve.
     # @return [RetrieveTeamMemberBookingProfileResponse Hash] response from the API call
     def retrieve_team_member_booking_profile(team_member_id:)
+      # Prepare parameters.
+      _parameters = {
+        'team_member_id' => { 'value' => team_member_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/bookings/team-member-booking-profiles/{team_member_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'team_member_id' => { 'value' => team_member_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -192,12 +202,17 @@ module Square
     # booking.
     # @return [RetrieveBookingResponse Hash] response from the API call
     def retrieve_booking(booking_id:)
+      # Prepare parameters.
+      _parameters = {
+        'booking_id' => { 'value' => booking_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/bookings/{booking_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'booking_id' => { 'value' => booking_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -231,12 +246,17 @@ module Square
     # @return [UpdateBookingResponse Hash] response from the API call
     def update_booking(booking_id:,
                        body:)
+      # Prepare parameters.
+      _parameters = {
+        'booking_id' => { 'value' => booking_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/bookings/{booking_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'booking_id' => { 'value' => booking_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -273,12 +293,17 @@ module Square
     # @return [CancelBookingResponse Hash] response from the API call
     def cancel_booking(booking_id:,
                        body:)
+      # Prepare parameters.
+      _parameters = {
+        'booking_id' => { 'value' => booking_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/bookings/{booking_id}/cancel'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'booking_id' => { 'value' => booking_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

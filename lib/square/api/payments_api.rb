@@ -45,11 +45,8 @@ module Square
                       last_4: nil,
                       card_brand: nil,
                       limit: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/payments'
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
+      # Prepare parameters.
+      _parameters = {
         'begin_time' => begin_time,
         'end_time' => end_time,
         'sort_order' => sort_order,
@@ -59,6 +56,14 @@ module Square
         'last_4' => last_4,
         'card_brand' => card_brand,
         'limit' => limit
+      }
+
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/payments'
+      _query_builder = APIHelper.append_url_with_query_parameters(
+        _query_builder,
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -179,12 +184,17 @@ module Square
     # payment.
     # @return [GetPaymentResponse Hash] response from the API call
     def get_payment(payment_id:)
+      # Prepare parameters.
+      _parameters = {
+        'payment_id' => { 'value' => payment_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/payments/{payment_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'payment_id' => { 'value' => payment_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -216,12 +226,17 @@ module Square
     # identifying the payment to be canceled.
     # @return [CancelPaymentResponse Hash] response from the API call
     def cancel_payment(payment_id:)
+      # Prepare parameters.
+      _parameters = {
+        'payment_id' => { 'value' => payment_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/payments/{payment_id}/cancel'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'payment_id' => { 'value' => payment_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -256,12 +271,17 @@ module Square
     # the payment to be completed.
     # @return [CompletePaymentResponse Hash] response from the API call
     def complete_payment(payment_id:)
+      # Prepare parameters.
+      _parameters = {
+        'payment_id' => { 'value' => payment_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/payments/{payment_id}/complete'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'payment_id' => { 'value' => payment_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

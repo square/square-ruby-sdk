@@ -100,12 +100,17 @@ module Square
     # subscription to retrieve.
     # @return [RetrieveSubscriptionResponse Hash] response from the API call
     def retrieve_subscription(subscription_id:)
+      # Prepare parameters.
+      _parameters = {
+        'subscription_id' => { 'value' => subscription_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/subscriptions/{subscription_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'subscription_id' => { 'value' => subscription_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -140,12 +145,17 @@ module Square
     # @return [UpdateSubscriptionResponse Hash] response from the API call
     def update_subscription(subscription_id:,
                             body:)
+      # Prepare parameters.
+      _parameters = {
+        'subscription_id' => { 'value' => subscription_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/subscriptions/{subscription_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'subscription_id' => { 'value' => subscription_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -178,12 +188,17 @@ module Square
     # subscription to cancel.
     # @return [CancelSubscriptionResponse Hash] response from the API call
     def cancel_subscription(subscription_id:)
+      # Prepare parameters.
+      _parameters = {
+        'subscription_id' => { 'value' => subscription_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/subscriptions/{subscription_id}/cancel'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'subscription_id' => { 'value' => subscription_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -225,17 +240,25 @@ module Square
     def list_subscription_events(subscription_id:,
                                  cursor: nil,
                                  limit: nil)
+      # Prepare parameters.
+      _template_parameters = {
+        'subscription_id' => { 'value' => subscription_id, 'encode' => true }
+      }
+      _query_parameters = {
+        'cursor' => cursor,
+        'limit' => limit
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/subscriptions/{subscription_id}/events'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'subscription_id' => { 'value' => subscription_id, 'encode' => true }
+        _template_parameters
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'cursor' => cursor,
-        'limit' => limit
+        _query_parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

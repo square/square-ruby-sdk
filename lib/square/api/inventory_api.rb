@@ -11,12 +11,17 @@ module Square
     # [InventoryAdjustment](#type-inventoryadjustment) to retrieve.
     # @return [RetrieveInventoryAdjustmentResponse Hash] response from the API call
     def retrieve_inventory_adjustment(adjustment_id:)
+      # Prepare parameters.
+      _parameters = {
+        'adjustment_id' => { 'value' => adjustment_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/inventory/adjustment/{adjustment_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'adjustment_id' => { 'value' => adjustment_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -166,12 +171,17 @@ module Square
     # [InventoryPhysicalCount](#type-inventoryphysicalcount) to retrieve.
     # @return [RetrieveInventoryPhysicalCountResponse Hash] response from the API call
     def retrieve_inventory_physical_count(physical_count_id:)
+      # Prepare parameters.
+      _parameters = {
+        'physical_count_id' => { 'value' => physical_count_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/inventory/physical-count/{physical_count_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'physical_count_id' => { 'value' => physical_count_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -214,17 +224,25 @@ module Square
     def retrieve_inventory_count(catalog_object_id:,
                                  location_ids: nil,
                                  cursor: nil)
+      # Prepare parameters.
+      _template_parameters = {
+        'catalog_object_id' => { 'value' => catalog_object_id, 'encode' => true }
+      }
+      _query_parameters = {
+        'location_ids' => location_ids,
+        'cursor' => cursor
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/inventory/{catalog_object_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'catalog_object_id' => { 'value' => catalog_object_id, 'encode' => true }
+        _template_parameters
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'location_ids' => location_ids,
-        'cursor' => cursor
+        _query_parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -272,17 +290,24 @@ module Square
     def retrieve_inventory_changes(catalog_object_id:,
                                    location_ids: nil,
                                    cursor: nil)
+      # Prepare parameters.
+      _template_parameters = {
+        'catalog_object_id' => { 'value' => catalog_object_id, 'encode' => true }
+      }
+      _query_parameters = {
+        'location_ids' => location_ids,
+        'cursor' => cursor
+      }
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/inventory/{catalog_object_id}/changes'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'catalog_object_id' => { 'value' => catalog_object_id, 'encode' => true }
+        _template_parameters
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'location_ids' => location_ids,
-        'cursor' => cursor
+        _query_parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

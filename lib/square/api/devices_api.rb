@@ -24,15 +24,20 @@ module Square
                           location_id: nil,
                           product_type: nil,
                           status: nil)
+      # Prepare parameters.
+      _parameters = {
+        'cursor' => cursor,
+        'location_id' => location_id,
+        'product_type' => product_type,
+        'status' => status
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/devices/codes'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'cursor' => cursor,
-        'location_id' => location_id,
-        'product_type' => product_type,
-        'status' => status
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -98,12 +103,17 @@ module Square
     # device code.
     # @return [GetDeviceCodeResponse Hash] response from the API call
     def get_device_code(id:)
+      # Prepare parameters.
+      _parameters = {
+        'id' => { 'value' => id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/devices/codes/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

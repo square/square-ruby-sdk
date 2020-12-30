@@ -17,14 +17,19 @@ module Square
     def list_break_types(location_id: nil,
                          limit: nil,
                          cursor: nil)
+      # Prepare parameters.
+      _parameters = {
+        'location_id' => location_id,
+        'limit' => limit,
+        'cursor' => cursor
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/labor/break-types'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'limit' => limit,
-        'cursor' => cursor
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -101,12 +106,17 @@ module Square
     # deleted.
     # @return [DeleteBreakTypeResponse Hash] response from the API call
     def delete_break_type(id:)
+      # Prepare parameters.
+      _parameters = {
+        'id' => { 'value' => id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/labor/break-types/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -136,12 +146,17 @@ module Square
     # retrieved.
     # @return [GetBreakTypeResponse Hash] response from the API call
     def get_break_type(id:)
+      # Prepare parameters.
+      _parameters = {
+        'id' => { 'value' => id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/labor/break-types/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -175,12 +190,17 @@ module Square
     # @return [UpdateBreakTypeResponse Hash] response from the API call
     def update_break_type(id:,
                           body:)
+      # Prepare parameters.
+      _parameters = {
+        'id' => { 'value' => id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/labor/break-types/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -220,14 +240,19 @@ module Square
                             limit: nil,
                             cursor: nil)
       warn 'Endpoint list_employee_wages in LaborApi is deprecated'
+      # Prepare parameters.
+      _parameters = {
+        'employee_id' => employee_id,
+        'limit' => limit,
+        'cursor' => cursor
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/labor/employee-wages'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'employee_id' => employee_id,
-        'limit' => limit,
-        'cursor' => cursor
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -258,12 +283,17 @@ module Square
     # @return [GetEmployeeWageResponse Hash] response from the API call
     def get_employee_wage(id:)
       warn 'Endpoint get_employee_wage in LaborApi is deprecated'
+      # Prepare parameters.
+      _parameters = {
+        'id' => { 'value' => id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/labor/employee-wages/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -389,12 +419,17 @@ module Square
     # deleted.
     # @return [DeleteShiftResponse Hash] response from the API call
     def delete_shift(id:)
+      # Prepare parameters.
+      _parameters = {
+        'id' => { 'value' => id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/labor/shifts/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -424,12 +459,17 @@ module Square
     # retrieved.
     # @return [GetShiftResponse Hash] response from the API call
     def get_shift(id:)
+      # Prepare parameters.
+      _parameters = {
+        'id' => { 'value' => id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/labor/shifts/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -468,12 +508,17 @@ module Square
     # @return [UpdateShiftResponse Hash] response from the API call
     def update_shift(id:,
                      body:)
+      # Prepare parameters.
+      _parameters = {
+        'id' => { 'value' => id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/labor/shifts/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -512,14 +557,19 @@ module Square
     def list_team_member_wages(team_member_id: nil,
                                limit: nil,
                                cursor: nil)
+      # Prepare parameters.
+      _parameters = {
+        'team_member_id' => team_member_id,
+        'limit' => limit,
+        'cursor' => cursor
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/labor/team-member-wages'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'team_member_id' => team_member_id,
-        'limit' => limit,
-        'cursor' => cursor
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -549,12 +599,17 @@ module Square
     # retrieved.
     # @return [GetTeamMemberWageResponse Hash] response from the API call
     def get_team_member_wage(id:)
+      # Prepare parameters.
+      _parameters = {
+        'id' => { 'value' => id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/labor/team-member-wages/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -587,13 +642,18 @@ module Square
     # @return [ListWorkweekConfigsResponse Hash] response from the API call
     def list_workweek_configs(limit: nil,
                               cursor: nil)
+      # Prepare parameters.
+      _parameters = {
+        'limit' => limit,
+        'cursor' => cursor
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/labor/workweek-configs'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'limit' => limit,
-        'cursor' => cursor
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -627,12 +687,17 @@ module Square
     # @return [UpdateWorkweekConfigResponse Hash] response from the API call
     def update_workweek_config(id:,
                                body:)
+      # Prepare parameters.
+      _parameters = {
+        'id' => { 'value' => id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/labor/workweek-configs/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

@@ -170,12 +170,17 @@ module Square
     # retrieve.
     # @return [RetrieveOrderResponse Hash] response from the API call
     def retrieve_order(order_id:)
+      # Prepare parameters.
+      _parameters = {
+        'order_id' => { 'value' => order_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/orders/{order_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'order_id' => { 'value' => order_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -225,12 +230,17 @@ module Square
     # @return [UpdateOrderResponse Hash] response from the API call
     def update_order(order_id:,
                      body:)
+      # Prepare parameters.
+      _parameters = {
+        'order_id' => { 'value' => order_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/orders/{order_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'order_id' => { 'value' => order_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -284,12 +294,17 @@ module Square
     # @return [PayOrderResponse Hash] response from the API call
     def pay_order(order_id:,
                   body:)
+      # Prepare parameters.
+      _parameters = {
+        'order_id' => { 'value' => order_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/orders/{order_id}/pay'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'order_id' => { 'value' => order_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

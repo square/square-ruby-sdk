@@ -80,12 +80,17 @@ module Square
     # main location.
     # @return [RetrieveLocationResponse Hash] response from the API call
     def retrieve_location(location_id:)
+      # Prepare parameters.
+      _parameters = {
+        'location_id' => { 'value' => location_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -119,12 +124,17 @@ module Square
     # @return [UpdateLocationResponse Hash] response from the API call
     def update_location(location_id:,
                         body:)
+      # Prepare parameters.
+      _parameters = {
+        'location_id' => { 'value' => location_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

@@ -45,11 +45,8 @@ module Square
                              status: nil,
                              source_type: nil,
                              limit: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/refunds'
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
+      # Prepare parameters.
+      _parameters = {
         'begin_time' => begin_time,
         'end_time' => end_time,
         'sort_order' => sort_order,
@@ -58,6 +55,14 @@ module Square
         'status' => status,
         'source_type' => source_type,
         'limit' => limit
+      }
+
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/refunds'
+      _query_builder = APIHelper.append_url_with_query_parameters(
+        _query_builder,
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -122,12 +127,17 @@ module Square
     # desired `PaymentRefund`.
     # @return [GetPaymentRefundResponse Hash] response from the API call
     def get_payment_refund(refund_id:)
+      # Prepare parameters.
+      _parameters = {
+        'refund_id' => { 'value' => refund_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/refunds/{refund_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'refund_id' => { 'value' => refund_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

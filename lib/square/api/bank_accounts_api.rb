@@ -23,14 +23,19 @@ module Square
     def list_bank_accounts(cursor: nil,
                            limit: nil,
                            location_id: nil)
+      # Prepare parameters.
+      _parameters = {
+        'cursor' => cursor,
+        'limit' => limit,
+        'location_id' => location_id
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/bank-accounts'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'cursor' => cursor,
-        'limit' => limit,
-        'location_id' => location_id
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -64,12 +69,17 @@ module Square
     # -account-by-using-an-id-issued-by-v1-bank-accounts-api).
     # @return [GetBankAccountByV1IdResponse Hash] response from the API call
     def get_bank_account_by_v1_id(v1_bank_account_id:)
+      # Prepare parameters.
+      _parameters = {
+        'v1_bank_account_id' => { 'value' => v1_bank_account_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/bank-accounts/by-v1-id/{v1_bank_account_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'v1_bank_account_id' => { 'value' => v1_bank_account_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -100,12 +110,17 @@ module Square
     # the desired `BankAccount`.
     # @return [GetBankAccountResponse Hash] response from the API call
     def get_bank_account(bank_account_id:)
+      # Prepare parameters.
+      _parameters = {
+        'bank_account_id' => { 'value' => bank_account_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/bank-accounts/{bank_account_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'bank_account_id' => { 'value' => bank_account_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

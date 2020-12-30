@@ -22,14 +22,19 @@ module Square
     def list_disputes(cursor: nil,
                       states: nil,
                       location_id: nil)
+      # Prepare parameters.
+      _parameters = {
+        'cursor' => cursor,
+        'states' => states,
+        'location_id' => location_id
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/disputes'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'cursor' => cursor,
-        'states' => states,
-        'location_id' => location_id
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -59,12 +64,17 @@ module Square
     # want more details about.
     # @return [RetrieveDisputeResponse Hash] response from the API call
     def retrieve_dispute(dispute_id:)
+      # Prepare parameters.
+      _parameters = {
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/disputes/{dispute_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -99,12 +109,17 @@ module Square
     # want to accept.
     # @return [AcceptDisputeResponse Hash] response from the API call
     def accept_dispute(dispute_id:)
+      # Prepare parameters.
+      _parameters = {
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/disputes/{dispute_id}/accept'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -133,12 +148,17 @@ module Square
     # @param [String] dispute_id Required parameter: The ID of the dispute.
     # @return [ListDisputeEvidenceResponse Hash] response from the API call
     def list_dispute_evidence(dispute_id:)
+      # Prepare parameters.
+      _parameters = {
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/disputes/{dispute_id}/evidence'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -176,13 +196,18 @@ module Square
     # @return [RemoveDisputeEvidenceResponse Hash] response from the API call
     def remove_dispute_evidence(dispute_id:,
                                 evidence_id:)
+      # Prepare parameters.
+      _parameters = {
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true },
+        'evidence_id' => { 'value' => evidence_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/disputes/{dispute_id}/evidence/{evidence_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true },
-        'evidence_id' => { 'value' => evidence_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -218,13 +243,18 @@ module Square
     # @return [RetrieveDisputeEvidenceResponse Hash] response from the API call
     def retrieve_dispute_evidence(dispute_id:,
                                   evidence_id:)
+      # Prepare parameters.
+      _parameters = {
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true },
+        'evidence_id' => { 'value' => evidence_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/disputes/{dispute_id}/evidence/{evidence_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true },
-        'evidence_id' => { 'value' => evidence_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -262,12 +292,17 @@ module Square
     def create_dispute_evidence_file(dispute_id:,
                                      request: nil,
                                      image_file: nil)
+      # Prepare parameters.
+      _parameters = {
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/disputes/{dispute_id}/evidence_file'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -323,12 +358,17 @@ module Square
     # @return [CreateDisputeEvidenceTextResponse Hash] response from the API call
     def create_dispute_evidence_text(dispute_id:,
                                      body:)
+      # Prepare parameters.
+      _parameters = {
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/disputes/{dispute_id}/evidence_text'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -368,12 +408,17 @@ module Square
     # you want to submit evidence for.
     # @return [SubmitEvidenceResponse Hash] response from the API call
     def submit_evidence(dispute_id:)
+      # Prepare parameters.
+      _parameters = {
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/disputes/{dispute_id}/submit-evidence'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

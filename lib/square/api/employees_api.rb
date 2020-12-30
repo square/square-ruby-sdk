@@ -19,15 +19,20 @@ module Square
                        limit: nil,
                        cursor: nil)
       warn 'Endpoint list_employees in EmployeesApi is deprecated'
+      # Prepare parameters.
+      _parameters = {
+        'location_id' => location_id,
+        'status' => status,
+        'limit' => limit,
+        'cursor' => cursor
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/employees'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'status' => status,
-        'limit' => limit,
-        'cursor' => cursor
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -58,12 +63,17 @@ module Square
     # @return [RetrieveEmployeeResponse Hash] response from the API call
     def retrieve_employee(id:)
       warn 'Endpoint retrieve_employee in EmployeesApi is deprecated'
+      # Prepare parameters.
+      _parameters = {
+        'id' => { 'value' => id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/employees/{id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
