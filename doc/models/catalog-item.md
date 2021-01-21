@@ -11,9 +11,9 @@ A [CatalogObject](#type-CatalogObject) instance of the `ITEM` type, also referre
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `String` | Optional | The item's name. This is a searchable attribute for use in applicable query filters, its value must not be empty, and the length is of Unicode code points. |
-| `description` | `String` | Optional | The item's description. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points. |
-| `abbreviation` | `String` | Optional | The text of the item's display label in the Square Point of Sale app. Only up to the first five characters of the string are used.<br>This attribute is searchable, and its value length is of Unicode code points. |
+| `name` | `String` | Optional | The item's name. This is a searchable attribute for use in applicable query filters, its value must not be empty, and the length is of Unicode code points.<br>**Constraints**: *Maximum Length*: `512` |
+| `description` | `String` | Optional | The item's description. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.<br>**Constraints**: *Maximum Length*: `4096` |
+| `abbreviation` | `String` | Optional | The text of the item's display label in the Square Point of Sale app. Only up to the first five characters of the string are used.<br>This attribute is searchable, and its value length is of Unicode code points.<br>**Constraints**: *Maximum Length*: `24` |
 | `label_color` | `String` | Optional | The color of the item's display label in the Square Point of Sale app. This must be a valid hex color code. |
 | `available_online` | `Boolean` | Optional | If `true`, the item can be added to shipping orders from the merchant's online store. |
 | `available_for_pickup` | `Boolean` | Optional | If `true`, the item can be added to pickup orders from the merchant's online store. |

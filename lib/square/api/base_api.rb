@@ -8,7 +8,7 @@ module Square
       @http_call_back = http_call_back
 
       @global_headers = {
-        'user-agent' => 'Square-Ruby-SDK/8.0.0.20201216',
+        'user-agent' => 'Square-Ruby-SDK/8.1.0.20210121',
         'Square-Version' => config.square_version
       }
     end

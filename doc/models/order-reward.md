@@ -12,8 +12,8 @@ reward tier criteria are met. Rewards are created through the Loyalty API.
 
 | Name | Type | Description |
 |  --- | --- | --- |
-| `id` | `String` | The identifier of the reward. |
-| `reward_tier_id` | `String` | The identifier of the reward tier corresponding to this reward. |
+| `id` | `String` | The identifier of the reward.<br>**Constraints**: *Minimum Length*: `1` |
+| `reward_tier_id` | `String` | The identifier of the reward tier corresponding to this reward.<br>**Constraints**: *Minimum Length*: `1` |
 
 ## Example (as JSON)
 

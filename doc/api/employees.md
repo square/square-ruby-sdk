@@ -16,6 +16,8 @@ employees_api = client.employees
 
 # List Employees
 
+**This endpoint is deprecated. **
+
 ListEmployees
 
 ```ruby
@@ -57,6 +59,8 @@ end
 
 
 # Retrieve Employee
+
+**This endpoint is deprecated. **
 
 RetrieveEmployee
 
