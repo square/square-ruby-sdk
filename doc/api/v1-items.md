@@ -54,6 +54,8 @@ v1_items_api = client.v1_items
 
 # List Categories
 
+**This endpoint is deprecated. **
+
 Lists all the item categories for a given location.
 
 ```ruby
@@ -86,6 +88,8 @@ end
 
 
 # Create Category
+
+**This endpoint is deprecated. **
 
 Creates an item category.
 
@@ -126,6 +130,8 @@ end
 
 # Delete Category
 
+**This endpoint is deprecated. **
+
 Deletes an existing item category.
 
 __DeleteCategory__ returns nothing on success but Connect SDKs
@@ -165,6 +171,8 @@ end
 
 
 # Update Category
+
+**This endpoint is deprecated. **
 
 Modifies the details of an existing item category.
 
@@ -208,6 +216,8 @@ end
 
 # List Discounts
 
+**This endpoint is deprecated. **
+
 Lists all the discounts for a given location.
 
 ```ruby
@@ -240,6 +250,8 @@ end
 
 
 # Create Discount
+
+**This endpoint is deprecated. **
 
 Creates a discount.
 
@@ -284,6 +296,8 @@ end
 
 # Delete Discount
 
+**This endpoint is deprecated. **
+
 Deletes an existing discount.
 
 __DeleteDiscount__ returns nothing on success but Connect SDKs
@@ -323,6 +337,8 @@ end
 
 
 # Update Discount
+
+**This endpoint is deprecated. **
 
 Modifies the details of an existing discount.
 
@@ -370,6 +386,8 @@ end
 
 # List Fees
 
+**This endpoint is deprecated. **
+
 Lists all the fees (taxes) for a given location.
 
 ```ruby
@@ -402,6 +420,8 @@ end
 
 
 # Create Fee
+
+**This endpoint is deprecated. **
 
 Creates a fee (tax).
 
@@ -444,6 +464,8 @@ end
 
 # Delete Fee
 
+**This endpoint is deprecated. **
+
 Deletes an existing fee (tax).
 
 __DeleteFee__ returns nothing on success but Connect SDKs
@@ -483,6 +505,8 @@ end
 
 
 # Update Fee
+
+**This endpoint is deprecated. **
 
 Modifies the details of an existing fee (tax).
 
@@ -528,6 +552,8 @@ end
 
 # List Inventory
 
+**This endpoint is deprecated. **
+
 Provides inventory information for all inventory-enabled item
 variations.
 
@@ -567,6 +593,8 @@ end
 
 
 # Adjust Inventory
+
+**This endpoint is deprecated. **
 
 Adjusts the current available inventory of an item variation.
 
@@ -610,6 +638,8 @@ end
 
 # List Items
 
+**This endpoint is deprecated. **
+
 Provides summary information of all items for a given location.
 
 ```ruby
@@ -645,6 +675,8 @@ end
 
 
 # Create Item
+
+**This endpoint is deprecated. **
 
 Creates an item and at least one variation for it.
 
@@ -698,6 +730,8 @@ end
 
 # Delete Item
 
+**This endpoint is deprecated. **
+
 Deletes an existing item and all item variations associated with it.
 
 __DeleteItem__ returns nothing on success but Connect SDKs
@@ -738,6 +772,8 @@ end
 
 # Retrieve Item
 
+**This endpoint is deprecated. **
+
 Provides the details for a single item, including associated modifier
 lists and fees.
 
@@ -774,6 +810,8 @@ end
 
 
 # Update Item
+
+**This endpoint is deprecated. **
 
 Modifies the core details of an existing item.
 
@@ -819,6 +857,8 @@ end
 
 # Remove Fee
 
+**This endpoint is deprecated. **
+
 Removes a fee assocation from an item so the fee is no longer
 automatically applied to the item in Square Point of Sale.
 
@@ -858,6 +898,8 @@ end
 
 
 # Apply Fee
+
+**This endpoint is deprecated. **
 
 Associates a fee with an item so the fee is automatically applied to
 the item in Square Point of Sale.
@@ -899,6 +941,8 @@ end
 
 # Remove Modifier List
 
+**This endpoint is deprecated. **
+
 Removes a modifier list association from an item so the modifier
 options from the list can no longer be applied to the item.
 
@@ -939,6 +983,8 @@ end
 
 # Apply Modifier List
 
+**This endpoint is deprecated. **
+
 Associates a modifier list with an item so the associated modifier
 options can be applied to the item.
 
@@ -978,6 +1024,8 @@ end
 
 
 # Create Variation
+
+**This endpoint is deprecated. **
 
 Creates an item variation for an existing item.
 
@@ -1023,6 +1071,8 @@ end
 
 # Delete Variation
 
+**This endpoint is deprecated. **
+
 Deletes an existing item variation from an item.
 
 __DeleteVariation__ returns nothing on success but Connect SDKs
@@ -1065,6 +1115,8 @@ end
 
 
 # Update Variation
+
+**This endpoint is deprecated. **
 
 Modifies the details of an existing item variation.
 
@@ -1113,6 +1165,8 @@ end
 
 # List Modifier Lists
 
+**This endpoint is deprecated. **
+
 Lists all the modifier lists for a given location.
 
 ```ruby
@@ -1145,6 +1199,8 @@ end
 
 
 # Create Modifier List
+
+**This endpoint is deprecated. **
 
 Creates an item modifier list and at least 1 modifier option for it.
 
@@ -1207,6 +1263,8 @@ end
 
 # Delete Modifier List
 
+**This endpoint is deprecated. **
+
 Deletes an existing item modifier list and all modifier options
 associated with it.
 
@@ -1248,6 +1306,8 @@ end
 
 # Retrieve Modifier List
 
+**This endpoint is deprecated. **
+
 Provides the details for a single modifier list.
 
 ```ruby
@@ -1283,6 +1343,8 @@ end
 
 
 # Update Modifier List
+
+**This endpoint is deprecated. **
 
 Modifies the details of an existing item modifier list.
 
@@ -1324,6 +1386,8 @@ end
 
 
 # Create Modifier Option
+
+**This endpoint is deprecated. **
 
 Creates an item modifier option and adds it to a modifier list.
 
@@ -1371,6 +1435,8 @@ end
 
 # Delete Modifier Option
 
+**This endpoint is deprecated. **
+
 Deletes an existing item modifier option from a modifier list.
 
 __DeleteModifierOption__ returns nothing on success but Connect
@@ -1413,6 +1479,8 @@ end
 
 
 # Update Modifier Option
+
+**This endpoint is deprecated. **
 
 Modifies the details of an existing item modifier option.
 
@@ -1463,6 +1531,8 @@ end
 
 # List Pages
 
+**This endpoint is deprecated. **
+
 Lists all Favorites pages (in Square Point of Sale) for a given
 location.
 
@@ -1496,6 +1566,8 @@ end
 
 
 # Create Page
+
+**This endpoint is deprecated. **
 
 Creates a Favorites page in Square Point of Sale.
 
@@ -1546,6 +1618,8 @@ end
 
 # Delete Page
 
+**This endpoint is deprecated. **
+
 Deletes an existing Favorites page and all of its cells.
 
 __DeletePage__ returns nothing on success but Connect SDKs
@@ -1584,6 +1658,8 @@ end
 
 
 # Update Page
+
+**This endpoint is deprecated. **
 
 Modifies the details of a Favorites page in Square Point of Sale.
 
@@ -1637,6 +1713,8 @@ end
 
 # Delete Page Cell
 
+**This endpoint is deprecated. **
+
 Deletes a cell from a Favorites page in Square Point of Sale.
 
 __DeletePageCell__ returns nothing on success but Connect SDKs
@@ -1682,6 +1760,8 @@ end
 
 
 # Update Page Cell
+
+**This endpoint is deprecated. **
 
 Modifies a cell of a Favorites page in Square Point of Sale.
 

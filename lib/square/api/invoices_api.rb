@@ -264,8 +264,8 @@ module Square
 
     # Cancels an invoice. The seller cannot collect payments for
     # the canceled invoice.
-    # You cannot cancel an invoice in a terminal state: `PAID`, `REFUNDED`,
-    # `CANCELED`, or `FAILED`.
+    # You cannot cancel an invoice in the `DRAFT` state or in a terminal state:
+    # `PAID`, `REFUNDED`, `CANCELED`, or `FAILED`.
     # @param [String] invoice_id Required parameter: The ID of the
     # [invoice](#type-invoice) to cancel.
     # @param [CancelInvoiceRequest] body Required parameter: An object

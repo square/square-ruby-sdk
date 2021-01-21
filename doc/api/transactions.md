@@ -21,6 +21,8 @@ transactions_api = client.transactions
 
 # List Refunds
 
+**This endpoint is deprecated. **
+
 Lists refunds for one of a business's locations.
 
 In addition to full or partial tender refunds processed through Square APIs,
@@ -75,6 +77,8 @@ end
 
 # List Transactions
 
+**This endpoint is deprecated. **
+
 Lists transactions for a particular location.
 
 Transactions include payment information from sales and exchanges and refund
@@ -124,6 +128,8 @@ end
 
 
 # Charge
+
+**This endpoint is deprecated. **
 
 Charges a card represented by a card nonce or a customer's card on file.
 
@@ -217,6 +223,8 @@ end
 
 # Retrieve Transaction
 
+**This endpoint is deprecated. **
+
 Retrieves details for a single transaction.
 
 ```ruby
@@ -252,6 +260,8 @@ end
 
 
 # Capture Transaction
+
+**This endpoint is deprecated. **
 
 Captures a transaction that was created with the [Charge](#endpoint-charge)
 endpoint with a `delay_capture` value of `true`.
@@ -292,6 +302,8 @@ end
 
 
 # Create Refund
+
+**This endpoint is deprecated. **
 
 Initiates a refund for a previously charged tender.
 
@@ -345,6 +357,8 @@ end
 
 
 # Void Transaction
+
+**This endpoint is deprecated. **
 
 Cancels a transaction that was created with the [Charge](#endpoint-charge)
 endpoint with a `delay_capture` value of `true`.

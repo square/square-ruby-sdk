@@ -11,10 +11,10 @@ Represents a service charge applied to an order.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `uid` | `String` | Optional | Unique ID that identifies the service charge only within this order. |
-| `name` | `String` | Optional | The name of the service charge. |
-| `catalog_object_id` | `String` | Optional | The catalog object ID referencing the service charge [CatalogObject](#type-catalogobject). |
-| `percentage` | `String` | Optional | The service charge percentage as a string representation of a<br>decimal number. For example, `"7.25"` indicates a service charge of 7.25%.<br><br>Exactly 1 of `percentage` or `amount_money` should be set. |
+| `uid` | `String` | Optional | Unique ID that identifies the service charge only within this order.<br>**Constraints**: *Maximum Length*: `60` |
+| `name` | `String` | Optional | The name of the service charge.<br>**Constraints**: *Maximum Length*: `255` |
+| `catalog_object_id` | `String` | Optional | The catalog object ID referencing the service charge [CatalogObject](#type-catalogobject).<br>**Constraints**: *Maximum Length*: `192` |
+| `percentage` | `String` | Optional | The service charge percentage as a string representation of a<br>decimal number. For example, `"7.25"` indicates a service charge of 7.25%.<br><br>Exactly 1 of `percentage` or `amount_money` should be set.<br>**Constraints**: *Maximum Length*: `10` |
 | `amount_money` | [`Money Hash`](/doc/models/money.md) | Optional | Represents an amount of money. `Money` fields can be signed or unsigned.<br>Fields that do not explicitly define whether they are signed or unsigned are<br>considered unsigned and can only hold positive amounts. For signed fields, the<br>sign of the value indicates the purpose of the money transfer. See<br>[Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)<br>for more information. |
 | `applied_money` | [`Money Hash`](/doc/models/money.md) | Optional | Represents an amount of money. `Money` fields can be signed or unsigned.<br>Fields that do not explicitly define whether they are signed or unsigned are<br>considered unsigned and can only hold positive amounts. For signed fields, the<br>sign of the value indicates the purpose of the money transfer. See<br>[Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)<br>for more information. |
 | `total_money` | [`Money Hash`](/doc/models/money.md) | Optional | Represents an amount of money. `Money` fields can be signed or unsigned.<br>Fields that do not explicitly define whether they are signed or unsigned are<br>considered unsigned and can only hold positive amounts. For signed fields, the<br>sign of the value indicates the purpose of the money transfer. See<br>[Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)<br>for more information. |

@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2020-12-16'` |
+| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2021-01-21'` |
 | `access_token` | `String` | The OAuth 2.0 Access Token to use for API requests. |
 | `environment` | `string` | The API environment. <br> **Default: `production`** |
 | `timeout` | `Float` | The value to use for connection timeout. <br> **Default: 60** |
@@ -18,7 +18,7 @@ The API client can be initialized as follows:
 
 ```ruby
 client = Square::Client.new(
-  square_version: '2020-12-16',
+  square_version: '2021-01-21',
   access_token: 'AccessToken',
   environment: 'production',
 )
@@ -42,6 +42,8 @@ API calls return an `ApiResponse` object that includes the following fields:
 
 ```ruby
 require 'square'
+
+include Square
 
 client = Square::Client.new(
   access_token: 'AccessToken',

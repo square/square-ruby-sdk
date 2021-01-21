@@ -530,11 +530,9 @@ module Square
     end
 
     # Provides the details for a single timecard.
-    # <aside>
     # Only approved accounts can manage their employees with Square.
     # Unapproved accounts cannot use employee management features with the
     # API.
-    # </aside>
     # @param [String] timecard_id Required parameter: The timecard's ID.
     # @return [V1Timecard Hash] response from the API call
     def retrieve_timecard(timecard_id:)

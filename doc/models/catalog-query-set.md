@@ -12,7 +12,7 @@ the `attribute_values`.
 
 | Name | Type | Description |
 |  --- | --- | --- |
-| `attribute_name` | `String` | The name of the attribute to be searched. Matching of the attribute name is exact. |
+| `attribute_name` | `String` | The name of the attribute to be searched. Matching of the attribute name is exact.<br>**Constraints**: *Minimum Length*: `1` |
 | `attribute_values` | `Array<String>` | The desired values of the search attribute. Matching of the attribute values is exact and case insensitive.<br>A maximum of 250 values may be searched in a request. |
 
 ## Example (as JSON)

@@ -157,7 +157,7 @@ def list_team_member_booking_profiles(bookable_only: false,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `bookable_only` | `Boolean` | Query, Optional | Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`). |
+| `bookable_only` | `Boolean` | Query, Optional | Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`).<br>**Default**: `false` |
 | `limit` | `Integer` | Query, Optional | The maximum number of results to return. |
 | `cursor` | `String` | Query, Optional | The cursor for paginating through the results. |
 | `location_id` | `String` | Query, Optional | Indicates whether to include only team members enabled at the given location in the returned result. |

@@ -11,8 +11,8 @@ A file to be uploaded as dispute evidence.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `filename` | `String` | Optional | The file name including the file extension. For example: "receipt.tiff". |
-| `filetype` | `String` | Optional | Dispute evidence files must be application/pdf, image/heic, image/heif, image/jpeg, image/png, or image/tiff formats. |
+| `filename` | `String` | Optional | The file name including the file extension. For example: "receipt.tiff".<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `40` |
+| `filetype` | `String` | Optional | Dispute evidence files must be application/pdf, image/heic, image/heif, image/jpeg, image/png, or image/tiff formats.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `40` |
 
 ## Example (as JSON)
 
