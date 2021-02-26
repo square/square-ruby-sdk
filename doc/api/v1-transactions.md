@@ -10,8 +10,6 @@ v1_transactions_api = client.v1_transactions
 
 ## Methods
 
-* [List Bank Accounts](/doc/api/v1-transactions.md#list-bank-accounts)
-* [Retrieve Bank Account](/doc/api/v1-transactions.md#retrieve-bank-account)
 * [List Orders](/doc/api/v1-transactions.md#list-orders)
 * [Retrieve Order](/doc/api/v1-transactions.md#retrieve-order)
 * [Update Order](/doc/api/v1-transactions.md#update-order)
@@ -21,79 +19,6 @@ v1_transactions_api = client.v1_transactions
 * [Create Refund](/doc/api/v1-transactions.md#create-refund)
 * [List Settlements](/doc/api/v1-transactions.md#list-settlements)
 * [Retrieve Settlement](/doc/api/v1-transactions.md#retrieve-settlement)
-
-
-# List Bank Accounts
-
-**This endpoint is deprecated. **
-
-Provides non-confidential details for all of a location's associated bank accounts. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
-
-```ruby
-def list_bank_accounts(location_id:)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `location_id` | `String` | Template, Required | The ID of the location to list bank accounts for. |
-
-## Response Type
-
-[`Array<V1 Bank Account Hash>`](/doc/models/v1-bank-account.md)
-
-## Example Usage
-
-```ruby
-location_id = 'location_id4'
-
-result = v1_transactions_api.list_bank_accounts(location_id: location_id)
-
-if result.success?
-  puts result.data
-elsif result.error?
-  warn result.data
-end
-```
-
-
-# Retrieve Bank Account
-
-**This endpoint is deprecated. **
-
-Provides non-confidential details for a merchant's associated bank account. This endpoint does not provide full bank account numbers, and there is no way to obtain a full bank account number with the Connect API.
-
-```ruby
-def retrieve_bank_account(location_id:,
-                          bank_account_id:)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `location_id` | `String` | Template, Required | The ID of the bank account's associated location. |
-| `bank_account_id` | `String` | Template, Required | The bank account's Square-issued ID. You obtain this value from Settlement objects returned. |
-
-## Response Type
-
-[`V1 Bank Account Hash`](/doc/models/v1-bank-account.md)
-
-## Example Usage
-
-```ruby
-location_id = 'location_id4'
-bank_account_id = 'bank_account_id0'
-
-result = v1_transactions_api.retrieve_bank_account(location_id: location_id, bank_account_id: bank_account_id)
-
-if result.success?
-  puts result.data
-elsif result.error?
-  warn result.data
-end
-```
 
 
 # List Orders
@@ -112,7 +37,7 @@ def list_orders(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the location to list online store orders for. |
-| `order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | TThe order in which payments are listed in the response. |
+| `order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | The order in which payments are listed in the response. |
 | `limit` | `Integer` | Query, Optional | The maximum number of payments to return in a single response. This value cannot exceed 200. |
 | `batch_token` | `String` | Query, Optional | A pagination cursor to retrieve the next set of results for your<br>original query to the endpoint. |
 
@@ -333,7 +258,7 @@ def list_refunds(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the location to list refunds for. |
-| `order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | TThe order in which payments are listed in the response. |
+| `order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | The order in which payments are listed in the response. |
 | `begin_time` | `String` | Query, Optional | The beginning of the requested reporting period, in ISO 8601 format. If this value is before January 1, 2013 (2013-01-01T00:00:00Z), this endpoint returns an error. Default value: The current time minus one year. |
 | `end_time` | `String` | Query, Optional | The end of the requested reporting period, in ISO 8601 format. If this value is more than one year greater than begin_time, this endpoint returns an error. Default value: The current time. |
 | `limit` | `Integer` | Query, Optional | The approximate number of refunds to return in a single response. Default: 100. Max: 200. Response may contain more results than the prescribed limit when refunds are made simultaneously to multiple tenders in a payment or when refunds are generated in an exchange to account for the value of returned goods. |

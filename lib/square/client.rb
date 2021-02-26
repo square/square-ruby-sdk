@@ -4,7 +4,7 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '8.1.0.20210121'
+      '9.0.0.20210226'
     end
 
     def square_version
@@ -33,12 +33,6 @@ module Square
     # @return [V1TransactionsApi] Returns the controller instance.
     def v1_transactions
       @v1_transactions ||= V1TransactionsApi.new config
-    end
-
-    # Access to v1_items controller.
-    # @return [V1ItemsApi] Returns the controller instance.
-    def v1_items
-      @v1_items ||= V1ItemsApi.new config
     end
 
     # Access to apple_pay controller.
@@ -193,13 +187,15 @@ module Square
 
     def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
                    backoff_factor: 1, environment: 'production',
-                   square_version: '2021-01-21', access_token: 'TODO: Replace',
+                   custom_url: 'https://connect.squareup.com',
+                   square_version: '2021-02-26', access_token: 'TODO: Replace',
                    additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(timeout: timeout, max_retries: max_retries,
                                     retry_interval: retry_interval,
                                     backoff_factor: backoff_factor,
                                     environment: environment,
+                                    custom_url: custom_url,
                                     square_version: square_version,
                                     access_token: access_token,
                                     additional_headers: additional_headers)

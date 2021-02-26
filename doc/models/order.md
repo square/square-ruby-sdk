@@ -17,7 +17,7 @@ itemization data.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `String` | Optional | The order's unique ID. |
-| `location_id` | `String` |  | The ID of the merchant location this order is associated with.<br>**Constraints**: *Minimum Length*: `1` |
+| `location_id` | `String` | Required | The ID of the merchant location this order is associated with.<br>**Constraints**: *Minimum Length*: `1` |
 | `reference_id` | `String` | Optional | A client specified identifier to associate an entity in another system<br>with this order.<br>**Constraints**: *Maximum Length*: `40` |
 | `source` | [`Order Source Hash`](/doc/models/order-source.md) | Optional | Represents the origination details of an order. |
 | `customer_id` | `String` | Optional | The [Customer](#type-customer) ID of the customer associated with the order.<br>**Constraints**: *Maximum Length*: `191` |

@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `location_id` | `String` |  | The ID of the location to list cash drawer shifts for.<br>**Constraints**: *Minimum Length*: `1` |
+| `location_id` | `String` | Required | The ID of the location to list cash drawer shifts for.<br>**Constraints**: *Minimum Length*: `1` |
 | `limit` | `Integer` | Optional | Number of resources to be returned in a page of results (200 by<br>default, 1000 max).<br>**Constraints**: `<= 1000` |
 | `cursor` | `String` | Optional | Opaque cursor for fetching the next page of results. |
 

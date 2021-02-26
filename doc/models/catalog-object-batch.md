@@ -9,9 +9,9 @@ A batch of catalog objects.
 
 ## Fields
 
-| Name | Type | Description |
-|  --- | --- | --- |
-| `objects` | [`Array<Catalog Object Hash>`](/doc/models/catalog-object.md) | A list of CatalogObjects belonging to this batch. |
+| Name | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `objects` | [`Array<Catalog Object Hash>`](/doc/models/catalog-object.md) | Required | A list of CatalogObjects belonging to this batch. |
 
 ## Example (as JSON)
 

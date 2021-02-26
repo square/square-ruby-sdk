@@ -9,10 +9,10 @@ The query filter to return the search result whose named attribute values are pr
 
 ## Fields
 
-| Name | Type | Description |
-|  --- | --- | --- |
-| `attribute_name` | `String` | The name of the attribute to be searched.<br>**Constraints**: *Minimum Length*: `1` |
-| `attribute_prefix` | `String` | The desired prefix of the search attribute value.<br>**Constraints**: *Minimum Length*: `1` |
+| Name | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `attribute_name` | `String` | Required | The name of the attribute to be searched.<br>**Constraints**: *Minimum Length*: `1` |
+| `attribute_prefix` | `String` | Required | The desired prefix of the search attribute value.<br>**Constraints**: *Minimum Length*: `1` |
 
 ## Example (as JSON)
 

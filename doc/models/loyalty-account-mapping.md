@@ -14,8 +14,8 @@ For more information, see
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `String` | Optional | The Square-assigned ID of the mapping.<br>**Constraints**: *Maximum Length*: `36` |
-| `type` | `String` |  | The type of mapping.<br>**Default**: `'PHONE'`<br>*Default: `'PHONE'`* |
-| `value` | `String` |  | The phone number, in E.164 format. For example, "+14155551111".<br>**Constraints**: *Minimum Length*: `1` |
+| `type` | `String` | Required | The type of mapping.<br>**Default**: `'PHONE'`<br>*Default: `'PHONE'`* |
+| `value` | `String` | Required | The phone number, in E.164 format. For example, "+14155551111".<br>**Constraints**: *Minimum Length*: `1` |
 | `created_at` | `String` | Optional | The timestamp when the mapping was created, in RFC 3339 format. |
 
 ## Example (as JSON)
