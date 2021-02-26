@@ -14,7 +14,7 @@ The line item being returned in an Order.
 | `uid` | `String` | Optional | Unique identifier for this return line item entry.<br>**Constraints**: *Maximum Length*: `60` |
 | `source_line_item_uid` | `String` | Optional | `uid` of the LineItem in the original sale Order.<br>**Constraints**: *Maximum Length*: `60` |
 | `name` | `String` | Optional | The name of the line item.<br>**Constraints**: *Maximum Length*: `512` |
-| `quantity` | `String` |  | The quantity returned, formatted as a decimal number.<br>For example: `"3"`.<br><br>Line items with a `quantity_unit` can have non-integer quantities.<br>For example: `"1.70000"`.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `12` |
+| `quantity` | `String` | Required | The quantity returned, formatted as a decimal number.<br>For example: `"3"`.<br><br>Line items with a `quantity_unit` can have non-integer quantities.<br>For example: `"1.70000"`.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `12` |
 | `quantity_unit` | [`Order Quantity Unit Hash`](/doc/models/order-quantity-unit.md) | Optional | Contains the measurement unit for a quantity and a precision which<br>specifies the number of digits after the decimal point for decimal quantities. |
 | `note` | `String` | Optional | The note of the returned line item.<br>**Constraints**: *Maximum Length*: `2000` |
 | `catalog_object_id` | `String` | Optional | The [CatalogItemVariation](#type-catalogitemvariation) id applied to this returned line item.<br>**Constraints**: *Maximum Length*: `192` |

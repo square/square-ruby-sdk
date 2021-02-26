@@ -5,91 +5,10 @@ module Square
       super(config, http_call_back: http_call_back)
     end
 
-    # Provides non-confidential details for all of a location's associated bank
-    # accounts. This endpoint does not provide full bank account numbers, and
-    # there is no way to obtain a full bank account number with the Connect API.
-    # @param [String] location_id Required parameter: The ID of the location to
-    # list bank accounts for.
-    # @return [List of V1BankAccount Hash] response from the API call
-    def list_bank_accounts(location_id:)
-      warn 'Endpoint list_bank_accounts in V1TransactionsApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v1/{location_id}/bank-accounts'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
-    end
-
-    # Provides non-confidential details for a merchant's associated bank
-    # account. This endpoint does not provide full bank account numbers, and
-    # there is no way to obtain a full bank account number with the Connect API.
-    # @param [String] location_id Required parameter: The ID of the bank
-    # account's associated location.
-    # @param [String] bank_account_id Required parameter: The bank account's
-    # Square-issued ID. You obtain this value from Settlement objects
-    # returned.
-    # @return [V1BankAccount Hash] response from the API call
-    def retrieve_bank_account(location_id:,
-                              bank_account_id:)
-      warn 'Endpoint retrieve_bank_account in V1TransactionsApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v1/{location_id}/bank-accounts/{bank_account_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true },
-        'bank_account_id' => { 'value' => bank_account_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
-    end
-
     # Provides summary information for a merchant's online store orders.
     # @param [String] location_id Required parameter: The ID of the location to
     # list online store orders for.
-    # @param [SortOrder] order Optional parameter: TThe order in which payments
+    # @param [SortOrder] order Optional parameter: The order in which payments
     # are listed in the response.
     # @param [Integer] limit Optional parameter: The maximum number of payments
     # to return in a single response. This value cannot exceed 200.
@@ -350,7 +269,7 @@ module Square
     # year in length.
     # @param [String] location_id Required parameter: The ID of the location to
     # list refunds for.
-    # @param [SortOrder] order Optional parameter: TThe order in which payments
+    # @param [SortOrder] order Optional parameter: The order in which payments
     # are listed in the response.
     # @param [String] begin_time Optional parameter: The beginning of the
     # requested reporting period, in ISO 8601 format. If this value is before

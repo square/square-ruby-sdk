@@ -9,12 +9,12 @@ Describes changes to subscription and billing states.
 
 ## Fields
 
-| Name | Type | Description |
-|  --- | --- | --- |
-| `id` | `String` | The ID of the subscription event. |
-| `subscription_event_type` | [`String (Subscription Event Subscription Event Type)`](/doc/models/subscription-event-subscription-event-type.md) | The possible subscription event types. |
-| `effective_date` | `String` | The date, in YYYY-MM-DD format (for<br>example, 2013-01-15), when the subscription event went into effect. |
-| `plan_id` | `String` | The ID of the subscription plan associated with the subscription. |
+| Name | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `String` | Required | The ID of the subscription event. |
+| `subscription_event_type` | [`String (Subscription Event Subscription Event Type)`](/doc/models/subscription-event-subscription-event-type.md) | Required | The possible subscription event types. |
+| `effective_date` | `String` | Required | The date, in YYYY-MM-DD format (for<br>example, 2013-01-15), when the subscription event went into effect. |
+| `plan_id` | `String` | Required | The ID of the subscription plan associated with the subscription. |
 
 ## Example (as JSON)
 

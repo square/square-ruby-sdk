@@ -196,6 +196,15 @@ client = Square::Client.new(
     environment: 'production'
 )
 ```
+
+- To set a custom environment provide a `custom_url`, and set environment to `custom`:
+
+```ruby
+client = Square::Client.new(
+    access_token:'ACCESS TOKEN HERE',
+    environment: 'custom',
+    custom_url: 'https://your.customdomain.com'
+)
  
 ### Get an Instance of an API object and call its methods
 

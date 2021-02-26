@@ -12,8 +12,8 @@ Represents one of a business's employees.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `String` | Optional | The employee's unique ID. |
-| `first_name` | `String` |  | The employee's first name. |
-| `last_name` | `String` |  | The employee's last name. |
+| `first_name` | `String` | Required | The employee's first name. |
+| `last_name` | `String` | Required | The employee's last name. |
 | `role_ids` | `Array<String>` | Optional | The ids of the employee's associated roles. Currently, you can specify only one or zero roles per employee. |
 | `authorized_location_ids` | `Array<String>` | Optional | The IDs of the locations the employee is allowed to clock in at. |
 | `email` | `String` | Optional | The employee's email address. |
