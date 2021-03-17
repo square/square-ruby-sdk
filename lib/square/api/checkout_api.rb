@@ -5,8 +5,8 @@ module Square
       super(config, http_call_back: http_call_back)
     end
 
-    # Links a `checkoutId` to a `checkout_page_url` that customers will
-    # be directed to in order to provide their payment information using a
+    # Links a `checkoutId` to a `checkout_page_url` that customers are
+    # directed to in order to provide their payment information using a
     # payment processing workflow hosted on connect.squareup.com.
     # @param [String] location_id Required parameter: The ID of the business
     # location to associate the checkout with.

@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Information on errors encountered during the request. |
+| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Information about errors encountered during the request. |
 | `refund` | [`Terminal Refund Hash`](/doc/models/terminal-refund.md) | Optional | - |
 
 ## Example (as JSON)
