@@ -22,7 +22,8 @@ terminal_api = client.terminal
 
 # Create Terminal Checkout
 
-Creates a new Terminal checkout request and sends it to the specified device to take a payment for the requested amount.
+Creates a Terminal checkout request and sends it to the specified device to take a payment
+for the requested amount.
 
 ```ruby
 def create_terminal_checkout(body:)
@@ -118,7 +119,7 @@ end
 
 # Get Terminal Checkout
 
-Retrieves a Terminal checkout request by checkout_id.
+Retrieves a Terminal checkout request by `checkout_id`.
 
 ```ruby
 def get_terminal_checkout(checkout_id:)
@@ -128,7 +129,7 @@ def get_terminal_checkout(checkout_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `checkout_id` | `String` | Template, Required | Unique ID for the desired `TerminalCheckout` |
+| `checkout_id` | `String` | Template, Required | The unique ID for the desired `TerminalCheckout`. |
 
 ## Response Type
 
@@ -161,7 +162,7 @@ def cancel_terminal_checkout(checkout_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `checkout_id` | `String` | Template, Required | Unique ID for the desired `TerminalCheckout` |
+| `checkout_id` | `String` | Template, Required | The unique ID for the desired `TerminalCheckout`. |
 
 ## Response Type
 
@@ -228,7 +229,7 @@ end
 
 # Search Terminal Refunds
 
-Retrieves a filtered list of Terminal Interac refund requests created by the seller making the request.
+Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request.
 
 ```ruby
 def search_terminal_refunds(body:)
@@ -272,7 +273,7 @@ end
 
 # Get Terminal Refund
 
-Retrieves an Interac terminal refund object by ID.
+Retrieves an Interac Terminal refund object by ID.
 
 ```ruby
 def get_terminal_refund(terminal_refund_id:)
@@ -282,7 +283,7 @@ def get_terminal_refund(terminal_refund_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `terminal_refund_id` | `String` | Template, Required | Unique ID for the desired `TerminalRefund` |
+| `terminal_refund_id` | `String` | Template, Required | The unique ID for the desired `TerminalRefund`. |
 
 ## Response Type
 
@@ -305,7 +306,7 @@ end
 
 # Cancel Terminal Refund
 
-Cancels an Interac terminal refund request by refund request ID if the status of the request permits it.
+Cancels an Interac Terminal refund request by refund request ID if the status of the request permits it.
 
 ```ruby
 def cancel_terminal_refund(terminal_refund_id:)
@@ -315,7 +316,7 @@ def cancel_terminal_refund(terminal_refund_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `terminal_refund_id` | `String` | Template, Required | Unique ID for the desired `TerminalRefund` |
+| `terminal_refund_id` | `String` | Template, Required | The unique ID for the desired `TerminalRefund`. |
 
 ## Response Type
 

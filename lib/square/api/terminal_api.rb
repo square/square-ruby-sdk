@@ -5,8 +5,9 @@ module Square
       super(config, http_call_back: http_call_back)
     end
 
-    # Creates a new Terminal checkout request and sends it to the specified
-    # device to take a payment for the requested amount.
+    # Creates a Terminal checkout request and sends it to the specified device
+    # to take a payment
+    # for the requested amount.
     # @param [CreateTerminalCheckoutRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -75,9 +76,9 @@ module Square
       )
     end
 
-    # Retrieves a Terminal checkout request by checkout_id.
-    # @param [String] checkout_id Required parameter: Unique ID for the desired
-    # `TerminalCheckout`
+    # Retrieves a Terminal checkout request by `checkout_id`.
+    # @param [String] checkout_id Required parameter: The unique ID for the
+    # desired `TerminalCheckout`.
     # @return [GetTerminalCheckoutResponse Hash] response from the API call
     def get_terminal_checkout(checkout_id:)
       # Prepare query url.
@@ -112,8 +113,8 @@ module Square
 
     # Cancels a Terminal checkout request if the status of the request permits
     # it.
-    # @param [String] checkout_id Required parameter: Unique ID for the desired
-    # `TerminalCheckout`
+    # @param [String] checkout_id Required parameter: The unique ID for the
+    # desired `TerminalCheckout`.
     # @return [CancelTerminalCheckoutResponse Hash] response from the API call
     def cancel_terminal_checkout(checkout_id:)
       # Prepare query url.
@@ -181,7 +182,7 @@ module Square
       )
     end
 
-    # Retrieves a filtered list of Terminal Interac refund requests created by
+    # Retrieves a filtered list of Interac Terminal refund requests created by
     # the seller making the request.
     # @param [SearchTerminalRefundsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
@@ -216,9 +217,9 @@ module Square
       )
     end
 
-    # Retrieves an Interac terminal refund object by ID.
-    # @param [String] terminal_refund_id Required parameter: Unique ID for the
-    # desired `TerminalRefund`
+    # Retrieves an Interac Terminal refund object by ID.
+    # @param [String] terminal_refund_id Required parameter: The unique ID for
+    # the desired `TerminalRefund`.
     # @return [GetTerminalRefundResponse Hash] response from the API call
     def get_terminal_refund(terminal_refund_id:)
       # Prepare query url.
@@ -251,10 +252,10 @@ module Square
       )
     end
 
-    # Cancels an Interac terminal refund request by refund request ID if the
+    # Cancels an Interac Terminal refund request by refund request ID if the
     # status of the request permits it.
-    # @param [String] terminal_refund_id Required parameter: Unique ID for the
-    # desired `TerminalRefund`
+    # @param [String] terminal_refund_id Required parameter: The unique ID for
+    # the desired `TerminalRefund`.
     # @return [CancelTerminalRefundResponse Hash] response from the API call
     def cancel_terminal_refund(terminal_refund_id:)
       # Prepare query url.

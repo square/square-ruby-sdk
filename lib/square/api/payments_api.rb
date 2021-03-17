@@ -83,16 +83,14 @@ module Square
       )
     end
 
-    # Charges a payment source (for example, a card
-    # represented by customer's card on file or a card nonce). In addition
-    # to the payment source, the request must include the
-    # amount to accept for the payment.
-    # There are several optional parameters that you can include in the request
-    # (for example, tip money, whether to autocomplete the payment, or a
-    # reference ID
-    # to correlate this payment with another system).
-    # The `PAYMENTS_WRITE_ADDITIONAL_RECIPIENTS` OAuth permission is required
-    # to enable application fees.
+    # Creates a payment using the provided source. You can use this endpoint
+    # to charge a card (credit/debit card or
+    # Square gift card) or record a payment that the seller received outside of
+    # Square
+    # (cash payment from a buyer or a payment that an external entity
+    # procesed on behalf of the seller).
+    # The endpoint creates a
+    # `Payment` object and returns it in the response.
     # @param [CreatePaymentRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -209,11 +207,53 @@ module Square
       )
     end
 
-    # Cancels (voids) a payment. If you set `autocomplete` to `false` when
-    # creating a payment,
-    # you can cancel the payment using this endpoint.
-    # @param [String] payment_id Required parameter: The `payment_id`
-    # identifying the payment to be canceled.
+    # Updates a payment with the APPROVED status.
+    # You can update the `amount_money` and `tip_money` using this endpoint.
+    # @param [String] payment_id Required parameter: The ID of the payment to
+    # update.
+    # @param [UpdatePaymentRequest] body Required parameter: An object
+    # containing the fields to POST for the request.  See the corresponding
+    # object definition for field details.
+    # @return [UpdatePaymentResponse Hash] response from the API call
+    def update_payment(payment_id:,
+                       body:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/payments/{payment_id}'
+      _query_builder = APIHelper.append_url_with_template_parameters(
+        _query_builder,
+        'payment_id' => { 'value' => payment_id, 'encode' => true }
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json',
+        'content-type' => 'application/json; charset=utf-8'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.put(
+        _query_url,
+        headers: _headers,
+        parameters: body.to_json
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
+    end
+
+    # Cancels (voids) a payment. You can use this endpoint to cancel a payment
+    # with
+    # the APPROVED `status`.
+    # @param [String] payment_id Required parameter: The ID of the payment to
+    # cancel.
     # @return [CancelPaymentResponse Hash] response from the API call
     def cancel_payment(payment_id:)
       # Prepare query url.
@@ -249,9 +289,8 @@ module Square
     # Completes (captures) a payment.
     # By default, payments are set to complete immediately after they are
     # created.
-    # If you set `autocomplete` to `false` when creating a payment, you can
-    # complete (capture)
-    # the payment using this endpoint.
+    # You can use this endpoint to complete a payment with the APPROVED
+    # `status`.
     # @param [String] payment_id Required parameter: The unique ID identifying
     # the payment to be completed.
     # @return [CompletePaymentResponse Hash] response from the API call
