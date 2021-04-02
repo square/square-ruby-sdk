@@ -1,5 +1,12 @@
 # Change Log
 
+## Version 9.1.1.20210317 (2021-04-01)
+
+## SDKs
+* **Square Ruby SDK:**
+  * Added support for Ruby 3.0.0.
+
+
 ## Version 9.1.0.20210317 (2021-03-17)
 
 ## Existing API updates

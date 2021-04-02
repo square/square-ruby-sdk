@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'square.rb'
-  s.version = '9.1.0.20210317'
+  s.version = '9.1.1.20210317'
   s.summary = 'square'
   s.description = 'Use Square APIs to manage and run business including payment, customer, product, inventory, and employee management.'
   s.authors = ['Square Developer Platform']
