@@ -1,8 +1,10 @@
 language: ruby
 rvm:
-- 2.4.6
-- 2.5.5
-- 2.6.3
+- 2.4.10
+- 2.5.8
+- 2.6.6
+- 2.7.2
+- 3.0.0
 - truffleruby
 env:
   global:
@@ -19,3 +21,6 @@ notifications:
     recipients:
       - devs-apex-alerts+travis@squareup.com
     on_success: change
+jobs:
+  allow_failures:
+  - rvm: ruby-head
