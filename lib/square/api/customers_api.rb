@@ -26,14 +26,19 @@ module Square
     def list_customers(cursor: nil,
                        sort_field: nil,
                        sort_order: nil)
+      # Prepare parameters.
+      _parameters = {
+        'cursor' => cursor,
+        'sort_field' => sort_field,
+        'sort_order' => sort_order
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'cursor' => cursor,
-        'sort_field' => sort_field,
-        'sort_order' => sort_order
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -154,12 +159,17 @@ module Square
     # delete.
     # @return [DeleteCustomerResponse Hash] response from the API call
     def delete_customer(customer_id:)
+      # Prepare parameters.
+      _parameters = {
+        'customer_id' => { 'value' => customer_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/{customer_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'customer_id' => { 'value' => customer_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -189,12 +199,17 @@ module Square
     # retrieve.
     # @return [RetrieveCustomerResponse Hash] response from the API call
     def retrieve_customer(customer_id:)
+      # Prepare parameters.
+      _parameters = {
+        'customer_id' => { 'value' => customer_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/{customer_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'customer_id' => { 'value' => customer_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -237,12 +252,17 @@ module Square
     # @return [UpdateCustomerResponse Hash] response from the API call
     def update_customer(customer_id:,
                         body:)
+      # Prepare parameters.
+      _parameters = {
+        'customer_id' => { 'value' => customer_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/{customer_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'customer_id' => { 'value' => customer_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -282,12 +302,17 @@ module Square
     # @return [CreateCustomerCardResponse Hash] response from the API call
     def create_customer_card(customer_id:,
                              body:)
+      # Prepare parameters.
+      _parameters = {
+        'customer_id' => { 'value' => customer_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/{customer_id}/cards'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'customer_id' => { 'value' => customer_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -322,13 +347,18 @@ module Square
     # @return [DeleteCustomerCardResponse Hash] response from the API call
     def delete_customer_card(customer_id:,
                              card_id:)
+      # Prepare parameters.
+      _parameters = {
+        'customer_id' => { 'value' => customer_id, 'encode' => true },
+        'card_id' => { 'value' => card_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/{customer_id}/cards/{card_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'customer_id' => { 'value' => customer_id, 'encode' => true },
-        'card_id' => { 'value' => card_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -363,13 +393,18 @@ module Square
     # @return [RemoveGroupFromCustomerResponse Hash] response from the API call
     def remove_group_from_customer(customer_id:,
                                    group_id:)
+      # Prepare parameters.
+      _parameters = {
+        'customer_id' => { 'value' => customer_id, 'encode' => true },
+        'group_id' => { 'value' => group_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/{customer_id}/groups/{group_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'customer_id' => { 'value' => customer_id, 'encode' => true },
-        'group_id' => { 'value' => group_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -404,13 +439,18 @@ module Square
     # @return [AddGroupToCustomerResponse Hash] response from the API call
     def add_group_to_customer(customer_id:,
                               group_id:)
+      # Prepare parameters.
+      _parameters = {
+        'customer_id' => { 'value' => customer_id, 'encode' => true },
+        'group_id' => { 'value' => group_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/{customer_id}/groups/{group_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'customer_id' => { 'value' => customer_id, 'encode' => true },
-        'group_id' => { 'value' => group_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

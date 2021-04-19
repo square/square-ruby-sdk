@@ -27,17 +27,22 @@ module Square
                                 end_time: nil,
                                 limit: nil,
                                 cursor: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/cash-drawers/shifts'
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
+      # Prepare parameters.
+      _parameters = {
         'location_id' => location_id,
         'sort_order' => sort_order,
         'begin_time' => begin_time,
         'end_time' => end_time,
         'limit' => limit,
         'cursor' => cursor
+      }
+
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/cash-drawers/shifts'
+      _query_builder = APIHelper.append_url_with_query_parameters(
+        _query_builder,
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -71,16 +76,24 @@ module Square
     # @return [RetrieveCashDrawerShiftResponse Hash] response from the API call
     def retrieve_cash_drawer_shift(location_id:,
                                    shift_id:)
+      # Prepare parameters.
+      _template_parameters = {
+        'shift_id' => { 'value' => shift_id, 'encode' => true }
+      }
+      _query_parameters = {
+        'location_id' => location_id
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/cash-drawers/shifts/{shift_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'shift_id' => { 'value' => shift_id, 'encode' => true }
+        _template_parameters
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'location_id' => location_id
+        _query_parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -118,18 +131,26 @@ module Square
                                       shift_id:,
                                       limit: nil,
                                       cursor: nil)
+      # Prepare parameters.
+      _template_parameters = {
+        'shift_id' => { 'value' => shift_id, 'encode' => true }
+      }
+      _query_parameters = {
+        'location_id' => location_id,
+        'limit' => limit,
+        'cursor' => cursor
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/cash-drawers/shifts/{shift_id}/events'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'shift_id' => { 'value' => shift_id, 'encode' => true }
+        _template_parameters
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'limit' => limit,
-        'cursor' => cursor
+        _query_parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

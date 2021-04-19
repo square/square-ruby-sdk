@@ -39,12 +39,17 @@ module Square
                     body:,
                     authorization:)
       warn 'Endpoint renew_token in OAuthApi is deprecated'
+      # Prepare parameters.
+      _parameters = {
+        'client_id' => { 'value' => client_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/oauth2/clients/{client_id}/access-token/renew'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'client_id' => { 'value' => client_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

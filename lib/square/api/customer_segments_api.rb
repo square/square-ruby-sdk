@@ -13,12 +13,17 @@ module Square
     # for more information.
     # @return [ListCustomerSegmentsResponse Hash] response from the API call
     def list_customer_segments(cursor: nil)
+      # Prepare parameters.
+      _parameters = {
+        'cursor' => cursor
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/segments'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'cursor' => cursor
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -49,12 +54,17 @@ module Square
     # customer segment.
     # @return [RetrieveCustomerSegmentResponse Hash] response from the API call
     def retrieve_customer_segment(segment_id:)
+      # Prepare parameters.
+      _parameters = {
+        'segment_id' => { 'value' => segment_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/segments/{segment_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'segment_id' => { 'value' => segment_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

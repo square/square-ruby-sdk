@@ -260,14 +260,19 @@ module Square
     def list_catalog(cursor: nil,
                      types: nil,
                      catalog_version: nil)
+      # Prepare parameters.
+      _parameters = {
+        'cursor' => cursor,
+        'types' => types,
+        'catalog_version' => catalog_version
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/catalog/list'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'cursor' => cursor,
-        'types' => types,
-        'catalog_version' => catalog_version
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -340,12 +345,17 @@ module Square
     # catalog item will delete its catalog item variations).
     # @return [DeleteCatalogObjectResponse Hash] response from the API call
     def delete_catalog_object(object_id:)
+      # Prepare parameters.
+      _parameters = {
+        'object_id' => { 'value' => object_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/catalog/object/{object_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'object_id' => { 'value' => object_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -398,17 +408,25 @@ module Square
     def retrieve_catalog_object(object_id:,
                                 include_related_objects: false,
                                 catalog_version: nil)
+      # Prepare parameters.
+      _template_parameters = {
+        'object_id' => { 'value' => object_id, 'encode' => true }
+      }
+      _query_parameters = {
+        'include_related_objects' => include_related_objects,
+        'catalog_version' => catalog_version
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/catalog/object/{object_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'object_id' => { 'value' => object_id, 'encode' => true }
+        _template_parameters
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'include_related_objects' => include_related_objects,
-        'catalog_version' => catalog_version
+        _query_parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

@@ -82,12 +82,17 @@ module Square
     # account](#type-LoyaltyAccount) to retrieve.
     # @return [RetrieveLoyaltyAccountResponse Hash] response from the API call
     def retrieve_loyalty_account(account_id:)
+      # Prepare parameters.
+      _parameters = {
+        'account_id' => { 'value' => account_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/loyalty/accounts/{account_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'account_id' => { 'value' => account_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -133,12 +138,17 @@ module Square
     # @return [AccumulateLoyaltyPointsResponse Hash] response from the API call
     def accumulate_loyalty_points(account_id:,
                                   body:)
+      # Prepare parameters.
+      _parameters = {
+        'account_id' => { 'value' => account_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/loyalty/accounts/{account_id}/accumulate'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'account_id' => { 'value' => account_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -178,12 +188,17 @@ module Square
     # @return [AdjustLoyaltyPointsResponse Hash] response from the API call
     def adjust_loyalty_points(account_id:,
                               body:)
+      # Prepare parameters.
+      _parameters = {
+        'account_id' => { 'value' => account_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/loyalty/accounts/{account_id}/adjust'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'account_id' => { 'value' => account_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -299,12 +314,17 @@ module Square
     # @return [CalculateLoyaltyPointsResponse Hash] response from the API call
     def calculate_loyalty_points(program_id:,
                                  body:)
+      # Prepare parameters.
+      _parameters = {
+        'program_id' => { 'value' => program_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/loyalty/programs/{program_id}/calculate'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'program_id' => { 'value' => program_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -421,12 +441,17 @@ module Square
     # reward](#type-LoyaltyReward) to delete.
     # @return [DeleteLoyaltyRewardResponse Hash] response from the API call
     def delete_loyalty_reward(reward_id:)
+      # Prepare parameters.
+      _parameters = {
+        'reward_id' => { 'value' => reward_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/loyalty/rewards/{reward_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'reward_id' => { 'value' => reward_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -456,12 +481,17 @@ module Square
     # reward](#type-LoyaltyReward) to retrieve.
     # @return [RetrieveLoyaltyRewardResponse Hash] response from the API call
     def retrieve_loyalty_reward(reward_id:)
+      # Prepare parameters.
+      _parameters = {
+        'reward_id' => { 'value' => reward_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/loyalty/rewards/{reward_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'reward_id' => { 'value' => reward_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -502,12 +532,17 @@ module Square
     # @return [RedeemLoyaltyRewardResponse Hash] response from the API call
     def redeem_loyalty_reward(reward_id:,
                               body:)
+      # Prepare parameters.
+      _parameters = {
+        'reward_id' => { 'value' => reward_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/loyalty/rewards/{reward_id}/redeem'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'reward_id' => { 'value' => reward_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

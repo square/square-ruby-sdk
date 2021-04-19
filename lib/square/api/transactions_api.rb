@@ -37,19 +37,27 @@ module Square
                      sort_order: nil,
                      cursor: nil)
       warn 'Endpoint list_refunds in TransactionsApi is deprecated'
+      # Prepare parameters.
+      _template_parameters = {
+        'location_id' => { 'value' => location_id, 'encode' => true }
+      }
+      _query_parameters = {
+        'begin_time' => begin_time,
+        'end_time' => end_time,
+        'sort_order' => sort_order,
+        'cursor' => cursor
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/refunds'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true }
+        _template_parameters
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'begin_time' => begin_time,
-        'end_time' => end_time,
-        'sort_order' => sort_order,
-        'cursor' => cursor
+        _query_parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -103,19 +111,27 @@ module Square
                           sort_order: nil,
                           cursor: nil)
       warn 'Endpoint list_transactions in TransactionsApi is deprecated'
+      # Prepare parameters.
+      _template_parameters = {
+        'location_id' => { 'value' => location_id, 'encode' => true }
+      }
+      _query_parameters = {
+        'begin_time' => begin_time,
+        'end_time' => end_time,
+        'sort_order' => sort_order,
+        'cursor' => cursor
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/transactions'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true }
+        _template_parameters
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'begin_time' => begin_time,
-        'end_time' => end_time,
-        'sort_order' => sort_order,
-        'cursor' => cursor
+        _query_parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -168,12 +184,17 @@ module Square
     def charge(location_id:,
                body:)
       warn 'Endpoint charge in TransactionsApi is deprecated'
+      # Prepare parameters.
+      _parameters = {
+        'location_id' => { 'value' => location_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/transactions'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -209,13 +230,18 @@ module Square
     def retrieve_transaction(location_id:,
                              transaction_id:)
       warn 'Endpoint retrieve_transaction in TransactionsApi is deprecated'
+      # Prepare parameters.
+      _parameters = {
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'transaction_id' => { 'value' => transaction_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/transactions/{transaction_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true },
-        'transaction_id' => { 'value' => transaction_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -253,13 +279,18 @@ module Square
     def capture_transaction(location_id:,
                             transaction_id:)
       warn 'Endpoint capture_transaction in TransactionsApi is deprecated'
+      # Prepare parameters.
+      _parameters = {
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'transaction_id' => { 'value' => transaction_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/transactions/{transaction_id}/capture'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true },
-        'transaction_id' => { 'value' => transaction_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -304,13 +335,18 @@ module Square
                       transaction_id:,
                       body:)
       warn 'Endpoint create_refund in TransactionsApi is deprecated'
+      # Prepare parameters.
+      _parameters = {
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'transaction_id' => { 'value' => transaction_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/transactions/{transaction_id}/refund'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true },
-        'transaction_id' => { 'value' => transaction_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -349,13 +385,18 @@ module Square
     def void_transaction(location_id:,
                          transaction_id:)
       warn 'Endpoint void_transaction in TransactionsApi is deprecated'
+      # Prepare parameters.
+      _parameters = {
+        'location_id' => { 'value' => location_id, 'encode' => true },
+        'transaction_id' => { 'value' => transaction_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/transactions/{transaction_id}/void'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true },
-        'transaction_id' => { 'value' => transaction_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

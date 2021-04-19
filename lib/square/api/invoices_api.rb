@@ -22,14 +22,19 @@ module Square
     def list_invoices(location_id:,
                       cursor: nil,
                       limit: nil)
+      # Prepare parameters.
+      _parameters = {
+        'location_id' => location_id,
+        'cursor' => cursor,
+        'limit' => limit
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/invoices'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'location_id' => location_id,
-        'cursor' => cursor,
-        'limit' => limit
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -145,16 +150,24 @@ module Square
     # @return [DeleteInvoiceResponse Hash] response from the API call
     def delete_invoice(invoice_id:,
                        version: nil)
+      # Prepare parameters.
+      _template_parameters = {
+        'invoice_id' => { 'value' => invoice_id, 'encode' => true }
+      }
+      _query_parameters = {
+        'version' => version
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/invoices/{invoice_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'invoice_id' => { 'value' => invoice_id, 'encode' => true }
+        _template_parameters
       )
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'version' => version
+        _query_parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -184,12 +197,17 @@ module Square
     # retrieve.
     # @return [GetInvoiceResponse Hash] response from the API call
     def get_invoice(invoice_id:)
+      # Prepare parameters.
+      _parameters = {
+        'invoice_id' => { 'value' => invoice_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/invoices/{invoice_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'invoice_id' => { 'value' => invoice_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -230,12 +248,17 @@ module Square
     # @return [UpdateInvoiceResponse Hash] response from the API call
     def update_invoice(invoice_id:,
                        body:)
+      # Prepare parameters.
+      _parameters = {
+        'invoice_id' => { 'value' => invoice_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/invoices/{invoice_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'invoice_id' => { 'value' => invoice_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -274,12 +297,17 @@ module Square
     # @return [CancelInvoiceResponse Hash] response from the API call
     def cancel_invoice(invoice_id:,
                        body:)
+      # Prepare parameters.
+      _parameters = {
+        'invoice_id' => { 'value' => invoice_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/invoices/{invoice_id}/cancel'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'invoice_id' => { 'value' => invoice_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -327,12 +355,17 @@ module Square
     # @return [PublishInvoiceResponse Hash] response from the API call
     def publish_invoice(invoice_id:,
                         body:)
+      # Prepare parameters.
+      _parameters = {
+        'invoice_id' => { 'value' => invoice_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/invoices/{invoice_id}/publish'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'invoice_id' => { 'value' => invoice_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

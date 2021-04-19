@@ -16,12 +16,17 @@ module Square
     # @return [CreateCheckoutResponse Hash] response from the API call
     def create_checkout(location_id:,
                         body:)
+      # Prepare parameters.
+      _parameters = {
+        'location_id' => { 'value' => location_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/checkouts'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

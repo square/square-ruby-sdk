@@ -13,12 +13,17 @@ module Square
     # for more information.
     # @return [ListCustomerGroupsResponse Hash] response from the API call
     def list_customer_groups(cursor: nil)
+      # Prepare parameters.
+      _parameters = {
+        'cursor' => cursor
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/groups'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'cursor' => cursor
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -83,12 +88,17 @@ module Square
     # to delete.
     # @return [DeleteCustomerGroupResponse Hash] response from the API call
     def delete_customer_group(group_id:)
+      # Prepare parameters.
+      _parameters = {
+        'group_id' => { 'value' => group_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/groups/{group_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'group_id' => { 'value' => group_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -118,12 +128,17 @@ module Square
     # to retrieve.
     # @return [RetrieveCustomerGroupResponse Hash] response from the API call
     def retrieve_customer_group(group_id:)
+      # Prepare parameters.
+      _parameters = {
+        'group_id' => { 'value' => group_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/groups/{group_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'group_id' => { 'value' => group_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -157,12 +172,17 @@ module Square
     # @return [UpdateCustomerGroupResponse Hash] response from the API call
     def update_customer_group(group_id:,
                               body:)
+      # Prepare parameters.
+      _parameters = {
+        'group_id' => { 'value' => group_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/groups/{group_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'group_id' => { 'value' => group_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 

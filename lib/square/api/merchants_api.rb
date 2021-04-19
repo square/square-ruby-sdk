@@ -18,12 +18,17 @@ module Square
     # previous response.
     # @return [ListMerchantsResponse Hash] response from the API call
     def list_merchants(cursor: nil)
+      # Prepare parameters.
+      _parameters = {
+        'cursor' => cursor
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/merchants'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'cursor' => cursor
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -54,12 +59,17 @@ module Square
     # merchant that is currently accessible to this call.
     # @return [RetrieveMerchantResponse Hash] response from the API call
     def retrieve_merchant(merchant_id:)
+      # Prepare parameters.
+      _parameters = {
+        'merchant_id' => { 'value' => merchant_id, 'encode' => true }
+      }
+
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/merchants/{merchant_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
-        'merchant_id' => { 'value' => merchant_id, 'encode' => true }
+        _parameters
       )
       _query_url = APIHelper.clean_url _query_builder
 
