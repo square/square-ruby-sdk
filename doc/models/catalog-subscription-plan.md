@@ -13,7 +13,7 @@ Describes a subscription plan. For more information, see
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `String` | Optional | The name of the plan. |
-| `phases` | [`Array<Subscription Phase Hash>`](/doc/models/subscription-phase.md) | Optional | A list of SubscriptionPhase containing the [SubscriptionPhase](#type-SubscriptionPhase) for this plan. |
+| `phases` | [`Array<Subscription Phase Hash>`](/doc/models/subscription-phase.md) | Optional | A list of SubscriptionPhase containing the [SubscriptionPhase](/doc/models/subscription-phase.md) for this plan. |
 
 ## Example (as JSON)
 

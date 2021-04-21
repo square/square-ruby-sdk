@@ -15,7 +15,7 @@ added to `ITEM` and `ITEM_VARIATION` type catalog objects.
 |  --- | --- | --- | --- |
 | `name` | `String` | Optional | The name of the custom attribute. |
 | `string_value` | `String` | Optional | The string value of the custom attribute.  Populated if `type` = `STRING`. |
-| `custom_attribute_definition_id` | `String` | Optional | __Read-only.__ The id of the [CatalogCustomAttributeDefinition](#type-CatalogCustomAttributeDefinition) this value belongs to. |
+| `custom_attribute_definition_id` | `String` | Optional | __Read-only.__ The id of the [CatalogCustomAttributeDefinition](/doc/models/catalog-custom-attribute-definition.md) this value belongs to. |
 | `type` | [`String (Catalog Custom Attribute Definition Type)`](/doc/models/catalog-custom-attribute-definition-type.md) | Optional | Defines the possible types for a custom attribute. |
 | `number_value` | `String` | Optional | Populated if `type` = `NUMBER`. Contains a string<br>representation of a decimal number, using a `.` as the decimal separator. |
 | `boolean_value` | `Boolean` | Optional | A `true` or `false` value. Populated if `type` = `BOOLEAN`. |

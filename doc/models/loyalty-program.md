@@ -14,7 +14,7 @@
 | `reward_tiers` | [`Array<Loyalty Program Reward Tier Hash>`](/doc/models/loyalty-program-reward-tier.md) | Required | The list of rewards for buyers, sorted by ascending points. |
 | `expiration_policy` | [`Loyalty Program Expiration Policy Hash`](/doc/models/loyalty-program-expiration-policy.md) | Optional | Describes when the loyalty program expires. |
 | `terminology` | [`Loyalty Program Terminology Hash`](/doc/models/loyalty-program-terminology.md) | Required | - |
-| `location_ids` | `Array<String>` | Required | The [locations](#type-Location) at which the program is active. |
+| `location_ids` | `Array<String>` | Required | The [locations](/doc/models/location.md) at which the program is active. |
 | `created_at` | `String` | Required | The timestamp when the program was created, in RFC 3339 format.<br>**Constraints**: *Minimum Length*: `1` |
 | `updated_at` | `String` | Required | The timestamp when the reward was last updated, in RFC 3339 format.<br>**Constraints**: *Minimum Length*: `1` |
 | `accrual_rules` | [`Array<Loyalty Program Accrual Rule Hash>`](/doc/models/loyalty-program-accrual-rule.md) | Required | Defines how buyers can earn loyalty points. |

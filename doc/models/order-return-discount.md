@@ -18,7 +18,7 @@ order subtotal.
 |  --- | --- | --- | --- |
 | `uid` | `String` | Optional | Unique ID that identifies the return discount only within this order.<br>**Constraints**: *Maximum Length*: `60` |
 | `source_discount_uid` | `String` | Optional | `uid` of the Discount from the Order which contains the original application of this discount.<br>**Constraints**: *Maximum Length*: `60` |
-| `catalog_object_id` | `String` | Optional | The catalog object id referencing [CatalogDiscount](#type-catalogdiscount).<br>**Constraints**: *Maximum Length*: `192` |
+| `catalog_object_id` | `String` | Optional | The catalog object id referencing [CatalogDiscount](/doc/models/catalog-discount.md).<br>**Constraints**: *Maximum Length*: `192` |
 | `name` | `String` | Optional | The discount's name.<br>**Constraints**: *Maximum Length*: `255` |
 | `type` | [`String (Order Line Item Discount Type)`](/doc/models/order-line-item-discount-type.md) | Optional | Indicates how the discount is applied to the associated line item or order. |
 | `percentage` | `String` | Optional | The percentage of the tax, as a string representation of a decimal number.<br>A value of `7.25` corresponds to a percentage of 7.25%.<br><br>`percentage` is not set for amount-based discounts.<br>**Constraints**: *Maximum Length*: `10` |

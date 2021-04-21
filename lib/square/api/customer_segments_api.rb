@@ -7,10 +7,10 @@ module Square
 
     # Retrieves the list of customer segments of a business.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
-    # previous calls to __ListCustomerSegments__. Used to retrieve the next set
-    # of query results.  See the [Pagination
-    # guide](https://developer.squareup.com/docs/working-with-apis/pagination)
-    # for more information.
+    # previous calls to `ListCustomerSegments`. This cursor is used to retrieve
+    # the next set of query results.  For more information, see
+    # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
+    # ion).
     # @return [ListCustomerSegmentsResponse Hash] response from the API call
     def list_customer_segments(cursor: nil)
       # Prepare query url.

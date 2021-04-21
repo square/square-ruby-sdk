@@ -6,6 +6,9 @@ module Square
     end
 
     # Retrieves a list of refunds for the account making the request.
+    # Results are eventually consistent, and new refunds or changes to refunds
+    # might take several
+    # seconds to appear.
     # The maximum results per page is 100.
     # @param [String] begin_time Optional parameter: The timestamp for the
     # beginning of the requested reporting period, in RFC 3339 format.  Default:
@@ -26,7 +29,7 @@ module Square
     # associated with the seller.
     # @param [String] status Optional parameter: If provided, only refunds with
     # the given status are returned. For a list of refund status values, see
-    # [PaymentRefund](#type-paymentrefund).  Default: If omitted, refunds are
+    # [PaymentRefund]($m/PaymentRefund).  Default: If omitted, refunds are
     # returned regardless of their status.
     # @param [String] source_type Optional parameter: If provided, only refunds
     # with the given source type are returned. - `CARD` - List refunds only for

@@ -4,7 +4,7 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '9.1.1.20210317'
+      '10.0.0.202104217'
     end
 
     def square_version
@@ -188,7 +188,7 @@ module Square
     def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
                    backoff_factor: 1, environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2021-03-17', access_token: 'TODO: Replace',
+                   square_version: '2021-04-21', access_token: 'TODO: Replace',
                    additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(timeout: timeout, max_retries: max_retries,

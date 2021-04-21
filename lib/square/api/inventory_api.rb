@@ -5,10 +5,10 @@ module Square
       super(config, http_call_back: http_call_back)
     end
 
-    # Returns the [InventoryAdjustment](#type-inventoryadjustment) object
+    # Returns the [InventoryAdjustment]($m/InventoryAdjustment) object
     # with the provided `adjustment_id`.
     # @param [String] adjustment_id Required parameter: ID of the
-    # [InventoryAdjustment](#type-inventoryadjustment) to retrieve.
+    # [InventoryAdjustment]($m/InventoryAdjustment) to retrieve.
     # @return [RetrieveInventoryAdjustmentResponse Hash] response from the API call
     def retrieve_inventory_adjustment(adjustment_id:)
       # Prepare query url.
@@ -118,8 +118,8 @@ module Square
     end
 
     # Returns current counts for the provided
-    # [CatalogObject](#type-catalogobject)s at the requested
-    # [Location](#type-location)s.
+    # [CatalogObject]($m/CatalogObject)s at the requested
+    # [Location]($m/Location)s.
     # Results are paginated and sorted in descending order according to their
     # `calculated_at` timestamp (newest first).
     # When `updated_after` is specified, only counts that have changed since
@@ -160,10 +160,10 @@ module Square
       )
     end
 
-    # Returns the [InventoryPhysicalCount](#type-inventoryphysicalcount)
+    # Returns the [InventoryPhysicalCount]($m/InventoryPhysicalCount)
     # object with the provided `physical_count_id`.
     # @param [String] physical_count_id Required parameter: ID of the
-    # [InventoryPhysicalCount](#type-inventoryphysicalcount) to retrieve.
+    # [InventoryPhysicalCount]($m/InventoryPhysicalCount) to retrieve.
     # @return [RetrieveInventoryPhysicalCountResponse Hash] response from the API call
     def retrieve_inventory_physical_count(physical_count_id:)
       # Prepare query url.
@@ -197,14 +197,14 @@ module Square
     end
 
     # Retrieves the current calculated stock count for a given
-    # [CatalogObject](#type-catalogobject) at a given set of
-    # [Location](#type-location)s. Responses are paginated and unsorted.
+    # [CatalogObject]($m/CatalogObject) at a given set of
+    # [Location]($m/Location)s. Responses are paginated and unsorted.
     # For more sophisticated queries, use a batch endpoint.
     # @param [String] catalog_object_id Required parameter: ID of the
-    # [CatalogObject](#type-catalogobject) to retrieve.
+    # [CatalogObject]($m/CatalogObject) to retrieve.
     # @param [String] location_ids Optional parameter: The
-    # [Location](#type-location) IDs to look up as a comma-separated list. An
-    # empty list queries all locations.
+    # [Location]($m/Location) IDs to look up as a comma-separated list. An empty
+    # list queries all locations.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
     # results for the original query.  See the
@@ -250,8 +250,8 @@ module Square
     end
 
     # Returns a set of physical counts and inventory adjustments for the
-    # provided [CatalogObject](#type-catalogobject) at the requested
-    # [Location](#type-location)s.
+    # provided [CatalogObject]($m/CatalogObject) at the requested
+    # [Location]($m/Location)s.
     # Results are paginated and sorted in descending order according to their
     # `occurred_at` timestamp (newest first).
     # There are no limits on how far back the caller can page. This endpoint can
@@ -259,10 +259,10 @@ module Square
     # used to display recent changes for a specific item. For more
     # sophisticated queries, use a batch endpoint.
     # @param [String] catalog_object_id Required parameter: ID of the
-    # [CatalogObject](#type-catalogobject) to retrieve.
+    # [CatalogObject]($m/CatalogObject) to retrieve.
     # @param [String] location_ids Optional parameter: The
-    # [Location](#type-location) IDs to look up as a comma-separated list. An
-    # empty list queries all locations.
+    # [Location]($m/Location) IDs to look up as a comma-separated list. An empty
+    # list queries all locations.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
     # results for the original query.  See the

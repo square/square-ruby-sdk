@@ -13,14 +13,14 @@ module Square
     # profiles can take closer to one minute or longer, especially during
     # network incidents and outages.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
-    # a previous call to this endpoint. Provide this to retrieve the next set of
-    # results for your original query.  See the [Pagination
-    # guide](https://developer.squareup.com/docs/working-with-apis/pagination)
-    # for more information.
+    # a previous call to this endpoint. Provide this cursor to retrieve the next
+    # set of results for your original query.  For more information, see
+    # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
+    # ion).
     # @param [CustomerSortField] sort_field Optional parameter: Indicates how
-    # Customers should be sorted.  Default: `DEFAULT`.
+    # customers should be sorted.  Default: `DEFAULT`.
     # @param [SortOrder] sort_order Optional parameter: Indicates whether
-    # Customers should be sorted in ascending (`ASC`) or descending (`DESC`)
+    # customers should be sorted in ascending (`ASC`) or descending (`DESC`)
     # order.  Default: `ASC`.
     # @return [ListCustomersResponse Hash] response from the API call
     def list_customers(cursor: nil,
@@ -60,8 +60,8 @@ module Square
 
     # Creates a new customer for a business, which can have associated cards on
     # file.
-    # You must provide __at least one__ of the following values in your request
-    # to this
+    # You must provide at least one of the following values in your request to
+    # this
     # endpoint:
     # - `given_name`
     # - `family_name`
@@ -145,21 +145,37 @@ module Square
       )
     end
 
-    # Deletes a customer from a business, along with any linked cards on file.
-    # When two profiles
-    # are merged into a single profile, that profile is assigned a new
-    # `customer_id`. You must use the
-    # new `customer_id` to delete merged profiles.
+    # Deletes a customer profile from a business, including any linked cards on
+    # file.
+    # As a best practice, you should include the `version` field in the request
+    # to enable [optimistic
+    # concurrency](https://developer.squareup.com/docs/working-with-apis/optimis
+    # tic-concurrency) control. The value must be set to the current version of
+    # the customer profile.
+    # To delete a customer profile that was created by merging existing
+    # profiles, you must use the ID of the newly created profile.
     # @param [String] customer_id Required parameter: The ID of the customer to
     # delete.
+    # @param [Long] version Optional parameter: The current version of the
+    # customer profile.   As a best practice, you should include this parameter
+    # to enable [optimistic
+    # concurrency](https://developer.squareup.com/docs/working-with-apis/optimis
+    # tic-concurrency) control.  For more information, see [Delete a customer
+    # profile](https://developer.squareup.com/docs/customers-api/use-the-api/kee
+    # p-records#delete-customer-profile).
     # @return [DeleteCustomerResponse Hash] response from the API call
-    def delete_customer(customer_id:)
+    def delete_customer(customer_id:,
+                        version: nil)
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/{customer_id}'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
         'customer_id' => { 'value' => customer_id, 'encode' => true }
+      )
+      _query_builder = APIHelper.append_url_with_query_parameters(
+        _query_builder,
+        'version' => version
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -219,16 +235,21 @@ module Square
       )
     end
 
-    # Updates the details of an existing customer. When two profiles are merged
-    # into a single profile, that profile is assigned a new `customer_id`. You
-    # must use
-    # the new `customer_id` to update merged profiles.
-    # You cannot edit a customer's cards on file with this endpoint. To make
-    # changes
-    # to a card on file, you must delete the existing card on file with the
-    # [DeleteCustomerCard](#endpoint-Customers-deletecustomercard) endpoint,
-    # then create a new one with the
-    # [CreateCustomerCard](#endpoint-Customers-createcustomercard) endpoint.
+    # Updates a customer profile. To change an attribute, specify the new value.
+    # To remove an attribute, specify the value as an empty string or empty
+    # object.
+    # As a best practice, you should include the `version` field in the request
+    # to enable [optimistic
+    # concurrency](https://developer.squareup.com/docs/working-with-apis/optimis
+    # tic-concurrency) control. The value must be set to the current version of
+    # the customer profile.
+    # To update a customer profile that was created by merging existing
+    # profiles, you must use the ID of the newly created profile.
+    # You cannot use this endpoint to change cards on file. To change a card on
+    # file, call [DeleteCustomerCard]($e/Customers/DeleteCustomerCard) to delete
+    # the existing card and then call
+    # [CreateCustomerCard]($e/Customers/CreateCustomerCard) to create a new
+    # card.
     # @param [String] customer_id Required parameter: The ID of the customer to
     # update.
     # @param [UpdateCustomerRequest] body Required parameter: An object
