@@ -5,12 +5,12 @@ module Square
       super(config, http_call_back: http_call_back)
     end
 
-    # Deletes a set of [CatalogItem](#type-catalogitem)s based on the
+    # Deletes a set of [CatalogItem]($m/CatalogItem)s based on the
     # provided list of target IDs and returns a set of successfully deleted IDs
     # in
     # the response. Deletion is a cascading event such that all children of the
     # targeted object are also deleted. For example, deleting a CatalogItem will
-    # also delete all of its [CatalogItemVariation](#type-catalogitemvariation)
+    # also delete all of its [CatalogItemVariation]($m/CatalogItemVariation)
     # children.
     # `BatchDeleteCatalogObjects` succeeds even if only a portion of the
     # targeted
@@ -50,13 +50,11 @@ module Square
     end
 
     # Returns a set of objects based on the provided ID.
-    # Each [CatalogItem](#type-catalogitem) returned in the set includes all of
-    # its
+    # Each [CatalogItem]($m/CatalogItem) returned in the set includes all of its
     # child information including: all of its
-    # [CatalogItemVariation](#type-catalogitemvariation) objects, references to
-    # its [CatalogModifierList](#type-catalogmodifierlist) objects, and the ids
-    # of
-    # any [CatalogTax](#type-catalogtax) objects that apply to it.
+    # [CatalogItemVariation]($m/CatalogItemVariation) objects, references to
+    # its [CatalogModifierList]($m/CatalogModifierList) objects, and the ids of
+    # any [CatalogTax]($m/CatalogTax) objects that apply to it.
     # @param [BatchRetrieveCatalogObjectsRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
@@ -138,8 +136,8 @@ module Square
     end
 
     # Uploads an image file to be represented by a
-    # [CatalogImage](#type-catalogimage) object linked to an existing
-    # [CatalogObject](#type-catalogobject) instance. A call to this endpoint can
+    # [CatalogImage]($m/CatalogImage) object linked to an existing
+    # [CatalogObject]($m/CatalogObject) instance. A call to this endpoint can
     # upload an image, link an image to
     # a catalog object, or do both.
     # This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data
@@ -228,19 +226,19 @@ module Square
       )
     end
 
-    # Returns a list of [CatalogObject](#type-catalogobject)s that includes
+    # Returns a list of [CatalogObject]($m/CatalogObject)s that includes
     # all objects of a set of desired types (for example, all
-    # [CatalogItem](#type-catalogitem)
-    # and [CatalogTax](#type-catalogtax) objects) in the catalog. The `types`
+    # [CatalogItem]($m/CatalogItem)
+    # and [CatalogTax]($m/CatalogTax) objects) in the catalog. The `types`
     # parameter
     # is specified as a comma-separated list of valid
-    # [CatalogObject](#type-catalogobject) types:
+    # [CatalogObject]($m/CatalogObject) types:
     # `ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`,
     # `DISCOUNT`, `TAX`, `IMAGE`.
     # __Important:__ ListCatalog does not return deleted catalog items. To
     # retrieve
     # deleted catalog items, use
-    # [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects)
+    # [SearchCatalogObjects]($e/Catalog/SearchCatalogObjects)
     # and set the `include_deleted_objects` attribute value to `true`.
     # @param [String] cursor Optional parameter: The pagination cursor returned
     # in the previous response. Leave unset for an initial request. See
@@ -254,7 +252,7 @@ module Square
     # @param [Long] catalog_version Optional parameter: The specific version of
     # the catalog objects to be included in the response.  This allows you to
     # retrieve historical versions of objects. The specified version value is
-    # matched against the [CatalogObject](#type-catalogobject)s' `version`
+    # matched against the [CatalogObject]($m/CatalogObject)s' `version`
     # attribute.
     # @return [ListCatalogResponse Hash] response from the API call
     def list_catalog(cursor: nil,
@@ -292,7 +290,7 @@ module Square
       )
     end
 
-    # Creates or updates the target [CatalogObject](#type-catalogobject).
+    # Creates or updates the target [CatalogObject]($m/CatalogObject).
     # @param [UpsertCatalogObjectRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -326,14 +324,14 @@ module Square
       )
     end
 
-    # Deletes a single [CatalogObject](#type-catalogobject) based on the
+    # Deletes a single [CatalogObject]($m/CatalogObject) based on the
     # provided ID and returns the set of successfully deleted IDs in the
     # response.
     # Deletion is a cascading event such that all children of the targeted
     # object
-    # are also deleted. For example, deleting a [CatalogItem](#type-catalogitem)
+    # are also deleted. For example, deleting a [CatalogItem]($m/CatalogItem)
     # will also delete all of its
-    # [CatalogItemVariation](#type-catalogitemvariation) children.
+    # [CatalogItemVariation]($m/CatalogItemVariation) children.
     # @param [String] object_id Required parameter: The ID of the catalog object
     # to be deleted. When an object is deleted, other objects in the graph that
     # depend on that object will be deleted as well (for example, deleting a
@@ -370,14 +368,13 @@ module Square
       )
     end
 
-    # Returns a single [CatalogItem](#type-catalogitem) as a
-    # [CatalogObject](#type-catalogobject) based on the provided ID. The
-    # returned
-    # object includes all of the relevant [CatalogItem](#type-catalogitem)
-    # information including: [CatalogItemVariation](#type-catalogitemvariation)
+    # Returns a single [CatalogItem]($m/CatalogItem) as a
+    # [CatalogObject]($m/CatalogObject) based on the provided ID. The returned
+    # object includes all of the relevant [CatalogItem]($m/CatalogItem)
+    # information including: [CatalogItemVariation]($m/CatalogItemVariation)
     # children, references to its
-    # [CatalogModifierList](#type-catalogmodifierlist) objects, and the ids of
-    # any [CatalogTax](#type-catalogtax) objects that apply to it.
+    # [CatalogModifierList]($m/CatalogModifierList) objects, and the ids of
+    # any [CatalogTax]($m/CatalogTax) objects that apply to it.
     # @param [String] object_id Required parameter: The object ID of any type of
     # catalog objects to be retrieved.
     # @param [Boolean] include_related_objects Optional parameter: If `true`,
@@ -392,8 +389,7 @@ module Square
     # @param [Long] catalog_version Optional parameter: Requests objects as of a
     # specific version of the catalog. This allows you to retrieve historical
     # versions of objects. The value to retrieve a specific version of an object
-    # can be found in the version field of
-    # [CatalogObject](#type-catalogobject)s.
+    # can be found in the version field of [CatalogObject]($m/CatalogObject)s.
     # @return [RetrieveCatalogObjectResponse Hash] response from the API call
     def retrieve_catalog_object(object_id:,
                                 include_related_objects: false,
@@ -433,12 +429,12 @@ module Square
       )
     end
 
-    # Searches for [CatalogObject](#type-CatalogObject) of any type by matching
+    # Searches for [CatalogObject]($m/CatalogObject) of any type by matching
     # supported search attribute values,
     # excluding custom attribute values on items or item variations, against one
     # or more of the specified query expressions.
     # This (`SearchCatalogObjects`) endpoint differs from the
-    # [SearchCatalogItems](#endpoint-Catalog-SearchCatalogItems)
+    # [SearchCatalogItems]($e/Catalog/SearchCatalogItems)
     # endpoint in the following aspects:
     # - `SearchCatalogItems` can only search for items or item variations,
     # whereas `SearchCatalogObjects` can search for any type of catalog objects.
@@ -488,7 +484,7 @@ module Square
     # custom attribute values, against one or more of the specified query
     # expressions.
     # This (`SearchCatalogItems`) endpoint differs from the
-    # [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects)
+    # [SearchCatalogObjects]($e/Catalog/SearchCatalogObjects)
     # endpoint in the following aspects:
     # - `SearchCatalogItems` can only search for items or item variations,
     # whereas `SearchCatalogObjects` can search for any type of catalog objects.
@@ -533,8 +529,8 @@ module Square
       )
     end
 
-    # Updates the [CatalogModifierList](#type-catalogmodifierlist) objects
-    # that apply to the targeted [CatalogItem](#type-catalogitem) without having
+    # Updates the [CatalogModifierList]($m/CatalogModifierList) objects
+    # that apply to the targeted [CatalogItem]($m/CatalogItem) without having
     # to perform an upsert on the entire item.
     # @param [UpdateItemModifierListsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
@@ -569,8 +565,8 @@ module Square
       )
     end
 
-    # Updates the [CatalogTax](#type-catalogtax) objects that apply to the
-    # targeted [CatalogItem](#type-catalogitem) without having to perform an
+    # Updates the [CatalogTax]($m/CatalogTax) objects that apply to the
+    # targeted [CatalogItem]($m/CatalogItem) without having to perform an
     # upsert on the entire item.
     # @param [UpdateItemTaxesRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding

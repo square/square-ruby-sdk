@@ -11,7 +11,7 @@ The booking profile of a seller's team member, including the team member's ID, d
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `team_member_id` | `String` | Optional | The ID of the [TeamMember](#type-TeamMember) object for the team member associated with the booking profile. |
+| `team_member_id` | `String` | Optional | The ID of the [TeamMember](/doc/models/team-member.md) object for the team member associated with the booking profile. |
 | `description` | `String` | Optional | The description of the team member. |
 | `display_name` | `String` | Optional | The display name of the team member. |
 | `is_bookable` | `Boolean` | Optional | Indicates whether the team member can be booked through the Bookings API or the seller's online booking channel or site (`true) or not (`false`). |

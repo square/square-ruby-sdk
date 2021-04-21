@@ -24,7 +24,7 @@ invoices_api = client.invoices
 
 Returns a list of invoices for a given location. The response
 is paginated. If truncated, the response includes a `cursor` that you  
-use in a subsequent request to fetch the next set of invoices.
+use in a subsequent request to retrieve the next set of invoices.
 
 ```ruby
 def list_invoices(location_id:,
@@ -38,7 +38,7 @@ def list_invoices(location_id:,
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Query, Required | The ID of the location for which to list invoices. |
 | `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for your original query.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
-| `limit` | `Integer` | Query, Optional | The maximum number of invoices to return (200 is the maximum `limit`).<br>If not provided, the server<br>uses a default limit of 100 invoices. |
+| `limit` | `Integer` | Query, Optional | The maximum number of invoices to return (200 is the maximum `limit`).<br>If not provided, the server uses a default limit of 100 invoices. |
 
 ## Response Type
 
@@ -63,7 +63,7 @@ end
 
 # Create Invoice
 
-Creates a draft [invoice](#type-invoice)
+Creates a draft [invoice](/doc/models/invoice.md)
 for an order created using the Orders API.
 
 A draft invoice remains in your account and no action is taken.
@@ -132,6 +132,10 @@ body[:invoice][:invoice_number] = 'inv-100'
 body[:invoice][:title] = 'Event Planning Services'
 body[:invoice][:description] = 'We appreciate your business!'
 body[:invoice][:scheduled_at] = '2030-01-13T10:00:00Z'
+body[:invoice][:accepted_payment_methods] = {}
+body[:invoice][:accepted_payment_methods][:card] = true
+body[:invoice][:accepted_payment_methods][:square_gift_card] = false
+body[:invoice][:accepted_payment_methods][:bank_account] = false
 body[:invoice][:custom_fields] = []
 
 
@@ -165,7 +169,7 @@ retrieve invoices. In the current implementation, you can only specify one locat
 optionally one customer.
 
 The response is paginated. If truncated, the response includes a `cursor`
-that you use in a subsequent request to fetch the next set of invoices.
+that you use in a subsequent request to retrieve the next set of invoices.
 
 ```ruby
 def search_invoices(body:)
@@ -208,7 +212,7 @@ end
 # Delete Invoice
 
 Deletes the specified invoice. When an invoice is deleted, the
-associated Order status changes to CANCELED. You can only delete a draft
+associated order status changes to CANCELED. You can only delete a draft
 invoice (you cannot delete a published invoice, including one that is scheduled for processing).
 
 ```ruby
@@ -221,7 +225,7 @@ def delete_invoice(invoice_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `invoice_id` | `String` | Template, Required | The ID of the invoice to delete. |
-| `version` | `Integer` | Query, Optional | The version of the [invoice](#type-invoice) to delete.<br>If you do not know the version, you can call [GetInvoice](#endpoint-Invoices-GetInvoice) or<br>[ListInvoices](#endpoint-Invoices-ListInvoices). |
+| `version` | `Integer` | Query, Optional | The version of the [invoice](/doc/models/invoice.md) to delete.<br>If you do not know the version, you can call [GetInvoice](/doc/api/invoices.md#get-invoice) or<br>[ListInvoices](/doc/api/invoices.md#list-invoices). |
 
 ## Response Type
 
@@ -255,7 +259,7 @@ def get_invoice(invoice_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `invoice_id` | `String` | Template, Required | The id of the invoice to retrieve. |
+| `invoice_id` | `String` | Template, Required | The ID of the invoice to retrieve. |
 
 ## Response Type
 
@@ -279,8 +283,8 @@ end
 # Update Invoice
 
 Updates an invoice by modifying fields, clearing fields, or both. For most updates, you can use a sparse
-`Invoice` object to add fields or change values, and use the `fields_to_clear` field to specify fields to clear.
-However, some restrictions apply. For example, you cannot change the `order_id` or `location_id` field, and you
+`Invoice` object to add fields or change values and use the `fields_to_clear` field to specify fields to clear.
+However, some restrictions apply. For example, you cannot change the `order_id` or `location_id` field and you
 must provide the complete `custom_fields` list to update a custom field. Published invoices have additional restrictions.
 
 ```ruby
@@ -362,7 +366,7 @@ def cancel_invoice(invoice_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `invoice_id` | `String` | Template, Required | The ID of the [invoice](#type-invoice) to cancel. |
+| `invoice_id` | `String` | Template, Required | The ID of the [invoice](/doc/models/invoice.md) to cancel. |
 | `body` | [`Cancel Invoice Request Hash`](/doc/models/cancel-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -398,7 +402,7 @@ nothing. Square also makes the invoice available on a Square-hosted invoice page
 The invoice `status` also changes from `DRAFT` to a status
 based on the invoice configuration. For example, the status changes to `UNPAID` if
 Square emails the invoice or `PARTIALLY_PAID` if Square charge a card on file for a portion of the
-invoice amount).
+invoice amount.
 
 ```ruby
 def publish_invoice(invoice_id:,
@@ -409,7 +413,7 @@ def publish_invoice(invoice_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `invoice_id` | `String` | Template, Required | The id of the invoice to publish. |
+| `invoice_id` | `String` | Template, Required | The ID of the invoice to publish. |
 | `body` | [`Publish Invoice Request Hash`](/doc/models/publish-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type

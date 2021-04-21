@@ -220,7 +220,7 @@ module Square
     # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
     # ion).
     # @param [Integer] limit Optional parameter: The upper limit on the number
-    # of subscription events to return  in the response.   Default: `200`
+    # of subscription events to return in the response.  Default: `200`
     # @return [ListSubscriptionEventsResponse Hash] response from the API call
     def list_subscription_events(subscription_id:,
                                  cursor: nil,
@@ -246,6 +246,41 @@ module Square
 
       # Prepare and execute HttpRequest.
       _request = config.http_client.get(
+        _query_url,
+        headers: _headers
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
+    end
+
+    # Resumes a deactivated subscription.
+    # @param [String] subscription_id Required parameter: The ID of the
+    # subscription to resume.
+    # @return [ResumeSubscriptionResponse Hash] response from the API call
+    def resume_subscription(subscription_id:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/subscriptions/{subscription_id}/resume'
+      _query_builder = APIHelper.append_url_with_template_parameters(
+        _query_builder,
+        'subscription_id' => { 'value' => subscription_id, 'encode' => true }
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.post(
         _query_url,
         headers: _headers
       )

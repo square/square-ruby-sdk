@@ -16,6 +16,7 @@ subscriptions_api = client.subscriptions
 * [Update Subscription](/doc/api/subscriptions.md#update-subscription)
 * [Cancel Subscription](/doc/api/subscriptions.md#cancel-subscription)
 * [List Subscription Events](/doc/api/subscriptions.md#list-subscription-events)
+* [Resume Subscription](/doc/api/subscriptions.md#resume-subscription)
 
 
 # Create Subscription
@@ -268,6 +269,39 @@ cursor = 'cursor6'
 limit = 172
 
 result = subscriptions_api.list_subscription_events(subscription_id: subscription_id, cursor: cursor, limit: limit)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Resume Subscription
+
+Resumes a deactivated subscription.
+
+```ruby
+def resume_subscription(subscription_id:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `String` | Template, Required | The ID of the subscription to resume. |
+
+## Response Type
+
+[`Resume Subscription Response Hash`](/doc/models/resume-subscription-response.md)
+
+## Example Usage
+
+```ruby
+subscription_id = 'subscription_id0'
+
+result = subscriptions_api.resume_subscription(subscription_id: subscription_id)
 
 if result.success?
   puts result.data

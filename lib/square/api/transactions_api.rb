@@ -12,24 +12,29 @@ module Square
     # Point of Sale applications.
     # Refunds with a `status` of `PENDING` are not currently included in this
     # endpoint's response.
-    # Max results per [page](#paginatingresults): 50
+    # Max results per
+    # [page](https://developer.squareup.com/docs/working-with-apis/pagination):
+    # 50
     # @param [String] location_id Required parameter: The ID of the location to
     # list refunds for.
     # @param [String] begin_time Optional parameter: The beginning of the
     # requested reporting period, in RFC 3339 format.  See [Date
-    # ranges](#dateranges) for details on date inclusivity/exclusivity.  Default
-    # value: The current time minus one year.
+    # ranges](https://developer.squareup.com/docs/build-basics/working-with-date
+    # s) for details on date inclusivity/exclusivity.  Default value: The
+    # current time minus one year.
     # @param [String] end_time Optional parameter: The end of the requested
-    # reporting period, in RFC 3339 format.  See [Date ranges](#dateranges) for
-    # details on date inclusivity/exclusivity.  Default value: The current
-    # time.
+    # reporting period, in RFC 3339 format.  See [Date
+    # ranges](https://developer.squareup.com/docs/build-basics/working-with-date
+    # s) for details on date inclusivity/exclusivity.  Default value: The
+    # current time.
     # @param [SortOrder] sort_order Optional parameter: The order in which
     # results are listed in the response (`ASC` for oldest first, `DESC` for
     # newest first).  Default value: `DESC`
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
     # results for your original query.  See [Paginating
-    # results](#paginatingresults) for more information.
+    # results](https://developer.squareup.com/docs/working-with-apis/pagination)
+    # for more information.
     # @return [ListRefundsResponse Hash] response from the API call
     def list_refunds(location_id:,
                      begin_time: nil,
@@ -78,24 +83,29 @@ module Square
     # Transactions include payment information from sales and exchanges and
     # refund
     # information from returns and exchanges.
-    # Max results per [page](#paginatingresults): 50
+    # Max results per
+    # [page](https://developer.squareup.com/docs/working-with-apis/pagination):
+    # 50
     # @param [String] location_id Required parameter: The ID of the location to
     # list transactions for.
     # @param [String] begin_time Optional parameter: The beginning of the
     # requested reporting period, in RFC 3339 format.  See [Date
-    # ranges](#dateranges) for details on date inclusivity/exclusivity.  Default
-    # value: The current time minus one year.
+    # ranges](https://developer.squareup.com/docs/build-basics/working-with-date
+    # s) for details on date inclusivity/exclusivity.  Default value: The
+    # current time minus one year.
     # @param [String] end_time Optional parameter: The end of the requested
-    # reporting period, in RFC 3339 format.  See [Date ranges](#dateranges) for
-    # details on date inclusivity/exclusivity.  Default value: The current
-    # time.
+    # reporting period, in RFC 3339 format.  See [Date
+    # ranges](https://developer.squareup.com/docs/build-basics/working-with-date
+    # s) for details on date inclusivity/exclusivity.  Default value: The
+    # current time.
     # @param [SortOrder] sort_order Optional parameter: The order in which
     # results are listed in the response (`ASC` for oldest first, `DESC` for
     # newest first).  Default value: `DESC`
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
     # results for your original query.  See [Paginating
-    # results](#paginatingresults) for more information.
+    # results](https://developer.squareup.com/docs/working-with-apis/pagination)
+    # for more information.
     # @return [ListTransactionsResponse Hash] response from the API call
     def list_transactions(location_id:,
                           begin_time: nil,
@@ -156,9 +166,9 @@ module Square
     # When this response is returned, the amount of Square's processing fee
     # might not yet be
     # calculated. To obtain the processing fee, wait about ten seconds and call
-    # [RetrieveTransaction](#endpoint-retrievetransaction). See the
+    # [RetrieveTransaction]($e/Transactions/RetrieveTransaction). See the
     # `processing_fee_money`
-    # field of each [Tender included](#type-tender) in the transaction.
+    # field of each [Tender included]($m/Tender) in the transaction.
     # @param [String] location_id Required parameter: The ID of the location to
     # associate the created transaction with.
     # @param [ChargeRequest] body Required parameter: An object containing the
@@ -241,7 +251,7 @@ module Square
     end
 
     # Captures a transaction that was created with the
-    # [Charge](#endpoint-charge)
+    # [Charge]($e/Transactions/Charge)
     # endpoint with a `delay_capture` value of `true`.
     # See [Delayed capture
     # transactions](https://developer.squareup.com/docs/payments/transactions/ov
@@ -337,7 +347,8 @@ module Square
       )
     end
 
-    # Cancels a transaction that was created with the [Charge](#endpoint-charge)
+    # Cancels a transaction that was created with the
+    # [Charge]($e/Transactions/Charge)
     # endpoint with a `delay_capture` value of `true`.
     # See [Delayed capture
     # transactions](https://developer.squareup.com/docs/payments/transactions/ov

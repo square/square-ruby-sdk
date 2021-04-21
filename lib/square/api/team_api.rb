@@ -54,8 +54,8 @@ module Square
     # marked as failed, but the body of the response
     # will contain explicit error information for this particular create.
     # Learn about [Troubleshooting the Teams
-    # API](https://developer.squareup.com/docs/team/troubleshooting#bulkcreatete
-    # ammembers).
+    # API](https://developer.squareup.com/docs/team/troubleshooting#bulk-create-
+    # team-members).
     # @param [BulkCreateTeamMembersRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -97,8 +97,8 @@ module Square
     # marked as failed, but the body of the response
     # will contain explicit error information for this particular update.
     # Learn about [Troubleshooting the Teams
-    # API](https://developer.squareup.com/docs/team/troubleshooting#bulkupdatete
-    # ammembers).
+    # API](https://developer.squareup.com/docs/team/troubleshooting#bulk-update-
+    # team-members).
     # @param [BulkUpdateTeamMembersRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -171,8 +171,8 @@ module Square
 
     # Retrieve a `TeamMember` object for the given `TeamMember.id`.
     # Learn about [Troubleshooting the Teams
-    # API](https://developer.squareup.com/docs/team/troubleshooting#retrieveteam
-    # member).
+    # API](https://developer.squareup.com/docs/team/troubleshooting#retrieve-a-t
+    # eam-member).
     # @param [String] team_member_id Required parameter: The ID of the team
     # member to retrieve.
     # @return [RetrieveTeamMemberResponse Hash] response from the API call
@@ -210,8 +210,8 @@ module Square
     # Updates a single `TeamMember` object. The `TeamMember` will be returned on
     # successful updates.
     # Learn about [Troubleshooting the Teams
-    # API](https://developer.squareup.com/docs/team/troubleshooting#updateteamme
-    # mber).
+    # API](https://developer.squareup.com/docs/team/troubleshooting#update-a-tea
+    # m-member).
     # @param [String] team_member_id Required parameter: The ID of the team
     # member to update.
     # @param [UpdateTeamMemberRequest] body Required parameter: An object
@@ -297,8 +297,8 @@ module Square
     # it fully replaces the `WageSetting` object for the team member.
     # The `WageSetting` will be returned upon successful update.
     # Learn about [Troubleshooting the Teams
-    # API](https://developer.squareup.com/docs/team/troubleshooting#updatewagese
-    # tting).
+    # API](https://developer.squareup.com/docs/team/troubleshooting#create-or-up
+    # date-a-wage-setting).
     # @param [String] team_member_id Required parameter: The ID of the team
     # member to update the `WageSetting` object for.
     # @param [UpdateWageSettingRequest] body Required parameter: An object

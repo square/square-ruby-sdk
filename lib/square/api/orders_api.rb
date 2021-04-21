@@ -5,14 +5,15 @@ module Square
       super(config, http_call_back: http_call_back)
     end
 
-    # Creates a new [Order](#type-order) which can include information on
-    # products for
+    # Creates a new [Order]($m/Order) which can include information on products
+    # for
     # purchase and settings to apply to the purchase.
-    # To pay for a created order, please refer to the [Pay for
+    # To pay for a created order, please refer to the
+    # [Pay for
     # Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders)
     # guide.
-    # You can modify open orders using the
-    # [UpdateOrder](#endpoint-orders-updateorder) endpoint.
+    # You can modify open orders using the [UpdateOrder]($e/Orders/UpdateOrder)
+    # endpoint.
     # @param [CreateOrderRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
@@ -46,7 +47,7 @@ module Square
       )
     end
 
-    # Retrieves a set of [Order](#type-order)s by their IDs.
+    # Retrieves a set of [Order]($m/Order)s by their IDs.
     # If a given Order ID does not exist, the ID is ignored instead of
     # generating an error.
     # @param [BatchRetrieveOrdersRequest] body Required parameter: An object
@@ -82,7 +83,7 @@ module Square
       )
     end
 
-    # Calculates an [Order](#type-order).
+    # Enables applications to preview order pricing without creating an order.
     # @param [CalculateOrderRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -121,12 +122,12 @@ module Square
     # Ecosystem (e.g. Point of Sale, Invoices, Connect APIs, etc).
     # SearchOrders requests need to specify which locations to search and define
     # a
-    # [`SearchOrdersQuery`](#type-searchordersquery) object which controls
+    # [`SearchOrdersQuery`]($m/SearchOrdersQuery) object which controls
     # how to sort or filter the results. Your SearchOrdersQuery can:
     #   Set filter criteria.
     #   Set sort order.
     #   Determine whether to return results as complete Order objects, or as
-    # [OrderEntry](#type-orderentry) objects.
+    # [OrderEntry]($m/OrderEntry) objects.
     # Note that details for orders processed with Square Point of Sale while in
     # offline mode may not be transmitted to Square for up to 72 hours. Offline
     # orders have a `created_at` value that reflects the time the order was
@@ -165,7 +166,7 @@ module Square
       )
     end
 
-    # Retrieves an [Order](#type-order) by ID.
+    # Retrieves an [Order]($m/Order) by ID.
     # @param [String] order_id Required parameter: The ID of the order to
     # retrieve.
     # @return [RetrieveOrderResponse Hash] response from the API call
@@ -200,7 +201,7 @@ module Square
       )
     end
 
-    # Updates an open [Order](#type-order) by adding, replacing, or deleting
+    # Updates an open [Order]($m/Order) by adding, replacing, or deleting
     # fields. Orders with a `COMPLETED` or `CANCELED` state cannot be updated.
     # An UpdateOrder request requires the following:
     # - The `order_id` in the endpoint path, identifying the order to update.
@@ -214,7 +215,8 @@ module Square
     # paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot
     # -notation)
     # identifying fields to clear.
-    # To pay for an order, please refer to the [Pay for
+    # To pay for an order, please refer to the
+    # [Pay for
     # Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders)
     # guide.
     # @param [String] order_id Required parameter: The ID of the order to
@@ -257,8 +259,8 @@ module Square
       )
     end
 
-    # Pay for an [order](#type-order) using one or more approved
-    # [payments](#type-payment),
+    # Pay for an [order]($m/Order) using one or more approved
+    # [payments]($m/Payment),
     # or settle an order with a total of `0`.
     # The total of the `payment_ids` listed in the request must be equal to the
     # order
@@ -267,7 +269,7 @@ module Square
     # array of `payment_ids` in the request.
     # To be used with PayOrder, a payment must:
     # - Reference the order by specifying the `order_id` when [creating the
-    # payment](#endpoint-payments-createpayment).
+    # payment]($e/Payments/CreatePayment).
     # Any approved payments that reference the same `order_id` not specified in
     # the
     # `payment_ids` will be canceled.

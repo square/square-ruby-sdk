@@ -17,7 +17,7 @@ bank_accounts_api = client.bank_accounts
 
 # List Bank Accounts
 
-Returns a list of [BankAccount](#type-bankaccount) objects linked to a Square account.
+Returns a list of [BankAccount](/doc/models/bank-account.md) objects linked to a Square account.
 
 ```ruby
 def list_bank_accounts(cursor: nil,
@@ -56,7 +56,7 @@ end
 
 # Get Bank Account by V1 Id
 
-Returns details of a [BankAccount](#type-bankaccount) identified by V1 bank account ID.
+Returns details of a [BankAccount](/doc/models/bank-account.md) identified by V1 bank account ID.
 
 ```ruby
 def get_bank_account_by_v1_id(v1_bank_account_id:)
@@ -89,7 +89,7 @@ end
 
 # Get Bank Account
 
-Returns details of a [BankAccount](#type-bankaccount)
+Returns details of a [BankAccount](/doc/models/bank-account.md)
 linked to a Square account.
 
 ```ruby

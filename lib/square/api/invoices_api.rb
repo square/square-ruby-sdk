@@ -7,7 +7,7 @@ module Square
 
     # Returns a list of invoices for a given location. The response
     # is paginated. If truncated, the response includes a `cursor` that you
-    # use in a subsequent request to fetch the next set of invoices.
+    # use in a subsequent request to retrieve the next set of invoices.
     # @param [String] location_id Required parameter: The ID of the location for
     # which to list invoices.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
@@ -16,7 +16,7 @@ module Square
     # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
     # ion).
     # @param [Integer] limit Optional parameter: The maximum number of invoices
-    # to return (200 is the maximum `limit`).  If not provided, the server  uses
+    # to return (200 is the maximum `limit`).  If not provided, the server uses
     # a default limit of 100 invoices.
     # @return [ListInvoicesResponse Hash] response from the API call
     def list_invoices(location_id:,
@@ -54,7 +54,7 @@ module Square
       )
     end
 
-    # Creates a draft [invoice](#type-invoice)
+    # Creates a draft [invoice]($m/Invoice)
     # for an order created using the Orders API.
     # A draft invoice remains in your account and no action is taken.
     # You must publish the invoice before Square can process it (send it to the
@@ -98,7 +98,7 @@ module Square
     # location and
     # optionally one customer.
     # The response is paginated. If truncated, the response includes a `cursor`
-    # that you use in a subsequent request to fetch the next set of invoices.
+    # that you use in a subsequent request to retrieve the next set of invoices.
     # @param [SearchInvoicesRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -133,15 +133,15 @@ module Square
     end
 
     # Deletes the specified invoice. When an invoice is deleted, the
-    # associated Order status changes to CANCELED. You can only delete a draft
+    # associated order status changes to CANCELED. You can only delete a draft
     # invoice (you cannot delete a published invoice, including one that is
     # scheduled for processing).
     # @param [String] invoice_id Required parameter: The ID of the invoice to
     # delete.
     # @param [Integer] version Optional parameter: The version of the
-    # [invoice](#type-invoice) to delete. If you do not know the version, you
-    # can call [GetInvoice](#endpoint-Invoices-GetInvoice) or 
-    # [ListInvoices](#endpoint-Invoices-ListInvoices).
+    # [invoice]($m/Invoice) to delete. If you do not know the version, you can
+    # call [GetInvoice]($e/Invoices/GetInvoice) or 
+    # [ListInvoices]($e/Invoices/ListInvoices).
     # @return [DeleteInvoiceResponse Hash] response from the API call
     def delete_invoice(invoice_id:,
                        version: nil)
@@ -180,7 +180,7 @@ module Square
     end
 
     # Retrieves an invoice by invoice ID.
-    # @param [String] invoice_id Required parameter: The id of the invoice to
+    # @param [String] invoice_id Required parameter: The ID of the invoice to
     # retrieve.
     # @return [GetInvoiceResponse Hash] response from the API call
     def get_invoice(invoice_id:)
@@ -216,10 +216,10 @@ module Square
 
     # Updates an invoice by modifying fields, clearing fields, or both. For most
     # updates, you can use a sparse
-    # `Invoice` object to add fields or change values, and use the
+    # `Invoice` object to add fields or change values and use the
     # `fields_to_clear` field to specify fields to clear.
     # However, some restrictions apply. For example, you cannot change the
-    # `order_id` or `location_id` field, and you
+    # `order_id` or `location_id` field and you
     # must provide the complete `custom_fields` list to update a custom field.
     # Published invoices have additional restrictions.
     # @param [String] invoice_id Required parameter: The ID of the invoice to
@@ -267,7 +267,7 @@ module Square
     # You cannot cancel an invoice in the `DRAFT` state or in a terminal state:
     # `PAID`, `REFUNDED`, `CANCELED`, or `FAILED`.
     # @param [String] invoice_id Required parameter: The ID of the
-    # [invoice](#type-invoice) to cancel.
+    # [invoice]($m/Invoice) to cancel.
     # @param [CancelInvoiceRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -318,8 +318,8 @@ module Square
     # `UNPAID` if
     # Square emails the invoice or `PARTIALLY_PAID` if Square charge a card on
     # file for a portion of the
-    # invoice amount).
-    # @param [String] invoice_id Required parameter: The id of the invoice to
+    # invoice amount.
+    # @param [String] invoice_id Required parameter: The ID of the invoice to
     # publish.
     # @param [PublishInvoiceRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding

@@ -5,7 +5,9 @@ module Square
       super(config, http_call_back: http_call_back)
     end
 
-    # Creates a loyalty account.
+    # Creates a loyalty account. To create a loyalty account, you must provide
+    # the `program_id` and either the `mapping` field (preferred) or the
+    # `mappings` field.
     # @param [CreateLoyaltyAccountRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -79,7 +81,7 @@ module Square
 
     # Retrieves a loyalty account.
     # @param [String] account_id Required parameter: The ID of the [loyalty
-    # account](#type-LoyaltyAccount) to retrieve.
+    # account]($m/LoyaltyAccount) to retrieve.
     # @return [RetrieveLoyaltyAccountResponse Hash] response from the API call
     def retrieve_loyalty_account(account_id:)
       # Prepare query url.
@@ -120,13 +122,13 @@ module Square
     # - If you are not using the Orders API to manage orders,
     # you first perform a client-side computation to compute the points.
     # For spend-based and visit-based programs, you can call
-    # [CalculateLoyaltyPoints](#endpoint-Loyalty-CalculateLoyaltyPoints) to
-    # compute the points. For more information,
+    # [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints) to compute the
+    # points. For more information,
     # see [Loyalty Program
     # Overview](https://developer.squareup.com/docs/loyalty/overview).
     # You then provide the points in a request to this endpoint.
     # @param [String] account_id Required parameter: The [loyalty
-    # account](#type-LoyaltyAccount) ID to which to add the points.
+    # account]($m/LoyaltyAccount) ID to which to add the points.
     # @param [AccumulateLoyaltyPointsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -168,10 +170,10 @@ module Square
     # Adds points to or subtracts points from a buyer's account.
     # Use this endpoint only when you need to manually adjust points. Otherwise,
     # in your application flow, you call
-    # [AccumulateLoyaltyPoints](#endpoint-Loyalty-AccumulateLoyaltyPoints)
+    # [AccumulateLoyaltyPoints]($e/Loyalty/AccumulateLoyaltyPoints)
     # to add points when a buyer pays for the purchase.
     # @param [String] account_id Required parameter: The ID of the [loyalty
-    # account](#type-LoyaltyAccount) in which to adjust the points.
+    # account]($m/LoyaltyAccount) in which to adjust the points.
     # @param [AdjustLoyaltyPointsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -217,6 +219,7 @@ module Square
     # (for example, points earned, points redeemed, and points expired) is
     # recorded in the ledger. Using this endpoint, you can search the ledger for
     # events.
+    # Search results are sorted by `created_at` in descending order.
     # @param [SearchLoyaltyEventsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -280,6 +283,48 @@ module Square
       )
     end
 
+    # Retrieves the loyalty program in a seller's account, specified by the
+    # program ID or the keyword `main`.
+    # Loyalty programs define how buyers can earn points and redeem points for
+    # rewards. Square sellers can have only one loyalty program, which is
+    # created and managed from the Seller Dashboard. For more information, see
+    # [Loyalty Program
+    # Overview](https://developer.squareup.com/docs/loyalty/overview).
+    # @param [String] program_id Required parameter: The ID of the loyalty
+    # program or the keyword `main`. Either value can be used to retrieve the
+    # single loyalty program that belongs to the seller.
+    # @return [RetrieveLoyaltyProgramResponse Hash] response from the API call
+    def retrieve_loyalty_program(program_id:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/loyalty/programs/{program_id}'
+      _query_builder = APIHelper.append_url_with_template_parameters(
+        _query_builder,
+        'program_id' => { 'value' => program_id, 'encode' => true }
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.get(
+        _query_url,
+        headers: _headers
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
+    end
+
     # Calculates the points a purchase earns.
     # - If you are using the Orders API to manage orders, you provide `order_id`
     # in the request. The
@@ -291,7 +336,7 @@ module Square
     # can earn with the
     # specific purchase.
     # @param [String] program_id Required parameter: The [loyalty
-    # program](#type-LoyaltyProgram) ID, which defines the rules for accruing
+    # program]($m/LoyaltyProgram) ID, which defines the rules for accruing
     # points.
     # @param [CalculateLoyaltyPointsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
@@ -376,7 +421,8 @@ module Square
     # In the current implementation, the endpoint supports search by the reward
     # `status`.
     # If you know a reward ID, use the
-    # [RetrieveLoyaltyReward](#endpoint-Loyalty-RetrieveLoyaltyReward) endpoint.
+    # [RetrieveLoyaltyReward]($e/Loyalty/RetrieveLoyaltyReward) endpoint.
+    # Search results are sorted by `updated_at` in descending order.
     # @param [SearchLoyaltyRewardsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -413,12 +459,12 @@ module Square
     # Deletes a loyalty reward by doing the following:
     # - Returns the loyalty points back to the loyalty account.
     # - If an order ID was specified when the reward was created
-    # (see [CreateLoyaltyReward](#endpoint-Loyalty-CreateLoyaltyReward)),
+    # (see [CreateLoyaltyReward]($e/Loyalty/CreateLoyaltyReward)),
     # it updates the order by removing the reward and related
     # discounts.
     # You cannot delete a reward that has reached the terminal state (REDEEMED).
     # @param [String] reward_id Required parameter: The ID of the [loyalty
-    # reward](#type-LoyaltyReward) to delete.
+    # reward]($m/LoyaltyReward) to delete.
     # @return [DeleteLoyaltyRewardResponse Hash] response from the API call
     def delete_loyalty_reward(reward_id:)
       # Prepare query url.
@@ -453,7 +499,7 @@ module Square
 
     # Retrieves a loyalty reward.
     # @param [String] reward_id Required parameter: The ID of the [loyalty
-    # reward](#type-LoyaltyReward) to retrieve.
+    # reward]($m/LoyaltyReward) to retrieve.
     # @return [RetrieveLoyaltyRewardResponse Hash] response from the API call
     def retrieve_loyalty_reward(reward_id:)
       # Prepare query url.
@@ -495,7 +541,7 @@ module Square
     # In other words, points used for the reward cannot be returned
     # to the account.
     # @param [String] reward_id Required parameter: The ID of the [loyalty
-    # reward](#type-LoyaltyReward) to redeem.
+    # reward]($m/LoyaltyReward) to redeem.
     # @param [RedeemLoyaltyRewardRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.

@@ -188,8 +188,7 @@ module Square
 
     # Retrieves a booking.
     # @param [String] booking_id Required parameter: The ID of the
-    # [Booking](#type-booking) object representing the to-be-retrieved
-    # booking.
+    # [Booking]($m/Booking) object representing the to-be-retrieved booking.
     # @return [RetrieveBookingResponse Hash] response from the API call
     def retrieve_booking(booking_id:)
       # Prepare query url.
@@ -224,7 +223,7 @@ module Square
 
     # Updates a booking.
     # @param [String] booking_id Required parameter: The ID of the
-    # [Booking](#type-booking) object representing the to-be-updated booking.
+    # [Booking]($m/Booking) object representing the to-be-updated booking.
     # @param [UpdateBookingRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -265,8 +264,7 @@ module Square
 
     # Cancels an existing booking.
     # @param [String] booking_id Required parameter: The ID of the
-    # [Booking](#type-booking) object representing the to-be-cancelled
-    # booking.
+    # [Booking]($m/Booking) object representing the to-be-cancelled booking.
     # @param [CancelBookingRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
