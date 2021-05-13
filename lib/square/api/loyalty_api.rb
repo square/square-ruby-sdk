@@ -6,8 +6,7 @@ module Square
     end
 
     # Creates a loyalty account. To create a loyalty account, you must provide
-    # the `program_id` and either the `mapping` field (preferred) or the
-    # `mappings` field.
+    # the `program_id` and a `mapping` with the `phone_number` of the buyer.
     # @param [CreateLoyaltyAccountRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -254,9 +253,16 @@ module Square
     end
 
     # Returns a list of loyalty programs in the seller's account.
-    # Currently, a seller can only have one loyalty program.
+    # Loyalty programs define how buyers can earn points and redeem points for
+    # rewards. Square sellers can have only one loyalty program, which is
+    # created and managed from the Seller Dashboard. For more information, see
+    # [Loyalty Program
+    # Overview](https://developer.squareup.com/docs/loyalty/overview).
+    # Replaced with [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram)
+    # when used with the keyword `main`.
     # @return [ListLoyaltyProgramsResponse Hash] response from the API call
     def list_loyalty_programs
+      warn 'Endpoint list_loyalty_programs in LoyaltyApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/loyalty/programs'

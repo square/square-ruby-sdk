@@ -366,7 +366,7 @@ def create_catalog_image(request: nil,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `request` | [`Create Catalog Image Request Hash`](/doc/models/create-catalog-image-request.md) | Form, Optional | - |
-| `image_file` | `File | UploadIO` | Form, Optional | - |
+| `image_file` | `File \| UploadIO` | Form, Optional | - |
 
 ## Response Type
 
@@ -456,7 +456,7 @@ def list_catalog(cursor: nil,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `cursor` | `String` | Query, Optional | The pagination cursor returned in the previous response. Leave unset for an initial request.<br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
+| `cursor` | `String` | Query, Optional | The pagination cursor returned in the previous response. Leave unset for an initial request.<br>The page size is currently set to be 100.<br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
 | `types` | `String` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve, for example<br>`ITEM,ITEM_VARIATION,CATEGORY,IMAGE`.<br><br>The legal values are taken from the CatalogObjectType enum:<br>`ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, or `IMAGE`. |
 | `catalog_version` | `Long` | Query, Optional | The specific version of the catalog objects to be included in the response.<br>This allows you to retrieve historical<br>versions of objects. The specified version value is matched against<br>the [CatalogObject](/doc/models/catalog-object.md)s' `version` attribute. |
 

@@ -24,7 +24,7 @@ module Square
     def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
                    backoff_factor: 1, environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2021-04-21', access_token: 'TODO: Replace',
+                   square_version: '2021-05-13', access_token: 'TODO: Replace',
                    additional_headers: {})
       # The value to use for connection timeout
       @timeout = timeout

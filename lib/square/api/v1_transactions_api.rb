@@ -20,6 +20,7 @@ module Square
                     order: nil,
                     limit: nil,
                     batch_token: nil)
+      warn 'Endpoint list_orders in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/orders'
@@ -66,6 +67,7 @@ module Square
     # @return [V1Order Hash] response from the API call
     def retrieve_order(location_id:,
                        order_id:)
+      warn 'Endpoint retrieve_order in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/orders/{order_id}'
@@ -111,6 +113,7 @@ module Square
     def update_order(location_id:,
                      order_id:,
                      body:)
+      warn 'Endpoint update_order in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/orders/{order_id}'
@@ -184,6 +187,7 @@ module Square
                       limit: nil,
                       batch_token: nil,
                       include_partial: false)
+      warn 'Endpoint list_payments in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/payments'
@@ -233,6 +237,7 @@ module Square
     # @return [V1Payment Hash] response from the API call
     def retrieve_payment(location_id:,
                          payment_id:)
+      warn 'Endpoint retrieve_payment in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/payments/{payment_id}'
@@ -294,6 +299,7 @@ module Square
                      end_time: nil,
                      limit: nil,
                      batch_token: nil)
+      warn 'Endpoint list_refunds in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/refunds'
@@ -350,6 +356,7 @@ module Square
     # @return [V1Refund Hash] response from the API call
     def create_refund(location_id:,
                       body:)
+      warn 'Endpoint create_refund in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/refunds'
@@ -417,6 +424,7 @@ module Square
                          limit: nil,
                          status: nil,
                          batch_token: nil)
+      warn 'Endpoint list_settlements in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/settlements'
@@ -479,6 +487,7 @@ module Square
     # @return [V1Settlement Hash] response from the API call
     def retrieve_settlement(location_id:,
                             settlement_id:)
+      warn 'Endpoint retrieve_settlement in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/settlements/{settlement_id}'
