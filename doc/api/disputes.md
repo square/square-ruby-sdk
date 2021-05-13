@@ -258,7 +258,7 @@ def create_dispute_evidence_file(dispute_id:,
 |  --- | --- | --- | --- |
 | `dispute_id` | `String` | Template, Required | The ID of the dispute you want to upload evidence for. |
 | `request` | [`Create Dispute Evidence File Request Hash`](/doc/models/create-dispute-evidence-file-request.md) | Form, Optional | Defines the parameters for a `CreateDisputeEvidenceFile` request. |
-| `image_file` | `File | UploadIO` | Form, Optional | - |
+| `image_file` | `File \| UploadIO` | Form, Optional | - |
 
 ## Response Type
 

@@ -4,7 +4,7 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '10.0.0.20210421'
+      '11.0.0.20210513'
     end
 
     def square_version
@@ -167,6 +167,18 @@ module Square
       @refunds ||= RefundsApi.new config
     end
 
+    # Access to sites controller.
+    # @return [SitesApi] Returns the controller instance.
+    def sites
+      @sites ||= SitesApi.new config
+    end
+
+    # Access to snippets controller.
+    # @return [SnippetsApi] Returns the controller instance.
+    def snippets
+      @snippets ||= SnippetsApi.new config
+    end
+
     # Access to subscriptions controller.
     # @return [SubscriptionsApi] Returns the controller instance.
     def subscriptions
@@ -188,7 +200,7 @@ module Square
     def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
                    backoff_factor: 1, environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2021-04-21', access_token: 'TODO: Replace',
+                   square_version: '2021-05-13', access_token: 'TODO: Replace',
                    additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(timeout: timeout, max_retries: max_retries,
