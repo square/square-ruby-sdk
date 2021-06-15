@@ -7,9 +7,9 @@ module Square
 
     # `RenewToken` is deprecated. For information about refreshing OAuth access
     # tokens, see
-    # [Renew OAuth
-    # Token](https://developer.squareup.com/docs/oauth-api/cookbook/renew-oauth-
-    # tokens).
+    # [Migrate from Renew to Refresh OAuth
+    # Tokens](https://developer.squareup.com/docs/oauth-api/migrate-to-refresh-t
+    # okens).
     # Renews an OAuth access token before it expires.
     # OAuth access tokens besides your application's personal access token
     # expire after __30 days__.
@@ -25,10 +25,10 @@ module Square
     # ```
     # Replace `APPLICATION_SECRET` with the application secret on the
     # Credentials
-    # page in the [application dashboard](https://connect.squareup.com/apps).
+    # page in the [developer dashboard](https://developer.squareup.com/apps).
     # @param [String] client_id Required parameter: Your application ID,
-    # available from the [application
-    # dashboard](https://connect.squareup.com/apps).
+    # available from the [developer
+    # dashboard](https://developer.squareup.com/apps).
     # @param [RenewTokenRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
@@ -83,9 +83,8 @@ module Square
     # ```
     # Authorization: Client APPLICATION_SECRET
     # ```
-    # Replace `APPLICATION_SECRET` with the application secret on the
-    # Credentials
-    # page in the [Developer Dashboard](https://developer.squareup.com/apps).
+    # Replace `APPLICATION_SECRET` with the application secret on the OAuth
+    # page in the [developer dashboard](https://developer.squareup.com/apps).
     # @param [RevokeTokenRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.

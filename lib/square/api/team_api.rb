@@ -5,12 +5,12 @@ module Square
       super(config, http_call_back: http_call_back)
     end
 
-    # Creates a single `TeamMember` object. The `TeamMember` will be returned on
-    # successful creates.
+    # Creates a single `TeamMember` object. The `TeamMember` object is returned
+    # on successful creates.
     # You must provide the following values in your request to this endpoint:
     # - `given_name`
     # - `family_name`
-    # Learn about [Troubleshooting the Teams
+    # Learn about [Troubleshooting the Team
     # API](https://developer.squareup.com/docs/team/troubleshooting#createteamme
     # mber).
     # @param [CreateTeamMemberRequest] body Required parameter: An object
@@ -47,13 +47,13 @@ module Square
     end
 
     # Creates multiple `TeamMember` objects. The created `TeamMember` objects
-    # will be returned on successful creates.
-    # This process is non-transactional and will process as much of the request
-    # as is possible. If one of the creates in
-    # the request cannot be successfully processed, the request will NOT be
-    # marked as failed, but the body of the response
-    # will contain explicit error information for this particular create.
-    # Learn about [Troubleshooting the Teams
+    # are returned on successful creates.
+    # This process is non-transactional and processes as much of the request as
+    # possible. If one of the creates in
+    # the request cannot be successfully processed, the request is not marked as
+    # failed, but the body of the response
+    # contains explicit error information for the failed create.
+    # Learn about [Troubleshooting the Team
     # API](https://developer.squareup.com/docs/team/troubleshooting#bulk-create-
     # team-members).
     # @param [BulkCreateTeamMembersRequest] body Required parameter: An object
@@ -90,13 +90,13 @@ module Square
     end
 
     # Updates multiple `TeamMember` objects. The updated `TeamMember` objects
-    # will be returned on successful updates.
-    # This process is non-transactional and will process as much of the request
-    # as is possible. If one of the updates in
-    # the request cannot be successfully processed, the request will NOT be
-    # marked as failed, but the body of the response
-    # will contain explicit error information for this particular update.
-    # Learn about [Troubleshooting the Teams
+    # are returned on successful updates.
+    # This process is non-transactional and processes as much of the request as
+    # possible. If one of the updates in
+    # the request cannot be successfully processed, the request is not marked as
+    # failed, but the body of the response
+    # contains explicit error information for the failed update.
+    # Learn about [Troubleshooting the Team
     # API](https://developer.squareup.com/docs/team/troubleshooting#bulk-update-
     # team-members).
     # @param [BulkUpdateTeamMembersRequest] body Required parameter: An object
@@ -133,8 +133,8 @@ module Square
     end
 
     # Returns a paginated list of `TeamMember` objects for a business.
-    # The list to be returned can be filtered by:
-    # - location IDs **and**
+    # The list can be filtered by the following:
+    # - location IDs
     # - `status`
     # @param [SearchTeamMembersRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
@@ -169,8 +169,8 @@ module Square
       )
     end
 
-    # Retrieve a `TeamMember` object for the given `TeamMember.id`.
-    # Learn about [Troubleshooting the Teams
+    # Retrieves a `TeamMember` object for the given `TeamMember.id`.
+    # Learn about [Troubleshooting the Team
     # API](https://developer.squareup.com/docs/team/troubleshooting#retrieve-a-t
     # eam-member).
     # @param [String] team_member_id Required parameter: The ID of the team
@@ -207,9 +207,9 @@ module Square
       )
     end
 
-    # Updates a single `TeamMember` object. The `TeamMember` will be returned on
-    # successful updates.
-    # Learn about [Troubleshooting the Teams
+    # Updates a single `TeamMember` object. The `TeamMember` object is returned
+    # on successful updates.
+    # Learn about [Troubleshooting the Team
     # API](https://developer.squareup.com/docs/team/troubleshooting#update-a-tea
     # m-member).
     # @param [String] team_member_id Required parameter: The ID of the team
@@ -252,13 +252,13 @@ module Square
       )
     end
 
-    # Retrieve a `WageSetting` object for a team member specified
+    # Retrieves a `WageSetting` object for a team member specified
     # by `TeamMember.id`.
-    # Learn about [Troubleshooting the Teams
+    # Learn about [Troubleshooting the Team
     # API](https://developer.squareup.com/docs/team/troubleshooting#retrievewage
     # setting).
     # @param [String] team_member_id Required parameter: The ID of the team
-    # member to retrieve wage setting for
+    # member for which to retrieve the wage setting.
     # @return [RetrieveWageSettingResponse Hash] response from the API call
     def retrieve_wage_setting(team_member_id:)
       # Prepare query url.
@@ -295,12 +295,12 @@ module Square
     # `WageSetting` with the specified `team_member_id` does not exist.
     # Otherwise,
     # it fully replaces the `WageSetting` object for the team member.
-    # The `WageSetting` will be returned upon successful update.
-    # Learn about [Troubleshooting the Teams
+    # The `WageSetting` is returned on a successful update.
+    # Learn about [Troubleshooting the Team
     # API](https://developer.squareup.com/docs/team/troubleshooting#create-or-up
     # date-a-wage-setting).
     # @param [String] team_member_id Required parameter: The ID of the team
-    # member to update the `WageSetting` object for.
+    # member for which to update the `WageSetting` object.
     # @param [UpdateWageSettingRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.

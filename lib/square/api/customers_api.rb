@@ -58,8 +58,7 @@ module Square
       )
     end
 
-    # Creates a new customer for a business, which can have associated cards on
-    # file.
+    # Creates a new customer for a business.
     # You must provide at least one of the following values in your request to
     # this
     # endpoint:
@@ -145,8 +144,8 @@ module Square
       )
     end
 
-    # Deletes a customer profile from a business, including any linked cards on
-    # file.
+    # Deletes a customer profile from a business. This operation also unlinks
+    # any associated cards on file.
     # As a best practice, you should include the `version` field in the request
     # to enable [optimistic
     # concurrency](https://developer.squareup.com/docs/working-with-apis/optimis
@@ -245,11 +244,8 @@ module Square
     # the customer profile.
     # To update a customer profile that was created by merging existing
     # profiles, you must use the ID of the newly created profile.
-    # You cannot use this endpoint to change cards on file. To change a card on
-    # file, call [DeleteCustomerCard]($e/Customers/DeleteCustomerCard) to delete
-    # the existing card and then call
-    # [CreateCustomerCard]($e/Customers/CreateCustomerCard) to create a new
-    # card.
+    # You cannot use this endpoint to change cards on file. To make changes, use
+    # the [Cards API]($e/Cards) or [Gift Cards API]($e/GiftCards).
     # @param [String] customer_id Required parameter: The ID of the customer to
     # update.
     # @param [UpdateCustomerRequest] body Required parameter: An object
@@ -303,6 +299,7 @@ module Square
     # @return [CreateCustomerCardResponse Hash] response from the API call
     def create_customer_card(customer_id:,
                              body:)
+      warn 'Endpoint create_customer_card in CustomersApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/{customer_id}/cards'
@@ -343,6 +340,7 @@ module Square
     # @return [DeleteCustomerCardResponse Hash] response from the API call
     def delete_customer_card(customer_id:,
                              card_id:)
+      warn 'Endpoint delete_customer_card in CustomersApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/{customer_id}/cards/{card_id}'

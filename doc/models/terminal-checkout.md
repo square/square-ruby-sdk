@@ -22,7 +22,7 @@
 | `updated_at` | `String` | Optional | The time when the `TerminalCheckout` was last updated, as an RFC 3339 timestamp. |
 | `app_id` | `String` | Optional | The ID of the application that created the checkout. |
 | `location_id` | `String` | Optional | The location of the device where the `TerminalCheckout` was directed. |
-| `payment_type` | [`String (Terminal Checkout Payment Type)`](/doc/models/terminal-checkout-payment-type.md) | Optional | - |
+| `payment_type` | [`String (Checkout Options Payment Type)`](/doc/models/checkout-options-payment-type.md) | Optional | - |
 
 ## Example (as JSON)
 

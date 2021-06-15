@@ -5,21 +5,23 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2021-05-13'` |
+| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2021-06-16'` |
 | `access_token` | `String` | The OAuth 2.0 Access Token to use for API requests. |
 | `custom_url` | `String` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `'https://connect.squareup.com'` |
 | `environment` | `string` | The API environment. <br> **Default: `production`** |
 | `timeout` | `Float` | The value to use for connection timeout. <br> **Default: 60** |
 | `max_retries` | `Integer` | The number of times to retry an endpoint call if it fails. <br> **Default: 0** |
 | `retry_interval` | `Float` | Pause in seconds between retries. <br> **Default: 1** |
-| `backoff_factor` | `Float` | The amount to multiply each successive retry's interval amount by in order to provide backoff. <br> **Default: 1** |
+| `backoff_factor` | `Float` | The amount to multiply each successive retry's interval amount by in order to provide backoff. <br> **Default: 2** |
+| `retry_statuses` | `Array` | A list of HTTP statuses to retry. <br> **Default: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524]** |
+| `retry_methods` | `Array` | A list of HTTP methods to retry. <br> **Default: %i[get put]** |
 | `additional_headers` | `String` | Additional headers to add to each API request |
 
 The API client can be initialized as follows:
 
 ```ruby
 client = Square::Client.new(
-  square_version: '2021-05-13',
+  square_version: '2021-06-16',
   access_token: 'AccessToken',
   environment: 'production',
   custom_url: 'https://connect.squareup.com',
@@ -76,6 +78,7 @@ The gateway for the SDK. This class acts as a factory for the Apis and also hold
 | apple_pay | Gets ApplePayApi |
 | bank_accounts | Gets BankAccountsApi |
 | bookings | Gets BookingsApi |
+| cards | Gets CardsApi |
 | cash_drawers | Gets CashDrawersApi |
 | catalog | Gets CatalogApi |
 | customers | Gets CustomersApi |
@@ -84,6 +87,8 @@ The gateway for the SDK. This class acts as a factory for the Apis and also hold
 | devices | Gets DevicesApi |
 | disputes | Gets DisputesApi |
 | employees | Gets EmployeesApi |
+| gift_cards | Gets GiftCardsApi |
+| gift_card_activities | Gets GiftCardActivitiesApi |
 | inventory | Gets InventoryApi |
 | invoices | Gets InvoicesApi |
 | labor | Gets LaborApi |

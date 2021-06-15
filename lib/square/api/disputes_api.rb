@@ -131,8 +131,14 @@ module Square
 
     # Returns a list of evidence associated with a dispute.
     # @param [String] dispute_id Required parameter: The ID of the dispute.
+    # @param [String] cursor Optional parameter: A pagination cursor returned by
+    # a previous call to this endpoint. Provide this cursor to retrieve the next
+    # set of results for the original query. For more information, see
+    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
+    # .
     # @return [ListDisputeEvidenceResponse Hash] response from the API call
-    def list_dispute_evidence(dispute_id:)
+    def list_dispute_evidence(dispute_id:,
+                              cursor: nil)
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/disputes/{dispute_id}/evidence'
@@ -140,90 +146,9 @@ module Square
         _query_builder,
         'dispute_id' => { 'value' => dispute_id, 'encode' => true }
       )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
-    end
-
-    # Removes specified evidence from a dispute.
-    # Square does not send the bank any evidence that is removed. Also, you
-    # cannot remove evidence after
-    # submitting it to the bank using
-    # [SubmitEvidence]($e/Disputes/SubmitEvidence).
-    # @param [String] dispute_id Required parameter: The ID of the dispute you
-    # want to remove evidence from.
-    # @param [String] evidence_id Required parameter: The ID of the evidence you
-    # want to remove.
-    # @return [RemoveDisputeEvidenceResponse Hash] response from the API call
-    def remove_dispute_evidence(dispute_id:,
-                                evidence_id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/disputes/{dispute_id}/evidence/{evidence_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
+      _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true },
-        'evidence_id' => { 'value' => evidence_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.delete(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
-    end
-
-    # Returns the specific evidence metadata associated with a specific dispute.
-    # You must maintain a copy of the evidence you upload if you want to
-    # reference it later. You cannot
-    # download the evidence after you upload it.
-    # @param [String] dispute_id Required parameter: The ID of the dispute that
-    # you want to retrieve evidence from.
-    # @param [String] evidence_id Required parameter: The ID of the evidence to
-    # retrieve.
-    # @return [RetrieveDisputeEvidenceResponse Hash] response from the API call
-    def retrieve_dispute_evidence(dispute_id:,
-                                  evidence_id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/disputes/{dispute_id}/evidence/{evidence_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true },
-        'evidence_id' => { 'value' => evidence_id, 'encode' => true }
+        'cursor' => cursor
       )
       _query_url = APIHelper.clean_url _query_builder
 
@@ -263,7 +188,7 @@ module Square
                                      image_file: nil)
       # Prepare query url.
       _query_builder = config.get_base_uri
-      _query_builder << '/v2/disputes/{dispute_id}/evidence_file'
+      _query_builder << '/v2/disputes/{dispute_id}/evidence-files'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
         'dispute_id' => { 'value' => dispute_id, 'encode' => true }
@@ -324,7 +249,7 @@ module Square
                                      body:)
       # Prepare query url.
       _query_builder = config.get_base_uri
-      _query_builder << '/v2/disputes/{dispute_id}/evidence_text'
+      _query_builder << '/v2/disputes/{dispute_id}/evidence-text'
       _query_builder = APIHelper.append_url_with_template_parameters(
         _query_builder,
         'dispute_id' => { 'value' => dispute_id, 'encode' => true }
@@ -342,6 +267,92 @@ module Square
         _query_url,
         headers: _headers,
         parameters: body.to_json
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
+    end
+
+    # Removes specified evidence from a dispute.
+    # Square does not send the bank any evidence that is removed. Also, you
+    # cannot remove evidence after
+    # submitting it to the bank using
+    # [SubmitEvidence]($e/Disputes/SubmitEvidence).
+    # @param [String] dispute_id Required parameter: The ID of the dispute you
+    # want to remove evidence from.
+    # @param [String] evidence_id Required parameter: The ID of the evidence you
+    # want to remove.
+    # @return [DeleteDisputeEvidenceResponse Hash] response from the API call
+    def delete_dispute_evidence(dispute_id:,
+                                evidence_id:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/disputes/{dispute_id}/evidence/{evidence_id}'
+      _query_builder = APIHelper.append_url_with_template_parameters(
+        _query_builder,
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true },
+        'evidence_id' => { 'value' => evidence_id, 'encode' => true }
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.delete(
+        _query_url,
+        headers: _headers
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
+    end
+
+    # Returns the evidence metadata specified by the evidence ID in the request
+    # URL path
+    # You must maintain a copy of the evidence you upload if you want to
+    # reference it later. You cannot
+    # download the evidence after you upload it.
+    # @param [String] dispute_id Required parameter: The ID of the dispute that
+    # you want to retrieve evidence from.
+    # @param [String] evidence_id Required parameter: The ID of the evidence to
+    # retrieve.
+    # @return [RetrieveDisputeEvidenceResponse Hash] response from the API call
+    def retrieve_dispute_evidence(dispute_id:,
+                                  evidence_id:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/disputes/{dispute_id}/evidence/{evidence_id}'
+      _query_builder = APIHelper.append_url_with_template_parameters(
+        _query_builder,
+        'dispute_id' => { 'value' => dispute_id, 'encode' => true },
+        'evidence_id' => { 'value' => evidence_id, 'encode' => true }
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.get(
+        _query_url,
+        headers: _headers
       )
       OAuth2.apply(config, _request)
       _response = execute_request(_request)
