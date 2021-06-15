@@ -4,7 +4,7 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '11.0.0.20210513'
+      '12.0.0.20210616'
     end
 
     def square_version
@@ -53,6 +53,12 @@ module Square
       @bookings ||= BookingsApi.new config
     end
 
+    # Access to cards controller.
+    # @return [CardsApi] Returns the controller instance.
+    def cards
+      @cards ||= CardsApi.new config
+    end
+
     # Access to cash_drawers controller.
     # @return [CashDrawersApi] Returns the controller instance.
     def cash_drawers
@@ -99,6 +105,18 @@ module Square
     # @return [EmployeesApi] Returns the controller instance.
     def employees
       @employees ||= EmployeesApi.new config
+    end
+
+    # Access to gift_cards controller.
+    # @return [GiftCardsApi] Returns the controller instance.
+    def gift_cards
+      @gift_cards ||= GiftCardsApi.new config
+    end
+
+    # Access to gift_card_activities controller.
+    # @return [GiftCardActivitiesApi] Returns the controller instance.
+    def gift_card_activities
+      @gift_card_activities ||= GiftCardActivitiesApi.new config
     end
 
     # Access to inventory controller.
@@ -198,14 +216,18 @@ module Square
     end
 
     def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
-                   backoff_factor: 1, environment: 'production',
+                   backoff_factor: 2,
+                   retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
+                   retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2021-05-13', access_token: 'TODO: Replace',
+                   square_version: '2021-06-16', access_token: 'TODO: Replace',
                    additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(timeout: timeout, max_retries: max_retries,
                                     retry_interval: retry_interval,
                                     backoff_factor: backoff_factor,
+                                    retry_statuses: retry_statuses,
+                                    retry_methods: retry_methods,
                                     environment: environment,
                                     custom_url: custom_url,
                                     square_version: square_version,

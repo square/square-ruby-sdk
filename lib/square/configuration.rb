@@ -8,6 +8,8 @@ module Square
     attr_reader :max_retries
     attr_reader :retry_interval
     attr_reader :backoff_factor
+    attr_reader :retry_statuses
+    attr_reader :retry_methods
     attr_reader :environment
     attr_reader :custom_url
     attr_reader :square_version
@@ -22,9 +24,11 @@ module Square
     end
 
     def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
-                   backoff_factor: 1, environment: 'production',
+                   backoff_factor: 2,
+                   retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
+                   retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2021-05-13', access_token: 'TODO: Replace',
+                   square_version: '2021-06-16', access_token: 'TODO: Replace',
                    additional_headers: {})
       # The value to use for connection timeout
       @timeout = timeout
@@ -38,6 +42,12 @@ module Square
       # The amount to multiply each successive retry's interval amount
       # by in order to provide backoff
       @backoff_factor = backoff_factor
+
+      # A list of HTTP statuses to retry
+      @retry_statuses = retry_statuses
+
+      # A list of HTTP methods to retry
+      @retry_methods = retry_methods
 
       # Current API environment
       @environment = String(environment)
@@ -59,13 +69,15 @@ module Square
     end
 
     def clone_with(timeout: nil, max_retries: nil, retry_interval: nil,
-                   backoff_factor: nil, environment: nil, custom_url: nil,
-                   square_version: nil, access_token: nil,
-                   additional_headers: nil)
+                   backoff_factor: nil, retry_statuses: nil, retry_methods: nil,
+                   environment: nil, custom_url: nil, square_version: nil,
+                   access_token: nil, additional_headers: nil)
       timeout ||= self.timeout
       max_retries ||= self.max_retries
       retry_interval ||= self.retry_interval
       backoff_factor ||= self.backoff_factor
+      retry_statuses ||= self.retry_statuses
+      retry_methods ||= self.retry_methods
       environment ||= self.environment
       custom_url ||= self.custom_url
       square_version ||= self.square_version
@@ -75,8 +87,9 @@ module Square
       Configuration.new(timeout: timeout, max_retries: max_retries,
                         retry_interval: retry_interval,
                         backoff_factor: backoff_factor,
-                        environment: environment, custom_url: custom_url,
-                        square_version: square_version,
+                        retry_statuses: retry_statuses,
+                        retry_methods: retry_methods, environment: environment,
+                        custom_url: custom_url, square_version: square_version,
                         access_token: access_token,
                         additional_headers: additional_headers)
     end
@@ -84,7 +97,9 @@ module Square
     def create_http_client
       FaradayClient.new(timeout: timeout, max_retries: max_retries,
                         retry_interval: retry_interval,
-                        backoff_factor: backoff_factor)
+                        backoff_factor: backoff_factor,
+                        retry_statuses: retry_statuses,
+                        retry_methods: retry_methods)
     end
 
     # All the environments the SDK can run in.
