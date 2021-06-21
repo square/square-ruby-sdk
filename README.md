@@ -113,10 +113,10 @@ result = client.locations.list_locations
 
 # Call the #success? method to see if the call succeeded
 if result.success?
-	# The #data Struct contains a list of locations
+  # The #data Struct contains a list of locations
   locations = result.data.locations
 
-	# Iterate over the list
+  # Iterate over the list
   locations.each do |location|
     # Each location is represented as a Hash
     location.each do |key, value|
@@ -185,30 +185,31 @@ To use the Square API, you import the Client class, instantiate a Client object,
 
 - Instantiate a `Square::Client` object with the access token for the Square account whose resources you want to manage. To access sandbox resources, initialize the `Square::Client` with environment set to sandbox:
 
-```ruby
-client = Square::Client.new(
+  ```ruby
+  client = Square::Client.new(
     access_token: 'SANDBOX ACCESS TOKEN HERE',
     environment: 'sandbox'
-)
-```
+  )
+  ```
 
 - To access production resources, set environment to production:
 
-```ruby
-client = Square::Client.new(
+  ```ruby
+  client = Square::Client.new(
     access_token: 'ACCESS TOKEN HERE',
     environment: 'production'
-)
-```
+  )
+  ```
 
 - To set a custom environment provide a `custom_url`, and set environment to `custom`:
 
-```ruby
-client = Square::Client.new(
+  ```ruby
+  client = Square::Client.new(
     access_token:'ACCESS TOKEN HERE',
     environment: 'custom',
     custom_url: 'https://your.customdomain.com'
-)
+  )
+  ```
  
 ### Get an Instance of an API object and call its methods
 
@@ -216,9 +217,9 @@ Each API is implemented as a class. The Client object instantiates every API cla
 
 - Work with an API by calling the methods on the API object. For example, you would call list_customers to get a list of all customers in the Square account:
 
-```ruby
-result = client.customers.list_customers
-```
+  ```ruby
+  result = client.customers.list_customers
+  ```
 
 See the SDK documentation for the list of methods for each API class.
 
