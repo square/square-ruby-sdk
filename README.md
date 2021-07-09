@@ -104,8 +104,8 @@ require 'square'
 # for the Square account whose assets you want to manage.
 
 client = Square::Client.new(
-    access_token: 'YOUR SANDBOX ACCESS TOKEN HERE',
-    environment: 'sandbox'
+  access_token: 'YOUR SANDBOX ACCESS TOKEN HERE',
+  environment: 'sandbox'
 )
 
 # Call list_locations method to get all locations in this Square account
@@ -113,10 +113,10 @@ result = client.locations.list_locations
 
 # Call the #success? method to see if the call succeeded
 if result.success?
-	# The #data Struct contains a list of locations
+  # The #data Struct contains a list of locations
   locations = result.data.locations
 
-	# Iterate over the list
+  # Iterate over the list
   locations.each do |location|
     # Each location is represented as a Hash
     location.each do |key, value|
@@ -165,6 +165,7 @@ This error was returned when an invalid token was used to call the API.
 After you’ve tried out the Square APIs and tested your application using sandbox, you will want to switch to your production credentials so that you can manage real Square resources. Don't forget to switch your access token from sandbox to production for real data.
 
 ## SDK patterns
+
 If you know a few patterns, you’ll be able to call any API in the SDK. Here are some important ones:
 
 ### Get an access token
@@ -187,8 +188,8 @@ To use the Square API, you import the Client class, instantiate a Client object,
 
 ```ruby
 client = Square::Client.new(
-    access_token: 'SANDBOX ACCESS TOKEN HERE',
-    environment: 'sandbox'
+  access_token: 'SANDBOX ACCESS TOKEN HERE',
+  environment: 'sandbox'
 )
 ```
 
@@ -196,8 +197,8 @@ client = Square::Client.new(
 
 ```ruby
 client = Square::Client.new(
-    access_token: 'ACCESS TOKEN HERE',
-    environment: 'production'
+  access_token: 'ACCESS TOKEN HERE',
+  environment: 'production'
 )
 ```
 
@@ -205,10 +206,11 @@ client = Square::Client.new(
 
 ```ruby
 client = Square::Client.new(
-    access_token:'ACCESS TOKEN HERE',
-    environment: 'custom',
-    custom_url: 'https://your.customdomain.com'
+  access_token:'ACCESS TOKEN HERE',
+  environment: 'custom',
+  custom_url: 'https://your.customdomain.com'
 )
+```
  
 ### Get an Instance of an API object and call its methods
 
@@ -239,6 +241,7 @@ result = client.customers.create_customer(request_body)
 ```
 
 If your call succeeds, you’ll see a response that looks like this:
+
 ```
 {'customer': {'created_at': '2019-06-28T21:23:05.126Z', 'creation_source': 'THIRD_PARTY', 'family_name': 'Earhardt', 'given_name': 'Amelia', 'id': 'CBASEDwl3El91nohQ2FLEk4aBfcgAQ', 'preferences': {'email_unsubscribed': False}, 'updated_at': '2019-06-28T21:23:05.126Z'}}
 ```
