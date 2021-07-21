@@ -9,6 +9,7 @@ require_relative 'square/client.rb'
 
 # Utilities
 require_relative 'square/utilities/file_wrapper.rb'
+require_relative 'square/utilities/date_time_helper.rb'
 
 # Http
 require_relative 'square/http/api_response.rb'

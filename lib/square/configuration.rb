@@ -28,7 +28,7 @@ module Square
                    retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
                    retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2021-06-16', access_token: 'TODO: Replace',
+                   square_version: '2021-07-21', access_token: 'TODO: Replace',
                    additional_headers: {})
       # The value to use for connection timeout
       @timeout = timeout
