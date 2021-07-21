@@ -120,12 +120,16 @@ module Square
     # account.
     # - If you are not using the Orders API to manage orders,
     # you first perform a client-side computation to compute the points.
-    # For spend-based and visit-based programs, you can call
+    # For spend-based and visit-based programs, you can first call
     # [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints) to compute the
-    # points. For more information,
-    # see [Loyalty Program
-    # Overview](https://developer.squareup.com/docs/loyalty/overview).
-    # You then provide the points in a request to this endpoint.
+    # points
+    # that you provide to this endpoint.
+    # __Note:__ The country of the seller's Square account determines whether
+    # tax is included in the purchase amount when accruing points for
+    # spend-based and visit-based programs.
+    # For more information, see [Availability of Square
+    # Loyalty](https://developer.squareup.com/docs/loyalty-api/overview#loyalty-
+    # market-availability).
     # @param [String] account_id Required parameter: The [loyalty
     # account]($m/LoyaltyAccount) ID to which to add the points.
     # @param [AccumulateLoyaltyPointsRequest] body Required parameter: An object
@@ -341,6 +345,12 @@ module Square
     # An application might call this endpoint to show the points that a buyer
     # can earn with the
     # specific purchase.
+    # __Note:__ The country of the seller's Square account determines whether
+    # tax is included in the purchase amount when accruing points for
+    # spend-based and visit-based programs.
+    # For more information, see [Availability of Square
+    # Loyalty](https://developer.squareup.com/docs/loyalty-api/overview#loyalty-
+    # market-availability).
     # @param [String] program_id Required parameter: The [loyalty
     # program]($m/LoyaltyProgram) ID, which defines the rules for accruing
     # points.

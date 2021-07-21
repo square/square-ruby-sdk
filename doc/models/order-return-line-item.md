@@ -18,6 +18,7 @@ The line item being returned in an order.
 | `quantity_unit` | [`Order Quantity Unit Hash`](/doc/models/order-quantity-unit.md) | Optional | Contains the measurement unit for a quantity and a precision that<br>specifies the number of digits after the decimal point for decimal quantities. |
 | `note` | `String` | Optional | The note of the return line item.<br>**Constraints**: *Maximum Length*: `2000` |
 | `catalog_object_id` | `String` | Optional | The [CatalogItemVariation](/doc/models/catalog-item-variation.md) ID applied to this return line item.<br>**Constraints**: *Maximum Length*: `192` |
+| `catalog_version` | `Long` | Optional | The version of the catalog object that this line item references. |
 | `variation_name` | `String` | Optional | The name of the variation applied to this return line item.<br>**Constraints**: *Maximum Length*: `255` |
 | `item_type` | [`String (Order Line Item Item Type)`](/doc/models/order-line-item-item-type.md) | Optional | Represents the line item type. |
 | `return_modifiers` | [`Array<Order Return Line Item Modifier Hash>`](/doc/models/order-return-line-item-modifier.md) | Optional | The [CatalogModifier](/doc/models/catalog-modifier.md)s applied to this line item. |
@@ -49,7 +50,8 @@ The line item being returned in an order.
       "volume_unit": "GENERIC_CUP",
       "weight_unit": "IMPERIAL_WEIGHT_OUNCE"
     },
-    "precision": 54
+    "precision": 54,
+    "catalog_version": 12
   },
   "note": "note4"
 }

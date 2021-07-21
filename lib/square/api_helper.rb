@@ -265,17 +265,5 @@ module Square
       end
       val
     end
-
-    # Safely converts a string into an rfc3339 DateTime object
-    # @param [String] The datetime string
-    # @return [DateTime] A DateTime object of rfc3339 format
-    def self.rfc3339(date_time)
-      # missing timezone information
-      if date_time.end_with?('Z') || date_time.index('+')
-        DateTime.rfc3339(date_time)
-      else
-        DateTime.rfc3339(date_time + 'Z')
-      end
-    end
   end
 end
