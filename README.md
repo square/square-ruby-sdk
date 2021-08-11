@@ -33,6 +33,9 @@ gem 'square.rb'
 * [Disputes]
 * [Checkout]
 * [Apple Pay]
+* [Cards]
+
+### Terminal
 * [Terminal]
 
 ### Orders
@@ -56,6 +59,10 @@ gem 'square.rb'
 ### Loyalty
 * [Loyalty]
 
+### Gift Cards
+* [Gift Cards]
+* [Gift Card Activities]
+
 ### Bookings
 * [Bookings]
 
@@ -63,12 +70,11 @@ gem 'square.rb'
 * [Merchants]
 * [Locations]
 * [Devices]
+* [Cash Drawers]
 
 ### Team
 * [Team]
-* [Employees]
 * [Labor]
-* [Cash Drawers]
 
 ### Financials
 * [Bank Accounts]
@@ -82,6 +88,7 @@ gem 'square.rb'
 * [OAuth]
 
 ### Deprecated APIs
+* [Employees]
 * [V1 Employees]
 * [V1 Transactions]
 * [V1 Items]
@@ -333,3 +340,6 @@ You can also use the Square API to create applications or services that work wit
 [Transactions]: doc/api/transactions.md
 [Sites]: doc/api/sites.md
 [Snippets]: doc/api/snippets.md
+[Cards]: doc/api/cards.md
+[Gift Cards]: doc/api/gift-cards.md
+[Gift Card Activities]: doc/api/gift-card-activities.md
