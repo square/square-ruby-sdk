@@ -22,7 +22,7 @@ module Square
                                 methods: retry_methods
         faraday.adapter Faraday.default_adapter
         faraday.options[:params_encoder] = Faraday::FlatParamsEncoder
-        faraday.options[:timeout] = timeout if timeout > 0
+        faraday.options[:timeout] = timeout if timeout.positive?
       end
     end
 

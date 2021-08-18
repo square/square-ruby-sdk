@@ -6,7 +6,7 @@ module Square
     # @param [DateTime] The DateTime object
     # @return [String] The rfc1123 formatted datetime string
     def self.to_rfc1123(date_time)
-      date_time.httpdate unless date_time.nil?
+      date_time&.httpdate
     end
 
     # Safely converts a map of DateTime objects into a map of rfc1123 format string
@@ -86,7 +86,7 @@ module Square
     # @param [DateTime] The DateTime object
     # @return [String] The rfc3339 formatted datetime string
     def self.to_rfc3339(date_time)
-      date_time.rfc3339 unless date_time.nil?
+      date_time&.rfc3339
     end
 
     # Safely converts a map of DateTime objects into a map of rfc1123 format string
