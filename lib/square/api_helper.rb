@@ -168,6 +168,7 @@ module Square
       a.each do |key, value_a|
         b.each do |k, value_b|
           next unless key == k
+
           x[k] = []
           if value_a.instance_of? Array
             value_a.each do |v|

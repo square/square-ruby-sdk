@@ -22,8 +22,7 @@ customer_groups_api = client.customer_groups
 Retrieves the list of customer groups of a business.
 
 ```ruby
-def list_customer_groups(cursor: nil,
-                         limit: nil)
+def list_customer_groups(cursor: nil)
 ```
 
 ## Parameters
@@ -31,7 +30,6 @@ def list_customer_groups(cursor: nil,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for your original query.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
-| `limit` | `Integer` | Query, Optional | The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.<br>The limit is ignored if it is less than 1 or greater than 50. The default value is 50.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
 
 ## Response Type
 
@@ -41,9 +39,8 @@ def list_customer_groups(cursor: nil,
 
 ```ruby
 cursor = 'cursor6'
-limit = 172
 
-result = customer_groups_api.list_customer_groups(cursor: cursor, limit: limit)
+result = customer_groups_api.list_customer_groups(cursor: cursor)
 
 if result.success?
   puts result.data

@@ -11,22 +11,14 @@ module Square
     # the next set of query results.  For more information, see
     # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
     # ion).
-    # @param [Integer] limit Optional parameter: The maximum number of results
-    # to return in a single page. This limit is advisory. The response might
-    # contain more or fewer results.  The limit is ignored if it is less than 1
-    # or greater than 50. The default value is 50.  For more information, see
-    # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
-    # ion).
     # @return [ListCustomerSegmentsResponse Hash] response from the API call
-    def list_customer_segments(cursor: nil,
-                               limit: nil)
+    def list_customer_segments(cursor: nil)
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/customers/segments'
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
-        'cursor' => cursor,
-        'limit' => limit
+        'cursor' => cursor
       )
       _query_url = APIHelper.clean_url _query_builder
 

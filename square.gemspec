@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'square.rb'
-  s.version = '13.1.0.20210818'
+  s.version = '13.0.0.20210721'
   s.summary = 'square'
   s.description = 'Use Square APIs to manage and run business including payment, customer, product, inventory, and employee management.'
   s.authors = ['Square Developer Platform']
@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.homepage = 'https://squareup.com/developers'
   s.license = 'Apache-2.0'
   s.add_dependency('logging', '~> 2.3')
-  s.add_dependency('faraday', '~> 1.0', '<= 1.3.0')
+  s.add_dependency('faraday', '~> 1.0', '>= 1.0.1')
   s.add_dependency('faraday_middleware', '~> 1.0')
   s.add_dependency('certifi', '~> 2018.1', '>= 2018.01.18')
   s.add_dependency('faraday-http-cache', '~> 2.2')
