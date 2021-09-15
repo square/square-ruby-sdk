@@ -1,8 +1,7 @@
 module Square
   # A utility to allow users to set the content-type for files
   class FileWrapper
-    attr_reader :content_type
-    attr_reader :file
+    attr_reader :content_type, :file
 
     def initialize(file, content_type: 'application/octet-stream')
       @file = file

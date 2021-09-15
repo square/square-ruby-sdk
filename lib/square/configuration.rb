@@ -3,21 +3,14 @@ module Square
   # are configured in this class.
   class Configuration
     # The attribute readers for properties.
-    attr_reader :http_client
-    attr_reader :timeout
-    attr_reader :max_retries
-    attr_reader :retry_interval
-    attr_reader :backoff_factor
-    attr_reader :retry_statuses
-    attr_reader :retry_methods
-    attr_reader :environment
-    attr_reader :custom_url
-    attr_reader :square_version
-    attr_reader :access_token
-
+    attr_reader :http_client, :timeout, :max_retries, :retry_interval, :backoff_factor,
+                :retry_statuses, :retry_methods, :environment, :custom_url, :square_version,
+                :access_token,
+                
     def additional_headers
       @additional_headers.clone
     end
+
 
     class << self
       attr_reader :environments
@@ -28,7 +21,7 @@ module Square
                    retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
                    retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2021-08-18', access_token: 'TODO: Replace',
+                   square_version: '2021-07-21', access_token: 'TODO: Replace',
                    additional_headers: {})
       # The value to use for connection timeout
       @timeout = timeout

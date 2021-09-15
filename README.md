@@ -8,10 +8,6 @@
 
 Use this gem to integrate Square payments into your app and grow your business with Square APIs including Catalog, Customers, Employees, Inventory, Labor, Locations, and Orders.
 
-## Requirements
-
-We support Ruby 2.5.x, 2.6.x, and 2.7.x.
-
 ## Installation
 
 Install the gem from the command line:

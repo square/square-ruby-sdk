@@ -19,8 +19,7 @@ customer_segments_api = client.customer_segments
 Retrieves the list of customer segments of a business.
 
 ```ruby
-def list_customer_segments(cursor: nil,
-                           limit: nil)
+def list_customer_segments(cursor: nil)
 ```
 
 ## Parameters
@@ -28,7 +27,6 @@ def list_customer_segments(cursor: nil,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `cursor` | `String` | Query, Optional | A pagination cursor returned by previous calls to `ListCustomerSegments`.<br>This cursor is used to retrieve the next set of query results.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
-| `limit` | `Integer` | Query, Optional | The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.<br>The limit is ignored if it is less than 1 or greater than 50. The default value is 50.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
 
 ## Response Type
 
@@ -38,9 +36,8 @@ def list_customer_segments(cursor: nil,
 
 ```ruby
 cursor = 'cursor6'
-limit = 172
 
-result = customer_segments_api.list_customer_segments(cursor: cursor, limit: limit)
+result = customer_segments_api.list_customer_segments(cursor: cursor)
 
 if result.success?
   puts result.data
