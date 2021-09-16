@@ -435,7 +435,7 @@ module Square
     # Searches for [CatalogObject]($m/CatalogObject) of any type by matching
     # supported search attribute values,
     # excluding custom attribute values on items or item variations, against one
-    # or more of the specified query expressions.
+    # or more of the specified query filters.
     # This (`SearchCatalogObjects`) endpoint differs from the
     # [SearchCatalogItems]($e/Catalog/SearchCatalogItems)
     # endpoint in the following aspects:
@@ -485,7 +485,7 @@ module Square
     # Searches for catalog items or item variations by matching supported search
     # attribute values, including
     # custom attribute values, against one or more of the specified query
-    # expressions.
+    # filters.
     # This (`SearchCatalogItems`) endpoint differs from the
     # [SearchCatalogObjects]($e/Catalog/SearchCatalogObjects)
     # endpoint in the following aspects:

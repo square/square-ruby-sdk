@@ -4,7 +4,7 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '14.0.0.20210915'
+      '14.1.0.20210915'
     end
 
     def square_version
@@ -21,12 +21,6 @@ module Square
     # @return [OAuthApi] Returns the controller instance.
     def o_auth
       @o_auth ||= OAuthApi.new config
-    end
-
-    # Access to v1_employees controller.
-    # @return [V1EmployeesApi] Returns the controller instance.
-    def v1_employees
-      @v1_employees ||= V1EmployeesApi.new config
     end
 
     # Access to v1_transactions controller.
@@ -220,7 +214,7 @@ module Square
                    retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
                    retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2021-07-21', access_token: 'TODO: Replace',
+                   square_version: '2021-09-15', access_token: 'TODO: Replace',
                    additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(timeout: timeout, max_retries: max_retries,

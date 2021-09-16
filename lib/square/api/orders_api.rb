@@ -116,6 +116,43 @@ module Square
       )
     end
 
+    # Creates a new order, in the `DRAFT` state, by duplicating an existing
+    # order. The newly created order has
+    # only the core fields (such as line items, taxes, and discounts) copied
+    # from the original order.
+    # @param [CloneOrderRequest] body Required parameter: An object containing
+    # the fields to POST for the request.  See the corresponding object
+    # definition for field details.
+    # @return [CloneOrderResponse Hash] response from the API call
+    def clone_order(body:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/orders/clone'
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json',
+        'content-type' => 'application/json; charset=utf-8'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.post(
+        _query_url,
+        headers: _headers,
+        parameters: body.to_json
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
+    end
+
     # Search all orders for one or more locations. Orders include all sales,
     # returns, and exchanges regardless of how or when they entered the Square
     # ecosystem (such as Point of Sale, Invoices, and Connect APIs).

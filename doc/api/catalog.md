@@ -687,7 +687,7 @@ end
 # Search Catalog Objects
 
 Searches for [CatalogObject](/doc/models/catalog-object.md) of any type by matching supported search attribute values,
-excluding custom attribute values on items or item variations, against one or more of the specified query expressions.
+excluding custom attribute values on items or item variations, against one or more of the specified query filters.
 
 This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](/doc/api/catalog.md#search-catalog-items)
 endpoint in the following aspects:
@@ -753,7 +753,7 @@ end
 # Search Catalog Items
 
 Searches for catalog items or item variations by matching supported search attribute values, including
-custom attribute values, against one or more of the specified query expressions.
+custom attribute values, against one or more of the specified query filters.
 
 This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](/doc/api/catalog.md#search-catalog-objects)
 endpoint in the following aspects:
