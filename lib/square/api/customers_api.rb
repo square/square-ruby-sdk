@@ -17,13 +17,20 @@ module Square
     # set of results for your original query.  For more information, see
     # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
     # ion).
+    # @param [Integer] limit Optional parameter: The maximum number of results
+    # to return in a single page. This limit is advisory. The response might
+    # contain more or fewer results.  The limit is ignored if it is less than 1
+    # or greater than 100. The default value is 100.  For more information, see
+    # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
+    # ion).
     # @param [CustomerSortField] sort_field Optional parameter: Indicates how
-    # customers should be sorted.  Default: `DEFAULT`.
+    # customers should be sorted.  The default value is `DEFAULT`.
     # @param [SortOrder] sort_order Optional parameter: Indicates whether
     # customers should be sorted in ascending (`ASC`) or descending (`DESC`)
-    # order.  Default: `ASC`.
+    # order.  The default value is `ASC`.
     # @return [ListCustomersResponse Hash] response from the API call
     def list_customers(cursor: nil,
+                       limit: nil,
                        sort_field: nil,
                        sort_order: nil)
       # Prepare query url.
@@ -32,6 +39,7 @@ module Square
       _query_builder = APIHelper.append_url_with_query_parameters(
         _query_builder,
         'cursor' => cursor,
+        'limit' => limit,
         'sort_field' => sort_field,
         'sort_order' => sort_order
       )
@@ -156,7 +164,7 @@ module Square
     # @param [String] customer_id Required parameter: The ID of the customer to
     # delete.
     # @param [Long] version Optional parameter: The current version of the
-    # customer profile.   As a best practice, you should include this parameter
+    # customer profile.  As a best practice, you should include this parameter
     # to enable [optimistic
     # concurrency](https://developer.squareup.com/docs/working-with-apis/optimis
     # tic-concurrency) control.  For more information, see [Delete a customer

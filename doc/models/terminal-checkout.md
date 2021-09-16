@@ -23,6 +23,7 @@
 | `app_id` | `String` | Optional | The ID of the application that created the checkout. |
 | `location_id` | `String` | Optional | The location of the device where the `TerminalCheckout` was directed. |
 | `payment_type` | [`String (Checkout Options Payment Type)`](/doc/models/checkout-options-payment-type.md) | Optional | - |
+| `customer_id` | `String` | Optional | An optional ID of the customer associated with the checkout. |
 
 ## Example (as JSON)
 

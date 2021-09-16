@@ -32,6 +32,7 @@ profiles can take closer to one minute or longer, especially during network inci
 
 ```ruby
 def list_customers(cursor: nil,
+                   limit: nil,
                    sort_field: nil,
                    sort_order: nil)
 ```
@@ -41,8 +42,9 @@ def list_customers(cursor: nil,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for your original query.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
-| `sort_field` | [`String (Customer Sort Field)`](/doc/models/customer-sort-field.md) | Query, Optional | Indicates how customers should be sorted.<br><br>Default: `DEFAULT`. |
-| `sort_order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | Indicates whether customers should be sorted in ascending (`ASC`) or<br>descending (`DESC`) order.<br><br>Default: `ASC`. |
+| `limit` | `Integer` | Query, Optional | The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.<br>The limit is ignored if it is less than 1 or greater than 100. The default value is 100.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
+| `sort_field` | [`String (Customer Sort Field)`](/doc/models/customer-sort-field.md) | Query, Optional | Indicates how customers should be sorted.<br><br>The default value is `DEFAULT`. |
+| `sort_order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | Indicates whether customers should be sorted in ascending (`ASC`) or<br>descending (`DESC`) order.<br><br>The default value is `ASC`. |
 
 ## Response Type
 
@@ -52,10 +54,11 @@ def list_customers(cursor: nil,
 
 ```ruby
 cursor = 'cursor6'
+limit = 172
 sort_field = 'DEFAULT'
 sort_order = 'DESC'
 
-result = customers_api.list_customers(cursor: cursor, sort_field: sort_field, sort_order: sort_order)
+result = customers_api.list_customers(cursor: cursor, limit: limit, sort_field: sort_field, sort_order: sort_order)
 
 if result.success?
   puts result.data
