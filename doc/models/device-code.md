@@ -13,7 +13,7 @@
 | `name` | `String` | Optional | An optional user-defined name for the device code.<br>**Constraints**: *Maximum Length*: `128` |
 | `code` | `String` | Optional | The unique code that can be used to login. |
 | `device_id` | `String` | Optional | The unique id of the device that used this code. Populated when the device is paired up. |
-| `product_type` | `String` | Required | **Default**: `'TERMINAL_API'`<br>*Default: `'TERMINAL_API'`* |
+| `product_type` | `String` | Required, Constant | **Default**: `'TERMINAL_API'`<br>*Default: `'TERMINAL_API'`* |
 | `location_id` | `String` | Optional | The location assigned to this code.<br>**Constraints**: *Maximum Length*: `50` |
 | `status` | [`String (Device Code Status)`](/doc/models/device-code-status.md) | Optional | DeviceCode.Status enum. |
 | `pair_by` | `String` | Optional | When this DeviceCode will expire and no longer login. Timestamp in RFC 3339 format. |

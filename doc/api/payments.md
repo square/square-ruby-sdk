@@ -110,10 +110,10 @@ def create_payment(body:)
 
 ```ruby
 body = {}
-body[:source_id] = 'ccof:uIbfJXhXETSP197M3GB'
-body[:idempotency_key] = '4935a656-a929-4792-b97c-8848be85c27c'
+body[:source_id] = 'ccof:GaJGNaZa8x4OgDJn4GB'
+body[:idempotency_key] = '7b0f3ec5-086a-4871-8f13-3c81b3875218'
 body[:amount_money] = {}
-body[:amount_money][:amount] = 200
+body[:amount_money][:amount] = 1000
 body[:amount_money][:currency] = 'USD'
 body[:tip_money] = {}
 body[:tip_money][:amount] = 198
@@ -124,8 +124,8 @@ body[:app_fee_money][:currency] = 'USD'
 body[:delay_duration] = 'delay_duration6'
 body[:autocomplete] = true
 body[:order_id] = 'order_id0'
-body[:customer_id] = 'VDKXEEKPJN48QDG3BGGFAK05P8'
-body[:location_id] = 'XK3DBG77NJBFX'
+body[:customer_id] = 'W92WH6P11H4Z77CTET0RNTGFW8'
+body[:location_id] = 'L88917AVBK2S5'
 body[:reference_id] = '123456'
 body[:note] = 'Brief description'
 
@@ -250,10 +250,10 @@ body[:payment][:amount_money] = {}
 body[:payment][:amount_money][:amount] = 1000
 body[:payment][:amount_money][:currency] = 'USD'
 body[:payment][:tip_money] = {}
-body[:payment][:tip_money][:amount] = 300
+body[:payment][:tip_money][:amount] = 100
 body[:payment][:tip_money][:currency] = 'USD'
-body[:payment][:version_token] = 'Z3okDzm2VRv5m5nE3WGx381ItTNhvjkB4VapByyz54h6o'
-body[:idempotency_key] = '3d3c3b22-9572-4fc6-1111-e4d2f41b4122'
+body[:payment][:version_token] = 'ODhwVQ35xwlzRuoZEwKXucfu7583sPTzK48c5zoGd0g6o'
+body[:idempotency_key] = '956f8b13-e4ec-45d6-85e8-d1d95ef0c5de'
 
 result = payments_api.update_payment(payment_id: payment_id, body: body)
 
@@ -307,7 +307,8 @@ By default, payments are set to complete immediately after they are created.
 You can use this endpoint to complete a payment with the APPROVED `status`.
 
 ```ruby
-def complete_payment(payment_id:)
+def complete_payment(payment_id:,
+                     body:)
 ```
 
 ## Parameters
@@ -315,6 +316,7 @@ def complete_payment(payment_id:)
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `payment_id` | `String` | Template, Required | The unique ID identifying the payment to be completed. |
+| `body` | [`Complete Payment Request Hash`](/doc/models/complete-payment-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
@@ -324,8 +326,10 @@ def complete_payment(payment_id:)
 
 ```ruby
 payment_id = 'payment_id0'
+body = {}
+body[:version_token] = 'version_token2'
 
-result = payments_api.complete_payment(payment_id: payment_id)
+result = payments_api.complete_payment(payment_id: payment_id, body: body)
 
 if result.success?
   puts result.data

@@ -8,7 +8,7 @@ module Square
       @http_call_back = http_call_back
 
       @global_headers = {
-        'user-agent' => 'Square-Ruby-SDK/14.1.0.20210915',
+        'user-agent' => 'Square-Ruby-SDK/15.0.0.20211020',
         'Square-Version' => config.square_version
       }
     end
@@ -24,9 +24,7 @@ module Square
 
       APIHelper.clean_hash(request.headers)
       request.headers.merge!(@global_headers)
-      unless config.additional_headers.nil?
-        request.headers.merge!(config.additional_headers)
-      end
+      request.headers.merge!(config.additional_headers) unless config.additional_headers.nil?
 
       response = if binary
                    config.http_client.execute_as_binary(request)

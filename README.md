@@ -115,8 +115,8 @@ require 'square'
 # for the Square account whose assets you want to manage.
 
 client = Square::Client.new(
-    access_token: 'YOUR SANDBOX ACCESS TOKEN HERE',
-    environment: 'sandbox'
+  access_token: 'YOUR SANDBOX ACCESS TOKEN HERE',
+  environment: 'sandbox'
 )
 
 # Call list_locations method to get all locations in this Square account
@@ -124,10 +124,10 @@ result = client.locations.list_locations
 
 # Call the #success? method to see if the call succeeded
 if result.success?
-	# The #data Struct contains a list of locations
+  # The #data Struct contains a list of locations
   locations = result.data.locations
 
-	# Iterate over the list
+  # Iterate over the list
   locations.each do |location|
     # Each location is represented as a Hash
     location.each do |key, value|
@@ -176,6 +176,7 @@ This error was returned when an invalid token was used to call the API.
 After you’ve tried out the Square APIs and tested your application using sandbox, you will want to switch to your production credentials so that you can manage real Square resources. Don't forget to switch your access token from sandbox to production for real data.
 
 ## SDK patterns
+
 If you know a few patterns, you’ll be able to call any API in the SDK. Here are some important ones:
 
 ### Get an access token
@@ -196,30 +197,31 @@ To use the Square API, you import the Client class, instantiate a Client object,
 
 - Instantiate a `Square::Client` object with the access token for the Square account whose resources you want to manage. To access sandbox resources, initialize the `Square::Client` with environment set to sandbox:
 
-```ruby
-client = Square::Client.new(
+  ```ruby
+  client = Square::Client.new(
     access_token: 'SANDBOX ACCESS TOKEN HERE',
     environment: 'sandbox'
-)
-```
+  )
+  ```
 
 - To access production resources, set environment to production:
 
-```ruby
-client = Square::Client.new(
+  ```ruby
+  client = Square::Client.new(
     access_token: 'ACCESS TOKEN HERE',
     environment: 'production'
-)
-```
+  )
+  ```
 
 - To set a custom environment provide a `custom_url`, and set environment to `custom`:
 
-```ruby
-client = Square::Client.new(
+  ```ruby
+  client = Square::Client.new(
     access_token:'ACCESS TOKEN HERE',
     environment: 'custom',
     custom_url: 'https://your.customdomain.com'
-)
+  )
+  ```
  
 ### Get an Instance of an API object and call its methods
 
@@ -227,9 +229,9 @@ Each API is implemented as a class. The Client object instantiates every API cla
 
 - Work with an API by calling the methods on the API object. For example, you would call list_customers to get a list of all customers in the Square account:
 
-```ruby
-result = client.customers.list_customers
-```
+  ```ruby
+  result = client.customers.list_customers
+  ```
 
 See the SDK documentation for the list of methods for each API class.
 
@@ -250,6 +252,7 @@ result = client.customers.create_customer(request_body)
 ```
 
 If your call succeeds, you’ll see a response that looks like this:
+
 ```
 {'customer': {'created_at': '2019-06-28T21:23:05.126Z', 'creation_source': 'THIRD_PARTY', 'family_name': 'Earhardt', 'given_name': 'Amelia', 'id': 'CBASEDwl3El91nohQ2FLEk4aBfcgAQ', 'preferences': {'email_unsubscribed': False}, 'updated_at': '2019-06-28T21:23:05.126Z'}}
 ```
@@ -274,7 +277,7 @@ end
 
 ## Tests
 
-First, clone the gem locally and `cd` into the directory.
+First, clone the repo locally and `cd` into the directory.
 
 ```sh
 git clone https://github.com/square/square-ruby-sdk.git

@@ -3,26 +3,28 @@ module Square
   # are configured in this class.
   class Configuration
     # The attribute readers for properties.
-    attr_reader :http_client, :timeout, :max_retries, :retry_interval, :backoff_factor,
-                :retry_statuses, :retry_methods, :environment, :custom_url, :square_version,
-                :access_token,
-                
+    attr_reader :http_client, :http_client_instance, :timeout, :max_retries, :retry_interval,
+                :backoff_factor, :retry_statuses, :retry_methods, :environment, :custom_url,
+                :square_version, :access_token
+
     def additional_headers
       @additional_headers.clone
     end
-
 
     class << self
       attr_reader :environments
     end
 
-    def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
-                   backoff_factor: 2,
+    def initialize(http_client_instance: nil, timeout: 60, max_retries: 0,
+                   retry_interval: 1, backoff_factor: 2,
                    retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
                    retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2021-09-15', access_token: 'TODO: Replace',
+                   square_version: '2021-10-20', access_token: '',
                    additional_headers: {})
+      # The Http Client passed from the sdk user for making requests
+      @http_client_instance = http_client_instance
+
       # The value to use for connection timeout
       @timeout = timeout
 
@@ -61,10 +63,12 @@ module Square
       @http_client = create_http_client
     end
 
-    def clone_with(timeout: nil, max_retries: nil, retry_interval: nil,
-                   backoff_factor: nil, retry_statuses: nil, retry_methods: nil,
-                   environment: nil, custom_url: nil, square_version: nil,
-                   access_token: nil, additional_headers: nil)
+    def clone_with(http_client_instance: nil, timeout: nil, max_retries: nil,
+                   retry_interval: nil, backoff_factor: nil,
+                   retry_statuses: nil, retry_methods: nil, environment: nil,
+                   custom_url: nil, square_version: nil, access_token: nil,
+                   additional_headers: nil)
+      http_client_instance ||= self.http_client_instance
       timeout ||= self.timeout
       max_retries ||= self.max_retries
       retry_interval ||= self.retry_interval
@@ -77,7 +81,8 @@ module Square
       access_token ||= self.access_token
       additional_headers ||= self.additional_headers
 
-      Configuration.new(timeout: timeout, max_retries: max_retries,
+      Configuration.new(http_client_instance: http_client_instance,
+                        timeout: timeout, max_retries: max_retries,
                         retry_interval: retry_interval,
                         backoff_factor: backoff_factor,
                         retry_statuses: retry_statuses,
@@ -92,7 +97,8 @@ module Square
                         retry_interval: retry_interval,
                         backoff_factor: backoff_factor,
                         retry_statuses: retry_statuses,
-                        retry_methods: retry_methods)
+                        retry_methods: retry_methods,
+                        http_client_instance: http_client_instance)
     end
 
     # All the environments the SDK can run in.
