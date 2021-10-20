@@ -7,7 +7,25 @@ module Square
     # The constructor.
     def initialize(timeout:, max_retries:, retry_interval:,
                    backoff_factor:, retry_statuses:, retry_methods:,
-                   cache: false, verify: true)
+                   http_client_instance: nil, cache: false, verify: true)
+      if http_client_instance.nil?
+        create_connection(timeout: timeout, max_retries: max_retries,
+                          retry_interval: retry_interval, backoff_factor: backoff_factor,
+                          retry_statuses: retry_statuses, retry_methods: retry_methods,
+                          cache: cache, verify: verify)
+      else
+        if http_client_instance.instance_variable_get('@connection').nil?
+          raise ArgumentError,
+                "`connection` cannot be nil in `#{self.class}`. Please specify a valid value."
+        end
+        @connection = http_client_instance.instance_variable_get('@connection')
+      end
+    end
+
+    # Method to initialize connection.
+    def create_connection(timeout:, max_retries:, retry_interval:,
+                          backoff_factor:, retry_statuses:, retry_methods:,
+                          cache: false, verify: true)
       @connection = Faraday.new do |faraday|
         faraday.use Faraday::HttpCache, serializer: Marshal if cache
         faraday.use FaradayMiddleware::FollowRedirects
@@ -24,6 +42,7 @@ module Square
         faraday.options[:params_encoder] = Faraday::FlatParamsEncoder
         faraday.options[:timeout] = timeout if timeout.positive?
       end
+      @connection
     end
 
     # Method overridden from HttpClient.

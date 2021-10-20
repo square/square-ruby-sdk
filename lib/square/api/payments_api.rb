@@ -296,8 +296,12 @@ module Square
     # `status`.
     # @param [String] payment_id Required parameter: The unique ID identifying
     # the payment to be completed.
+    # @param [CompletePaymentRequest] body Required parameter: An object
+    # containing the fields to POST for the request.  See the corresponding
+    # object definition for field details.
     # @return [CompletePaymentResponse Hash] response from the API call
-    def complete_payment(payment_id:)
+    def complete_payment(payment_id:,
+                         body:)
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/payments/{payment_id}/complete'
@@ -309,13 +313,15 @@ module Square
 
       # Prepare headers.
       _headers = {
-        'accept' => 'application/json'
+        'accept' => 'application/json',
+        'content-type' => 'application/json; charset=utf-8'
       }
 
       # Prepare and execute HttpRequest.
       _request = config.http_client.post(
         _query_url,
-        headers: _headers
+        headers: _headers,
+        parameters: body.to_json
       )
       OAuth2.apply(config, _request)
       _response = execute_request(_request)

@@ -4,7 +4,7 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '14.1.0.20210915'
+      '15.0.0.20211020'
     end
 
     def square_version
@@ -209,15 +209,16 @@ module Square
       @terminal ||= TerminalApi.new config
     end
 
-    def initialize(timeout: 60, max_retries: 0, retry_interval: 1,
-                   backoff_factor: 2,
+    def initialize(http_client_instance: nil, timeout: 60, max_retries: 0,
+                   retry_interval: 1, backoff_factor: 2,
                    retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
                    retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2021-09-15', access_token: 'TODO: Replace',
+                   square_version: '2021-10-20', access_token: '',
                    additional_headers: {}, config: nil)
       @config = if config.nil?
-                  Configuration.new(timeout: timeout, max_retries: max_retries,
+                  Configuration.new(http_client_instance: http_client_instance,
+                                    timeout: timeout, max_retries: max_retries,
                                     retry_interval: retry_interval,
                                     backoff_factor: backoff_factor,
                                     retry_statuses: retry_statuses,

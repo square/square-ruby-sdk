@@ -25,7 +25,7 @@ module Square
           end.new(*data.values)
 
           @cursor = data.fetch(:cursor, nil)
-          data.reject! { |k| k == :cursor || k == :errors }
+          data.reject! { |k| %i[cursor errors].include?(k) }
           @data = Struct.new(*data.keys).new(*data.values) if data.keys.any?
         end
       else
