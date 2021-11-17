@@ -72,7 +72,7 @@ module Square
       # Prepare headers.
       _headers = {
         'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'Content-Type' => 'application/json'
       }
 
       # Prepare and execute HttpRequest.
@@ -112,7 +112,7 @@ module Square
       # Prepare headers.
       _headers = {
         'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'Content-Type' => 'application/json'
       }
 
       # Prepare and execute HttpRequest.
@@ -242,7 +242,7 @@ module Square
       # Prepare headers.
       _headers = {
         'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'Content-Type' => 'application/json'
       }
 
       # Prepare and execute HttpRequest.
@@ -286,7 +286,7 @@ module Square
       # Prepare headers.
       _headers = {
         'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'Content-Type' => 'application/json'
       }
 
       # Prepare and execute HttpRequest.
@@ -339,7 +339,7 @@ module Square
       # Prepare headers.
       _headers = {
         'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'Content-Type' => 'application/json'
       }
 
       # Prepare and execute HttpRequest.

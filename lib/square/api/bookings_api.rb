@@ -5,6 +5,66 @@ module Square
       super(config, http_call_back: http_call_back)
     end
 
+    # Retrieve a collection of bookings.
+    # @param [Integer] limit Optional parameter: The maximum number of results
+    # per page to return in a paged response.
+    # @param [String] cursor Optional parameter: The pagination cursor from the
+    # preceding response to return the next page of the results. Do not set this
+    # when retrieving the first page of the results.
+    # @param [String] team_member_id Optional parameter: The team member for
+    # whom to retrieve bookings. If this is not set, bookings of all members are
+    # retrieved.
+    # @param [String] location_id Optional parameter: The location for which to
+    # retrieve bookings. If this is not set, all locations' bookings are
+    # retrieved.
+    # @param [String] start_at_min Optional parameter: The RFC 3339 timestamp
+    # specifying the earliest of the start time. If this is not set, the current
+    # time is used.
+    # @param [String] start_at_max Optional parameter: The RFC 3339 timestamp
+    # specifying the latest of the start time. If this is not set, the time of
+    # 31 days after `start_at_min` is used.
+    # @return [ListBookingsResponse Hash] response from the API call
+    def list_bookings(limit: nil,
+                      cursor: nil,
+                      team_member_id: nil,
+                      location_id: nil,
+                      start_at_min: nil,
+                      start_at_max: nil)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/bookings'
+      _query_builder = APIHelper.append_url_with_query_parameters(
+        _query_builder,
+        'limit' => limit,
+        'cursor' => cursor,
+        'team_member_id' => team_member_id,
+        'location_id' => location_id,
+        'start_at_min' => start_at_min,
+        'start_at_max' => start_at_max
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.get(
+        _query_url,
+        headers: _headers
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
+    end
+
     # Creates a booking.
     # @param [CreateBookingRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
@@ -19,7 +79,7 @@ module Square
       # Prepare headers.
       _headers = {
         'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'Content-Type' => 'application/json'
       }
 
       # Prepare and execute HttpRequest.
@@ -53,7 +113,7 @@ module Square
       # Prepare headers.
       _headers = {
         'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'Content-Type' => 'application/json'
       }
 
       # Prepare and execute HttpRequest.
@@ -242,7 +302,7 @@ module Square
       # Prepare headers.
       _headers = {
         'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'Content-Type' => 'application/json'
       }
 
       # Prepare and execute HttpRequest.
@@ -283,7 +343,7 @@ module Square
       # Prepare headers.
       _headers = {
         'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'Content-Type' => 'application/json'
       }
 
       # Prepare and execute HttpRequest.

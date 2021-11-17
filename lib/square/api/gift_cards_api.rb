@@ -7,24 +7,26 @@ module Square
 
     # Lists all gift cards. You can specify optional filters to retrieve
     # a subset of the gift cards.
-    # @param [String] type Optional parameter: If a type is provided, gift cards
-    # of this type are returned  (see [GiftCardType]($m/GiftCardType)). If no
-    # type is provided, it returns gift cards of all types.
-    # @param [String] state Optional parameter: If the state is provided, it
-    # returns the gift cards in the specified state  (see
-    # [GiftCardStatus]($m/GiftCardStatus)). Otherwise, it returns the gift cards
-    # of all states.
-    # @param [Integer] limit Optional parameter: If a value is provided, it
-    # returns only that number of results per page. The maximum number of
-    # results allowed per page is 50. The default value is 30.
-    # @param [String] cursor Optional parameter: A pagination cursor returned by
-    # a previous call to this endpoint. Provide this cursor to retrieve the next
-    # set of results for the original query. If a cursor is not provided, it
-    # returns the first page of the results.  For more information, see
+    # @param [String] type Optional parameter: If a [type]($m/GiftCardType) is
+    # provided, the endpoint returns gift cards of the specified type.
+    # Otherwise, the endpoint returns gift cards of all types.
+    # @param [String] state Optional parameter: If a [state]($m/GiftCardStatus)
+    # is provided, the endpoint returns the gift cards in the specified state.
+    # Otherwise, the endpoint returns the gift cards of all states.
+    # @param [Integer] limit Optional parameter: If a limit is provided, the
+    # endpoint returns only the specified number of results per page. The
+    # maximum value is 50. The default value is 30. For more information, see
     # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
     # ion).
-    # @param [String] customer_id Optional parameter: If a value is provided,
-    # returns only the gift cards linked to the specified customer
+    # @param [String] cursor Optional parameter: A pagination cursor returned by
+    # a previous call to this endpoint. Provide this cursor to retrieve the next
+    # set of results for the original query. If a cursor is not provided, the
+    # endpoint returns the first page of the results.  For more information, see
+    # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
+    # ion).
+    # @param [String] customer_id Optional parameter: If a customer ID is
+    # provided, the endpoint returns only the gift cards linked to the specified
+    # customer.
     # @return [ListGiftCardsResponse Hash] response from the API call
     def list_gift_cards(type: nil,
                         state: nil,
@@ -84,7 +86,7 @@ module Square
       # Prepare headers.
       _headers = {
         'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'Content-Type' => 'application/json'
       }
 
       # Prepare and execute HttpRequest.
@@ -118,7 +120,7 @@ module Square
       # Prepare headers.
       _headers = {
         'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'Content-Type' => 'application/json'
       }
 
       # Prepare and execute HttpRequest.
@@ -138,7 +140,7 @@ module Square
       )
     end
 
-    # Retrieves a gift card using a nonce (a secure token) that represents the
+    # Retrieves a gift card using a secure payment token that represents the
     # gift card.
     # @param [RetrieveGiftCardFromNonceRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
@@ -153,7 +155,7 @@ module Square
       # Prepare headers.
       _headers = {
         'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'Content-Type' => 'application/json'
       }
 
       # Prepare and execute HttpRequest.
@@ -173,9 +175,10 @@ module Square
       )
     end
 
-    # Links a customer to a gift card
+    # Links a customer to a gift card, which is also referred to as adding a
+    # card on file.
     # @param [String] gift_card_id Required parameter: The ID of the gift card
-    # to link.
+    # to be linked.
     # @param [LinkCustomerToGiftCardRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -194,7 +197,7 @@ module Square
       # Prepare headers.
       _headers = {
         'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'Content-Type' => 'application/json'
       }
 
       # Prepare and execute HttpRequest.
@@ -214,8 +217,10 @@ module Square
       )
     end
 
-    # Unlinks a customer from a gift card
-    # @param [String] gift_card_id Required parameter: Example:
+    # Unlinks a customer from a gift card, which is also referred to as removing
+    # a card on file.
+    # @param [String] gift_card_id Required parameter: The ID of the gift card
+    # to be unlinked.
     # @param [UnlinkCustomerFromGiftCardRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
@@ -234,7 +239,7 @@ module Square
       # Prepare headers.
       _headers = {
         'accept' => 'application/json',
-        'content-type' => 'application/json; charset=utf-8'
+        'Content-Type' => 'application/json'
       }
 
       # Prepare and execute HttpRequest.

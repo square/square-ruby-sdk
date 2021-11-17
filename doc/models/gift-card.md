@@ -12,7 +12,7 @@ Represents a Square gift card.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `String` | Optional | The Square-assigned ID of the gift card. |
-| `type` | [`String (Gift Card Type)`](/doc/models/gift-card-type.md) | Required | - |
+| `type` | [`String (Gift Card Type)`](/doc/models/gift-card-type.md) | Required | Indicates the gift card type. |
 | `gan_source` | [`String (Gift Card GAN Source)`](/doc/models/gift-card-gan-source.md) | Optional | Indicates the source that generated the gift card<br>account number (GAN). |
 | `state` | [`String (Gift Card Status)`](/doc/models/gift-card-status.md) | Optional | Indicates the gift card state. |
 | `balance_money` | [`Money Hash`](/doc/models/money.md) | Optional | Represents an amount of money. `Money` fields can be signed or unsigned.<br>Fields that do not explicitly define whether they are signed or unsigned are<br>considered unsigned and can only hold positive amounts. For signed fields, the<br>sign of the value indicates the purpose of the money transfer. See<br>[Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)<br>for more information. |

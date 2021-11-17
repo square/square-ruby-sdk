@@ -10,6 +10,7 @@ bookings_api = client.bookings
 
 ## Methods
 
+* [List Bookings](/doc/api/bookings.md#list-bookings)
 * [Create Booking](/doc/api/bookings.md#create-booking)
 * [Search Availability](/doc/api/bookings.md#search-availability)
 * [Retrieve Business Booking Profile](/doc/api/bookings.md#retrieve-business-booking-profile)
@@ -18,6 +19,54 @@ bookings_api = client.bookings
 * [Retrieve Booking](/doc/api/bookings.md#retrieve-booking)
 * [Update Booking](/doc/api/bookings.md#update-booking)
 * [Cancel Booking](/doc/api/bookings.md#cancel-booking)
+
+
+# List Bookings
+
+Retrieve a collection of bookings.
+
+```ruby
+def list_bookings(limit: nil,
+                  cursor: nil,
+                  team_member_id: nil,
+                  location_id: nil,
+                  start_at_min: nil,
+                  start_at_max: nil)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `limit` | `Integer` | Query, Optional | The maximum number of results per page to return in a paged response. |
+| `cursor` | `String` | Query, Optional | The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results. |
+| `team_member_id` | `String` | Query, Optional | The team member for whom to retrieve bookings. If this is not set, bookings of all members are retrieved. |
+| `location_id` | `String` | Query, Optional | The location for which to retrieve bookings. If this is not set, all locations' bookings are retrieved. |
+| `start_at_min` | `String` | Query, Optional | The RFC 3339 timestamp specifying the earliest of the start time. If this is not set, the current time is used. |
+| `start_at_max` | `String` | Query, Optional | The RFC 3339 timestamp specifying the latest of the start time. If this is not set, the time of 31 days after `start_at_min` is used. |
+
+## Response Type
+
+[`List Bookings Response Hash`](/doc/models/list-bookings-response.md)
+
+## Example Usage
+
+```ruby
+limit = 172
+cursor = 'cursor6'
+team_member_id = 'team_member_id0'
+location_id = 'location_id4'
+start_at_min = 'start_at_min8'
+start_at_max = 'start_at_max8'
+
+result = bookings_api.list_bookings(limit: limit, cursor: cursor, team_member_id: team_member_id, location_id: location_id, start_at_min: start_at_min, start_at_max: start_at_max)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
 
 
 # Create Booking

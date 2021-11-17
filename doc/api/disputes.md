@@ -47,7 +47,7 @@ def list_disputes(cursor: nil,
 
 ```ruby
 cursor = 'cursor6'
-states = 'EVIDENCE_REQUIRED'
+states = 'INQUIRY_EVIDENCE_REQUIRED'
 location_id = 'location_id4'
 
 result = disputes_api.list_disputes(cursor: cursor, states: states, location_id: location_id)
