@@ -5,10 +5,11 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2021-10-20'` |
+| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2021-11-17'` |
 | `access_token` | `String` | The OAuth 2.0 Access Token to use for API requests. |
 | `custom_url` | `String` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `'https://connect.squareup.com'` |
 | `environment` | `string` | The API environment. <br> **Default: `production`** |
+| `http_client_instance` | `HttpClient` | The Http Client passed from the sdk user for making requests |
 | `timeout` | `Float` | The value to use for connection timeout. <br> **Default: 60** |
 | `max_retries` | `Integer` | The number of times to retry an endpoint call if it fails. <br> **Default: 0** |
 | `retry_interval` | `Float` | Pause in seconds between retries. <br> **Default: 1** |
@@ -21,7 +22,7 @@ The API client can be initialized as follows:
 
 ```ruby
 client = Square::Client.new(
-  square_version: '2021-10-20',
+  square_version: '2021-11-17',
   access_token: 'AccessToken',
   environment: 'production',
   custom_url: 'https://connect.squareup.com',

@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `bookable_only` | `Boolean` | Optional | Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`). |
-| `limit` | `Integer` | Optional | The maximum number of results to return. |
+| `limit` | `Integer` | Optional | The maximum number of results to return.<br>**Constraints**: `>= 1`, `<= 100` |
 | `cursor` | `String` | Optional | The cursor for paginating through the results. |
 | `location_id` | `String` | Optional | Indicates whether to include only team members enabled at the given location in the returned result. |
 
