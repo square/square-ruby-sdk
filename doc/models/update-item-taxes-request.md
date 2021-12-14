@@ -9,9 +9,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `item_ids` | `Array<String>` | Required | IDs for the CatalogItems associated with the CatalogTax objects being updated. |
-| `taxes_to_enable` | `Array<String>` | Optional | IDs of the CatalogTax objects to enable. |
-| `taxes_to_disable` | `Array<String>` | Optional | IDs of the CatalogTax objects to disable. |
+| `item_ids` | `Array<String>` | Required | IDs for the CatalogItems associated with the CatalogTax objects being updated.<br>No more than 1,000 IDs may be provided. |
+| `taxes_to_enable` | `Array<String>` | Optional | IDs of the CatalogTax objects to enable.<br>At least one of `taxes_to_enable` or `taxes_to_disable` must be specified. |
+| `taxes_to_disable` | `Array<String>` | Optional | IDs of the CatalogTax objects to disable.<br>At least one of `taxes_to_enable` or `taxes_to_disable` must be specified. |
 
 ## Example (as JSON)
 

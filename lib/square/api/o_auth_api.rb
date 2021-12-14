@@ -12,11 +12,11 @@ module Square
     # okens).
     # Renews an OAuth access token before it expires.
     # OAuth access tokens besides your application's personal access token
-    # expire after __30 days__.
-    # You can also renew expired tokens within __15 days__ of their expiration.
+    # expire after 30 days.
+    # You can also renew expired tokens within 15 days of their expiration.
     # You cannot renew an access token that has been expired for more than 15
     # days.
-    # Instead, the associated user must re-complete the OAuth flow from the
+    # Instead, the associated user must recomplete the OAuth flow from the
     # beginning.
     # __Important:__ The `Authorization` header for this endpoint must have the
     # following format:
@@ -25,10 +25,10 @@ module Square
     # ```
     # Replace `APPLICATION_SECRET` with the application secret on the
     # Credentials
-    # page in the [developer dashboard](https://developer.squareup.com/apps).
-    # @param [String] client_id Required parameter: Your application ID,
-    # available from the OAuth page for your  application on the Developer
-    # Dashboard.
+    # page in the [Developer Dashboard](https://developer.squareup.com/apps).
+    # @param [String] client_id Required parameter: Your application ID, which
+    # is available in the OAuth page in the [Developer
+    # Dashboard](https://developer.squareup.com/apps).
     # @param [RenewTokenRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.

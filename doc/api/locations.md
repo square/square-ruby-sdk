@@ -18,11 +18,8 @@ locations_api = client.locations
 
 # List Locations
 
-Provides information of all locations of a business.
-
-Many Square API endpoints require a `location_id` parameter.
-The `id` field of the [`Location`](/doc/models/location.md) objects returned by this
-endpoint correspond to that `location_id` parameter.
+Provides details about all of the seller's locations,
+including those with an inactive status.
 
 ```ruby
 def list_locations
@@ -47,7 +44,13 @@ end
 
 # Create Location
 
-Creates a location.
+Creates a [location](https://developer.squareup.com/docs/locations-api).
+Creating new locations allows for separate configuration of receipt layouts, item prices,
+and sales reports. Developers can use locations to separate sales activity via applications
+that integrate with Square from sales activity elsewhere in a seller's account.
+Locations created programmatically with the Locations API will last forever and
+are visible to the seller for their own management, so ensure that
+each location has a sensible and unique name.
 
 ```ruby
 def create_location(body:)
@@ -95,9 +98,8 @@ end
 
 # Retrieve Location
 
-Retrieves details of a location. You can specify "main"
-as the location ID to retrieve details of the
-main location.
+Retrieves details of a single location. Specify "main"
+as the location ID to retrieve details of the [main location](https://developer.squareup.com/docs/locations-api#about-the-main-location).
 
 ```ruby
 def retrieve_location(location_id:)
@@ -107,7 +109,7 @@ def retrieve_location(location_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `location_id` | `String` | Template, Required | The ID of the location to retrieve. If you specify the string "main",<br>then the endpoint returns the main location. |
+| `location_id` | `String` | Template, Required | The ID of the location to retrieve. Specify the string<br>"main" to return the main location. |
 
 ## Response Type
 

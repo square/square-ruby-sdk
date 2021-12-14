@@ -4,11 +4,15 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '16.0.1.20211117'
+      '17.0.0.20211215'
     end
 
     def square_version
       config.square_version
+    end
+
+    def user_agent_detail
+      config.user_agent_detail
     end
 
     # Access to mobile_authorization controller.
@@ -214,8 +218,8 @@ module Square
                    retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
                    retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2021-11-17', access_token: '',
-                   additional_headers: {}, config: nil)
+                   square_version: '2021-12-15', access_token: '',
+                   user_agent_detail: '', additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(http_client_instance: http_client_instance,
                                     timeout: timeout, max_retries: max_retries,
@@ -227,6 +231,7 @@ module Square
                                     custom_url: custom_url,
                                     square_version: square_version,
                                     access_token: access_token,
+                                    user_agent_detail: user_agent_detail,
                                     additional_headers: additional_headers)
                 else
                   config

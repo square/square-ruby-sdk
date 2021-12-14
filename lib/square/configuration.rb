@@ -5,7 +5,7 @@ module Square
     # The attribute readers for properties.
     attr_reader :http_client, :http_client_instance, :timeout, :max_retries, :retry_interval,
                 :backoff_factor, :retry_statuses, :retry_methods, :environment, :custom_url,
-                :square_version, :access_token
+                :square_version, :access_token, :user_agent_detail
 
     def additional_headers
       @additional_headers.clone
@@ -20,8 +20,8 @@ module Square
                    retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
                    retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2021-11-17', access_token: '',
-                   additional_headers: {})
+                   square_version: '2021-12-15', access_token: '',
+                   user_agent_detail: '', additional_headers: {})
       # The Http Client passed from the sdk user for making requests
       @http_client_instance = http_client_instance
 
@@ -67,7 +67,7 @@ module Square
                    retry_interval: nil, backoff_factor: nil,
                    retry_statuses: nil, retry_methods: nil, environment: nil,
                    custom_url: nil, square_version: nil, access_token: nil,
-                   additional_headers: nil)
+                   user_agent_detail: nil, additional_headers: nil)
       http_client_instance ||= self.http_client_instance
       timeout ||= self.timeout
       max_retries ||= self.max_retries
@@ -79,6 +79,7 @@ module Square
       custom_url ||= self.custom_url
       square_version ||= self.square_version
       access_token ||= self.access_token
+      user_agent_detail ||= self.user_agent_detail
       additional_headers ||= self.additional_headers
 
       Configuration.new(http_client_instance: http_client_instance,
@@ -89,6 +90,7 @@ module Square
                         retry_methods: retry_methods, environment: environment,
                         custom_url: custom_url, square_version: square_version,
                         access_token: access_token,
+                        user_agent_detail: user_agent_detail,
                         additional_headers: additional_headers)
     end
 
