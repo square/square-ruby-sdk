@@ -1,3 +1,4 @@
+require 'erb'
 module Square
   # BaseApi.
   class BaseApi
@@ -8,7 +9,7 @@ module Square
       @http_call_back = http_call_back
 
       @global_headers = {
-        'user-agent' => 'Square-Ruby-SDK/16.0.1.20211117',
+        'user-agent' => get_user_agent,
         'Square-Version' => config.square_version
       }
     end
@@ -34,6 +35,11 @@ module Square
       @http_call_back&.on_after_response(response)
 
       response
+    end
+
+    def get_user_agent
+      user_agent = 'Square-Ruby-SDK/17.0.0.20211215'
+      user_agent
     end
   end
 end

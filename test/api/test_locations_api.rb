@@ -7,11 +7,8 @@ class LocationsApiTests < ApiTestBase
     @controller = LocationsApi.new CONFIG, http_call_back: @response_catcher
   end
 
-  # Provides information of all locations of a business.
-  #
-  #Many Square API endpoints require a `location_id` parameter.
-  #The `id` field of the [`Location`]($m/Location) objects returned by this
-  #endpoint correspond to that `location_id` parameter.
+  # Provides details about all of the seller's locations,
+  #including those with an inactive status.
   def test_list_locations()
 
     # Perform the API call through the SDK function

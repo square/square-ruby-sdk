@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2021-11-17'` |
+| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2021-12-15'` |
 | `access_token` | `String` | The OAuth 2.0 Access Token to use for API requests. |
 | `custom_url` | `String` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `'https://connect.squareup.com'` |
 | `environment` | `string` | The API environment. <br> **Default: `production`** |
@@ -16,13 +16,14 @@ The following parameters are configurable for the API Client:
 | `backoff_factor` | `Float` | The amount to multiply each successive retry's interval amount by in order to provide backoff. <br> **Default: 2** |
 | `retry_statuses` | `Array` | A list of HTTP statuses to retry. <br> **Default: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524]** |
 | `retry_methods` | `Array` | A list of HTTP methods to retry. <br> **Default: %i[get put]** |
+| `user_agent_detail` | `string` | User agent detail, to be appended with user-agent header. |
 | `additional_headers` | `String` | Additional headers to add to each API request |
 
 The API client can be initialized as follows:
 
 ```ruby
 client = Square::Client.new(
-  square_version: '2021-11-17',
+  square_version: '2021-12-15',
   access_token: 'AccessToken',
   environment: 'production',
   custom_url: 'https://connect.squareup.com',
