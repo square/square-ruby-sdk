@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `business_booking_profile` | [`Business Booking Profile Hash`](/doc/models/business-booking-profile.md) | Optional | - |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Errors that occurred during the request. |
 
 ## Example (as JSON)
 

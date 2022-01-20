@@ -38,7 +38,16 @@ module Square
     end
 
     def get_user_agent
-      user_agent = 'Square-Ruby-SDK/17.0.0.20211215'
+      user_agent = 'Square-Ruby-SDK/17.1.0.20220120 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}'
+      user_agent['{engine}'] = RUBY_ENGINE
+      user_agent['{engine-version}'] = RUBY_ENGINE_VERSION
+      user_agent['{os-info}'] = RUBY_PLATFORM
+      user_agent['{api-version}'] = config.square_version
+      if config.user_agent_detail.nil? || config.user_agent_detail.empty?
+        user_agent = user_agent.gsub('{detail}', '')
+      else
+        user_agent['{detail}'] = ERB::Util.url_encode(config.user_agent_detail.to_s)
+      end
       user_agent
     end
   end

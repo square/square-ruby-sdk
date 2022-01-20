@@ -6,6 +6,10 @@ module Square
     end
 
     # Retrieve a collection of bookings.
+    # To call this endpoint with buyer-level permissions, set
+    # `APPOINTMENTS_READ` for the OAuth scope.
+    # To call this endpoint with seller-level permissions, set
+    # `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
     # @param [Integer] limit Optional parameter: The maximum number of results
     # per page to return in a paged response.
     # @param [String] cursor Optional parameter: The pagination cursor from the
@@ -66,6 +70,10 @@ module Square
     end
 
     # Creates a booking.
+    # To call this endpoint with buyer-level permissions, set
+    # `APPOINTMENTS_WRITE` for the OAuth scope.
+    # To call this endpoint with seller-level permissions, set
+    # `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
     # @param [CreateBookingRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -100,6 +108,10 @@ module Square
     end
 
     # Searches for availabilities for booking.
+    # To call this endpoint with buyer-level permissions, set
+    # `APPOINTMENTS_READ` for the OAuth scope.
+    # To call this endpoint with seller-level permissions, set
+    # `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
     # @param [SearchAvailabilityRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -167,9 +179,10 @@ module Square
     # include only bookable team members in the returned result (`true`) or not
     # (`false`).
     # @param [Integer] limit Optional parameter: The maximum number of results
-    # to return.
-    # @param [String] cursor Optional parameter: The cursor for paginating
-    # through the results.
+    # to return in a paged response.
+    # @param [String] cursor Optional parameter: The pagination cursor from the
+    # preceding response to return the next page of the results. Do not set this
+    # when retrieving the first page of the results.
     # @param [String] location_id Optional parameter: Indicates whether to
     # include only team members enabled at the given location in the returned
     # result.
@@ -247,6 +260,10 @@ module Square
     end
 
     # Retrieves a booking.
+    # To call this endpoint with buyer-level permissions, set
+    # `APPOINTMENTS_READ` for the OAuth scope.
+    # To call this endpoint with seller-level permissions, set
+    # `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
     # @param [String] booking_id Required parameter: The ID of the
     # [Booking]($m/Booking) object representing the to-be-retrieved booking.
     # @return [RetrieveBookingResponse Hash] response from the API call
@@ -282,6 +299,10 @@ module Square
     end
 
     # Updates a booking.
+    # To call this endpoint with buyer-level permissions, set
+    # `APPOINTMENTS_WRITE` for the OAuth scope.
+    # To call this endpoint with seller-level permissions, set
+    # `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
     # @param [String] booking_id Required parameter: The ID of the
     # [Booking]($m/Booking) object representing the to-be-updated booking.
     # @param [UpdateBookingRequest] body Required parameter: An object
@@ -323,6 +344,10 @@ module Square
     end
 
     # Cancels an existing booking.
+    # To call this endpoint with buyer-level permissions, set
+    # `APPOINTMENTS_WRITE` for the OAuth scope.
+    # To call this endpoint with seller-level permissions, set
+    # `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
     # @param [String] booking_id Required parameter: The ID of the
     # [Booking]($m/Booking) object representing the to-be-cancelled booking.
     # @param [CancelBookingRequest] body Required parameter: An object
