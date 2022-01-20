@@ -25,6 +25,9 @@ bookings_api = client.bookings
 
 Retrieve a collection of bookings.
 
+To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.  
+To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
+
 ```ruby
 def list_bookings(limit: nil,
                   cursor: nil,
@@ -73,6 +76,9 @@ end
 
 Creates a booking.
 
+To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.  
+To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
+
 ```ruby
 def create_booking(body:)
 ```
@@ -112,6 +118,9 @@ end
 # Search Availability
 
 Searches for availabilities for booking.
+
+To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.  
+To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
 
 ```ruby
 def search_availability(body:)
@@ -207,8 +216,8 @@ def list_team_member_booking_profiles(bookable_only: false,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `bookable_only` | `Boolean` | Query, Optional | Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`).<br>**Default**: `false` |
-| `limit` | `Integer` | Query, Optional | The maximum number of results to return. |
-| `cursor` | `String` | Query, Optional | The cursor for paginating through the results. |
+| `limit` | `Integer` | Query, Optional | The maximum number of results to return in a paged response. |
+| `cursor` | `String` | Query, Optional | The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results. |
 | `location_id` | `String` | Query, Optional | Indicates whether to include only team members enabled at the given location in the returned result. |
 
 ## Response Type
@@ -270,6 +279,9 @@ end
 
 Retrieves a booking.
 
+To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.  
+To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
+
 ```ruby
 def retrieve_booking(booking_id:)
 ```
@@ -302,6 +314,9 @@ end
 # Update Booking
 
 Updates a booking.
+
+To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.  
+To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
 
 ```ruby
 def update_booking(booking_id:,
@@ -345,6 +360,9 @@ end
 # Cancel Booking
 
 Cancels an existing booking.
+
+To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.  
+To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
 
 ```ruby
 def cancel_booking(booking_id:,

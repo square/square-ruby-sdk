@@ -20,7 +20,7 @@ module Square
                    retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
                    retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2021-12-15', access_token: '',
+                   square_version: '2022-01-20', access_token: '',
                    user_agent_detail: '', additional_headers: {})
       # The Http Client passed from the sdk user for making requests
       @http_client_instance = http_client_instance
@@ -61,6 +61,9 @@ module Square
 
       # The Http Client to use for making requests.
       @http_client = create_http_client
+
+      # User agent detail, to be appended with user-agent header.
+      @user_agent_detail = get_user_agent(user_agent_detail)
     end
 
     def clone_with(http_client_instance: nil, timeout: nil, max_retries: nil,
@@ -101,6 +104,12 @@ module Square
                         retry_statuses: retry_statuses,
                         retry_methods: retry_methods,
                         http_client_instance: http_client_instance)
+    end
+
+    def get_user_agent(user_agent_detail)
+      raise ArgumentError, 'The length of user-agent detail should not exceed 128 characters.' unless user_agent_detail.length < 128
+
+      user_agent_detail
     end
 
     # All the environments the SDK can run in.

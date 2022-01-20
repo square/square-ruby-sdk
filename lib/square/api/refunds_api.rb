@@ -31,10 +31,13 @@ module Square
     # the given status are returned. For a list of refund status values, see
     # [PaymentRefund]($m/PaymentRefund).  Default: If omitted, refunds are
     # returned regardless of their status.
-    # @param [String] source_type Optional parameter: If provided, only refunds
-    # with the given source type are returned. - `CARD` - List refunds only for
-    # payments where `CARD` was specified as the payment source.  Default: If
-    # omitted, refunds are returned regardless of the source type.
+    # @param [String] source_type Optional parameter: If provided, only returns
+    # refunds whose payments have the indicated source type. Current values
+    # include `CARD`, `BANK_ACCOUNT`, `WALLET`, `CASH`, and `EXTERNAL`. For
+    # information about these payment source types, see [Take
+    # Payments](https://developer.squareup.com/docs/payments-api/take-payments).
+    #  Default: If omitted, refunds are returned regardless of the source
+    # type.
     # @param [Integer] limit Optional parameter: The maximum number of results
     # to be returned in a single page.  It is possible to receive fewer results
     # than the specified limit on a given page.  If the supplied value is

@@ -5,7 +5,8 @@ module Square
       super(config, http_call_back: http_call_back)
     end
 
-    # Provides details about all of the seller's locations,
+    # Provides details about all of the seller's
+    # [locations](https://developer.squareup.com/docs/locations-api),
     # including those with an inactive status.
     # @return [ListLocationsResponse Hash] response from the API call
     def list_locations
@@ -117,7 +118,7 @@ module Square
       )
     end
 
-    # Updates a location.
+    # Updates a [location](https://developer.squareup.com/docs/locations-api).
     # @param [String] location_id Required parameter: The ID of the location to
     # update.
     # @param [UpdateLocationRequest] body Required parameter: An object

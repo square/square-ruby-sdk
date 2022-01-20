@@ -7,7 +7,7 @@ class LocationsApiTests < ApiTestBase
     @controller = LocationsApi.new CONFIG, http_call_back: @response_catcher
   end
 
-  # Provides details about all of the seller's locations,
+  # Provides details about all of the seller's [locations](https://developer.squareup.com/docs/locations-api),
   #including those with an inactive status.
   def test_list_locations()
 

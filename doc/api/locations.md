@@ -18,7 +18,7 @@ locations_api = client.locations
 
 # List Locations
 
-Provides details about all of the seller's locations,
+Provides details about all of the seller's [locations](https://developer.squareup.com/docs/locations-api),
 including those with an inactive status.
 
 ```ruby
@@ -132,7 +132,7 @@ end
 
 # Update Location
 
-Updates a location.
+Updates a [location](https://developer.squareup.com/docs/locations-api).
 
 ```ruby
 def update_location(location_id:,
