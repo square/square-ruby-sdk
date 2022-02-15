@@ -10,7 +10,7 @@ Use this gem to integrate Square payments into your app and grow your business w
 
 ## Requirements
 
-We support Ruby 2.5.x, 2.6.x, 2.7.x, and 3.0.x.
+We support Ruby 2.6 through 3.1.
 
 ## Installation
 

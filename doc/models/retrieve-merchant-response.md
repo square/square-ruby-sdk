@@ -12,7 +12,7 @@ The response object returned by the [RetrieveMerchant](/doc/api/merchants.md#ret
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Information on errors encountered during the request. |
-| `merchant` | [`Merchant Hash`](/doc/models/merchant.md) | Optional | Represents a Square seller. |
+| `merchant` | [`Merchant Hash`](/doc/models/merchant.md) | Optional | Represents a business that sells with Square. |
 
 ## Example (as JSON)
 

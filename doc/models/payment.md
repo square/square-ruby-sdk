@@ -31,6 +31,7 @@ Represents a payment processed by the Square API.
 | `bank_account_details` | [`Bank Account Payment Details Hash`](/doc/models/bank-account-payment-details.md) | Optional | Additional details about BANK_ACCOUNT type payments. |
 | `external_details` | [`External Payment Details Hash`](/doc/models/external-payment-details.md) | Optional | Stores details about an external payment. Contains only non-confidential information.<br>For more information, see<br>[Take External Payments](https://developer.squareup.com/docs/payments-api/take-payments/external-payments). |
 | `wallet_details` | [`Digital Wallet Details Hash`](/doc/models/digital-wallet-details.md) | Optional | Additional details about `WALLET` type payments. Contains only non-confidential information. |
+| `buy_now_pay_later_details` | [`Buy Now Pay Later Details Hash`](/doc/models/buy-now-pay-later-details.md) | Optional | Additional details about a Buy Now Pay Later payment type. |
 | `location_id` | `String` | Optional | The ID of the location associated with the payment.<br>**Constraints**: *Maximum Length*: `50` |
 | `order_id` | `String` | Optional | The ID of the order associated with the payment.<br>**Constraints**: *Maximum Length*: `192` |
 | `reference_id` | `String` | Optional | An optional ID that associates the payment with an entity in<br>another system.<br>**Constraints**: *Maximum Length*: `40` |
