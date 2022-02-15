@@ -8,18 +8,16 @@ module Square
     def self.serialize_array(key, array, formatting: 'indexed')
       tuples = []
 
-      case formatting
-      when 'unindexed'
-        tuples += array.map { |element| ["#{key}[]", element] }
-      when 'indexed'
-        tuples += array.map.with_index do |element, index|
-          ["#{key}[#{index}]", element]
-        end
-      when 'plain'
-        tuples += array.map { |element| [key, element] }
-      else
-        raise ArgumentError, 'Invalid format provided.'
-      end
+      tuples += case formatting
+                when 'csv'
+                  [[key, array.map { |element| CGI.escape(element.to_s) }.join(',')]]
+                when 'psv'
+                  [[key, array.map { |element| CGI.escape(element.to_s) }.join('|')]]
+                when 'tsv'
+                  [[key, array.map { |element| CGI.escape(element.to_s) }.join("\t")]]
+                else
+                  array.map { |element| [key, element] }
+                end
       tuples
     end
 
@@ -75,31 +73,19 @@ module Square
       return query_builder if parameters.nil?
 
       array_serialization = 'indexed'
+      parameters = process_complex_types_parameters(parameters, array_serialization)
 
       parameters.each do |key, value|
         seperator = query_builder.include?('?') ? '&' : '?'
         unless value.nil?
           if value.instance_of? Array
             value.compact!
-            query_builder += case array_serialization
-                             when 'csv'
-                               "#{seperator}#{key}=#{value.map do |element|
-                                 CGI.escape(element.to_s)
-                               end.join(',')}"
-                             when 'psv'
-                               "#{seperator}#{key}=#{value.map do |element|
-                                 CGI.escape(element.to_s)
-                               end.join('|')}"
-                             when 'tsv'
-                               "#{seperator}#{key}=#{value.map do |element|
-                                 CGI.escape(element.to_s)
-                               end.join("\t")}"
-                             else
-                               "#{seperator}#{APIHelper.serialize_array(
-                                 key, value, formatting: array_serialization
-                               ).map { |k, v| "#{k}=#{CGI.escape(v.to_s)}" }
-                               .join('&')}"
-                             end
+            APIHelper.serialize_array(
+              key, value, formatting: array_serialization
+            ).each do |element|
+              seperator = query_builder.include?('?') ? '&' : '?'
+              query_builder += "#{seperator}#{element[0]}=#{element[1]}"
+            end
           else
             query_builder += "#{seperator}#{key}=#{CGI.escape(value.to_s)}"
           end
@@ -161,6 +147,18 @@ module Square
           array_serialization))
       end
       encoded
+    end
+
+    # Process complex types in query_params.
+    # @param [Hash] The hash of query parameters.
+    # @return [Hash] A hash with the processed query parameters.
+    def self.process_complex_types_parameters(query_parameters, array_serialization)
+      processed_params = {}
+      query_parameters.each do |key, value|
+        processed_params.merge!(APIHelper.form_encode(value, key, formatting:
+          array_serialization))
+      end
+      processed_params
     end
 
     def self.custom_merge(a, b)
