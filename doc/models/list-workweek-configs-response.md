@@ -13,9 +13,9 @@ the request resulted in errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `workweek_configs` | [`Array<Workweek Config Hash>`](/doc/models/workweek-config.md) | Optional | A page of `EmployeeWage` results. |
+| `workweek_configs` | [`Array<Workweek Config Hash>`](../../doc/models/workweek-config.md) | Optional | A page of `EmployeeWage` results. |
 | `cursor` | `String` | Optional | The value supplied in the subsequent request to fetch the next page of<br>`EmployeeWage` results. |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

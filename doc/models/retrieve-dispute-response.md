@@ -11,8 +11,8 @@ Defines fields in a `RetrieveDispute` response.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Information about errors encountered during the request. |
-| `dispute` | [`Dispute Hash`](/doc/models/dispute.md) | Optional | Represents a dispute a cardholder initiated with their bank. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
+| `dispute` | [`Dispute Hash`](../../doc/models/dispute.md) | Optional | Represents a dispute a cardholder initiated with their bank. |
 
 ## Example (as JSON)
 

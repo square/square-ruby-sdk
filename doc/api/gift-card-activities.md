@@ -10,8 +10,8 @@ gift_card_activities_api = client.gift_card_activities
 
 ## Methods
 
-* [List Gift Card Activities](/doc/api/gift-card-activities.md#list-gift-card-activities)
-* [Create Gift Card Activity](/doc/api/gift-card-activities.md#create-gift-card-activity)
+* [List Gift Card Activities](../../doc/api/gift-card-activities.md#list-gift-card-activities)
+* [Create Gift Card Activity](../../doc/api/gift-card-activities.md#create-gift-card-activity)
 
 
 # List Gift Card Activities
@@ -37,17 +37,17 @@ def list_gift_card_activities(gift_card_id: nil,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `gift_card_id` | `String` | Query, Optional | If a gift card ID is provided, the endpoint returns activities related<br>to the specified gift card. Otherwise, the endpoint returns all gift card activities for<br>the seller. |
-| `type` | `String` | Query, Optional | If a [type](/doc/models/gift-card-activity-type.md) is provided, the endpoint returns gift card activities of the specified type.<br>Otherwise, the endpoint returns all types of gift card activities. |
+| `type` | `String` | Query, Optional | If a [type](../../doc/models/gift-card-activity-type.md) is provided, the endpoint returns gift card activities of the specified type.<br>Otherwise, the endpoint returns all types of gift card activities. |
 | `location_id` | `String` | Query, Optional | If a location ID is provided, the endpoint returns gift card activities for the specified location.<br>Otherwise, the endpoint returns gift card activities for all locations. |
 | `begin_time` | `String` | Query, Optional | The timestamp for the beginning of the reporting period, in RFC 3339 format.<br>This start time is inclusive. The default value is the current time minus one year. |
 | `end_time` | `String` | Query, Optional | The timestamp for the end of the reporting period, in RFC 3339 format.<br>This end time is inclusive. The default value is the current time. |
-| `limit` | `Integer` | Query, Optional | If a limit is provided, the endpoint returns the specified number<br>of results (or fewer) per page. The maximum value is 100. The default value is 50.<br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>If a cursor is not provided, the endpoint returns the first page of the results.<br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
+| `limit` | `Integer` | Query, Optional | If a limit is provided, the endpoint returns the specified number<br>of results (or fewer) per page. The maximum value is 100. The default value is 50.<br>For more information, see [Pagination](../../https://developer.squareup.com/docs/working-with-apis/pagination). |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>If a cursor is not provided, the endpoint returns the first page of the results.<br>For more information, see [Pagination](../../https://developer.squareup.com/docs/working-with-apis/pagination). |
 | `sort_order` | `String` | Query, Optional | The order in which the endpoint returns the activities, based on `created_at`.<br><br>- `ASC` - Oldest to newest.<br>- `DESC` - Newest to oldest (default). |
 
 ## Response Type
 
-[`List Gift Card Activities Response Hash`](/doc/models/list-gift-card-activities-response.md)
+[`List Gift Card Activities Response Hash`](../../doc/models/list-gift-card-activities-response.md)
 
 ## Example Usage
 
@@ -74,8 +74,8 @@ end
 # Create Gift Card Activity
 
 Creates a gift card activity. For more information, see
-[GiftCardActivity](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#giftcardactivity) and
-[Using activated gift cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#using-activated-gift-cards).
+[GiftCardActivity](../../https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#giftcardactivity) and
+[Using activated gift cards](../../https://developer.squareup.com/docs/gift-cards/using-gift-cards-api#using-activated-gift-cards).
 
 ```ruby
 def create_gift_card_activity(body:)
@@ -85,11 +85,11 @@ def create_gift_card_activity(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Create Gift Card Activity Request Hash`](/doc/models/create-gift-card-activity-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Gift Card Activity Request Hash`](../../doc/models/create-gift-card-activity-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Create Gift Card Activity Response Hash`](/doc/models/create-gift-card-activity-response.md)
+[`Create Gift Card Activity Response Hash`](../../doc/models/create-gift-card-activity-response.md)
 
 ## Example Usage
 

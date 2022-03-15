@@ -33,20 +33,20 @@ associated payment.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `String` | Optional | The tender's unique ID. |
-| `type` | [`String (V1 Tender Type)`](/doc/models/v1-tender-type.md) | Optional | - |
+| `type` | [`String (V1 Tender Type)`](../../doc/models/v1-tender-type.md) | Optional | - |
 | `name` | `String` | Optional | A human-readable description of the tender. |
 | `employee_id` | `String` | Optional | The ID of the employee that processed the tender. |
 | `receipt_url` | `String` | Optional | The URL of the receipt for the tender. |
-| `card_brand` | [`String (V1 Tender Card Brand)`](/doc/models/v1-tender-card-brand.md) | Optional | The brand of a credit card. |
+| `card_brand` | [`String (V1 Tender Card Brand)`](../../doc/models/v1-tender-card-brand.md) | Optional | The brand of a credit card. |
 | `pan_suffix` | `String` | Optional | The last four digits of the provided credit card's account number. |
-| `entry_method` | [`String (V1 Tender Entry Method)`](/doc/models/v1-tender-entry-method.md) | Optional | - |
+| `entry_method` | [`String (V1 Tender Entry Method)`](../../doc/models/v1-tender-entry-method.md) | Optional | - |
 | `payment_note` | `String` | Optional | Notes entered by the merchant about the tender at the time of payment, if any. Typically only present for tender with the type: OTHER. |
-| `total_money` | [`V1 Money Hash`](/doc/models/v1-money.md) | Optional | - |
-| `tendered_money` | [`V1 Money Hash`](/doc/models/v1-money.md) | Optional | - |
+| `total_money` | [`V1 Money Hash`](../../doc/models/v1-money.md) | Optional | - |
+| `tendered_money` | [`V1 Money Hash`](../../doc/models/v1-money.md) | Optional | - |
 | `tendered_at` | `String` | Optional | The time when the tender was created, in ISO 8601 format. |
 | `settled_at` | `String` | Optional | The time when the tender was settled, in ISO 8601 format. |
-| `change_back_money` | [`V1 Money Hash`](/doc/models/v1-money.md) | Optional | - |
-| `refunded_money` | [`V1 Money Hash`](/doc/models/v1-money.md) | Optional | - |
+| `change_back_money` | [`V1 Money Hash`](../../doc/models/v1-money.md) | Optional | - |
+| `refunded_money` | [`V1 Money Hash`](../../doc/models/v1-money.md) | Optional | - |
 | `is_exchange` | `Boolean` | Optional | Indicates whether or not the tender is associated with an exchange. If is_exchange is true, the tender represents the value of goods returned in an exchange not the actual money paid. The exchange value reduces the tender amounts needed to pay for items purchased in the exchange. |
 
 ## Example (as JSON)

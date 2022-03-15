@@ -10,9 +10,9 @@ o_auth_api = client.o_auth
 
 ## Methods
 
-* [Renew Token](/doc/api/o-auth.md#renew-token)
-* [Revoke Token](/doc/api/o-auth.md#revoke-token)
-* [Obtain Token](/doc/api/o-auth.md#obtain-token)
+* [Renew Token](../../doc/api/o-auth.md#renew-token)
+* [Revoke Token](../../doc/api/o-auth.md#revoke-token)
+* [Obtain Token](../../doc/api/o-auth.md#obtain-token)
 
 
 # Renew Token
@@ -20,7 +20,7 @@ o_auth_api = client.o_auth
 **This endpoint is deprecated.**
 
 `RenewToken` is deprecated. For information about refreshing OAuth access tokens, see
-[Migrate from Renew to Refresh OAuth Tokens](https://developer.squareup.com/docs/oauth-api/migrate-to-refresh-tokens).
+[Migrate from Renew to Refresh OAuth Tokens](../../https://developer.squareup.com/docs/oauth-api/migrate-to-refresh-tokens).
 
 Renews an OAuth access token before it expires.
 
@@ -37,7 +37,7 @@ Authorization: Client APPLICATION_SECRET
 ```
 
 Replace `APPLICATION_SECRET` with the application secret on the Credentials
-page in the [Developer Dashboard](https://developer.squareup.com/apps).
+page in the [Developer Dashboard](../../https://developer.squareup.com/apps).
 
 :information_source: **Note** This endpoint does not require authentication.
 
@@ -51,13 +51,13 @@ def renew_token(client_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `client_id` | `String` | Template, Required | Your application ID, which is available in the OAuth page in the [Developer Dashboard](https://developer.squareup.com/apps). |
-| `body` | [`Renew Token Request Hash`](/doc/models/renew-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `client_id` | `String` | Template, Required | Your application ID, which is available in the OAuth page in the [Developer Dashboard](../../https://developer.squareup.com/apps). |
+| `body` | [`Renew Token Request Hash`](../../doc/models/renew-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 | `authorization` | `String` | Header, Required | Client APPLICATION_SECRET |
 
 ## Response Type
 
-[`Renew Token Response Hash`](/doc/models/renew-token-response.md)
+[`Renew Token Response Hash`](../../doc/models/renew-token-response.md)
 
 ## Example Usage
 
@@ -107,12 +107,12 @@ def revoke_token(body:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Revoke Token Request Hash`](/doc/models/revoke-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Revoke Token Request Hash`](../../doc/models/revoke-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 | `authorization` | `String` | Header, Required | Client APPLICATION_SECRET |
 
 ## Response Type
 
-[`Revoke Token Response Hash`](/doc/models/revoke-token-response.md)
+[`Revoke Token Response Hash`](../../doc/models/revoke-token-response.md)
 
 ## Example Usage
 
@@ -164,11 +164,11 @@ def obtain_token(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Obtain Token Request Hash`](/doc/models/obtain-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Obtain Token Request Hash`](../../doc/models/obtain-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Obtain Token Response Hash`](/doc/models/obtain-token-response.md)
+[`Obtain Token Response Hash`](../../doc/models/obtain-token-response.md)
 
 ## Example Usage
 

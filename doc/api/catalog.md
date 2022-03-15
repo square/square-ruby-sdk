@@ -10,29 +10,29 @@ catalog_api = client.catalog
 
 ## Methods
 
-* [Batch Delete Catalog Objects](/doc/api/catalog.md#batch-delete-catalog-objects)
-* [Batch Retrieve Catalog Objects](/doc/api/catalog.md#batch-retrieve-catalog-objects)
-* [Batch Upsert Catalog Objects](/doc/api/catalog.md#batch-upsert-catalog-objects)
-* [Create Catalog Image](/doc/api/catalog.md#create-catalog-image)
-* [Update Catalog Image](/doc/api/catalog.md#update-catalog-image)
-* [Catalog Info](/doc/api/catalog.md#catalog-info)
-* [List Catalog](/doc/api/catalog.md#list-catalog)
-* [Upsert Catalog Object](/doc/api/catalog.md#upsert-catalog-object)
-* [Delete Catalog Object](/doc/api/catalog.md#delete-catalog-object)
-* [Retrieve Catalog Object](/doc/api/catalog.md#retrieve-catalog-object)
-* [Search Catalog Objects](/doc/api/catalog.md#search-catalog-objects)
-* [Search Catalog Items](/doc/api/catalog.md#search-catalog-items)
-* [Update Item Modifier Lists](/doc/api/catalog.md#update-item-modifier-lists)
-* [Update Item Taxes](/doc/api/catalog.md#update-item-taxes)
+* [Batch Delete Catalog Objects](../../doc/api/catalog.md#batch-delete-catalog-objects)
+* [Batch Retrieve Catalog Objects](../../doc/api/catalog.md#batch-retrieve-catalog-objects)
+* [Batch Upsert Catalog Objects](../../doc/api/catalog.md#batch-upsert-catalog-objects)
+* [Create Catalog Image](../../doc/api/catalog.md#create-catalog-image)
+* [Update Catalog Image](../../doc/api/catalog.md#update-catalog-image)
+* [Catalog Info](../../doc/api/catalog.md#catalog-info)
+* [List Catalog](../../doc/api/catalog.md#list-catalog)
+* [Upsert Catalog Object](../../doc/api/catalog.md#upsert-catalog-object)
+* [Delete Catalog Object](../../doc/api/catalog.md#delete-catalog-object)
+* [Retrieve Catalog Object](../../doc/api/catalog.md#retrieve-catalog-object)
+* [Search Catalog Objects](../../doc/api/catalog.md#search-catalog-objects)
+* [Search Catalog Items](../../doc/api/catalog.md#search-catalog-items)
+* [Update Item Modifier Lists](../../doc/api/catalog.md#update-item-modifier-lists)
+* [Update Item Taxes](../../doc/api/catalog.md#update-item-taxes)
 
 
 # Batch Delete Catalog Objects
 
-Deletes a set of [CatalogItem](/doc/models/catalog-item.md)s based on the
+Deletes a set of [CatalogItem](../../doc/models/catalog-item.md)s based on the
 provided list of target IDs and returns a set of successfully deleted IDs in
 the response. Deletion is a cascading event such that all children of the
 targeted object are also deleted. For example, deleting a CatalogItem will
-also delete all of its [CatalogItemVariation](/doc/models/catalog-item-variation.md)
+also delete all of its [CatalogItemVariation](../../doc/models/catalog-item-variation.md)
 children.
 
 `BatchDeleteCatalogObjects` succeeds even if only a portion of the targeted
@@ -47,11 +47,11 @@ def batch_delete_catalog_objects(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Batch Delete Catalog Objects Request Hash`](/doc/models/batch-delete-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Batch Delete Catalog Objects Request Hash`](../../doc/models/batch-delete-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Batch Delete Catalog Objects Response Hash`](/doc/models/batch-delete-catalog-objects-response.md)
+[`Batch Delete Catalog Objects Response Hash`](../../doc/models/batch-delete-catalog-objects-response.md)
 
 ## Example Usage
 
@@ -72,11 +72,11 @@ end
 # Batch Retrieve Catalog Objects
 
 Returns a set of objects based on the provided ID.
-Each [CatalogItem](/doc/models/catalog-item.md) returned in the set includes all of its
+Each [CatalogItem](../../doc/models/catalog-item.md) returned in the set includes all of its
 child information including: all of its
-[CatalogItemVariation](/doc/models/catalog-item-variation.md) objects, references to
-its [CatalogModifierList](/doc/models/catalog-modifier-list.md) objects, and the ids of
-any [CatalogTax](/doc/models/catalog-tax.md) objects that apply to it.
+[CatalogItemVariation](../../doc/models/catalog-item-variation.md) objects, references to
+its [CatalogModifierList](../../doc/models/catalog-modifier-list.md) objects, and the ids of
+any [CatalogTax](../../doc/models/catalog-tax.md) objects that apply to it.
 
 ```ruby
 def batch_retrieve_catalog_objects(body:)
@@ -86,11 +86,11 @@ def batch_retrieve_catalog_objects(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Batch Retrieve Catalog Objects Request Hash`](/doc/models/batch-retrieve-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Batch Retrieve Catalog Objects Request Hash`](../../doc/models/batch-retrieve-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Batch Retrieve Catalog Objects Response Hash`](/doc/models/batch-retrieve-catalog-objects-response.md)
+[`Batch Retrieve Catalog Objects Response Hash`](../../doc/models/batch-retrieve-catalog-objects-response.md)
 
 ## Example Usage
 
@@ -130,11 +130,11 @@ def batch_upsert_catalog_objects(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Batch Upsert Catalog Objects Request Hash`](/doc/models/batch-upsert-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Batch Upsert Catalog Objects Request Hash`](../../doc/models/batch-upsert-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Batch Upsert Catalog Objects Response Hash`](/doc/models/batch-upsert-catalog-objects-response.md)
+[`Batch Upsert Catalog Objects Response Hash`](../../doc/models/batch-upsert-catalog-objects-response.md)
 
 ## Example Usage
 
@@ -351,8 +351,8 @@ end
 
 # Create Catalog Image
 
-Uploads an image file to be represented by a [CatalogImage](/doc/models/catalog-image.md) object that can be linked to an existing
-[CatalogObject](/doc/models/catalog-object.md) instance. The resulting `CatalogImage` is unattached to any `CatalogObject` if the `object_id`
+Uploads an image file to be represented by a [CatalogImage](../../doc/models/catalog-image.md) object that can be linked to an existing
+[CatalogObject](../../doc/models/catalog-object.md) instance. The resulting `CatalogImage` is unattached to any `CatalogObject` if the `object_id`
 is not specified.
 
 This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
@@ -367,12 +367,12 @@ def create_catalog_image(request: nil,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `request` | [`Create Catalog Image Request Hash`](/doc/models/create-catalog-image-request.md) | Form, Optional | - |
+| `request` | [`Create Catalog Image Request Hash`](../../doc/models/create-catalog-image-request.md) | Form, Optional | - |
 | `image_file` | `File \| UploadIO` | Form, Optional | - |
 
 ## Response Type
 
-[`Create Catalog Image Response Hash`](/doc/models/create-catalog-image-response.md)
+[`Create Catalog Image Response Hash`](../../doc/models/create-catalog-image-response.md)
 
 ## Example Usage
 
@@ -414,7 +414,7 @@ end
 
 # Update Catalog Image
 
-Uploads a new image file to replace the existing one in the specified [CatalogImage](/doc/models/catalog-image.md) object.
+Uploads a new image file to replace the existing one in the specified [CatalogImage](../../doc/models/catalog-image.md) object.
 
 This `UpdateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
 JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
@@ -430,12 +430,12 @@ def update_catalog_image(image_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `image_id` | `String` | Template, Required | The ID of the `CatalogImage` object to update the encapsulated image file. |
-| `request` | [`Update Catalog Image Request Hash`](/doc/models/update-catalog-image-request.md) | Form, Optional | - |
+| `request` | [`Update Catalog Image Request Hash`](../../doc/models/update-catalog-image-request.md) | Form, Optional | - |
 | `image_file` | `File \| UploadIO` | Form, Optional | - |
 
 ## Response Type
 
-[`Update Catalog Image Response Hash`](/doc/models/update-catalog-image-response.md)
+[`Update Catalog Image Response Hash`](../../doc/models/update-catalog-image-response.md)
 
 ## Example Usage
 
@@ -466,7 +466,7 @@ def catalog_info
 
 ## Response Type
 
-[`Catalog Info Response Hash`](/doc/models/catalog-info-response.md)
+[`Catalog Info Response Hash`](../../doc/models/catalog-info-response.md)
 
 ## Example Usage
 
@@ -483,13 +483,13 @@ end
 
 # List Catalog
 
-Returns a list of all [CatalogObject](/doc/models/catalog-object.md)s of the specified types in the catalog.
+Returns a list of all [CatalogObject](../../doc/models/catalog-object.md)s of the specified types in the catalog.
 
-The `types` parameter is specified as a comma-separated list of the [CatalogObjectType](/doc/models/catalog-object-type.md) values,
+The `types` parameter is specified as a comma-separated list of the [CatalogObjectType](../../doc/models/catalog-object-type.md) values,
 for example, "`ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`".
 
 __Important:__ ListCatalog does not return deleted catalog items. To retrieve
-deleted catalog items, use [SearchCatalogObjects](/doc/api/catalog.md#search-catalog-objects)
+deleted catalog items, use [SearchCatalogObjects](../../doc/api/catalog.md#search-catalog-objects)
 and set the `include_deleted_objects` attribute value to `true`.
 
 ```ruby
@@ -502,13 +502,13 @@ def list_catalog(cursor: nil,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `cursor` | `String` | Query, Optional | The pagination cursor returned in the previous response. Leave unset for an initial request.<br>The page size is currently set to be 100.<br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
-| `types` | `String` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve.<br><br>The valid values are defined in the [CatalogObjectType](/doc/models/catalog-object-type.md) enum, for example,<br>`ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, `IMAGE`, etc.<br><br>If this is unspecified, the operation returns objects of all the top level types at the version<br>of the Square API used to make the request. Object types that are nested onto other object types<br>are not included in the defaults.<br><br>At the current API version the default object types are:<br>ITEM, CATEGORY, TAX, DISCOUNT, MODIFIER_LIST, DINING_OPTION, TAX_EXEMPTION,<br>SERVICE_CHARGE, PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT,<br>SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS. |
-| `catalog_version` | `Long` | Query, Optional | The specific version of the catalog objects to be included in the response.<br>This allows you to retrieve historical<br>versions of objects. The specified version value is matched against<br>the [CatalogObject](/doc/models/catalog-object.md)s' `version` attribute.  If not included, results will<br>be from the current version of the catalog. |
+| `cursor` | `String` | Query, Optional | The pagination cursor returned in the previous response. Leave unset for an initial request.<br>The page size is currently set to be 100.<br>See [Pagination](../../https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
+| `types` | `String` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve.<br><br>The valid values are defined in the [CatalogObjectType](../../doc/models/catalog-object-type.md) enum, for example,<br>`ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, `IMAGE`, etc.<br><br>If this is unspecified, the operation returns objects of all the top level types at the version<br>of the Square API used to make the request. Object types that are nested onto other object types<br>are not included in the defaults.<br><br>At the current API version the default object types are:<br>ITEM, CATEGORY, TAX, DISCOUNT, MODIFIER_LIST, DINING_OPTION, TAX_EXEMPTION,<br>SERVICE_CHARGE, PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT,<br>SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS. |
+| `catalog_version` | `Long` | Query, Optional | The specific version of the catalog objects to be included in the response.<br>This allows you to retrieve historical<br>versions of objects. The specified version value is matched against<br>the [CatalogObject](../../doc/models/catalog-object.md)s' `version` attribute.  If not included, results will<br>be from the current version of the catalog. |
 
 ## Response Type
 
-[`List Catalog Response Hash`](/doc/models/list-catalog-response.md)
+[`List Catalog Response Hash`](../../doc/models/list-catalog-response.md)
 
 ## Example Usage
 
@@ -529,7 +529,7 @@ end
 
 # Upsert Catalog Object
 
-Creates or updates the target [CatalogObject](/doc/models/catalog-object.md).
+Creates or updates the target [CatalogObject](../../doc/models/catalog-object.md).
 
 ```ruby
 def upsert_catalog_object(body:)
@@ -539,11 +539,11 @@ def upsert_catalog_object(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Upsert Catalog Object Request Hash`](/doc/models/upsert-catalog-object-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Upsert Catalog Object Request Hash`](../../doc/models/upsert-catalog-object-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Upsert Catalog Object Response Hash`](/doc/models/upsert-catalog-object-response.md)
+[`Upsert Catalog Object Response Hash`](../../doc/models/upsert-catalog-object-response.md)
 
 ## Example Usage
 
@@ -649,12 +649,12 @@ end
 
 # Delete Catalog Object
 
-Deletes a single [CatalogObject](/doc/models/catalog-object.md) based on the
+Deletes a single [CatalogObject](../../doc/models/catalog-object.md) based on the
 provided ID and returns the set of successfully deleted IDs in the response.
 Deletion is a cascading event such that all children of the targeted object
-are also deleted. For example, deleting a [CatalogItem](/doc/models/catalog-item.md)
+are also deleted. For example, deleting a [CatalogItem](../../doc/models/catalog-item.md)
 will also delete all of its
-[CatalogItemVariation](/doc/models/catalog-item-variation.md) children.
+[CatalogItemVariation](../../doc/models/catalog-item-variation.md) children.
 
 ```ruby
 def delete_catalog_object(object_id:)
@@ -668,7 +668,7 @@ def delete_catalog_object(object_id:)
 
 ## Response Type
 
-[`Delete Catalog Object Response Hash`](/doc/models/delete-catalog-object-response.md)
+[`Delete Catalog Object Response Hash`](../../doc/models/delete-catalog-object-response.md)
 
 ## Example Usage
 
@@ -687,13 +687,13 @@ end
 
 # Retrieve Catalog Object
 
-Returns a single [CatalogItem](/doc/models/catalog-item.md) as a
-[CatalogObject](/doc/models/catalog-object.md) based on the provided ID. The returned
-object includes all of the relevant [CatalogItem](/doc/models/catalog-item.md)
-information including: [CatalogItemVariation](/doc/models/catalog-item-variation.md)
+Returns a single [CatalogItem](../../doc/models/catalog-item.md) as a
+[CatalogObject](../../doc/models/catalog-object.md) based on the provided ID. The returned
+object includes all of the relevant [CatalogItem](../../doc/models/catalog-item.md)
+information including: [CatalogItemVariation](../../doc/models/catalog-item-variation.md)
 children, references to its
-[CatalogModifierList](/doc/models/catalog-modifier-list.md) objects, and the ids of
-any [CatalogTax](/doc/models/catalog-tax.md) objects that apply to it.
+[CatalogModifierList](../../doc/models/catalog-modifier-list.md) objects, and the ids of
+any [CatalogTax](../../doc/models/catalog-tax.md) objects that apply to it.
 
 ```ruby
 def retrieve_catalog_object(object_id:,
@@ -707,11 +707,11 @@ def retrieve_catalog_object(object_id:,
 |  --- | --- | --- | --- |
 | `object_id` | `String` | Template, Required | The object ID of any type of catalog objects to be retrieved. |
 | `include_related_objects` | `Boolean` | Query, Optional | If `true`, the response will include additional objects that are related to the<br>requested objects. Related objects are defined as any objects referenced by ID by the results in the `objects` field<br>of the response. These objects are put in the `related_objects` field. Setting this to `true` is<br>helpful when the objects are needed for immediate display to a user.<br>This process only goes one level deep. Objects referenced by the related objects will not be included. For example,<br><br>if the `objects` field of the response contains a CatalogItem, its associated<br>CatalogCategory objects, CatalogTax objects, CatalogImage objects and<br>CatalogModifierLists will be returned in the `related_objects` field of the<br>response. If the `objects` field of the response contains a CatalogItemVariation,<br>its parent CatalogItem will be returned in the `related_objects` field of<br>the response.<br><br>Default value: `false`<br>**Default**: `false` |
-| `catalog_version` | `Long` | Query, Optional | Requests objects as of a specific version of the catalog. This allows you to retrieve historical<br>versions of objects. The value to retrieve a specific version of an object can be found<br>in the version field of [CatalogObject](/doc/models/catalog-object.md)s. If not included, results will<br>be from the current version of the catalog. |
+| `catalog_version` | `Long` | Query, Optional | Requests objects as of a specific version of the catalog. This allows you to retrieve historical<br>versions of objects. The value to retrieve a specific version of an object can be found<br>in the version field of [CatalogObject](../../doc/models/catalog-object.md)s. If not included, results will<br>be from the current version of the catalog. |
 
 ## Response Type
 
-[`Retrieve Catalog Object Response Hash`](/doc/models/retrieve-catalog-object-response.md)
+[`Retrieve Catalog Object Response Hash`](../../doc/models/retrieve-catalog-object-response.md)
 
 ## Example Usage
 
@@ -732,10 +732,10 @@ end
 
 # Search Catalog Objects
 
-Searches for [CatalogObject](/doc/models/catalog-object.md) of any type by matching supported search attribute values,
+Searches for [CatalogObject](../../doc/models/catalog-object.md) of any type by matching supported search attribute values,
 excluding custom attribute values on items or item variations, against one or more of the specified query filters.
 
-This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](/doc/api/catalog.md#search-catalog-items)
+This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](../../doc/api/catalog.md#search-catalog-items)
 endpoint in the following aspects:
 
 - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
@@ -751,11 +751,11 @@ def search_catalog_objects(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Search Catalog Objects Request Hash`](/doc/models/search-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Search Catalog Objects Request Hash`](../../doc/models/search-catalog-objects-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Search Catalog Objects Response Hash`](/doc/models/search-catalog-objects-response.md)
+[`Search Catalog Objects Response Hash`](../../doc/models/search-catalog-objects-response.md)
 
 ## Example Usage
 
@@ -801,7 +801,7 @@ end
 Searches for catalog items or item variations by matching supported search attribute values, including
 custom attribute values, against one or more of the specified query filters.
 
-This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](/doc/api/catalog.md#search-catalog-objects)
+This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](../../doc/api/catalog.md#search-catalog-objects)
 endpoint in the following aspects:
 
 - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
@@ -817,11 +817,11 @@ def search_catalog_items(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Search Catalog Items Request Hash`](/doc/models/search-catalog-items-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Search Catalog Items Request Hash`](../../doc/models/search-catalog-items-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Search Catalog Items Response Hash`](/doc/models/search-catalog-items-response.md)
+[`Search Catalog Items Response Hash`](../../doc/models/search-catalog-items-response.md)
 
 ## Example Usage
 
@@ -888,8 +888,8 @@ end
 
 # Update Item Modifier Lists
 
-Updates the [CatalogModifierList](/doc/models/catalog-modifier-list.md) objects
-that apply to the targeted [CatalogItem](/doc/models/catalog-item.md) without having
+Updates the [CatalogModifierList](../../doc/models/catalog-modifier-list.md) objects
+that apply to the targeted [CatalogItem](../../doc/models/catalog-item.md) without having
 to perform an upsert on the entire item.
 
 ```ruby
@@ -900,11 +900,11 @@ def update_item_modifier_lists(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Update Item Modifier Lists Request Hash`](/doc/models/update-item-modifier-lists-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Update Item Modifier Lists Request Hash`](../../doc/models/update-item-modifier-lists-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Update Item Modifier Lists Response Hash`](/doc/models/update-item-modifier-lists-response.md)
+[`Update Item Modifier Lists Response Hash`](../../doc/models/update-item-modifier-lists-response.md)
 
 ## Example Usage
 
@@ -926,8 +926,8 @@ end
 
 # Update Item Taxes
 
-Updates the [CatalogTax](/doc/models/catalog-tax.md) objects that apply to the
-targeted [CatalogItem](/doc/models/catalog-item.md) without having to perform an
+Updates the [CatalogTax](../../doc/models/catalog-tax.md) objects that apply to the
+targeted [CatalogItem](../../doc/models/catalog-item.md) without having to perform an
 upsert on the entire item.
 
 ```ruby
@@ -938,11 +938,11 @@ def update_item_taxes(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Update Item Taxes Request Hash`](/doc/models/update-item-taxes-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Update Item Taxes Request Hash`](../../doc/models/update-item-taxes-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Update Item Taxes Response Hash`](/doc/models/update-item-taxes-response.md)
+[`Update Item Taxes Response Hash`](../../doc/models/update-item-taxes-response.md)
 
 ## Example Usage
 

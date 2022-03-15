@@ -19,9 +19,9 @@ taken during the shift.
 | `timezone` | `String` | Optional | The read-only convenience value that is calculated from the location based<br>on the `location_id`. Format: the IANA timezone database identifier for the<br>location timezone. |
 | `start_at` | `String` | Required | RFC 3339; shifted to the location timezone + offset. Precision up to the<br>minute is respected; seconds are truncated.<br>**Constraints**: *Minimum Length*: `1` |
 | `end_at` | `String` | Optional | RFC 3339; shifted to the timezone + offset. Precision up to the minute is<br>respected; seconds are truncated. |
-| `wage` | [`Shift Wage Hash`](/doc/models/shift-wage.md) | Optional | The hourly wage rate used to compensate an employee for this shift. |
-| `breaks` | [`Array<Break Hash>`](/doc/models/break.md) | Optional | A list of all the paid or unpaid breaks that were taken during this shift. |
-| `status` | [`String (Shift Status)`](/doc/models/shift-status.md) | Optional | Enumerates the possible status of a `Shift`. |
+| `wage` | [`Shift Wage Hash`](../../doc/models/shift-wage.md) | Optional | The hourly wage rate used to compensate an employee for this shift. |
+| `breaks` | [`Array<Break Hash>`](../../doc/models/break.md) | Optional | A list of all the paid or unpaid breaks that were taken during this shift. |
+| `status` | [`String (Shift Status)`](../../doc/models/shift-status.md) | Optional | Enumerates the possible status of a `Shift`. |
 | `version` | `Integer` | Optional | Used for resolving concurrency issues. The request fails if the version<br>provided does not match the server version at the time of the request. If not provided,<br>Square executes a blind write; potentially overwriting data from another<br>write. |
 | `created_at` | `String` | Optional | A read-only timestamp in RFC 3339 format; presented in UTC. |
 | `updated_at` | `String` | Optional | A read-only timestamp in RFC 3339 format; presented in UTC. |

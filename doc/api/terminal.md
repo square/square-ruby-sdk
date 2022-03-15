@@ -10,14 +10,14 @@ terminal_api = client.terminal
 
 ## Methods
 
-* [Create Terminal Checkout](/doc/api/terminal.md#create-terminal-checkout)
-* [Search Terminal Checkouts](/doc/api/terminal.md#search-terminal-checkouts)
-* [Get Terminal Checkout](/doc/api/terminal.md#get-terminal-checkout)
-* [Cancel Terminal Checkout](/doc/api/terminal.md#cancel-terminal-checkout)
-* [Create Terminal Refund](/doc/api/terminal.md#create-terminal-refund)
-* [Search Terminal Refunds](/doc/api/terminal.md#search-terminal-refunds)
-* [Get Terminal Refund](/doc/api/terminal.md#get-terminal-refund)
-* [Cancel Terminal Refund](/doc/api/terminal.md#cancel-terminal-refund)
+* [Create Terminal Checkout](../../doc/api/terminal.md#create-terminal-checkout)
+* [Search Terminal Checkouts](../../doc/api/terminal.md#search-terminal-checkouts)
+* [Get Terminal Checkout](../../doc/api/terminal.md#get-terminal-checkout)
+* [Cancel Terminal Checkout](../../doc/api/terminal.md#cancel-terminal-checkout)
+* [Create Terminal Refund](../../doc/api/terminal.md#create-terminal-refund)
+* [Search Terminal Refunds](../../doc/api/terminal.md#search-terminal-refunds)
+* [Get Terminal Refund](../../doc/api/terminal.md#get-terminal-refund)
+* [Cancel Terminal Refund](../../doc/api/terminal.md#cancel-terminal-refund)
 
 
 # Create Terminal Checkout
@@ -33,11 +33,11 @@ def create_terminal_checkout(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Create Terminal Checkout Request Hash`](/doc/models/create-terminal-checkout-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Terminal Checkout Request Hash`](../../doc/models/create-terminal-checkout-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Create Terminal Checkout Response Hash`](/doc/models/create-terminal-checkout-response.md)
+[`Create Terminal Checkout Response Hash`](../../doc/models/create-terminal-checkout-response.md)
 
 ## Example Usage
 
@@ -85,11 +85,11 @@ def search_terminal_checkouts(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Search Terminal Checkouts Request Hash`](/doc/models/search-terminal-checkouts-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Search Terminal Checkouts Request Hash`](../../doc/models/search-terminal-checkouts-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Search Terminal Checkouts Response Hash`](/doc/models/search-terminal-checkouts-response.md)
+[`Search Terminal Checkouts Response Hash`](../../doc/models/search-terminal-checkouts-response.md)
 
 ## Example Usage
 
@@ -133,7 +133,7 @@ def get_terminal_checkout(checkout_id:)
 
 ## Response Type
 
-[`Get Terminal Checkout Response Hash`](/doc/models/get-terminal-checkout-response.md)
+[`Get Terminal Checkout Response Hash`](../../doc/models/get-terminal-checkout-response.md)
 
 ## Example Usage
 
@@ -166,7 +166,7 @@ def cancel_terminal_checkout(checkout_id:)
 
 ## Response Type
 
-[`Cancel Terminal Checkout Response Hash`](/doc/models/cancel-terminal-checkout-response.md)
+[`Cancel Terminal Checkout Response Hash`](../../doc/models/cancel-terminal-checkout-response.md)
 
 ## Example Usage
 
@@ -195,11 +195,11 @@ def create_terminal_refund(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Create Terminal Refund Request Hash`](/doc/models/create-terminal-refund-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Terminal Refund Request Hash`](../../doc/models/create-terminal-refund-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Create Terminal Refund Response Hash`](/doc/models/create-terminal-refund-response.md)
+[`Create Terminal Refund Response Hash`](../../doc/models/create-terminal-refund-response.md)
 
 ## Example Usage
 
@@ -239,11 +239,11 @@ def search_terminal_refunds(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Search Terminal Refunds Request Hash`](/doc/models/search-terminal-refunds-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Search Terminal Refunds Request Hash`](../../doc/models/search-terminal-refunds-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Search Terminal Refunds Response Hash`](/doc/models/search-terminal-refunds-response.md)
+[`Search Terminal Refunds Response Hash`](../../doc/models/search-terminal-refunds-response.md)
 
 ## Example Usage
 
@@ -287,7 +287,7 @@ def get_terminal_refund(terminal_refund_id:)
 
 ## Response Type
 
-[`Get Terminal Refund Response Hash`](/doc/models/get-terminal-refund-response.md)
+[`Get Terminal Refund Response Hash`](../../doc/models/get-terminal-refund-response.md)
 
 ## Example Usage
 
@@ -320,7 +320,7 @@ def cancel_terminal_refund(terminal_refund_id:)
 
 ## Response Type
 
-[`Cancel Terminal Refund Response Hash`](/doc/models/cancel-terminal-refund-response.md)
+[`Cancel Terminal Refund Response Hash`](../../doc/models/cancel-terminal-refund-response.md)
 
 ## Example Usage
 

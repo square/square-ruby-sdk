@@ -12,8 +12,8 @@ resulted in errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `gift_card` | [`Gift Card Hash`](/doc/models/gift-card.md) | Optional | Represents a Square gift card. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `gift_card` | [`Gift Card Hash`](../../doc/models/gift-card.md) | Optional | Represents a Square gift card. |
 
 ## Example (as JSON)
 

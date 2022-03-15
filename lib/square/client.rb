@@ -4,7 +4,7 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '18.0.0.20220216'
+      '18.1.0.20220316'
     end
 
     def square_version
@@ -213,12 +213,18 @@ module Square
       @terminal ||= TerminalApi.new config
     end
 
+    # Access to vendors controller.
+    # @return [VendorsApi] Returns the controller instance.
+    def vendors
+      @vendors ||= VendorsApi.new config
+    end
+
     def initialize(connection: nil, timeout: 60, max_retries: 0,
                    retry_interval: 1, backoff_factor: 2,
                    retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
                    retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2022-02-16', access_token: '',
+                   square_version: '2022-03-16', access_token: '',
                    user_agent_detail: '', additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(connection: connection, timeout: timeout,

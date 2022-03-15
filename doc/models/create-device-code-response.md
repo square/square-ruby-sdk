@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `device_code` | [`Device Code Hash`](/doc/models/device-code.md) | Optional | - |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `device_code` | [`Device Code Hash`](../../doc/models/device-code.md) | Optional | - |
 
 ## Example (as JSON)
 

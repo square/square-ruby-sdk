@@ -12,7 +12,7 @@ a specified purchase.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 | `points` | `Integer` | Optional | The points that the buyer can earn from a specified purchase. |
 
 ## Example (as JSON)

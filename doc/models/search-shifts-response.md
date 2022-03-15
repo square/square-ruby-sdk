@@ -13,9 +13,9 @@ the request resulted in errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `shifts` | [`Array<Shift Hash>`](/doc/models/shift.md) | Optional | Shifts. |
+| `shifts` | [`Array<Shift Hash>`](../../doc/models/shift.md) | Optional | Shifts. |
 | `cursor` | `String` | Optional | An opaque cursor for fetching the next page. |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

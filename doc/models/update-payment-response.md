@@ -2,7 +2,7 @@
 # Update Payment Response
 
 Defines the response returned by
-[UpdatePayment](/doc/api/payments.md#update-payment).
+[UpdatePayment](../../doc/api/payments.md#update-payment).
 
 ## Structure
 
@@ -12,8 +12,8 @@ Defines the response returned by
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `payment` | [`Payment Hash`](/doc/models/payment.md) | Optional | Represents a payment processed by the Square API. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `payment` | [`Payment Hash`](../../doc/models/payment.md) | Optional | Represents a payment processed by the Square API. |
 
 ## Example (as JSON)
 

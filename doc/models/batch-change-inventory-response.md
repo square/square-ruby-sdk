@@ -9,9 +9,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `counts` | [`Array<Inventory Count Hash>`](/doc/models/inventory-count.md) | Optional | The current counts for all objects referenced in the request. |
-| `changes` | [`Array<Inventory Change Hash>`](/doc/models/inventory-change.md) | Optional | Changes created for the request. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `counts` | [`Array<Inventory Count Hash>`](../../doc/models/inventory-count.md) | Optional | The current counts for all objects referenced in the request. |
+| `changes` | [`Array<Inventory Change Hash>`](../../doc/models/inventory-change.md) | Optional | Changes created for the request. |
 
 ## Example (as JSON)
 

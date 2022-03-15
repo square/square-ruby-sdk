@@ -11,8 +11,8 @@ A response that includes the loyalty rewards satisfying the search criteria.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `rewards` | [`Array<Loyalty Reward Hash>`](/doc/models/loyalty-reward.md) | Optional | The loyalty rewards that satisfy the search criteria.<br>These are returned in descending order by `updated_at`. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `rewards` | [`Array<Loyalty Reward Hash>`](../../doc/models/loyalty-reward.md) | Optional | The loyalty rewards that satisfy the search criteria.<br>These are returned in descending order by `updated_at`. |
 | `cursor` | `String` | Optional | The pagination cursor to be used in a subsequent<br>request. If empty, this is the final response. |
 
 ## Example (as JSON)

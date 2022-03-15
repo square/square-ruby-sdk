@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `availabilities` | [`Array<Availability Hash>`](/doc/models/availability.md) | Optional | List of appointment slots available for booking. |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Errors that occurred during the request. |
+| `availabilities` | [`Array<Availability Hash>`](../../doc/models/availability.md) | Optional | List of appointment slots available for booking. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Errors that occurred during the request. |
 
 ## Example (as JSON)
 

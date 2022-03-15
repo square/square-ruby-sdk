@@ -12,8 +12,8 @@ a request to the `BatchRetrieveOrders` endpoint.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `orders` | [`Array<Order Hash>`](/doc/models/order.md) | Optional | The requested orders. This will omit any requested orders that do not exist. |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `orders` | [`Array<Order Hash>`](../../doc/models/order.md) | Optional | The requested orders. This will omit any requested orders that do not exist. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

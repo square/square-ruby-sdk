@@ -10,9 +10,9 @@ refunds_api = client.refunds
 
 ## Methods
 
-* [List Payment Refunds](/doc/api/refunds.md#list-payment-refunds)
-* [Refund Payment](/doc/api/refunds.md#refund-payment)
-* [Get Payment Refund](/doc/api/refunds.md#get-payment-refund)
+* [List Payment Refunds](../../doc/api/refunds.md#list-payment-refunds)
+* [Refund Payment](../../doc/api/refunds.md#refund-payment)
+* [Get Payment Refund](../../doc/api/refunds.md#get-payment-refund)
 
 
 # List Payment Refunds
@@ -42,15 +42,15 @@ def list_payment_refunds(begin_time: nil,
 | `begin_time` | `String` | Query, Optional | The timestamp for the beginning of the requested reporting period, in RFC 3339 format.<br><br>Default: The current time minus one year. |
 | `end_time` | `String` | Query, Optional | The timestamp for the end of the requested reporting period, in RFC 3339 format.<br><br>Default: The current time. |
 | `sort_order` | `String` | Query, Optional | The order in which results are listed:<br><br>- `ASC` - Oldest to newest.<br>- `DESC` - Newest to oldest (default). |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination). |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br><br>For more information, see [Pagination](../../https://developer.squareup.com/docs/basics/api101/pagination). |
 | `location_id` | `String` | Query, Optional | Limit results to the location supplied. By default, results are returned<br>for all locations associated with the seller. |
-| `status` | `String` | Query, Optional | If provided, only refunds with the given status are returned.<br>For a list of refund status values, see [PaymentRefund](/doc/models/payment-refund.md).<br><br>Default: If omitted, refunds are returned regardless of their status. |
-| `source_type` | `String` | Query, Optional | If provided, only returns refunds whose payments have the indicated source type.<br>Current values include `CARD`, `BANK_ACCOUNT`, `WALLET`, `CASH`, and `EXTERNAL`.<br>For information about these payment source types, see<br>[Take Payments](https://developer.squareup.com/docs/payments-api/take-payments).<br><br>Default: If omitted, refunds are returned regardless of the source type. |
+| `status` | `String` | Query, Optional | If provided, only refunds with the given status are returned.<br>For a list of refund status values, see [PaymentRefund](../../doc/models/payment-refund.md).<br><br>Default: If omitted, refunds are returned regardless of their status. |
+| `source_type` | `String` | Query, Optional | If provided, only returns refunds whose payments have the indicated source type.<br>Current values include `CARD`, `BANK_ACCOUNT`, `WALLET`, `CASH`, and `EXTERNAL`.<br>For information about these payment source types, see<br>[Take Payments](../../https://developer.squareup.com/docs/payments-api/take-payments).<br><br>Default: If omitted, refunds are returned regardless of the source type. |
 | `limit` | `Integer` | Query, Optional | The maximum number of results to be returned in a single page.<br><br>It is possible to receive fewer results than the specified limit on a given page.<br><br>If the supplied value is greater than 100, no more than 100 results are returned.<br><br>Default: 100 |
 
 ## Response Type
 
-[`List Payment Refunds Response Hash`](/doc/models/list-payment-refunds-response.md)
+[`List Payment Refunds Response Hash`](../../doc/models/list-payment-refunds-response.md)
 
 ## Example Usage
 
@@ -79,7 +79,7 @@ end
 Refunds a payment. You can refund the entire payment amount or a
 portion of it. You can use this endpoint to refund a card payment or record a
 refund of a cash or external payment. For more information, see
-[Refund Payment](https://developer.squareup.com/docs/payments-api/refund-payments).
+[Refund Payment](../../https://developer.squareup.com/docs/payments-api/refund-payments).
 
 ```ruby
 def refund_payment(body:)
@@ -89,11 +89,11 @@ def refund_payment(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Refund Payment Request Hash`](/doc/models/refund-payment-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Refund Payment Request Hash`](../../doc/models/refund-payment-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Refund Payment Response Hash`](/doc/models/refund-payment-response.md)
+[`Refund Payment Response Hash`](../../doc/models/refund-payment-response.md)
 
 ## Example Usage
 
@@ -137,7 +137,7 @@ def get_payment_refund(refund_id:)
 
 ## Response Type
 
-[`Get Payment Refund Response Hash`](/doc/models/get-payment-refund-response.md)
+[`Get Payment Refund Response Hash`](../../doc/models/get-payment-refund-response.md)
 
 ## Example Usage
 

@@ -12,9 +12,9 @@ a set of `TeamMemberWage` objects.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `team_member_wages` | [`Array<Team Member Wage Hash>`](/doc/models/team-member-wage.md) | Optional | A page of `TeamMemberWage` results. |
+| `team_member_wages` | [`Array<Team Member Wage Hash>`](../../doc/models/team-member-wage.md) | Optional | A page of `TeamMemberWage` results. |
 | `cursor` | `String` | Optional | The value supplied in the subsequent request to fetch the next page<br>of `TeamMemberWage` results. |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

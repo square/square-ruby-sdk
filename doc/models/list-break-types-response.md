@@ -13,9 +13,9 @@ the request resulted in errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `break_types` | [`Array<Break Type Hash>`](/doc/models/break-type.md) | Optional | A page of `BreakType` results. |
+| `break_types` | [`Array<Break Type Hash>`](../../doc/models/break-type.md) | Optional | A page of `BreakType` results. |
 | `cursor` | `String` | Optional | The value supplied in the subsequent request to fetch the next page<br>of `BreakType` results. |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

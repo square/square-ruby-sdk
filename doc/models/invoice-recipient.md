@@ -20,10 +20,10 @@ Square updates the customer ID in response to a merge operation, but does not up
 | `given_name` | `String` | Optional | The recipient's given (that is, first) name. |
 | `family_name` | `String` | Optional | The recipient's family (that is, last) name. |
 | `email_address` | `String` | Optional | The recipient's email address. |
-| `address` | [`Address Hash`](/doc/models/address.md) | Optional | Represents a postal address in a country.<br>For more information, see [Working with Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses). |
+| `address` | [`Address Hash`](../../doc/models/address.md) | Optional | Represents a postal address in a country.<br>For more information, see [Working with Addresses](../../https://developer.squareup.com/docs/build-basics/working-with-addresses). |
 | `phone_number` | `String` | Optional | The recipient's phone number. |
 | `company_name` | `String` | Optional | The name of the recipient's company. |
-| `tax_ids` | [`Invoice Recipient Tax Ids Hash`](/doc/models/invoice-recipient-tax-ids.md) | Optional | Represents the tax IDs for an invoice recipient. The country of the seller account determines<br>whether the corresponding `tax_ids` field is available for the customer. For more information,<br>see [Invoice recipient tax IDs](https://developer.squareup.com/docs/invoices-api/overview#recipient-tax-ids). |
+| `tax_ids` | [`Invoice Recipient Tax Ids Hash`](../../doc/models/invoice-recipient-tax-ids.md) | Optional | Represents the tax IDs for an invoice recipient. The country of the seller account determines<br>whether the corresponding `tax_ids` field is available for the customer. For more information,<br>see [Invoice recipient tax IDs](../../https://developer.squareup.com/docs/invoices-api/overview#recipient-tax-ids). |
 
 ## Example (as JSON)
 

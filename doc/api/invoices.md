@@ -10,14 +10,14 @@ invoices_api = client.invoices
 
 ## Methods
 
-* [List Invoices](/doc/api/invoices.md#list-invoices)
-* [Create Invoice](/doc/api/invoices.md#create-invoice)
-* [Search Invoices](/doc/api/invoices.md#search-invoices)
-* [Delete Invoice](/doc/api/invoices.md#delete-invoice)
-* [Get Invoice](/doc/api/invoices.md#get-invoice)
-* [Update Invoice](/doc/api/invoices.md#update-invoice)
-* [Cancel Invoice](/doc/api/invoices.md#cancel-invoice)
-* [Publish Invoice](/doc/api/invoices.md#publish-invoice)
+* [List Invoices](../../doc/api/invoices.md#list-invoices)
+* [Create Invoice](../../doc/api/invoices.md#create-invoice)
+* [Search Invoices](../../doc/api/invoices.md#search-invoices)
+* [Delete Invoice](../../doc/api/invoices.md#delete-invoice)
+* [Get Invoice](../../doc/api/invoices.md#get-invoice)
+* [Update Invoice](../../doc/api/invoices.md#update-invoice)
+* [Cancel Invoice](../../doc/api/invoices.md#cancel-invoice)
+* [Publish Invoice](../../doc/api/invoices.md#publish-invoice)
 
 
 # List Invoices
@@ -37,12 +37,12 @@ def list_invoices(location_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Query, Required | The ID of the location for which to list invoices. |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for your original query.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for your original query.<br><br>For more information, see [Pagination](../../https://developer.squareup.com/docs/working-with-apis/pagination). |
 | `limit` | `Integer` | Query, Optional | The maximum number of invoices to return (200 is the maximum `limit`).<br>If not provided, the server uses a default limit of 100 invoices. |
 
 ## Response Type
 
-[`List Invoices Response Hash`](/doc/models/list-invoices-response.md)
+[`List Invoices Response Hash`](../../doc/models/list-invoices-response.md)
 
 ## Example Usage
 
@@ -63,7 +63,7 @@ end
 
 # Create Invoice
 
-Creates a draft [invoice](/doc/models/invoice.md)
+Creates a draft [invoice](../../doc/models/invoice.md)
 for an order created using the Orders API.
 
 A draft invoice remains in your account and no action is taken.
@@ -77,11 +77,11 @@ def create_invoice(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Create Invoice Request Hash`](/doc/models/create-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Invoice Request Hash`](../../doc/models/create-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Create Invoice Response Hash`](/doc/models/create-invoice-response.md)
+[`Create Invoice Response Hash`](../../doc/models/create-invoice-response.md)
 
 ## Example Usage
 
@@ -180,11 +180,11 @@ def search_invoices(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Search Invoices Request Hash`](/doc/models/search-invoices-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Search Invoices Request Hash`](../../doc/models/search-invoices-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Search Invoices Response Hash`](/doc/models/search-invoices-response.md)
+[`Search Invoices Response Hash`](../../doc/models/search-invoices-response.md)
 
 ## Example Usage
 
@@ -225,11 +225,11 @@ def delete_invoice(invoice_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `invoice_id` | `String` | Template, Required | The ID of the invoice to delete. |
-| `version` | `Integer` | Query, Optional | The version of the [invoice](/doc/models/invoice.md) to delete.<br>If you do not know the version, you can call [GetInvoice](/doc/api/invoices.md#get-invoice) or<br>[ListInvoices](/doc/api/invoices.md#list-invoices). |
+| `version` | `Integer` | Query, Optional | The version of the [invoice](../../doc/models/invoice.md) to delete.<br>If you do not know the version, you can call [GetInvoice](../../doc/api/invoices.md#get-invoice) or<br>[ListInvoices](../../doc/api/invoices.md#list-invoices). |
 
 ## Response Type
 
-[`Delete Invoice Response Hash`](/doc/models/delete-invoice-response.md)
+[`Delete Invoice Response Hash`](../../doc/models/delete-invoice-response.md)
 
 ## Example Usage
 
@@ -263,7 +263,7 @@ def get_invoice(invoice_id:)
 
 ## Response Type
 
-[`Get Invoice Response Hash`](/doc/models/get-invoice-response.md)
+[`Get Invoice Response Hash`](../../doc/models/get-invoice-response.md)
 
 ## Example Usage
 
@@ -297,11 +297,11 @@ def update_invoice(invoice_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `invoice_id` | `String` | Template, Required | The ID of the invoice to update. |
-| `body` | [`Update Invoice Request Hash`](/doc/models/update-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Update Invoice Request Hash`](../../doc/models/update-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Update Invoice Response Hash`](/doc/models/update-invoice-response.md)
+[`Update Invoice Response Hash`](../../doc/models/update-invoice-response.md)
 
 ## Example Usage
 
@@ -366,12 +366,12 @@ def cancel_invoice(invoice_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `invoice_id` | `String` | Template, Required | The ID of the [invoice](/doc/models/invoice.md) to cancel. |
-| `body` | [`Cancel Invoice Request Hash`](/doc/models/cancel-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `invoice_id` | `String` | Template, Required | The ID of the [invoice](../../doc/models/invoice.md) to cancel. |
+| `body` | [`Cancel Invoice Request Hash`](../../doc/models/cancel-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Cancel Invoice Response Hash`](/doc/models/cancel-invoice-response.md)
+[`Cancel Invoice Response Hash`](../../doc/models/cancel-invoice-response.md)
 
 ## Example Usage
 
@@ -414,11 +414,11 @@ def publish_invoice(invoice_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `invoice_id` | `String` | Template, Required | The ID of the invoice to publish. |
-| `body` | [`Publish Invoice Request Hash`](/doc/models/publish-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Publish Invoice Request Hash`](../../doc/models/publish-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Publish Invoice Response Hash`](/doc/models/publish-invoice-response.md)
+[`Publish Invoice Response Hash`](../../doc/models/publish-invoice-response.md)
 
 ## Example Usage
 

@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Information about errors encountered during the request. |
-| `checkout` | [`Terminal Checkout Hash`](/doc/models/terminal-checkout.md) | Optional | - |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
+| `checkout` | [`Terminal Checkout Hash`](../../doc/models/terminal-checkout.md) | Optional | - |
 
 ## Example (as JSON)
 

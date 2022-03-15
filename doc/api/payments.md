@@ -10,13 +10,13 @@ payments_api = client.payments
 
 ## Methods
 
-* [List Payments](/doc/api/payments.md#list-payments)
-* [Create Payment](/doc/api/payments.md#create-payment)
-* [Cancel Payment by Idempotency Key](/doc/api/payments.md#cancel-payment-by-idempotency-key)
-* [Get Payment](/doc/api/payments.md#get-payment)
-* [Update Payment](/doc/api/payments.md#update-payment)
-* [Cancel Payment](/doc/api/payments.md#cancel-payment)
-* [Complete Payment](/doc/api/payments.md#complete-payment)
+* [List Payments](../../doc/api/payments.md#list-payments)
+* [Create Payment](../../doc/api/payments.md#create-payment)
+* [Cancel Payment by Idempotency Key](../../doc/api/payments.md#cancel-payment-by-idempotency-key)
+* [Get Payment](../../doc/api/payments.md#get-payment)
+* [Update Payment](../../doc/api/payments.md#update-payment)
+* [Cancel Payment](../../doc/api/payments.md#cancel-payment)
+* [Complete Payment](../../doc/api/payments.md#complete-payment)
 
 
 # List Payments
@@ -47,7 +47,7 @@ def list_payments(begin_time: nil,
 | `begin_time` | `String` | Query, Optional | The timestamp for the beginning of the reporting period, in RFC 3339 format.<br>Inclusive. Default: The current time minus one year. |
 | `end_time` | `String` | Query, Optional | The timestamp for the end of the reporting period, in RFC 3339 format.<br><br>Default: The current time. |
 | `sort_order` | `String` | Query, Optional | The order in which results are listed:<br><br>- `ASC` - Oldest to newest.<br>- `DESC` - Newest to oldest (default). |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination). |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br><br>For more information, see [Pagination](../../https://developer.squareup.com/docs/basics/api101/pagination). |
 | `location_id` | `String` | Query, Optional | Limit results to the location supplied. By default, results are returned<br>for the default (main) location associated with the seller. |
 | `total` | `Long` | Query, Optional | The exact amount in the `total_money` for a payment. |
 | `last_4` | `String` | Query, Optional | The last four digits of a payment card. |
@@ -56,7 +56,7 @@ def list_payments(begin_time: nil,
 
 ## Response Type
 
-[`List Payments Response Hash`](/doc/models/list-payments-response.md)
+[`List Payments Response Hash`](../../doc/models/list-payments-response.md)
 
 ## Example Usage
 
@@ -100,11 +100,11 @@ def create_payment(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Create Payment Request Hash`](/doc/models/create-payment-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Payment Request Hash`](../../doc/models/create-payment-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Create Payment Response Hash`](/doc/models/create-payment-response.md)
+[`Create Payment Response Hash`](../../doc/models/create-payment-response.md)
 
 ## Example Usage
 
@@ -161,11 +161,11 @@ def cancel_payment_by_idempotency_key(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Cancel Payment by Idempotency Key Request Hash`](/doc/models/cancel-payment-by-idempotency-key-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Cancel Payment by Idempotency Key Request Hash`](../../doc/models/cancel-payment-by-idempotency-key-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Cancel Payment by Idempotency Key Response Hash`](/doc/models/cancel-payment-by-idempotency-key-response.md)
+[`Cancel Payment by Idempotency Key Response Hash`](../../doc/models/cancel-payment-by-idempotency-key-response.md)
 
 ## Example Usage
 
@@ -199,7 +199,7 @@ def get_payment(payment_id:)
 
 ## Response Type
 
-[`Get Payment Response Hash`](/doc/models/get-payment-response.md)
+[`Get Payment Response Hash`](../../doc/models/get-payment-response.md)
 
 ## Example Usage
 
@@ -231,11 +231,11 @@ def update_payment(payment_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `payment_id` | `String` | Template, Required | The ID of the payment to update. |
-| `body` | [`Update Payment Request Hash`](/doc/models/update-payment-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Update Payment Request Hash`](../../doc/models/update-payment-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Update Payment Response Hash`](/doc/models/update-payment-response.md)
+[`Update Payment Response Hash`](../../doc/models/update-payment-response.md)
 
 ## Example Usage
 
@@ -282,7 +282,7 @@ def cancel_payment(payment_id:)
 
 ## Response Type
 
-[`Cancel Payment Response Hash`](/doc/models/cancel-payment-response.md)
+[`Cancel Payment Response Hash`](../../doc/models/cancel-payment-response.md)
 
 ## Example Usage
 
@@ -316,11 +316,11 @@ def complete_payment(payment_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `payment_id` | `String` | Template, Required | The unique ID identifying the payment to be completed. |
-| `body` | [`Complete Payment Request Hash`](/doc/models/complete-payment-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Complete Payment Request Hash`](../../doc/models/complete-payment-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Complete Payment Response Hash`](/doc/models/complete-payment-response.md)
+[`Complete Payment Response Hash`](../../doc/models/complete-payment-response.md)
 
 ## Example Usage
 

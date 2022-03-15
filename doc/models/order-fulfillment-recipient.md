@@ -15,7 +15,7 @@ Contains information about the recipient of a fulfillment.
 | `display_name` | `String` | Optional | The display name of the fulfillment recipient.<br><br>If provided, the display name overrides the value pulled from the customer profile indicated by `customer_id`.<br>**Constraints**: *Maximum Length*: `255` |
 | `email_address` | `String` | Optional | The email address of the fulfillment recipient.<br><br>If provided, the email address overrides the value pulled from the customer profile indicated by `customer_id`.<br>**Constraints**: *Maximum Length*: `255` |
 | `phone_number` | `String` | Optional | The phone number of the fulfillment recipient.<br><br>If provided, the phone number overrides the value pulled from the customer profile indicated by `customer_id`.<br>**Constraints**: *Maximum Length*: `17` |
-| `address` | [`Address Hash`](/doc/models/address.md) | Optional | Represents a postal address in a country.<br>For more information, see [Working with Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses). |
+| `address` | [`Address Hash`](../../doc/models/address.md) | Optional | Represents a postal address in a country.<br>For more information, see [Working with Addresses](../../https://developer.squareup.com/docs/build-basics/working-with-addresses). |
 
 ## Example (as JSON)
 

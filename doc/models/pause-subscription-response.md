@@ -2,7 +2,7 @@
 # Pause Subscription Response
 
 Defines output parameters in a response from the
-[PauseSubscription](/doc/api/subscriptions.md#pause-subscription) endpoint.
+[PauseSubscription](../../doc/api/subscriptions.md#pause-subscription) endpoint.
 
 ## Structure
 
@@ -12,9 +12,9 @@ Defines output parameters in a response from the
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Errors encountered during the request. |
-| `subscription` | [`Subscription Hash`](/doc/models/subscription.md) | Optional | Represents a subscription to a subscription plan by a subscriber.<br><br>For an overview of the `Subscription` type, see<br>[Subscription object](https://developer.squareup.com/docs/subscriptions-api/overview#subscription-object-overview). |
-| `actions` | [`Array<Subscription Action Hash>`](/doc/models/subscription-action.md) | Optional | The list of a `PAUSE` action and a possible `RESUME` action created by the request. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Errors encountered during the request. |
+| `subscription` | [`Subscription Hash`](../../doc/models/subscription.md) | Optional | Represents a subscription to a subscription plan by a subscriber.<br><br>For an overview of the `Subscription` type, see<br>[Subscription object](../../https://developer.squareup.com/docs/subscriptions-api/overview#subscription-object-overview). |
+| `actions` | [`Array<Subscription Action Hash>`](../../doc/models/subscription-action.md) | Optional | The list of a `PAUSE` action and a possible `RESUME` action created by the request. |
 
 ## Example (as JSON)
 
