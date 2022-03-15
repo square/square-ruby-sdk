@@ -12,8 +12,8 @@ or error messages.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `wage_setting` | [`Wage Setting Hash`](/doc/models/wage-setting.md) | Optional | An object representing a team member's wage information. |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | The errors that occurred during the request. |
+| `wage_setting` | [`Wage Setting Hash`](../../doc/models/wage-setting.md) | Optional | An object representing a team member's wage information. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | The errors that occurred during the request. |
 
 ## Example (as JSON)
 

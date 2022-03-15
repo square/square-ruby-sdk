@@ -38,7 +38,7 @@ module Square
     end
 
     def get_user_agent
-      user_agent = 'Square-Ruby-SDK/18.0.0.20220216 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}'
+      user_agent = 'Square-Ruby-SDK/18.1.0.20220316 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}'
       user_agent['{engine}'] = RUBY_ENGINE
       user_agent['{engine-version}'] = RUBY_ENGINE_VERSION
       user_agent['{os-info}'] = RUBY_PLATFORM

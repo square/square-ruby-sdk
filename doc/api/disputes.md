@@ -10,15 +10,15 @@ disputes_api = client.disputes
 
 ## Methods
 
-* [List Disputes](/doc/api/disputes.md#list-disputes)
-* [Retrieve Dispute](/doc/api/disputes.md#retrieve-dispute)
-* [Accept Dispute](/doc/api/disputes.md#accept-dispute)
-* [List Dispute Evidence](/doc/api/disputes.md#list-dispute-evidence)
-* [Create Dispute Evidence File](/doc/api/disputes.md#create-dispute-evidence-file)
-* [Create Dispute Evidence Text](/doc/api/disputes.md#create-dispute-evidence-text)
-* [Delete Dispute Evidence](/doc/api/disputes.md#delete-dispute-evidence)
-* [Retrieve Dispute Evidence](/doc/api/disputes.md#retrieve-dispute-evidence)
-* [Submit Evidence](/doc/api/disputes.md#submit-evidence)
+* [List Disputes](../../doc/api/disputes.md#list-disputes)
+* [Retrieve Dispute](../../doc/api/disputes.md#retrieve-dispute)
+* [Accept Dispute](../../doc/api/disputes.md#accept-dispute)
+* [List Dispute Evidence](../../doc/api/disputes.md#list-dispute-evidence)
+* [Create Dispute Evidence File](../../doc/api/disputes.md#create-dispute-evidence-file)
+* [Create Dispute Evidence Text](../../doc/api/disputes.md#create-dispute-evidence-text)
+* [Delete Dispute Evidence](../../doc/api/disputes.md#delete-dispute-evidence)
+* [Retrieve Dispute Evidence](../../doc/api/disputes.md#retrieve-dispute-evidence)
+* [Submit Evidence](../../doc/api/disputes.md#submit-evidence)
 
 
 # List Disputes
@@ -35,13 +35,13 @@ def list_disputes(cursor: nil,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination). |
-| `states` | [`String (Dispute State)`](/doc/models/dispute-state.md) | Query, Optional | The dispute states to filter the result.<br>If not specified, the endpoint returns all open disputes (the dispute status is not `INQUIRY_CLOSED`, `WON`,<br>or `LOST`). |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>For more information, see [Pagination](../../https://developer.squareup.com/docs/basics/api101/pagination). |
+| `states` | [`String (Dispute State)`](../../doc/models/dispute-state.md) | Query, Optional | The dispute states to filter the result.<br>If not specified, the endpoint returns all open disputes (the dispute status is not `INQUIRY_CLOSED`, `WON`,<br>or `LOST`). |
 | `location_id` | `String` | Query, Optional | The ID of the location for which to return a list of disputes. If not specified, the endpoint returns<br>all open disputes (the dispute status is not `INQUIRY_CLOSED`, `WON`, or `LOST`) associated with all locations. |
 
 ## Response Type
 
-[`List Disputes Response Hash`](/doc/models/list-disputes-response.md)
+[`List Disputes Response Hash`](../../doc/models/list-disputes-response.md)
 
 ## Example Usage
 
@@ -76,7 +76,7 @@ def retrieve_dispute(dispute_id:)
 
 ## Response Type
 
-[`Retrieve Dispute Response Hash`](/doc/models/retrieve-dispute-response.md)
+[`Retrieve Dispute Response Hash`](../../doc/models/retrieve-dispute-response.md)
 
 ## Example Usage
 
@@ -113,7 +113,7 @@ def accept_dispute(dispute_id:)
 
 ## Response Type
 
-[`Accept Dispute Response Hash`](/doc/models/accept-dispute-response.md)
+[`Accept Dispute Response Hash`](../../doc/models/accept-dispute-response.md)
 
 ## Example Usage
 
@@ -144,11 +144,11 @@ def list_dispute_evidence(dispute_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `dispute_id` | `String` | Template, Required | The ID of the dispute. |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination). |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>For more information, see [Pagination](../../https://developer.squareup.com/docs/basics/api101/pagination). |
 
 ## Response Type
 
-[`List Dispute Evidence Response Hash`](/doc/models/list-dispute-evidence-response.md)
+[`List Dispute Evidence Response Hash`](../../doc/models/list-dispute-evidence-response.md)
 
 ## Example Usage
 
@@ -182,12 +182,12 @@ def create_dispute_evidence_file(dispute_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `dispute_id` | `String` | Template, Required | The ID of the dispute you want to upload evidence for. |
-| `request` | [`Create Dispute Evidence File Request Hash`](/doc/models/create-dispute-evidence-file-request.md) | Form, Optional | Defines the parameters for a `CreateDisputeEvidenceFile` request. |
+| `request` | [`Create Dispute Evidence File Request Hash`](../../doc/models/create-dispute-evidence-file-request.md) | Form, Optional | Defines the parameters for a `CreateDisputeEvidenceFile` request. |
 | `image_file` | `File \| UploadIO` | Form, Optional | - |
 
 ## Response Type
 
-[`Create Dispute Evidence File Response Hash`](/doc/models/create-dispute-evidence-file-response.md)
+[`Create Dispute Evidence File Response Hash`](../../doc/models/create-dispute-evidence-file-response.md)
 
 ## Example Usage
 
@@ -223,11 +223,11 @@ def create_dispute_evidence_text(dispute_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `dispute_id` | `String` | Template, Required | The ID of the dispute you want to upload evidence for. |
-| `body` | [`Create Dispute Evidence Text Request Hash`](/doc/models/create-dispute-evidence-text-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Dispute Evidence Text Request Hash`](../../doc/models/create-dispute-evidence-text-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Create Dispute Evidence Text Response Hash`](/doc/models/create-dispute-evidence-text-response.md)
+[`Create Dispute Evidence Text Response Hash`](../../doc/models/create-dispute-evidence-text-response.md)
 
 ## Example Usage
 
@@ -253,7 +253,7 @@ end
 Removes specified evidence from a dispute.
 
 Square does not send the bank any evidence that is removed. Also, you cannot remove evidence after
-submitting it to the bank using [SubmitEvidence](/doc/api/disputes.md#submit-evidence).
+submitting it to the bank using [SubmitEvidence](../../doc/api/disputes.md#submit-evidence).
 
 ```ruby
 def delete_dispute_evidence(dispute_id:,
@@ -269,7 +269,7 @@ def delete_dispute_evidence(dispute_id:,
 
 ## Response Type
 
-[`Delete Dispute Evidence Response Hash`](/doc/models/delete-dispute-evidence-response.md)
+[`Delete Dispute Evidence Response Hash`](../../doc/models/delete-dispute-evidence-response.md)
 
 ## Example Usage
 
@@ -308,7 +308,7 @@ def retrieve_dispute_evidence(dispute_id:,
 
 ## Response Type
 
-[`Retrieve Dispute Evidence Response Hash`](/doc/models/retrieve-dispute-evidence-response.md)
+[`Retrieve Dispute Evidence Response Hash`](../../doc/models/retrieve-dispute-evidence-response.md)
 
 ## Example Usage
 
@@ -331,8 +331,8 @@ end
 Submits evidence to the cardholder's bank.
 
 Before submitting evidence, Square compiles all available evidence. This includes evidence uploaded
-using the [CreateDisputeEvidenceFile](/doc/api/disputes.md#create-dispute-evidence-file) and
-[CreateDisputeEvidenceText](/doc/api/disputes.md#create-dispute-evidence-text) endpoints and
+using the [CreateDisputeEvidenceFile](../../doc/api/disputes.md#create-dispute-evidence-file) and
+[CreateDisputeEvidenceText](../../doc/api/disputes.md#create-dispute-evidence-text) endpoints and
 evidence automatically provided by Square, when available.
 
 ```ruby
@@ -347,7 +347,7 @@ def submit_evidence(dispute_id:)
 
 ## Response Type
 
-[`Submit Evidence Response Hash`](/doc/models/submit-evidence-response.md)
+[`Submit Evidence Response Hash`](../../doc/models/submit-evidence-response.md)
 
 ## Example Usage
 

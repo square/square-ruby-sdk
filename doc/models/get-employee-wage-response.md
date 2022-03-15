@@ -13,8 +13,8 @@ the request resulted in errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `employee_wage` | [`Employee Wage Hash`](/doc/models/employee-wage.md) | Optional | The hourly wage rate that an employee earns on a `Shift` for doing the job<br>specified by the `title` property of this object. Deprecated at version 2020-08-26. Use `TeamMemberWage` instead. |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `employee_wage` | [`Employee Wage Hash`](../../doc/models/employee-wage.md) | Optional | The hourly wage rate that an employee earns on a `Shift` for doing the job<br>specified by the `title` property of this object. Deprecated at version 2020-08-26. Use `TeamMemberWage` instead. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

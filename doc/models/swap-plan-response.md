@@ -2,7 +2,7 @@
 # Swap Plan Response
 
 Defines output parameters in a response of the
-[SwapPlan](/doc/api/subscriptions.md#swap-plan) endpoint.
+[SwapPlan](../../doc/api/subscriptions.md#swap-plan) endpoint.
 
 ## Structure
 
@@ -12,9 +12,9 @@ Defines output parameters in a response of the
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Errors encountered during the request. |
-| `subscription` | [`Subscription Hash`](/doc/models/subscription.md) | Optional | Represents a subscription to a subscription plan by a subscriber.<br><br>For an overview of the `Subscription` type, see<br>[Subscription object](https://developer.squareup.com/docs/subscriptions-api/overview#subscription-object-overview). |
-| `actions` | [`Array<Subscription Action Hash>`](/doc/models/subscription-action.md) | Optional | A list of a `SWAP_PLAN` action created by the request. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Errors encountered during the request. |
+| `subscription` | [`Subscription Hash`](../../doc/models/subscription.md) | Optional | Represents a subscription to a subscription plan by a subscriber.<br><br>For an overview of the `Subscription` type, see<br>[Subscription object](../../https://developer.squareup.com/docs/subscriptions-api/overview#subscription-object-overview). |
+| `actions` | [`Array<Subscription Action Hash>`](../../doc/models/subscription-action.md) | Optional | A list of a `SWAP_PLAN` action created by the request. |
 
 ## Example (as JSON)
 

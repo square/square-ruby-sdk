@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `items` | [`Array<V1 Payment Hash>`](/doc/models/v1-payment.md) | Optional | - |
+| `items` | [`Array<V1 Payment Hash>`](../../doc/models/v1-payment.md) | Optional | - |
 
 ## Example (as JSON)
 

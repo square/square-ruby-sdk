@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `type` | `String` | Optional | Name of the affected dispute's type. |
 | `id` | `String` | Optional | ID of the affected dispute. |
-| `object` | [`Dispute Evidence Created Webhook Object Hash`](/doc/models/dispute-evidence-created-webhook-object.md) | Optional | - |
+| `object` | [`Dispute Evidence Created Webhook Object Hash`](../../doc/models/dispute-evidence-created-webhook-object.md) | Optional | - |
 
 ## Example (as JSON)
 

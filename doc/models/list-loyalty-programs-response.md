@@ -11,8 +11,8 @@ A response that contains all loyalty programs.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `programs` | [`Array<Loyalty Program Hash>`](/doc/models/loyalty-program.md) | Optional | A list of `LoyaltyProgram` for the merchant. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `programs` | [`Array<Loyalty Program Hash>`](../../doc/models/loyalty-program.md) | Optional | A list of `LoyaltyProgram` for the merchant. |
 
 ## Example (as JSON)
 

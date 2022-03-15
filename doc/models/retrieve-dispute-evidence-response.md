@@ -11,8 +11,8 @@ Defines the fields in a `RetrieveDisputeEvidence` response.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `evidence` | [`Dispute Evidence Hash`](/doc/models/dispute-evidence.md) | Optional | - |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `evidence` | [`Dispute Evidence Hash`](../../doc/models/dispute-evidence.md) | Optional | - |
 
 ## Example (as JSON)
 

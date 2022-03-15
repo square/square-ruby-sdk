@@ -10,22 +10,22 @@ labor_api = client.labor
 
 ## Methods
 
-* [List Break Types](/doc/api/labor.md#list-break-types)
-* [Create Break Type](/doc/api/labor.md#create-break-type)
-* [Delete Break Type](/doc/api/labor.md#delete-break-type)
-* [Get Break Type](/doc/api/labor.md#get-break-type)
-* [Update Break Type](/doc/api/labor.md#update-break-type)
-* [List Employee Wages](/doc/api/labor.md#list-employee-wages)
-* [Get Employee Wage](/doc/api/labor.md#get-employee-wage)
-* [Create Shift](/doc/api/labor.md#create-shift)
-* [Search Shifts](/doc/api/labor.md#search-shifts)
-* [Delete Shift](/doc/api/labor.md#delete-shift)
-* [Get Shift](/doc/api/labor.md#get-shift)
-* [Update Shift](/doc/api/labor.md#update-shift)
-* [List Team Member Wages](/doc/api/labor.md#list-team-member-wages)
-* [Get Team Member Wage](/doc/api/labor.md#get-team-member-wage)
-* [List Workweek Configs](/doc/api/labor.md#list-workweek-configs)
-* [Update Workweek Config](/doc/api/labor.md#update-workweek-config)
+* [List Break Types](../../doc/api/labor.md#list-break-types)
+* [Create Break Type](../../doc/api/labor.md#create-break-type)
+* [Delete Break Type](../../doc/api/labor.md#delete-break-type)
+* [Get Break Type](../../doc/api/labor.md#get-break-type)
+* [Update Break Type](../../doc/api/labor.md#update-break-type)
+* [List Employee Wages](../../doc/api/labor.md#list-employee-wages)
+* [Get Employee Wage](../../doc/api/labor.md#get-employee-wage)
+* [Create Shift](../../doc/api/labor.md#create-shift)
+* [Search Shifts](../../doc/api/labor.md#search-shifts)
+* [Delete Shift](../../doc/api/labor.md#delete-shift)
+* [Get Shift](../../doc/api/labor.md#get-shift)
+* [Update Shift](../../doc/api/labor.md#update-shift)
+* [List Team Member Wages](../../doc/api/labor.md#list-team-member-wages)
+* [Get Team Member Wage](../../doc/api/labor.md#get-team-member-wage)
+* [List Workweek Configs](../../doc/api/labor.md#list-workweek-configs)
+* [Update Workweek Config](../../doc/api/labor.md#update-workweek-config)
 
 
 # List Break Types
@@ -48,7 +48,7 @@ def list_break_types(location_id: nil,
 
 ## Response Type
 
-[`List Break Types Response Hash`](/doc/models/list-break-types-response.md)
+[`List Break Types Response Hash`](../../doc/models/list-break-types-response.md)
 
 ## Example Usage
 
@@ -92,11 +92,11 @@ def create_break_type(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Create Break Type Request Hash`](/doc/models/create-break-type-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Break Type Request Hash`](../../doc/models/create-break-type-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Create Break Type Response Hash`](/doc/models/create-break-type-response.md)
+[`Create Break Type Response Hash`](../../doc/models/create-break-type-response.md)
 
 ## Example Usage
 
@@ -141,7 +141,7 @@ def delete_break_type(id:)
 
 ## Response Type
 
-[`Delete Break Type Response Hash`](/doc/models/delete-break-type-response.md)
+[`Delete Break Type Response Hash`](../../doc/models/delete-break-type-response.md)
 
 ## Example Usage
 
@@ -174,7 +174,7 @@ def get_break_type(id:)
 
 ## Response Type
 
-[`Get Break Type Response Hash`](/doc/models/get-break-type-response.md)
+[`Get Break Type Response Hash`](../../doc/models/get-break-type-response.md)
 
 ## Example Usage
 
@@ -205,11 +205,11 @@ def update_break_type(id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `String` | Template, Required | The UUID for the `BreakType` being updated. |
-| `body` | [`Update Break Type Request Hash`](/doc/models/update-break-type-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Update Break Type Request Hash`](../../doc/models/update-break-type-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Update Break Type Response Hash`](/doc/models/update-break-type-response.md)
+[`Update Break Type Response Hash`](../../doc/models/update-break-type-response.md)
 
 ## Example Usage
 
@@ -258,7 +258,7 @@ def list_employee_wages(employee_id: nil,
 
 ## Response Type
 
-[`List Employee Wages Response Hash`](/doc/models/list-employee-wages-response.md)
+[`List Employee Wages Response Hash`](../../doc/models/list-employee-wages-response.md)
 
 ## Example Usage
 
@@ -295,7 +295,7 @@ def get_employee_wage(id:)
 
 ## Response Type
 
-[`Get Employee Wage Response Hash`](/doc/models/get-employee-wage-response.md)
+[`Get Employee Wage Response Hash`](../../doc/models/get-employee-wage-response.md)
 
 ## Example Usage
 
@@ -342,11 +342,11 @@ def create_shift(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Create Shift Request Hash`](/doc/models/create-shift-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Shift Request Hash`](../../doc/models/create-shift-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Create Shift Response Hash`](/doc/models/create-shift-response.md)
+[`Create Shift Response Hash`](../../doc/models/create-shift-response.md)
 
 ## Example Usage
 
@@ -416,11 +416,11 @@ def search_shifts(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Search Shifts Request Hash`](/doc/models/search-shifts-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Search Shifts Request Hash`](../../doc/models/search-shifts-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Search Shifts Response Hash`](/doc/models/search-shifts-response.md)
+[`Search Shifts Response Hash`](../../doc/models/search-shifts-response.md)
 
 ## Example Usage
 
@@ -476,7 +476,7 @@ def delete_shift(id:)
 
 ## Response Type
 
-[`Delete Shift Response Hash`](/doc/models/delete-shift-response.md)
+[`Delete Shift Response Hash`](../../doc/models/delete-shift-response.md)
 
 ## Example Usage
 
@@ -509,7 +509,7 @@ def get_shift(id:)
 
 ## Response Type
 
-[`Get Shift Response Hash`](/doc/models/get-shift-response.md)
+[`Get Shift Response Hash`](../../doc/models/get-shift-response.md)
 
 ## Example Usage
 
@@ -546,11 +546,11 @@ def update_shift(id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `String` | Template, Required | The ID of the object being updated. |
-| `body` | [`Update Shift Request Hash`](/doc/models/update-shift-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Update Shift Request Hash`](../../doc/models/update-shift-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Update Shift Response Hash`](/doc/models/update-shift-response.md)
+[`Update Shift Response Hash`](../../doc/models/update-shift-response.md)
 
 ## Example Usage
 
@@ -614,7 +614,7 @@ def list_team_member_wages(team_member_id: nil,
 
 ## Response Type
 
-[`List Team Member Wages Response Hash`](/doc/models/list-team-member-wages-response.md)
+[`List Team Member Wages Response Hash`](../../doc/models/list-team-member-wages-response.md)
 
 ## Example Usage
 
@@ -649,7 +649,7 @@ def get_team_member_wage(id:)
 
 ## Response Type
 
-[`Get Team Member Wage Response Hash`](/doc/models/get-team-member-wage-response.md)
+[`Get Team Member Wage Response Hash`](../../doc/models/get-team-member-wage-response.md)
 
 ## Example Usage
 
@@ -684,7 +684,7 @@ def list_workweek_configs(limit: nil,
 
 ## Response Type
 
-[`List Workweek Configs Response Hash`](/doc/models/list-workweek-configs-response.md)
+[`List Workweek Configs Response Hash`](../../doc/models/list-workweek-configs-response.md)
 
 ## Example Usage
 
@@ -716,11 +716,11 @@ def update_workweek_config(id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `String` | Template, Required | The UUID for the `WorkweekConfig` object being updated. |
-| `body` | [`Update Workweek Config Request Hash`](/doc/models/update-workweek-config-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Update Workweek Config Request Hash`](../../doc/models/update-workweek-config-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Update Workweek Config Response Hash`](/doc/models/update-workweek-config-response.md)
+[`Update Workweek Config Response Hash`](../../doc/models/update-workweek-config-response.md)
 
 ## Example Usage
 

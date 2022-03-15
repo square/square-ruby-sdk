@@ -19,7 +19,7 @@ This endpoint provides an easy way for platform developers to bulk activate
 Apple Pay on the Web with Square for merchants using their platform.
 
 To learn more about Web Apple Pay, see
-[Add the Apple Pay on the Web Button](https://developer.squareup.com/docs/payment-form/add-digital-wallets/apple-pay).
+[Add the Apple Pay on the Web Button](../../https://developer.squareup.com/docs/payment-form/add-digital-wallets/apple-pay).
 
 ```ruby
 def register_domain(body:)
@@ -29,11 +29,11 @@ def register_domain(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Register Domain Request Hash`](/doc/models/register-domain-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Register Domain Request Hash`](../../doc/models/register-domain-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Register Domain Response Hash`](/doc/models/register-domain-response.md)
+[`Register Domain Response Hash`](../../doc/models/register-domain-response.md)
 
 ## Example Usage
 

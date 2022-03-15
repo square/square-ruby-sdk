@@ -10,22 +10,22 @@ bookings_api = client.bookings
 
 ## Methods
 
-* [List Bookings](/doc/api/bookings.md#list-bookings)
-* [Create Booking](/doc/api/bookings.md#create-booking)
-* [Search Availability](/doc/api/bookings.md#search-availability)
-* [Retrieve Business Booking Profile](/doc/api/bookings.md#retrieve-business-booking-profile)
-* [List Team Member Booking Profiles](/doc/api/bookings.md#list-team-member-booking-profiles)
-* [Retrieve Team Member Booking Profile](/doc/api/bookings.md#retrieve-team-member-booking-profile)
-* [Retrieve Booking](/doc/api/bookings.md#retrieve-booking)
-* [Update Booking](/doc/api/bookings.md#update-booking)
-* [Cancel Booking](/doc/api/bookings.md#cancel-booking)
+* [List Bookings](../../doc/api/bookings.md#list-bookings)
+* [Create Booking](../../doc/api/bookings.md#create-booking)
+* [Search Availability](../../doc/api/bookings.md#search-availability)
+* [Retrieve Business Booking Profile](../../doc/api/bookings.md#retrieve-business-booking-profile)
+* [List Team Member Booking Profiles](../../doc/api/bookings.md#list-team-member-booking-profiles)
+* [Retrieve Team Member Booking Profile](../../doc/api/bookings.md#retrieve-team-member-booking-profile)
+* [Retrieve Booking](../../doc/api/bookings.md#retrieve-booking)
+* [Update Booking](../../doc/api/bookings.md#update-booking)
+* [Cancel Booking](../../doc/api/bookings.md#cancel-booking)
 
 
 # List Bookings
 
 Retrieve a collection of bookings.
 
-To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.  
+To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.
 To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
 
 ```ruby
@@ -50,7 +50,7 @@ def list_bookings(limit: nil,
 
 ## Response Type
 
-[`List Bookings Response Hash`](/doc/models/list-bookings-response.md)
+[`List Bookings Response Hash`](../../doc/models/list-bookings-response.md)
 
 ## Example Usage
 
@@ -76,7 +76,7 @@ end
 
 Creates a booking.
 
-To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.  
+To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.
 To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
 
 ```ruby
@@ -87,11 +87,11 @@ def create_booking(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Create Booking Request Hash`](/doc/models/create-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Booking Request Hash`](../../doc/models/create-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Create Booking Response Hash`](/doc/models/create-booking-response.md)
+[`Create Booking Response Hash`](../../doc/models/create-booking-response.md)
 
 ## Example Usage
 
@@ -119,7 +119,7 @@ end
 
 Searches for availabilities for booking.
 
-To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.  
+To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.
 To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
 
 ```ruby
@@ -130,11 +130,11 @@ def search_availability(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Search Availability Request Hash`](/doc/models/search-availability-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Search Availability Request Hash`](../../doc/models/search-availability-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Search Availability Response Hash`](/doc/models/search-availability-response.md)
+[`Search Availability Response Hash`](../../doc/models/search-availability-response.md)
 
 ## Example Usage
 
@@ -185,7 +185,7 @@ def retrieve_business_booking_profile
 
 ## Response Type
 
-[`Retrieve Business Booking Profile Response Hash`](/doc/models/retrieve-business-booking-profile-response.md)
+[`Retrieve Business Booking Profile Response Hash`](../../doc/models/retrieve-business-booking-profile-response.md)
 
 ## Example Usage
 
@@ -222,7 +222,7 @@ def list_team_member_booking_profiles(bookable_only: false,
 
 ## Response Type
 
-[`List Team Member Booking Profiles Response Hash`](/doc/models/list-team-member-booking-profiles-response.md)
+[`List Team Member Booking Profiles Response Hash`](../../doc/models/list-team-member-booking-profiles-response.md)
 
 ## Example Usage
 
@@ -258,7 +258,7 @@ def retrieve_team_member_booking_profile(team_member_id:)
 
 ## Response Type
 
-[`Retrieve Team Member Booking Profile Response Hash`](/doc/models/retrieve-team-member-booking-profile-response.md)
+[`Retrieve Team Member Booking Profile Response Hash`](../../doc/models/retrieve-team-member-booking-profile-response.md)
 
 ## Example Usage
 
@@ -279,7 +279,7 @@ end
 
 Retrieves a booking.
 
-To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.  
+To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.
 To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
 
 ```ruby
@@ -290,11 +290,11 @@ def retrieve_booking(booking_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `booking_id` | `String` | Template, Required | The ID of the [Booking](/doc/models/booking.md) object representing the to-be-retrieved booking. |
+| `booking_id` | `String` | Template, Required | The ID of the [Booking](../../doc/models/booking.md) object representing the to-be-retrieved booking. |
 
 ## Response Type
 
-[`Retrieve Booking Response Hash`](/doc/models/retrieve-booking-response.md)
+[`Retrieve Booking Response Hash`](../../doc/models/retrieve-booking-response.md)
 
 ## Example Usage
 
@@ -315,7 +315,7 @@ end
 
 Updates a booking.
 
-To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.  
+To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.
 To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
 
 ```ruby
@@ -327,12 +327,12 @@ def update_booking(booking_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `booking_id` | `String` | Template, Required | The ID of the [Booking](/doc/models/booking.md) object representing the to-be-updated booking. |
-| `body` | [`Update Booking Request Hash`](/doc/models/update-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `booking_id` | `String` | Template, Required | The ID of the [Booking](../../doc/models/booking.md) object representing the to-be-updated booking. |
+| `body` | [`Update Booking Request Hash`](../../doc/models/update-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Update Booking Response Hash`](/doc/models/update-booking-response.md)
+[`Update Booking Response Hash`](../../doc/models/update-booking-response.md)
 
 ## Example Usage
 
@@ -361,7 +361,7 @@ end
 
 Cancels an existing booking.
 
-To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.  
+To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.
 To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
 
 ```ruby
@@ -373,12 +373,12 @@ def cancel_booking(booking_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `booking_id` | `String` | Template, Required | The ID of the [Booking](/doc/models/booking.md) object representing the to-be-cancelled booking. |
-| `body` | [`Cancel Booking Request Hash`](/doc/models/cancel-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `booking_id` | `String` | Template, Required | The ID of the [Booking](../../doc/models/booking.md) object representing the to-be-cancelled booking. |
+| `body` | [`Cancel Booking Request Hash`](../../doc/models/cancel-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Cancel Booking Response Hash`](/doc/models/cancel-booking-response.md)
+[`Cancel Booking Response Hash`](../../doc/models/cancel-booking-response.md)
 
 ## Example Usage
 

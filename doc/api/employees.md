@@ -10,8 +10,8 @@ employees_api = client.employees
 
 ## Methods
 
-* [List Employees](/doc/api/employees.md#list-employees)
-* [Retrieve Employee](/doc/api/employees.md#retrieve-employee)
+* [List Employees](../../doc/api/employees.md#list-employees)
+* [Retrieve Employee](../../doc/api/employees.md#retrieve-employee)
 
 
 # List Employees
@@ -32,13 +32,13 @@ def list_employees(location_id: nil,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Query, Optional | - |
-| `status` | [`String (Employee Status)`](/doc/models/employee-status.md) | Query, Optional | Specifies the EmployeeStatus to filter the employee by. |
+| `status` | [`String (Employee Status)`](../../doc/models/employee-status.md) | Query, Optional | Specifies the EmployeeStatus to filter the employee by. |
 | `limit` | `Integer` | Query, Optional | The number of employees to be returned on each page. |
 | `cursor` | `String` | Query, Optional | The token required to retrieve the specified page of results. |
 
 ## Response Type
 
-[`List Employees Response Hash`](/doc/models/list-employees-response.md)
+[`List Employees Response Hash`](../../doc/models/list-employees-response.md)
 
 ## Example Usage
 
@@ -76,7 +76,7 @@ def retrieve_employee(id:)
 
 ## Response Type
 
-[`Retrieve Employee Response Hash`](/doc/models/retrieve-employee-response.md)
+[`Retrieve Employee Response Hash`](../../doc/models/retrieve-employee-response.md)
 
 ## Example Usage
 

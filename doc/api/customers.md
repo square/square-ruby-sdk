@@ -10,16 +10,16 @@ customers_api = client.customers
 
 ## Methods
 
-* [List Customers](/doc/api/customers.md#list-customers)
-* [Create Customer](/doc/api/customers.md#create-customer)
-* [Search Customers](/doc/api/customers.md#search-customers)
-* [Delete Customer](/doc/api/customers.md#delete-customer)
-* [Retrieve Customer](/doc/api/customers.md#retrieve-customer)
-* [Update Customer](/doc/api/customers.md#update-customer)
-* [Create Customer Card](/doc/api/customers.md#create-customer-card)
-* [Delete Customer Card](/doc/api/customers.md#delete-customer-card)
-* [Remove Group From Customer](/doc/api/customers.md#remove-group-from-customer)
-* [Add Group to Customer](/doc/api/customers.md#add-group-to-customer)
+* [List Customers](../../doc/api/customers.md#list-customers)
+* [Create Customer](../../doc/api/customers.md#create-customer)
+* [Search Customers](../../doc/api/customers.md#search-customers)
+* [Delete Customer](../../doc/api/customers.md#delete-customer)
+* [Retrieve Customer](../../doc/api/customers.md#retrieve-customer)
+* [Update Customer](../../doc/api/customers.md#update-customer)
+* [Create Customer Card](../../doc/api/customers.md#create-customer-card)
+* [Delete Customer Card](../../doc/api/customers.md#delete-customer-card)
+* [Remove Group From Customer](../../doc/api/customers.md#remove-group-from-customer)
+* [Add Group to Customer](../../doc/api/customers.md#add-group-to-customer)
 
 
 # List Customers
@@ -41,14 +41,14 @@ def list_customers(cursor: nil,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for your original query.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
-| `limit` | `Integer` | Query, Optional | The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.<br>The limit is ignored if it is less than 1 or greater than 100. The default value is 100.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
-| `sort_field` | [`String (Customer Sort Field)`](/doc/models/customer-sort-field.md) | Query, Optional | Indicates how customers should be sorted.<br><br>The default value is `DEFAULT`. |
-| `sort_order` | [`String (Sort Order)`](/doc/models/sort-order.md) | Query, Optional | Indicates whether customers should be sorted in ascending (`ASC`) or<br>descending (`DESC`) order.<br><br>The default value is `ASC`. |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for your original query.<br><br>For more information, see [Pagination](../../https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
+| `limit` | `Integer` | Query, Optional | The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.<br>If the specified limit is less than 1 or greater than 100, Square returns a `400 VALUE_TOO_LOW` or `400 VALUE_TOO_HIGH` error. The default value is 100.<br><br>For more information, see [Pagination](../../https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
+| `sort_field` | [`String (Customer Sort Field)`](../../doc/models/customer-sort-field.md) | Query, Optional | Indicates how customers should be sorted.<br><br>The default value is `DEFAULT`. |
+| `sort_order` | [`String (Sort Order)`](../../doc/models/sort-order.md) | Query, Optional | Indicates whether customers should be sorted in ascending (`ASC`) or<br>descending (`DESC`) order.<br><br>The default value is `ASC`. |
 
 ## Response Type
 
-[`List Customers Response Hash`](/doc/models/list-customers-response.md)
+[`List Customers Response Hash`](../../doc/models/list-customers-response.md)
 
 ## Example Usage
 
@@ -89,11 +89,11 @@ def create_customer(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Create Customer Request Hash`](/doc/models/create-customer-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Customer Request Hash`](../../doc/models/create-customer-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Create Customer Response Hash`](/doc/models/create-customer-response.md)
+[`Create Customer Response Hash`](../../doc/models/create-customer-response.md)
 
 ## Example Usage
 
@@ -148,11 +148,11 @@ def search_customers(body:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Search Customers Request Hash`](/doc/models/search-customers-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Search Customers Request Hash`](../../doc/models/search-customers-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Search Customers Response Hash`](/doc/models/search-customers-response.md)
+[`Search Customers Response Hash`](../../doc/models/search-customers-response.md)
 
 ## Example Usage
 
@@ -199,7 +199,7 @@ end
 
 Deletes a customer profile from a business. This operation also unlinks any associated cards on file.
 
-As a best practice, you should include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control. The value must be set to the current version of the customer profile.
+As a best practice, you should include the `version` field in the request to enable [optimistic concurrency](../../https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control. The value must be set to the current version of the customer profile.
 
 To delete a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile.
 
@@ -213,11 +213,11 @@ def delete_customer(customer_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `customer_id` | `String` | Template, Required | The ID of the customer to delete. |
-| `version` | `Long` | Query, Optional | The current version of the customer profile.<br><br>As a best practice, you should include this parameter to enable [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control.  For more information, see [Delete a customer profile](https://developer.squareup.com/docs/customers-api/use-the-api/keep-records#delete-customer-profile). |
+| `version` | `Long` | Query, Optional | The current version of the customer profile.<br><br>As a best practice, you should include this parameter to enable [optimistic concurrency](../../https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.  For more information, see [Delete a customer profile](../../https://developer.squareup.com/docs/customers-api/use-the-api/keep-records#delete-customer-profile). |
 
 ## Response Type
 
-[`Delete Customer Response Hash`](/doc/models/delete-customer-response.md)
+[`Delete Customer Response Hash`](../../doc/models/delete-customer-response.md)
 
 ## Example Usage
 
@@ -251,7 +251,7 @@ def retrieve_customer(customer_id:)
 
 ## Response Type
 
-[`Retrieve Customer Response Hash`](/doc/models/retrieve-customer-response.md)
+[`Retrieve Customer Response Hash`](../../doc/models/retrieve-customer-response.md)
 
 ## Example Usage
 
@@ -272,11 +272,11 @@ end
 
 Updates a customer profile. To change an attribute, specify the new value. To remove an attribute, specify the value as an empty string or empty object.
 
-As a best practice, you should include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control. The value must be set to the current version of the customer profile.
+As a best practice, you should include the `version` field in the request to enable [optimistic concurrency](../../https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control. The value must be set to the current version of the customer profile.
 
 To update a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile.
 
-You cannot use this endpoint to change cards on file. To make changes, use the [Cards API](/doc/api/cards.md) or [Gift Cards API](/doc/api/gift-cards.md).
+You cannot use this endpoint to change cards on file. To make changes, use the [Cards API](../../doc/api/cards.md) or [Gift Cards API](../../doc/api/gift-cards.md).
 
 ```ruby
 def update_customer(customer_id:,
@@ -288,11 +288,11 @@ def update_customer(customer_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `customer_id` | `String` | Template, Required | The ID of the customer to update. |
-| `body` | [`Update Customer Request Hash`](/doc/models/update-customer-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Update Customer Request Hash`](../../doc/models/update-customer-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Update Customer Response Hash`](/doc/models/update-customer-response.md)
+[`Update Customer Response Hash`](../../doc/models/update-customer-response.md)
 
 ## Example Usage
 
@@ -338,11 +338,11 @@ def create_customer_card(customer_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `customer_id` | `String` | Template, Required | The Square ID of the customer profile the card is linked to. |
-| `body` | [`Create Customer Card Request Hash`](/doc/models/create-customer-card-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`Create Customer Card Request Hash`](../../doc/models/create-customer-card-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
-[`Create Customer Card Response Hash`](/doc/models/create-customer-card-response.md)
+[`Create Customer Card Response Hash`](../../doc/models/create-customer-card-response.md)
 
 ## Example Usage
 
@@ -392,7 +392,7 @@ def delete_customer_card(customer_id:,
 
 ## Response Type
 
-[`Delete Customer Card Response Hash`](/doc/models/delete-customer-card-response.md)
+[`Delete Customer Card Response Hash`](../../doc/models/delete-customer-card-response.md)
 
 ## Example Usage
 
@@ -431,7 +431,7 @@ def remove_group_from_customer(customer_id:,
 
 ## Response Type
 
-[`Remove Group From Customer Response Hash`](/doc/models/remove-group-from-customer-response.md)
+[`Remove Group From Customer Response Hash`](../../doc/models/remove-group-from-customer-response.md)
 
 ## Example Usage
 
@@ -470,7 +470,7 @@ def add_group_to_customer(customer_id:,
 
 ## Response Type
 
-[`Add Group to Customer Response Hash`](/doc/models/add-group-to-customer-response.md)
+[`Add Group to Customer Response Hash`](../../doc/models/add-group-to-customer-response.md)
 
 ## Example Usage
 

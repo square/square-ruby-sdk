@@ -1,7 +1,7 @@
 
 # Get Payment Response
 
-Defines the response returned by [GetPayment](/doc/api/payments.md#get-payment).
+Defines the response returned by [GetPayment](../../doc/api/payments.md#get-payment).
 
 ## Structure
 
@@ -11,8 +11,8 @@ Defines the response returned by [GetPayment](/doc/api/payments.md#get-payment).
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](/doc/models/error.md) | Optional | Information about errors encountered during the request. |
-| `payment` | [`Payment Hash`](/doc/models/payment.md) | Optional | Represents a payment processed by the Square API. |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
+| `payment` | [`Payment Hash`](../../doc/models/payment.md) | Optional | Represents a payment processed by the Square API. |
 
 ## Example (as JSON)
 

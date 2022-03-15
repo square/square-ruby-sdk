@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `items` | [`Array<V1 Order Hash>`](/doc/models/v1-order.md) | Optional | - |
+| `items` | [`Array<V1 Order Hash>`](../../doc/models/v1-order.md) | Optional | - |
 
 ## Example (as JSON)
 
