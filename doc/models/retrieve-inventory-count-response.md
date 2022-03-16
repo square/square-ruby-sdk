@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 | `counts` | [`Array<Inventory Count Hash>`](../../doc/models/inventory-count.md) | Optional | The current calculated inventory counts for the requested object and<br>locations. |
-| `cursor` | `String` | Optional | The pagination cursor to be used in a subsequent request. If unset,<br>this is the final response.<br><br>See the [Pagination](../../https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information. |
+| `cursor` | `String` | Optional | The pagination cursor to be used in a subsequent request. If unset,<br>this is the final response.<br><br>See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information. |
 
 ## Example (as JSON)
 

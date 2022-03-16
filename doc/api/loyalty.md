@@ -309,7 +309,7 @@ end
 **This endpoint is deprecated.**
 
 Returns a list of loyalty programs in the seller's account.
-Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](../../https://developer.squareup.com/docs/loyalty/overview).
+Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
 
 Replaced with [RetrieveLoyaltyProgram](../../doc/api/loyalty.md#retrieve-loyalty-program) when used with the keyword `main`.
 
@@ -338,7 +338,7 @@ end
 
 Retrieves the loyalty program in a seller's account, specified by the program ID or the keyword `main`.
 
-Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](../../https://developer.squareup.com/docs/loyalty/overview).
+Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
 
 ```ruby
 def retrieve_loyalty_program(program_id:)

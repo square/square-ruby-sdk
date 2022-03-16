@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `order_id` | `String` | Optional | The order's unique ID. |
-| `version` | `Integer` | Optional | The version number, which is incremented each time an update is committed to the order.<br>Orders that were not created through the API do not include a version number and<br>therefore cannot be updated.<br><br>[Read more about working with versions.](../../https://developer.squareup.com/docs/orders-api/manage-orders#update-orders) |
+| `version` | `Integer` | Optional | The version number, which is incremented each time an update is committed to the order.<br>Orders that were not created through the API do not include a version number and<br>therefore cannot be updated.<br><br>[Read more about working with versions.](https://developer.squareup.com/docs/orders-api/manage-orders#update-orders) |
 | `location_id` | `String` | Optional | The ID of the seller location that this order is associated with. |
 | `state` | [`String (Order State)`](../../doc/models/order-state.md) | Optional | The state of the order. |
 | `created_at` | `String` | Optional | The timestamp for when the order was created, in RFC 3339 format. |

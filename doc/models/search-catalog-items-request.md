@@ -13,7 +13,7 @@ Defines the request body for the [SearchCatalogItems](../../doc/api/catalog.md#s
 |  --- | --- | --- | --- |
 | `text_filter` | `String` | Optional | The text filter expression to return items or item variations containing specified text in<br>the `name`, `description`, or `abbreviation` attribute value of an item, or in<br>the `name`, `sku`, or `upc` attribute value of an item variation. |
 | `category_ids` | `Array<String>` | Optional | The category id query expression to return items containing the specified category IDs. |
-| `stock_levels` | [`Array<String (Search Catalog Items Request Stock Level)>`](../../doc/models/search-catalog-items-request-stock-level.md) | Optional | The stock-level query expression to return item variations with the specified stock levels.<br>See [SearchCatalogItemsRequestStockLevel](../../#type-searchcatalogitemsrequeststocklevel) for possible values |
+| `stock_levels` | [`Array<String (Search Catalog Items Request Stock Level)>`](../../doc/models/search-catalog-items-request-stock-level.md) | Optional | The stock-level query expression to return item variations with the specified stock levels.<br>See [SearchCatalogItemsRequestStockLevel](#type-searchcatalogitemsrequeststocklevel) for possible values |
 | `enabled_location_ids` | `Array<String>` | Optional | The enabled-location query expression to return items and item variations having specified enabled locations. |
 | `cursor` | `String` | Optional | The pagination token, returned in the previous response, used to fetch the next batch of pending results. |
 | `limit` | `Integer` | Optional | The maximum number of results to return per page. The default value is 100.<br>**Constraints**: `<= 100` |

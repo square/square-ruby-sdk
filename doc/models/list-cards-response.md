@@ -17,7 +17,7 @@ present.
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
 | `cards` | [`Array<Card Hash>`](../../doc/models/card.md) | Optional | The requested list of `Card`s. |
-| `cursor` | `String` | Optional | The pagination cursor to be used in a subsequent request. If empty,<br>this is the final response.<br><br>See [Pagination](../../https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
+| `cursor` | `String` | Optional | The pagination cursor to be used in a subsequent request. If empty,<br>this is the final response.<br><br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
 
 ## Example (as JSON)
 
