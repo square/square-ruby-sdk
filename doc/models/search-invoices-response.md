@@ -12,7 +12,7 @@ Describes a `SearchInvoices` response.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `invoices` | [`Array<Invoice Hash>`](../../doc/models/invoice.md) | Optional | The list of invoices returned by the search. |
-| `cursor` | `String` | Optional | When a response is truncated, it includes a cursor that you can use in a<br>subsequent request to fetch the next set of invoices. If empty, this is the final<br>response.<br>For more information, see [Pagination](../../https://developer.squareup.com/docs/working-with-apis/pagination). |
+| `cursor` | `String` | Optional | When a response is truncated, it includes a cursor that you can use in a<br>subsequent request to fetch the next set of invoices. If empty, this is the final<br>response.<br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
 | `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
 
 ## Example (as JSON)

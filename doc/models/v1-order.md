@@ -17,7 +17,7 @@ V1Order
 | `recipient_name` | `String` | Optional | The name of the order's buyer. |
 | `recipient_phone_number` | `String` | Optional | The phone number to use for the order's delivery. |
 | `state` | [`String (V1 Order State)`](../../doc/models/v1-order-state.md) | Optional | - |
-| `shipping_address` | [`Address Hash`](../../doc/models/address.md) | Optional | Represents a postal address in a country.<br>For more information, see [Working with Addresses](../../https://developer.squareup.com/docs/build-basics/working-with-addresses). |
+| `shipping_address` | [`Address Hash`](../../doc/models/address.md) | Optional | Represents a postal address in a country.<br>For more information, see [Working with Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses). |
 | `subtotal_money` | [`V1 Money Hash`](../../doc/models/v1-money.md) | Optional | - |
 | `total_shipping_money` | [`V1 Money Hash`](../../doc/models/v1-money.md) | Optional | - |
 | `total_tax_money` | [`V1 Money Hash`](../../doc/models/v1-money.md) | Optional | - |
