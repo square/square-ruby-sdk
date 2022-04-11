@@ -1,5 +1,6 @@
 require 'faraday/http_cache'
-require 'faraday_middleware'
+require 'faraday/follow_redirects'
+require 'faraday/gzip'
 
 module Square
   # An implementation of HttpClient.
@@ -27,8 +28,8 @@ module Square
                           cache: false, verify: true)
       Faraday.new do |faraday|
         faraday.use Faraday::HttpCache, serializer: Marshal if cache
-        faraday.use FaradayMiddleware::FollowRedirects
-        faraday.use :gzip
+        faraday.use Faraday::FollowRedirects::Middleware
+        faraday.request :gzip
         faraday.request :multipart
         faraday.request :url_encoded
         faraday.ssl[:ca_file] = Certifi.where
