@@ -28,72 +28,91 @@ module Square
     # Get a GET HttpRequest object.
     # @param [String] The URL to send the request to.
     # @param [Hash, Optional] The headers for the HTTP Request.
+    # @param [Hash, Optional] The context for the HTTP Request.
     def get(query_url,
-            headers: {})
+            headers: {},
+            context: {})
       HttpRequest.new(HttpMethodEnum::GET,
                       query_url,
-                      headers: headers)
+                      headers: headers,
+                      context: context)
     end
 
     # Get a HEAD HttpRequest object.
     # @param [String] The URL to send the request to.
     # @param [Hash, Optional] The headers for the HTTP Request.
+    # @param [Hash, Optional] The context for the HTTP Request.
     def head(query_url,
-             headers: {})
+             headers: {},
+             context: {})
       HttpRequest.new(HttpMethodEnum::HEAD,
                       query_url,
-                      headers: headers)
+                      headers: headers,
+                      context: context)
     end
 
     # Get a POST HttpRequest object.
     # @param [String] The URL to send the request to.
     # @param [Hash, Optional] The headers for the HTTP Request.
     # @param [Hash, Optional] The parameters for the HTTP Request.
+    # @param [Hash, Optional] The context for the HTTP Request.
     def post(query_url,
              headers: {},
-             parameters: {})
+             parameters: {},
+             context: {})
       HttpRequest.new(HttpMethodEnum::POST,
                       query_url,
                       headers: headers,
-                      parameters: parameters)
+                      parameters: parameters,
+                      context: context)
     end
 
     # Get a PUT HttpRequest object.
     # @param [String] The URL to send the request to.
     # @param [Hash, Optional] The headers for the HTTP Request.
     # @param [Hash, Optional] The parameters for the HTTP Request.
+    # @param [Hash, Optional] The context for the HTTP Request.
     def put(query_url,
             headers: {},
-            parameters: {})
+            parameters: {},
+            context: {})
       HttpRequest.new(HttpMethodEnum::PUT,
                       query_url,
                       headers: headers,
-                      parameters: parameters)
+                      parameters: parameters,
+                      context: context)
     end
 
     # Get a PATCH HttpRequest object.
     # @param [String] The URL to send the request to.
     # @param [Hash, Optional] The headers for the HTTP Request.
     # @param [Hash, Optional] The parameters for the HTTP Request.
+    # @param [Hash, Optional] The context for the HTTP Request.
     def patch(query_url,
               headers: {},
-              parameters: {})
+              parameters: {},
+              context: {})
       HttpRequest.new(HttpMethodEnum::PATCH,
                       query_url,
                       headers: headers,
-                      parameters: parameters)
+                      parameters: parameters,
+                      context: context)
     end
 
     # Get a DELETE HttpRequest object.
     # @param [String] The URL to send the request to.
     # @param [Hash, Optional] The headers for the HTTP Request.
+    # @param [Hash, Optional] The parameters for the HTTP Request.
+    # @param [Hash, Optional] The context for the HTTP Request.
     def delete(query_url,
                headers: {},
-               parameters: {})
+               parameters: {},
+               context: {})
       HttpRequest.new(HttpMethodEnum::DELETE,
                       query_url,
                       headers: headers,
-                      parameters: parameters)
+                      parameters: parameters,
+                      context: context)
     end
   end
 end

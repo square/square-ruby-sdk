@@ -2,21 +2,25 @@ module Square
   # Represents a single Http Request.
   class HttpRequest
     attr_accessor :http_method, :query_url, :headers,
-                  :parameters, :username, :password
+                  :parameters, :username, :password,
+                  :context
 
     # The constructor.
     # @param [HttpMethodEnum] The HTTP method.
     # @param [String] The URL to send the request to.
     # @param [Hash, Optional] The headers for the HTTP Request.
     # @param [Hash, Optional] The parameters for the HTTP Request.
+    # @param [Hash, Optional] The context for the HTTP Request.
     def initialize(http_method,
                    query_url,
                    headers: {},
-                   parameters: {})
+                   parameters: {},
+                   context: {})
       @http_method = http_method
       @query_url = query_url
       @headers = headers
       @parameters = parameters
+      @context = context
     end
 
     # Add a header to the HttpRequest.

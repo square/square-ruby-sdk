@@ -41,8 +41,10 @@ module Square
       )
     end
 
-    # Retrieves a filtered list of Terminal checkout requests created by the
-    # account making the request.
+    # Returns a filtered list of Terminal checkout requests created by the
+    # application making the request. Only Terminal checkout requests created
+    # for the merchant scoped to the OAuth token are returned. Terminal checkout
+    # requests are available for 30 days.
     # @param [SearchTerminalCheckoutsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -76,7 +78,8 @@ module Square
       )
     end
 
-    # Retrieves a Terminal checkout request by `checkout_id`.
+    # Retrieves a Terminal checkout request by `checkout_id`. Terminal checkout
+    # requests are available for 30 days.
     # @param [String] checkout_id Required parameter: The unique ID for the
     # desired `TerminalCheckout`.
     # @return [GetTerminalCheckoutResponse Hash] response from the API call
@@ -148,7 +151,10 @@ module Square
     end
 
     # Creates a request to refund an Interac payment completed on a Square
-    # Terminal.
+    # Terminal. Refunds for Interac payments on a Square Terminal are supported
+    # only for Interac debit cards in Canada. Other refunds for Terminal
+    # payments should use the Refunds API. For more information, see [Refunds
+    # API]($e/Refunds).
     # @param [CreateTerminalRefundRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -183,7 +189,8 @@ module Square
     end
 
     # Retrieves a filtered list of Interac Terminal refund requests created by
-    # the seller making the request.
+    # the seller making the request. Terminal refund requests are available for
+    # 30 days.
     # @param [SearchTerminalRefundsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -217,7 +224,8 @@ module Square
       )
     end
 
-    # Retrieves an Interac Terminal refund object by ID.
+    # Retrieves an Interac Terminal refund object by ID. Terminal refund objects
+    # are available for 30 days.
     # @param [String] terminal_refund_id Required parameter: The unique ID for
     # the desired `TerminalRefund`.
     # @return [GetTerminalRefundResponse Hash] response from the API call

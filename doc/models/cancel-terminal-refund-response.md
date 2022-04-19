@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
-| `refund` | [`Terminal Refund Hash`](../../doc/models/terminal-refund.md) | Optional | - |
+| `refund` | [`Terminal Refund Hash`](../../doc/models/terminal-refund.md) | Optional | Represents a payment refund processed by the Square Terminal. Only supports Interac (Canadian debit network) payment refunds. |
 
 ## Example (as JSON)
 

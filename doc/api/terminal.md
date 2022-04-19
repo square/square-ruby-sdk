@@ -54,6 +54,7 @@ body[:checkout][:note] = 'A brief note'
 body[:checkout][:device_options] = {}
 body[:checkout][:device_options][:device_id] = 'dbb5d83a-7838-11ea-bc55-0242ac130003'
 body[:checkout][:device_options][:skip_receipt_screen] = false
+body[:checkout][:device_options][:collect_signature] = false
 body[:checkout][:device_options][:tip_settings] = {}
 body[:checkout][:device_options][:tip_settings][:allow_tipping] = false
 body[:checkout][:device_options][:tip_settings][:separate_tip_screen] = false
@@ -75,7 +76,7 @@ end
 
 # Search Terminal Checkouts
 
-Retrieves a filtered list of Terminal checkout requests created by the account making the request.
+Returns a filtered list of Terminal checkout requests created by the application making the request. Only Terminal checkout requests created for the merchant scoped to the OAuth token are returned. Terminal checkout requests are available for 30 days.
 
 ```ruby
 def search_terminal_checkouts(body:)
@@ -119,7 +120,7 @@ end
 
 # Get Terminal Checkout
 
-Retrieves a Terminal checkout request by `checkout_id`.
+Retrieves a Terminal checkout request by `checkout_id`. Terminal checkout requests are available for 30 days.
 
 ```ruby
 def get_terminal_checkout(checkout_id:)
@@ -185,7 +186,7 @@ end
 
 # Create Terminal Refund
 
-Creates a request to refund an Interac payment completed on a Square Terminal.
+Creates a request to refund an Interac payment completed on a Square Terminal. Refunds for Interac payments on a Square Terminal are supported only for Interac debit cards in Canada. Other refunds for Terminal payments should use the Refunds API. For more information, see [Refunds API](../../doc/api/refunds.md).
 
 ```ruby
 def create_terminal_refund(body:)
@@ -216,6 +217,8 @@ body[:refund][:amount_money][:amount] = 111
 body[:refund][:amount_money][:currency] = 'CAD'
 body[:refund][:reason] = 'Returning items'
 body[:refund][:device_id] = 'f72dfb8e-4d65-4e56-aade-ec3fb8d33291'
+body[:refund][:deadline_duration] = 'deadline_duration6'
+body[:refund][:status] = 'status6'
 
 result = terminal_api.create_terminal_refund(body: body)
 
@@ -229,7 +232,7 @@ end
 
 # Search Terminal Refunds
 
-Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request.
+Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request. Terminal refund requests are available for 30 days.
 
 ```ruby
 def search_terminal_refunds(body:)
@@ -273,7 +276,7 @@ end
 
 # Get Terminal Refund
 
-Retrieves an Interac Terminal refund object by ID.
+Retrieves an Interac Terminal refund object by ID. Terminal refund objects are available for 30 days.
 
 ```ruby
 def get_terminal_refund(terminal_refund_id:)

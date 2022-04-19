@@ -260,9 +260,6 @@ module Square
     end
 
     # Lists all events for a specific subscription.
-    # In the current implementation, only `START_SUBSCRIPTION` and
-    # `STOP_SUBSCRIPTION` (when the subscription was canceled) events are
-    # returned.
     # @param [String] subscription_id Required parameter: The ID of the
     # subscription to retrieve the events for.
     # @param [String] cursor Optional parameter: When the total number of
