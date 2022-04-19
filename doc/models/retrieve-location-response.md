@@ -12,8 +12,8 @@ endpoint returns in a response.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
-| `location` | [`Location Hash`](../../doc/models/location.md) | Optional | Represents one of a business's [locations](https://developer.squareup.com/docs/locations-api). |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
+| `location` | [`Location Hash`](../../doc/models/location.md) | Optional | Represents one of a business' [locations](https://developer.squareup.com/docs/locations-api). |
 
 ## Example (as JSON)
 

@@ -4,7 +4,7 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '18.1.0.20220316'
+      '19.0.0.20220420'
     end
 
     def square_version
@@ -177,6 +177,12 @@ module Square
       @payments ||= PaymentsApi.new config
     end
 
+    # Access to payouts controller.
+    # @return [PayoutsApi] Returns the controller instance.
+    def payouts
+      @payouts ||= PayoutsApi.new config
+    end
+
     # Access to refunds controller.
     # @return [RefundsApi] Returns the controller instance.
     def refunds
@@ -224,7 +230,7 @@ module Square
                    retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
                    retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2022-03-16', access_token: '',
+                   square_version: '2022-04-20', access_token: '',
                    user_agent_detail: '', additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(connection: connection, timeout: timeout,

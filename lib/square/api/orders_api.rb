@@ -311,8 +311,8 @@ module Square
     # the
     # `payment_ids` is canceled.
     # - Be approved with [delayed
-    # capture](https://developer.squareup.com/docs/payments-api/take-payments#de
-    # layed-capture).
+    # capture](https://developer.squareup.com/docs/payments-api/take-payments/ca
+    # rd-payments/delayed-capture).
     # Using a delayed capture payment with `PayOrder` completes the approved
     # payment.
     # @param [String] order_id Required parameter: The ID of the order being
