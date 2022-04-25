@@ -12,7 +12,7 @@ Use this library to integrate Square payments into your app and grow your busine
 
 Use of the Square Ruby SDK requires:
 
-* Ruby 2.6 through 3.1
+* Ruby 2.7 through 3.1
 
 ## Installation
 
