@@ -74,6 +74,9 @@ module Square
     # `APPOINTMENTS_WRITE` for the OAuth scope.
     # To call this endpoint with seller-level permissions, set
     # `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
+    # For calls to this endpoint with seller-level permissions to succeed, the
+    # seller must have subscribed to *Appointments Plus*
+    # or *Appointments Premium*.
     # @param [CreateBookingRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -303,6 +306,9 @@ module Square
     # `APPOINTMENTS_WRITE` for the OAuth scope.
     # To call this endpoint with seller-level permissions, set
     # `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
+    # For calls to this endpoint with seller-level permissions to succeed, the
+    # seller must have subscribed to *Appointments Plus*
+    # or *Appointments Premium*.
     # @param [String] booking_id Required parameter: The ID of the
     # [Booking]($m/Booking) object representing the to-be-updated booking.
     # @param [UpdateBookingRequest] body Required parameter: An object
@@ -348,6 +354,9 @@ module Square
     # `APPOINTMENTS_WRITE` for the OAuth scope.
     # To call this endpoint with seller-level permissions, set
     # `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
+    # For calls to this endpoint with seller-level permissions to succeed, the
+    # seller must have subscribed to *Appointments Plus*
+    # or *Appointments Premium*.
     # @param [String] booking_id Required parameter: The ID of the
     # [Booking]($m/Booking) object representing the to-be-cancelled booking.
     # @param [CancelBookingRequest] body Required parameter: An object

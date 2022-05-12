@@ -12,7 +12,7 @@ Use this library to integrate Square payments into your app and grow your busine
 
 Use of the Square Ruby SDK requires:
 
-* Ruby 2.7 through 3.1
+* Ruby 2.6 through 3.1
 
 ## Installation
 
@@ -82,6 +82,7 @@ rake
 
 ### Customers
 * [Customers]
+* [Customer Custom Attributes]
 * [Customer Groups]
 * [Customer Segments]
 
@@ -100,6 +101,7 @@ rake
 * [Locations]
 * [Devices]
 * [Cash Drawers]
+* [Vendors]
 
 ### Team
 * [Team]
@@ -135,6 +137,7 @@ rake
 [Terminal]: doc/api/terminal.md
 [Team]: doc/api/team.md
 [Cash Drawers]: doc/api/cash-drawers.md
+[Vendors]: doc/api/vendors.md
 [Customer Groups]: doc/api/customer-groups.md
 [Customer Segments]: doc/api/customer-segments.md
 [Bank Accounts]: doc/api/bank-accounts.md
@@ -142,6 +145,7 @@ rake
 [Checkout]: doc/api/checkout.md
 [Catalog]: doc/api/catalog.md
 [Customers]: doc/api/customers.md
+[Customer Custom Attributes]: doc/api/customer-custom-attributes.md
 [Employees]: doc/api/employees.md
 [Inventory]: doc/api/inventory.md
 [Labor]: doc/api/labor.md

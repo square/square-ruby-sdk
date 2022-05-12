@@ -48,13 +48,8 @@ def list_cash_drawer_shifts(location_id:,
 
 ```ruby
 location_id = 'location_id4'
-sort_order = 'DESC'
-begin_time = 'begin_time2'
-end_time = 'end_time2'
-limit = 172
-cursor = 'cursor6'
 
-result = cash_drawers_api.list_cash_drawer_shifts(location_id: location_id, sort_order: sort_order, begin_time: begin_time, end_time: end_time, limit: limit, cursor: cursor)
+result = cash_drawers_api.list_cash_drawer_shifts(location_id: location_id, )
 
 if result.success?
   puts result.data
@@ -130,10 +125,8 @@ def list_cash_drawer_shift_events(location_id:,
 ```ruby
 location_id = 'location_id4'
 shift_id = 'shift_id0'
-limit = 172
-cursor = 'cursor6'
 
-result = cash_drawers_api.list_cash_drawer_shift_events(location_id: location_id, shift_id: shift_id, limit: limit, cursor: cursor)
+result = cash_drawers_api.list_cash_drawer_shift_events(location_id: location_id, shift_id: shift_id, )
 
 if result.success?
   puts result.data

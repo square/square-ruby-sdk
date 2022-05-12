@@ -46,13 +46,9 @@ def list_cards(cursor: nil,
 ## Example Usage
 
 ```ruby
-cursor = 'cursor6'
-customer_id = 'customer_id8'
 include_disabled = false
-reference_id = 'reference_id2'
-sort_order = 'DESC'
 
-result = cards_api.list_cards(cursor: cursor, customer_id: customer_id, include_disabled: include_disabled, reference_id: reference_id, sort_order: sort_order)
+result = cards_api.list_cards(include_disabled: include_disabled, )
 
 if result.success?
   puts result.data
@@ -86,20 +82,12 @@ def create_card(body:)
 body = {}
 body[:idempotency_key] = '4935a656-a929-4792-b97c-8848be85c27c'
 body[:source_id] = 'cnon:uIbfJXhXETSP197M3GB'
-body[:verification_token] = 'verification_token0'
 body[:card] = {}
-body[:card][:id] = 'id0'
-body[:card][:card_brand] = 'INTERAC'
-body[:card][:last_4] = 'last_42'
-body[:card][:exp_month] = 236
-body[:card][:exp_year] = 60
 body[:card][:cardholder_name] = 'Amelia Earhart'
 body[:card][:billing_address] = {}
 body[:card][:billing_address][:address_line_1] = '500 Electric Ave'
 body[:card][:billing_address][:address_line_2] = 'Suite 600'
-body[:card][:billing_address][:address_line_3] = 'address_line_34'
 body[:card][:billing_address][:locality] = 'New York'
-body[:card][:billing_address][:sublocality] = 'sublocality8'
 body[:card][:billing_address][:administrative_district_level_1] = 'NY'
 body[:card][:billing_address][:postal_code] = '10003'
 body[:card][:billing_address][:country] = 'US'

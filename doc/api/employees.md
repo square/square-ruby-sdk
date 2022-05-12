@@ -43,12 +43,7 @@ def list_employees(location_id: nil,
 ## Example Usage
 
 ```ruby
-location_id = 'location_id4'
-status = 'ACTIVE'
-limit = 172
-cursor = 'cursor6'
-
-result = employees_api.list_employees(location_id: location_id, status: status, limit: limit, cursor: cursor)
+result = employees_api.list_employees()
 
 if result.success?
   puts result.data
