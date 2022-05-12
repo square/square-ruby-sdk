@@ -53,11 +53,7 @@ def list_break_types(location_id: nil,
 ## Example Usage
 
 ```ruby
-location_id = 'location_id4'
-limit = 172
-cursor = 'cursor6'
-
-result = labor_api.list_break_types(location_id: location_id, limit: limit, cursor: cursor)
+result = labor_api.list_break_types()
 
 if result.success?
   puts result.data
@@ -104,14 +100,10 @@ def create_break_type(body:)
 body = {}
 body[:idempotency_key] = 'PAD3NG5KSN2GL'
 body[:break_type] = {}
-body[:break_type][:id] = 'id2'
 body[:break_type][:location_id] = 'CGJN03P1D08GF'
 body[:break_type][:break_name] = 'Lunch Break'
 body[:break_type][:expected_duration] = 'PT30M'
 body[:break_type][:is_paid] = true
-body[:break_type][:version] = 124
-body[:break_type][:created_at] = 'created_at0'
-body[:break_type][:updated_at] = 'updated_at8'
 
 result = labor_api.create_break_type(body: body)
 
@@ -217,14 +209,11 @@ def update_break_type(id:,
 id = 'id0'
 body = {}
 body[:break_type] = {}
-body[:break_type][:id] = 'id2'
 body[:break_type][:location_id] = '26M7H24AZ9N6R'
 body[:break_type][:break_name] = 'Lunch'
 body[:break_type][:expected_duration] = 'PT50M'
 body[:break_type][:is_paid] = true
 body[:break_type][:version] = 1
-body[:break_type][:created_at] = 'created_at0'
-body[:break_type][:updated_at] = 'updated_at8'
 
 result = labor_api.update_break_type(id: id, body: body)
 
@@ -263,11 +252,7 @@ def list_employee_wages(employee_id: nil,
 ## Example Usage
 
 ```ruby
-employee_id = 'employee_id0'
-limit = 172
-cursor = 'cursor6'
-
-result = labor_api.list_employee_wages(employee_id: employee_id, limit: limit, cursor: cursor)
+result = labor_api.list_employee_wages()
 
 if result.success?
   puts result.data
@@ -354,10 +339,7 @@ def create_shift(body:)
 body = {}
 body[:idempotency_key] = 'HIDSNG5KS478L'
 body[:shift] = {}
-body[:shift][:id] = 'id8'
-body[:shift][:employee_id] = 'employee_id2'
 body[:shift][:location_id] = 'PAA1RJZZKXBFG'
-body[:shift][:timezone] = 'timezone2'
 body[:shift][:start_at] = '2019-01-25T03:11:00-05:00'
 body[:shift][:end_at] = '2019-01-25T13:11:00-05:00'
 body[:shift][:wage] = {}
@@ -369,7 +351,6 @@ body[:shift][:breaks] = []
 
 
 body[:shift][:breaks][0] = {}
-body[:shift][:breaks][0][:id] = 'id4'
 body[:shift][:breaks][0][:start_at] = '2019-01-25T06:11:00-05:00'
 body[:shift][:breaks][0][:end_at] = '2019-01-25T06:16:00-05:00'
 body[:shift][:breaks][0][:break_type_id] = 'REGS1EQR1TPZ5'
@@ -426,29 +407,6 @@ def search_shifts(body:)
 
 ```ruby
 body = {}
-body[:query] = {}
-body[:query][:filter] = {}
-body[:query][:filter][:location_ids] = ['location_ids2']
-body[:query][:filter][:employee_ids] = ['employee_ids7']
-body[:query][:filter][:status] = 'OPEN'
-body[:query][:filter][:start] = {}
-body[:query][:filter][:start][:start_at] = 'start_at8'
-body[:query][:filter][:start][:end_at] = 'end_at4'
-body[:query][:filter][:'end'] = {}
-body[:query][:filter][:'end'][:start_at] = 'start_at2'
-body[:query][:filter][:'end'][:end_at] = 'end_at0'
-body[:query][:filter][:workday] = {}
-body[:query][:filter][:workday][:date_range] = {}
-body[:query][:filter][:workday][:date_range][:start_date] = 'start_date8'
-body[:query][:filter][:workday][:date_range][:end_date] = 'end_date4'
-body[:query][:filter][:workday][:match_shifts_by] = 'START_AT'
-body[:query][:filter][:workday][:default_timezone] = 'default_timezone8'
-body[:query][:filter][:team_member_ids] = ['team_member_ids9', 'team_member_ids0']
-body[:query][:sort] = {}
-body[:query][:sort][:field] = 'CREATED_AT'
-body[:query][:sort][:order] = 'DESC'
-body[:limit] = 164
-body[:cursor] = 'cursor0'
 
 result = labor_api.search_shifts(body: body)
 
@@ -558,10 +516,7 @@ def update_shift(id:,
 id = 'id0'
 body = {}
 body[:shift] = {}
-body[:shift][:id] = 'id8'
-body[:shift][:employee_id] = 'employee_id2'
 body[:shift][:location_id] = 'PAA1RJZZKXBFG'
-body[:shift][:timezone] = 'timezone2'
 body[:shift][:start_at] = '2019-01-25T03:11:00-05:00'
 body[:shift][:end_at] = '2019-01-25T13:11:00-05:00'
 body[:shift][:wage] = {}
@@ -619,11 +574,7 @@ def list_team_member_wages(team_member_id: nil,
 ## Example Usage
 
 ```ruby
-team_member_id = 'team_member_id0'
-limit = 172
-cursor = 'cursor6'
-
-result = labor_api.list_team_member_wages(team_member_id: team_member_id, limit: limit, cursor: cursor)
+result = labor_api.list_team_member_wages()
 
 if result.success?
   puts result.data
@@ -689,10 +640,7 @@ def list_workweek_configs(limit: nil,
 ## Example Usage
 
 ```ruby
-limit = 172
-cursor = 'cursor6'
-
-result = labor_api.list_workweek_configs(limit: limit, cursor: cursor)
+result = labor_api.list_workweek_configs()
 
 if result.success?
   puts result.data
@@ -728,12 +676,9 @@ def update_workweek_config(id:,
 id = 'id0'
 body = {}
 body[:workweek_config] = {}
-body[:workweek_config][:id] = 'id4'
 body[:workweek_config][:start_of_week] = 'MON'
 body[:workweek_config][:start_of_day_local_time] = '10:00'
 body[:workweek_config][:version] = 10
-body[:workweek_config][:created_at] = 'created_at2'
-body[:workweek_config][:updated_at] = 'updated_at0'
 
 result = labor_api.update_workweek_config(id: id, body: body)
 

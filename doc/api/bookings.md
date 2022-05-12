@@ -55,14 +55,7 @@ def list_bookings(limit: nil,
 ## Example Usage
 
 ```ruby
-limit = 172
-cursor = 'cursor6'
-team_member_id = 'team_member_id0'
-location_id = 'location_id4'
-start_at_min = 'start_at_min8'
-start_at_max = 'start_at_max8'
-
-result = bookings_api.list_bookings(limit: limit, cursor: cursor, team_member_id: team_member_id, location_id: location_id, start_at_min: start_at_min, start_at_max: start_at_max)
+result = bookings_api.list_bookings()
 
 if result.success?
   puts result.data
@@ -78,6 +71,9 @@ Creates a booking.
 
 To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.
 To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
+
+For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*
+or *Appointments Premium*.
 
 ```ruby
 def create_booking(body:)
@@ -97,13 +93,7 @@ def create_booking(body:)
 
 ```ruby
 body = {}
-body[:idempotency_key] = 'idempotency_key2'
 body[:booking] = {}
-body[:booking][:id] = 'id8'
-body[:booking][:version] = 148
-body[:booking][:status] = 'ACCEPTED'
-body[:booking][:created_at] = 'created_at6'
-body[:booking][:updated_at] = 'updated_at4'
 
 result = bookings_api.create_booking(body: body)
 
@@ -143,27 +133,6 @@ body = {}
 body[:query] = {}
 body[:query][:filter] = {}
 body[:query][:filter][:start_at_range] = {}
-body[:query][:filter][:start_at_range][:start_at] = 'start_at8'
-body[:query][:filter][:start_at_range][:end_at] = 'end_at4'
-body[:query][:filter][:location_id] = 'location_id6'
-body[:query][:filter][:segment_filters] = []
-
-
-body[:query][:filter][:segment_filters][0] = {}
-body[:query][:filter][:segment_filters][0][:service_variation_id] = 'service_variation_id8'
-body[:query][:filter][:segment_filters][0][:team_member_id_filter] = {}
-body[:query][:filter][:segment_filters][0][:team_member_id_filter][:all] = ['all7']
-body[:query][:filter][:segment_filters][0][:team_member_id_filter][:any] = ['any0', 'any1']
-body[:query][:filter][:segment_filters][0][:team_member_id_filter][:none] = ['none5']
-
-body[:query][:filter][:segment_filters][1] = {}
-body[:query][:filter][:segment_filters][1][:service_variation_id] = 'service_variation_id7'
-body[:query][:filter][:segment_filters][1][:team_member_id_filter] = {}
-body[:query][:filter][:segment_filters][1][:team_member_id_filter][:all] = ['all6', 'all7', 'all8']
-body[:query][:filter][:segment_filters][1][:team_member_id_filter][:any] = ['any1', 'any2', 'any3']
-body[:query][:filter][:segment_filters][1][:team_member_id_filter][:none] = ['none6', 'none7']
-
-body[:query][:filter][:booking_id] = 'booking_id6'
 
 result = bookings_api.search_availability(body: body)
 
@@ -228,11 +197,8 @@ def list_team_member_booking_profiles(bookable_only: false,
 
 ```ruby
 bookable_only = false
-limit = 172
-cursor = 'cursor6'
-location_id = 'location_id4'
 
-result = bookings_api.list_team_member_booking_profiles(bookable_only: bookable_only, limit: limit, cursor: cursor, location_id: location_id)
+result = bookings_api.list_team_member_booking_profiles(bookable_only: bookable_only, )
 
 if result.success?
   puts result.data
@@ -318,6 +284,9 @@ Updates a booking.
 To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.
 To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
 
+For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*
+or *Appointments Premium*.
+
 ```ruby
 def update_booking(booking_id:,
                    body:)
@@ -339,13 +308,7 @@ def update_booking(booking_id:,
 ```ruby
 booking_id = 'booking_id4'
 body = {}
-body[:idempotency_key] = 'idempotency_key2'
 body[:booking] = {}
-body[:booking][:id] = 'id8'
-body[:booking][:version] = 148
-body[:booking][:status] = 'ACCEPTED'
-body[:booking][:created_at] = 'created_at6'
-body[:booking][:updated_at] = 'updated_at4'
 
 result = bookings_api.update_booking(booking_id: booking_id, body: body)
 
@@ -363,6 +326,9 @@ Cancels an existing booking.
 
 To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.
 To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
+
+For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*
+or *Appointments Premium*.
 
 ```ruby
 def cancel_booking(booking_id:,
@@ -385,8 +351,6 @@ def cancel_booking(booking_id:,
 ```ruby
 booking_id = 'booking_id4'
 body = {}
-body[:idempotency_key] = 'idempotency_key2'
-body[:booking_version] = 8
 
 result = bookings_api.cancel_booking(booking_id: booking_id, body: body)
 

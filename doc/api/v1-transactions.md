@@ -51,11 +51,8 @@ def list_orders(location_id:,
 
 ```ruby
 location_id = 'location_id4'
-order = 'DESC'
-limit = 172
-batch_token = 'batch_token2'
 
-result = v1_transactions_api.list_orders(location_id: location_id, order: order, limit: limit, batch_token: batch_token)
+result = v1_transactions_api.list_orders(location_id: location_id, )
 
 if result.success?
   puts result.data
@@ -134,10 +131,6 @@ location_id = 'location_id4'
 order_id = 'order_id6'
 body = {}
 body[:action] = 'REFUND'
-body[:shipped_tracking_number] = 'shipped_tracking_number6'
-body[:completed_note] = 'completed_note6'
-body[:refunded_note] = 'refunded_note0'
-body[:canceled_note] = 'canceled_note4'
 
 result = v1_transactions_api.update_order(location_id: location_id, order_id: order_id, body: body)
 
@@ -195,14 +188,9 @@ def list_payments(location_id:,
 
 ```ruby
 location_id = 'location_id4'
-order = 'DESC'
-begin_time = 'begin_time2'
-end_time = 'end_time2'
-limit = 172
-batch_token = 'batch_token2'
 include_partial = false
 
-result = v1_transactions_api.list_payments(location_id: location_id, order: order, begin_time: begin_time, end_time: end_time, limit: limit, batch_token: batch_token, include_partial: include_partial)
+result = v1_transactions_api.list_payments(location_id: location_id, include_partial: include_partial)
 
 if result.success?
   puts result.data
@@ -284,13 +272,8 @@ def list_refunds(location_id:,
 
 ```ruby
 location_id = 'location_id4'
-order = 'DESC'
-begin_time = 'begin_time2'
-end_time = 'end_time2'
-limit = 172
-batch_token = 'batch_token2'
 
-result = v1_transactions_api.list_refunds(location_id: location_id, order: order, begin_time: begin_time, end_time: end_time, limit: limit, batch_token: batch_token)
+result = v1_transactions_api.list_refunds(location_id: location_id, )
 
 if result.success?
   puts result.data
@@ -341,10 +324,6 @@ body = {}
 body[:payment_id] = 'payment_id6'
 body[:type] = 'FULL'
 body[:reason] = 'reason8'
-body[:refunded_money] = {}
-body[:refunded_money][:amount] = 222
-body[:refunded_money][:currency_code] = 'CLF'
-body[:request_idempotence_key] = 'request_idempotence_key2'
 
 result = v1_transactions_api.create_refund(location_id: location_id, body: body)
 
@@ -397,14 +376,8 @@ def list_settlements(location_id:,
 
 ```ruby
 location_id = 'location_id4'
-order = 'DESC'
-begin_time = 'begin_time2'
-end_time = 'end_time2'
-limit = 172
-status = 'SENT'
-batch_token = 'batch_token2'
 
-result = v1_transactions_api.list_settlements(location_id: location_id, order: order, begin_time: begin_time, end_time: end_time, limit: limit, status: status, batch_token: batch_token)
+result = v1_transactions_api.list_settlements(location_id: location_id, )
 
 if result.success?
   puts result.data

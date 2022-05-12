@@ -46,11 +46,7 @@ def list_disputes(cursor: nil,
 ## Example Usage
 
 ```ruby
-cursor = 'cursor6'
-states = 'INQUIRY_EVIDENCE_REQUIRED'
-location_id = 'location_id4'
-
-result = disputes_api.list_disputes(cursor: cursor, states: states, location_id: location_id)
+result = disputes_api.list_disputes()
 
 if result.success?
   puts result.data
@@ -154,9 +150,8 @@ def list_dispute_evidence(dispute_id:,
 
 ```ruby
 dispute_id = 'dispute_id2'
-cursor = 'cursor6'
 
-result = disputes_api.list_dispute_evidence(dispute_id: dispute_id, cursor: cursor)
+result = disputes_api.list_dispute_evidence(dispute_id: dispute_id, )
 
 if result.success?
   puts result.data
@@ -193,13 +188,8 @@ def create_dispute_evidence_file(dispute_id:,
 
 ```ruby
 dispute_id = 'dispute_id2'
-request = {}
-request[:idempotency_key] = 'idempotency_key2'
-request[:evidence_type] = 'REBUTTAL_EXPLANATION'
-request[:content_type] = 'content_type0'
-image_file = FileWrapper.new(File::open('dummy_file', 'rb'), content_type: 'optional-content-type')
 
-result = disputes_api.create_dispute_evidence_file(dispute_id: dispute_id, request: request, image_file: image_file)
+result = disputes_api.create_dispute_evidence_file(dispute_id: dispute_id, )
 
 if result.success?
   puts result.data

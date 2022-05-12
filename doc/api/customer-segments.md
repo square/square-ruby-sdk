@@ -37,10 +37,7 @@ def list_customer_segments(cursor: nil,
 ## Example Usage
 
 ```ruby
-cursor = 'cursor6'
-limit = 172
-
-result = customer_segments_api.list_customer_segments(cursor: cursor, limit: limit)
+result = customer_segments_api.list_customer_segments()
 
 if result.success?
   puts result.data

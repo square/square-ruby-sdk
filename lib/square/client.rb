@@ -4,7 +4,7 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '19.0.0.20220420'
+      '20.0.0.20220512'
     end
 
     def square_version
@@ -73,6 +73,12 @@ module Square
     # @return [CustomersApi] Returns the controller instance.
     def customers
       @customers ||= CustomersApi.new config
+    end
+
+    # Access to customer_custom_attributes controller.
+    # @return [CustomerCustomAttributesApi] Returns the controller instance.
+    def customer_custom_attributes
+      @customer_custom_attributes ||= CustomerCustomAttributesApi.new config
     end
 
     # Access to customer_groups controller.
@@ -230,7 +236,7 @@ module Square
                    retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
                    retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2022-04-20', access_token: '',
+                   square_version: '2022-05-12', access_token: '',
                    user_agent_detail: '', additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(connection: connection, timeout: timeout,

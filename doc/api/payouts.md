@@ -50,15 +50,7 @@ def list_payouts(location_id: nil,
 ## Example Usage
 
 ```ruby
-location_id = 'location_id4'
-status = 'PAID'
-begin_time = 'begin_time2'
-end_time = 'end_time2'
-sort_order = 'DESC'
-cursor = 'cursor6'
-limit = 172
-
-result = payouts_api.list_payouts(location_id: location_id, status: status, begin_time: begin_time, end_time: end_time, sort_order: sort_order, cursor: cursor, limit: limit)
+result = payouts_api.list_payouts()
 
 if result.success?
   puts result.data
@@ -131,11 +123,8 @@ def list_payout_entries(payout_id:,
 
 ```ruby
 payout_id = 'payout_id6'
-sort_order = 'DESC'
-cursor = 'cursor6'
-limit = 172
 
-result = payouts_api.list_payout_entries(payout_id: payout_id, sort_order: sort_order, cursor: cursor, limit: limit)
+result = payouts_api.list_payout_entries(payout_id: payout_id, )
 
 if result.success?
   puts result.data
