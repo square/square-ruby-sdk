@@ -2,6 +2,12 @@
 
 For general API and SDK changelogs, see  [Square APIs and SDKs Release Notes](https://developer.squareup.com/docs/changelog/connect).
 
+## Version 20.0.0.20220512 (2022-05-12)
+- Dropped support for Ruby versions less than 2.7
+
+## Version 19.0.0.202204020 (2022-04-20)
+- Increased range of supported Faraday versions
+
 ## Version 17.0.0.20211215 (2021-12-15)
 ### API updates
 

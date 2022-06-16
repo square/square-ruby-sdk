@@ -4,7 +4,7 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '20.0.0.20220512'
+      '20.1.0.20220616'
     end
 
     def square_version
@@ -231,16 +231,17 @@ module Square
       @vendors ||= VendorsApi.new config
     end
 
-    def initialize(connection: nil, timeout: 60, max_retries: 0,
-                   retry_interval: 1, backoff_factor: 2,
+    def initialize(connection: nil, adapter: Faraday.default_adapter,
+                   timeout: 60, max_retries: 0, retry_interval: 1,
+                   backoff_factor: 2,
                    retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
                    retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2022-05-12', access_token: '',
+                   square_version: '2022-06-16', access_token: '',
                    user_agent_detail: '', additional_headers: {}, config: nil)
       @config = if config.nil?
-                  Configuration.new(connection: connection, timeout: timeout,
-                                    max_retries: max_retries,
+                  Configuration.new(connection: connection, adapter: adapter,
+                                    timeout: timeout, max_retries: max_retries,
                                     retry_interval: retry_interval,
                                     backoff_factor: backoff_factor,
                                     retry_statuses: retry_statuses,

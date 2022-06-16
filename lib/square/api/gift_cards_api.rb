@@ -6,7 +6,8 @@ module Square
     end
 
     # Lists all gift cards. You can specify optional filters to retrieve
-    # a subset of the gift cards.
+    # a subset of the gift cards. Results are sorted by `created_at` in
+    # ascending order.
     # @param [String] type Optional parameter: If a [type]($m/GiftCardType) is
     # provided, the endpoint returns gift cards of the specified type.
     # Otherwise, the endpoint returns gift cards of all types.

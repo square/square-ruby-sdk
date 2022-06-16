@@ -5,9 +5,7 @@ module Square
       super(config, http_call_back: http_call_back)
     end
 
-    # Creates a Terminal action request and sends it to the specified device to
-    # take a payment
-    # for the requested amount.
+    # Creates a Terminal action request and sends it to the specified device.
     # @param [CreateTerminalActionRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.

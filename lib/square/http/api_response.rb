@@ -18,16 +18,14 @@ module Square
       @request = http_response.request
       @errors = errors
 
-      if data.is_a? Hash
-        if data.keys.any?
-          @body = Struct.new(*data.keys) do
-            define_method(:to_s) { http_response.raw_body }
-          end.new(*data.values)
+      if (data.is_a? Hash) && data.keys.any?
+        @body = Struct.new(*data.keys) do
+          define_method(:to_s) { http_response.raw_body }
+        end.new(*data.values)
 
-          @cursor = data.fetch(:cursor, nil)
-          data.reject! { |k| %i[cursor errors].include?(k) }
-          @data = Struct.new(*data.keys).new(*data.values) if data.keys.any?
-        end
+        @cursor = data.fetch(:cursor, nil)
+        data.reject! { |k| %i[cursor errors].include?(k) }
+        @data = Struct.new(*data.keys).new(*data.values) if data.keys.any?
       else
         @data = data
         @body = data
