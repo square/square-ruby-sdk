@@ -316,9 +316,9 @@ module Square
     # Square API used to make the request. Object types that are nested onto
     # other object types are not included in the defaults.  At the current API
     # version the default object types are: ITEM, CATEGORY, TAX, DISCOUNT,
-    # MODIFIER_LIST, DINING_OPTION, TAX_EXEMPTION, SERVICE_CHARGE, PRICING_RULE,
-    # PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT, SUBSCRIPTION_PLAN,
-    # ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS.
+    # MODIFIER_LIST,  PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT,
+    # SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION,
+    # QUICK_AMOUNT_SETTINGS.
     # @param [Long] catalog_version Optional parameter: The specific version of
     # the catalog objects to be included in the response.  This allows you to
     # retrieve historical versions of objects. The specified version value is
