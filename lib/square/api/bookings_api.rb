@@ -178,9 +178,9 @@ module Square
     end
 
     # Lists booking profiles for team members.
-    # @param [Boolean] bookable_only Optional parameter: Indicates whether to
-    # include only bookable team members in the returned result (`true`) or not
-    # (`false`).
+    # @param [TrueClass|FalseClass] bookable_only Optional parameter: Indicates
+    # whether to include only bookable team members in the returned result
+    # (`true`) or not (`false`).
     # @param [Integer] limit Optional parameter: The maximum number of results
     # to return in a paged response.
     # @param [String] cursor Optional parameter: The pagination cursor from the

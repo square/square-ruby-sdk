@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'square.rb'
-  s.version = '20.1.0.20220616'
+  s.version = '21.0.0.20220720'
   s.summary = 'square'
   s.description = 'Use Square APIs to manage and run business including payment, customer, product, inventory, and employee management.'
   s.authors = ['Square Developer Platform']
@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.add_dependency('faraday-multipart', '~> 1.0')
   s.add_dependency('faraday-gzip', '~> 0.1')
   s.add_dependency('faraday-retry', '~> 1.0')
+  s.add_dependency('faraday-net_http_persistent', '~> 2.0')
   s.add_dependency('certifi', '~> 2018.1', '>= 2018.01.18')
   s.add_dependency('faraday-http-cache', '~> 2.2')
   s.add_development_dependency('minitest', '~> 5.14', '>= 5.14.1')

@@ -13,7 +13,7 @@ A record representing an individual team member for a business.
 |  --- | --- | --- | --- |
 | `id` | `String` | Optional | The unique ID for the team member. |
 | `reference_id` | `String` | Optional | A second ID used to associate the team member with an entity in another system. |
-| `is_owner` | `Boolean` | Optional | Whether the team member is the owner of the Square account. |
+| `is_owner` | `TrueClass\|FalseClass` | Optional | Whether the team member is the owner of the Square account. |
 | `status` | [`String (Team Member Status)`](../../doc/models/team-member-status.md) | Optional | Enumerates the possible statuses the team member can have within a business. |
 | `given_name` | `String` | Optional | The given name (that is, the first name) associated with the team member. |
 | `family_name` | `String` | Optional | The family name (that is, the last name) associated with the team member. |

@@ -175,10 +175,10 @@ module Square
     # @param [String] batch_token Optional parameter: A pagination cursor to
     # retrieve the next set of results for your original query to the
     # endpoint.
-    # @param [Boolean] include_partial Optional parameter: Indicates whether or
-    # not to include partial payments in the response. Partial payments will
-    # have the tenders collected so far, but the itemizations will be empty
-    # until the payment is completed.
+    # @param [TrueClass|FalseClass] include_partial Optional parameter:
+    # Indicates whether or not to include partial payments in the response.
+    # Partial payments will have the tenders collected so far, but the
+    # itemizations will be empty until the payment is completed.
     # @return [List of V1Payment Hash] response from the API call
     def list_payments(location_id:,
                       order: nil,

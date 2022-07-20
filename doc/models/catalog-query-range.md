@@ -12,8 +12,8 @@ The query filter to return the search result whose named attribute values fall b
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `attribute_name` | `String` | Required | The name of the attribute to be searched.<br>**Constraints**: *Minimum Length*: `1` |
-| `attribute_min_value` | `Long` | Optional | The desired minimum value for the search attribute (inclusive). |
-| `attribute_max_value` | `Long` | Optional | The desired maximum value for the search attribute (inclusive). |
+| `attribute_min_value` | `Integer` | Optional | The desired minimum value for the search attribute (inclusive). |
+| `attribute_max_value` | `Integer` | Optional | The desired maximum value for the search attribute (inclusive). |
 
 ## Example (as JSON)
 

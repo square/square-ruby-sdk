@@ -49,7 +49,7 @@ class TestHelper
         end
       end
     elsif expected_body.instance_of? Array
-      return False unless received_body.instance_of? Array
+      return false unless received_body.instance_of? Array
       if check_count == true && (expected_body.length != received_body.length)
         return false
       else

@@ -25,6 +25,7 @@ require_relative 'square/http/auth/o_auth2'
 
 # Exceptions
 require_relative 'square/exceptions/api_exception'
+require_relative 'square/exceptions/validation_exception'
 
 require_relative 'square/configuration'
 

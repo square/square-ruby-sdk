@@ -130,6 +130,12 @@ module Square
       raise TypeError, 'Server responded with invalid JSON.'
     end
 
+    # Parses JSON string.
+    # @param [object] The object to serialize.
+    def self.json_serialize(obj)
+      serializable_types.map { |x| obj.is_a? x }.any? ? obj.to_s : obj.to_json
+    end
+
     # Removes elements with empty values from a hash.
     # @param [Hash] The hash to clean.
     def self.clean_hash(hash)
@@ -199,9 +205,6 @@ module Square
     def self.form_encode(obj, instance_name, formatting: 'indexed')
       retval = {}
 
-      serializable_types = [String, Numeric, TrueClass,
-                            FalseClass, Date, DateTime]
-
       # Create a form encoded hash for this object.
       if obj.nil?
         nil
@@ -210,7 +213,7 @@ module Square
           obj.each_with_index do |value, index|
             retval.merge!(APIHelper.form_encode(value, "#{instance_name}[#{index}]"))
           end
-        elsif serializable_types.map { |x| obj[0].is_a? x }.any?
+        elsif APIHelper.serializable_types.map { |x| obj[0].is_a? x }.any?
           obj.each do |value|
             abc = if formatting == 'unindexed'
                     APIHelper.form_encode(value, "#{instance_name}[]",
@@ -264,6 +267,175 @@ module Square
         val = nil
       end
       val
+    end
+
+    # Deserialize the value against the template (group of types).
+    # @param [String] The value to be deserialized.
+    # @param [String] The parameter indicates the type-combination
+    # against which the value will be mapped (oneOf(Integer, String)).
+    def self.deserialize(template, value)
+      decoded = APIHelper.json_deserialize(value)
+      map_types(decoded, template)
+    end
+
+    # Validates and processes the value against the template(group of types).
+    # @param [String] The value to be mapped against the template.
+    # @param [String] The parameter indicates the group of types (oneOf(Integer, String)).
+    # @param [String] The parameter indicates the group (oneOf|anyOf).
+    def self.map_types(value, template, group_name: nil)
+      result_value = nil
+      matches = 0
+      types = []
+      group_name = template.partition('(').first if group_name.nil? && template.match?(/anyOf|oneOf/)
+
+      return if value.nil?
+
+      if template.end_with?('{}') || template.end_with?('[]')
+        types = template.split(group_name, 2).last.gsub(/\s+/, '').split
+      else
+        template = template.split(group_name, 2).last.delete_prefix('(').delete_suffix(')')
+        types = template.scan(/(anyOf|oneOf)[(]([^[)]]*)[)]/).flatten.combination(2).map { |a, b| "#{a}(#{b})" }
+        types.each { |t| template = template.gsub(", #{t}", '') }
+        types = template.gsub(/\s+/, '').split(',').push(*types)
+      end
+      types.each do |element|
+        if element.match?(/^(oneOf|anyOf)[(].*$/)
+          begin
+            result_value = map_types(value, element, matches)
+            matches += 1
+          rescue ValidationException
+            next
+          end
+        elsif element.end_with?('{}')
+          result_value, matches = map_hash_type(value, element, group_name, matches)
+        elsif element.end_with?('[]')
+          result_value, matches = map_array_type(value, element, group_name, matches)
+        else
+          begin
+            result_value, matches = map_type(value, element, group_name, matches)
+          rescue StandardError
+            next
+          end
+        end
+        break if group_name == 'anyOf' && matches == 1
+      end
+      raise ValidationException.new(value, template) unless matches == 1
+
+      value = result_value unless result_value.nil?
+      value
+    end
+
+    # Validates and processes the value against the [Hash] type.
+    # @param [String] The value to be mapped against the type.
+    # @param [String] The possible type of the value.
+    # @param [String] The parameter indicates the group (oneOf|anyOf).
+    # @param [Integer] The parameter indicates the number of matches of value against types.
+    def self.map_hash_type(value, type, group_name, matches)
+      if value.instance_of? Hash
+        decoded = {}
+        value.each do |key, val|
+          type = type.chomp('{}').to_s
+          val = map_types(val, type, group_name: group_name)
+          decoded[key] = val unless type.empty?
+        rescue ValidationException
+          next
+        end
+        matches += 1 if decoded.length == value.length
+        value = decoded unless decoded.empty?
+      end
+      [value, matches]
+    end
+
+    # Validates and processes the value against the [Array] type.
+    # @param [String] The value to be mapped against the type.
+    # @param [String] The possible type of the value.
+    # @param [String] The parameter indicates the group (oneOf|anyOf).
+    # @param [Integer] The parameter indicates the number of matches of value against types.
+    def self.map_array_type(value, type, group_name, matches)
+      if value.instance_of? Array
+        decoded = []
+        value.each do |val|
+          type = type.chomp('[]').to_s
+          val = map_types(val, type, group_name: group_name)
+          decoded.append(val) unless type.empty?
+        rescue ValidationException
+          next
+        end
+        matches += 1 if decoded.length == value.length
+        value = decoded unless decoded.empty?
+      end
+      [value, matches]
+    end
+
+    # Validates and processes the value against the type.
+    # @param [String] The value to be mapped against the type.
+    # @param [String] The possible type of the value.
+    # @param [String] The parameter indicates the group (oneOf|anyOf).
+    # @param [Integer] The parameter indicates the number of matches of value against types.
+    def self.map_type(value, type, _group_name, matches)
+      if Square.constants.select do |c|
+        Square.const_get(c).to_s == "Square::#{type}"
+      end.empty?
+        value, matches = map_data_type(value, type, matches)
+      else
+        value, matches = map_complex_type(value, type, matches)
+      end
+      [value, matches]
+    end
+
+    # Validates and processes the value against the complex types.
+    # @param [String] The value to be mapped against the type.
+    # @param [String] The possible type of the value.
+    # @param [Integer] The parameter indicates the number of matches of value against types.
+    def self.map_complex_type(value, type, matches)
+      obj = Square.const_get(type)
+      value = if obj.respond_to? 'from_hash'
+                obj.send('from_hash', value)
+              else
+                obj.constants.find { |k| obj.const_get(k) == value }
+              end
+      matches += 1 unless value.nil?
+      [value, matches]
+    end
+
+    # Validates and processes the value against the data types.
+    # @param [String] The value to be mapped against the type.
+    # @param [String] The possible type of the value.
+    # @param [Integer] The parameter indicates the number of matches of value against types.
+    def self.map_data_type(value, element, matches)
+      element = element.split('|').map { |x| Object.const_get x }
+      matches += 1 if element.all? { |x| APIHelper.data_types.include?(x) } &&
+                      element.any? { |x| (value.instance_of? x) || (value.class.ancestors.include? x) }
+      [value, matches]
+    end
+
+    # Validates the value against the template(group of types).
+    # @param [String] The value to be mapped against the type.
+    # @param [String] The parameter indicates the group of types (oneOf(Integer, String)).
+    def self.validate_types(value, template)
+      map_types(APIHelper.json_deserialize(value.to_json), template)
+    end
+
+    # Get content-type depending on the value
+    def self.get_content_type(value)
+      if serializable_types.map { |x| value.is_a? x }.any?
+        'text/plain; charset=utf-8'
+      else
+        'application/json; charset=utf-8'
+      end
+    end
+
+    # Array of serializable types
+    def self.serializable_types
+      [String, Numeric, TrueClass,
+       FalseClass, Date, DateTime]
+    end
+
+    # Array of supported data types
+    def self.data_types
+      [String, Float, Integer,
+       TrueClass, FalseClass, Date,
+       DateTime, Array, Hash, Object]
     end
   end
 end

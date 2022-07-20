@@ -153,7 +153,6 @@ body[:batches][0][:objects][0][:id] = '#Tea'
 body[:batches][0][:objects][0][:present_at_all_locations] = true
 body[:batches][0][:objects][0][:item_data] = {}
 body[:batches][0][:objects][0][:item_data][:name] = 'Tea'
-body[:batches][0][:objects][0][:item_data][:description] = 'Hot Leaf Juice'
 body[:batches][0][:objects][0][:item_data][:category_id] = '#Beverages'
 body[:batches][0][:objects][0][:item_data][:tax_ids] = ['#SalesTax']
 body[:batches][0][:objects][0][:item_data][:variations] = []
@@ -168,6 +167,7 @@ body[:batches][0][:objects][0][:item_data][:variations][0][:item_variation_data]
 body[:batches][0][:objects][0][:item_data][:variations][0][:item_variation_data][:name] = 'Mug'
 body[:batches][0][:objects][0][:item_data][:variations][0][:item_variation_data][:pricing_type] = 'FIXED_PRICING'
 
+body[:batches][0][:objects][0][:item_data][:description_html] = '<p><strong>Hot</strong> Leaf Juice</p>'
 
 body[:batches][0][:objects][1] = {}
 body[:batches][0][:objects][1][:type] = 'ITEM'
@@ -175,7 +175,6 @@ body[:batches][0][:objects][1][:id] = '#Coffee'
 body[:batches][0][:objects][1][:present_at_all_locations] = true
 body[:batches][0][:objects][1][:item_data] = {}
 body[:batches][0][:objects][1][:item_data][:name] = 'Coffee'
-body[:batches][0][:objects][1][:item_data][:description] = 'Hot Bean Juice'
 body[:batches][0][:objects][1][:item_data][:category_id] = '#Beverages'
 body[:batches][0][:objects][1][:item_data][:tax_ids] = ['#SalesTax']
 body[:batches][0][:objects][1][:item_data][:variations] = []
@@ -199,6 +198,7 @@ body[:batches][0][:objects][1][:item_data][:variations][1][:item_variation_data]
 body[:batches][0][:objects][1][:item_data][:variations][1][:item_variation_data][:name] = 'Large'
 body[:batches][0][:objects][1][:item_data][:variations][1][:item_variation_data][:pricing_type] = 'FIXED_PRICING'
 
+body[:batches][0][:objects][1][:item_data][:description_html] = '<p>Hot <em>Bean Juice</em></p>'
 
 body[:batches][0][:objects][2] = {}
 body[:batches][0][:objects][2][:type] = 'CATEGORY'
@@ -249,7 +249,7 @@ def create_catalog_image(request: nil,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `request` | [`Create Catalog Image Request Hash`](../../doc/models/create-catalog-image-request.md) | Form, Optional | - |
+| `request` | [`Create Catalog Image Request Hash`](../../doc/models/create-catalog-image-request.md) | Form (JSON-Encoded), Optional | - |
 | `image_file` | `File \| UploadIO` | Form, Optional | - |
 
 ## Response Type
@@ -296,7 +296,7 @@ def update_catalog_image(image_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `image_id` | `String` | Template, Required | The ID of the `CatalogImage` object to update the encapsulated image file. |
-| `request` | [`Update Catalog Image Request Hash`](../../doc/models/update-catalog-image-request.md) | Form, Optional | - |
+| `request` | [`Update Catalog Image Request Hash`](../../doc/models/update-catalog-image-request.md) | Form (JSON-Encoded), Optional | - |
 | `image_file` | `File \| UploadIO` | Form, Optional | - |
 
 ## Response Type
@@ -369,7 +369,7 @@ def list_catalog(cursor: nil,
 |  --- | --- | --- | --- |
 | `cursor` | `String` | Query, Optional | The pagination cursor returned in the previous response. Leave unset for an initial request.<br>The page size is currently set to be 100.<br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
 | `types` | `String` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve.<br><br>The valid values are defined in the [CatalogObjectType](../../doc/models/catalog-object-type.md) enum, for example,<br>`ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, `IMAGE`, etc.<br><br>If this is unspecified, the operation returns objects of all the top level types at the version<br>of the Square API used to make the request. Object types that are nested onto other object types<br>are not included in the defaults.<br><br>At the current API version the default object types are:<br>ITEM, CATEGORY, TAX, DISCOUNT, MODIFIER_LIST,<br>PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT,<br>SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS. |
-| `catalog_version` | `Long` | Query, Optional | The specific version of the catalog objects to be included in the response.<br>This allows you to retrieve historical<br>versions of objects. The specified version value is matched against<br>the [CatalogObject](../../doc/models/catalog-object.md)s' `version` attribute.  If not included, results will<br>be from the current version of the catalog. |
+| `catalog_version` | `Integer` | Query, Optional | The specific version of the catalog objects to be included in the response.<br>This allows you to retrieve historical<br>versions of objects. The specified version value is matched against<br>the [CatalogObject](../../doc/models/catalog-object.md)s' `version` attribute.  If not included, results will<br>be from the current version of the catalog. |
 
 ## Response Type
 
@@ -416,7 +416,6 @@ body[:object][:type] = 'ITEM'
 body[:object][:id] = '#Cocoa'
 body[:object][:item_data] = {}
 body[:object][:item_data][:name] = 'Cocoa'
-body[:object][:item_data][:description] = 'Hot Chocolate'
 body[:object][:item_data][:abbreviation] = 'Ch'
 body[:object][:item_data][:variations] = []
 
@@ -440,6 +439,7 @@ body[:object][:item_data][:variations][1][:item_variation_data][:price_money] = 
 body[:object][:item_data][:variations][1][:item_variation_data][:price_money][:amount] = 400
 body[:object][:item_data][:variations][1][:item_variation_data][:price_money][:currency] = 'USD'
 
+body[:object][:item_data][:description_html] = '<p><strong>Hot</strong> Chocolate</p>'
 
 result = catalog_api.upsert_catalog_object(body: body)
 
@@ -510,8 +510,8 @@ def retrieve_catalog_object(object_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `object_id` | `String` | Template, Required | The object ID of any type of catalog objects to be retrieved. |
-| `include_related_objects` | `Boolean` | Query, Optional | If `true`, the response will include additional objects that are related to the<br>requested objects. Related objects are defined as any objects referenced by ID by the results in the `objects` field<br>of the response. These objects are put in the `related_objects` field. Setting this to `true` is<br>helpful when the objects are needed for immediate display to a user.<br>This process only goes one level deep. Objects referenced by the related objects will not be included. For example,<br><br>if the `objects` field of the response contains a CatalogItem, its associated<br>CatalogCategory objects, CatalogTax objects, CatalogImage objects and<br>CatalogModifierLists will be returned in the `related_objects` field of the<br>response. If the `objects` field of the response contains a CatalogItemVariation,<br>its parent CatalogItem will be returned in the `related_objects` field of<br>the response.<br><br>Default value: `false`<br>**Default**: `false` |
-| `catalog_version` | `Long` | Query, Optional | Requests objects as of a specific version of the catalog. This allows you to retrieve historical<br>versions of objects. The value to retrieve a specific version of an object can be found<br>in the version field of [CatalogObject](../../doc/models/catalog-object.md)s. If not included, results will<br>be from the current version of the catalog. |
+| `include_related_objects` | `TrueClass\|FalseClass` | Query, Optional | If `true`, the response will include additional objects that are related to the<br>requested objects. Related objects are defined as any objects referenced by ID by the results in the `objects` field<br>of the response. These objects are put in the `related_objects` field. Setting this to `true` is<br>helpful when the objects are needed for immediate display to a user.<br>This process only goes one level deep. Objects referenced by the related objects will not be included. For example,<br><br>if the `objects` field of the response contains a CatalogItem, its associated<br>CatalogCategory objects, CatalogTax objects, CatalogImage objects and<br>CatalogModifierLists will be returned in the `related_objects` field of the<br>response. If the `objects` field of the response contains a CatalogItemVariation,<br>its parent CatalogItem will be returned in the `related_objects` field of<br>the response.<br><br>Default value: `false`<br>**Default**: `false` |
+| `catalog_version` | `Integer` | Query, Optional | Requests objects as of a specific version of the catalog. This allows you to retrieve historical<br>versions of objects. The value to retrieve a specific version of an object can be found<br>in the version field of [CatalogObject](../../doc/models/catalog-object.md)s. If not included, results will<br>be from the current version of the catalog. |
 
 ## Response Type
 

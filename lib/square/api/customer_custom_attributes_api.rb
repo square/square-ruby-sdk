@@ -323,12 +323,12 @@ module Square
     # more information, see
     # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
     # atterns/pagination).
-    # @param [Boolean] with_definitions Optional parameter: Indicates whether to
-    # return the [custom attribute definition]($m/CustomAttributeDefinition) in
-    # the `definition` field of each custom attribute. Set this parameter to
-    # `true` to get the name and description of each custom attribute,
-    # information about the data type, or other definition details. The default
-    # value is `false`.
+    # @param [TrueClass|FalseClass] with_definitions Optional parameter:
+    # Indicates whether to return the [custom attribute
+    # definition]($m/CustomAttributeDefinition) in the `definition` field of
+    # each custom attribute. Set this parameter to `true` to get the name and
+    # description of each custom attribute, information about the data type, or
+    # other definition details. The default value is `false`.
     # @return [ListCustomerCustomAttributesResponse Hash] response from the API call
     def list_customer_custom_attributes(customer_id:,
                                         limit: nil,
@@ -427,12 +427,12 @@ module Square
     # retrieve. This key must match the `key` of a custom attribute definition
     # in the Square seller account. If the requesting application is not the
     # definition owner, you must use the qualified key.
-    # @param [Boolean] with_definition Optional parameter: Indicates whether to
-    # return the [custom attribute definition]($m/CustomAttributeDefinition) in
-    # the `definition` field of the custom attribute. Set this parameter to
-    # `true` to get the name and description of the custom attribute,
-    # information about the data type, or other definition details. The default
-    # value is `false`.
+    # @param [TrueClass|FalseClass] with_definition Optional parameter:
+    # Indicates whether to return the [custom attribute
+    # definition]($m/CustomAttributeDefinition) in the `definition` field of the
+    # custom attribute. Set this parameter to `true` to get the name and
+    # description of the custom attribute, information about the data type, or
+    # other definition details. The default value is `false`.
     # @param [Integer] version Optional parameter: The current version of the
     # custom attribute, which is used for strongly consistent reads to guarantee
     # that you receive the most up-to-date data. When included in the request,

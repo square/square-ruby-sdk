@@ -25,8 +25,8 @@ linking a bank account to a Square account, see
 | `reference_id` | `String` | Optional | Client-provided identifier for linking the banking account to an entity<br>in a third-party system (for example, a bank account number or a user identifier). |
 | `location_id` | `String` | Optional | The location to which the bank account belongs. |
 | `status` | [`String (Bank Account Status)`](../../doc/models/bank-account-status.md) | Required | Indicates the current verification status of a `BankAccount` object. |
-| `creditable` | `Boolean` | Required | Indicates whether it is possible for Square to send money to this bank account. |
-| `debitable` | `Boolean` | Required | Indicates whether it is possible for Square to take money from this<br>bank account. |
+| `creditable` | `TrueClass\|FalseClass` | Required | Indicates whether it is possible for Square to send money to this bank account. |
+| `debitable` | `TrueClass\|FalseClass` | Required | Indicates whether it is possible for Square to take money from this<br>bank account. |
 | `fingerprint` | `String` | Optional | A Square-assigned, unique identifier for the bank account based on the<br>account information. The account fingerprint can be used to compare account<br>entries and determine if the they represent the same real-world bank account. |
 | `version` | `Integer` | Optional | The current version of the `BankAccount`. |
 | `bank_name` | `String` | Optional | Read only. Name of actual financial institution.<br>For example "Bank of America".<br>**Constraints**: *Maximum Length*: `100` |
