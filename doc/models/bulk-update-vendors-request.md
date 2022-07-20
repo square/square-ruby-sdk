@@ -11,7 +11,7 @@ Represents an input to a call to [BulkUpdateVendors](../../doc/api/vendors.md#bu
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `vendors` | [`Hash Hash`](../../doc/models/update-vendor-request.md) | Required | A set of [UpdateVendorRequest](../../doc/models/update-vendor-request.md) objects encapsulating to-be-updated [Vendor](../../doc/models/vendor.md)<br>objects. The set is represented by  a collection of `Vendor`-ID/`UpdateVendorRequest`-object pairs. |
+| `vendors` | [`Hash of Update Vendor Request Hash`](../../doc/models/update-vendor-request.md) | Required | A set of [UpdateVendorRequest](../../doc/models/update-vendor-request.md) objects encapsulating to-be-updated [Vendor](../../doc/models/vendor.md)<br>objects. The set is represented by  a collection of `Vendor`-ID/`UpdateVendorRequest`-object pairs. |
 
 ## Example (as JSON)
 

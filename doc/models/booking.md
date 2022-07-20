@@ -24,7 +24,7 @@ at a given location to a requesting customer in one or more appointment segments
 | `seller_note` | `String` | Optional | The free-text field for the seller to supply notes about the booking. For example, the note can be preferences that cannot be expressed by supported attributes of a specific [CatalogObject](../../doc/models/catalog-object.md) instance.<br>This field should not be visible to customers.<br>**Constraints**: *Maximum Length*: `4096` |
 | `appointment_segments` | [`Array<Appointment Segment Hash>`](../../doc/models/appointment-segment.md) | Optional | A list of appointment segments for this booking. |
 | `transition_time_minutes` | `Integer` | Optional | Additional time at the end of a booking.<br>Applications should not make this field visible to customers of a seller. |
-| `all_day` | `Boolean` | Optional | Whether the booking is of a full business day. |
+| `all_day` | `TrueClass\|FalseClass` | Optional | Whether the booking is of a full business day. |
 | `location_type` | [`String (Business Appointment Settings Booking Location Type)`](../../doc/models/business-appointment-settings-booking-location-type.md) | Optional | Supported types of location where service is provided. |
 | `creator_details` | [`Booking Creator Details Hash`](../../doc/models/booking-creator-details.md) | Optional | Information about a booking creator. |
 | `source` | [`String (Booking Booking Source)`](../../doc/models/booking-booking-source.md) | Optional | Supported sources a booking was created from. |

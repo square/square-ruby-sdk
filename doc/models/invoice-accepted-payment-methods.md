@@ -11,9 +11,9 @@ The payment methods that customers can use to pay an invoice on the Square-hoste
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `card` | `Boolean` | Optional | Indicates whether credit card or debit card payments are accepted. The default value is `false`. |
-| `square_gift_card` | `Boolean` | Optional | Indicates whether Square gift card payments are accepted. The default value is `false`. |
-| `bank_account` | `Boolean` | Optional | Indicates whether bank transfer payments are accepted. The default value is `false`.<br><br>This option is allowed only for invoices that have a single payment request of type `BALANCE`. |
+| `card` | `TrueClass\|FalseClass` | Optional | Indicates whether credit card or debit card payments are accepted. The default value is `false`. |
+| `square_gift_card` | `TrueClass\|FalseClass` | Optional | Indicates whether Square gift card payments are accepted. The default value is `false`. |
+| `bank_account` | `TrueClass\|FalseClass` | Optional | Indicates whether bank transfer payments are accepted. The default value is `false`.<br><br>This option is allowed only for invoices that have a single payment request of type `BALANCE`. |
 
 ## Example (as JSON)
 

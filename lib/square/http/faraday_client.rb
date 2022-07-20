@@ -3,6 +3,7 @@ require 'faraday/retry'
 require 'faraday/multipart'
 require 'faraday/follow_redirects'
 require 'faraday/gzip'
+require 'faraday/net_http_persistent'
 
 module Square
   # An implementation of HttpClient.

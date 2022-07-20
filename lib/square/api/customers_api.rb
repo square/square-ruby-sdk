@@ -165,7 +165,7 @@ module Square
     # profiles, you must use the ID of the newly created profile.
     # @param [String] customer_id Required parameter: The ID of the customer to
     # delete.
-    # @param [Long] version Optional parameter: The current version of the
+    # @param [Integer] version Optional parameter: The current version of the
     # customer profile.  As a best practice, you should include this parameter
     # to enable [optimistic
     # concurrency](https://developer.squareup.com/docs/build-basics/common-api-p

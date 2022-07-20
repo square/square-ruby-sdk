@@ -319,8 +319,8 @@ module Square
     # MODIFIER_LIST,  PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT,
     # SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION,
     # QUICK_AMOUNT_SETTINGS.
-    # @param [Long] catalog_version Optional parameter: The specific version of
-    # the catalog objects to be included in the response.  This allows you to
+    # @param [Integer] catalog_version Optional parameter: The specific version
+    # of the catalog objects to be included in the response.  This allows you to
     # retrieve historical versions of objects. The specified version value is
     # matched against the [CatalogObject]($m/CatalogObject)s' `version`
     # attribute.  If not included, results will be from the current version of
@@ -448,26 +448,26 @@ module Square
     # any [CatalogTax]($m/CatalogTax) objects that apply to it.
     # @param [String] object_id Required parameter: The object ID of any type of
     # catalog objects to be retrieved.
-    # @param [Boolean] include_related_objects Optional parameter: If `true`,
-    # the response will include additional objects that are related to the
-    # requested objects. Related objects are defined as any objects referenced
-    # by ID by the results in the `objects` field of the response. These objects
-    # are put in the `related_objects` field. Setting this to `true` is helpful
-    # when the objects are needed for immediate display to a user. This process
-    # only goes one level deep. Objects referenced by the related objects will
-    # not be included. For example,  if the `objects` field of the response
-    # contains a CatalogItem, its associated CatalogCategory objects, CatalogTax
-    # objects, CatalogImage objects and CatalogModifierLists will be returned in
-    # the `related_objects` field of the response. If the `objects` field of the
-    # response contains a CatalogItemVariation, its parent CatalogItem will be
-    # returned in the `related_objects` field of the response.  Default value:
-    # `false`
-    # @param [Long] catalog_version Optional parameter: Requests objects as of a
-    # specific version of the catalog. This allows you to retrieve historical
-    # versions of objects. The value to retrieve a specific version of an object
-    # can be found in the version field of [CatalogObject]($m/CatalogObject)s.
-    # If not included, results will be from the current version of the
-    # catalog.
+    # @param [TrueClass|FalseClass] include_related_objects Optional parameter:
+    # If `true`, the response will include additional objects that are related
+    # to the requested objects. Related objects are defined as any objects
+    # referenced by ID by the results in the `objects` field of the response.
+    # These objects are put in the `related_objects` field. Setting this to
+    # `true` is helpful when the objects are needed for immediate display to a
+    # user. This process only goes one level deep. Objects referenced by the
+    # related objects will not be included. For example,  if the `objects` field
+    # of the response contains a CatalogItem, its associated CatalogCategory
+    # objects, CatalogTax objects, CatalogImage objects and CatalogModifierLists
+    # will be returned in the `related_objects` field of the response. If the
+    # `objects` field of the response contains a CatalogItemVariation, its
+    # parent CatalogItem will be returned in the `related_objects` field of the
+    # response.  Default value: `false`
+    # @param [Integer] catalog_version Optional parameter: Requests objects as
+    # of a specific version of the catalog. This allows you to retrieve
+    # historical versions of objects. The value to retrieve a specific version
+    # of an object can be found in the version field of
+    # [CatalogObject]($m/CatalogObject)s. If not included, results will be from
+    # the current version of the catalog.
     # @return [RetrieveCatalogObjectResponse Hash] response from the API call
     def retrieve_catalog_object(object_id:,
                                 include_related_objects: false,

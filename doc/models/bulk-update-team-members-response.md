@@ -11,7 +11,7 @@ Represents a response from a bulk update request containing the updated `TeamMem
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `team_members` | [`Hash Hash`](../../doc/models/update-team-member-response.md) | Optional | The successfully updated `TeamMember` objects. Each key is the `team_member_id` that maps to the `UpdateTeamMemberRequest`. |
+| `team_members` | [`Hash of Update Team Member Response Hash`](../../doc/models/update-team-member-response.md) | Optional | The successfully updated `TeamMember` objects. Each key is the `team_member_id` that maps to the `UpdateTeamMemberRequest`. |
 | `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | The errors that occurred during the request. |
 
 ## Example (as JSON)

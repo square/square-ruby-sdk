@@ -26,7 +26,7 @@ module Square
     # @param [String] location_id Optional parameter: Limit results to the
     # location supplied. By default, results are returned for the default (main)
     # location associated with the seller.
-    # @param [Long] total Optional parameter: The exact amount in the
+    # @param [Integer] total Optional parameter: The exact amount in the
     # `total_money` for a payment.
     # @param [String] last_4 Optional parameter: The last four digits of a
     # payment card.

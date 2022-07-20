@@ -14,7 +14,7 @@
 | `end_time` | `String` | Optional | The end of the requested reporting period, in ISO 8601 format. If this value is more than one year greater than begin_time, this endpoint returns an error. Default value: The current time. |
 | `limit` | `Integer` | Optional | The maximum number of payments to return in a single response. This value cannot exceed 200. |
 | `batch_token` | `String` | Optional | A pagination cursor to retrieve the next set of results for your<br>original query to the endpoint. |
-| `include_partial` | `Boolean` | Optional | Indicates whether or not to include partial payments in the response. Partial payments will have the tenders collected so far, but the itemizations will be empty until the payment is completed. |
+| `include_partial` | `TrueClass\|FalseClass` | Optional | Indicates whether or not to include partial payments in the response. Partial payments will have the tenders collected so far, but the itemizations will be empty until the payment is completed. |
 
 ## Example (as JSON)
 

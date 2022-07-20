@@ -14,7 +14,7 @@ at a specific version.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `object_id` | `String` | Optional | The ID of the referenced object. |
-| `catalog_version` | `Long` | Optional | The version of the object. |
+| `catalog_version` | `Integer` | Optional | The version of the object. |
 
 ## Example (as JSON)
 

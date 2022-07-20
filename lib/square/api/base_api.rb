@@ -20,6 +20,13 @@ module Square
       end
     end
 
+    def validate_parameters_types(args)
+      args.each do |_name, type|
+        key, val = type.first
+        APIHelper.validate_types(key, val) unless key.nil?
+      end
+    end
+
     def execute_request(request, binary: false)
       @http_call_back&.on_before_request(request)
 
@@ -38,7 +45,7 @@ module Square
     end
 
     def get_user_agent
-      user_agent = 'Square-Ruby-SDK/20.1.0.20220616 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}'
+      user_agent = 'Square-Ruby-SDK/21.0.0.20220720 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}'
       user_agent['{engine}'] = RUBY_ENGINE
       user_agent['{engine-version}'] = RUBY_ENGINE_VERSION
       user_agent['{os-info}'] = RUBY_PLATFORM

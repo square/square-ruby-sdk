@@ -155,8 +155,8 @@ body[:query][:filter][:creation_source] = {}
 body[:query][:filter][:creation_source][:values] = ['THIRD_PARTY']
 body[:query][:filter][:creation_source][:rule] = 'INCLUDE'
 body[:query][:filter][:created_at] = {}
-body[:query][:filter][:created_at][:start_at] = '2018-01-01T00:00:00-00:00'
-body[:query][:filter][:created_at][:end_at] = '2018-02-01T00:00:00-00:00'
+body[:query][:filter][:created_at][:start_at] = '2018-01-01T00:00:00+00:00'
+body[:query][:filter][:created_at][:end_at] = '2018-02-01T00:00:00+00:00'
 body[:query][:filter][:email_address] = {}
 body[:query][:filter][:email_address][:fuzzy] = 'example.com'
 body[:query][:filter][:group_ids] = {}
@@ -193,7 +193,7 @@ def delete_customer(customer_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `customer_id` | `String` | Template, Required | The ID of the customer to delete. |
-| `version` | `Long` | Query, Optional | The current version of the customer profile.<br><br>As a best practice, you should include this parameter to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.  For more information, see [Delete a customer profile](https://developer.squareup.com/docs/customers-api/use-the-api/keep-records#delete-customer-profile). |
+| `version` | `Integer` | Query, Optional | The current version of the customer profile.<br><br>As a best practice, you should include this parameter to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.  For more information, see [Delete a customer profile](https://developer.squareup.com/docs/customers-api/use-the-api/keep-records#delete-customer-profile). |
 
 ## Response Type
 

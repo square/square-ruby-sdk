@@ -15,7 +15,7 @@ Represents a contact of a [Vendor](../../doc/models/vendor.md).
 | `name` | `String` | Optional | The name of the [VendorContact](../../doc/models/vendor-contact.md).<br>This field is required when attempting to create a [Vendor](../../doc/models/vendor.md).<br>**Constraints**: *Maximum Length*: `255` |
 | `email_address` | `String` | Optional | The email address of the [VendorContact](../../doc/models/vendor-contact.md).<br>**Constraints**: *Maximum Length*: `255` |
 | `phone_number` | `String` | Optional | The phone number of the [VendorContact](../../doc/models/vendor-contact.md).<br>**Constraints**: *Maximum Length*: `255` |
-| `removed` | `Boolean` | Optional | The state of the [VendorContact](../../doc/models/vendor-contact.md). |
+| `removed` | `TrueClass\|FalseClass` | Optional | The state of the [VendorContact](../../doc/models/vendor-contact.md). |
 | `ordinal` | `Integer` | Required | The ordinal of the [VendorContact](../../doc/models/vendor-contact.md). |
 
 ## Example (as JSON)

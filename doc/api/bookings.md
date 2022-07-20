@@ -184,7 +184,7 @@ def list_team_member_booking_profiles(bookable_only: false,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `bookable_only` | `Boolean` | Query, Optional | Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`).<br>**Default**: `false` |
+| `bookable_only` | `TrueClass\|FalseClass` | Query, Optional | Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`).<br>**Default**: `false` |
 | `limit` | `Integer` | Query, Optional | The maximum number of results to return in a paged response. |
 | `cursor` | `String` | Query, Optional | The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results. |
 | `location_id` | `String` | Query, Optional | Indicates whether to include only team members enabled at the given location in the returned result. |
