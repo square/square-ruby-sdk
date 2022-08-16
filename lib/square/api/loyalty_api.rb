@@ -113,20 +113,30 @@ module Square
       )
     end
 
-    # Adds points earned from the base loyalty program to a loyalty account.
-    # - If you are using the Orders API to manage orders, you only provide the
-    # `order_id`.
-    # The endpoint reads the order to compute points to add to the buyer's
-    # account.
-    # - If you are not using the Orders API to manage orders,
-    # you first perform a client-side computation to compute the points.
-    # For spend-based and visit-based programs, you can first call
-    # [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints) to compute the
-    # points
-    # that you provide to this endpoint.
-    # This endpoint excludes additional points earned from loyalty promotions.
-    # @param [String] account_id Required parameter: The [loyalty
-    # account]($m/LoyaltyAccount) ID to which to add the points.
+    # Adds points earned from a purchase to a [loyalty
+    # account]($m/LoyaltyAccount).
+    # - If you are using the Orders API to manage orders, provide the
+    # `order_id`. Square reads the order
+    # to compute the points earned from both the base loyalty program and an
+    # associated
+    # [loyalty promotion]($m/LoyaltyPromotion). For purchases that qualify for
+    # multiple accrual
+    # rules, Square computes points based on the accrual rule that grants the
+    # most points.
+    # For purchases that qualify for multiple promotions, Square computes points
+    # based on the most
+    # recently created promotion. A purchase must first qualify for program
+    # points to be eligible for promotion points.
+    # - If you are not using the Orders API to manage orders, provide `points`
+    # with the number of points to add.
+    # You must first perform a client-side computation of the points earned from
+    # the loyalty program and
+    # loyalty promotion. For spend-based and visit-based programs, you can call
+    # [CalculateLoyaltyPoints]($e/Loyalty/CalculateLoyaltyPoints)
+    # to compute the points earned from the loyalty program (but not points
+    # earned from a loyalty promotion).
+    # @param [String] account_id Required parameter: The ID of the target
+    # [loyalty account]($m/LoyaltyAccount).
     # @param [AccumulateLoyaltyPointsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -170,8 +180,8 @@ module Square
     # in your application flow, you call
     # [AccumulateLoyaltyPoints]($e/Loyalty/AccumulateLoyaltyPoints)
     # to add points when a buyer pays for the purchase.
-    # @param [String] account_id Required parameter: The ID of the [loyalty
-    # account]($m/LoyaltyAccount) in which to adjust the points.
+    # @param [String] account_id Required parameter: The ID of the target
+    # [loyalty account]($m/LoyaltyAccount).
     # @param [AdjustLoyaltyPointsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -330,21 +340,32 @@ module Square
       )
     end
 
-    # Calculates the points a purchase earns from the base loyalty program.
-    # - If you are using the Orders API to manage orders, you provide the
-    # `order_id` in the request. The
-    # endpoint calculates the points by reading the order.
-    # - If you are not using the Orders API to manage orders, you provide the
-    # purchase amount in
-    # the request for the endpoint to calculate the points.
-    # An application might call this endpoint to show the points that a buyer
-    # can earn with the
-    # specific purchase.
-    # For spend-based and visit-based programs, the `tax_mode` setting of the
-    # accrual rule indicates how taxes should be treated for loyalty points
-    # accrual.
-    # @param [String] program_id Required parameter: The [loyalty
-    # program]($m/LoyaltyProgram) ID, which defines the rules for accruing
+    # Calculates the number of points a buyer can earn from a purchase.
+    # Applications might call this endpoint
+    # to display the points to the buyer.
+    # - If you are using the Orders API to manage orders, provide the `order_id`
+    # and (optional) `loyalty_account_id`.
+    # Square reads the order to compute the points earned from the base loyalty
+    # program and an associated
+    # [loyalty promotion]($m/LoyaltyPromotion).
+    # - If you are not using the Orders API to manage orders, provide
+    # `transaction_amount_money` with the
+    # purchase amount. Square uses this amount to calculate the points earned
+    # from the base loyalty program,
+    # but not points earned from a loyalty promotion. For spend-based and
+    # visit-based programs, the `tax_mode`
+    # setting of the accrual rule indicates how taxes should be treated for
+    # loyalty points accrual.
+    # If the purchase qualifies for program points, call
+    # [ListLoyaltyPromotions]($e/Loyalty/ListLoyaltyPromotions) and perform a
+    # client-side computation
+    # to calculate whether the purchase also qualifies for promotion points. For
+    # more information, see
+    # [Calculating promotion
+    # points](https://developer.squareup.com/docs/loyalty-api/loyalty-promotions
+    # #calculate-promotion-points).
+    # @param [String] program_id Required parameter: The ID of the [loyalty
+    # program]($m/LoyaltyProgram), which defines the rules for accruing
     # points.
     # @param [CalculateLoyaltyPointsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
@@ -372,6 +393,210 @@ module Square
         _query_url,
         headers: _headers,
         parameters: body.to_json
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
+    end
+
+    # Lists the loyalty promotions associated with a [loyalty
+    # program]($m/LoyaltyProgram).
+    # Results are sorted by the `created_at` date in descending order (newest to
+    # oldest).
+    # @param [String] program_id Required parameter: The ID of the base [loyalty
+    # program]($m/LoyaltyProgram). To get the program ID, call
+    # [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the
+    # `main` keyword.
+    # @param [LoyaltyPromotionStatus] status Optional parameter: The status to
+    # filter the results by. If a status is provided, only loyalty promotions
+    # with the specified status are returned. Otherwise, all loyalty promotions
+    # associated with the loyalty program are returned.
+    # @param [String] cursor Optional parameter: The cursor returned in the
+    # paged response from the previous call to this endpoint. Provide this
+    # cursor to retrieve the next page of results for your original request. For
+    # more information, see
+    # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
+    # atterns/pagination).
+    # @param [Integer] limit Optional parameter: The maximum number of results
+    # to return in a single paged response. The minimum value is 1 and the
+    # maximum value is 30. The default value is 30. For more information, see
+    # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
+    # atterns/pagination).
+    # @return [ListLoyaltyPromotionsResponse Hash] response from the API call
+    def list_loyalty_promotions(program_id:,
+                                status: nil,
+                                cursor: nil,
+                                limit: nil)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/loyalty/programs/{program_id}/promotions'
+      _query_builder = APIHelper.append_url_with_template_parameters(
+        _query_builder,
+        'program_id' => { 'value' => program_id, 'encode' => true }
+      )
+      _query_builder = APIHelper.append_url_with_query_parameters(
+        _query_builder,
+        'status' => status,
+        'cursor' => cursor,
+        'limit' => limit
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.get(
+        _query_url,
+        headers: _headers
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
+    end
+
+    # Creates a loyalty promotion for a [loyalty program]($m/LoyaltyProgram). A
+    # loyalty promotion
+    # enables buyers to earn points in addition to those earned from the base
+    # loyalty program.
+    # This endpoint sets the loyalty promotion to the `ACTIVE` or `SCHEDULED`
+    # status, depending on the
+    # `available_time` setting. A loyalty program can have a maximum of 10
+    # loyalty promotions with an
+    # `ACTIVE` or `SCHEDULED` status.
+    # @param [String] program_id Required parameter: The ID of the [loyalty
+    # program]($m/LoyaltyProgram) to associate with the promotion. To get the
+    # program ID, call
+    # [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the
+    # `main` keyword.
+    # @param [CreateLoyaltyPromotionRequest] body Required parameter: An object
+    # containing the fields to POST for the request.  See the corresponding
+    # object definition for field details.
+    # @return [CreateLoyaltyPromotionResponse Hash] response from the API call
+    def create_loyalty_promotion(program_id:,
+                                 body:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/loyalty/programs/{program_id}/promotions'
+      _query_builder = APIHelper.append_url_with_template_parameters(
+        _query_builder,
+        'program_id' => { 'value' => program_id, 'encode' => true }
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json',
+        'Content-Type' => 'application/json'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.post(
+        _query_url,
+        headers: _headers,
+        parameters: body.to_json
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
+    end
+
+    # Retrieves a loyalty promotion.
+    # @param [String] promotion_id Required parameter: The ID of the [loyalty
+    # promotion]($m/LoyaltyPromotion) to retrieve.
+    # @param [String] program_id Required parameter: The ID of the base [loyalty
+    # program]($m/LoyaltyProgram). To get the program ID, call
+    # [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the
+    # `main` keyword.
+    # @return [RetrieveLoyaltyPromotionResponse Hash] response from the API call
+    def retrieve_loyalty_promotion(promotion_id:,
+                                   program_id:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/loyalty/programs/{program_id}/promotions/{promotion_id}'
+      _query_builder = APIHelper.append_url_with_template_parameters(
+        _query_builder,
+        'promotion_id' => { 'value' => promotion_id, 'encode' => true },
+        'program_id' => { 'value' => program_id, 'encode' => true }
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.get(
+        _query_url,
+        headers: _headers
+      )
+      OAuth2.apply(config, _request)
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
+    end
+
+    # Cancels a loyalty promotion. Use this endpoint to cancel an `ACTIVE`
+    # promotion earlier than the
+    # end date, cancel an `ACTIVE` promotion when an end date is not specified,
+    # or cancel a `SCHEDULED` promotion.
+    # Because updating a promotion is not supported, you can also use this
+    # endpoint to cancel a promotion before
+    # you create a new one.
+    # This endpoint sets the loyalty promotion to the `CANCELED` state
+    # @param [String] promotion_id Required parameter: The ID of the [loyalty
+    # promotion]($m/LoyaltyPromotion) to cancel. You can cancel a promotion that
+    # has an `ACTIVE` or `SCHEDULED` status.
+    # @param [String] program_id Required parameter: The ID of the base [loyalty
+    # program]($m/LoyaltyProgram).
+    # @return [CancelLoyaltyPromotionResponse Hash] response from the API call
+    def cancel_loyalty_promotion(promotion_id:,
+                                 program_id:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/v2/loyalty/programs/{program_id}/promotions/{promotion_id}/cancel'
+      _query_builder = APIHelper.append_url_with_template_parameters(
+        _query_builder,
+        'promotion_id' => { 'value' => promotion_id, 'encode' => true },
+        'program_id' => { 'value' => program_id, 'encode' => true }
+      )
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json'
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.post(
+        _query_url,
+        headers: _headers
       )
       OAuth2.apply(config, _request)
       _response = execute_request(_request)

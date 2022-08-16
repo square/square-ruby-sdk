@@ -61,7 +61,6 @@ body[:price_override_money][:currency] = 'USD'
 body[:card_id] = 'ccof:qy5x8hHGYsgLrp4Q4GB'
 body[:timezone] = 'America/Los_Angeles'
 body[:source] = {}
-body[:source][:name] = 'My App'
 
 result = subscriptions_api.create_subscription(body: body)
 
@@ -404,7 +403,7 @@ def swap_plan(subscription_id:,
 ```ruby
 subscription_id = 'subscription_id0'
 body = {}
-body[:new_plan_id] = 'new_plan_id2'
+body[:new_plan_id] = nil
 
 result = subscriptions_api.swap_plan(subscription_id: subscription_id, body: body)
 
