@@ -285,6 +285,7 @@ def update_invoice(invoice_id:,
 invoice_id = 'invoice_id0'
 body = {}
 body[:invoice] = {}
+body[:invoice][:version] = 1
 body[:invoice][:payment_requests] = []
 
 

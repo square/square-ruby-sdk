@@ -23,6 +23,7 @@ module Square
     # @return [CreateCheckoutResponse Hash] response from the API call
     def create_checkout(location_id:,
                         body:)
+      warn 'Endpoint create_checkout in CheckoutApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v2/locations/{location_id}/checkouts'
@@ -57,14 +58,13 @@ module Square
 
     # Lists all payment links.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
-    # a previous call to this endpoint.  Provide this cursor to retrieve the
-    # next set of results for the original query.  If a cursor is not provided,
-    # the endpoint returns the first page of the results.  For more 
-    # information, see
+    # a previous call to this endpoint. Provide this cursor to retrieve the next
+    # set of results for the original query. If a cursor is not provided, the
+    # endpoint returns the first page of the results. For more  information, see
     # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
     # .
     # @param [Integer] limit Optional parameter: A limit on the number of
-    # results to return per page. The limit is advisory and  the implementation
+    # results to return per page. The limit is advisory and the implementation
     # might return more or less results. If the supplied limit is negative,
     # zero, or greater than the maximum limit of 1000, it is ignored.  Default
     # value: `100`

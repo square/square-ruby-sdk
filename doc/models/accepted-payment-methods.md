@@ -9,10 +9,10 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `apple_pay` | `TrueClass\|FalseClass` | Optional | Whether Apple Pay is accepted at checkout |
-| `google_pay` | `TrueClass\|FalseClass` | Optional | Whether Google Pay is accepted at checkout |
-| `cash_app_pay` | `TrueClass\|FalseClass` | Optional | Whether Cash App Pay is accepted at checkout |
-| `afterpay_clearpay` | `TrueClass\|FalseClass` | Optional | Whether Afterpay/Clearpay is accepted at checkout |
+| `apple_pay` | `TrueClass\|FalseClass` | Optional | Whether Apple Pay is accepted at checkout. |
+| `google_pay` | `TrueClass\|FalseClass` | Optional | Whether Google Pay is accepted at checkout. |
+| `cash_app_pay` | `TrueClass\|FalseClass` | Optional | Whether Cash App Pay is accepted at checkout. |
+| `afterpay_clearpay` | `TrueClass\|FalseClass` | Optional | Whether Afterpay/Clearpay is accepted at checkout. |
 
 ## Example (as JSON)
 

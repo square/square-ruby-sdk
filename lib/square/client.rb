@@ -4,7 +4,7 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '21.1.0.20220720'
+      '22.0.0.20220817'
     end
 
     def square_version
@@ -231,12 +231,18 @@ module Square
       @vendors ||= VendorsApi.new config
     end
 
+    # Access to webhook_subscriptions controller.
+    # @return [WebhookSubscriptionsApi] Returns the controller instance.
+    def webhook_subscriptions
+      @webhook_subscriptions ||= WebhookSubscriptionsApi.new config
+    end
+
     def initialize(connection: nil, adapter: :net_http_persistent, timeout: 60,
                    max_retries: 0, retry_interval: 1, backoff_factor: 2,
                    retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
                    retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2022-07-20', access_token: '',
+                   square_version: '2022-08-17', access_token: '',
                    user_agent_detail: '', additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(connection: connection, adapter: adapter,

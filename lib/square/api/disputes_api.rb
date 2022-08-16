@@ -11,13 +11,12 @@ module Square
     # set of results for the original query. For more information, see
     # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
     # .
-    # @param [DisputeState] states Optional parameter: The dispute states to
-    # filter the result. If not specified, the endpoint returns all open
-    # disputes (the dispute status is not `INQUIRY_CLOSED`, `WON`, or `LOST`).
+    # @param [DisputeState] states Optional parameter: The dispute states used
+    # to filter the result. If not specified, the endpoint returns all
+    # disputes.
     # @param [String] location_id Optional parameter: The ID of the location for
     # which to return a list of disputes. If not specified, the endpoint returns
-    # all open disputes (the dispute status is not `INQUIRY_CLOSED`, `WON`, or
-    # `LOST`) associated with all locations.
+    # disputes associated with all locations.
     # @return [ListDisputesResponse Hash] response from the API call
     def list_disputes(cursor: nil,
                       states: nil,
@@ -134,8 +133,8 @@ module Square
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this cursor to retrieve the next
     # set of results for the original query. For more information, see
-    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
-    # .
+    # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
+    # atterns/pagination).
     # @return [ListDisputeEvidenceResponse Hash] response from the API call
     def list_dispute_evidence(dispute_id:,
                               cursor: nil)
@@ -177,8 +176,8 @@ module Square
     # accepts HTTP
     # multipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG, and TIFF
     # formats.
-    # @param [String] dispute_id Required parameter: The ID of the dispute you
-    # want to upload evidence for.
+    # @param [String] dispute_id Required parameter: The ID of the dispute for
+    # which you want to upload evidence.
     # @param [CreateDisputeEvidenceFileRequest] request Optional parameter:
     # Defines the parameters for a `CreateDisputeEvidenceFile` request.
     # @param [File | UploadIO] image_file Optional parameter: Example:
@@ -239,8 +238,8 @@ module Square
     end
 
     # Uploads text to use as evidence for a dispute challenge.
-    # @param [String] dispute_id Required parameter: The ID of the dispute you
-    # want to upload evidence for.
+    # @param [String] dispute_id Required parameter: The ID of the dispute for
+    # which you want to upload evidence.
     # @param [CreateDisputeEvidenceTextRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
@@ -280,12 +279,9 @@ module Square
     end
 
     # Removes specified evidence from a dispute.
-    # Square does not send the bank any evidence that is removed. Also, you
-    # cannot remove evidence after
-    # submitting it to the bank using
-    # [SubmitEvidence]($e/Disputes/SubmitEvidence).
-    # @param [String] dispute_id Required parameter: The ID of the dispute you
-    # want to remove evidence from.
+    # Square does not send the bank any evidence that is removed.
+    # @param [String] dispute_id Required parameter: The ID of the dispute from
+    # which you want to remove evidence.
     # @param [String] evidence_id Required parameter: The ID of the evidence you
     # want to remove.
     # @return [DeleteDisputeEvidenceResponse Hash] response from the API call
@@ -322,13 +318,11 @@ module Square
       )
     end
 
-    # Returns the evidence metadata specified by the evidence ID in the request
-    # URL path
-    # You must maintain a copy of the evidence you upload if you want to
-    # reference it later. You cannot
-    # download the evidence after you upload it.
-    # @param [String] dispute_id Required parameter: The ID of the dispute that
-    # you want to retrieve evidence from.
+    # Returns the metadata for the evidence specified in the request URL path.
+    # You must maintain a copy of any evidence uploaded if you want to reference
+    # it later. Evidence cannot be downloaded after you upload it.
+    # @param [String] dispute_id Required parameter: The ID of the dispute from
+    # which you want to retrieve evidence metadata.
     # @param [String] evidence_id Required parameter: The ID of the evidence to
     # retrieve.
     # @return [RetrieveDisputeEvidenceResponse Hash] response from the API call
@@ -366,15 +360,16 @@ module Square
     end
 
     # Submits evidence to the cardholder's bank.
-    # Before submitting evidence, Square compiles all available evidence. This
-    # includes evidence uploaded
+    # The evidence submitted by this endpoint includes evidence uploaded
     # using the
     # [CreateDisputeEvidenceFile]($e/Disputes/CreateDisputeEvidenceFile) and
     # [CreateDisputeEvidenceText]($e/Disputes/CreateDisputeEvidenceText)
     # endpoints and
-    # evidence automatically provided by Square, when available.
-    # @param [String] dispute_id Required parameter: The ID of the dispute that
-    # you want to submit evidence for.
+    # evidence automatically provided by Square, when available. Evidence cannot
+    # be removed from
+    # a dispute after submission.
+    # @param [String] dispute_id Required parameter: The ID of the dispute for
+    # which you want to submit evidence.
     # @return [SubmitEvidenceResponse Hash] response from the API call
     def submit_evidence(dispute_id:)
       # Prepare query url.

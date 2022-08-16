@@ -19,6 +19,10 @@ loyalty_api = client.loyalty
 * [List Loyalty Programs](../../doc/api/loyalty.md#list-loyalty-programs)
 * [Retrieve Loyalty Program](../../doc/api/loyalty.md#retrieve-loyalty-program)
 * [Calculate Loyalty Points](../../doc/api/loyalty.md#calculate-loyalty-points)
+* [List Loyalty Promotions](../../doc/api/loyalty.md#list-loyalty-promotions)
+* [Create Loyalty Promotion](../../doc/api/loyalty.md#create-loyalty-promotion)
+* [Retrieve Loyalty Promotion](../../doc/api/loyalty.md#retrieve-loyalty-promotion)
+* [Cancel Loyalty Promotion](../../doc/api/loyalty.md#cancel-loyalty-promotion)
 * [Create Loyalty Reward](../../doc/api/loyalty.md#create-loyalty-reward)
 * [Search Loyalty Rewards](../../doc/api/loyalty.md#search-loyalty-rewards)
 * [Delete Loyalty Reward](../../doc/api/loyalty.md#delete-loyalty-reward)
@@ -144,17 +148,19 @@ end
 
 # Accumulate Loyalty Points
 
-Adds points earned from the base loyalty program to a loyalty account.
+Adds points earned from a purchase to a [loyalty account](../../doc/models/loyalty-account.md).
 
-- If you are using the Orders API to manage orders, you only provide the `order_id`.
-  The endpoint reads the order to compute points to add to the buyer's account.
-- If you are not using the Orders API to manage orders,
-  you first perform a client-side computation to compute the points.  
-  For spend-based and visit-based programs, you can first call
-  [CalculateLoyaltyPoints](../../doc/api/loyalty.md#calculate-loyalty-points) to compute the points  
-  that you provide to this endpoint.
+- If you are using the Orders API to manage orders, provide the `order_id`. Square reads the order
+  to compute the points earned from both the base loyalty program and an associated
+  [loyalty promotion](../../doc/models/loyalty-promotion.md). For purchases that qualify for multiple accrual
+  rules, Square computes points based on the accrual rule that grants the most points.
+  For purchases that qualify for multiple promotions, Square computes points based on the most
+  recently created promotion. A purchase must first qualify for program points to be eligible for promotion points.
 
-This endpoint excludes additional points earned from loyalty promotions.
+- If you are not using the Orders API to manage orders, provide `points` with the number of points to add.
+  You must first perform a client-side computation of the points earned from the loyalty program and
+  loyalty promotion. For spend-based and visit-based programs, you can call [CalculateLoyaltyPoints](../../doc/api/loyalty.md#calculate-loyalty-points)
+  to compute the points earned from the loyalty program (but not points earned from a loyalty promotion).
 
 ```ruby
 def accumulate_loyalty_points(account_id:,
@@ -165,7 +171,7 @@ def accumulate_loyalty_points(account_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_id` | `String` | Template, Required | The [loyalty account](../../doc/models/loyalty-account.md) ID to which to add the points. |
+| `account_id` | `String` | Template, Required | The ID of the target [loyalty account](../../doc/models/loyalty-account.md). |
 | `body` | [`Accumulate Loyalty Points Request Hash`](../../doc/models/accumulate-loyalty-points-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -209,7 +215,7 @@ def adjust_loyalty_points(account_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_id` | `String` | Template, Required | The ID of the [loyalty account](../../doc/models/loyalty-account.md) in which to adjust the points. |
+| `account_id` | `String` | Template, Required | The ID of the target [loyalty account](../../doc/models/loyalty-account.md). |
 | `body` | [`Adjust Loyalty Points Request Hash`](../../doc/models/adjust-loyalty-points-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -348,17 +354,21 @@ end
 
 # Calculate Loyalty Points
 
-Calculates the points a purchase earns from the base loyalty program.
+Calculates the number of points a buyer can earn from a purchase. Applications might call this endpoint
+to display the points to the buyer.
 
-- If you are using the Orders API to manage orders, you provide the `order_id` in the request. The
-  endpoint calculates the points by reading the order.
-- If you are not using the Orders API to manage orders, you provide the purchase amount in
-  the request for the endpoint to calculate the points.
+- If you are using the Orders API to manage orders, provide the `order_id` and (optional) `loyalty_account_id`.
+  Square reads the order to compute the points earned from the base loyalty program and an associated
+  [loyalty promotion](../../doc/models/loyalty-promotion.md).
 
-An application might call this endpoint to show the points that a buyer can earn with the
-specific purchase.
-
-For spend-based and visit-based programs, the `tax_mode` setting of the accrual rule indicates how taxes should be treated for loyalty points accrual.
+- If you are not using the Orders API to manage orders, provide `transaction_amount_money` with the
+  purchase amount. Square uses this amount to calculate the points earned from the base loyalty program,
+  but not points earned from a loyalty promotion. For spend-based and visit-based programs, the `tax_mode`
+  setting of the accrual rule indicates how taxes should be treated for loyalty points accrual.
+  If the purchase qualifies for program points, call
+  [ListLoyaltyPromotions](../../doc/api/loyalty.md#list-loyalty-promotions) and perform a client-side computation
+  to calculate whether the purchase also qualifies for promotion points. For more information, see
+  [Calculating promotion points](https://developer.squareup.com/docs/loyalty-api/loyalty-promotions#calculate-promotion-points).
 
 ```ruby
 def calculate_loyalty_points(program_id:,
@@ -369,7 +379,7 @@ def calculate_loyalty_points(program_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `program_id` | `String` | Template, Required | The [loyalty program](../../doc/models/loyalty-program.md) ID, which defines the rules for accruing points. |
+| `program_id` | `String` | Template, Required | The ID of the [loyalty program](../../doc/models/loyalty-program.md), which defines the rules for accruing points. |
 | `body` | [`Calculate Loyalty Points Request Hash`](../../doc/models/calculate-loyalty-points-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -382,8 +392,183 @@ def calculate_loyalty_points(program_id:,
 program_id = 'program_id0'
 body = {}
 body[:order_id] = 'RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY'
+body[:loyalty_account_id] = '79b807d2-d786-46a9-933b-918028d7a8c5'
 
 result = loyalty_api.calculate_loyalty_points(program_id: program_id, body: body)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# List Loyalty Promotions
+
+Lists the loyalty promotions associated with a [loyalty program](../../doc/models/loyalty-program.md).
+Results are sorted by the `created_at` date in descending order (newest to oldest).
+
+```ruby
+def list_loyalty_promotions(program_id:,
+                            status: nil,
+                            cursor: nil,
+                            limit: nil)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `program_id` | `String` | Template, Required | The ID of the base [loyalty program](../../doc/models/loyalty-program.md). To get the program ID,<br>call [RetrieveLoyaltyProgram](../../doc/api/loyalty.md#retrieve-loyalty-program) using the `main` keyword. |
+| `status` | [`String (Loyalty Promotion Status)`](../../doc/models/loyalty-promotion-status.md) | Query, Optional | The status to filter the results by. If a status is provided, only loyalty promotions<br>with the specified status are returned. Otherwise, all loyalty promotions associated with<br>the loyalty program are returned. |
+| `cursor` | `String` | Query, Optional | The cursor returned in the paged response from the previous call to this endpoint.<br>Provide this cursor to retrieve the next page of results for your original request.<br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
+| `limit` | `Integer` | Query, Optional | The maximum number of results to return in a single paged response.<br>The minimum value is 1 and the maximum value is 30. The default value is 30.<br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
+
+## Response Type
+
+[`List Loyalty Promotions Response Hash`](../../doc/models/list-loyalty-promotions-response.md)
+
+## Example Usage
+
+```ruby
+program_id = 'program_id0'
+
+result = loyalty_api.list_loyalty_promotions(program_id: program_id, )
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Create Loyalty Promotion
+
+Creates a loyalty promotion for a [loyalty program](../../doc/models/loyalty-program.md). A loyalty promotion
+enables buyers to earn points in addition to those earned from the base loyalty program.
+
+This endpoint sets the loyalty promotion to the `ACTIVE` or `SCHEDULED` status, depending on the
+`available_time` setting. A loyalty program can have a maximum of 10 loyalty promotions with an
+`ACTIVE` or `SCHEDULED` status.
+
+```ruby
+def create_loyalty_promotion(program_id:,
+                             body:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `program_id` | `String` | Template, Required | The ID of the [loyalty program](../../doc/models/loyalty-program.md) to associate with the promotion.<br>To get the program ID, call [RetrieveLoyaltyProgram](../../doc/api/loyalty.md#retrieve-loyalty-program)<br>using the `main` keyword. |
+| `body` | [`Create Loyalty Promotion Request Hash`](../../doc/models/create-loyalty-promotion-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+[`Create Loyalty Promotion Response Hash`](../../doc/models/create-loyalty-promotion-response.md)
+
+## Example Usage
+
+```ruby
+program_id = 'program_id0'
+body = {}
+body[:loyalty_promotion] = {}
+body[:loyalty_promotion][:name] = 'Tuesday Happy Hour Promo'
+body[:loyalty_promotion][:incentive] = {}
+body[:loyalty_promotion][:incentive][:type] = 'POINTS_MULTIPLIER'
+body[:loyalty_promotion][:incentive][:points_multiplier_data] = {}
+body[:loyalty_promotion][:incentive][:points_multiplier_data][:points_multiplier] = 3
+body[:loyalty_promotion][:available_time] = {}
+body[:loyalty_promotion][:available_time][:time_periods] = ['BEGIN:VEVENT
+DTSTART:20220816T160000
+DURATION:PT2H
+RRULE:FREQ=WEEKLY;BYDAY=TU
+END:VEVENT']
+body[:loyalty_promotion][:trigger_limit] = {}
+body[:loyalty_promotion][:trigger_limit][:times] = 1
+body[:loyalty_promotion][:trigger_limit][:interval] = 'DAY'
+body[:idempotency_key] = 'ec78c477-b1c3-4899-a209-a4e71337c996'
+
+result = loyalty_api.create_loyalty_promotion(program_id: program_id, body: body)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Retrieve Loyalty Promotion
+
+Retrieves a loyalty promotion.
+
+```ruby
+def retrieve_loyalty_promotion(promotion_id:,
+                               program_id:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `promotion_id` | `String` | Template, Required | The ID of the [loyalty promotion](../../doc/models/loyalty-promotion.md) to retrieve. |
+| `program_id` | `String` | Template, Required | The ID of the base [loyalty program](../../doc/models/loyalty-program.md). To get the program ID,<br>call [RetrieveLoyaltyProgram](../../doc/api/loyalty.md#retrieve-loyalty-program) using the `main` keyword. |
+
+## Response Type
+
+[`Retrieve Loyalty Promotion Response Hash`](../../doc/models/retrieve-loyalty-promotion-response.md)
+
+## Example Usage
+
+```ruby
+promotion_id = 'promotion_id0'
+program_id = 'program_id0'
+
+result = loyalty_api.retrieve_loyalty_promotion(promotion_id: promotion_id, program_id: program_id)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Cancel Loyalty Promotion
+
+Cancels a loyalty promotion. Use this endpoint to cancel an `ACTIVE` promotion earlier than the
+end date, cancel an `ACTIVE` promotion when an end date is not specified, or cancel a `SCHEDULED` promotion.
+Because updating a promotion is not supported, you can also use this endpoint to cancel a promotion before
+you create a new one.
+
+This endpoint sets the loyalty promotion to the `CANCELED` state
+
+```ruby
+def cancel_loyalty_promotion(promotion_id:,
+                             program_id:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `promotion_id` | `String` | Template, Required | The ID of the [loyalty promotion](../../doc/models/loyalty-promotion.md) to cancel. You can cancel a<br>promotion that has an `ACTIVE` or `SCHEDULED` status. |
+| `program_id` | `String` | Template, Required | The ID of the base [loyalty program](../../doc/models/loyalty-program.md). |
+
+## Response Type
+
+[`Cancel Loyalty Promotion Response Hash`](../../doc/models/cancel-loyalty-promotion-response.md)
+
+## Example Usage
+
+```ruby
+promotion_id = 'promotion_id0'
+program_id = 'program_id0'
+
+result = loyalty_api.cancel_loyalty_promotion(promotion_id: promotion_id, program_id: program_id)
 
 if result.success?
   puts result.data
