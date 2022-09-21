@@ -10,28 +10,28 @@ v1_transactions_api = client.v1_transactions
 
 ## Methods
 
-* [List Orders](../../doc/api/v1-transactions.md#list-orders)
-* [Retrieve Order](../../doc/api/v1-transactions.md#retrieve-order)
-* [Update Order](../../doc/api/v1-transactions.md#update-order)
-* [List Payments](../../doc/api/v1-transactions.md#list-payments)
-* [Retrieve Payment](../../doc/api/v1-transactions.md#retrieve-payment)
-* [List Refunds](../../doc/api/v1-transactions.md#list-refunds)
-* [Create Refund](../../doc/api/v1-transactions.md#create-refund)
-* [List Settlements](../../doc/api/v1-transactions.md#list-settlements)
-* [Retrieve Settlement](../../doc/api/v1-transactions.md#retrieve-settlement)
+* [V1 List Orders](../../doc/api/v1-transactions.md#v1-list-orders)
+* [V1 Retrieve Order](../../doc/api/v1-transactions.md#v1-retrieve-order)
+* [V1 Update Order](../../doc/api/v1-transactions.md#v1-update-order)
+* [V1 List Payments](../../doc/api/v1-transactions.md#v1-list-payments)
+* [V1 Retrieve Payment](../../doc/api/v1-transactions.md#v1-retrieve-payment)
+* [V1 List Refunds](../../doc/api/v1-transactions.md#v1-list-refunds)
+* [V1 Create Refund](../../doc/api/v1-transactions.md#v1-create-refund)
+* [V1 List Settlements](../../doc/api/v1-transactions.md#v1-list-settlements)
+* [V1 Retrieve Settlement](../../doc/api/v1-transactions.md#v1-retrieve-settlement)
 
 
-# List Orders
+# V1 List Orders
 
 **This endpoint is deprecated.**
 
 Provides summary information for a merchant's online store orders.
 
 ```ruby
-def list_orders(location_id:,
-                order: nil,
-                limit: nil,
-                batch_token: nil)
+def v1_list_orders(location_id:,
+                   order: nil,
+                   limit: nil,
+                   batch_token: nil)
 ```
 
 ## Parameters
@@ -52,7 +52,7 @@ def list_orders(location_id:,
 ```ruby
 location_id = 'location_id4'
 
-result = v1_transactions_api.list_orders(location_id: location_id, )
+result = v1_transactions_api.v1_list_orders(location_id: location_id, )
 
 if result.success?
   puts result.data
@@ -62,15 +62,15 @@ end
 ```
 
 
-# Retrieve Order
+# V1 Retrieve Order
 
 **This endpoint is deprecated.**
 
 Provides comprehensive information for a single online store order, including the order's history.
 
 ```ruby
-def retrieve_order(location_id:,
-                   order_id:)
+def v1_retrieve_order(location_id:,
+                      order_id:)
 ```
 
 ## Parameters
@@ -90,7 +90,7 @@ def retrieve_order(location_id:,
 location_id = 'location_id4'
 order_id = 'order_id6'
 
-result = v1_transactions_api.retrieve_order(location_id: location_id, order_id: order_id)
+result = v1_transactions_api.v1_retrieve_order(location_id: location_id, order_id: order_id)
 
 if result.success?
   puts result.data
@@ -100,16 +100,16 @@ end
 ```
 
 
-# Update Order
+# V1 Update Order
 
 **This endpoint is deprecated.**
 
 Updates the details of an online store order. Every update you perform on an order corresponds to one of three actions:
 
 ```ruby
-def update_order(location_id:,
-                 order_id:,
-                 body:)
+def v1_update_order(location_id:,
+                    order_id:,
+                    body:)
 ```
 
 ## Parameters
@@ -132,7 +132,7 @@ order_id = 'order_id6'
 body = {}
 body[:action] = 'REFUND'
 
-result = v1_transactions_api.update_order(location_id: location_id, order_id: order_id, body: body)
+result = v1_transactions_api.v1_update_order(location_id: location_id, order_id: order_id, body: body)
 
 if result.success?
   puts result.data
@@ -142,7 +142,7 @@ end
 ```
 
 
-# List Payments
+# V1 List Payments
 
 **This endpoint is deprecated.**
 
@@ -159,13 +159,13 @@ list an offline payment chronologically between online payments that
 were seen in a previous request.
 
 ```ruby
-def list_payments(location_id:,
-                  order: nil,
-                  begin_time: nil,
-                  end_time: nil,
-                  limit: nil,
-                  batch_token: nil,
-                  include_partial: false)
+def v1_list_payments(location_id:,
+                     order: nil,
+                     begin_time: nil,
+                     end_time: nil,
+                     limit: nil,
+                     batch_token: nil,
+                     include_partial: false)
 ```
 
 ## Parameters
@@ -190,7 +190,7 @@ def list_payments(location_id:,
 location_id = 'location_id4'
 include_partial = false
 
-result = v1_transactions_api.list_payments(location_id: location_id, include_partial: include_partial)
+result = v1_transactions_api.v1_list_payments(location_id: location_id, include_partial: include_partial)
 
 if result.success?
   puts result.data
@@ -200,15 +200,15 @@ end
 ```
 
 
-# Retrieve Payment
+# V1 Retrieve Payment
 
 **This endpoint is deprecated.**
 
 Provides comprehensive information for a single payment.
 
 ```ruby
-def retrieve_payment(location_id:,
-                     payment_id:)
+def v1_retrieve_payment(location_id:,
+                        payment_id:)
 ```
 
 ## Parameters
@@ -228,7 +228,7 @@ def retrieve_payment(location_id:,
 location_id = 'location_id4'
 payment_id = 'payment_id0'
 
-result = v1_transactions_api.retrieve_payment(location_id: location_id, payment_id: payment_id)
+result = v1_transactions_api.v1_retrieve_payment(location_id: location_id, payment_id: payment_id)
 
 if result.success?
   puts result.data
@@ -238,19 +238,19 @@ end
 ```
 
 
-# List Refunds
+# V1 List Refunds
 
 **This endpoint is deprecated.**
 
 Provides the details for all refunds initiated by a merchant or any of the merchant's mobile staff during a date range. Date ranges cannot exceed one year in length.
 
 ```ruby
-def list_refunds(location_id:,
-                 order: nil,
-                 begin_time: nil,
-                 end_time: nil,
-                 limit: nil,
-                 batch_token: nil)
+def v1_list_refunds(location_id:,
+                    order: nil,
+                    begin_time: nil,
+                    end_time: nil,
+                    limit: nil,
+                    batch_token: nil)
 ```
 
 ## Parameters
@@ -273,7 +273,7 @@ def list_refunds(location_id:,
 ```ruby
 location_id = 'location_id4'
 
-result = v1_transactions_api.list_refunds(location_id: location_id, )
+result = v1_transactions_api.v1_list_refunds(location_id: location_id, )
 
 if result.success?
   puts result.data
@@ -283,7 +283,7 @@ end
 ```
 
 
-# Create Refund
+# V1 Create Refund
 
 **This endpoint is deprecated.**
 
@@ -301,8 +301,8 @@ purposes, you can create fake cash payments in Square Point of Sale and
 refund them.
 
 ```ruby
-def create_refund(location_id:,
-                  body:)
+def v1_create_refund(location_id:,
+                     body:)
 ```
 
 ## Parameters
@@ -325,7 +325,7 @@ body[:payment_id] = 'payment_id6'
 body[:type] = 'FULL'
 body[:reason] = 'reason8'
 
-result = v1_transactions_api.create_refund(location_id: location_id, body: body)
+result = v1_transactions_api.v1_create_refund(location_id: location_id, body: body)
 
 if result.success?
   puts result.data
@@ -335,7 +335,7 @@ end
 ```
 
 
-# List Settlements
+# V1 List Settlements
 
 **This endpoint is deprecated.**
 
@@ -347,13 +347,13 @@ ranges cannot exceed one year in length.
 information.
 
 ```ruby
-def list_settlements(location_id:,
-                     order: nil,
-                     begin_time: nil,
-                     end_time: nil,
-                     limit: nil,
-                     status: nil,
-                     batch_token: nil)
+def v1_list_settlements(location_id:,
+                        order: nil,
+                        begin_time: nil,
+                        end_time: nil,
+                        limit: nil,
+                        status: nil,
+                        batch_token: nil)
 ```
 
 ## Parameters
@@ -377,7 +377,7 @@ def list_settlements(location_id:,
 ```ruby
 location_id = 'location_id4'
 
-result = v1_transactions_api.list_settlements(location_id: location_id, )
+result = v1_transactions_api.v1_list_settlements(location_id: location_id, )
 
 if result.success?
   puts result.data
@@ -387,7 +387,7 @@ end
 ```
 
 
-# Retrieve Settlement
+# V1 Retrieve Settlement
 
 **This endpoint is deprecated.**
 
@@ -410,8 +410,8 @@ a bank account within 3 business days, but in exceptional cases it may
 take longer.
 
 ```ruby
-def retrieve_settlement(location_id:,
-                        settlement_id:)
+def v1_retrieve_settlement(location_id:,
+                           settlement_id:)
 ```
 
 ## Parameters
@@ -431,7 +431,7 @@ def retrieve_settlement(location_id:,
 location_id = 'location_id4'
 settlement_id = 'settlement_id0'
 
-result = v1_transactions_api.retrieve_settlement(location_id: location_id, settlement_id: settlement_id)
+result = v1_transactions_api.v1_retrieve_settlement(location_id: location_id, settlement_id: settlement_id)
 
 if result.success?
   puts result.data

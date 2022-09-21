@@ -16,11 +16,11 @@ module Square
     # retrieve the next set of results for your original query to the
     # endpoint.
     # @return [List of V1Order Hash] response from the API call
-    def list_orders(location_id:,
-                    order: nil,
-                    limit: nil,
-                    batch_token: nil)
-      warn 'Endpoint list_orders in V1TransactionsApi is deprecated'
+    def v1_list_orders(location_id:,
+                       order: nil,
+                       limit: nil,
+                       batch_token: nil)
+      warn 'Endpoint v1_list_orders in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/orders'
@@ -65,9 +65,9 @@ module Square
     # You obtain this value from Order objects returned by the List Orders
     # endpoint
     # @return [V1Order Hash] response from the API call
-    def retrieve_order(location_id:,
-                       order_id:)
-      warn 'Endpoint retrieve_order in V1TransactionsApi is deprecated'
+    def v1_retrieve_order(location_id:,
+                          order_id:)
+      warn 'Endpoint v1_retrieve_order in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/orders/{order_id}'
@@ -110,10 +110,10 @@ module Square
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
     # @return [V1Order Hash] response from the API call
-    def update_order(location_id:,
-                     order_id:,
-                     body:)
-      warn 'Endpoint update_order in V1TransactionsApi is deprecated'
+    def v1_update_order(location_id:,
+                        order_id:,
+                        body:)
+      warn 'Endpoint v1_update_order in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/orders/{order_id}'
@@ -180,14 +180,14 @@ module Square
     # Partial payments will have the tenders collected so far, but the
     # itemizations will be empty until the payment is completed.
     # @return [List of V1Payment Hash] response from the API call
-    def list_payments(location_id:,
-                      order: nil,
-                      begin_time: nil,
-                      end_time: nil,
-                      limit: nil,
-                      batch_token: nil,
-                      include_partial: false)
-      warn 'Endpoint list_payments in V1TransactionsApi is deprecated'
+    def v1_list_payments(location_id:,
+                         order: nil,
+                         begin_time: nil,
+                         end_time: nil,
+                         limit: nil,
+                         batch_token: nil,
+                         include_partial: false)
+      warn 'Endpoint v1_list_payments in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/payments'
@@ -235,9 +235,9 @@ module Square
     # endpoint, Settlement objects returned by the List Settlements endpoint, or
     # Refund objects returned by the List Refunds endpoint.
     # @return [V1Payment Hash] response from the API call
-    def retrieve_payment(location_id:,
-                         payment_id:)
-      warn 'Endpoint retrieve_payment in V1TransactionsApi is deprecated'
+    def v1_retrieve_payment(location_id:,
+                            payment_id:)
+      warn 'Endpoint v1_retrieve_payment in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/payments/{payment_id}'
@@ -293,13 +293,13 @@ module Square
     # retrieve the next set of results for your original query to the
     # endpoint.
     # @return [List of V1Refund Hash] response from the API call
-    def list_refunds(location_id:,
-                     order: nil,
-                     begin_time: nil,
-                     end_time: nil,
-                     limit: nil,
-                     batch_token: nil)
-      warn 'Endpoint list_refunds in V1TransactionsApi is deprecated'
+    def v1_list_refunds(location_id:,
+                        order: nil,
+                        begin_time: nil,
+                        end_time: nil,
+                        limit: nil,
+                        batch_token: nil)
+      warn 'Endpoint v1_list_refunds in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/refunds'
@@ -354,9 +354,9 @@ module Square
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
     # @return [V1Refund Hash] response from the API call
-    def create_refund(location_id:,
-                      body:)
-      warn 'Endpoint create_refund in V1TransactionsApi is deprecated'
+    def v1_create_refund(location_id:,
+                         body:)
+      warn 'Endpoint v1_create_refund in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/refunds'
@@ -417,14 +417,14 @@ module Square
     # retrieve the next set of results for your original query to the
     # endpoint.
     # @return [List of V1Settlement Hash] response from the API call
-    def list_settlements(location_id:,
-                         order: nil,
-                         begin_time: nil,
-                         end_time: nil,
-                         limit: nil,
-                         status: nil,
-                         batch_token: nil)
-      warn 'Endpoint list_settlements in V1TransactionsApi is deprecated'
+    def v1_list_settlements(location_id:,
+                            order: nil,
+                            begin_time: nil,
+                            end_time: nil,
+                            limit: nil,
+                            status: nil,
+                            batch_token: nil)
+      warn 'Endpoint v1_list_settlements in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/settlements'
@@ -485,9 +485,9 @@ module Square
     # Square-issued ID. You obtain this value from Settlement objects returned
     # by the List Settlements endpoint.
     # @return [V1Settlement Hash] response from the API call
-    def retrieve_settlement(location_id:,
-                            settlement_id:)
-      warn 'Endpoint retrieve_settlement in V1TransactionsApi is deprecated'
+    def v1_retrieve_settlement(location_id:,
+                               settlement_id:)
+      warn 'Endpoint v1_retrieve_settlement in V1TransactionsApi is deprecated'
       # Prepare query url.
       _query_builder = config.get_base_uri
       _query_builder << '/v1/{location_id}/settlements/{settlement_id}'

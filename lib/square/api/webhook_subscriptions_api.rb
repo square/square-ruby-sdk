@@ -56,8 +56,7 @@ module Square
     # @param [Integer] limit Optional parameter: The maximum number of results
     # to be returned in a single page. It is possible to receive fewer results
     # than the specified limit on a given page. The default value of 100 is also
-    # the maximum allowed value. If the provided value is greater than 100, it
-    # is ignored and the default value is used instead.  Default: 100
+    # the maximum allowed value.  Default: 100
     # @return [ListWebhookSubscriptionsResponse Hash] response from the API call
     def list_webhook_subscriptions(cursor: nil,
                                    include_disabled: false,
