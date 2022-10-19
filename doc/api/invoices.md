@@ -115,6 +115,7 @@ body[:invoice][:accepted_payment_methods] = {}
 body[:invoice][:accepted_payment_methods][:card] = true
 body[:invoice][:accepted_payment_methods][:square_gift_card] = false
 body[:invoice][:accepted_payment_methods][:bank_account] = false
+body[:invoice][:accepted_payment_methods][:buy_now_pay_later] = false
 body[:invoice][:custom_fields] = []
 
 

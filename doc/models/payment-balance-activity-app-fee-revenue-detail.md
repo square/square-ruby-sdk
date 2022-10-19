@@ -1,23 +1,23 @@
 
-# Payment Balance Activity Tax on Fee Detail
+# Payment Balance Activity App Fee Revenue Detail
 
 ## Structure
 
-`Payment Balance Activity Tax on Fee Detail`
+`Payment Balance Activity App Fee Revenue Detail`
 
 ## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `payment_id` | `String` | Optional | The ID of the payment associated with this activity. |
-| `tax_rate_description` | `String` | Optional | The description of the tax rate being applied. For example: "GST", "HST". |
+| `location_id` | `String` | Optional | The ID of the location of the merchant associated with the payment activity |
 
 ## Example (as JSON)
 
 ```json
 {
   "payment_id": null,
-  "tax_rate_description": null
+  "location_id": null
 }
 ```
 
