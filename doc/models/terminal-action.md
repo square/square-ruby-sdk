@@ -21,6 +21,7 @@ Represents an action processed by the Square Terminal.
 | `app_id` | `String` | Optional | The ID of the application that created the action. |
 | `type` | [`String (Terminal Action Action Type)`](../../doc/models/terminal-action-action-type.md) | Optional | Describes the type of this unit and indicates which field contains the unit information. This is an ‘open’ enum. |
 | `save_card_options` | [`Save Card Options Hash`](../../doc/models/save-card-options.md) | Optional | Describes save-card action fields. |
+| `receipt_options` | [`Receipt Options Hash`](../../doc/models/receipt-options.md) | Optional | Describes receipt action fields. |
 | `device_metadata` | [`Device Metadata Hash`](../../doc/models/device-metadata.md) | Optional | - |
 
 ## Example (as JSON)
@@ -32,6 +33,7 @@ Represents an action processed by the Square Terminal.
   "cancel_reason": null,
   "type": null,
   "save_card_options": null,
+  "receipt_options": null,
   "device_metadata": null
 }
 ```

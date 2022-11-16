@@ -451,7 +451,6 @@ customer_id = 'customer_id8'
 key = 'key0'
 body = {}
 body[:custom_attribute] = {}
-body[:custom_attribute][:value] = JSON.parse('"Dune"')
 
 result = customer_custom_attributes_api.upsert_customer_custom_attribute(customer_id: customer_id, key: key, body: body)
 
