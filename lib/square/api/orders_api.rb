@@ -250,8 +250,8 @@ module Square
     # is
     # being applied.
     # - If deleting fields, the [dot notation
-    # paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot
-    # -notation)
+    # paths](https://developer.squareup.com/docs/orders-api/manage-orders/update
+    # -orders#identifying-fields-to-delete)
     # identifying the fields to clear.
     # To pay for an order, see
     # [Pay for
