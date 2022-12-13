@@ -168,5 +168,52 @@ module Square
         _response, data: decoded, errors: _errors
       )
     end
+
+    # Returns information about an [OAuth access
+    # token](https://developer.squareup.com/docs/build-basics/access-tokens#get-
+    # an-oauth-access-token) or an application’s [personal access
+    # token](https://developer.squareup.com/docs/build-basics/access-tokens#get-
+    # a-personal-access-token).
+    # Add the access token to the Authorization header of the request.
+    # __Important:__ The `Authorization` header you provide to this endpoint
+    # must have the following format:
+    # ```
+    # Authorization: Bearer ACCESS_TOKEN
+    # ```
+    # where `ACCESS_TOKEN` is a
+    # [valid production authorization
+    # credential](https://developer.squareup.com/docs/build-basics/access-tokens
+    # ).
+    # If the access token is expired or not a valid access token, the endpoint
+    # returns an `UNAUTHORIZED` error.
+    # @param [String] authorization Required parameter: Client
+    # APPLICATION_SECRET
+    # @return [RetrieveTokenStatusResponse Hash] response from the API call
+    def retrieve_token_status(authorization:)
+      # Prepare query url.
+      _query_builder = config.get_base_uri
+      _query_builder << '/oauth2/token/status'
+      _query_url = APIHelper.clean_url _query_builder
+
+      # Prepare headers.
+      _headers = {
+        'accept' => 'application/json',
+        'Authorization' => authorization
+      }
+
+      # Prepare and execute HttpRequest.
+      _request = config.http_client.post(
+        _query_url,
+        headers: _headers
+      )
+      _response = execute_request(_request)
+
+      # Return appropriate response type.
+      decoded = APIHelper.json_deserialize(_response.raw_body)
+      _errors = APIHelper.map_response(decoded, ['errors'])
+      ApiResponse.new(
+        _response, data: decoded, errors: _errors
+      )
+    end
   end
 end

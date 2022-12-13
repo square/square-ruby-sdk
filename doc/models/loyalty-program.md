@@ -15,55 +15,24 @@ For more information, see [Loyalty Program Overview](https://developer.squareup.
 |  --- | --- | --- | --- |
 | `id` | `String` | Optional | The Square-assigned ID of the loyalty program. Updates to<br>the loyalty program do not modify the identifier.<br>**Constraints**: *Maximum Length*: `36` |
 | `status` | [`String (Loyalty Program Status)`](../../doc/models/loyalty-program-status.md) | Optional | Indicates whether the program is currently active. |
-| `reward_tiers` | [`Array<Loyalty Program Reward Tier Hash>`](../../doc/models/loyalty-program-reward-tier.md) | Required | The list of rewards for buyers, sorted by ascending points. |
+| `reward_tiers` | [`Array<Loyalty Program Reward Tier Hash>`](../../doc/models/loyalty-program-reward-tier.md) | Optional | The list of rewards for buyers, sorted by ascending points. |
 | `expiration_policy` | [`Loyalty Program Expiration Policy Hash`](../../doc/models/loyalty-program-expiration-policy.md) | Optional | Describes when the loyalty program expires. |
-| `terminology` | [`Loyalty Program Terminology Hash`](../../doc/models/loyalty-program-terminology.md) | Required | Represents the naming used for loyalty points. |
+| `terminology` | [`Loyalty Program Terminology Hash`](../../doc/models/loyalty-program-terminology.md) | Optional | Represents the naming used for loyalty points. |
 | `location_ids` | `Array<String>` | Optional | The [locations](../../doc/models/location.md) at which the program is active. |
 | `created_at` | `String` | Optional | The timestamp when the program was created, in RFC 3339 format. |
 | `updated_at` | `String` | Optional | The timestamp when the reward was last updated, in RFC 3339 format. |
-| `accrual_rules` | [`Array<Loyalty Program Accrual Rule Hash>`](../../doc/models/loyalty-program-accrual-rule.md) | Required | Defines how buyers can earn loyalty points from the base loyalty program.<br>To check for associated [loyalty promotions](../../doc/models/loyalty-promotion.md) that enable<br>buyers to earn extra points, call [ListLoyaltyPromotions](../../doc/api/loyalty.md#list-loyalty-promotions). |
+| `accrual_rules` | [`Array<Loyalty Program Accrual Rule Hash>`](../../doc/models/loyalty-program-accrual-rule.md) | Optional | Defines how buyers can earn loyalty points from the base loyalty program.<br>To check for associated [loyalty promotions](../../doc/models/loyalty-promotion.md) that enable<br>buyers to earn extra points, call [ListLoyaltyPromotions](../../doc/api/loyalty.md#list-loyalty-promotions). |
 
 ## Example (as JSON)
 
 ```json
 {
   "status": null,
-  "reward_tiers": [
-    {
-      "points": 249,
-      "definition": null,
-      "pricing_rule_reference": null
-    },
-    {
-      "points": 248,
-      "definition": null,
-      "pricing_rule_reference": null
-    }
-  ],
+  "reward_tiers": null,
   "expiration_policy": null,
-  "terminology": {
-    "one": "one0",
-    "other": "other6"
-  },
+  "terminology": null,
   "location_ids": null,
-  "accrual_rules": [
-    {
-      "accrual_type": "ITEM_VARIATION",
-      "points": null,
-      "visit_data": null,
-      "spend_data": null,
-      "item_variation_data": null,
-      "category_data": null
-    },
-    {
-      "accrual_type": "SPEND",
-      "points": null,
-      "visit_data": null,
-      "spend_data": null,
-      "item_variation_data": null,
-      "category_data": null
-    }
-  ]
+  "accrual_rules": null
 }
 ```
 
