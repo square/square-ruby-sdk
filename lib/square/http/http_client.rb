@@ -106,7 +106,7 @@ module Square
     # @param [Hash, Optional] The context for the HTTP Request.
     def delete(query_url,
                headers: {},
-               parameters: {},
+               parameters: nil,
                context: {})
       HttpRequest.new(HttpMethodEnum::DELETE,
                       query_url,
