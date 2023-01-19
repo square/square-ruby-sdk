@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2022-12-14'` |
+| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2023-01-19'` |
 | `access_token` | `String` | The OAuth 2.0 Access Token to use for API requests. |
 | `custom_url` | `String` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `'https://connect.squareup.com'` |
 | `environment` | `string` | The API environment. <br> **Default: `production`** |
@@ -24,7 +24,7 @@ The API client can be initialized as follows:
 
 ```ruby
 client = Square::Client.new(
-  square_version: '2022-12-14',
+  square_version: '2023-01-19',
   access_token: 'AccessToken',
   environment: 'production',
   custom_url: 'https://connect.squareup.com',
@@ -97,6 +97,7 @@ The gateway for the SDK. This class acts as a factory for the Apis and also hold
 | invoices | Gets InvoicesApi |
 | labor | Gets LaborApi |
 | locations | Gets LocationsApi |
+| location_custom_attributes | Gets LocationCustomAttributesApi |
 | checkout | Gets CheckoutApi |
 | transactions | Gets TransactionsApi |
 | loyalty | Gets LoyaltyApi |

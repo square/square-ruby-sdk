@@ -20,7 +20,7 @@ module Square
                    retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
                    retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2022-12-14', access_token: '',
+                   square_version: '2023-01-19', access_token: '',
                    user_agent_detail: '', additional_headers: {})
       # The Faraday connection object passed by the SDK user for making requests
       @connection = connection

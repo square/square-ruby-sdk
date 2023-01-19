@@ -4,7 +4,7 @@ module Square
     attr_reader :config
 
     def sdk_version
-      '26.0.0.20221214'
+      '26.1.0.20230119'
     end
 
     def square_version
@@ -153,6 +153,12 @@ module Square
       @locations ||= LocationsApi.new config
     end
 
+    # Access to location_custom_attributes controller.
+    # @return [LocationCustomAttributesApi] Returns the controller instance.
+    def location_custom_attributes
+      @location_custom_attributes ||= LocationCustomAttributesApi.new config
+    end
+
     # Access to checkout controller.
     # @return [CheckoutApi] Returns the controller instance.
     def checkout
@@ -254,7 +260,7 @@ module Square
                    retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
                    retry_methods: %i[get put], environment: 'production',
                    custom_url: 'https://connect.squareup.com',
-                   square_version: '2022-12-14', access_token: '',
+                   square_version: '2023-01-19', access_token: '',
                    user_agent_detail: '', additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(connection: connection, adapter: adapter,
