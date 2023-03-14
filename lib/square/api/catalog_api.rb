@@ -1,10 +1,6 @@
 module Square
   # CatalogApi
   class CatalogApi < BaseApi
-    def initialize(config, http_call_back: nil)
-      super(config, http_call_back: http_call_back)
-    end
-
     # Deletes a set of [CatalogItem]($m/CatalogItem)s based on the
     # provided list of target IDs and returns a set of successfully deleted IDs
     # in
@@ -26,32 +22,20 @@ module Square
     # corresponding object definition for field details.
     # @return [BatchDeleteCatalogObjectsResponse Hash] response from the API call
     def batch_delete_catalog_objects(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/catalog/batch-delete'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/catalog/batch-delete',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns a set of objects based on the provided ID.
@@ -65,32 +49,20 @@ module Square
     # corresponding object definition for field details.
     # @return [BatchRetrieveCatalogObjectsResponse Hash] response from the API call
     def batch_retrieve_catalog_objects(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/catalog/batch-retrieve'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/catalog/batch-retrieve',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Creates or updates up to 10,000 target objects based on the provided
@@ -117,32 +89,20 @@ module Square
     # corresponding object definition for field details.
     # @return [BatchUpsertCatalogObjectsResponse Hash] response from the API call
     def batch_upsert_catalog_objects(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/catalog/batch-upsert'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/catalog/batch-upsert',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Uploads an image file to be represented by a
@@ -158,52 +118,21 @@ module Square
     # @return [CreateCatalogImageResponse Hash] response from the API call
     def create_catalog_image(request: nil,
                              image_file: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/catalog/images'
-      _query_url = APIHelper.clean_url _query_builder
-
-      if image_file.is_a? FileWrapper
-        image_file_wrapper = image_file.file
-        image_file_content_type = image_file.content_type
-      else
-        image_file_wrapper = image_file
-        image_file_content_type = 'image/jpeg'
-      end
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare form parameters.
-      _parameters = {
-        'request' => Faraday::UploadIO.new(
-          StringIO.new(request.to_json),
-          'application/json'
-        ),
-        'image_file' => Faraday::UploadIO.new(
-          image_file_wrapper,
-          image_file_content_type
-        )
-      }
-      _parameters = APIHelper.form_encode_parameters(_parameters)
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: _parameters
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/catalog/images',
+                                     'default')
+                   .multipart_param(new_parameter(StringIO.new(request.to_json), key: 'request')
+                                     .default_content_type('application/json; charset=utf-8'))
+                   .multipart_param(new_parameter(image_file, key: 'image_file')
+                                     .default_content_type('image/jpeg'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Uploads a new image file to replace the existing one in the specified
@@ -219,86 +148,40 @@ module Square
     def update_catalog_image(image_id:,
                              request: nil,
                              image_file: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/catalog/images/{image_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'image_id' => { 'value' => image_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      if image_file.is_a? FileWrapper
-        image_file_wrapper = image_file.file
-        image_file_content_type = image_file.content_type
-      else
-        image_file_wrapper = image_file
-        image_file_content_type = 'image/jpeg'
-      end
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare form parameters.
-      _parameters = {
-        'request' => Faraday::UploadIO.new(
-          StringIO.new(request.to_json),
-          'application/json'
-        ),
-        'image_file' => Faraday::UploadIO.new(
-          image_file_wrapper,
-          image_file_content_type
-        )
-      }
-      _parameters = APIHelper.form_encode_parameters(_parameters)
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.put(
-        _query_url,
-        headers: _headers,
-        parameters: _parameters
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::PUT,
+                                     '/v2/catalog/images/{image_id}',
+                                     'default')
+                   .template_param(new_parameter(image_id, key: 'image_id')
+                                    .should_encode(true))
+                   .multipart_param(new_parameter(StringIO.new(request.to_json), key: 'request')
+                                     .default_content_type('application/json; charset=utf-8'))
+                   .multipart_param(new_parameter(image_file, key: 'image_file')
+                                     .default_content_type('image/jpeg'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Retrieves information about the Square Catalog API, such as batch size
     # limits that can be used by the `BatchUpsertCatalogObjects` endpoint.
     # @return [CatalogInfoResponse Hash] response from the API call
     def catalog_info
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/catalog/info'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/catalog/info',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns a list of all [CatalogObject]($m/CatalogObject)s of the specified
@@ -339,36 +222,20 @@ module Square
     def list_catalog(cursor: nil,
                      types: nil,
                      catalog_version: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/catalog/list'
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'cursor' => cursor,
-        'types' => types,
-        'catalog_version' => catalog_version
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/catalog/list',
+                                     'default')
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .query_param(new_parameter(types, key: 'types'))
+                   .query_param(new_parameter(catalog_version, key: 'catalog_version'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Creates a new or updates the specified [CatalogObject]($m/CatalogObject).
@@ -382,32 +249,20 @@ module Square
     # object definition for field details.
     # @return [UpsertCatalogObjectResponse Hash] response from the API call
     def upsert_catalog_object(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/catalog/object'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/catalog/object',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Deletes a single [CatalogObject]($m/CatalogObject) based on the
@@ -429,34 +284,19 @@ module Square
     # catalog item will delete its catalog item variations).
     # @return [DeleteCatalogObjectResponse Hash] response from the API call
     def delete_catalog_object(object_id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/catalog/object/{object_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'object_id' => { 'value' => object_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.delete(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::DELETE,
+                                     '/v2/catalog/object/{object_id}',
+                                     'default')
+                   .template_param(new_parameter(object_id, key: 'object_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns a single [CatalogItem]($m/CatalogItem) as a
@@ -492,39 +332,21 @@ module Square
     def retrieve_catalog_object(object_id:,
                                 include_related_objects: false,
                                 catalog_version: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/catalog/object/{object_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'object_id' => { 'value' => object_id, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'include_related_objects' => include_related_objects,
-        'catalog_version' => catalog_version
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/catalog/object/{object_id}',
+                                     'default')
+                   .template_param(new_parameter(object_id, key: 'object_id')
+                                    .should_encode(true))
+                   .query_param(new_parameter(include_related_objects, key: 'include_related_objects'))
+                   .query_param(new_parameter(catalog_version, key: 'catalog_version'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Searches for [CatalogObject]($m/CatalogObject) of any type by matching
@@ -549,32 +371,20 @@ module Square
     # object definition for field details.
     # @return [SearchCatalogObjectsResponse Hash] response from the API call
     def search_catalog_objects(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/catalog/search'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/catalog/search',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Searches for catalog items or item variations by matching supported search
@@ -599,32 +409,20 @@ module Square
     # object definition for field details.
     # @return [SearchCatalogItemsResponse Hash] response from the API call
     def search_catalog_items(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/catalog/search-catalog-items'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/catalog/search-catalog-items',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Updates the [CatalogModifierList]($m/CatalogModifierList) objects
@@ -635,32 +433,20 @@ module Square
     # object definition for field details.
     # @return [UpdateItemModifierListsResponse Hash] response from the API call
     def update_item_modifier_lists(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/catalog/update-item-modifier-lists'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/catalog/update-item-modifier-lists',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Updates the [CatalogTax]($m/CatalogTax) objects that apply to the
@@ -671,32 +457,20 @@ module Square
     # object definition for field details.
     # @return [UpdateItemTaxesResponse Hash] response from the API call
     def update_item_taxes(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/catalog/update-item-taxes'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/catalog/update-item-taxes',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
   end
 end

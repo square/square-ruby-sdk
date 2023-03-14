@@ -1,10 +1,6 @@
 module Square
   # CashDrawersApi
   class CashDrawersApi < BaseApi
-    def initialize(config, http_call_back: nil)
-      super(config, http_call_back: http_call_back)
-    end
-
     # Provides the details for all of the cash drawer shifts for a location
     # in a date range.
     # @param [String] location_id Required parameter: The ID of the location to
@@ -27,39 +23,23 @@ module Square
                                 end_time: nil,
                                 limit: nil,
                                 cursor: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/cash-drawers/shifts'
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'location_id' => location_id,
-        'sort_order' => sort_order,
-        'begin_time' => begin_time,
-        'end_time' => end_time,
-        'limit' => limit,
-        'cursor' => cursor
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/cash-drawers/shifts',
+                                     'default')
+                   .query_param(new_parameter(location_id, key: 'location_id'))
+                   .query_param(new_parameter(sort_order, key: 'sort_order'))
+                   .query_param(new_parameter(begin_time, key: 'begin_time'))
+                   .query_param(new_parameter(end_time, key: 'end_time'))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Provides the summary details for a single cash drawer shift. See
@@ -71,38 +51,20 @@ module Square
     # @return [RetrieveCashDrawerShiftResponse Hash] response from the API call
     def retrieve_cash_drawer_shift(location_id:,
                                    shift_id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/cash-drawers/shifts/{shift_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'shift_id' => { 'value' => shift_id, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'location_id' => location_id
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/cash-drawers/shifts/{shift_id}',
+                                     'default')
+                   .query_param(new_parameter(location_id, key: 'location_id'))
+                   .template_param(new_parameter(shift_id, key: 'shift_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Provides a paginated list of events for a single cash drawer shift.
@@ -118,40 +80,22 @@ module Square
                                       shift_id:,
                                       limit: nil,
                                       cursor: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/cash-drawers/shifts/{shift_id}/events'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'shift_id' => { 'value' => shift_id, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'location_id' => location_id,
-        'limit' => limit,
-        'cursor' => cursor
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/cash-drawers/shifts/{shift_id}/events',
+                                     'default')
+                   .query_param(new_parameter(location_id, key: 'location_id'))
+                   .template_param(new_parameter(shift_id, key: 'shift_id')
+                                    .should_encode(true))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
   end
 end

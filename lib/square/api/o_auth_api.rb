@@ -1,10 +1,6 @@
 module Square
   # OAuthApi
   class OAuthApi < BaseApi
-    def initialize(config, http_call_back: nil)
-      super(config, http_call_back: http_call_back)
-    end
-
     # `RenewToken` is deprecated. For information about refreshing OAuth access
     # tokens, see
     # [Migrate from Renew to Refresh OAuth
@@ -39,36 +35,22 @@ module Square
                     body:,
                     authorization:)
       warn 'Endpoint renew_token in OAuthApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/oauth2/clients/{client_id}/access-token/renew'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'client_id' => { 'value' => client_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json',
-        'Authorization' => authorization
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/oauth2/clients/{client_id}/access-token/renew',
+                                     'default')
+                   .template_param(new_parameter(client_id, key: 'client_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter(authorization, key: 'Authorization'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Revokes an access token generated with the OAuth flow.
@@ -93,32 +75,20 @@ module Square
     # @return [RevokeTokenResponse Hash] response from the API call
     def revoke_token(body:,
                      authorization:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/oauth2/revoke'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json',
-        'Authorization' => authorization
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/oauth2/revoke',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter(authorization, key: 'Authorization'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns an OAuth access token and a refresh token unless the
@@ -142,31 +112,19 @@ module Square
     # definition for field details.
     # @return [ObtainTokenResponse Hash] response from the API call
     def obtain_token(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/oauth2/token'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/oauth2/token',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns information about an [OAuth access
@@ -190,30 +148,17 @@ module Square
     # APPLICATION_SECRET
     # @return [RetrieveTokenStatusResponse Hash] response from the API call
     def retrieve_token_status(authorization:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/oauth2/token/status'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Authorization' => authorization
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers
-      )
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/oauth2/token/status',
+                                     'default')
+                   .header_param(new_parameter(authorization, key: 'Authorization'))
+                   .header_param(new_parameter('application/json', key: 'accept')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
   end
 end

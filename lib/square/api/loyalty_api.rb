@@ -1,10 +1,6 @@
 module Square
   # LoyaltyApi
   class LoyaltyApi < BaseApi
-    def initialize(config, http_call_back: nil)
-      super(config, http_call_back: http_call_back)
-    end
-
     # Creates a loyalty account. To create a loyalty account, you must provide
     # the `program_id` and a `mapping` with the `phone_number` of the buyer.
     # @param [CreateLoyaltyAccountRequest] body Required parameter: An object
@@ -12,32 +8,20 @@ module Square
     # object definition for field details.
     # @return [CreateLoyaltyAccountResponse Hash] response from the API call
     def create_loyalty_account(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/accounts'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/loyalty/accounts',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Searches for loyalty accounts in a loyalty program.
@@ -50,32 +34,20 @@ module Square
     # object definition for field details.
     # @return [SearchLoyaltyAccountsResponse Hash] response from the API call
     def search_loyalty_accounts(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/accounts/search'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/loyalty/accounts/search',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Retrieves a loyalty account.
@@ -83,34 +55,19 @@ module Square
     # account]($m/LoyaltyAccount) to retrieve.
     # @return [RetrieveLoyaltyAccountResponse Hash] response from the API call
     def retrieve_loyalty_account(account_id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/accounts/{account_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'account_id' => { 'value' => account_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/loyalty/accounts/{account_id}',
+                                     'default')
+                   .template_param(new_parameter(account_id, key: 'account_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Adds points earned from a purchase to a [loyalty
@@ -146,36 +103,22 @@ module Square
     # @return [AccumulateLoyaltyPointsResponse Hash] response from the API call
     def accumulate_loyalty_points(account_id:,
                                   body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/accounts/{account_id}/accumulate'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'account_id' => { 'value' => account_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/loyalty/accounts/{account_id}/accumulate',
+                                     'default')
+                   .template_param(new_parameter(account_id, key: 'account_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Adds points to or subtracts points from a buyer's account.
@@ -191,36 +134,22 @@ module Square
     # @return [AdjustLoyaltyPointsResponse Hash] response from the API call
     def adjust_loyalty_points(account_id:,
                               body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/accounts/{account_id}/adjust'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'account_id' => { 'value' => account_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/loyalty/accounts/{account_id}/adjust',
+                                     'default')
+                   .template_param(new_parameter(account_id, key: 'account_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Searches for loyalty events.
@@ -236,32 +165,20 @@ module Square
     # object definition for field details.
     # @return [SearchLoyaltyEventsResponse Hash] response from the API call
     def search_loyalty_events(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/events/search'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/loyalty/events/search',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns a list of loyalty programs in the seller's account.
@@ -275,30 +192,17 @@ module Square
     # @return [ListLoyaltyProgramsResponse Hash] response from the API call
     def list_loyalty_programs
       warn 'Endpoint list_loyalty_programs in LoyaltyApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/programs'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/loyalty/programs',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Retrieves the loyalty program in a seller's account, specified by the
@@ -313,34 +217,19 @@ module Square
     # single loyalty program that belongs to the seller.
     # @return [RetrieveLoyaltyProgramResponse Hash] response from the API call
     def retrieve_loyalty_program(program_id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/programs/{program_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'program_id' => { 'value' => program_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/loyalty/programs/{program_id}',
+                                     'default')
+                   .template_param(new_parameter(program_id, key: 'program_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Calculates the number of points a buyer can earn from a purchase.
@@ -376,36 +265,22 @@ module Square
     # @return [CalculateLoyaltyPointsResponse Hash] response from the API call
     def calculate_loyalty_points(program_id:,
                                  body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/programs/{program_id}/calculate'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'program_id' => { 'value' => program_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/loyalty/programs/{program_id}/calculate',
+                                     'default')
+                   .template_param(new_parameter(program_id, key: 'program_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Lists the loyalty promotions associated with a [loyalty
@@ -436,40 +311,22 @@ module Square
                                 status: nil,
                                 cursor: nil,
                                 limit: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/programs/{program_id}/promotions'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'program_id' => { 'value' => program_id, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'status' => status,
-        'cursor' => cursor,
-        'limit' => limit
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/loyalty/programs/{program_id}/promotions',
+                                     'default')
+                   .template_param(new_parameter(program_id, key: 'program_id')
+                                    .should_encode(true))
+                   .query_param(new_parameter(status, key: 'status'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Creates a loyalty promotion for a [loyalty program]($m/LoyaltyProgram). A
@@ -492,36 +349,22 @@ module Square
     # @return [CreateLoyaltyPromotionResponse Hash] response from the API call
     def create_loyalty_promotion(program_id:,
                                  body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/programs/{program_id}/promotions'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'program_id' => { 'value' => program_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/loyalty/programs/{program_id}/promotions',
+                                     'default')
+                   .template_param(new_parameter(program_id, key: 'program_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Retrieves a loyalty promotion.
@@ -534,35 +377,21 @@ module Square
     # @return [RetrieveLoyaltyPromotionResponse Hash] response from the API call
     def retrieve_loyalty_promotion(promotion_id:,
                                    program_id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/programs/{program_id}/promotions/{promotion_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'promotion_id' => { 'value' => promotion_id, 'encode' => true },
-        'program_id' => { 'value' => program_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/loyalty/programs/{program_id}/promotions/{promotion_id}',
+                                     'default')
+                   .template_param(new_parameter(promotion_id, key: 'promotion_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(program_id, key: 'program_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Cancels a loyalty promotion. Use this endpoint to cancel an `ACTIVE`
@@ -581,35 +410,21 @@ module Square
     # @return [CancelLoyaltyPromotionResponse Hash] response from the API call
     def cancel_loyalty_promotion(promotion_id:,
                                  program_id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/programs/{program_id}/promotions/{promotion_id}/cancel'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'promotion_id' => { 'value' => promotion_id, 'encode' => true },
-        'program_id' => { 'value' => program_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/loyalty/programs/{program_id}/promotions/{promotion_id}/cancel',
+                                     'default')
+                   .template_param(new_parameter(promotion_id, key: 'promotion_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(program_id, key: 'program_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Creates a loyalty reward. In the process, the endpoint does following:
@@ -625,32 +440,20 @@ module Square
     # object definition for field details.
     # @return [CreateLoyaltyRewardResponse Hash] response from the API call
     def create_loyalty_reward(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/rewards'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/loyalty/rewards',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Searches for loyalty rewards. This endpoint accepts a request with no
@@ -665,32 +468,20 @@ module Square
     # object definition for field details.
     # @return [SearchLoyaltyRewardsResponse Hash] response from the API call
     def search_loyalty_rewards(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/rewards/search'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/loyalty/rewards/search',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Deletes a loyalty reward by doing the following:
@@ -704,34 +495,19 @@ module Square
     # reward]($m/LoyaltyReward) to delete.
     # @return [DeleteLoyaltyRewardResponse Hash] response from the API call
     def delete_loyalty_reward(reward_id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/rewards/{reward_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'reward_id' => { 'value' => reward_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.delete(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::DELETE,
+                                     '/v2/loyalty/rewards/{reward_id}',
+                                     'default')
+                   .template_param(new_parameter(reward_id, key: 'reward_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Retrieves a loyalty reward.
@@ -739,34 +515,19 @@ module Square
     # reward]($m/LoyaltyReward) to retrieve.
     # @return [RetrieveLoyaltyRewardResponse Hash] response from the API call
     def retrieve_loyalty_reward(reward_id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/rewards/{reward_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'reward_id' => { 'value' => reward_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/loyalty/rewards/{reward_id}',
+                                     'default')
+                   .template_param(new_parameter(reward_id, key: 'reward_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Redeems a loyalty reward.
@@ -785,36 +546,22 @@ module Square
     # @return [RedeemLoyaltyRewardResponse Hash] response from the API call
     def redeem_loyalty_reward(reward_id:,
                               body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/loyalty/rewards/{reward_id}/redeem'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'reward_id' => { 'value' => reward_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/loyalty/rewards/{reward_id}/redeem',
+                                     'default')
+                   .template_param(new_parameter(reward_id, key: 'reward_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
   end
 end

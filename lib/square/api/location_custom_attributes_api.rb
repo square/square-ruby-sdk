@@ -1,10 +1,6 @@
 module Square
   # LocationCustomAttributesApi
   class LocationCustomAttributesApi < BaseApi
-    def initialize(config, http_call_back: nil)
-      super(config, http_call_back: http_call_back)
-    end
-
     # Lists the location-related [custom attribute
     # definitions]($m/CustomAttributeDefinition) that belong to a Square seller
     # account.
@@ -32,36 +28,20 @@ module Square
     def list_location_custom_attribute_definitions(visibility_filter: nil,
                                                    limit: nil,
                                                    cursor: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/custom-attribute-definitions'
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'visibility_filter' => visibility_filter,
-        'limit' => limit,
-        'cursor' => cursor
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/locations/custom-attribute-definitions',
+                                     'default')
+                   .query_param(new_parameter(visibility_filter, key: 'visibility_filter'))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Creates a location-related [custom attribute
@@ -81,32 +61,20 @@ module Square
     # the corresponding object definition for field details.
     # @return [CreateLocationCustomAttributeDefinitionResponse Hash] response from the API call
     def create_location_custom_attribute_definition(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/custom-attribute-definitions'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/locations/custom-attribute-definitions',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Deletes a location-related [custom attribute
@@ -119,34 +87,19 @@ module Square
     # definition to delete.
     # @return [DeleteLocationCustomAttributeDefinitionResponse Hash] response from the API call
     def delete_location_custom_attribute_definition(key:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/custom-attribute-definitions/{key}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'key' => { 'value' => key, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.delete(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::DELETE,
+                                     '/v2/locations/custom-attribute-definitions/{key}',
+                                     'default')
+                   .template_param(new_parameter(key, key: 'key')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Retrieves a location-related [custom attribute
@@ -166,38 +119,20 @@ module Square
     # @return [RetrieveLocationCustomAttributeDefinitionResponse Hash] response from the API call
     def retrieve_location_custom_attribute_definition(key:,
                                                       version: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/custom-attribute-definitions/{key}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'key' => { 'value' => key, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'version' => version
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/locations/custom-attribute-definitions/{key}',
+                                     'default')
+                   .template_param(new_parameter(key, key: 'key')
+                                    .should_encode(true))
+                   .query_param(new_parameter(version, key: 'version'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Updates a location-related [custom attribute
@@ -214,36 +149,22 @@ module Square
     # @return [UpdateLocationCustomAttributeDefinitionResponse Hash] response from the API call
     def update_location_custom_attribute_definition(key:,
                                                     body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/custom-attribute-definitions/{key}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'key' => { 'value' => key, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.put(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::PUT,
+                                     '/v2/locations/custom-attribute-definitions/{key}',
+                                     'default')
+                   .template_param(new_parameter(key, key: 'key')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Deletes [custom attributes]($m/CustomAttribute) for locations as a bulk
@@ -256,32 +177,20 @@ module Square
     # the corresponding object definition for field details.
     # @return [BulkDeleteLocationCustomAttributesResponse Hash] response from the API call
     def bulk_delete_location_custom_attributes(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/custom-attributes/bulk-delete'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/locations/custom-attributes/bulk-delete',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Creates or updates [custom attributes]($m/CustomAttribute) for locations
@@ -308,32 +217,20 @@ module Square
     # the corresponding object definition for field details.
     # @return [BulkUpsertLocationCustomAttributesResponse Hash] response from the API call
     def bulk_upsert_location_custom_attributes(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/custom-attributes/bulk-upsert'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/locations/custom-attributes/bulk-upsert',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Lists the [custom attributes]($m/CustomAttribute) associated with a
@@ -374,41 +271,23 @@ module Square
                                         limit: nil,
                                         cursor: nil,
                                         with_definitions: false)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/{location_id}/custom-attributes'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'visibility_filter' => visibility_filter,
-        'limit' => limit,
-        'cursor' => cursor,
-        'with_definitions' => with_definitions
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/locations/{location_id}/custom-attributes',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .query_param(new_parameter(visibility_filter, key: 'visibility_filter'))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .query_param(new_parameter(with_definitions, key: 'with_definitions'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Deletes a [custom attribute]($m/CustomAttribute) associated with a
@@ -425,35 +304,21 @@ module Square
     # @return [DeleteLocationCustomAttributeResponse Hash] response from the API call
     def delete_location_custom_attribute(location_id:,
                                          key:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/{location_id}/custom-attributes/{key}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true },
-        'key' => { 'value' => key, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.delete(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::DELETE,
+                                     '/v2/locations/{location_id}/custom-attributes/{key}',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(key, key: 'key')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Retrieves a [custom attribute]($m/CustomAttribute) associated with a
@@ -487,40 +352,23 @@ module Square
                                            key:,
                                            with_definition: false,
                                            version: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/{location_id}/custom-attributes/{key}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true },
-        'key' => { 'value' => key, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'with_definition' => with_definition,
-        'version' => version
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/locations/{location_id}/custom-attributes/{key}',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(key, key: 'key')
+                                    .should_encode(true))
+                   .query_param(new_parameter(with_definition, key: 'with_definition'))
+                   .query_param(new_parameter(version, key: 'version'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Creates or updates a [custom attribute]($m/CustomAttribute) for a
@@ -548,37 +396,24 @@ module Square
     def upsert_location_custom_attribute(location_id:,
                                          key:,
                                          body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/{location_id}/custom-attributes/{key}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true },
-        'key' => { 'value' => key, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/locations/{location_id}/custom-attributes/{key}',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(key, key: 'key')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
   end
 end

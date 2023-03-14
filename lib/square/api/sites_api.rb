@@ -1,10 +1,6 @@
 module Square
   # SitesApi
   class SitesApi < BaseApi
-    def initialize(config, http_call_back: nil)
-      super(config, http_call_back: http_call_back)
-    end
-
     # Lists the Square Online sites that belong to a seller. Sites are listed in
     # descending order by the `created_at` date.
     # __Note:__ Square Online APIs are publicly available as part of an early
@@ -14,30 +10,17 @@ module Square
     # for-square-online-apis).
     # @return [ListSitesResponse Hash] response from the API call
     def list_sites
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/sites'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/sites',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
   end
 end

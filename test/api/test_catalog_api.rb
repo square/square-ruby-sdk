@@ -5,8 +5,9 @@ require_relative 'api_test_base'
 class CatalogApiTests < ApiTestBase
   # Called only once for the class before any test has executed
   def setup
-    @response_catcher = HttpResponseCatcher.new
-    @controller = CatalogApi.new CONFIG, http_call_back: @response_catcher
+    setup_class
+    @controller = @client.catalog
+    @response_catcher = @controller.http_call_back
   end
 
   # Returns information about the Square Catalog API, such as batch size
@@ -23,7 +24,7 @@ class CatalogApiTests < ApiTestBase
     expected_headers = {}
     expected_headers['content-type'] = 'application/json'
 
-    assert(TestHelper.match_headers(expected_headers, @response_catcher.response.headers))
+    assert(ComparisonHelper.match_headers(expected_headers, @response_catcher.response.headers))
   end
 
   # Returns a list of [CatalogObject](#type-catalogobject)s that includes
@@ -50,7 +51,7 @@ class CatalogApiTests < ApiTestBase
     expected_headers = {}
     expected_headers['content-type'] = 'application/json'
 
-    assert(TestHelper.match_headers(expected_headers, @response_catcher.response.headers))
+    assert(ComparisonHelper.match_headers(expected_headers, @response_catcher.response.headers))
   end
 
 end

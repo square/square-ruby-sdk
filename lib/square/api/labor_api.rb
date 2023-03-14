@@ -1,10 +1,6 @@
 module Square
   # LaborApi
   class LaborApi < BaseApi
-    def initialize(config, http_call_back: nil)
-      super(config, http_call_back: http_call_back)
-    end
-
     # Returns a paginated list of `BreakType` instances for a business.
     # @param [String] location_id Optional parameter: Filter the returned
     # `BreakType` results to only those that are associated with the specified
@@ -18,36 +14,20 @@ module Square
     def list_break_types(location_id: nil,
                          limit: nil,
                          cursor: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/labor/break-types'
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'location_id' => location_id,
-        'limit' => limit,
-        'cursor' => cursor
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/labor/break-types',
+                                     'default')
+                   .query_param(new_parameter(location_id, key: 'location_id'))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Creates a new `BreakType`.
@@ -68,32 +48,20 @@ module Square
     # object definition for field details.
     # @return [CreateBreakTypeResponse Hash] response from the API call
     def create_break_type(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/labor/break-types'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/labor/break-types',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Deletes an existing `BreakType`.
@@ -102,34 +70,19 @@ module Square
     # deleted.
     # @return [DeleteBreakTypeResponse Hash] response from the API call
     def delete_break_type(id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/labor/break-types/{id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.delete(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::DELETE,
+                                     '/v2/labor/break-types/{id}',
+                                     'default')
+                   .template_param(new_parameter(id, key: 'id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns a single `BreakType` specified by `id`.
@@ -137,34 +90,19 @@ module Square
     # retrieved.
     # @return [GetBreakTypeResponse Hash] response from the API call
     def get_break_type(id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/labor/break-types/{id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/labor/break-types/{id}',
+                                     'default')
+                   .template_param(new_parameter(id, key: 'id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Updates an existing `BreakType`.
@@ -176,36 +114,22 @@ module Square
     # @return [UpdateBreakTypeResponse Hash] response from the API call
     def update_break_type(id:,
                           body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/labor/break-types/{id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.put(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::PUT,
+                                     '/v2/labor/break-types/{id}',
+                                     'default')
+                   .template_param(new_parameter(id, key: 'id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns a paginated list of `EmployeeWage` instances for a business.
@@ -221,36 +145,20 @@ module Square
                             limit: nil,
                             cursor: nil)
       warn 'Endpoint list_employee_wages in LaborApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/labor/employee-wages'
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'employee_id' => employee_id,
-        'limit' => limit,
-        'cursor' => cursor
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/labor/employee-wages',
+                                     'default')
+                   .query_param(new_parameter(employee_id, key: 'employee_id'))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns a single `EmployeeWage` specified by `id`.
@@ -259,34 +167,19 @@ module Square
     # @return [GetEmployeeWageResponse Hash] response from the API call
     def get_employee_wage(id:)
       warn 'Endpoint get_employee_wage in LaborApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/labor/employee-wages/{id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/labor/employee-wages/{id}',
+                                     'default')
+                   .template_param(new_parameter(id, key: 'id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Creates a new `Shift`.
@@ -311,32 +204,20 @@ module Square
     # definition for field details.
     # @return [CreateShiftResponse Hash] response from the API call
     def create_shift(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/labor/shifts'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/labor/shifts',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns a paginated list of `Shift` records for a business.
@@ -357,32 +238,20 @@ module Square
     # definition for field details.
     # @return [SearchShiftsResponse Hash] response from the API call
     def search_shifts(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/labor/shifts/search'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/labor/shifts/search',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Deletes a `Shift`.
@@ -390,34 +259,19 @@ module Square
     # deleted.
     # @return [DeleteShiftResponse Hash] response from the API call
     def delete_shift(id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/labor/shifts/{id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.delete(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::DELETE,
+                                     '/v2/labor/shifts/{id}',
+                                     'default')
+                   .template_param(new_parameter(id, key: 'id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns a single `Shift` specified by `id`.
@@ -425,34 +279,19 @@ module Square
     # retrieved.
     # @return [GetShiftResponse Hash] response from the API call
     def get_shift(id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/labor/shifts/{id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/labor/shifts/{id}',
+                                     'default')
+                   .template_param(new_parameter(id, key: 'id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Updates an existing `Shift`.
@@ -470,36 +309,22 @@ module Square
     # @return [UpdateShiftResponse Hash] response from the API call
     def update_shift(id:,
                      body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/labor/shifts/{id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.put(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::PUT,
+                                     '/v2/labor/shifts/{id}',
+                                     'default')
+                   .template_param(new_parameter(id, key: 'id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns a paginated list of `TeamMemberWage` instances for a business.
@@ -514,36 +339,20 @@ module Square
     def list_team_member_wages(team_member_id: nil,
                                limit: nil,
                                cursor: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/labor/team-member-wages'
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'team_member_id' => team_member_id,
-        'limit' => limit,
-        'cursor' => cursor
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/labor/team-member-wages',
+                                     'default')
+                   .query_param(new_parameter(team_member_id, key: 'team_member_id'))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns a single `TeamMemberWage` specified by `id `.
@@ -551,34 +360,19 @@ module Square
     # being retrieved.
     # @return [GetTeamMemberWageResponse Hash] response from the API call
     def get_team_member_wage(id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/labor/team-member-wages/{id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/labor/team-member-wages/{id}',
+                                     'default')
+                   .template_param(new_parameter(id, key: 'id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns a list of `WorkweekConfig` instances for a business.
@@ -589,35 +383,19 @@ module Square
     # @return [ListWorkweekConfigsResponse Hash] response from the API call
     def list_workweek_configs(limit: nil,
                               cursor: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/labor/workweek-configs'
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'limit' => limit,
-        'cursor' => cursor
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/labor/workweek-configs',
+                                     'default')
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Updates a `WorkweekConfig`.
@@ -629,36 +407,22 @@ module Square
     # @return [UpdateWorkweekConfigResponse Hash] response from the API call
     def update_workweek_config(id:,
                                body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/labor/workweek-configs/{id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.put(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::PUT,
+                                     '/v2/labor/workweek-configs/{id}',
+                                     'default')
+                   .template_param(new_parameter(id, key: 'id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
   end
 end

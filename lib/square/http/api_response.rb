@@ -1,21 +1,16 @@
 module Square
   # Http response received.
-  class ApiResponse
-    attr_reader(:status_code, :reason_phrase, :headers, :raw_body, :request,
-                :data, :errors, :body, :cursor)
+  class ApiResponse < CoreLibrary::ApiResponse
+    attr_reader :body, :cursor
 
     # The constructor
-    # @param [HttpResponse] The original, raw response from the api.
-    # @param [Object] The data field specified for the response.
-    # @param [Array<String>] Any errors returned by the server.
+    # @param [HttpResponse] http_response The original, raw response from the api.
+    # @param [Object] data The data field specified for the response.
+    # @param [Array<String>] errors Any errors returned by the server.
     def initialize(http_response,
                    data: nil,
                    errors: nil)
-      @status_code = http_response.status_code
-      @reason_phrase = http_response.reason_phrase
-      @headers = http_response.headers
-      @raw_body = http_response.raw_body
-      @request = http_response.request
+      super
       @errors = errors
 
       if (data.is_a? Hash) && data.keys.any?
@@ -32,14 +27,13 @@ module Square
       end
     end
 
-    # returns true if status_code is between 200-300
-    def success?
-      status_code >= 200 && status_code < 300
-    end
-
-    # returns true if status_code is between 400-600
-    def error?
-      status_code >= 400 && status_code < 600
+    # The factory method for creating the API Response instance of the SDK from its parent instance in the core lirbary.
+    # @param [CoreLibrary::HttpResponse] parent_instance The Api Response instance from core library.
+    def self.create(parent_instance)
+      ApiResponse.new(CoreLibrary::HttpResponse
+                           .new(parent_instance.status_code, parent_instance.reason_phrase,
+                                parent_instance.headers, parent_instance.raw_body, parent_instance.request),
+                      data: parent_instance.data, errors: parent_instance.errors)
     end
   end
 end

@@ -1,10 +1,6 @@
 module Square
   # TransactionsApi
   class TransactionsApi < BaseApi
-    def initialize(config, http_call_back: nil)
-      super(config, http_call_back: http_call_back)
-    end
-
     # Lists transactions for a particular location.
     # Transactions include payment information from sales and exchanges and
     # refund
@@ -39,41 +35,23 @@ module Square
                           sort_order: nil,
                           cursor: nil)
       warn 'Endpoint list_transactions in TransactionsApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/{location_id}/transactions'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'begin_time' => begin_time,
-        'end_time' => end_time,
-        'sort_order' => sort_order,
-        'cursor' => cursor
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/locations/{location_id}/transactions',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .query_param(new_parameter(begin_time, key: 'begin_time'))
+                   .query_param(new_parameter(end_time, key: 'end_time'))
+                   .query_param(new_parameter(sort_order, key: 'sort_order'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Retrieves details for a single transaction.
@@ -85,35 +63,21 @@ module Square
     def retrieve_transaction(location_id:,
                              transaction_id:)
       warn 'Endpoint retrieve_transaction in TransactionsApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/{location_id}/transactions/{transaction_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true },
-        'transaction_id' => { 'value' => transaction_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/locations/{location_id}/transactions/{transaction_id}',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(transaction_id, key: 'transaction_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Captures a transaction that was created with the
@@ -129,35 +93,21 @@ module Square
     def capture_transaction(location_id:,
                             transaction_id:)
       warn 'Endpoint capture_transaction in TransactionsApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/{location_id}/transactions/{transaction_id}/capture'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true },
-        'transaction_id' => { 'value' => transaction_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/locations/{location_id}/transactions/{transaction_id}/capture',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(transaction_id, key: 'transaction_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Cancels a transaction that was created with the
@@ -173,35 +123,21 @@ module Square
     def void_transaction(location_id:,
                          transaction_id:)
       warn 'Endpoint void_transaction in TransactionsApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/locations/{location_id}/transactions/{transaction_id}/void'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true },
-        'transaction_id' => { 'value' => transaction_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/locations/{location_id}/transactions/{transaction_id}/void',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(transaction_id, key: 'transaction_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
   end
 end

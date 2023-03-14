@@ -1,10 +1,6 @@
 module Square
   # GiftCardsApi
   class GiftCardsApi < BaseApi
-    def initialize(config, http_call_back: nil)
-      super(config, http_call_back: http_call_back)
-    end
-
     # Lists all gift cards. You can specify optional filters to retrieve
     # a subset of the gift cards. Results are sorted by `created_at` in
     # ascending order.
@@ -34,38 +30,22 @@ module Square
                         limit: nil,
                         cursor: nil,
                         customer_id: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/gift-cards'
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'type' => type,
-        'state' => state,
-        'limit' => limit,
-        'cursor' => cursor,
-        'customer_id' => customer_id
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/gift-cards',
+                                     'default')
+                   .query_param(new_parameter(type, key: 'type'))
+                   .query_param(new_parameter(state, key: 'state'))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .query_param(new_parameter(customer_id, key: 'customer_id'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Creates a digital gift card or registers a physical (plastic) gift card.
@@ -79,32 +59,20 @@ module Square
     # object definition for field details.
     # @return [CreateGiftCardResponse Hash] response from the API call
     def create_gift_card(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/gift-cards'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/gift-cards',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Retrieves a gift card using the gift card account number (GAN).
@@ -113,32 +81,20 @@ module Square
     # object definition for field details.
     # @return [RetrieveGiftCardFromGANResponse Hash] response from the API call
     def retrieve_gift_card_from_gan(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/gift-cards/from-gan'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/gift-cards/from-gan',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Retrieves a gift card using a secure payment token that represents the
@@ -148,32 +104,20 @@ module Square
     # corresponding object definition for field details.
     # @return [RetrieveGiftCardFromNonceResponse Hash] response from the API call
     def retrieve_gift_card_from_nonce(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/gift-cards/from-nonce'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/gift-cards/from-nonce',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Links a customer to a gift card, which is also referred to as adding a
@@ -186,36 +130,22 @@ module Square
     # @return [LinkCustomerToGiftCardResponse Hash] response from the API call
     def link_customer_to_gift_card(gift_card_id:,
                                    body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/gift-cards/{gift_card_id}/link-customer'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'gift_card_id' => { 'value' => gift_card_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/gift-cards/{gift_card_id}/link-customer',
+                                     'default')
+                   .template_param(new_parameter(gift_card_id, key: 'gift_card_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Unlinks a customer from a gift card, which is also referred to as removing
@@ -228,36 +158,22 @@ module Square
     # @return [UnlinkCustomerFromGiftCardResponse Hash] response from the API call
     def unlink_customer_from_gift_card(gift_card_id:,
                                        body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/gift-cards/{gift_card_id}/unlink-customer'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'gift_card_id' => { 'value' => gift_card_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/gift-cards/{gift_card_id}/unlink-customer',
+                                     'default')
+                   .template_param(new_parameter(gift_card_id, key: 'gift_card_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Retrieves a gift card using the gift card ID.
@@ -265,34 +181,19 @@ module Square
     # retrieve.
     # @return [RetrieveGiftCardResponse Hash] response from the API call
     def retrieve_gift_card(id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/gift-cards/{id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'id' => { 'value' => id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/gift-cards/{id}',
+                                     'default')
+                   .template_param(new_parameter(id, key: 'id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
   end
 end

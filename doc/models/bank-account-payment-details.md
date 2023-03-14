@@ -13,7 +13,7 @@ Additional details about BANK_ACCOUNT type payments.
 |  --- | --- | --- | --- |
 | `bank_name` | `String` | Optional | The name of the bank associated with the bank account.<br>**Constraints**: *Maximum Length*: `100` |
 | `transfer_type` | `String` | Optional | The type of the bank transfer. The type can be `ACH` or `UNKNOWN`.<br>**Constraints**: *Maximum Length*: `50` |
-| `account_ownership_type` | `String` | Optional | The ownership type of the bank account performing the transfer.<br>The type can be `INDIVIDUAL`, `COMPANY`, or `UNKNOWN`.<br>**Constraints**: *Maximum Length*: `50` |
+| `account_ownership_type` | `String` | Optional | The ownership type of the bank account performing the transfer.<br>The type can be `INDIVIDUAL`, `COMPANY`, or `ACCOUNT_TYPE_UNKNOWN`.<br>**Constraints**: *Maximum Length*: `50` |
 | `fingerprint` | `String` | Optional | Uniquely identifies the bank account for this seller and can be used<br>to determine if payments are from the same bank account.<br>**Constraints**: *Maximum Length*: `255` |
 | `country` | `String` | Optional | The two-letter ISO code representing the country the bank account is located in.<br>**Constraints**: *Minimum Length*: `2`, *Maximum Length*: `2` |
 | `statement_description` | `String` | Optional | The statement description as sent to the bank.<br>**Constraints**: *Maximum Length*: `1000` |

@@ -5,8 +5,9 @@ require_relative 'api_test_base'
 class CustomersApiTests < ApiTestBase
   # Called only once for the class before any test has executed
   def setup
-    @response_catcher = HttpResponseCatcher.new
-    @controller = CustomersApi.new CONFIG, http_call_back: @response_catcher
+    setup_class
+    @controller = @client.customers
+    @response_catcher = @controller.http_call_back
   end
 
   # Creates a new customer for a business, which can have associated cards on file.

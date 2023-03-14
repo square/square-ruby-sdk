@@ -1,10 +1,6 @@
 module Square
   # PayoutsApi
   class PayoutsApi < BaseApi
-    def initialize(config, http_call_back: nil)
-      super(config, http_call_back: http_call_back)
-    end
-
     # Retrieves a list of all payouts for the default location.
     # You can filter payouts by location ID, status, time range, and order them
     # in ascending or descending order.
@@ -40,40 +36,24 @@ module Square
                      sort_order: nil,
                      cursor: nil,
                      limit: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/payouts'
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'location_id' => location_id,
-        'status' => status,
-        'begin_time' => begin_time,
-        'end_time' => end_time,
-        'sort_order' => sort_order,
-        'cursor' => cursor,
-        'limit' => limit
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/payouts',
+                                     'default')
+                   .query_param(new_parameter(location_id, key: 'location_id'))
+                   .query_param(new_parameter(status, key: 'status'))
+                   .query_param(new_parameter(begin_time, key: 'begin_time'))
+                   .query_param(new_parameter(end_time, key: 'end_time'))
+                   .query_param(new_parameter(sort_order, key: 'sort_order'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Retrieves details of a specific payout identified by a payout ID.
@@ -82,34 +62,19 @@ module Square
     # retrieve the information for.
     # @return [GetPayoutResponse Hash] response from the API call
     def get_payout(payout_id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/payouts/{payout_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'payout_id' => { 'value' => payout_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/payouts/{payout_id}',
+                                     'default')
+                   .template_param(new_parameter(payout_id, key: 'payout_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Retrieves a list of all payout entries for a specific payout.
@@ -134,40 +99,22 @@ module Square
                             sort_order: nil,
                             cursor: nil,
                             limit: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/payouts/{payout_id}/payout-entries'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'payout_id' => { 'value' => payout_id, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'sort_order' => sort_order,
-        'cursor' => cursor,
-        'limit' => limit
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/payouts/{payout_id}/payout-entries',
+                                     'default')
+                   .template_param(new_parameter(payout_id, key: 'payout_id')
+                                    .should_encode(true))
+                   .query_param(new_parameter(sort_order, key: 'sort_order'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
   end
 end
