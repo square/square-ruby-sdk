@@ -5,8 +5,9 @@ require_relative 'api_test_base'
 class MerchantsApiTests < ApiTestBase
   # Called only once for the class before any test has executed
   def setup
-    @response_catcher = HttpResponseCatcher.new
-    @controller = MerchantsApi.new CONFIG, http_call_back: @response_catcher
+    setup_class
+    @controller = @client.merchants
+    @response_catcher = @controller.http_call_back
   end
 
   # Returns `Merchant` information for a given access token.
@@ -31,7 +32,7 @@ class MerchantsApiTests < ApiTestBase
     expected_headers = {}
     expected_headers['content-type'] = 'application/json'
 
-    assert(TestHelper.match_headers(expected_headers, @response_catcher.response.headers))
+    assert(ComparisonHelper.match_headers(expected_headers, @response_catcher.response.headers))
   end
 
 end

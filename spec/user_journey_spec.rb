@@ -4,8 +4,8 @@ require_relative '../test/api/api_test_base'
 require 'json'
 
 describe "UserJourney" do
-  let(:access_token) { ApiTestBase::CONFIG.access_token }
-  let(:environment) { ApiTestBase::CONFIG.environment }
+  let(:access_token) { ENV.fetch('SQUARE_SANDBOX_TOKEN', 'AccessToken')}
+  let(:environment) { "sandbox" }
 
   let(:phone_number) { "1-212-555-4240" }
   let(:phone_number2) { "1-917-500-1000" }

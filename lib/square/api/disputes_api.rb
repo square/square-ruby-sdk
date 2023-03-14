@@ -1,10 +1,6 @@
 module Square
   # DisputesApi
   class DisputesApi < BaseApi
-    def initialize(config, http_call_back: nil)
-      super(config, http_call_back: http_call_back)
-    end
-
     # Returns a list of disputes associated with a particular account.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this cursor to retrieve the next
@@ -21,36 +17,20 @@ module Square
     def list_disputes(cursor: nil,
                       states: nil,
                       location_id: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/disputes'
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'cursor' => cursor,
-        'states' => states,
-        'location_id' => location_id
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/disputes',
+                                     'default')
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .query_param(new_parameter(states, key: 'states'))
+                   .query_param(new_parameter(location_id, key: 'location_id'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns details about a specific dispute.
@@ -58,34 +38,19 @@ module Square
     # want more details about.
     # @return [RetrieveDisputeResponse Hash] response from the API call
     def retrieve_dispute(dispute_id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/disputes/{dispute_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/disputes/{dispute_id}',
+                                     'default')
+                   .template_param(new_parameter(dispute_id, key: 'dispute_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Accepts the loss on a dispute. Square returns the disputed amount to the
@@ -98,34 +63,19 @@ module Square
     # want to accept.
     # @return [AcceptDisputeResponse Hash] response from the API call
     def accept_dispute(dispute_id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/disputes/{dispute_id}/accept'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/disputes/{dispute_id}/accept',
+                                     'default')
+                   .template_param(new_parameter(dispute_id, key: 'dispute_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns a list of evidence associated with a dispute.
@@ -138,38 +88,20 @@ module Square
     # @return [ListDisputeEvidenceResponse Hash] response from the API call
     def list_dispute_evidence(dispute_id:,
                               cursor: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/disputes/{dispute_id}/evidence'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'cursor' => cursor
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/disputes/{dispute_id}/evidence',
+                                     'default')
+                   .template_param(new_parameter(dispute_id, key: 'dispute_id')
+                                    .should_encode(true))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Uploads a file to use as evidence in a dispute challenge. The endpoint
@@ -185,56 +117,23 @@ module Square
     def create_dispute_evidence_file(dispute_id:,
                                      request: nil,
                                      image_file: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/disputes/{dispute_id}/evidence-files'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      if image_file.is_a? FileWrapper
-        image_file_wrapper = image_file.file
-        image_file_content_type = image_file.content_type
-      else
-        image_file_wrapper = image_file
-        image_file_content_type = 'image/jpeg'
-      end
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare form parameters.
-      _parameters = {
-        'request' => Faraday::UploadIO.new(
-          StringIO.new(request.to_json),
-          'application/json'
-        ),
-        'image_file' => Faraday::UploadIO.new(
-          image_file_wrapper,
-          image_file_content_type
-        )
-      }
-      _parameters = APIHelper.form_encode_parameters(_parameters)
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: _parameters
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/disputes/{dispute_id}/evidence-files',
+                                     'default')
+                   .template_param(new_parameter(dispute_id, key: 'dispute_id')
+                                    .should_encode(true))
+                   .multipart_param(new_parameter(StringIO.new(request.to_json), key: 'request')
+                                     .default_content_type('application/json; charset=utf-8'))
+                   .multipart_param(new_parameter(image_file, key: 'image_file')
+                                     .default_content_type('image/jpeg'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Uploads text to use as evidence for a dispute challenge.
@@ -246,36 +145,22 @@ module Square
     # @return [CreateDisputeEvidenceTextResponse Hash] response from the API call
     def create_dispute_evidence_text(dispute_id:,
                                      body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/disputes/{dispute_id}/evidence-text'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/disputes/{dispute_id}/evidence-text',
+                                     'default')
+                   .template_param(new_parameter(dispute_id, key: 'dispute_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Removes specified evidence from a dispute.
@@ -287,35 +172,21 @@ module Square
     # @return [DeleteDisputeEvidenceResponse Hash] response from the API call
     def delete_dispute_evidence(dispute_id:,
                                 evidence_id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/disputes/{dispute_id}/evidence/{evidence_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true },
-        'evidence_id' => { 'value' => evidence_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.delete(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::DELETE,
+                                     '/v2/disputes/{dispute_id}/evidence/{evidence_id}',
+                                     'default')
+                   .template_param(new_parameter(dispute_id, key: 'dispute_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(evidence_id, key: 'evidence_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Returns the metadata for the evidence specified in the request URL path.
@@ -328,35 +199,21 @@ module Square
     # @return [RetrieveDisputeEvidenceResponse Hash] response from the API call
     def retrieve_dispute_evidence(dispute_id:,
                                   evidence_id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/disputes/{dispute_id}/evidence/{evidence_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true },
-        'evidence_id' => { 'value' => evidence_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/disputes/{dispute_id}/evidence/{evidence_id}',
+                                     'default')
+                   .template_param(new_parameter(dispute_id, key: 'dispute_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(evidence_id, key: 'evidence_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Submits evidence to the cardholder's bank.
@@ -372,34 +229,19 @@ module Square
     # which you want to submit evidence.
     # @return [SubmitEvidenceResponse Hash] response from the API call
     def submit_evidence(dispute_id:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/disputes/{dispute_id}/submit-evidence'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'dispute_id' => { 'value' => dispute_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/disputes/{dispute_id}/submit-evidence',
+                                     'default')
+                   .template_param(new_parameter(dispute_id, key: 'dispute_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
   end
 end

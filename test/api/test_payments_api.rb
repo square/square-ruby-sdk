@@ -5,8 +5,9 @@ require_relative 'api_test_base'
 class PaymentsApiTests < ApiTestBase
   # Called only once for the class before any test has executed
   def setup
-    @response_catcher = HttpResponseCatcher.new
-    @controller = PaymentsApi.new CONFIG, http_call_back: @response_catcher
+    setup_class
+    @controller = @client.payments
+    @response_catcher = @controller.http_call_back
   end
 
   # Retrieves a list of payments taken by the account making the request.
@@ -33,7 +34,7 @@ class PaymentsApiTests < ApiTestBase
     expected_headers = {}
     expected_headers['content-type'] = 'application/json'
 
-    assert(TestHelper.match_headers(expected_headers, @response_catcher.response.headers))
+    assert(ComparisonHelper.match_headers(expected_headers, @response_catcher.response.headers))
   end
 
 end

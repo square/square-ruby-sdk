@@ -5,8 +5,9 @@ require_relative 'api_test_base'
 class EmployeesApiTests < ApiTestBase
   # Called only once for the class before any test has executed
   def setup
-    @response_catcher = HttpResponseCatcher.new
-    @controller = EmployeesApi.new CONFIG, http_call_back: @response_catcher
+    setup_class
+    @controller = @client.employees
+    @response_catcher = @controller.http_call_back
   end
 
   # Gets a list of `Employee` objects for a business.
@@ -27,7 +28,7 @@ class EmployeesApiTests < ApiTestBase
     expected_headers = {}
     expected_headers['content-type'] = 'application/json'
 
-    assert(TestHelper.match_headers(expected_headers, @response_catcher.response.headers))
+    assert(ComparisonHelper.match_headers(expected_headers, @response_catcher.response.headers))
   end
 
 end

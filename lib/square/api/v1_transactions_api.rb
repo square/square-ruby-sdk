@@ -1,10 +1,6 @@
 module Square
   # V1TransactionsApi
   class V1TransactionsApi < BaseApi
-    def initialize(config, http_call_back: nil)
-      super(config, http_call_back: http_call_back)
-    end
-
     # Provides summary information for a merchant's online store orders.
     # @param [String] location_id Required parameter: The ID of the location to
     # list online store orders for.
@@ -21,40 +17,23 @@ module Square
                        limit: nil,
                        batch_token: nil)
       warn 'Endpoint v1_list_orders in V1TransactionsApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v1/{location_id}/orders'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'order' => order,
-        'limit' => limit,
-        'batch_token' => batch_token
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v1/{location_id}/orders',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .query_param(new_parameter(order, key: 'order'))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(batch_token, key: 'batch_token'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create))
+                   .is_response_array(true))
+        .execute
     end
 
     # Provides comprehensive information for a single online store order,
@@ -68,35 +47,21 @@ module Square
     def v1_retrieve_order(location_id:,
                           order_id:)
       warn 'Endpoint v1_retrieve_order in V1TransactionsApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v1/{location_id}/orders/{order_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true },
-        'order_id' => { 'value' => order_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v1/{location_id}/orders/{order_id}',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(order_id, key: 'order_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Updates the details of an online store order. Every update you perform on
@@ -114,37 +79,24 @@ module Square
                         order_id:,
                         body:)
       warn 'Endpoint v1_update_order in V1TransactionsApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v1/{location_id}/orders/{order_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true },
-        'order_id' => { 'value' => order_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.put(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::PUT,
+                                     '/v1/{location_id}/orders/{order_id}',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(order_id, key: 'order_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Provides summary information for all payments taken for a given
@@ -188,43 +140,26 @@ module Square
                          batch_token: nil,
                          include_partial: false)
       warn 'Endpoint v1_list_payments in V1TransactionsApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v1/{location_id}/payments'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'order' => order,
-        'begin_time' => begin_time,
-        'end_time' => end_time,
-        'limit' => limit,
-        'batch_token' => batch_token,
-        'include_partial' => include_partial
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v1/{location_id}/payments',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .query_param(new_parameter(order, key: 'order'))
+                   .query_param(new_parameter(begin_time, key: 'begin_time'))
+                   .query_param(new_parameter(end_time, key: 'end_time'))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(batch_token, key: 'batch_token'))
+                   .query_param(new_parameter(include_partial, key: 'include_partial'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create))
+                   .is_response_array(true))
+        .execute
     end
 
     # Provides comprehensive information for a single payment.
@@ -238,35 +173,21 @@ module Square
     def v1_retrieve_payment(location_id:,
                             payment_id:)
       warn 'Endpoint v1_retrieve_payment in V1TransactionsApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v1/{location_id}/payments/{payment_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true },
-        'payment_id' => { 'value' => payment_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v1/{location_id}/payments/{payment_id}',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(payment_id, key: 'payment_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Provides the details for all refunds initiated by a merchant or any of the
@@ -300,42 +221,25 @@ module Square
                         limit: nil,
                         batch_token: nil)
       warn 'Endpoint v1_list_refunds in V1TransactionsApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v1/{location_id}/refunds'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'order' => order,
-        'begin_time' => begin_time,
-        'end_time' => end_time,
-        'limit' => limit,
-        'batch_token' => batch_token
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v1/{location_id}/refunds',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .query_param(new_parameter(order, key: 'order'))
+                   .query_param(new_parameter(begin_time, key: 'begin_time'))
+                   .query_param(new_parameter(end_time, key: 'end_time'))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(batch_token, key: 'batch_token'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create))
+                   .is_response_array(true))
+        .execute
     end
 
     # Issues a refund for a previously processed payment. You must issue
@@ -357,36 +261,22 @@ module Square
     def v1_create_refund(location_id:,
                          body:)
       warn 'Endpoint v1_create_refund in V1TransactionsApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v1/{location_id}/refunds'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v1/{location_id}/refunds',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Provides summary information for all deposits and withdrawals
@@ -425,43 +315,26 @@ module Square
                             status: nil,
                             batch_token: nil)
       warn 'Endpoint v1_list_settlements in V1TransactionsApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v1/{location_id}/settlements'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'order' => order,
-        'begin_time' => begin_time,
-        'end_time' => end_time,
-        'limit' => limit,
-        'status' => status,
-        'batch_token' => batch_token
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v1/{location_id}/settlements',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .query_param(new_parameter(order, key: 'order'))
+                   .query_param(new_parameter(begin_time, key: 'begin_time'))
+                   .query_param(new_parameter(end_time, key: 'end_time'))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(status, key: 'status'))
+                   .query_param(new_parameter(batch_token, key: 'batch_token'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create))
+                   .is_response_array(true))
+        .execute
     end
 
     # Provides comprehensive information for a single settlement.
@@ -488,35 +361,21 @@ module Square
     def v1_retrieve_settlement(location_id:,
                                settlement_id:)
       warn 'Endpoint v1_retrieve_settlement in V1TransactionsApi is deprecated'
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v1/{location_id}/settlements/{settlement_id}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'location_id' => { 'value' => location_id, 'encode' => true },
-        'settlement_id' => { 'value' => settlement_id, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v1/{location_id}/settlements/{settlement_id}',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(settlement_id, key: 'settlement_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
   end
 end

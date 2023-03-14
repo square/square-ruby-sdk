@@ -1,8 +1,11 @@
 require 'date'
 require 'json'
-require 'faraday'
-require 'certifi'
-require 'logging'
+require 'apimatic_core_interfaces'
+require 'apimatic_core'
+require 'apimatic_faraday_client_adapter'
+# rubocop:disable Style/MixinUsage
+include CoreLibrary
+# rubocop:enable Style/MixinUsage
 
 require_relative 'square/api_helper'
 require_relative 'square/client'
@@ -14,8 +17,6 @@ require_relative 'square/utilities/date_time_helper'
 # Http
 require_relative 'square/http/api_response'
 require_relative 'square/http/http_call_back'
-require_relative 'square/http/http_client'
-require_relative 'square/http/faraday_client'
 require_relative 'square/http/http_method_enum'
 require_relative 'square/http/http_request'
 require_relative 'square/http/http_response'
@@ -25,7 +26,6 @@ require_relative 'square/http/auth/o_auth2'
 
 # Exceptions
 require_relative 'square/exceptions/api_exception'
-require_relative 'square/exceptions/validation_exception'
 
 require_relative 'square/configuration'
 

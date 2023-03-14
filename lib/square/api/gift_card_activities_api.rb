@@ -1,10 +1,6 @@
 module Square
   # GiftCardActivitiesApi
   class GiftCardActivitiesApi < BaseApi
-    def initialize(config, http_call_back: nil)
-      super(config, http_call_back: http_call_back)
-    end
-
     # Lists gift card activities. By default, you get gift card activities for
     # all
     # gift cards in the seller's account. You can optionally specify query
@@ -54,41 +50,25 @@ module Square
                                   limit: nil,
                                   cursor: nil,
                                   sort_order: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/gift-cards/activities'
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'gift_card_id' => gift_card_id,
-        'type' => type,
-        'location_id' => location_id,
-        'begin_time' => begin_time,
-        'end_time' => end_time,
-        'limit' => limit,
-        'cursor' => cursor,
-        'sort_order' => sort_order
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/gift-cards/activities',
+                                     'default')
+                   .query_param(new_parameter(gift_card_id, key: 'gift_card_id'))
+                   .query_param(new_parameter(type, key: 'type'))
+                   .query_param(new_parameter(location_id, key: 'location_id'))
+                   .query_param(new_parameter(begin_time, key: 'begin_time'))
+                   .query_param(new_parameter(end_time, key: 'end_time'))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .query_param(new_parameter(sort_order, key: 'sort_order'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Creates a gift card activity to manage the balance or state of a [gift
@@ -101,32 +81,20 @@ module Square
     # object definition for field details.
     # @return [CreateGiftCardActivityResponse Hash] response from the API call
     def create_gift_card_activity(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/gift-cards/activities'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/gift-cards/activities',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
   end
 end

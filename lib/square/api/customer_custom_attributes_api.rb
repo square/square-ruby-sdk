@@ -1,10 +1,6 @@
 module Square
   # CustomerCustomAttributesApi
   class CustomerCustomAttributesApi < BaseApi
-    def initialize(config, http_call_back: nil)
-      super(config, http_call_back: http_call_back)
-    end
-
     # Lists the customer-related [custom attribute
     # definitions]($m/CustomAttributeDefinition) that belong to a Square seller
     # account.
@@ -31,35 +27,19 @@ module Square
     # @return [ListCustomerCustomAttributeDefinitionsResponse Hash] response from the API call
     def list_customer_custom_attribute_definitions(limit: nil,
                                                    cursor: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/customers/custom-attribute-definitions'
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'limit' => limit,
-        'cursor' => cursor
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/customers/custom-attribute-definitions',
+                                     'default')
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Creates a customer-related [custom attribute
@@ -83,32 +63,20 @@ module Square
     # the corresponding object definition for field details.
     # @return [CreateCustomerCustomAttributeDefinitionResponse Hash] response from the API call
     def create_customer_custom_attribute_definition(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/customers/custom-attribute-definitions'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/customers/custom-attribute-definitions',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Deletes a customer-related [custom attribute
@@ -121,34 +89,19 @@ module Square
     # definition to delete.
     # @return [DeleteCustomerCustomAttributeDefinitionResponse Hash] response from the API call
     def delete_customer_custom_attribute_definition(key:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/customers/custom-attribute-definitions/{key}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'key' => { 'value' => key, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.delete(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::DELETE,
+                                     '/v2/customers/custom-attribute-definitions/{key}',
+                                     'default')
+                   .template_param(new_parameter(key, key: 'key')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Retrieves a customer-related [custom attribute
@@ -171,38 +124,20 @@ module Square
     # @return [RetrieveCustomerCustomAttributeDefinitionResponse Hash] response from the API call
     def retrieve_customer_custom_attribute_definition(key:,
                                                       version: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/customers/custom-attribute-definitions/{key}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'key' => { 'value' => key, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'version' => version
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/customers/custom-attribute-definitions/{key}',
+                                     'default')
+                   .template_param(new_parameter(key, key: 'key')
+                                    .should_encode(true))
+                   .query_param(new_parameter(version, key: 'version'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Updates a customer-related [custom attribute
@@ -222,36 +157,22 @@ module Square
     # @return [UpdateCustomerCustomAttributeDefinitionResponse Hash] response from the API call
     def update_customer_custom_attribute_definition(key:,
                                                     body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/customers/custom-attribute-definitions/{key}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'key' => { 'value' => key, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.put(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::PUT,
+                                     '/v2/customers/custom-attribute-definitions/{key}',
+                                     'default')
+                   .template_param(new_parameter(key, key: 'key')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Creates or updates [custom attributes]($m/CustomAttribute) for customer
@@ -281,32 +202,20 @@ module Square
     # the corresponding object definition for field details.
     # @return [BulkUpsertCustomerCustomAttributesResponse Hash] response from the API call
     def bulk_upsert_customer_custom_attributes(body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/customers/custom-attributes/bulk-upsert'
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/customers/custom-attributes/bulk-upsert',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Lists the [custom attributes]($m/CustomAttribute) associated with a
@@ -344,40 +253,22 @@ module Square
                                         limit: nil,
                                         cursor: nil,
                                         with_definitions: false)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/customers/{customer_id}/custom-attributes'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'customer_id' => { 'value' => customer_id, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'limit' => limit,
-        'cursor' => cursor,
-        'with_definitions' => with_definitions
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/customers/{customer_id}/custom-attributes',
+                                     'default')
+                   .template_param(new_parameter(customer_id, key: 'customer_id')
+                                    .should_encode(true))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .query_param(new_parameter(with_definitions, key: 'with_definitions'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Deletes a [custom attribute]($m/CustomAttribute) associated with a
@@ -396,35 +287,21 @@ module Square
     # @return [DeleteCustomerCustomAttributeResponse Hash] response from the API call
     def delete_customer_custom_attribute(customer_id:,
                                          key:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/customers/{customer_id}/custom-attributes/{key}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'customer_id' => { 'value' => customer_id, 'encode' => true },
-        'key' => { 'value' => key, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.delete(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::DELETE,
+                                     '/v2/customers/{customer_id}/custom-attributes/{key}',
+                                     'default')
+                   .template_param(new_parameter(customer_id, key: 'customer_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(key, key: 'key')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Retrieves a [custom attribute]($m/CustomAttribute) associated with a
@@ -461,40 +338,23 @@ module Square
                                            key:,
                                            with_definition: false,
                                            version: nil)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/customers/{customer_id}/custom-attributes/{key}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'customer_id' => { 'value' => customer_id, 'encode' => true },
-        'key' => { 'value' => key, 'encode' => true }
-      )
-      _query_builder = APIHelper.append_url_with_query_parameters(
-        _query_builder,
-        'with_definition' => with_definition,
-        'version' => version
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.get(
-        _query_url,
-        headers: _headers
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/customers/{customer_id}/custom-attributes/{key}',
+                                     'default')
+                   .template_param(new_parameter(customer_id, key: 'customer_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(key, key: 'key')
+                                    .should_encode(true))
+                   .query_param(new_parameter(with_definition, key: 'with_definition'))
+                   .query_param(new_parameter(version, key: 'version'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
 
     # Creates or updates a [custom attribute]($m/CustomAttribute) for a customer
@@ -525,37 +385,24 @@ module Square
     def upsert_customer_custom_attribute(customer_id:,
                                          key:,
                                          body:)
-      # Prepare query url.
-      _query_builder = config.get_base_uri
-      _query_builder << '/v2/customers/{customer_id}/custom-attributes/{key}'
-      _query_builder = APIHelper.append_url_with_template_parameters(
-        _query_builder,
-        'customer_id' => { 'value' => customer_id, 'encode' => true },
-        'key' => { 'value' => key, 'encode' => true }
-      )
-      _query_url = APIHelper.clean_url _query_builder
-
-      # Prepare headers.
-      _headers = {
-        'accept' => 'application/json',
-        'Content-Type' => 'application/json'
-      }
-
-      # Prepare and execute HttpRequest.
-      _request = config.http_client.post(
-        _query_url,
-        headers: _headers,
-        parameters: body.to_json
-      )
-      OAuth2.apply(config, _request)
-      _response = execute_request(_request)
-
-      # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_response.raw_body)
-      _errors = APIHelper.map_response(decoded, ['errors'])
-      ApiResponse.new(
-        _response, data: decoded, errors: _errors
-      )
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/customers/{customer_id}/custom-attributes/{key}',
+                                     'default')
+                   .template_param(new_parameter(customer_id, key: 'customer_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(key, key: 'key')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
     end
   end
 end
