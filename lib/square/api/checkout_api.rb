@@ -9,7 +9,7 @@ module Square
     # highlights](https://developer.squareup.com/docs/checkout-api#checkout-api-
     # highlights).
     # We recommend that you use the
-    # new [CreatePaymentLink]($e/Checkout/CreatePaymentLink)
+    # new [CreatePaymentLink](api-endpoint:Checkout-CreatePaymentLink)
     # endpoint in place of this previously released endpoint.
     # @param [String] location_id Required parameter: The ID of the business
     # location to associate the checkout with.

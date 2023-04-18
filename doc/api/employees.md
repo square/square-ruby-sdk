@@ -43,7 +43,7 @@ def list_employees(location_id: nil,
 ## Example Usage
 
 ```ruby
-result = employees_api.list_employees()
+result = employees_api.list_employees
 
 if result.success?
   puts result.data
@@ -77,6 +77,7 @@ def retrieve_employee(id:)
 
 ```ruby
 id = 'id0'
+
 
 result = employees_api.retrieve_employee(id: id)
 

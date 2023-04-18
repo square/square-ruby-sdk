@@ -37,7 +37,7 @@ def list_customer_segments(cursor: nil,
 ## Example Usage
 
 ```ruby
-result = customer_segments_api.list_customer_segments()
+result = customer_segments_api.list_customer_segments
 
 if result.success?
   puts result.data
@@ -69,6 +69,7 @@ def retrieve_customer_segment(segment_id:)
 
 ```ruby
 segment_id = 'segment_id4'
+
 
 result = customer_segments_api.retrieve_customer_segment(segment_id: segment_id)
 

@@ -4,7 +4,7 @@ module Square
     attr_reader :config, :auth_managers
 
     def sdk_version
-      '26.2.0.20230315'
+      '27.0.0.20230419'
     end
 
     def square_version
@@ -261,7 +261,7 @@ module Square
                    retry_methods: %i[get put], http_callback: nil,
                    environment: 'production',
                    custom_url: 'https://connect.squareup.com', access_token: '',
-                   square_version: '2023-03-15', user_agent_detail: '',
+                   square_version: '2023-04-19', user_agent_detail: '',
                    additional_headers: {}, config: nil)
       @config = if config.nil?
                   Configuration.new(connection: connection, adapter: adapter,

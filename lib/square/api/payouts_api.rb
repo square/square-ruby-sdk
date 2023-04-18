@@ -6,7 +6,7 @@ module Square
     # in ascending or descending order.
     # To call this endpoint, set `PAYOUTS_READ` for the OAuth scope.
     # @param [String] location_id Optional parameter: The ID of the location for
-    # which to list the payouts.  By default, payouts are returned for the
+    # which to list the payouts. By default, payouts are returned for the
     # default (main) location associated with the seller.
     # @param [PayoutStatus] status Optional parameter: If provided, only payouts
     # with the given status are returned.
@@ -20,9 +20,9 @@ module Square
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this cursor to retrieve the next
     # set of results for the original query. For more information, see
-    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
-    # . If request parameters change between requests, subsequent results may
-    # contain duplicates or missing records.
+    # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
+    # atterns/pagination). If request parameters change between requests,
+    # subsequent results may contain duplicates or missing records.
     # @param [Integer] limit Optional parameter: The maximum number of results
     # to be returned in a single page. It is possible to receive fewer results
     # than the specified limit on a given page. The default value of 100 is also
@@ -86,9 +86,9 @@ module Square
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this cursor to retrieve the next
     # set of results for the original query. For more information, see
-    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
-    # . If request parameters change between requests, subsequent results may
-    # contain duplicates or missing records.
+    # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
+    # atterns/pagination). If request parameters change between requests,
+    # subsequent results may contain duplicates or missing records.
     # @param [Integer] limit Optional parameter: The maximum number of results
     # to be returned in a single page. It is possible to receive fewer results
     # than the specified limit on a given page. The default value of 100 is also

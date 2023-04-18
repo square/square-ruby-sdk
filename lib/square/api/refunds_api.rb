@@ -6,26 +6,28 @@ module Square
     # might take several
     # seconds to appear.
     # The maximum results per page is 100.
-    # @param [String] begin_time Optional parameter: The timestamp for the
-    # beginning of the requested reporting period, in RFC 3339 format.  Default:
-    # The current time minus one year.
-    # @param [String] end_time Optional parameter: The timestamp for the end of
-    # the requested reporting period, in RFC 3339 format.  Default: The current
-    # time.
+    # @param [String] begin_time Optional parameter: Indicates the start of the
+    # time range to retrieve each PaymentRefund` for, in RFC 3339  format.  The
+    # range is determined using the `created_at` field for each `PaymentRefund`.
+    #   Default: The current time minus one year.
+    # @param [String] end_time Optional parameter: Indicates the end of the time
+    # range to retrieve each `PaymentRefund` for, in RFC 3339  format.  The
+    # range is determined using the `created_at` field for each `PaymentRefund`.
+    #  Default: The current time.
     # @param [String] sort_order Optional parameter: The order in which results
-    # are listed: - `ASC` - Oldest to newest. - `DESC` - Newest to oldest
-    # (default).
+    # are listed by `PaymentRefund.created_at`: - `ASC` - Oldest to newest. -
+    # `DESC` - Newest to oldest (default).
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this cursor to retrieve the next
     # set of results for the original query.  For more information, see
-    # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
-    # .
+    # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
+    # atterns/pagination).
     # @param [String] location_id Optional parameter: Limit results to the
     # location supplied. By default, results are returned for all locations
     # associated with the seller.
     # @param [String] status Optional parameter: If provided, only refunds with
     # the given status are returned. For a list of refund status values, see
-    # [PaymentRefund]($m/PaymentRefund).  Default: If omitted, refunds are
+    # [PaymentRefund](entity:PaymentRefund).  Default: If omitted, refunds are
     # returned regardless of their status.
     # @param [String] source_type Optional parameter: If provided, only returns
     # refunds whose payments have the indicated source type. Current values

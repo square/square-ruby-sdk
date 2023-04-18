@@ -29,7 +29,7 @@ inventory_api = client.inventory
 
 **This endpoint is deprecated.**
 
-Deprecated version of [RetrieveInventoryAdjustment](../../doc/api/inventory.md#retrieve-inventory-adjustment) after the endpoint URL
+Deprecated version of [RetrieveInventoryAdjustment](api-endpoint:Inventory-RetrieveInventoryAdjustment) after the endpoint URL
 is updated to conform to the standard convention.
 
 ```ruby
@@ -40,7 +40,7 @@ def deprecated_retrieve_inventory_adjustment(adjustment_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `adjustment_id` | `String` | Template, Required | ID of the [InventoryAdjustment](../../doc/models/inventory-adjustment.md) to retrieve. |
+| `adjustment_id` | `String` | Template, Required | ID of the [InventoryAdjustment](entity:InventoryAdjustment) to retrieve. |
 
 ## Response Type
 
@@ -50,6 +50,7 @@ def deprecated_retrieve_inventory_adjustment(adjustment_id:)
 
 ```ruby
 adjustment_id = 'adjustment_id0'
+
 
 result = inventory_api.deprecated_retrieve_inventory_adjustment(adjustment_id: adjustment_id)
 
@@ -74,7 +75,7 @@ def retrieve_inventory_adjustment(adjustment_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `adjustment_id` | `String` | Template, Required | ID of the [InventoryAdjustment](../../doc/models/inventory-adjustment.md) to retrieve. |
+| `adjustment_id` | `String` | Template, Required | ID of the [InventoryAdjustment](entity:InventoryAdjustment) to retrieve. |
 
 ## Response Type
 
@@ -84,6 +85,7 @@ def retrieve_inventory_adjustment(adjustment_id:)
 
 ```ruby
 adjustment_id = 'adjustment_id0'
+
 
 result = inventory_api.retrieve_inventory_adjustment(adjustment_id: adjustment_id)
 
@@ -99,7 +101,7 @@ end
 
 **This endpoint is deprecated.**
 
-Deprecated version of [BatchChangeInventory](../../doc/api/inventory.md#batch-change-inventory) after the endpoint URL
+Deprecated version of [BatchChangeInventory](api-endpoint:Inventory-BatchChangeInventory) after the endpoint URL
 is updated to conform to the standard convention.
 
 ```ruby
@@ -119,23 +121,25 @@ def deprecated_batch_change_inventory(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:idempotency_key] = '8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe'
-body[:changes] = []
+body = {
+  :idempotency_key => '8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe',
+  :changes => [
+    {
+      :type => 'PHYSICAL_COUNT',
+      :physical_count => {
+        :reference_id => '1536bfbf-efed-48bf-b17d-a197141b2a92',
+        :catalog_object_id => 'W62UWFY35CWMYGVWK6TWJDNI',
+        :state => 'IN_STOCK',
+        :location_id => 'C6W5YS5QM06F5',
+        :quantity => '53',
+        :team_member_id => 'LRK57NSQ5X7PUD05',
+        :occurred_at => '2016-11-16T22:25:24.878Z'
+      }
+    }
+  ],
+  :ignore_unchanged_counts => true
+}
 
-
-body[:changes][0] = {}
-body[:changes][0][:type] = 'PHYSICAL_COUNT'
-body[:changes][0][:physical_count] = {}
-body[:changes][0][:physical_count][:reference_id] = '1536bfbf-efed-48bf-b17d-a197141b2a92'
-body[:changes][0][:physical_count][:catalog_object_id] = 'W62UWFY35CWMYGVWK6TWJDNI'
-body[:changes][0][:physical_count][:state] = 'IN_STOCK'
-body[:changes][0][:physical_count][:location_id] = 'C6W5YS5QM06F5'
-body[:changes][0][:physical_count][:quantity] = '53'
-body[:changes][0][:physical_count][:team_member_id] = 'LRK57NSQ5X7PUD05'
-body[:changes][0][:physical_count][:occurred_at] = '2016-11-16T22:25:24.878Z'
-
-body[:ignore_unchanged_counts] = true
 
 result = inventory_api.deprecated_batch_change_inventory(body: body)
 
@@ -151,7 +155,7 @@ end
 
 **This endpoint is deprecated.**
 
-Deprecated version of [BatchRetrieveInventoryChanges](../../doc/api/inventory.md#batch-retrieve-inventory-changes) after the endpoint URL
+Deprecated version of [BatchRetrieveInventoryChanges](api-endpoint:Inventory-BatchRetrieveInventoryChanges) after the endpoint URL
 is updated to conform to the standard convention.
 
 ```ruby
@@ -171,13 +175,23 @@ def deprecated_batch_retrieve_inventory_changes(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:catalog_object_ids] = ['W62UWFY35CWMYGVWK6TWJDNI']
-body[:location_ids] = ['C6W5YS5QM06F5']
-body[:types] = ['PHYSICAL_COUNT']
-body[:states] = ['IN_STOCK']
-body[:updated_after] = '2016-11-01T00:00:00Z'
-body[:updated_before] = '2016-12-01T00:00:00Z'
+body = {
+  :catalog_object_ids => [
+    'W62UWFY35CWMYGVWK6TWJDNI'
+  ],
+  :location_ids => [
+    'C6W5YS5QM06F5'
+  ],
+  :types => [
+    'PHYSICAL_COUNT'
+  ],
+  :states => [
+    'IN_STOCK'
+  ],
+  :updated_after => '2016-11-01T00:00:00Z',
+  :updated_before => '2016-12-01T00:00:00Z'
+}
+
 
 result = inventory_api.deprecated_batch_retrieve_inventory_changes(body: body)
 
@@ -193,7 +207,7 @@ end
 
 **This endpoint is deprecated.**
 
-Deprecated version of [BatchRetrieveInventoryCounts](../../doc/api/inventory.md#batch-retrieve-inventory-counts) after the endpoint URL
+Deprecated version of [BatchRetrieveInventoryCounts](api-endpoint:Inventory-BatchRetrieveInventoryCounts) after the endpoint URL
 is updated to conform to the standard convention.
 
 ```ruby
@@ -213,10 +227,16 @@ def deprecated_batch_retrieve_inventory_counts(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:catalog_object_ids] = ['W62UWFY35CWMYGVWK6TWJDNI']
-body[:location_ids] = ['59TNP9SA8VGDA']
-body[:updated_after] = '2016-11-16T00:00:00Z'
+body = {
+  :catalog_object_ids => [
+    'W62UWFY35CWMYGVWK6TWJDNI'
+  ],
+  :location_ids => [
+    '59TNP9SA8VGDA'
+  ],
+  :updated_after => '2016-11-16T00:00:00Z'
+}
+
 
 result = inventory_api.deprecated_batch_retrieve_inventory_counts(body: body)
 
@@ -253,23 +273,25 @@ def batch_change_inventory(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:idempotency_key] = '8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe'
-body[:changes] = []
+body = {
+  :idempotency_key => '8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe',
+  :changes => [
+    {
+      :type => 'PHYSICAL_COUNT',
+      :physical_count => {
+        :reference_id => '1536bfbf-efed-48bf-b17d-a197141b2a92',
+        :catalog_object_id => 'W62UWFY35CWMYGVWK6TWJDNI',
+        :state => 'IN_STOCK',
+        :location_id => 'C6W5YS5QM06F5',
+        :quantity => '53',
+        :team_member_id => 'LRK57NSQ5X7PUD05',
+        :occurred_at => '2016-11-16T22:25:24.878Z'
+      }
+    }
+  ],
+  :ignore_unchanged_counts => true
+}
 
-
-body[:changes][0] = {}
-body[:changes][0][:type] = 'PHYSICAL_COUNT'
-body[:changes][0][:physical_count] = {}
-body[:changes][0][:physical_count][:reference_id] = '1536bfbf-efed-48bf-b17d-a197141b2a92'
-body[:changes][0][:physical_count][:catalog_object_id] = 'W62UWFY35CWMYGVWK6TWJDNI'
-body[:changes][0][:physical_count][:state] = 'IN_STOCK'
-body[:changes][0][:physical_count][:location_id] = 'C6W5YS5QM06F5'
-body[:changes][0][:physical_count][:quantity] = '53'
-body[:changes][0][:physical_count][:team_member_id] = 'LRK57NSQ5X7PUD05'
-body[:changes][0][:physical_count][:occurred_at] = '2016-11-16T22:25:24.878Z'
-
-body[:ignore_unchanged_counts] = true
 
 result = inventory_api.batch_change_inventory(body: body)
 
@@ -309,13 +331,23 @@ def batch_retrieve_inventory_changes(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:catalog_object_ids] = ['W62UWFY35CWMYGVWK6TWJDNI']
-body[:location_ids] = ['C6W5YS5QM06F5']
-body[:types] = ['PHYSICAL_COUNT']
-body[:states] = ['IN_STOCK']
-body[:updated_after] = '2016-11-01T00:00:00Z'
-body[:updated_before] = '2016-12-01T00:00:00Z'
+body = {
+  :catalog_object_ids => [
+    'W62UWFY35CWMYGVWK6TWJDNI'
+  ],
+  :location_ids => [
+    'C6W5YS5QM06F5'
+  ],
+  :types => [
+    'PHYSICAL_COUNT'
+  ],
+  :states => [
+    'IN_STOCK'
+  ],
+  :updated_after => '2016-11-01T00:00:00Z',
+  :updated_before => '2016-12-01T00:00:00Z'
+}
+
 
 result = inventory_api.batch_retrieve_inventory_changes(body: body)
 
@@ -358,10 +390,16 @@ def batch_retrieve_inventory_counts(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:catalog_object_ids] = ['W62UWFY35CWMYGVWK6TWJDNI']
-body[:location_ids] = ['59TNP9SA8VGDA']
-body[:updated_after] = '2016-11-16T00:00:00Z'
+body = {
+  :catalog_object_ids => [
+    'W62UWFY35CWMYGVWK6TWJDNI'
+  ],
+  :location_ids => [
+    '59TNP9SA8VGDA'
+  ],
+  :updated_after => '2016-11-16T00:00:00Z'
+}
+
 
 result = inventory_api.batch_retrieve_inventory_counts(body: body)
 
@@ -377,7 +415,7 @@ end
 
 **This endpoint is deprecated.**
 
-Deprecated version of [RetrieveInventoryPhysicalCount](../../doc/api/inventory.md#retrieve-inventory-physical-count) after the endpoint URL
+Deprecated version of [RetrieveInventoryPhysicalCount](api-endpoint:Inventory-RetrieveInventoryPhysicalCount) after the endpoint URL
 is updated to conform to the standard convention.
 
 ```ruby
@@ -388,7 +426,7 @@ def deprecated_retrieve_inventory_physical_count(physical_count_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `physical_count_id` | `String` | Template, Required | ID of the<br>[InventoryPhysicalCount](../../doc/models/inventory-physical-count.md) to retrieve. |
+| `physical_count_id` | `String` | Template, Required | ID of the<br>[InventoryPhysicalCount](entity:InventoryPhysicalCount) to retrieve. |
 
 ## Response Type
 
@@ -398,6 +436,7 @@ def deprecated_retrieve_inventory_physical_count(physical_count_id:)
 
 ```ruby
 physical_count_id = 'physical_count_id2'
+
 
 result = inventory_api.deprecated_retrieve_inventory_physical_count(physical_count_id: physical_count_id)
 
@@ -422,7 +461,7 @@ def retrieve_inventory_physical_count(physical_count_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `physical_count_id` | `String` | Template, Required | ID of the<br>[InventoryPhysicalCount](../../doc/models/inventory-physical-count.md) to retrieve. |
+| `physical_count_id` | `String` | Template, Required | ID of the<br>[InventoryPhysicalCount](entity:InventoryPhysicalCount) to retrieve. |
 
 ## Response Type
 
@@ -432,6 +471,7 @@ def retrieve_inventory_physical_count(physical_count_id:)
 
 ```ruby
 physical_count_id = 'physical_count_id2'
+
 
 result = inventory_api.retrieve_inventory_physical_count(physical_count_id: physical_count_id)
 
@@ -456,7 +496,7 @@ def retrieve_inventory_transfer(transfer_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `transfer_id` | `String` | Template, Required | ID of the [InventoryTransfer](../../doc/models/inventory-transfer.md) to retrieve. |
+| `transfer_id` | `String` | Template, Required | ID of the [InventoryTransfer](entity:InventoryTransfer) to retrieve. |
 
 ## Response Type
 
@@ -466,6 +506,7 @@ def retrieve_inventory_transfer(transfer_id:)
 
 ```ruby
 transfer_id = 'transfer_id6'
+
 
 result = inventory_api.retrieve_inventory_transfer(transfer_id: transfer_id)
 
@@ -494,8 +535,8 @@ def retrieve_inventory_count(catalog_object_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `catalog_object_id` | `String` | Template, Required | ID of the [CatalogObject](../../doc/models/catalog-object.md) to retrieve. |
-| `location_ids` | `String` | Query, Optional | The [Location](../../doc/models/location.md) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
+| `catalog_object_id` | `String` | Template, Required | ID of the [CatalogObject](entity:CatalogObject) to retrieve. |
+| `location_ids` | `String` | Query, Optional | The [Location](entity:Location) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
 | `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information. |
 
 ## Response Type
@@ -507,7 +548,8 @@ def retrieve_inventory_count(catalog_object_id:,
 ```ruby
 catalog_object_id = 'catalog_object_id6'
 
-result = inventory_api.retrieve_inventory_count(catalog_object_id: catalog_object_id, )
+
+result = inventory_api.retrieve_inventory_count(catalog_object_id: catalog_object_id)
 
 if result.success?
   puts result.data
@@ -522,10 +564,10 @@ end
 **This endpoint is deprecated.**
 
 Returns a set of physical counts and inventory adjustments for the
-provided [CatalogObject](../../doc/models/catalog-object.md) at the requested
-[Location](../../doc/models/location.md)s.
+provided [CatalogObject](entity:CatalogObject) at the requested
+[Location](entity:Location)s.
 
-You can achieve the same result by calling [BatchRetrieveInventoryChanges](../../doc/api/inventory.md#batch-retrieve-inventory-changes)
+You can achieve the same result by calling [BatchRetrieveInventoryChanges](api-endpoint:Inventory-BatchRetrieveInventoryChanges)
 and having the `catalog_object_ids` list contain a single element of the `CatalogObject` ID.
 
 Results are paginated and sorted in descending order according to their
@@ -545,8 +587,8 @@ def retrieve_inventory_changes(catalog_object_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `catalog_object_id` | `String` | Template, Required | ID of the [CatalogObject](../../doc/models/catalog-object.md) to retrieve. |
-| `location_ids` | `String` | Query, Optional | The [Location](../../doc/models/location.md) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
+| `catalog_object_id` | `String` | Template, Required | ID of the [CatalogObject](entity:CatalogObject) to retrieve. |
+| `location_ids` | `String` | Query, Optional | The [Location](entity:Location) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
 | `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information. |
 
 ## Response Type
@@ -558,7 +600,8 @@ def retrieve_inventory_changes(catalog_object_id:,
 ```ruby
 catalog_object_id = 'catalog_object_id6'
 
-result = inventory_api.retrieve_inventory_changes(catalog_object_id: catalog_object_id, )
+
+result = inventory_api.retrieve_inventory_changes(catalog_object_id: catalog_object_id)
 
 if result.success?
   puts result.data

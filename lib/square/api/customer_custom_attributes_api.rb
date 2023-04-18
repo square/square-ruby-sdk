@@ -229,7 +229,7 @@ module Square
     # other applications
     # and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
     # @param [String] customer_id Required parameter: The ID of the target
-    # [customer profile]($m/Customer).
+    # [customer profile](entity:Customer).
     # @param [Integer] limit Optional parameter: The maximum number of results
     # to return in a single paged response. This limit is advisory. The response
     # might contain more or fewer results. The minimum value is 1 and the
@@ -244,7 +244,7 @@ module Square
     # atterns/pagination).
     # @param [TrueClass|FalseClass] with_definitions Optional parameter:
     # Indicates whether to return the [custom attribute
-    # definition]($m/CustomAttributeDefinition) in the `definition` field of
+    # definition](entity:CustomAttributeDefinition) in the `definition` field of
     # each custom attribute. Set this parameter to `true` to get the name and
     # description of each custom attribute, information about the data type, or
     # other definition details. The default value is `false`.
@@ -279,7 +279,7 @@ module Square
     # (also known as custom fields) are always set to
     # `VISIBILITY_READ_WRITE_VALUES`.
     # @param [String] customer_id Required parameter: The ID of the target
-    # [customer profile]($m/Customer).
+    # [customer profile](entity:Customer).
     # @param [String] key Required parameter: The key of the custom attribute to
     # delete. This key must match the `key` of a custom attribute definition in
     # the Square seller account. If the requesting application is not the
@@ -316,15 +316,15 @@ module Square
     # (also known as custom fields) are always set to
     # `VISIBILITY_READ_WRITE_VALUES`.
     # @param [String] customer_id Required parameter: The ID of the target
-    # [customer profile]($m/Customer).
+    # [customer profile](entity:Customer).
     # @param [String] key Required parameter: The key of the custom attribute to
     # retrieve. This key must match the `key` of a custom attribute definition
     # in the Square seller account. If the requesting application is not the
     # definition owner, you must use the qualified key.
     # @param [TrueClass|FalseClass] with_definition Optional parameter:
     # Indicates whether to return the [custom attribute
-    # definition]($m/CustomAttributeDefinition) in the `definition` field of the
-    # custom attribute. Set this parameter to `true` to get the name and
+    # definition](entity:CustomAttributeDefinition) in the `definition` field of
+    # the custom attribute. Set this parameter to `true` to get the name and
     # description of the custom attribute, information about the data type, or
     # other definition details. The default value is `false`.
     # @param [Integer] version Optional parameter: The current version of the
@@ -373,7 +373,7 @@ module Square
     # (also known as custom fields) are always set to
     # `VISIBILITY_READ_WRITE_VALUES`.
     # @param [String] customer_id Required parameter: The ID of the target
-    # [customer profile]($m/Customer).
+    # [customer profile](entity:Customer).
     # @param [String] key Required parameter: The key of the custom attribute to
     # create or update. This key must match the `key` of a custom attribute
     # definition in the Square seller account. If the requesting application is

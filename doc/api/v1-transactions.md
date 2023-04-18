@@ -52,7 +52,8 @@ def v1_list_orders(location_id:,
 ```ruby
 location_id = 'location_id4'
 
-result = v1_transactions_api.v1_list_orders(location_id: location_id, )
+
+result = v1_transactions_api.v1_list_orders(location_id: location_id)
 
 if result.success?
   puts result.data
@@ -88,9 +89,14 @@ def v1_retrieve_order(location_id:,
 
 ```ruby
 location_id = 'location_id4'
+
 order_id = 'order_id6'
 
-result = v1_transactions_api.v1_retrieve_order(location_id: location_id, order_id: order_id)
+
+result = v1_transactions_api.v1_retrieve_order(
+  location_id: location_id,
+  order_id: order_id
+)
 
 if result.success?
   puts result.data
@@ -128,11 +134,19 @@ def v1_update_order(location_id:,
 
 ```ruby
 location_id = 'location_id4'
-order_id = 'order_id6'
-body = {}
-body[:action] = 'REFUND'
 
-result = v1_transactions_api.v1_update_order(location_id: location_id, order_id: order_id, body: body)
+order_id = 'order_id6'
+
+body = {
+  :action => 'REFUND'
+}
+
+
+result = v1_transactions_api.v1_update_order(
+  location_id: location_id,
+  order_id: order_id,
+  body: body
+)
 
 if result.success?
   puts result.data
@@ -188,9 +202,14 @@ def v1_list_payments(location_id:,
 
 ```ruby
 location_id = 'location_id4'
+
 include_partial = false
 
-result = v1_transactions_api.v1_list_payments(location_id: location_id, include_partial: include_partial)
+
+result = v1_transactions_api.v1_list_payments(
+  location_id: location_id,
+  include_partial: include_partial
+)
 
 if result.success?
   puts result.data
@@ -226,9 +245,14 @@ def v1_retrieve_payment(location_id:,
 
 ```ruby
 location_id = 'location_id4'
+
 payment_id = 'payment_id0'
 
-result = v1_transactions_api.v1_retrieve_payment(location_id: location_id, payment_id: payment_id)
+
+result = v1_transactions_api.v1_retrieve_payment(
+  location_id: location_id,
+  payment_id: payment_id
+)
 
 if result.success?
   puts result.data
@@ -273,7 +297,8 @@ def v1_list_refunds(location_id:,
 ```ruby
 location_id = 'location_id4'
 
-result = v1_transactions_api.v1_list_refunds(location_id: location_id, )
+
+result = v1_transactions_api.v1_list_refunds(location_id: location_id)
 
 if result.success?
   puts result.data
@@ -320,12 +345,18 @@ def v1_create_refund(location_id:,
 
 ```ruby
 location_id = 'location_id4'
-body = {}
-body[:payment_id] = 'payment_id6'
-body[:type] = 'FULL'
-body[:reason] = 'reason8'
 
-result = v1_transactions_api.v1_create_refund(location_id: location_id, body: body)
+body = {
+  :payment_id => 'payment_id6',
+  :type => 'FULL',
+  :reason => 'reason8'
+}
+
+
+result = v1_transactions_api.v1_create_refund(
+  location_id: location_id,
+  body: body
+)
 
 if result.success?
   puts result.data
@@ -377,7 +408,8 @@ def v1_list_settlements(location_id:,
 ```ruby
 location_id = 'location_id4'
 
-result = v1_transactions_api.v1_list_settlements(location_id: location_id, )
+
+result = v1_transactions_api.v1_list_settlements(location_id: location_id)
 
 if result.success?
   puts result.data
@@ -429,9 +461,14 @@ def v1_retrieve_settlement(location_id:,
 
 ```ruby
 location_id = 'location_id4'
+
 settlement_id = 'settlement_id0'
 
-result = v1_transactions_api.v1_retrieve_settlement(location_id: location_id, settlement_id: settlement_id)
+
+result = v1_transactions_api.v1_retrieve_settlement(
+  location_id: location_id,
+  settlement_id: settlement_id
+)
 
 if result.success?
   puts result.data

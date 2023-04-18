@@ -40,7 +40,7 @@ def list_customer_groups(cursor: nil,
 ## Example Usage
 
 ```ruby
-result = customer_groups_api.list_customer_groups()
+result = customer_groups_api.list_customer_groups
 
 if result.success?
   puts result.data
@@ -73,9 +73,12 @@ def create_customer_group(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:group] = {}
-body[:group][:name] = 'Loyal Customers'
+body = {
+  :group => {
+    :name => 'Loyal Customers'
+  }
+}
+
 
 result = customer_groups_api.create_customer_group(body: body)
 
@@ -110,6 +113,7 @@ def delete_customer_group(group_id:)
 ```ruby
 group_id = 'group_id0'
 
+
 result = customer_groups_api.delete_customer_group(group_id: group_id)
 
 if result.success?
@@ -142,6 +146,7 @@ def retrieve_customer_group(group_id:)
 
 ```ruby
 group_id = 'group_id0'
+
 
 result = customer_groups_api.retrieve_customer_group(group_id: group_id)
 
@@ -177,11 +182,18 @@ def update_customer_group(group_id:,
 
 ```ruby
 group_id = 'group_id0'
-body = {}
-body[:group] = {}
-body[:group][:name] = 'Loyal Customers'
 
-result = customer_groups_api.update_customer_group(group_id: group_id, body: body)
+body = {
+  :group => {
+    :name => 'Loyal Customers'
+  }
+}
+
+
+result = customer_groups_api.update_customer_group(
+  group_id: group_id,
+  body: body
+)
 
 if result.success?
   puts result.data

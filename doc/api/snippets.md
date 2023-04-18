@@ -42,6 +42,7 @@ def delete_snippet(site_id:)
 ```ruby
 site_id = 'site_id6'
 
+
 result = snippets_api.delete_snippet(site_id: site_id)
 
 if result.success?
@@ -78,6 +79,7 @@ def retrieve_snippet(site_id:)
 
 ```ruby
 site_id = 'site_id6'
+
 
 result = snippets_api.retrieve_snippet(site_id: site_id)
 
@@ -118,11 +120,18 @@ def upsert_snippet(site_id:,
 
 ```ruby
 site_id = 'site_id6'
-body = {}
-body[:snippet] = {}
-body[:snippet][:content] = '<script>var js = 1;</script>'
 
-result = snippets_api.upsert_snippet(site_id: site_id, body: body)
+body = {
+  :snippet => {
+    :content => '<script>var js = 1;</script>'
+  }
+}
+
+
+result = snippets_api.upsert_snippet(
+  site_id: site_id,
+  body: body
+)
 
 if result.success?
   puts result.data

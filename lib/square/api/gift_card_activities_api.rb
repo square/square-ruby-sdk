@@ -14,7 +14,7 @@ module Square
     # card. Otherwise, the endpoint returns all gift card activities for  the
     # seller.
     # @param [String] type Optional parameter: If a
-    # [type]($m/GiftCardActivityType) is provided, the endpoint returns gift
+    # [type](entity:GiftCardActivityType) is provided, the endpoint returns gift
     # card activities of the specified type.  Otherwise, the endpoint returns
     # all types of gift card activities.
     # @param [String] location_id Optional parameter: If a location ID is

@@ -28,11 +28,11 @@ module Square
     # [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)
     # .
     # @param [TrueClass|FalseClass] include_disabled Optional parameter:
-    # Includes disabled [Subscription]($m/WebhookSubscription)s. By default, all
-    # enabled [Subscription]($m/WebhookSubscription)s are returned.
+    # Includes disabled [Subscription](entity:WebhookSubscription)s. By default,
+    # all enabled [Subscription](entity:WebhookSubscription)s are returned.
     # @param [SortOrder] sort_order Optional parameter: Sorts the returned list
-    # by when the [Subscription]($m/WebhookSubscription) was created with the
-    # specified order. This field defaults to ASC.
+    # by when the [Subscription](entity:WebhookSubscription) was created with
+    # the specified order. This field defaults to ASC.
     # @param [Integer] limit Optional parameter: The maximum number of results
     # to be returned in a single page. It is possible to receive fewer results
     # than the specified limit on a given page. The default value of 100 is also
@@ -83,7 +83,7 @@ module Square
 
     # Deletes a webhook subscription.
     # @param [String] subscription_id Required parameter: [REQUIRED] The ID of
-    # the [Subscription]($m/WebhookSubscription) to delete.
+    # the [Subscription](entity:WebhookSubscription) to delete.
     # @return [DeleteWebhookSubscriptionResponse Hash] response from the API call
     def delete_webhook_subscription(subscription_id:)
       new_api_call_builder
@@ -103,7 +103,7 @@ module Square
 
     # Retrieves a webhook subscription identified by its ID.
     # @param [String] subscription_id Required parameter: [REQUIRED] The ID of
-    # the [Subscription]($m/WebhookSubscription) to retrieve.
+    # the [Subscription](entity:WebhookSubscription) to retrieve.
     # @return [RetrieveWebhookSubscriptionResponse Hash] response from the API call
     def retrieve_webhook_subscription(subscription_id:)
       new_api_call_builder
@@ -123,7 +123,7 @@ module Square
 
     # Updates a webhook subscription.
     # @param [String] subscription_id Required parameter: [REQUIRED] The ID of
-    # the [Subscription]($m/WebhookSubscription) to update.
+    # the [Subscription](entity:WebhookSubscription) to update.
     # @param [UpdateWebhookSubscriptionRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
@@ -151,7 +151,7 @@ module Square
     # Updates a webhook subscription by replacing the existing signature key
     # with a new one.
     # @param [String] subscription_id Required parameter: [REQUIRED] The ID of
-    # the [Subscription]($m/WebhookSubscription) to update.
+    # the [Subscription](entity:WebhookSubscription) to update.
     # @param [UpdateWebhookSubscriptionSignatureKeyRequest] body Required
     # parameter: An object containing the fields to POST for the request.  See
     # the corresponding object definition for field details.
@@ -179,7 +179,7 @@ module Square
     # Tests a webhook subscription by sending a test event to the notification
     # URL.
     # @param [String] subscription_id Required parameter: [REQUIRED] The ID of
-    # the [Subscription]($m/WebhookSubscription) to test.
+    # the [Subscription](entity:WebhookSubscription) to test.
     # @param [TestWebhookSubscriptionRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.

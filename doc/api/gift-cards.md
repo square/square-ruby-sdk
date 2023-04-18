@@ -36,8 +36,8 @@ def list_gift_cards(type: nil,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | `String` | Query, Optional | If a [type](../../doc/models/gift-card-type.md) is provided, the endpoint returns gift cards of the specified type.<br>Otherwise, the endpoint returns gift cards of all types. |
-| `state` | `String` | Query, Optional | If a [state](../../doc/models/gift-card-status.md) is provided, the endpoint returns the gift cards in the specified state.<br>Otherwise, the endpoint returns the gift cards of all states. |
+| `type` | `String` | Query, Optional | If a [type](entity:GiftCardType) is provided, the endpoint returns gift cards of the specified type.<br>Otherwise, the endpoint returns gift cards of all types. |
+| `state` | `String` | Query, Optional | If a [state](entity:GiftCardStatus) is provided, the endpoint returns the gift cards in the specified state.<br>Otherwise, the endpoint returns the gift cards of all states. |
 | `limit` | `Integer` | Query, Optional | If a limit is provided, the endpoint returns only the specified number of results per page.<br>The maximum value is 50. The default value is 30.<br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
 | `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>If a cursor is not provided, the endpoint returns the first page of the results.<br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
 | `customer_id` | `String` | Query, Optional | If a customer ID is provided, the endpoint returns only the gift cards linked to the specified customer. |
@@ -49,7 +49,7 @@ def list_gift_cards(type: nil,
 ## Example Usage
 
 ```ruby
-result = gift_cards_api.list_gift_cards()
+result = gift_cards_api.list_gift_cards
 
 if result.success?
   puts result.data
@@ -82,11 +82,14 @@ def create_gift_card(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:idempotency_key] = 'NC9Tm69EjbjtConu'
-body[:location_id] = '81FN9BNFZTKS4'
-body[:gift_card] = {}
-body[:gift_card][:type] = 'DIGITAL'
+body = {
+  :idempotency_key => 'NC9Tm69EjbjtConu',
+  :location_id => '81FN9BNFZTKS4',
+  :gift_card => {
+    :type => 'DIGITAL'
+  }
+}
+
 
 result = gift_cards_api.create_gift_card(body: body)
 
@@ -119,8 +122,10 @@ def retrieve_gift_card_from_gan(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:gan] = '7783320001001635'
+body = {
+  :gan => '7783320001001635'
+}
+
 
 result = gift_cards_api.retrieve_gift_card_from_gan(body: body)
 
@@ -153,8 +158,10 @@ def retrieve_gift_card_from_nonce(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:nonce] = 'cnon:7783322135245171'
+body = {
+  :nonce => 'cnon:7783322135245171'
+}
+
 
 result = gift_cards_api.retrieve_gift_card_from_nonce(body: body)
 
@@ -190,10 +197,16 @@ def link_customer_to_gift_card(gift_card_id:,
 
 ```ruby
 gift_card_id = 'gift_card_id8'
-body = {}
-body[:customer_id] = 'GKY0FZ3V717AH8Q2D821PNT2ZW'
 
-result = gift_cards_api.link_customer_to_gift_card(gift_card_id: gift_card_id, body: body)
+body = {
+  :customer_id => 'GKY0FZ3V717AH8Q2D821PNT2ZW'
+}
+
+
+result = gift_cards_api.link_customer_to_gift_card(
+  gift_card_id: gift_card_id,
+  body: body
+)
 
 if result.success?
   puts result.data
@@ -227,10 +240,16 @@ def unlink_customer_from_gift_card(gift_card_id:,
 
 ```ruby
 gift_card_id = 'gift_card_id8'
-body = {}
-body[:customer_id] = 'GKY0FZ3V717AH8Q2D821PNT2ZW'
 
-result = gift_cards_api.unlink_customer_from_gift_card(gift_card_id: gift_card_id, body: body)
+body = {
+  :customer_id => 'GKY0FZ3V717AH8Q2D821PNT2ZW'
+}
+
+
+result = gift_cards_api.unlink_customer_from_gift_card(
+  gift_card_id: gift_card_id,
+  body: body
+)
 
 if result.success?
   puts result.data
@@ -262,6 +281,7 @@ def retrieve_gift_card(id:)
 
 ```ruby
 id = 'id0'
+
 
 result = gift_cards_api.retrieve_gift_card(id: id)
 

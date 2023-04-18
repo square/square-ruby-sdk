@@ -37,7 +37,7 @@ def list_gift_card_activities(gift_card_id: nil,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `gift_card_id` | `String` | Query, Optional | If a gift card ID is provided, the endpoint returns activities related<br>to the specified gift card. Otherwise, the endpoint returns all gift card activities for<br>the seller. |
-| `type` | `String` | Query, Optional | If a [type](../../doc/models/gift-card-activity-type.md) is provided, the endpoint returns gift card activities of the specified type.<br>Otherwise, the endpoint returns all types of gift card activities. |
+| `type` | `String` | Query, Optional | If a [type](entity:GiftCardActivityType) is provided, the endpoint returns gift card activities of the specified type.<br>Otherwise, the endpoint returns all types of gift card activities. |
 | `location_id` | `String` | Query, Optional | If a location ID is provided, the endpoint returns gift card activities for the specified location.<br>Otherwise, the endpoint returns gift card activities for all locations. |
 | `begin_time` | `String` | Query, Optional | The timestamp for the beginning of the reporting period, in RFC 3339 format.<br>This start time is inclusive. The default value is the current time minus one year. |
 | `end_time` | `String` | Query, Optional | The timestamp for the end of the reporting period, in RFC 3339 format.<br>This end time is inclusive. The default value is the current time. |
@@ -52,7 +52,7 @@ def list_gift_card_activities(gift_card_id: nil,
 ## Example Usage
 
 ```ruby
-result = gift_card_activities_api.list_gift_card_activities()
+result = gift_card_activities_api.list_gift_card_activities
 
 if result.success?
   puts result.data
@@ -85,15 +85,19 @@ def create_gift_card_activity(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:idempotency_key] = 'U16kfr-kA70er-q4Rsym-7U7NnY'
-body[:gift_card_activity] = {}
-body[:gift_card_activity][:type] = 'ACTIVATE'
-body[:gift_card_activity][:location_id] = '81FN9BNFZTKS4'
-body[:gift_card_activity][:gift_card_id] = 'gftc:6d55a72470d940c6ba09c0ab8ad08d20'
-body[:gift_card_activity][:activate_activity_details] = {}
-body[:gift_card_activity][:activate_activity_details][:order_id] = 'jJNGHm4gLI6XkFbwtiSLqK72KkAZY'
-body[:gift_card_activity][:activate_activity_details][:line_item_uid] = 'eIWl7X0nMuO9Ewbh0ChIx'
+body = {
+  :idempotency_key => 'U16kfr-kA70er-q4Rsym-7U7NnY',
+  :gift_card_activity => {
+    :type => 'ACTIVATE',
+    :location_id => '81FN9BNFZTKS4',
+    :gift_card_id => 'gftc:6d55a72470d940c6ba09c0ab8ad08d20',
+    :activate_activity_details => {
+      :order_id => 'jJNGHm4gLI6XkFbwtiSLqK72KkAZY',
+      :line_item_uid => 'eIWl7X0nMuO9Ewbh0ChIx'
+    }
+  }
+}
+
 
 result = gift_card_activities_api.create_gift_card_activity(body: body)
 

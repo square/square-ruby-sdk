@@ -49,7 +49,8 @@ def list_invoices(location_id:,
 ```ruby
 location_id = 'location_id4'
 
-result = invoices_api.list_invoices(location_id: location_id, )
+
+result = invoices_api.list_invoices(location_id: location_id)
 
 if result.success?
   puts result.data
@@ -84,54 +85,56 @@ def create_invoice(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:invoice] = {}
-body[:invoice][:location_id] = 'ES0RJRZYEC39A'
-body[:invoice][:order_id] = 'CAISENgvlJ6jLWAzERDzjyHVybY'
-body[:invoice][:primary_recipient] = {}
-body[:invoice][:primary_recipient][:customer_id] = 'JDKYHBWT1D4F8MFH63DBMEN8Y4'
-body[:invoice][:payment_requests] = []
+body = {
+  :invoice => {
+    :location_id => 'ES0RJRZYEC39A',
+    :order_id => 'CAISENgvlJ6jLWAzERDzjyHVybY',
+    :primary_recipient => {
+      :customer_id => 'JDKYHBWT1D4F8MFH63DBMEN8Y4'
+    },
+    :payment_requests => [
+      {
+        :request_type => 'BALANCE',
+        :due_date => '2030-01-24',
+        :tipping_enabled => true,
+        :automatic_payment_source => 'NONE',
+        :reminders => [
+          {
+            :relative_scheduled_days => -1,
+            :message => 'Your invoice is due tomorrow'
+          }
+        ]
+      }
+    ],
+    :delivery_method => 'EMAIL',
+    :invoice_number => 'inv-100',
+    :title => 'Event Planning Services',
+    :description => 'We appreciate your business!',
+    :scheduled_at => '2030-01-13T10:00:00Z',
+    :accepted_payment_methods => {
+      :card => true,
+      :square_gift_card => false,
+      :bank_account => false,
+      :buy_now_pay_later => false
+    },
+    :custom_fields => [
+      {
+        :label => 'Event Reference Number',
+        :value => 'Ref. #1234',
+        :placement => 'ABOVE_LINE_ITEMS'
+      },
+      {
+        :label => 'Terms of Service',
+        :value => 'The terms of service are...',
+        :placement => 'BELOW_LINE_ITEMS'
+      }
+    ],
+    :sale_or_service_date => '2030-01-24',
+    :store_payment_method_enabled => false
+  },
+  :idempotency_key => 'ce3748f9-5fc1-4762-aa12-aae5e843f1f4'
+}
 
-
-body[:invoice][:payment_requests][0] = {}
-body[:invoice][:payment_requests][0][:request_type] = 'BALANCE'
-body[:invoice][:payment_requests][0][:due_date] = '2030-01-24'
-body[:invoice][:payment_requests][0][:tipping_enabled] = true
-body[:invoice][:payment_requests][0][:automatic_payment_source] = 'NONE'
-body[:invoice][:payment_requests][0][:reminders] = []
-
-
-body[:invoice][:payment_requests][0][:reminders][0] = {}
-body[:invoice][:payment_requests][0][:reminders][0][:relative_scheduled_days] = -1
-body[:invoice][:payment_requests][0][:reminders][0][:message] = 'Your invoice is due tomorrow'
-
-
-body[:invoice][:delivery_method] = 'EMAIL'
-body[:invoice][:invoice_number] = 'inv-100'
-body[:invoice][:title] = 'Event Planning Services'
-body[:invoice][:description] = 'We appreciate your business!'
-body[:invoice][:scheduled_at] = '2030-01-13T10:00:00Z'
-body[:invoice][:accepted_payment_methods] = {}
-body[:invoice][:accepted_payment_methods][:card] = true
-body[:invoice][:accepted_payment_methods][:square_gift_card] = false
-body[:invoice][:accepted_payment_methods][:bank_account] = false
-body[:invoice][:accepted_payment_methods][:buy_now_pay_later] = false
-body[:invoice][:custom_fields] = []
-
-
-body[:invoice][:custom_fields][0] = {}
-body[:invoice][:custom_fields][0][:label] = 'Event Reference Number'
-body[:invoice][:custom_fields][0][:value] = 'Ref. #1234'
-body[:invoice][:custom_fields][0][:placement] = 'ABOVE_LINE_ITEMS'
-
-body[:invoice][:custom_fields][1] = {}
-body[:invoice][:custom_fields][1][:label] = 'Terms of Service'
-body[:invoice][:custom_fields][1][:value] = 'The terms of service are...'
-body[:invoice][:custom_fields][1][:placement] = 'BELOW_LINE_ITEMS'
-
-body[:invoice][:sale_or_service_date] = '2030-01-24'
-body[:invoice][:store_payment_method_enabled] = false
-body[:idempotency_key] = 'ce3748f9-5fc1-4762-aa12-aae5e843f1f4'
 
 result = invoices_api.create_invoice(body: body)
 
@@ -170,13 +173,23 @@ def search_invoices(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:query] = {}
-body[:query][:filter] = {}
-body[:query][:filter][:location_ids] = ['ES0RJRZYEC39A']
-body[:query][:filter][:customer_ids] = ['JDKYHBWT1D4F8MFH63DBMEN8Y4']
-body[:query][:sort] = {}
-body[:query][:sort][:order] = 'DESC'
+body = {
+  :query => {
+    :filter => {
+      :location_ids => [
+        'ES0RJRZYEC39A'
+      ],
+      :customer_ids => [
+        'JDKYHBWT1D4F8MFH63DBMEN8Y4'
+      ]
+    },
+    :sort => {
+      :field => 'INVOICE_SORT_DATE',
+      :order => 'DESC'
+    }
+  }
+}
+
 
 result = invoices_api.search_invoices(body: body)
 
@@ -204,7 +217,7 @@ def delete_invoice(invoice_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `invoice_id` | `String` | Template, Required | The ID of the invoice to delete. |
-| `version` | `Integer` | Query, Optional | The version of the [invoice](../../doc/models/invoice.md) to delete.<br>If you do not know the version, you can call [GetInvoice](../../doc/api/invoices.md#get-invoice) or<br>[ListInvoices](../../doc/api/invoices.md#list-invoices). |
+| `version` | `Integer` | Query, Optional | The version of the [invoice](entity:Invoice) to delete.<br>If you do not know the version, you can call [GetInvoice](api-endpoint:Invoices-GetInvoice) or<br>[ListInvoices](api-endpoint:Invoices-ListInvoices). |
 
 ## Response Type
 
@@ -215,7 +228,8 @@ def delete_invoice(invoice_id:,
 ```ruby
 invoice_id = 'invoice_id0'
 
-result = invoices_api.delete_invoice(invoice_id: invoice_id, )
+
+result = invoices_api.delete_invoice(invoice_id: invoice_id)
 
 if result.success?
   puts result.data
@@ -247,6 +261,7 @@ def get_invoice(invoice_id:)
 
 ```ruby
 invoice_id = 'invoice_id0'
+
 
 result = invoices_api.get_invoice(invoice_id: invoice_id)
 
@@ -285,20 +300,28 @@ def update_invoice(invoice_id:,
 
 ```ruby
 invoice_id = 'invoice_id0'
-body = {}
-body[:invoice] = {}
-body[:invoice][:version] = 1
-body[:invoice][:payment_requests] = []
+
+body = {
+  :invoice => {
+    :version => 1,
+    :payment_requests => [
+      {
+        :uid => '2da7964f-f3d2-4f43-81e8-5aa220bf3355',
+        :tipping_enabled => false
+      }
+    ]
+  },
+  :idempotency_key => '4ee82288-0910-499e-ab4c-5d0071dad1be',
+  :fields_to_clear => [
+    'payments_requests[2da7964f-f3d2-4f43-81e8-5aa220bf3355].reminders'
+  ]
+}
 
 
-body[:invoice][:payment_requests][0] = {}
-body[:invoice][:payment_requests][0][:uid] = '2da7964f-f3d2-4f43-81e8-5aa220bf3355'
-body[:invoice][:payment_requests][0][:tipping_enabled] = false
-
-body[:idempotency_key] = '4ee82288-0910-499e-ab4c-5d0071dad1be'
-body[:fields_to_clear] = ['payments_requests[2da7964f-f3d2-4f43-81e8-5aa220bf3355].reminders']
-
-result = invoices_api.update_invoice(invoice_id: invoice_id, body: body)
+result = invoices_api.update_invoice(
+  invoice_id: invoice_id,
+  body: body
+)
 
 if result.success?
   puts result.data
@@ -324,7 +347,7 @@ def cancel_invoice(invoice_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `invoice_id` | `String` | Template, Required | The ID of the [invoice](../../doc/models/invoice.md) to cancel. |
+| `invoice_id` | `String` | Template, Required | The ID of the [invoice](entity:Invoice) to cancel. |
 | `body` | [`Cancel Invoice Request Hash`](../../doc/models/cancel-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -335,10 +358,16 @@ def cancel_invoice(invoice_id:,
 
 ```ruby
 invoice_id = 'invoice_id0'
-body = {}
-body[:version] = 0
 
-result = invoices_api.cancel_invoice(invoice_id: invoice_id, body: body)
+body = {
+  :version => 0
+}
+
+
+result = invoices_api.cancel_invoice(
+  invoice_id: invoice_id,
+  body: body
+)
 
 if result.success?
   puts result.data
@@ -382,11 +411,17 @@ def publish_invoice(invoice_id:,
 
 ```ruby
 invoice_id = 'invoice_id0'
-body = {}
-body[:version] = 1
-body[:idempotency_key] = '32da42d0-1997-41b0-826b-f09464fc2c2e'
 
-result = invoices_api.publish_invoice(invoice_id: invoice_id, body: body)
+body = {
+  :version => 1,
+  :idempotency_key => '32da42d0-1997-41b0-826b-f09464fc2c2e'
+}
+
+
+result = invoices_api.publish_invoice(
+  invoice_id: invoice_id,
+  body: body
+)
 
 if result.success?
   puts result.data

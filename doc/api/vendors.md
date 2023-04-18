@@ -40,8 +40,13 @@ def bulk_create_vendors(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:vendors] = {}
+body = {
+  :vendors => {
+    'key0': {},
+    'key1': {}
+  }
+}
+
 
 result = vendors_api.bulk_create_vendors(body: body)
 
@@ -74,8 +79,12 @@ def bulk_retrieve_vendors(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:vendor_ids] = ['INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4']
+body = {
+  :vendor_ids => [
+    'INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4'
+  ]
+}
+
 
 result = vendors_api.bulk_retrieve_vendors(body: body)
 
@@ -108,9 +117,17 @@ def bulk_update_vendors(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:vendors] = {}
-body[:vendors][:vendor] = {}
+body = {
+  :vendors => {
+    'key0': {
+      :vendor => {}
+    },
+    'key1': {
+      :vendor => {}
+    }
+  }
+}
+
 
 result = vendors_api.bulk_update_vendors(body: body)
 
@@ -143,8 +160,10 @@ def create_vendor(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:idempotency_key] = 'idempotency_key2'
+body = {
+  :idempotency_key => 'idempotency_key2'
+}
+
 
 result = vendors_api.create_vendor(body: body)
 
@@ -179,6 +198,7 @@ def search_vendors(body:)
 ```ruby
 body = {}
 
+
 result = vendors_api.search_vendors(body: body)
 
 if result.success?
@@ -201,7 +221,7 @@ def retrieve_vendor(vendor_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `vendor_id` | `String` | Template, Required | ID of the [Vendor](../../doc/models/vendor.md) to retrieve. |
+| `vendor_id` | `String` | Template, Required | ID of the [Vendor](entity:Vendor) to retrieve. |
 
 ## Response Type
 
@@ -211,6 +231,7 @@ def retrieve_vendor(vendor_id:)
 
 ```ruby
 vendor_id = 'vendor_id8'
+
 
 result = vendors_api.retrieve_vendor(vendor_id: vendor_id)
 
@@ -245,16 +266,23 @@ def update_vendor(body:,
 ## Example Usage
 
 ```ruby
-body = {}
-body[:idempotency_key] = '8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe'
-body[:vendor] = {}
-body[:vendor][:id] = 'INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4'
-body[:vendor][:name] = 'Jack\'s Chicken Shack'
-body[:vendor][:version] = 1
-body[:vendor][:status] = 'ACTIVE'
+body = {
+  :vendor => {
+    :id => 'INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4',
+    :name => 'Jack\'s Chicken Shack',
+    :version => 1,
+    :status => 'ACTIVE'
+  },
+  :idempotency_key => '8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe'
+}
+
 vendor_id = 'vendor_id8'
 
-result = vendors_api.update_vendor(body: body, vendor_id: vendor_id)
+
+result = vendors_api.update_vendor(
+  body: body,
+  vendor_id: vendor_id
+)
 
 if result.success?
   puts result.data

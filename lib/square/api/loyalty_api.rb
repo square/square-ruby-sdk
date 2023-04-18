@@ -52,7 +52,7 @@ module Square
 
     # Retrieves a loyalty account.
     # @param [String] account_id Required parameter: The ID of the [loyalty
-    # account]($m/LoyaltyAccount) to retrieve.
+    # account](entity:LoyaltyAccount) to retrieve.
     # @return [RetrieveLoyaltyAccountResponse Hash] response from the API call
     def retrieve_loyalty_account(account_id:)
       new_api_call_builder
@@ -96,7 +96,7 @@ module Square
     # points](https://developer.squareup.com/docs/loyalty-api/loyalty-promotions
     # #calculate-promotion-points).
     # @param [String] account_id Required parameter: The ID of the target
-    # [loyalty account]($m/LoyaltyAccount).
+    # [loyalty account](entity:LoyaltyAccount).
     # @param [AccumulateLoyaltyPointsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -127,7 +127,7 @@ module Square
     # [AccumulateLoyaltyPoints]($e/Loyalty/AccumulateLoyaltyPoints)
     # to add points when a buyer pays for the purchase.
     # @param [String] account_id Required parameter: The ID of the target
-    # [loyalty account]($m/LoyaltyAccount).
+    # [loyalty account](entity:LoyaltyAccount).
     # @param [AdjustLoyaltyPointsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -187,8 +187,9 @@ module Square
     # created and managed from the Seller Dashboard. For more information, see
     # [Loyalty Program
     # Overview](https://developer.squareup.com/docs/loyalty/overview).
-    # Replaced with [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram)
-    # when used with the keyword `main`.
+    # Replaced with
+    # [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) when
+    # used with the keyword `main`.
     # @return [ListLoyaltyProgramsResponse Hash] response from the API call
     def list_loyalty_programs
       warn 'Endpoint list_loyalty_programs in LoyaltyApi is deprecated'
@@ -257,7 +258,7 @@ module Square
     # points](https://developer.squareup.com/docs/loyalty-api/loyalty-promotions
     # #calculate-promotion-points).
     # @param [String] program_id Required parameter: The ID of the [loyalty
-    # program]($m/LoyaltyProgram), which defines the rules for accruing
+    # program](entity:LoyaltyProgram), which defines the rules for accruing
     # points.
     # @param [CalculateLoyaltyPointsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
@@ -288,9 +289,9 @@ module Square
     # Results are sorted by the `created_at` date in descending order (newest to
     # oldest).
     # @param [String] program_id Required parameter: The ID of the base [loyalty
-    # program]($m/LoyaltyProgram). To get the program ID, call
-    # [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the
-    # `main` keyword.
+    # program](entity:LoyaltyProgram). To get the program ID, call
+    # [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram)
+    # using the `main` keyword.
     # @param [LoyaltyPromotionStatus] status Optional parameter: The status to
     # filter the results by. If a status is provided, only loyalty promotions
     # with the specified status are returned. Otherwise, all loyalty promotions
@@ -339,10 +340,10 @@ module Square
     # loyalty promotions with an
     # `ACTIVE` or `SCHEDULED` status.
     # @param [String] program_id Required parameter: The ID of the [loyalty
-    # program]($m/LoyaltyProgram) to associate with the promotion. To get the
-    # program ID, call
-    # [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the
-    # `main` keyword.
+    # program](entity:LoyaltyProgram) to associate with the promotion. To get
+    # the program ID, call
+    # [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram)
+    # using the `main` keyword.
     # @param [CreateLoyaltyPromotionRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -369,11 +370,11 @@ module Square
 
     # Retrieves a loyalty promotion.
     # @param [String] promotion_id Required parameter: The ID of the [loyalty
-    # promotion]($m/LoyaltyPromotion) to retrieve.
+    # promotion](entity:LoyaltyPromotion) to retrieve.
     # @param [String] program_id Required parameter: The ID of the base [loyalty
-    # program]($m/LoyaltyProgram). To get the program ID, call
-    # [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the
-    # `main` keyword.
+    # program](entity:LoyaltyProgram). To get the program ID, call
+    # [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram)
+    # using the `main` keyword.
     # @return [RetrieveLoyaltyPromotionResponse Hash] response from the API call
     def retrieve_loyalty_promotion(promotion_id:,
                                    program_id:)
@@ -403,10 +404,10 @@ module Square
     # you create a new one.
     # This endpoint sets the loyalty promotion to the `CANCELED` state
     # @param [String] promotion_id Required parameter: The ID of the [loyalty
-    # promotion]($m/LoyaltyPromotion) to cancel. You can cancel a promotion that
-    # has an `ACTIVE` or `SCHEDULED` status.
+    # promotion](entity:LoyaltyPromotion) to cancel. You can cancel a promotion
+    # that has an `ACTIVE` or `SCHEDULED` status.
     # @param [String] program_id Required parameter: The ID of the base [loyalty
-    # program]($m/LoyaltyProgram).
+    # program](entity:LoyaltyProgram).
     # @return [CancelLoyaltyPromotionResponse Hash] response from the API call
     def cancel_loyalty_promotion(promotion_id:,
                                  program_id:)
@@ -492,7 +493,7 @@ module Square
     # discounts.
     # You cannot delete a reward that has reached the terminal state (REDEEMED).
     # @param [String] reward_id Required parameter: The ID of the [loyalty
-    # reward]($m/LoyaltyReward) to delete.
+    # reward](entity:LoyaltyReward) to delete.
     # @return [DeleteLoyaltyRewardResponse Hash] response from the API call
     def delete_loyalty_reward(reward_id:)
       new_api_call_builder
@@ -512,7 +513,7 @@ module Square
 
     # Retrieves a loyalty reward.
     # @param [String] reward_id Required parameter: The ID of the [loyalty
-    # reward]($m/LoyaltyReward) to retrieve.
+    # reward](entity:LoyaltyReward) to retrieve.
     # @return [RetrieveLoyaltyRewardResponse Hash] response from the API call
     def retrieve_loyalty_reward(reward_id:)
       new_api_call_builder
@@ -539,7 +540,7 @@ module Square
     # In other words, points used for the reward cannot be returned
     # to the account.
     # @param [String] reward_id Required parameter: The ID of the [loyalty
-    # reward]($m/LoyaltyReward) to redeem.
+    # reward](entity:LoyaltyReward) to redeem.
     # @param [RedeemLoyaltyRewardRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.

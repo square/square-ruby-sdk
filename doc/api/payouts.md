@@ -40,7 +40,7 @@ def list_payouts(location_id: nil,
 | `begin_time` | `String` | Query, Optional | The timestamp for the beginning of the payout creation time, in RFC 3339 format.<br>Inclusive. Default: The current time minus one year. |
 | `end_time` | `String` | Query, Optional | The timestamp for the end of the payout creation time, in RFC 3339 format.<br>Default: The current time. |
 | `sort_order` | [`String (Sort Order)`](../../doc/models/sort-order.md) | Query, Optional | The order in which payouts are listed. |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination).<br>If request parameters change between requests, subsequent results may contain duplicates or missing records. |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination).<br>If request parameters change between requests, subsequent results may contain duplicates or missing records. |
 | `limit` | `Integer` | Query, Optional | The maximum number of results to be returned in a single page.<br>It is possible to receive fewer results than the specified limit on a given page.<br>The default value of 100 is also the maximum allowed value. If the provided value is<br>greater than 100, it is ignored and the default value is used instead.<br>Default: `100` |
 
 ## Response Type
@@ -50,7 +50,7 @@ def list_payouts(location_id: nil,
 ## Example Usage
 
 ```ruby
-result = payouts_api.list_payouts()
+result = payouts_api.list_payouts
 
 if result.success?
   puts result.data
@@ -84,6 +84,7 @@ def get_payout(payout_id:)
 ```ruby
 payout_id = 'payout_id6'
 
+
 result = payouts_api.get_payout(payout_id: payout_id)
 
 if result.success?
@@ -112,7 +113,7 @@ def list_payout_entries(payout_id:,
 |  --- | --- | --- | --- |
 | `payout_id` | `String` | Template, Required | The ID of the payout to retrieve the information for. |
 | `sort_order` | [`String (Sort Order)`](../../doc/models/sort-order.md) | Query, Optional | The order in which payout entries are listed. |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination).<br>If request parameters change between requests, subsequent results may contain duplicates or missing records. |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination).<br>If request parameters change between requests, subsequent results may contain duplicates or missing records. |
 | `limit` | `Integer` | Query, Optional | The maximum number of results to be returned in a single page.<br>It is possible to receive fewer results than the specified limit on a given page.<br>The default value of 100 is also the maximum allowed value. If the provided value is<br>greater than 100, it is ignored and the default value is used instead.<br>Default: `100` |
 
 ## Response Type
@@ -124,7 +125,8 @@ def list_payout_entries(payout_id:,
 ```ruby
 payout_id = 'payout_id6'
 
-result = payouts_api.list_payout_entries(payout_id: payout_id, )
+
+result = payouts_api.list_payout_entries(payout_id: payout_id)
 
 if result.success?
   puts result.data

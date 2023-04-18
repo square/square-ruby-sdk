@@ -40,7 +40,7 @@ def list_bank_accounts(cursor: nil,
 ## Example Usage
 
 ```ruby
-result = bank_accounts_api.list_bank_accounts()
+result = bank_accounts_api.list_bank_accounts
 
 if result.success?
   puts result.data
@@ -72,6 +72,7 @@ def get_bank_account_by_v1_id(v1_bank_account_id:)
 
 ```ruby
 v1_bank_account_id = 'v1_bank_account_id8'
+
 
 result = bank_accounts_api.get_bank_account_by_v1_id(v1_bank_account_id: v1_bank_account_id)
 
@@ -106,6 +107,7 @@ def get_bank_account(bank_account_id:)
 
 ```ruby
 bank_account_id = 'bank_account_id0'
+
 
 result = bank_accounts_api.get_bank_account(bank_account_id: bank_account_id)
 

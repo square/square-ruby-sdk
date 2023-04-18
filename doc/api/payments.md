@@ -44,10 +44,10 @@ def list_payments(begin_time: nil,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `begin_time` | `String` | Query, Optional | The timestamp for the beginning of the reporting period, in RFC 3339 format.<br>Inclusive. Default: The current time minus one year. |
-| `end_time` | `String` | Query, Optional | The timestamp for the end of the reporting period, in RFC 3339 format.<br><br>Default: The current time. |
-| `sort_order` | `String` | Query, Optional | The order in which results are listed:<br><br>- `ASC` - Oldest to newest.<br>- `DESC` - Newest to oldest (default). |
-| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination). |
+| `begin_time` | `String` | Query, Optional | Indicates the start of the time range to retrieve payments for, in RFC 3339 format.  <br>The range is determined using the `created_at` field for each Payment.<br>Inclusive. Default: The current time minus one year. |
+| `end_time` | `String` | Query, Optional | Indicates the end of the time range to retrieve payments for, in RFC 3339 format.  The<br>range is determined using the `created_at` field for each Payment.<br><br>Default: The current time. |
+| `sort_order` | `String` | Query, Optional | The order in which results are listed by `Payment.created_at`:<br><br>- `ASC` - Oldest to newest.<br>- `DESC` - Newest to oldest (default). |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 | `location_id` | `String` | Query, Optional | Limit results to the location supplied. By default, results are returned<br>for the default (main) location associated with the seller. |
 | `total` | `Integer` | Query, Optional | The exact amount in the `total_money` for a payment. |
 | `last_4` | `String` | Query, Optional | The last four digits of a payment card. |
@@ -61,7 +61,7 @@ def list_payments(begin_time: nil,
 ## Example Usage
 
 ```ruby
-result = payments_api.list_payments()
+result = payments_api.list_payments
 
 if result.success?
   puts result.data
@@ -99,20 +99,24 @@ def create_payment(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:source_id] = 'ccof:GaJGNaZa8x4OgDJn4GB'
-body[:idempotency_key] = '7b0f3ec5-086a-4871-8f13-3c81b3875218'
-body[:amount_money] = {}
-body[:amount_money][:amount] = 1000
-body[:amount_money][:currency] = 'USD'
-body[:app_fee_money] = {}
-body[:app_fee_money][:amount] = 10
-body[:app_fee_money][:currency] = 'USD'
-body[:autocomplete] = true
-body[:customer_id] = 'W92WH6P11H4Z77CTET0RNTGFW8'
-body[:location_id] = 'L88917AVBK2S5'
-body[:reference_id] = '123456'
-body[:note] = 'Brief description'
+body = {
+  :source_id => 'ccof:GaJGNaZa8x4OgDJn4GB',
+  :idempotency_key => '7b0f3ec5-086a-4871-8f13-3c81b3875218',
+  :amount_money => {
+    :amount => 1000,
+    :currency => 'USD'
+  },
+  :app_fee_money => {
+    :amount => 10,
+    :currency => 'USD'
+  },
+  :autocomplete => true,
+  :customer_id => 'W92WH6P11H4Z77CTET0RNTGFW8',
+  :location_id => 'L88917AVBK2S5',
+  :reference_id => '123456',
+  :note => 'Brief description'
+}
+
 
 result = payments_api.create_payment(body: body)
 
@@ -155,8 +159,10 @@ def cancel_payment_by_idempotency_key(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:idempotency_key] = 'a7e36d40-d24b-11e8-b568-0800200c9a66'
+body = {
+  :idempotency_key => 'a7e36d40-d24b-11e8-b568-0800200c9a66'
+}
+
 
 result = payments_api.cancel_payment_by_idempotency_key(body: body)
 
@@ -190,6 +196,7 @@ def get_payment(payment_id:)
 
 ```ruby
 payment_id = 'payment_id0'
+
 
 result = payments_api.get_payment(payment_id: payment_id)
 
@@ -226,18 +233,27 @@ def update_payment(payment_id:,
 
 ```ruby
 payment_id = 'payment_id0'
-body = {}
-body[:payment] = {}
-body[:payment][:amount_money] = {}
-body[:payment][:amount_money][:amount] = 1000
-body[:payment][:amount_money][:currency] = 'USD'
-body[:payment][:tip_money] = {}
-body[:payment][:tip_money][:amount] = 100
-body[:payment][:tip_money][:currency] = 'USD'
-body[:payment][:version_token] = 'ODhwVQ35xwlzRuoZEwKXucfu7583sPTzK48c5zoGd0g6o'
-body[:idempotency_key] = '956f8b13-e4ec-45d6-85e8-d1d95ef0c5de'
 
-result = payments_api.update_payment(payment_id: payment_id, body: body)
+body = {
+  :idempotency_key => '956f8b13-e4ec-45d6-85e8-d1d95ef0c5de',
+  :payment => {
+    :amount_money => {
+      :amount => 1000,
+      :currency => 'USD'
+    },
+    :tip_money => {
+      :amount => 100,
+      :currency => 'USD'
+    },
+    :version_token => 'ODhwVQ35xwlzRuoZEwKXucfu7583sPTzK48c5zoGd0g6o'
+  }
+}
+
+
+result = payments_api.update_payment(
+  payment_id: payment_id,
+  body: body
+)
 
 if result.success?
   puts result.data
@@ -270,6 +286,7 @@ def cancel_payment(payment_id:)
 
 ```ruby
 payment_id = 'payment_id0'
+
 
 result = payments_api.cancel_payment(payment_id: payment_id)
 
@@ -308,9 +325,14 @@ def complete_payment(payment_id:,
 
 ```ruby
 payment_id = 'payment_id0'
+
 body = {}
 
-result = payments_api.complete_payment(payment_id: payment_id, body: body)
+
+result = payments_api.complete_payment(
+  payment_id: payment_id,
+  body: body
+)
 
 if result.success?
   puts result.data

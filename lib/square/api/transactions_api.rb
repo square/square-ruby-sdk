@@ -81,7 +81,7 @@ module Square
     end
 
     # Captures a transaction that was created with the
-    # [Charge]($e/Transactions/Charge)
+    # [Charge](api-endpoint:Transactions-Charge)
     # endpoint with a `delay_capture` value of `true`.
     # See [Delayed capture
     # transactions](https://developer.squareup.com/docs/payments/transactions/ov
@@ -111,7 +111,7 @@ module Square
     end
 
     # Cancels a transaction that was created with the
-    # [Charge]($e/Transactions/Charge)
+    # [Charge](api-endpoint:Transactions-Charge)
     # endpoint with a `delay_capture` value of `true`.
     # See [Delayed capture
     # transactions](https://developer.squareup.com/docs/payments/transactions/ov

@@ -50,7 +50,7 @@ def list_customer_custom_attribute_definitions(limit: nil,
 ## Example Usage
 
 ```ruby
-result = customer_custom_attributes_api.list_customer_custom_attribute_definitions()
+result = customer_custom_attributes_api.list_customer_custom_attribute_definitions
 
 if result.success?
   puts result.data
@@ -91,12 +91,15 @@ def create_customer_custom_attribute_definition(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:custom_attribute_definition] = {}
-body[:custom_attribute_definition][:key] = 'favoritemovie'
-body[:custom_attribute_definition][:name] = 'Favorite Movie'
-body[:custom_attribute_definition][:description] = 'The favorite movie of the customer.'
-body[:custom_attribute_definition][:visibility] = 'VISIBILITY_HIDDEN'
+body = {
+  :custom_attribute_definition => {
+    :key => 'favoritemovie',
+    :name => 'Favorite Movie',
+    :description => 'The favorite movie of the customer.',
+    :visibility => 'VISIBILITY_HIDDEN'
+  }
+}
+
 
 result = customer_custom_attributes_api.create_customer_custom_attribute_definition(body: body)
 
@@ -135,6 +138,7 @@ def delete_customer_custom_attribute_definition(key:)
 
 ```ruby
 key = 'key0'
+
 
 result = customer_custom_attributes_api.delete_customer_custom_attribute_definition(key: key)
 
@@ -175,7 +179,8 @@ def retrieve_customer_custom_attribute_definition(key:,
 ```ruby
 key = 'key0'
 
-result = customer_custom_attributes_api.retrieve_customer_custom_attribute_definition(key: key, )
+
+result = customer_custom_attributes_api.retrieve_customer_custom_attribute_definition(key: key)
 
 if result.success?
   puts result.data
@@ -215,12 +220,19 @@ def update_customer_custom_attribute_definition(key:,
 
 ```ruby
 key = 'key0'
-body = {}
-body[:custom_attribute_definition] = {}
-body[:custom_attribute_definition][:description] = 'Update the description as desired.'
-body[:custom_attribute_definition][:visibility] = 'VISIBILITY_READ_ONLY'
 
-result = customer_custom_attributes_api.update_customer_custom_attribute_definition(key: key, body: body)
+body = {
+  :custom_attribute_definition => {
+    :description => 'Update the description as desired.',
+    :visibility => 'VISIBILITY_READ_ONLY'
+  }
+}
+
+
+result = customer_custom_attributes_api.update_customer_custom_attribute_definition(
+  key: key,
+  body: body
+)
 
 if result.success?
   puts result.data
@@ -264,10 +276,19 @@ def bulk_upsert_customer_custom_attributes(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:values] = {}
-body[:values][:customer_id] = nil
-body[:values][:custom_attribute] = {}
+body = {
+  :values => {
+    'key0': {
+      :customer_id => 'customer_id2',
+      :custom_attribute => {}
+    },
+    'key1': {
+      :customer_id => 'customer_id3',
+      :custom_attribute => {}
+    }
+  }
+}
+
 
 result = customer_custom_attributes_api.bulk_upsert_customer_custom_attributes(body: body)
 
@@ -301,10 +322,10 @@ def list_customer_custom_attributes(customer_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `customer_id` | `String` | Template, Required | The ID of the target [customer profile](../../doc/models/customer.md). |
+| `customer_id` | `String` | Template, Required | The ID of the target [customer profile](entity:Customer). |
 | `limit` | `Integer` | Query, Optional | The maximum number of results to return in a single paged response. This limit is advisory.<br>The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.<br>The default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 | `cursor` | `String` | Query, Optional | The cursor returned in the paged response from the previous call to this endpoint.<br>Provide this cursor to retrieve the next page of results for your original request. For more<br>information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
-| `with_definitions` | `TrueClass\|FalseClass` | Query, Optional | Indicates whether to return the [custom attribute definition](../../doc/models/custom-attribute-definition.md) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
+| `with_definitions` | `TrueClass\|FalseClass` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 
 ## Response Type
 
@@ -314,9 +335,14 @@ def list_customer_custom_attributes(customer_id:,
 
 ```ruby
 customer_id = 'customer_id8'
+
 with_definitions = false
 
-result = customer_custom_attributes_api.list_customer_custom_attributes(customer_id: customer_id, with_definitions: with_definitions)
+
+result = customer_custom_attributes_api.list_customer_custom_attributes(
+  customer_id: customer_id,
+  with_definitions: with_definitions
+)
 
 if result.success?
   puts result.data
@@ -343,7 +369,7 @@ def delete_customer_custom_attribute(customer_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `customer_id` | `String` | Template, Required | The ID of the target [customer profile](../../doc/models/customer.md). |
+| `customer_id` | `String` | Template, Required | The ID of the target [customer profile](entity:Customer). |
 | `key` | `String` | Template, Required | The key of the custom attribute to delete. This key must match the `key` of a custom<br>attribute definition in the Square seller account. If the requesting application is not the<br>definition owner, you must use the qualified key. |
 
 ## Response Type
@@ -354,9 +380,14 @@ def delete_customer_custom_attribute(customer_id:,
 
 ```ruby
 customer_id = 'customer_id8'
+
 key = 'key0'
 
-result = customer_custom_attributes_api.delete_customer_custom_attribute(customer_id: customer_id, key: key)
+
+result = customer_custom_attributes_api.delete_customer_custom_attribute(
+  customer_id: customer_id,
+  key: key
+)
 
 if result.success?
   puts result.data
@@ -388,9 +419,9 @@ def retrieve_customer_custom_attribute(customer_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `customer_id` | `String` | Template, Required | The ID of the target [customer profile](../../doc/models/customer.md). |
+| `customer_id` | `String` | Template, Required | The ID of the target [customer profile](entity:Customer). |
 | `key` | `String` | Template, Required | The key of the custom attribute to retrieve. This key must match the `key` of a custom<br>attribute definition in the Square seller account. If the requesting application is not the<br>definition owner, you must use the qualified key. |
-| `with_definition` | `TrueClass\|FalseClass` | Query, Optional | Indicates whether to return the [custom attribute definition](../../doc/models/custom-attribute-definition.md) in the `definition` field of<br>the custom attribute. Set this parameter to `true` to get the name and description of the custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
+| `with_definition` | `TrueClass\|FalseClass` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of<br>the custom attribute. Set this parameter to `true` to get the name and description of the custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 | `version` | `Integer` | Query, Optional | The current version of the custom attribute, which is used for strongly consistent reads to<br>guarantee that you receive the most up-to-date data. When included in the request, Square<br>returns the specified version or a higher version if one exists. If the specified version is<br>higher than the current version, Square returns a `BAD_REQUEST` error. |
 
 ## Response Type
@@ -401,10 +432,17 @@ def retrieve_customer_custom_attribute(customer_id:,
 
 ```ruby
 customer_id = 'customer_id8'
+
 key = 'key0'
+
 with_definition = false
 
-result = customer_custom_attributes_api.retrieve_customer_custom_attribute(customer_id: customer_id, key: key, with_definition: with_definition, )
+
+result = customer_custom_attributes_api.retrieve_customer_custom_attribute(
+  customer_id: customer_id,
+  key: key,
+  with_definition: with_definition
+)
 
 if result.success?
   puts result.data
@@ -436,7 +474,7 @@ def upsert_customer_custom_attribute(customer_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `customer_id` | `String` | Template, Required | The ID of the target [customer profile](../../doc/models/customer.md). |
+| `customer_id` | `String` | Template, Required | The ID of the target [customer profile](entity:Customer). |
 | `key` | `String` | Template, Required | The key of the custom attribute to create or update. This key must match the `key` of a<br>custom attribute definition in the Square seller account. If the requesting application is not<br>the definition owner, you must use the qualified key. |
 | `body` | [`Upsert Customer Custom Attribute Request Hash`](../../doc/models/upsert-customer-custom-attribute-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
@@ -448,11 +486,19 @@ def upsert_customer_custom_attribute(customer_id:,
 
 ```ruby
 customer_id = 'customer_id8'
-key = 'key0'
-body = {}
-body[:custom_attribute] = {}
 
-result = customer_custom_attributes_api.upsert_customer_custom_attribute(customer_id: customer_id, key: key, body: body)
+key = 'key0'
+
+body = {
+  :custom_attribute => {}
+}
+
+
+result = customer_custom_attributes_api.upsert_customer_custom_attribute(
+  customer_id: customer_id,
+  key: key,
+  body: body
+)
 
 if result.success?
   puts result.data

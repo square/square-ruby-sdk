@@ -2,11 +2,11 @@ module Square
   # InventoryApi
   class InventoryApi < BaseApi
     # Deprecated version of
-    # [RetrieveInventoryAdjustment]($e/Inventory/RetrieveInventoryAdjustment)
-    # after the endpoint URL
+    # [RetrieveInventoryAdjustment](api-endpoint:Inventory-RetrieveInventoryAdju
+    # stment) after the endpoint URL
     # is updated to conform to the standard convention.
     # @param [String] adjustment_id Required parameter: ID of the
-    # [InventoryAdjustment]($m/InventoryAdjustment) to retrieve.
+    # [InventoryAdjustment](entity:InventoryAdjustment) to retrieve.
     # @return [RetrieveInventoryAdjustmentResponse Hash] response from the API call
     def deprecated_retrieve_inventory_adjustment(adjustment_id:)
       warn 'Endpoint deprecated_retrieve_inventory_adjustment in InventoryApi '\
@@ -29,7 +29,7 @@ module Square
     # Returns the [InventoryAdjustment]($m/InventoryAdjustment) object
     # with the provided `adjustment_id`.
     # @param [String] adjustment_id Required parameter: ID of the
-    # [InventoryAdjustment]($m/InventoryAdjustment) to retrieve.
+    # [InventoryAdjustment](entity:InventoryAdjustment) to retrieve.
     # @return [RetrieveInventoryAdjustmentResponse Hash] response from the API call
     def retrieve_inventory_adjustment(adjustment_id:)
       new_api_call_builder
@@ -48,8 +48,8 @@ module Square
     end
 
     # Deprecated version of
-    # [BatchChangeInventory]($e/Inventory/BatchChangeInventory) after the
-    # endpoint URL
+    # [BatchChangeInventory](api-endpoint:Inventory-BatchChangeInventory) after
+    # the endpoint URL
     # is updated to conform to the standard convention.
     # @param [BatchChangeInventoryRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
@@ -75,8 +75,8 @@ module Square
     end
 
     # Deprecated version of
-    # [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges
-    # ) after the endpoint URL
+    # [BatchRetrieveInventoryChanges](api-endpoint:Inventory-BatchRetrieveInvent
+    # oryChanges) after the endpoint URL
     # is updated to conform to the standard convention.
     # @param [BatchRetrieveInventoryChangesRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
@@ -102,8 +102,8 @@ module Square
     end
 
     # Deprecated version of
-    # [BatchRetrieveInventoryCounts]($e/Inventory/BatchRetrieveInventoryCounts)
-    # after the endpoint URL
+    # [BatchRetrieveInventoryCounts](api-endpoint:Inventory-BatchRetrieveInvento
+    # ryCounts) after the endpoint URL
     # is updated to conform to the standard convention.
     # @param [BatchRetrieveInventoryCountsRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
@@ -212,11 +212,11 @@ module Square
     end
 
     # Deprecated version of
-    # [RetrieveInventoryPhysicalCount]($e/Inventory/RetrieveInventoryPhysicalCou
-    # nt) after the endpoint URL
+    # [RetrieveInventoryPhysicalCount](api-endpoint:Inventory-RetrieveInventoryP
+    # hysicalCount) after the endpoint URL
     # is updated to conform to the standard convention.
     # @param [String] physical_count_id Required parameter: ID of the
-    # [InventoryPhysicalCount]($m/InventoryPhysicalCount) to retrieve.
+    # [InventoryPhysicalCount](entity:InventoryPhysicalCount) to retrieve.
     # @return [RetrieveInventoryPhysicalCountResponse Hash] response from the API call
     def deprecated_retrieve_inventory_physical_count(physical_count_id:)
       warn 'Endpoint deprecated_retrieve_inventory_physical_count in Inventory'\
@@ -239,7 +239,7 @@ module Square
     # Returns the [InventoryPhysicalCount]($m/InventoryPhysicalCount)
     # object with the provided `physical_count_id`.
     # @param [String] physical_count_id Required parameter: ID of the
-    # [InventoryPhysicalCount]($m/InventoryPhysicalCount) to retrieve.
+    # [InventoryPhysicalCount](entity:InventoryPhysicalCount) to retrieve.
     # @return [RetrieveInventoryPhysicalCountResponse Hash] response from the API call
     def retrieve_inventory_physical_count(physical_count_id:)
       new_api_call_builder
@@ -260,7 +260,7 @@ module Square
     # Returns the [InventoryTransfer]($m/InventoryTransfer) object
     # with the provided `transfer_id`.
     # @param [String] transfer_id Required parameter: ID of the
-    # [InventoryTransfer]($m/InventoryTransfer) to retrieve.
+    # [InventoryTransfer](entity:InventoryTransfer) to retrieve.
     # @return [RetrieveInventoryTransferResponse Hash] response from the API call
     def retrieve_inventory_transfer(transfer_id:)
       new_api_call_builder
@@ -283,10 +283,10 @@ module Square
     # [Location]($m/Location)s. Responses are paginated and unsorted.
     # For more sophisticated queries, use a batch endpoint.
     # @param [String] catalog_object_id Required parameter: ID of the
-    # [CatalogObject]($m/CatalogObject) to retrieve.
+    # [CatalogObject](entity:CatalogObject) to retrieve.
     # @param [String] location_ids Optional parameter: The
-    # [Location]($m/Location) IDs to look up as a comma-separated list. An empty
-    # list queries all locations.
+    # [Location](entity:Location) IDs to look up as a comma-separated list. An
+    # empty list queries all locations.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
     # results for the original query.  See the
@@ -314,11 +314,11 @@ module Square
     end
 
     # Returns a set of physical counts and inventory adjustments for the
-    # provided [CatalogObject]($m/CatalogObject) at the requested
-    # [Location]($m/Location)s.
+    # provided [CatalogObject](entity:CatalogObject) at the requested
+    # [Location](entity:Location)s.
     # You can achieve the same result by calling
-    # [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges
-    # )
+    # [BatchRetrieveInventoryChanges](api-endpoint:Inventory-BatchRetrieveInvent
+    # oryChanges)
     # and having the `catalog_object_ids` list contain a single element of the
     # `CatalogObject` ID.
     # Results are paginated and sorted in descending order according to their
@@ -328,10 +328,10 @@ module Square
     # used to display recent changes for a specific item. For more
     # sophisticated queries, use a batch endpoint.
     # @param [String] catalog_object_id Required parameter: ID of the
-    # [CatalogObject]($m/CatalogObject) to retrieve.
+    # [CatalogObject](entity:CatalogObject) to retrieve.
     # @param [String] location_ids Optional parameter: The
-    # [Location]($m/Location) IDs to look up as a comma-separated list. An empty
-    # list queries all locations.
+    # [Location](entity:Location) IDs to look up as a comma-separated list. An
+    # empty list queries all locations.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
     # results for the original query.  See the

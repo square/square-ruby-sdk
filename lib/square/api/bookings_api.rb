@@ -51,8 +51,8 @@ module Square
 
     # Creates a booking.
     # The required input must include the following:
-    # - `Booking.location_id`,
-    # - `Booking.start_at`,
+    # - `Booking.location_id`
+    # - `Booking.start_at`
     # - `Booking.team_member_id`
     # - `Booking.AppointmentSegment.service_variation_id`
     # - `Booking.AppointmentSegment.service_variation_version`
@@ -186,7 +186,8 @@ module Square
     # To call this endpoint with seller-level permissions, set
     # `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
     # @param [String] booking_id Required parameter: The ID of the
-    # [Booking]($m/Booking) object representing the to-be-retrieved booking.
+    # [Booking](entity:Booking) object representing the to-be-retrieved
+    # booking.
     # @return [RetrieveBookingResponse Hash] response from the API call
     def retrieve_booking(booking_id:)
       new_api_call_builder
@@ -213,7 +214,7 @@ module Square
     # seller must have subscribed to *Appointments Plus*
     # or *Appointments Premium*.
     # @param [String] booking_id Required parameter: The ID of the
-    # [Booking]($m/Booking) object representing the to-be-updated booking.
+    # [Booking](entity:Booking) object representing the to-be-updated booking.
     # @param [UpdateBookingRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -247,7 +248,8 @@ module Square
     # seller must have subscribed to *Appointments Plus*
     # or *Appointments Premium*.
     # @param [String] booking_id Required parameter: The ID of the
-    # [Booking]($m/Booking) object representing the to-be-cancelled booking.
+    # [Booking](entity:Booking) object representing the to-be-cancelled
+    # booking.
     # @param [CancelBookingRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
