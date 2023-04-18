@@ -40,8 +40,10 @@ def register_domain(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:domain_name] = 'example.com'
+body = {
+  :domain_name => 'example.com'
+}
+
 
 result = apple_pay_api.register_domain(body: body)
 

@@ -4,12 +4,13 @@ module Square
     # Lists all gift cards. You can specify optional filters to retrieve
     # a subset of the gift cards. Results are sorted by `created_at` in
     # ascending order.
-    # @param [String] type Optional parameter: If a [type]($m/GiftCardType) is
-    # provided, the endpoint returns gift cards of the specified type.
+    # @param [String] type Optional parameter: If a [type](entity:GiftCardType)
+    # is provided, the endpoint returns gift cards of the specified type.
     # Otherwise, the endpoint returns gift cards of all types.
-    # @param [String] state Optional parameter: If a [state]($m/GiftCardStatus)
-    # is provided, the endpoint returns the gift cards in the specified state.
-    # Otherwise, the endpoint returns the gift cards of all states.
+    # @param [String] state Optional parameter: If a
+    # [state](entity:GiftCardStatus) is provided, the endpoint returns the gift
+    # cards in the specified state. Otherwise, the endpoint returns the gift
+    # cards of all states.
     # @param [Integer] limit Optional parameter: If a limit is provided, the
     # endpoint returns only the specified number of results per page. The
     # maximum value is 50. The default value is 30. For more information, see

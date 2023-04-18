@@ -42,7 +42,7 @@ def list_device_codes(cursor: nil,
 ## Example Usage
 
 ```ruby
-result = devices_api.list_device_codes()
+result = devices_api.list_device_codes
 
 if result.success?
   puts result.data
@@ -74,11 +74,15 @@ def create_device_code(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:idempotency_key] = '01bb00a6-0c86-4770-94ed-f5fca973cd56'
-body[:device_code] = {}
-body[:device_code][:name] = 'Counter 1'
-body[:device_code][:location_id] = 'B5E4484SHHNYH'
+body = {
+  :idempotency_key => '01bb00a6-0c86-4770-94ed-f5fca973cd56',
+  :device_code => {
+    :product_type => 'TERMINAL_API',
+    :name => 'Counter 1',
+    :location_id => 'B5E4484SHHNYH'
+  }
+}
+
 
 result = devices_api.create_device_code(body: body)
 
@@ -112,6 +116,7 @@ def get_device_code(id:)
 
 ```ruby
 id = 'id0'
+
 
 result = devices_api.get_device_code(id: id)
 

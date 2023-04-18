@@ -49,7 +49,8 @@ def list_cash_drawer_shifts(location_id:,
 ```ruby
 location_id = 'location_id4'
 
-result = cash_drawers_api.list_cash_drawer_shifts(location_id: location_id, )
+
+result = cash_drawers_api.list_cash_drawer_shifts(location_id: location_id)
 
 if result.success?
   puts result.data
@@ -84,9 +85,14 @@ def retrieve_cash_drawer_shift(location_id:,
 
 ```ruby
 location_id = 'location_id4'
+
 shift_id = 'shift_id0'
 
-result = cash_drawers_api.retrieve_cash_drawer_shift(location_id: location_id, shift_id: shift_id)
+
+result = cash_drawers_api.retrieve_cash_drawer_shift(
+  location_id: location_id,
+  shift_id: shift_id
+)
 
 if result.success?
   puts result.data
@@ -124,9 +130,14 @@ def list_cash_drawer_shift_events(location_id:,
 
 ```ruby
 location_id = 'location_id4'
+
 shift_id = 'shift_id0'
 
-result = cash_drawers_api.list_cash_drawer_shift_events(location_id: location_id, shift_id: shift_id, )
+
+result = cash_drawers_api.list_cash_drawer_shift_events(
+  location_id: location_id,
+  shift_id: shift_id
+)
 
 if result.success?
   puts result.data

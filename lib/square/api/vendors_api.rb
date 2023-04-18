@@ -117,7 +117,7 @@ module Square
 
     # Retrieves the vendor of a specified [Vendor]($m/Vendor) ID.
     # @param [String] vendor_id Required parameter: ID of the
-    # [Vendor]($m/Vendor) to retrieve.
+    # [Vendor](entity:Vendor) to retrieve.
     # @return [RetrieveVendorResponse Hash] response from the API call
     def retrieve_vendor(vendor_id:)
       new_api_call_builder

@@ -44,7 +44,7 @@ def list_merchants(cursor: nil)
 ## Example Usage
 
 ```ruby
-result = merchants_api.list_merchants()
+result = merchants_api.list_merchants
 
 if result.success?
   puts result.data
@@ -76,6 +76,7 @@ def retrieve_merchant(merchant_id:)
 
 ```ruby
 merchant_id = 'merchant_id0'
+
 
 result = merchants_api.retrieve_merchant(merchant_id: merchant_id)
 

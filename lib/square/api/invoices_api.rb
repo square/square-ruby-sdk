@@ -95,9 +95,9 @@ module Square
     # @param [String] invoice_id Required parameter: The ID of the invoice to
     # delete.
     # @param [Integer] version Optional parameter: The version of the
-    # [invoice]($m/Invoice) to delete. If you do not know the version, you can
-    # call [GetInvoice]($e/Invoices/GetInvoice) or
-    # [ListInvoices]($e/Invoices/ListInvoices).
+    # [invoice](entity:Invoice) to delete. If you do not know the version, you
+    # can call [GetInvoice](api-endpoint:Invoices-GetInvoice) or
+    # [ListInvoices](api-endpoint:Invoices-ListInvoices).
     # @return [DeleteInvoiceResponse Hash] response from the API call
     def delete_invoice(invoice_id:,
                        version: nil)
@@ -176,7 +176,7 @@ module Square
     # You cannot cancel an invoice in the `DRAFT` state or in a terminal state:
     # `PAID`, `REFUNDED`, `CANCELED`, or `FAILED`.
     # @param [String] invoice_id Required parameter: The ID of the
-    # [invoice]($m/Invoice) to cancel.
+    # [invoice](entity:Invoice) to cancel.
     # @param [CancelInvoiceRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.

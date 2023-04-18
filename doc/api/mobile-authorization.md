@@ -41,8 +41,10 @@ def create_mobile_authorization_code(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:location_id] = 'YOUR_LOCATION_ID'
+body = {
+  :location_id => 'YOUR_LOCATION_ID'
+}
+
 
 result = mobile_authorization_api.create_mobile_authorization_code(body: body)
 

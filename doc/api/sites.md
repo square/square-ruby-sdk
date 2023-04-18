@@ -26,7 +26,7 @@ def list_sites
 ## Example Usage
 
 ```ruby
-result = sites_api.list_sites()
+result = sites_api.list_sites
 
 if result.success?
   puts result.data

@@ -64,11 +64,19 @@ def renew_token(client_id:,
 
 ```ruby
 client_id = 'client_id8'
-body = {}
-body[:access_token] = 'ACCESS_TOKEN'
+
+body = {
+  :access_token => 'ACCESS_TOKEN'
+}
+
 authorization = 'Client CLIENT_SECRET'
 
-result = o_auth_api.renew_token(client_id: client_id, body: body, authorization: authorization)
+
+result = o_auth_api.renew_token(
+  client_id: client_id,
+  body: body,
+  authorization: authorization
+)
 
 if result.success?
   puts result.data
@@ -118,12 +126,18 @@ def revoke_token(body:,
 ## Example Usage
 
 ```ruby
-body = {}
-body[:client_id] = 'CLIENT_ID'
-body[:access_token] = 'ACCESS_TOKEN'
+body = {
+  :client_id => 'CLIENT_ID',
+  :access_token => 'ACCESS_TOKEN'
+}
+
 authorization = 'Client CLIENT_SECRET'
 
-result = o_auth_api.revoke_token(body: body, authorization: authorization)
+
+result = o_auth_api.revoke_token(
+  body: body,
+  authorization: authorization
+)
 
 if result.success?
   puts result.data
@@ -172,11 +186,13 @@ def obtain_token(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:client_id] = 'APPLICATION_ID'
-body[:client_secret] = 'APPLICATION_SECRET'
-body[:code] = 'CODE_FROM_AUTHORIZE'
-body[:grant_type] = 'authorization_code'
+body = {
+  :client_id => 'APPLICATION_ID',
+  :grant_type => 'authorization_code',
+  :client_secret => 'APPLICATION_SECRET',
+  :code => 'CODE_FROM_AUTHORIZE'
+}
+
 
 result = o_auth_api.obtain_token(body: body)
 
@@ -225,6 +241,7 @@ def retrieve_token_status(authorization:)
 
 ```ruby
 authorization = 'Client CLIENT_SECRET'
+
 
 result = o_auth_api.retrieve_token_status(authorization: authorization)
 

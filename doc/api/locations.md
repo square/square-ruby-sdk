@@ -32,7 +32,7 @@ def list_locations
 ## Example Usage
 
 ```ruby
-result = locations_api.list_locations()
+result = locations_api.list_locations
 
 if result.success?
   puts result.data
@@ -69,15 +69,19 @@ def create_location(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:location] = {}
-body[:location][:name] = 'Midtown'
-body[:location][:address] = {}
-body[:location][:address][:address_line_1] = '1234 Peachtree St. NE'
-body[:location][:address][:locality] = 'Atlanta'
-body[:location][:address][:administrative_district_level_1] = 'GA'
-body[:location][:address][:postal_code] = '30309'
-body[:location][:description] = 'Midtown Atlanta store'
+body = {
+  :location => {
+    :name => 'Midtown',
+    :address => {
+      :address_line_1 => '1234 Peachtree St. NE',
+      :locality => 'Atlanta',
+      :administrative_district_level_1 => 'GA',
+      :postal_code => '30309'
+    },
+    :description => 'Midtown Atlanta store'
+  }
+}
+
 
 result = locations_api.create_location(body: body)
 
@@ -113,6 +117,7 @@ def retrieve_location(location_id:)
 ```ruby
 location_id = 'location_id4'
 
+
 result = locations_api.retrieve_location(location_id: location_id)
 
 if result.success?
@@ -147,30 +152,37 @@ def update_location(location_id:,
 
 ```ruby
 location_id = 'location_id4'
-body = {}
-body[:location] = {}
-body[:location][:business_hours] = {}
-body[:location][:business_hours][:periods] = []
+
+body = {
+  :location => {
+    :business_hours => {
+      :periods => [
+        {
+          :day_of_week => 'FRI',
+          :start_local_time => '07:00',
+          :end_local_time => '18:00'
+        },
+        {
+          :day_of_week => 'SAT',
+          :start_local_time => '07:00',
+          :end_local_time => '18:00'
+        },
+        {
+          :day_of_week => 'SUN',
+          :start_local_time => '09:00',
+          :end_local_time => '15:00'
+        }
+      ]
+    },
+    :description => 'Midtown Atlanta store - Open weekends'
+  }
+}
 
 
-body[:location][:business_hours][:periods][0] = {}
-body[:location][:business_hours][:periods][0][:day_of_week] = 'FRI'
-body[:location][:business_hours][:periods][0][:start_local_time] = '07:00'
-body[:location][:business_hours][:periods][0][:end_local_time] = '18:00'
-
-body[:location][:business_hours][:periods][1] = {}
-body[:location][:business_hours][:periods][1][:day_of_week] = 'SAT'
-body[:location][:business_hours][:periods][1][:start_local_time] = '07:00'
-body[:location][:business_hours][:periods][1][:end_local_time] = '18:00'
-
-body[:location][:business_hours][:periods][2] = {}
-body[:location][:business_hours][:periods][2][:day_of_week] = 'SUN'
-body[:location][:business_hours][:periods][2][:start_local_time] = '09:00'
-body[:location][:business_hours][:periods][2][:end_local_time] = '15:00'
-
-body[:location][:description] = 'Midtown Atlanta store - Open weekends'
-
-result = locations_api.update_location(location_id: location_id, body: body)
+result = locations_api.update_location(
+  location_id: location_id,
+  body: body
+)
 
 if result.success?
   puts result.data

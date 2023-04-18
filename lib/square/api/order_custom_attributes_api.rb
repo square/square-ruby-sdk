@@ -257,7 +257,7 @@ module Square
     # other applications
     # and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
     # @param [String] order_id Required parameter: The ID of the target
-    # [order]($m/Order).
+    # [order](entity:Order).
     # @param [VisibilityFilter] visibility_filter Optional parameter: Requests
     # that all of the custom attributes be returned, or only those that are
     # read-only or read-write.
@@ -276,7 +276,7 @@ module Square
     # ion).
     # @param [TrueClass|FalseClass] with_definitions Optional parameter:
     # Indicates whether to return the [custom attribute
-    # definition]($m/CustomAttributeDefinition) in the `definition` field of
+    # definition](entity:CustomAttributeDefinition) in the `definition` field of
     # each custom attribute. Set this parameter to `true` to get the name and
     # description of each custom attribute,  information about the data type, or
     # other definition details. The default value is `false`.
@@ -313,7 +313,7 @@ module Square
     # (also known as custom fields) are always set to
     # `VISIBILITY_READ_WRITE_VALUES`.
     # @param [String] order_id Required parameter: The ID of the target
-    # [order]($m/Order).
+    # [order](entity:Order).
     # @param [String] custom_attribute_key Required parameter: The key of the
     # custom attribute to delete.  This key must match the key of an existing
     # custom attribute definition.
@@ -349,7 +349,7 @@ module Square
     # also known as custom fields) are always set to
     # `VISIBILITY_READ_WRITE_VALUES`.
     # @param [String] order_id Required parameter: The ID of the target
-    # [order]($m/Order).
+    # [order](entity:Order).
     # @param [String] custom_attribute_key Required parameter: The key of the
     # custom attribute to retrieve.  This key must match the key of an existing
     # custom attribute definition.
@@ -359,7 +359,7 @@ module Square
     # specify the current version of the custom attribute.
     # @param [TrueClass|FalseClass] with_definition Optional parameter:
     # Indicates whether to return the [custom attribute
-    # definition]($m/CustomAttributeDefinition) in the `definition` field of
+    # definition](entity:CustomAttributeDefinition) in the `definition` field of
     # each  custom attribute. Set this parameter to `true` to get the name and
     # description of each custom attribute,  information about the data type, or
     # other definition details. The default value is `false`.
@@ -402,7 +402,7 @@ module Square
     # (also known as custom fields) are always set to
     # `VISIBILITY_READ_WRITE_VALUES`.
     # @param [String] order_id Required parameter: The ID of the target
-    # [order]($m/Order).
+    # [order](entity:Order).
     # @param [String] custom_attribute_key Required parameter: The key of the
     # custom attribute to create or update.  This key must match the key  of an
     # existing custom attribute definition.

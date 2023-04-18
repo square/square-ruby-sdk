@@ -55,7 +55,7 @@ def list_bookings(limit: nil,
 ## Example Usage
 
 ```ruby
-result = bookings_api.list_bookings()
+result = bookings_api.list_bookings
 
 if result.success?
   puts result.data
@@ -71,8 +71,8 @@ Creates a booking.
 
 The required input must include the following:
 
-- `Booking.location_id`,
-- `Booking.start_at`,
+- `Booking.location_id`
+- `Booking.start_at`
 - `Booking.team_member_id`
 - `Booking.AppointmentSegment.service_variation_id`
 - `Booking.AppointmentSegment.service_variation_version`
@@ -100,8 +100,10 @@ def create_booking(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:booking] = {}
+body = {
+  :booking => {}
+}
+
 
 result = bookings_api.create_booking(body: body)
 
@@ -137,10 +139,14 @@ def search_availability(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:query] = {}
-body[:query][:filter] = {}
-body[:query][:filter][:start_at_range] = {}
+body = {
+  :query => {
+    :filter => {
+      :start_at_range => {}
+    }
+  }
+}
+
 
 result = bookings_api.search_availability(body: body)
 
@@ -167,7 +173,7 @@ def retrieve_business_booking_profile
 ## Example Usage
 
 ```ruby
-result = bookings_api.retrieve_business_booking_profile()
+result = bookings_api.retrieve_business_booking_profile
 
 if result.success?
   puts result.data
@@ -206,7 +212,8 @@ def list_team_member_booking_profiles(bookable_only: false,
 ```ruby
 bookable_only = false
 
-result = bookings_api.list_team_member_booking_profiles(bookable_only: bookable_only, )
+
+result = bookings_api.list_team_member_booking_profiles(bookable_only: bookable_only)
 
 if result.success?
   puts result.data
@@ -239,6 +246,7 @@ def retrieve_team_member_booking_profile(team_member_id:)
 ```ruby
 team_member_id = 'team_member_id0'
 
+
 result = bookings_api.retrieve_team_member_booking_profile(team_member_id: team_member_id)
 
 if result.success?
@@ -264,7 +272,7 @@ def retrieve_booking(booking_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `booking_id` | `String` | Template, Required | The ID of the [Booking](../../doc/models/booking.md) object representing the to-be-retrieved booking. |
+| `booking_id` | `String` | Template, Required | The ID of the [Booking](entity:Booking) object representing the to-be-retrieved booking. |
 
 ## Response Type
 
@@ -274,6 +282,7 @@ def retrieve_booking(booking_id:)
 
 ```ruby
 booking_id = 'booking_id4'
+
 
 result = bookings_api.retrieve_booking(booking_id: booking_id)
 
@@ -304,7 +313,7 @@ def update_booking(booking_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `booking_id` | `String` | Template, Required | The ID of the [Booking](../../doc/models/booking.md) object representing the to-be-updated booking. |
+| `booking_id` | `String` | Template, Required | The ID of the [Booking](entity:Booking) object representing the to-be-updated booking. |
 | `body` | [`Update Booking Request Hash`](../../doc/models/update-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -315,10 +324,16 @@ def update_booking(booking_id:,
 
 ```ruby
 booking_id = 'booking_id4'
-body = {}
-body[:booking] = {}
 
-result = bookings_api.update_booking(booking_id: booking_id, body: body)
+body = {
+  :booking => {}
+}
+
+
+result = bookings_api.update_booking(
+  booking_id: booking_id,
+  body: body
+)
 
 if result.success?
   puts result.data
@@ -347,7 +362,7 @@ def cancel_booking(booking_id:,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `booking_id` | `String` | Template, Required | The ID of the [Booking](../../doc/models/booking.md) object representing the to-be-cancelled booking. |
+| `booking_id` | `String` | Template, Required | The ID of the [Booking](entity:Booking) object representing the to-be-cancelled booking. |
 | `body` | [`Cancel Booking Request Hash`](../../doc/models/cancel-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -358,9 +373,14 @@ def cancel_booking(booking_id:,
 
 ```ruby
 booking_id = 'booking_id4'
+
 body = {}
 
-result = bookings_api.cancel_booking(booking_id: booking_id, body: body)
+
+result = bookings_api.cancel_booking(
+  booking_id: booking_id,
+  body: body
+)
 
 if result.success?
   puts result.data

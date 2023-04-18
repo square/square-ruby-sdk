@@ -45,15 +45,19 @@ def create_terminal_action(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:idempotency_key] = 'thahn-70e75c10-47f7-4ab6-88cc-aaa4076d065e'
-body[:action] = {}
-body[:action][:device_id] = '{{DEVICE_ID}}'
-body[:action][:deadline_duration] = 'PT5M'
-body[:action][:type] = 'SAVE_CARD'
-body[:action][:save_card_options] = {}
-body[:action][:save_card_options][:customer_id] = '{{CUSTOMER_ID}}'
-body[:action][:save_card_options][:reference_id] = 'user-id-1'
+body = {
+  :idempotency_key => 'thahn-70e75c10-47f7-4ab6-88cc-aaa4076d065e',
+  :action => {
+    :device_id => '{{DEVICE_ID}}',
+    :deadline_duration => 'PT5M',
+    :type => 'SAVE_CARD',
+    :save_card_options => {
+      :customer_id => '{{CUSTOMER_ID}}',
+      :reference_id => 'user-id-1'
+    }
+  }
+}
+
 
 result = terminal_api.create_terminal_action(body: body)
 
@@ -86,14 +90,20 @@ def search_terminal_actions(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:query] = {}
-body[:query][:filter] = {}
-body[:query][:filter][:created_at] = {}
-body[:query][:filter][:created_at][:start_at] = '2022-04-01T00:00:00Z'
-body[:query][:sort] = {}
-body[:query][:sort][:sort_order] = 'DESC'
-body[:limit] = 2
+body = {
+  :query => {
+    :filter => {
+      :created_at => {
+        :start_at => '2022-04-01T00:00:00Z'
+      }
+    },
+    :sort => {
+      :sort_order => 'DESC'
+    }
+  },
+  :limit => 2
+}
+
 
 result = terminal_api.search_terminal_actions(body: body)
 
@@ -128,6 +138,7 @@ def get_terminal_action(action_id:)
 ```ruby
 action_id = 'action_id6'
 
+
 result = terminal_api.get_terminal_action(action_id: action_id)
 
 if result.success?
@@ -161,6 +172,7 @@ def cancel_terminal_action(action_id:)
 ```ruby
 action_id = 'action_id6'
 
+
 result = terminal_api.cancel_terminal_action(action_id: action_id)
 
 if result.success?
@@ -193,16 +205,21 @@ def create_terminal_checkout(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:idempotency_key] = '28a0c3bc-7839-11ea-bc55-0242ac130003'
-body[:checkout] = {}
-body[:checkout][:amount_money] = {}
-body[:checkout][:amount_money][:amount] = 2610
-body[:checkout][:amount_money][:currency] = 'USD'
-body[:checkout][:reference_id] = 'id11572'
-body[:checkout][:note] = 'A brief note'
-body[:checkout][:device_options] = {}
-body[:checkout][:device_options][:device_id] = 'dbb5d83a-7838-11ea-bc55-0242ac130003'
+body = {
+  :idempotency_key => '28a0c3bc-7839-11ea-bc55-0242ac130003',
+  :checkout => {
+    :amount_money => {
+      :amount => 2610,
+      :currency => 'USD'
+    },
+    :device_options => {
+      :device_id => 'dbb5d83a-7838-11ea-bc55-0242ac130003'
+    },
+    :reference_id => 'id11572',
+    :note => 'A brief note'
+  }
+}
+
 
 result = terminal_api.create_terminal_checkout(body: body)
 
@@ -235,11 +252,15 @@ def search_terminal_checkouts(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:query] = {}
-body[:query][:filter] = {}
-body[:query][:filter][:status] = 'COMPLETED'
-body[:limit] = 2
+body = {
+  :query => {
+    :filter => {
+      :status => 'COMPLETED'
+    }
+  },
+  :limit => 2
+}
+
 
 result = terminal_api.search_terminal_checkouts(body: body)
 
@@ -274,6 +295,7 @@ def get_terminal_checkout(checkout_id:)
 ```ruby
 checkout_id = 'checkout_id8'
 
+
 result = terminal_api.get_terminal_checkout(checkout_id: checkout_id)
 
 if result.success?
@@ -307,6 +329,7 @@ def cancel_terminal_checkout(checkout_id:)
 ```ruby
 checkout_id = 'checkout_id8'
 
+
 result = terminal_api.cancel_terminal_checkout(checkout_id: checkout_id)
 
 if result.success?
@@ -338,15 +361,19 @@ def create_terminal_refund(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:idempotency_key] = '402a640b-b26f-401f-b406-46f839590c04'
-body[:refund] = {}
-body[:refund][:payment_id] = '5O5OvgkcNUhl7JBuINflcjKqUzXZY'
-body[:refund][:amount_money] = {}
-body[:refund][:amount_money][:amount] = 111
-body[:refund][:amount_money][:currency] = 'CAD'
-body[:refund][:reason] = 'Returning items'
-body[:refund][:device_id] = 'f72dfb8e-4d65-4e56-aade-ec3fb8d33291'
+body = {
+  :idempotency_key => '402a640b-b26f-401f-b406-46f839590c04',
+  :refund => {
+    :payment_id => '5O5OvgkcNUhl7JBuINflcjKqUzXZY',
+    :amount_money => {
+      :amount => 111,
+      :currency => 'CAD'
+    },
+    :reason => 'Returning items',
+    :device_id => 'f72dfb8e-4d65-4e56-aade-ec3fb8d33291'
+  }
+}
+
 
 result = terminal_api.create_terminal_refund(body: body)
 
@@ -379,11 +406,15 @@ def search_terminal_refunds(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:query] = {}
-body[:query][:filter] = {}
-body[:query][:filter][:status] = 'COMPLETED'
-body[:limit] = 1
+body = {
+  :query => {
+    :filter => {
+      :status => 'COMPLETED'
+    }
+  },
+  :limit => 1
+}
+
 
 result = terminal_api.search_terminal_refunds(body: body)
 
@@ -418,6 +449,7 @@ def get_terminal_refund(terminal_refund_id:)
 ```ruby
 terminal_refund_id = 'terminal_refund_id0'
 
+
 result = terminal_api.get_terminal_refund(terminal_refund_id: terminal_refund_id)
 
 if result.success?
@@ -450,6 +482,7 @@ def cancel_terminal_refund(terminal_refund_id:)
 
 ```ruby
 terminal_refund_id = 'terminal_refund_id0'
+
 
 result = terminal_api.cancel_terminal_refund(terminal_refund_id: terminal_refund_id)
 

@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2023-03-15'` |
+| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2023-04-19'` |
 | `custom_url` | `String` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `'https://connect.squareup.com'` |
 | `environment` | `string` | The API environment. <br> **Default: `production`** |
 | `connection` | `Faraday::Connection` | The Faraday connection object passed by the SDK user for making requests |
@@ -25,10 +25,10 @@ The API client can be initialized as follows:
 
 ```ruby
 client = Square::Client.new(
-  square_version: '2023-03-15',
+  square_version: '2023-04-19',
   access_token: 'AccessToken',
   environment: 'production',
-  custom_url: 'https://connect.squareup.com',
+  custom_url: 'https://connect.squareup.com'
 )
 ```
 
@@ -50,15 +50,13 @@ API calls return an `ApiResponse` object that includes the following fields:
 
 ```ruby
 require 'square'
-
 include Square
 
 client = Square::Client.new(
-  access_token: 'AccessToken',
+  access_token: 'AccessToken'
 )
 
-locations_api = client.locations
-result = locations_api.list_locations()
+result = client.locations.list_locations
 
 if result.success?
   puts result.data

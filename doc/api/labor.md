@@ -53,7 +53,7 @@ def list_break_types(location_id: nil,
 ## Example Usage
 
 ```ruby
-result = labor_api.list_break_types()
+result = labor_api.list_break_types
 
 if result.success?
   puts result.data
@@ -97,13 +97,16 @@ def create_break_type(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:idempotency_key] = 'PAD3NG5KSN2GL'
-body[:break_type] = {}
-body[:break_type][:location_id] = 'CGJN03P1D08GF'
-body[:break_type][:break_name] = 'Lunch Break'
-body[:break_type][:expected_duration] = 'PT30M'
-body[:break_type][:is_paid] = true
+body = {
+  :break_type => {
+    :location_id => 'CGJN03P1D08GF',
+    :break_name => 'Lunch Break',
+    :expected_duration => 'PT30M',
+    :is_paid => true
+  },
+  :idempotency_key => 'PAD3NG5KSN2GL'
+}
+
 
 result = labor_api.create_break_type(body: body)
 
@@ -140,6 +143,7 @@ def delete_break_type(id:)
 ```ruby
 id = 'id0'
 
+
 result = labor_api.delete_break_type(id: id)
 
 if result.success?
@@ -172,6 +176,7 @@ def get_break_type(id:)
 
 ```ruby
 id = 'id0'
+
 
 result = labor_api.get_break_type(id: id)
 
@@ -207,15 +212,22 @@ def update_break_type(id:,
 
 ```ruby
 id = 'id0'
-body = {}
-body[:break_type] = {}
-body[:break_type][:location_id] = '26M7H24AZ9N6R'
-body[:break_type][:break_name] = 'Lunch'
-body[:break_type][:expected_duration] = 'PT50M'
-body[:break_type][:is_paid] = true
-body[:break_type][:version] = 1
 
-result = labor_api.update_break_type(id: id, body: body)
+body = {
+  :break_type => {
+    :location_id => '26M7H24AZ9N6R',
+    :break_name => 'Lunch',
+    :expected_duration => 'PT50M',
+    :is_paid => true,
+    :version => 1
+  }
+}
+
+
+result = labor_api.update_break_type(
+  id: id,
+  body: body
+)
 
 if result.success?
   puts result.data
@@ -252,7 +264,7 @@ def list_employee_wages(employee_id: nil,
 ## Example Usage
 
 ```ruby
-result = labor_api.list_employee_wages()
+result = labor_api.list_employee_wages
 
 if result.success?
   puts result.data
@@ -286,6 +298,7 @@ def get_employee_wage(id:)
 
 ```ruby
 id = 'id0'
+
 
 result = labor_api.get_employee_wage(id: id)
 
@@ -336,29 +349,33 @@ def create_shift(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:idempotency_key] = 'HIDSNG5KS478L'
-body[:shift] = {}
-body[:shift][:location_id] = 'PAA1RJZZKXBFG'
-body[:shift][:start_at] = '2019-01-25T08:11:00+00:00'
-body[:shift][:end_at] = '2019-01-25T18:11:00+00:00'
-body[:shift][:wage] = {}
-body[:shift][:wage][:title] = 'Barista'
-body[:shift][:wage][:hourly_rate] = {}
-body[:shift][:wage][:hourly_rate][:amount] = 1100
-body[:shift][:wage][:hourly_rate][:currency] = 'USD'
-body[:shift][:breaks] = []
+body = {
+  :shift => {
+    :start_at => '2019-01-25T08:11:00+00:00',
+    :location_id => 'PAA1RJZZKXBFG',
+    :end_at => '2019-01-25T18:11:00+00:00',
+    :wage => {
+      :title => 'Barista',
+      :hourly_rate => {
+        :amount => 1100,
+        :currency => 'USD'
+      }
+    },
+    :breaks => [
+      {
+        :start_at => '2019-01-25T11:11:00+00:00',
+        :break_type_id => 'REGS1EQR1TPZ5',
+        :name => 'Tea Break',
+        :expected_duration => 'PT5M',
+        :is_paid => true,
+        :end_at => '2019-01-25T11:16:00+00:00'
+      }
+    ],
+    :team_member_id => 'ormj0jJJZ5OZIzxrZYJI'
+  },
+  :idempotency_key => 'HIDSNG5KS478L'
+}
 
-
-body[:shift][:breaks][0] = {}
-body[:shift][:breaks][0][:start_at] = '2019-01-25T11:11:00+00:00'
-body[:shift][:breaks][0][:end_at] = '2019-01-25T11:16:00+00:00'
-body[:shift][:breaks][0][:break_type_id] = 'REGS1EQR1TPZ5'
-body[:shift][:breaks][0][:name] = 'Tea Break'
-body[:shift][:breaks][0][:expected_duration] = 'PT5M'
-body[:shift][:breaks][0][:is_paid] = true
-
-body[:shift][:team_member_id] = 'ormj0jJJZ5OZIzxrZYJI'
 
 result = labor_api.create_shift(body: body)
 
@@ -406,16 +423,22 @@ def search_shifts(body:)
 ## Example Usage
 
 ```ruby
-body = {}
-body[:query] = {}
-body[:query][:filter] = {}
-body[:query][:filter][:workday] = {}
-body[:query][:filter][:workday][:date_range] = {}
-body[:query][:filter][:workday][:date_range][:start_date] = '2019-01-20'
-body[:query][:filter][:workday][:date_range][:end_date] = '2019-02-03'
-body[:query][:filter][:workday][:match_shifts_by] = 'START_AT'
-body[:query][:filter][:workday][:default_timezone] = 'America/Los_Angeles'
-body[:limit] = 100
+body = {
+  :query => {
+    :filter => {
+      :workday => {
+        :date_range => {
+          :start_date => '2019-01-20',
+          :end_date => '2019-02-03'
+        },
+        :match_shifts_by => 'START_AT',
+        :default_timezone => 'America/Los_Angeles'
+      }
+    }
+  },
+  :limit => 100
+}
+
 
 result = labor_api.search_shifts(body: body)
 
@@ -450,6 +473,7 @@ def delete_shift(id:)
 ```ruby
 id = 'id0'
 
+
 result = labor_api.delete_shift(id: id)
 
 if result.success?
@@ -482,6 +506,7 @@ def get_shift(id:)
 
 ```ruby
 id = 'id0'
+
 
 result = labor_api.get_shift(id: id)
 
@@ -523,32 +548,40 @@ def update_shift(id:,
 
 ```ruby
 id = 'id0'
-body = {}
-body[:shift] = {}
-body[:shift][:location_id] = 'PAA1RJZZKXBFG'
-body[:shift][:start_at] = '2019-01-25T08:11:00+00:00'
-body[:shift][:end_at] = '2019-01-25T18:11:00+00:00'
-body[:shift][:wage] = {}
-body[:shift][:wage][:title] = 'Bartender'
-body[:shift][:wage][:hourly_rate] = {}
-body[:shift][:wage][:hourly_rate][:amount] = 1500
-body[:shift][:wage][:hourly_rate][:currency] = 'USD'
-body[:shift][:breaks] = []
+
+body = {
+  :shift => {
+    :start_at => '2019-01-25T08:11:00+00:00',
+    :location_id => 'PAA1RJZZKXBFG',
+    :end_at => '2019-01-25T18:11:00+00:00',
+    :wage => {
+      :title => 'Bartender',
+      :hourly_rate => {
+        :amount => 1500,
+        :currency => 'USD'
+      }
+    },
+    :breaks => [
+      {
+        :start_at => '2019-01-25T11:11:00+00:00',
+        :break_type_id => 'REGS1EQR1TPZ5',
+        :name => 'Tea Break',
+        :expected_duration => 'PT5M',
+        :is_paid => true,
+        :id => 'X7GAQYVVRRG6P',
+        :end_at => '2019-01-25T11:16:00+00:00'
+      }
+    ],
+    :version => 1,
+    :team_member_id => 'ormj0jJJZ5OZIzxrZYJI'
+  }
+}
 
 
-body[:shift][:breaks][0] = {}
-body[:shift][:breaks][0][:id] = 'X7GAQYVVRRG6P'
-body[:shift][:breaks][0][:start_at] = '2019-01-25T11:11:00+00:00'
-body[:shift][:breaks][0][:end_at] = '2019-01-25T11:16:00+00:00'
-body[:shift][:breaks][0][:break_type_id] = 'REGS1EQR1TPZ5'
-body[:shift][:breaks][0][:name] = 'Tea Break'
-body[:shift][:breaks][0][:expected_duration] = 'PT5M'
-body[:shift][:breaks][0][:is_paid] = true
-
-body[:shift][:version] = 1
-body[:shift][:team_member_id] = 'ormj0jJJZ5OZIzxrZYJI'
-
-result = labor_api.update_shift(id: id, body: body)
+result = labor_api.update_shift(
+  id: id,
+  body: body
+)
 
 if result.success?
   puts result.data
@@ -583,7 +616,7 @@ def list_team_member_wages(team_member_id: nil,
 ## Example Usage
 
 ```ruby
-result = labor_api.list_team_member_wages()
+result = labor_api.list_team_member_wages
 
 if result.success?
   puts result.data
@@ -615,6 +648,7 @@ def get_team_member_wage(id:)
 
 ```ruby
 id = 'id0'
+
 
 result = labor_api.get_team_member_wage(id: id)
 
@@ -649,7 +683,7 @@ def list_workweek_configs(limit: nil,
 ## Example Usage
 
 ```ruby
-result = labor_api.list_workweek_configs()
+result = labor_api.list_workweek_configs
 
 if result.success?
   puts result.data
@@ -683,13 +717,20 @@ def update_workweek_config(id:,
 
 ```ruby
 id = 'id0'
-body = {}
-body[:workweek_config] = {}
-body[:workweek_config][:start_of_week] = 'MON'
-body[:workweek_config][:start_of_day_local_time] = '10:00'
-body[:workweek_config][:version] = 10
 
-result = labor_api.update_workweek_config(id: id, body: body)
+body = {
+  :workweek_config => {
+    :start_of_week => 'MON',
+    :start_of_day_local_time => '10:00',
+    :version => 10
+  }
+}
+
+
+result = labor_api.update_workweek_config(
+  id: id,
+  body: body
+)
 
 if result.success?
   puts result.data
