@@ -61,7 +61,9 @@ body = {
   },
   :card_id => 'ccof:qy5x8hHGYsgLrp4Q4GB',
   :timezone => 'America/Los_Angeles',
-  :source => {}
+  :source => {
+    :name => 'My App'
+  }
 }
 
 
@@ -202,13 +204,7 @@ def update_subscription(subscription_id:,
 subscription_id = 'subscription_id0'
 
 body = {
-  :subscription => {
-    :price_override_money => {
-      :amount => 2000,
-      :currency => 'USD'
-    },
-    :version => 1594155459464
-  }
+  :subscription => {}
 }
 
 
