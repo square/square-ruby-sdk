@@ -1,13 +1,16 @@
 module Square
   # SubscriptionsApi
   class SubscriptionsApi < BaseApi
-    # Creates a subscription to a subscription plan by a customer.
+    # Enrolls a customer in a subscription.
     # If you provide a card on file in the request, Square charges the card for
-    # the subscription. Otherwise, Square bills an invoice to the customer's
+    # the subscription. Otherwise, Square sends an invoice to the customer's
     # email
     # address. The subscription starts immediately, unless the request includes
     # the optional `start_date`. Each individual subscription is associated with
     # a particular location.
+    # For more information, see [Create a
+    # subscription](https://developer.squareup.com/docs/subscriptions-api/manage
+    # -subscriptions#create-a-subscription).
     # @param [CreateSubscriptionRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -42,10 +45,6 @@ module Square
     # If the request specifies customer IDs, the endpoint orders results
     # first by location, within location by customer ID, and within
     # customer by subscription creation date.
-    # For more information, see
-    # [Retrieve
-    # subscriptions](https://developer.squareup.com/docs/subscriptions-api/overv
-    # iew#retrieve-subscriptions).
     # @param [SearchSubscriptionsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -67,7 +66,7 @@ module Square
         .execute
     end
 
-    # Retrieves a subscription.
+    # Retrieves a specific subscription.
     # @param [String] subscription_id Required parameter: The ID of the
     # subscription to retrieve.
     # @param [String] include Optional parameter: A query parameter to specify
@@ -93,8 +92,9 @@ module Square
         .execute
     end
 
-    # Updates a subscription. You can set, modify, and clear the
-    # `subscription` field values.
+    # Updates a subscription by modifying or clearing `subscription` field
+    # values.
+    # To clear a field, set its value to `null`.
     # @param [String] subscription_id Required parameter: The ID of the
     # subscription to update.
     # @param [UpdateSubscriptionRequest] body Required parameter: An object
@@ -146,11 +146,10 @@ module Square
         .execute
     end
 
-    # Schedules a `CANCEL` action to cancel an active subscription
-    # by setting the `canceled_date` field to the end of the active billing
-    # period
-    # and changing the subscription status from ACTIVE to CANCELED after this
-    # date.
+    # Schedules a `CANCEL` action to cancel an active subscription. This
+    # sets the `canceled_date` field to the end of the active billing period.
+    # After this date,
+    # the subscription status changes from ACTIVE to CANCELED.
     # @param [String] subscription_id Required parameter: The ID of the
     # subscription to cancel.
     # @return [CancelSubscriptionResponse Hash] response from the API call
@@ -170,7 +169,9 @@ module Square
         .execute
     end
 
-    # Lists all events for a specific subscription.
+    # Lists all
+    # [events](https://developer.squareup.com/docs/subscriptions-api/actions-eve
+    # nts) for a specific subscription.
     # @param [String] subscription_id Required parameter: The ID of the
     # subscription to retrieve the events for.
     # @param [String] cursor Optional parameter: When the total number of
@@ -178,8 +179,8 @@ module Square
     # specify the cursor returned from a preceding response here to fetch the
     # next set of results. If the cursor is unset, the response contains the
     # last page of the results.  For more information, see
-    # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
-    # ion).
+    # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
+    # atterns/pagination).
     # @param [Integer] limit Optional parameter: The upper limit on the number
     # of subscription events to return in a paged response.
     # @return [ListSubscriptionEventsResponse Hash] response from the API call
@@ -258,8 +259,11 @@ module Square
         .execute
     end
 
-    # Schedules a `SWAP_PLAN` action to swap a subscription plan in an existing
-    # subscription.
+    # Schedules a `SWAP_PLAN` action to swap a subscription plan variation in an
+    # existing subscription.
+    # For more information, see [Swap Subscription Plan
+    # Variations](https://developer.squareup.com/docs/subscriptions-api/swap-pla
+    # n-variations).
     # @param [String] subscription_id Required parameter: The ID of the
     # subscription to swap the subscription plan for.
     # @param [SwapPlanRequest] body Required parameter: An object containing the

@@ -50,7 +50,7 @@ module Square
     # Retrieves a Terminal action request by `action_id`. Terminal action
     # requests are available for 30 days.
     # @param [String] action_id Required parameter: Unique ID for the desired
-    # `TerminalAction`
+    # `TerminalAction`.
     # @return [GetTerminalActionResponse Hash] response from the API call
     def get_terminal_action(action_id:)
       new_api_call_builder
@@ -70,12 +70,36 @@ module Square
 
     # Cancels a Terminal action request if the status of the request permits it.
     # @param [String] action_id Required parameter: Unique ID for the desired
-    # `TerminalAction`
+    # `TerminalAction`.
     # @return [CancelTerminalActionResponse Hash] response from the API call
     def cancel_terminal_action(action_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
                                      '/v2/terminals/actions/{action_id}/cancel',
+                                     'default')
+                   .template_param(new_parameter(action_id, key: 'action_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
+    # Dismisses a Terminal action request if the status and type of the request
+    # permits it.
+    # See [Link and Dismiss
+    # Actions](https://developer.squareup.com/docs/terminal-api/advanced-feature
+    # s/custom-workflows/link-and-dismiss-actions) for more details.
+    # @param [String] action_id Required parameter: Unique ID for the
+    # `TerminalAction` associated with the waiting dialog to be dismissed.
+    # @return [DismissTerminalActionResponse Hash] response from the API call
+    def dismiss_terminal_action(action_id:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/terminals/actions/{action_id}/dismiss',
                                      'default')
                    .template_param(new_parameter(action_id, key: 'action_id')
                                     .should_encode(true))
