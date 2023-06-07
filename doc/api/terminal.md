@@ -14,6 +14,7 @@ terminal_api = client.terminal
 * [Search Terminal Actions](../../doc/api/terminal.md#search-terminal-actions)
 * [Get Terminal Action](../../doc/api/terminal.md#get-terminal-action)
 * [Cancel Terminal Action](../../doc/api/terminal.md#cancel-terminal-action)
+* [Dismiss Terminal Action](../../doc/api/terminal.md#dismiss-terminal-action)
 * [Create Terminal Checkout](../../doc/api/terminal.md#create-terminal-checkout)
 * [Search Terminal Checkouts](../../doc/api/terminal.md#search-terminal-checkouts)
 * [Get Terminal Checkout](../../doc/api/terminal.md#get-terminal-checkout)
@@ -127,7 +128,7 @@ def get_terminal_action(action_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `action_id` | `String` | Template, Required | Unique ID for the desired `TerminalAction` |
+| `action_id` | `String` | Template, Required | Unique ID for the desired `TerminalAction`. |
 
 ## Response Type
 
@@ -161,7 +162,7 @@ def cancel_terminal_action(action_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `action_id` | `String` | Template, Required | Unique ID for the desired `TerminalAction` |
+| `action_id` | `String` | Template, Required | Unique ID for the desired `TerminalAction`. |
 
 ## Response Type
 
@@ -174,6 +175,42 @@ action_id = 'action_id6'
 
 
 result = terminal_api.cancel_terminal_action(action_id: action_id)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Dismiss Terminal Action
+
+Dismisses a Terminal action request if the status and type of the request permits it.
+
+See [Link and Dismiss Actions](https://developer.squareup.com/docs/terminal-api/advanced-features/custom-workflows/link-and-dismiss-actions) for more details.
+
+```ruby
+def dismiss_terminal_action(action_id:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `action_id` | `String` | Template, Required | Unique ID for the `TerminalAction` associated with the waiting dialog to be dismissed. |
+
+## Response Type
+
+[`Dismiss Terminal Action Response Hash`](../../doc/models/dismiss-terminal-action-response.md)
+
+## Example Usage
+
+```ruby
+action_id = 'action_id6'
+
+
+result = terminal_api.dismiss_terminal_action(action_id: action_id)
 
 if result.success?
   puts result.data

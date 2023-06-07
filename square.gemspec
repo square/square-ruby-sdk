@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'square.rb'
-  s.version = '28.0.0.20230517'
+  s.version = '29.0.0.20230608'
   s.summary = 'square'
   s.description = ''
   s.authors = ['Square Developer Platform']
