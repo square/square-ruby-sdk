@@ -11,7 +11,7 @@ module Square
     # @param [String] batch_token Optional parameter: A pagination cursor to
     # retrieve the next set of results for your original query to the
     # endpoint.
-    # @return [List of V1Order Hash] response from the API call
+    # @return [Array[V1Order] Hash] response from the API call
     def v1_list_orders(location_id:,
                        order: nil,
                        limit: nil,
@@ -127,11 +127,11 @@ module Square
     # @param [String] batch_token Optional parameter: A pagination cursor to
     # retrieve the next set of results for your original query to the
     # endpoint.
-    # @param [TrueClass|FalseClass] include_partial Optional parameter:
+    # @param [TrueClass | FalseClass] include_partial Optional parameter:
     # Indicates whether or not to include partial payments in the response.
     # Partial payments will have the tenders collected so far, but the
     # itemizations will be empty until the payment is completed.
-    # @return [List of V1Payment Hash] response from the API call
+    # @return [Array[V1Payment] Hash] response from the API call
     def v1_list_payments(location_id:,
                          order: nil,
                          begin_time: nil,
@@ -213,7 +213,7 @@ module Square
     # @param [String] batch_token Optional parameter: A pagination cursor to
     # retrieve the next set of results for your original query to the
     # endpoint.
-    # @return [List of V1Refund Hash] response from the API call
+    # @return [Array[V1Refund] Hash] response from the API call
     def v1_list_refunds(location_id:,
                         order: nil,
                         begin_time: nil,
@@ -306,7 +306,7 @@ module Square
     # @param [String] batch_token Optional parameter: A pagination cursor to
     # retrieve the next set of results for your original query to the
     # endpoint.
-    # @return [List of V1Settlement Hash] response from the API call
+    # @return [Array[V1Settlement] Hash] response from the API call
     def v1_list_settlements(location_id:,
                             order: nil,
                             begin_time: nil,

@@ -35,13 +35,13 @@ def list_cards(cursor: nil,
 |  --- | --- | --- | --- |
 | `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>See [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination) for more information. |
 | `customer_id` | `String` | Query, Optional | Limit results to cards associated with the customer supplied.<br>By default, all cards owned by the merchant are returned. |
-| `include_disabled` | `TrueClass\|FalseClass` | Query, Optional | Includes disabled cards.<br>By default, all enabled cards owned by the merchant are returned.<br>**Default**: `false` |
+| `include_disabled` | `TrueClass \| FalseClass` | Query, Optional | Includes disabled cards.<br>By default, all enabled cards owned by the merchant are returned.<br>**Default**: `false` |
 | `reference_id` | `String` | Query, Optional | Limit results to cards associated with the reference_id supplied. |
 | `sort_order` | [`String (Sort Order)`](../../doc/models/sort-order.md) | Query, Optional | Sorts the returned list by when the card was created with the specified order.<br>This field defaults to ASC. |
 
 ## Response Type
 
-[`List Cards Response Hash`](../../doc/models/list-cards-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Cards Response Hash`](../../doc/models/list-cards-response.md).
 
 ## Example Usage
 
@@ -75,7 +75,7 @@ def create_card(body:)
 
 ## Response Type
 
-[`Create Card Response Hash`](../../doc/models/create-card-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Card Response Hash`](../../doc/models/create-card-response.md).
 
 ## Example Usage
 
@@ -125,7 +125,7 @@ def retrieve_card(card_id:)
 
 ## Response Type
 
-[`Retrieve Card Response Hash`](../../doc/models/retrieve-card-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Card Response Hash`](../../doc/models/retrieve-card-response.md).
 
 ## Example Usage
 
@@ -160,7 +160,7 @@ def disable_card(card_id:)
 
 ## Response Type
 
-[`Disable Card Response Hash`](../../doc/models/disable-card-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Disable Card Response Hash`](../../doc/models/disable-card-response.md).
 
 ## Example Usage
 

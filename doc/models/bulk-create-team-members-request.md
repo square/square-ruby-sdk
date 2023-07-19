@@ -11,7 +11,7 @@ Represents a bulk create request for `TeamMember` objects.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `team_members` | [`Hash of Create Team Member Request Hash`](../../doc/models/create-team-member-request.md) | Required | The data used to create the `TeamMember` objects. Each key is the `idempotency_key` that maps to the `CreateTeamMemberRequest`. The maximum number of create objects is 25. |
+| `team_members` | [`Hash String Create Team Member Request Hash`](../../doc/models/create-team-member-request.md) | Required | The data used to create the `TeamMember` objects. Each key is the `idempotency_key` that maps to the `CreateTeamMemberRequest`. The maximum number of create objects is 25. |
 
 ## Example (as JSON)
 

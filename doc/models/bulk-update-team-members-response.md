@@ -11,7 +11,7 @@ Represents a response from a bulk update request containing the updated `TeamMem
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `team_members` | [`Hash of Update Team Member Response Hash`](../../doc/models/update-team-member-response.md) | Optional | The successfully updated `TeamMember` objects. Each key is the `team_member_id` that maps to the `UpdateTeamMemberRequest`. |
+| `team_members` | [`Hash String Update Team Member Response Hash`](../../doc/models/update-team-member-response.md) | Optional | The successfully updated `TeamMember` objects. Each key is the `team_member_id` that maps to the `UpdateTeamMemberRequest`. |
 | `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | The errors that occurred during the request. |
 
 ## Example (as JSON)
@@ -37,20 +37,20 @@ Represents a response from a bulk update request containing the updated `TeamMem
       },
       "errors": [
         {
-          "category": "MERCHANT_SUBSCRIPTION_ERROR",
-          "code": "GENERIC_DECLINE",
+          "category": "PAYMENT_METHOD_ERROR",
+          "code": "REQUEST_TIMEOUT",
           "detail": "detail8",
           "field": "field6"
         },
         {
-          "category": "API_ERROR",
-          "code": "CVV_FAILURE",
+          "category": "REFUND_ERROR",
+          "code": "CONFLICT",
           "detail": "detail9",
           "field": "field7"
         },
         {
-          "category": "AUTHENTICATION_ERROR",
-          "code": "ADDRESS_VERIFICATION_FAILURE",
+          "category": "MERCHANT_SUBSCRIPTION_ERROR",
+          "code": "GONE",
           "detail": "detail0",
           "field": "field8"
         }
@@ -78,8 +78,8 @@ Represents a response from a bulk update request containing the updated `TeamMem
       },
       "errors": [
         {
-          "category": "API_ERROR",
-          "code": "CVV_FAILURE",
+          "category": "REFUND_ERROR",
+          "code": "CONFLICT",
           "detail": "detail9",
           "field": "field7"
         }
@@ -88,20 +88,20 @@ Represents a response from a bulk update request containing the updated `TeamMem
   },
   "errors": [
     {
-      "category": "AUTHENTICATION_ERROR",
-      "code": "REFUND_ALREADY_PENDING",
+      "category": "REFUND_ERROR",
+      "code": "MERCHANT_SUBSCRIPTION_NOT_FOUND",
       "detail": "detail1",
       "field": "field9"
     },
     {
-      "category": "INVALID_REQUEST_ERROR",
-      "code": "PAYMENT_NOT_REFUNDABLE",
+      "category": "MERCHANT_SUBSCRIPTION_ERROR",
+      "code": "BAD_REQUEST",
       "detail": "detail2",
       "field": "field0"
     },
     {
-      "category": "RATE_LIMIT_ERROR",
-      "code": "REFUND_DECLINED",
+      "category": "EXTERNAL_VENDOR_ERROR",
+      "code": "MISSING_REQUIRED_PARAMETER",
       "detail": "detail3",
       "field": "field1"
     }

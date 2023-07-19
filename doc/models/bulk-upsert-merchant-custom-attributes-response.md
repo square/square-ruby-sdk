@@ -12,7 +12,7 @@ which contains a map of responses that each corresponds to an individual upsert 
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `values` | [`Hash of Bulk Upsert Merchant Custom Attributes Response Merchant Custom Attribute Upsert Response Hash`](../../doc/models/bulk-upsert-merchant-custom-attributes-response-merchant-custom-attribute-upsert-response.md) | Optional | A map of responses that correspond to individual upsert requests. Each response has the<br>same ID as the corresponding request and contains either a `merchant_id` and `custom_attribute` or an `errors` field. |
+| `values` | [`Hash String Bulk Upsert Merchant Custom Attributes Response Merchant Custom Attribute Upsert Response Hash`](../../doc/models/bulk-upsert-merchant-custom-attributes-response-merchant-custom-attribute-upsert-response.md) | Optional | A map of responses that correspond to individual upsert requests. Each response has the<br>same ID as the corresponding request and contains either a `merchant_id` and `custom_attribute` or an `errors` field. |
 | `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
@@ -43,8 +43,8 @@ which contains a map of responses that each corresponds to an individual upsert 
       },
       "errors": [
         {
-          "category": "API_ERROR",
-          "code": "INVALID_FEES",
+          "category": "REFUND_ERROR",
+          "code": "INVALID_ENUM_VALUE",
           "detail": "detail1",
           "field": "field9"
         }
@@ -73,14 +73,14 @@ which contains a map of responses that each corresponds to an individual upsert 
       },
       "errors": [
         {
-          "category": "AUTHENTICATION_ERROR",
-          "code": "MANUALLY_ENTERED_PAYMENT_NOT_SUPPORTED",
+          "category": "MERCHANT_SUBSCRIPTION_ERROR",
+          "code": "INVALID_CONTENT_TYPE",
           "detail": "detail2",
           "field": "field0"
         },
         {
-          "category": "INVALID_REQUEST_ERROR",
-          "code": "PAYMENT_LIMIT_EXCEEDED",
+          "category": "EXTERNAL_VENDOR_ERROR",
+          "code": "INVALID_FORM_VALUE",
           "detail": "detail3",
           "field": "field1"
         }
@@ -109,20 +109,20 @@ which contains a map of responses that each corresponds to an individual upsert 
       },
       "errors": [
         {
-          "category": "INVALID_REQUEST_ERROR",
-          "code": "PAYMENT_LIMIT_EXCEEDED",
+          "category": "EXTERNAL_VENDOR_ERROR",
+          "code": "INVALID_FORM_VALUE",
           "detail": "detail3",
           "field": "field1"
         },
         {
-          "category": "RATE_LIMIT_ERROR",
-          "code": "GIFT_CARD_AVAILABLE_AMOUNT",
+          "category": "API_ERROR",
+          "code": "CUSTOMER_NOT_FOUND",
           "detail": "detail4",
           "field": "field2"
         },
         {
-          "category": "PAYMENT_METHOD_ERROR",
-          "code": "ACCOUNT_UNUSABLE",
+          "category": "AUTHENTICATION_ERROR",
+          "code": "ONE_INSTRUMENT_EXPECTED",
           "detail": "detail5",
           "field": "field3"
         }
@@ -131,20 +131,20 @@ which contains a map of responses that each corresponds to an individual upsert 
   },
   "errors": [
     {
-      "category": "AUTHENTICATION_ERROR",
-      "code": "REFUND_ALREADY_PENDING",
+      "category": "REFUND_ERROR",
+      "code": "MERCHANT_SUBSCRIPTION_NOT_FOUND",
       "detail": "detail1",
       "field": "field9"
     },
     {
-      "category": "INVALID_REQUEST_ERROR",
-      "code": "PAYMENT_NOT_REFUNDABLE",
+      "category": "MERCHANT_SUBSCRIPTION_ERROR",
+      "code": "BAD_REQUEST",
       "detail": "detail2",
       "field": "field0"
     },
     {
-      "category": "RATE_LIMIT_ERROR",
-      "code": "REFUND_DECLINED",
+      "category": "EXTERNAL_VENDOR_ERROR",
+      "code": "MISSING_REQUIRED_PARAMETER",
       "detail": "detail3",
       "field": "field1"
     }

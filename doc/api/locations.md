@@ -27,7 +27,7 @@ def list_locations
 
 ## Response Type
 
-[`List Locations Response Hash`](../../doc/models/list-locations-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Locations Response Hash`](../../doc/models/list-locations-response.md).
 
 ## Example Usage
 
@@ -64,7 +64,7 @@ def create_location(body:)
 
 ## Response Type
 
-[`Create Location Response Hash`](../../doc/models/create-location-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Location Response Hash`](../../doc/models/create-location-response.md).
 
 ## Example Usage
 
@@ -110,7 +110,7 @@ def retrieve_location(location_id:)
 
 ## Response Type
 
-[`Retrieve Location Response Hash`](../../doc/models/retrieve-location-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Location Response Hash`](../../doc/models/retrieve-location-response.md).
 
 ## Example Usage
 
@@ -146,7 +146,7 @@ def update_location(location_id:,
 
 ## Response Type
 
-[`Update Location Response Hash`](../../doc/models/update-location-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Location Response Hash`](../../doc/models/update-location-response.md).
 
 ## Example Usage
 

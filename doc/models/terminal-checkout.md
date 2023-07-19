@@ -25,7 +25,7 @@ Represents a checkout processed by the Square Terminal.
 | `created_at` | `String` | Optional | The time when the `TerminalCheckout` was created, as an RFC 3339 timestamp. |
 | `updated_at` | `String` | Optional | The time when the `TerminalCheckout` was last updated, as an RFC 3339 timestamp. |
 | `app_id` | `String` | Optional | The ID of the application that created the checkout. |
-| `location_id` | `String` | Optional | The location of the device where the `TerminalCheckout` was directed. |
+| `location_id` | `String` | Optional | The location of the device where the `TerminalCheckout` was directed.<br>**Constraints**: *Maximum Length*: `64` |
 | `payment_type` | [`String (Checkout Options Payment Type)`](../../doc/models/checkout-options-payment-type.md) | Optional | - |
 | `team_member_id` | `String` | Optional | An optional ID of the team member associated with creating the checkout. |
 | `customer_id` | `String` | Optional | An optional ID of the customer associated with the checkout. |
@@ -40,7 +40,7 @@ Represents a checkout processed by the Square Terminal.
   "id": "id0",
   "amount_money": {
     "amount": 186,
-    "currency": "NGN"
+    "currency": "TZS"
   },
   "reference_id": "reference_id2",
   "note": "note4",

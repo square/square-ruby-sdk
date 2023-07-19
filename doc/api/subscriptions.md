@@ -45,7 +45,7 @@ def create_subscription(body:)
 
 ## Response Type
 
-[`Create Subscription Response Hash`](../../doc/models/create-subscription-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Subscription Response Hash`](../../doc/models/create-subscription-response.md).
 
 ## Example Usage
 
@@ -54,18 +54,19 @@ body = {
   :location_id => 'S8GWD5R9QB376',
   :customer_id => 'CHFGVKYY8RSV93M5KCYTG4PN0G',
   :idempotency_key => '8193148c-9586-11e6-99f9-28cfe92138cf',
-  :plan_id => '6JHXF3B2CW3YKHDV4XEM674H',
-  :start_date => '2021-10-20',
-  :tax_percentage => '5',
-  :price_override_money => {
-    :amount => 100,
-    :currency => 'USD'
-  },
+  :plan_variation_id => '6JHXF3B2CW3YKHDV4XEM674H',
+  :start_date => '2023-06-20',
   :card_id => 'ccof:qy5x8hHGYsgLrp4Q4GB',
   :timezone => 'America/Los_Angeles',
   :source => {
-    :name => 'My App'
-  }
+    :name => 'My Application'
+  },
+  :phases => [
+    {
+      :ordinal => 0,
+      :order_template_id => 'U2NaowWxzXwpsZU697x7ZHOAnCNZY'
+    }
+  ]
 }
 
 
@@ -108,7 +109,7 @@ def search_subscriptions(body:)
 
 ## Response Type
 
-[`Search Subscriptions Response Hash`](../../doc/models/search-subscriptions-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Subscriptions Response Hash`](../../doc/models/search-subscriptions-response.md).
 
 ## Example Usage
 
@@ -158,7 +159,7 @@ def retrieve_subscription(subscription_id:,
 
 ## Response Type
 
-[`Retrieve Subscription Response Hash`](../../doc/models/retrieve-subscription-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Subscription Response Hash`](../../doc/models/retrieve-subscription-response.md).
 
 ## Example Usage
 
@@ -195,7 +196,7 @@ def update_subscription(subscription_id:,
 
 ## Response Type
 
-[`Update Subscription Response Hash`](../../doc/models/update-subscription-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Subscription Response Hash`](../../doc/models/update-subscription-response.md).
 
 ## Example Usage
 
@@ -238,7 +239,7 @@ def delete_subscription_action(subscription_id:,
 
 ## Response Type
 
-[`Delete Subscription Action Response Hash`](../../doc/models/delete-subscription-action-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Subscription Action Response Hash`](../../doc/models/delete-subscription-action-response.md).
 
 ## Example Usage
 
@@ -279,7 +280,7 @@ def cancel_subscription(subscription_id:)
 
 ## Response Type
 
-[`Cancel Subscription Response Hash`](../../doc/models/cancel-subscription-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Cancel Subscription Response Hash`](../../doc/models/cancel-subscription-response.md).
 
 ## Example Usage
 
@@ -317,7 +318,7 @@ def list_subscription_events(subscription_id:,
 
 ## Response Type
 
-[`List Subscription Events Response Hash`](../../doc/models/list-subscription-events-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Subscription Events Response Hash`](../../doc/models/list-subscription-events-response.md).
 
 ## Example Usage
 
@@ -353,7 +354,7 @@ def pause_subscription(subscription_id:,
 
 ## Response Type
 
-[`Pause Subscription Response Hash`](../../doc/models/pause-subscription-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Pause Subscription Response Hash`](../../doc/models/pause-subscription-response.md).
 
 ## Example Usage
 
@@ -394,7 +395,7 @@ def resume_subscription(subscription_id:,
 
 ## Response Type
 
-[`Resume Subscription Response Hash`](../../doc/models/resume-subscription-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Resume Subscription Response Hash`](../../doc/models/resume-subscription-response.md).
 
 ## Example Usage
 
@@ -436,14 +437,22 @@ def swap_plan(subscription_id:,
 
 ## Response Type
 
-[`Swap Plan Response Hash`](../../doc/models/swap-plan-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Swap Plan Response Hash`](../../doc/models/swap-plan-response.md).
 
 ## Example Usage
 
 ```ruby
 subscription_id = 'subscription_id0'
 
-body = {}
+body = {
+  :new_plan_variation_id => 'FQ7CDXXWSLUJRPM3GFJSJGZ7',
+  :phases => [
+    {
+      :ordinal => 0,
+      :order_template_id => 'uhhnjH9osVv3shUADwaC0b3hNxQZY'
+    }
+  ]
+}
 
 
 result = subscriptions_api.swap_plan(

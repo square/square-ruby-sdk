@@ -25,7 +25,7 @@ Reflects the current status of a card payment. Contains only non-confidential in
 | `statement_description` | `String` | Optional | The statement description sent to the card networks.<br><br>Note: The actual statement description varies and is likely to be truncated and appended with<br>additional information on a per issuer basis.<br>**Constraints**: *Maximum Length*: `50` |
 | `device_details` | [`Device Details Hash`](../../doc/models/device-details.md) | Optional | Details about the device that took the payment. |
 | `card_payment_timeline` | [`Card Payment Timeline Hash`](../../doc/models/card-payment-timeline.md) | Optional | The timeline for card payments. |
-| `refund_requires_card_presence` | `TrueClass\|FalseClass` | Optional | Whether the card must be physically present for the payment to<br>be refunded.  If set to `true`, the card must be present. |
+| `refund_requires_card_presence` | `TrueClass \| FalseClass` | Optional | Whether the card must be physically present for the payment to<br>be refunded.  If set to `true`, the card must be present. |
 | `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
 
 ## Example (as JSON)

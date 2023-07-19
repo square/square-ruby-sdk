@@ -45,7 +45,7 @@ def list_payouts(location_id: nil,
 
 ## Response Type
 
-[`List Payouts Response Hash`](../../doc/models/list-payouts-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Payouts Response Hash`](../../doc/models/list-payouts-response.md).
 
 ## Example Usage
 
@@ -77,7 +77,7 @@ def get_payout(payout_id:)
 
 ## Response Type
 
-[`Get Payout Response Hash`](../../doc/models/get-payout-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Payout Response Hash`](../../doc/models/get-payout-response.md).
 
 ## Example Usage
 
@@ -118,7 +118,7 @@ def list_payout_entries(payout_id:,
 
 ## Response Type
 
-[`List Payout Entries Response Hash`](../../doc/models/list-payout-entries-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Payout Entries Response Hash`](../../doc/models/list-payout-entries-response.md).
 
 ## Example Usage
 

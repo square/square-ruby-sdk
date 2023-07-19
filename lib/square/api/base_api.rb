@@ -4,7 +4,7 @@ module Square
     attr_accessor :config, :http_call_back
 
     def self.user_agent
-      'Square-Ruby-SDK/29.0.1.20230608 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}'
+      'Square-Ruby-SDK/30.0.0.20230720 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}'
     end
 
     def self.user_agent_parameters
@@ -31,7 +31,7 @@ module Square
     end
 
     # Creates a new instance of the request builder.
-    # @param [HttpMethodEnum] http_method The HTTP method to use in the request.
+    # @param [String] http_method The HTTP method to use in the request.
     # @param [String] path The endpoint path to use in the request.
     # @param [String] server The server to extract the base uri for the request.
     # @return [RequestBuilder] The instance of RequestBuilder.

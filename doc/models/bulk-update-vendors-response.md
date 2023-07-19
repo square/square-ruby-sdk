@@ -12,7 +12,7 @@ Represents an output from a call to [BulkUpdateVendors](../../doc/api/vendors.md
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Errors encountered when the request fails. |
-| `responses` | [`Hash of Update Vendor Response Hash`](../../doc/models/update-vendor-response.md) | Optional | A set of [UpdateVendorResponse](entity:UpdateVendorResponse) objects encapsulating successfully created [Vendor](entity:Vendor)<br>objects or error responses for failed attempts. The set is represented by a collection of `Vendor`-ID/`UpdateVendorResponse`-object or<br>`Vendor`-ID/error-object pairs. |
+| `responses` | [`Hash String Update Vendor Response Hash`](../../doc/models/update-vendor-response.md) | Optional | A set of [UpdateVendorResponse](entity:UpdateVendorResponse) objects encapsulating successfully created [Vendor](entity:Vendor)<br>objects or error responses for failed attempts. The set is represented by a collection of `Vendor`-ID/`UpdateVendorResponse`-object or<br>`Vendor`-ID/error-object pairs. |
 
 ## Example (as JSON)
 
@@ -73,20 +73,20 @@ Represents an output from a call to [BulkUpdateVendors](../../doc/api/vendors.md
   },
   "errors": [
     {
-      "category": "AUTHENTICATION_ERROR",
-      "code": "REFUND_ALREADY_PENDING",
+      "category": "REFUND_ERROR",
+      "code": "MERCHANT_SUBSCRIPTION_NOT_FOUND",
       "detail": "detail1",
       "field": "field9"
     },
     {
-      "category": "INVALID_REQUEST_ERROR",
-      "code": "PAYMENT_NOT_REFUNDABLE",
+      "category": "MERCHANT_SUBSCRIPTION_ERROR",
+      "code": "BAD_REQUEST",
       "detail": "detail2",
       "field": "field0"
     },
     {
-      "category": "RATE_LIMIT_ERROR",
-      "code": "REFUND_DECLINED",
+      "category": "EXTERNAL_VENDOR_ERROR",
+      "code": "MISSING_REQUIRED_PARAMETER",
       "detail": "detail3",
       "field": "field1"
     }
@@ -95,20 +95,20 @@ Represents an output from a call to [BulkUpdateVendors](../../doc/api/vendors.md
     "key0": {
       "errors": [
         {
-          "category": "AUTHENTICATION_ERROR",
-          "code": "INVALID_EMAIL_ADDRESS",
+          "category": "PAYMENT_METHOD_ERROR",
+          "code": "INVALID_CARD",
           "detail": "detail8",
           "field": "field6"
         },
         {
-          "category": "INVALID_REQUEST_ERROR",
-          "code": "INVALID_PHONE_NUMBER",
+          "category": "REFUND_ERROR",
+          "code": "PAYMENT_AMOUNT_MISMATCH",
           "detail": "detail9",
           "field": "field7"
         },
         {
-          "category": "RATE_LIMIT_ERROR",
-          "code": "CHECKOUT_EXPIRED",
+          "category": "MERCHANT_SUBSCRIPTION_ERROR",
+          "code": "GENERIC_DECLINE",
           "detail": "detail0",
           "field": "field8"
         }

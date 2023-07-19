@@ -41,7 +41,7 @@ def create_terminal_action(body:)
 
 ## Response Type
 
-[`Create Terminal Action Response Hash`](../../doc/models/create-terminal-action-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Terminal Action Response Hash`](../../doc/models/create-terminal-action-response.md).
 
 ## Example Usage
 
@@ -86,7 +86,7 @@ def search_terminal_actions(body:)
 
 ## Response Type
 
-[`Search Terminal Actions Response Hash`](../../doc/models/search-terminal-actions-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Terminal Actions Response Hash`](../../doc/models/search-terminal-actions-response.md).
 
 ## Example Usage
 
@@ -132,7 +132,7 @@ def get_terminal_action(action_id:)
 
 ## Response Type
 
-[`Get Terminal Action Response Hash`](../../doc/models/get-terminal-action-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Terminal Action Response Hash`](../../doc/models/get-terminal-action-response.md).
 
 ## Example Usage
 
@@ -166,7 +166,7 @@ def cancel_terminal_action(action_id:)
 
 ## Response Type
 
-[`Cancel Terminal Action Response Hash`](../../doc/models/cancel-terminal-action-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Cancel Terminal Action Response Hash`](../../doc/models/cancel-terminal-action-response.md).
 
 ## Example Usage
 
@@ -202,7 +202,7 @@ def dismiss_terminal_action(action_id:)
 
 ## Response Type
 
-[`Dismiss Terminal Action Response Hash`](../../doc/models/dismiss-terminal-action-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Dismiss Terminal Action Response Hash`](../../doc/models/dismiss-terminal-action-response.md).
 
 ## Example Usage
 
@@ -237,7 +237,7 @@ def create_terminal_checkout(body:)
 
 ## Response Type
 
-[`Create Terminal Checkout Response Hash`](../../doc/models/create-terminal-checkout-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Terminal Checkout Response Hash`](../../doc/models/create-terminal-checkout-response.md).
 
 ## Example Usage
 
@@ -284,7 +284,7 @@ def search_terminal_checkouts(body:)
 
 ## Response Type
 
-[`Search Terminal Checkouts Response Hash`](../../doc/models/search-terminal-checkouts-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Terminal Checkouts Response Hash`](../../doc/models/search-terminal-checkouts-response.md).
 
 ## Example Usage
 
@@ -325,7 +325,7 @@ def get_terminal_checkout(checkout_id:)
 
 ## Response Type
 
-[`Get Terminal Checkout Response Hash`](../../doc/models/get-terminal-checkout-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Terminal Checkout Response Hash`](../../doc/models/get-terminal-checkout-response.md).
 
 ## Example Usage
 
@@ -359,7 +359,7 @@ def cancel_terminal_checkout(checkout_id:)
 
 ## Response Type
 
-[`Cancel Terminal Checkout Response Hash`](../../doc/models/cancel-terminal-checkout-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Cancel Terminal Checkout Response Hash`](../../doc/models/cancel-terminal-checkout-response.md).
 
 ## Example Usage
 
@@ -393,7 +393,7 @@ def create_terminal_refund(body:)
 
 ## Response Type
 
-[`Create Terminal Refund Response Hash`](../../doc/models/create-terminal-refund-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Terminal Refund Response Hash`](../../doc/models/create-terminal-refund-response.md).
 
 ## Example Usage
 
@@ -438,7 +438,7 @@ def search_terminal_refunds(body:)
 
 ## Response Type
 
-[`Search Terminal Refunds Response Hash`](../../doc/models/search-terminal-refunds-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Terminal Refunds Response Hash`](../../doc/models/search-terminal-refunds-response.md).
 
 ## Example Usage
 
@@ -479,7 +479,7 @@ def get_terminal_refund(terminal_refund_id:)
 
 ## Response Type
 
-[`Get Terminal Refund Response Hash`](../../doc/models/get-terminal-refund-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Terminal Refund Response Hash`](../../doc/models/get-terminal-refund-response.md).
 
 ## Example Usage
 
@@ -513,7 +513,7 @@ def cancel_terminal_refund(terminal_refund_id:)
 
 ## Response Type
 
-[`Cancel Terminal Refund Response Hash`](../../doc/models/cancel-terminal-refund-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Cancel Terminal Refund Response Hash`](../../doc/models/cancel-terminal-refund-response.md).
 
 ## Example Usage
 

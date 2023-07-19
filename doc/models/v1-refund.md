@@ -28,7 +28,7 @@ V1Refund
 | `processed_at` | `String` | Optional | The time when Square processed the refund on behalf of the merchant, in ISO 8601 format. |
 | `payment_id` | `String` | Optional | A Square-issued ID associated with the refund. For single-tender refunds, payment_id is the ID of the original payment ID. For split-tender refunds, payment_id is the ID of the original tender. For exchange-based refunds (is_exchange == true), payment_id is the ID of the original payment ID even if the payment includes other tenders. |
 | `merchant_id` | `String` | Optional | - |
-| `is_exchange` | `TrueClass\|FalseClass` | Optional | Indicates whether or not the refund is associated with an exchange. If is_exchange is true, the refund reflects the value of goods returned in the exchange not the total money refunded. |
+| `is_exchange` | `TrueClass \| FalseClass` | Optional | Indicates whether or not the refund is associated with an exchange. If is_exchange is true, the refund reflects the value of goods returned in the exchange not the total money refunded. |
 
 ## Example (as JSON)
 
@@ -38,15 +38,15 @@ V1Refund
   "reason": "reason4",
   "refunded_money": {
     "amount": 214,
-    "currency_code": "CHW"
+    "currency_code": "SRD"
   },
   "refunded_processing_fee_money": {
     "amount": 0,
-    "currency_code": "LBP"
+    "currency_code": "BGN"
   },
   "refunded_tax_money": {
     "amount": 148,
-    "currency_code": "BAM"
+    "currency_code": "SRD"
   }
 }
 ```

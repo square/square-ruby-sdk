@@ -18,7 +18,7 @@ added to `ITEM` and `ITEM_VARIATION` type catalog objects.
 | `custom_attribute_definition_id` | `String` | Optional | The id of the [CatalogCustomAttributeDefinition](entity:CatalogCustomAttributeDefinition) this value belongs to. |
 | `type` | [`String (Catalog Custom Attribute Definition Type)`](../../doc/models/catalog-custom-attribute-definition-type.md) | Optional | Defines the possible types for a custom attribute. |
 | `number_value` | `String` | Optional | Populated if `type` = `NUMBER`. Contains a string<br>representation of a decimal number, using a `.` as the decimal separator. |
-| `boolean_value` | `TrueClass\|FalseClass` | Optional | A `true` or `false` value. Populated if `type` = `BOOLEAN`. |
+| `boolean_value` | `TrueClass \| FalseClass` | Optional | A `true` or `false` value. Populated if `type` = `BOOLEAN`. |
 | `selection_uid_values` | `Array<String>` | Optional | One or more choices from `allowed_selections`. Populated if `type` = `SELECTION`. |
 | `key` | `String` | Optional | If the associated `CatalogCustomAttributeDefinition` object is defined by another application, this key is prefixed by the defining application ID.<br>For example, if the CatalogCustomAttributeDefinition has a key attribute of "cocoa_brand" and the defining application ID is "abcd1234", this key is "abcd1234:cocoa_brand"<br>when the application making the request is different from the application defining the custom attribute definition. Otherwise, the key is simply "cocoa_brand". |
 

@@ -27,7 +27,7 @@ module Square
     # results for your original query.  For more information, see
     # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
     # atterns/pagination).
-    # @param [TrueClass|FalseClass] include_disabled Optional parameter:
+    # @param [TrueClass | FalseClass] include_disabled Optional parameter:
     # Includes disabled [Subscription](entity:WebhookSubscription)s. By default,
     # all enabled [Subscription](entity:WebhookSubscription)s are returned.
     # @param [SortOrder] sort_order Optional parameter: Sorts the returned list

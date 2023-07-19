@@ -35,7 +35,7 @@ def delete_snippet(site_id:)
 
 ## Response Type
 
-[`Delete Snippet Response Hash`](../../doc/models/delete-snippet-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Snippet Response Hash`](../../doc/models/delete-snippet-response.md).
 
 ## Example Usage
 
@@ -73,7 +73,7 @@ def retrieve_snippet(site_id:)
 
 ## Response Type
 
-[`Retrieve Snippet Response Hash`](../../doc/models/retrieve-snippet-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Snippet Response Hash`](../../doc/models/retrieve-snippet-response.md).
 
 ## Example Usage
 
@@ -114,7 +114,7 @@ def upsert_snippet(site_id:,
 
 ## Response Type
 
-[`Upsert Snippet Response Hash`](../../doc/models/upsert-snippet-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Upsert Snippet Response Hash`](../../doc/models/upsert-snippet-response.md).
 
 ## Example Usage
 

@@ -12,7 +12,7 @@ Represents an output from a call to [BulkRetrieveVendors](../../doc/api/vendors.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `responses` | [`Hash of Retrieve Vendor Response Hash`](../../doc/models/retrieve-vendor-response.md) | Optional | The set of [RetrieveVendorResponse](entity:RetrieveVendorResponse) objects encapsulating successfully retrieved [Vendor](entity:Vendor)<br>objects or error responses for failed attempts. The set is represented by<br>a collection of `Vendor`-ID/`Vendor`-object or `Vendor`-ID/error-object pairs. |
+| `responses` | [`Hash String Retrieve Vendor Response Hash`](../../doc/models/retrieve-vendor-response.md) | Optional | The set of [RetrieveVendorResponse](entity:RetrieveVendorResponse) objects encapsulating successfully retrieved [Vendor](entity:Vendor)<br>objects or error responses for failed attempts. The set is represented by<br>a collection of `Vendor`-ID/`Vendor`-object or `Vendor`-ID/error-object pairs. |
 
 ## Example (as JSON)
 
@@ -53,20 +53,20 @@ Represents an output from a call to [BulkRetrieveVendors](../../doc/api/vendors.
     "key0": {
       "errors": [
         {
-          "category": "AUTHENTICATION_ERROR",
-          "code": "INVALID_EMAIL_ADDRESS",
+          "category": "PAYMENT_METHOD_ERROR",
+          "code": "INVALID_CARD",
           "detail": "detail8",
           "field": "field6"
         },
         {
-          "category": "INVALID_REQUEST_ERROR",
-          "code": "INVALID_PHONE_NUMBER",
+          "category": "REFUND_ERROR",
+          "code": "PAYMENT_AMOUNT_MISMATCH",
           "detail": "detail9",
           "field": "field7"
         },
         {
-          "category": "RATE_LIMIT_ERROR",
-          "code": "CHECKOUT_EXPIRED",
+          "category": "MERCHANT_SUBSCRIPTION_ERROR",
+          "code": "GENERIC_DECLINE",
           "detail": "detail0",
           "field": "field8"
         }

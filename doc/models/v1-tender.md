@@ -47,7 +47,7 @@ associated payment.
 | `settled_at` | `String` | Optional | The time when the tender was settled, in ISO 8601 format. |
 | `change_back_money` | [`V1 Money Hash`](../../doc/models/v1-money.md) | Optional | - |
 | `refunded_money` | [`V1 Money Hash`](../../doc/models/v1-money.md) | Optional | - |
-| `is_exchange` | `TrueClass\|FalseClass` | Optional | Indicates whether or not the tender is associated with an exchange. If is_exchange is true, the tender represents the value of goods returned in an exchange not the actual money paid. The exchange value reduces the tender amounts needed to pay for items purchased in the exchange. |
+| `is_exchange` | `TrueClass \| FalseClass` | Optional | Indicates whether or not the tender is associated with an exchange. If is_exchange is true, the tender represents the value of goods returned in an exchange not the actual money paid. The exchange value reduces the tender amounts needed to pay for items purchased in the exchange. |
 
 ## Example (as JSON)
 

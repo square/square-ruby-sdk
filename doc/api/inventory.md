@@ -44,7 +44,7 @@ def deprecated_retrieve_inventory_adjustment(adjustment_id:)
 
 ## Response Type
 
-[`Retrieve Inventory Adjustment Response Hash`](../../doc/models/retrieve-inventory-adjustment-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Inventory Adjustment Response Hash`](../../doc/models/retrieve-inventory-adjustment-response.md).
 
 ## Example Usage
 
@@ -79,7 +79,7 @@ def retrieve_inventory_adjustment(adjustment_id:)
 
 ## Response Type
 
-[`Retrieve Inventory Adjustment Response Hash`](../../doc/models/retrieve-inventory-adjustment-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Inventory Adjustment Response Hash`](../../doc/models/retrieve-inventory-adjustment-response.md).
 
 ## Example Usage
 
@@ -116,7 +116,7 @@ def deprecated_batch_change_inventory(body:)
 
 ## Response Type
 
-[`Batch Change Inventory Response Hash`](../../doc/models/batch-change-inventory-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Batch Change Inventory Response Hash`](../../doc/models/batch-change-inventory-response.md).
 
 ## Example Usage
 
@@ -170,7 +170,7 @@ def deprecated_batch_retrieve_inventory_changes(body:)
 
 ## Response Type
 
-[`Batch Retrieve Inventory Changes Response Hash`](../../doc/models/batch-retrieve-inventory-changes-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Batch Retrieve Inventory Changes Response Hash`](../../doc/models/batch-retrieve-inventory-changes-response.md).
 
 ## Example Usage
 
@@ -222,7 +222,7 @@ def deprecated_batch_retrieve_inventory_counts(body:)
 
 ## Response Type
 
-[`Batch Retrieve Inventory Counts Response Hash`](../../doc/models/batch-retrieve-inventory-counts-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Batch Retrieve Inventory Counts Response Hash`](../../doc/models/batch-retrieve-inventory-counts-response.md).
 
 ## Example Usage
 
@@ -268,7 +268,7 @@ def batch_change_inventory(body:)
 
 ## Response Type
 
-[`Batch Change Inventory Response Hash`](../../doc/models/batch-change-inventory-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Batch Change Inventory Response Hash`](../../doc/models/batch-change-inventory-response.md).
 
 ## Example Usage
 
@@ -326,7 +326,7 @@ def batch_retrieve_inventory_changes(body:)
 
 ## Response Type
 
-[`Batch Retrieve Inventory Changes Response Hash`](../../doc/models/batch-retrieve-inventory-changes-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Batch Retrieve Inventory Changes Response Hash`](../../doc/models/batch-retrieve-inventory-changes-response.md).
 
 ## Example Usage
 
@@ -385,7 +385,7 @@ def batch_retrieve_inventory_counts(body:)
 
 ## Response Type
 
-[`Batch Retrieve Inventory Counts Response Hash`](../../doc/models/batch-retrieve-inventory-counts-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Batch Retrieve Inventory Counts Response Hash`](../../doc/models/batch-retrieve-inventory-counts-response.md).
 
 ## Example Usage
 
@@ -430,7 +430,7 @@ def deprecated_retrieve_inventory_physical_count(physical_count_id:)
 
 ## Response Type
 
-[`Retrieve Inventory Physical Count Response Hash`](../../doc/models/retrieve-inventory-physical-count-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Inventory Physical Count Response Hash`](../../doc/models/retrieve-inventory-physical-count-response.md).
 
 ## Example Usage
 
@@ -465,7 +465,7 @@ def retrieve_inventory_physical_count(physical_count_id:)
 
 ## Response Type
 
-[`Retrieve Inventory Physical Count Response Hash`](../../doc/models/retrieve-inventory-physical-count-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Inventory Physical Count Response Hash`](../../doc/models/retrieve-inventory-physical-count-response.md).
 
 ## Example Usage
 
@@ -500,7 +500,7 @@ def retrieve_inventory_transfer(transfer_id:)
 
 ## Response Type
 
-[`Retrieve Inventory Transfer Response Hash`](../../doc/models/retrieve-inventory-transfer-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Inventory Transfer Response Hash`](../../doc/models/retrieve-inventory-transfer-response.md).
 
 ## Example Usage
 
@@ -541,7 +541,7 @@ def retrieve_inventory_count(catalog_object_id:,
 
 ## Response Type
 
-[`Retrieve Inventory Count Response Hash`](../../doc/models/retrieve-inventory-count-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Inventory Count Response Hash`](../../doc/models/retrieve-inventory-count-response.md).
 
 ## Example Usage
 
@@ -593,7 +593,7 @@ def retrieve_inventory_changes(catalog_object_id:,
 
 ## Response Type
 
-[`Retrieve Inventory Changes Response Hash`](../../doc/models/retrieve-inventory-changes-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Inventory Changes Response Hash`](../../doc/models/retrieve-inventory-changes-response.md).
 
 ## Example Usage
 

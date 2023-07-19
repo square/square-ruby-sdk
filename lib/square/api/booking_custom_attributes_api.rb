@@ -236,7 +236,7 @@ module Square
     # more information, see
     # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
     # atterns/pagination).
-    # @param [TrueClass|FalseClass] with_definitions Optional parameter:
+    # @param [TrueClass | FalseClass] with_definitions Optional parameter:
     # Indicates whether to return the [custom attribute
     # definition](entity:CustomAttributeDefinition) in the `definition` field of
     # each custom attribute. Set this parameter to `true` to get the name and
@@ -310,7 +310,7 @@ module Square
     # retrieve. This key must match the `key` of a custom attribute definition
     # in the Square seller account. If the requesting application is not the
     # definition owner, you must use the qualified key.
-    # @param [TrueClass|FalseClass] with_definition Optional parameter:
+    # @param [TrueClass | FalseClass] with_definition Optional parameter:
     # Indicates whether to return the [custom attribute
     # definition](entity:CustomAttributeDefinition) in the `definition` field of
     # the custom attribute. Set this parameter to `true` to get the name and

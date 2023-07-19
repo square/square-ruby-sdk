@@ -274,7 +274,7 @@ module Square
     # see
     # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
     # ion).
-    # @param [TrueClass|FalseClass] with_definitions Optional parameter:
+    # @param [TrueClass | FalseClass] with_definitions Optional parameter:
     # Indicates whether to return the [custom attribute
     # definition](entity:CustomAttributeDefinition) in the `definition` field of
     # each custom attribute. Set this parameter to `true` to get the name and
@@ -357,7 +357,7 @@ module Square
     # concurrency](https://developer.squareup.com/docs/build-basics/common-api-p
     # atterns/optimistic-concurrency) control, include this optional field and
     # specify the current version of the custom attribute.
-    # @param [TrueClass|FalseClass] with_definition Optional parameter:
+    # @param [TrueClass | FalseClass] with_definition Optional parameter:
     # Indicates whether to return the [custom attribute
     # definition](entity:CustomAttributeDefinition) in the `definition` field of
     # each  custom attribute. Set this parameter to `true` to get the name and

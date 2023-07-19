@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
   s.name = 'square.rb'
-  s.version = '29.0.1.20230608'
+  s.version = '30.0.0.20230720'
   s.summary = 'square'
   s.description = ''
   s.authors = ['Square Developer Platform']
   s.email = ['developers@squareup.com']
   s.homepage = ''
   s.licenses = ['Apache-2.0']
-  s.add_dependency('apimatic_core_interfaces', '~> 0.1.0')
-  s.add_dependency('apimatic_core', '~> 0.2.0')
+  s.add_dependency('apimatic_core_interfaces', '~> 0.2.0')
+  s.add_dependency('apimatic_core', '~> 0.3.0')
   s.add_dependency('apimatic_faraday_client_adapter', '~> 0.1.0')
   s.add_development_dependency('minitest', '~> 5.14', '>= 5.14.1')
   s.add_development_dependency('minitest-proveit', '~> 1.0')

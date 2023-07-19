@@ -17,7 +17,7 @@ A record of an employee's break during a shift.
 | `break_type_id` | `String` | Required | The `BreakType` that this `Break` was templated on.<br>**Constraints**: *Minimum Length*: `1` |
 | `name` | `String` | Required | A human-readable name.<br>**Constraints**: *Minimum Length*: `1` |
 | `expected_duration` | `String` | Required | Format: RFC-3339 P[n]Y[n]M[n]DT[n]H[n]M[n]S. The expected length of<br>the break.<br>**Constraints**: *Minimum Length*: `1` |
-| `is_paid` | `TrueClass\|FalseClass` | Required | Whether this break counts towards time worked for compensation<br>purposes. |
+| `is_paid` | `TrueClass \| FalseClass` | Required | Whether this break counts towards time worked for compensation<br>purposes. |
 
 ## Example (as JSON)
 

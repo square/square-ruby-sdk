@@ -12,7 +12,7 @@ Represents an output from a call to [BulkCreateVendors](../../doc/api/vendors.md
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `responses` | [`Hash of Create Vendor Response Hash`](../../doc/models/create-vendor-response.md) | Optional | A set of [CreateVendorResponse](entity:CreateVendorResponse) objects encapsulating successfully created [Vendor](entity:Vendor)<br>objects or error responses for failed attempts. The set is represented by<br>a collection of idempotency-key/`Vendor`-object or idempotency-key/error-object pairs. The idempotency keys correspond to those specified<br>in the input. |
+| `responses` | [`Hash String Create Vendor Response Hash`](../../doc/models/create-vendor-response.md) | Optional | A set of [CreateVendorResponse](entity:CreateVendorResponse) objects encapsulating successfully created [Vendor](entity:Vendor)<br>objects or error responses for failed attempts. The set is represented by<br>a collection of idempotency-key/`Vendor`-object or idempotency-key/error-object pairs. The idempotency keys correspond to those specified<br>in the input. |
 
 ## Example (as JSON)
 
@@ -71,20 +71,20 @@ Represents an output from a call to [BulkCreateVendors](../../doc/api/vendors.md
     "key0": {
       "errors": [
         {
-          "category": "AUTHENTICATION_ERROR",
-          "code": "INVALID_EMAIL_ADDRESS",
+          "category": "PAYMENT_METHOD_ERROR",
+          "code": "INVALID_CARD",
           "detail": "detail8",
           "field": "field6"
         },
         {
-          "category": "INVALID_REQUEST_ERROR",
-          "code": "INVALID_PHONE_NUMBER",
+          "category": "REFUND_ERROR",
+          "code": "PAYMENT_AMOUNT_MISMATCH",
           "detail": "detail9",
           "field": "field7"
         },
         {
-          "category": "RATE_LIMIT_ERROR",
-          "code": "CHECKOUT_EXPIRED",
+          "category": "MERCHANT_SUBSCRIPTION_ERROR",
+          "code": "GENERIC_DECLINE",
           "detail": "detail0",
           "field": "field8"
         }

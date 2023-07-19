@@ -16,7 +16,7 @@ V1PaymentSurcharge
 | `rate` | `String` | Optional | The amount of the surcharge as a percentage. The percentage is provided as a string representing the decimal equivalent of the percentage. For example, "0.7" corresponds to a 7% surcharge. Exactly one of rate or amount_money should be set. |
 | `amount_money` | [`V1 Money Hash`](../../doc/models/v1-money.md) | Optional | - |
 | `type` | [`String (V1 Payment Surcharge Type)`](../../doc/models/v1-payment-surcharge-type.md) | Optional | - |
-| `taxable` | `TrueClass\|FalseClass` | Optional | Indicates whether the surcharge is taxable. |
+| `taxable` | `TrueClass \| FalseClass` | Optional | Indicates whether the surcharge is taxable. |
 | `taxes` | [`Array<V1 Payment Tax Hash>`](../../doc/models/v1-payment-tax.md) | Optional | The list of taxes that should be applied to the surcharge. |
 | `surcharge_id` | `String` | Optional | A Square-issued unique identifier associated with the surcharge. |
 
@@ -27,12 +27,12 @@ V1PaymentSurcharge
   "name": "name0",
   "applied_money": {
     "amount": 196,
-    "currency_code": "LYD"
+    "currency_code": "IQD"
   },
   "rate": "rate0",
   "amount_money": {
     "amount": 186,
-    "currency_code": "KRW"
+    "currency_code": "UZS"
   },
   "type": "CUSTOM"
 }

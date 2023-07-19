@@ -42,7 +42,7 @@ def create_team_member(body:)
 
 ## Response Type
 
-[`Create Team Member Response Hash`](../../doc/models/create-team-member-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Team Member Response Hash`](../../doc/models/create-team-member-response.md).
 
 ## Example Usage
 
@@ -98,7 +98,7 @@ def bulk_create_team_members(body:)
 
 ## Response Type
 
-[`Bulk Create Team Members Response Hash`](../../doc/models/bulk-create-team-members-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Create Team Members Response Hash`](../../doc/models/bulk-create-team-members-response.md).
 
 ## Example Usage
 
@@ -167,7 +167,7 @@ def bulk_update_team_members(body:)
 
 ## Response Type
 
-[`Bulk Update Team Members Response Hash`](../../doc/models/bulk-update-team-members-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Update Team Members Response Hash`](../../doc/models/bulk-update-team-members-response.md).
 
 ## Example Usage
 
@@ -240,7 +240,7 @@ def search_team_members(body:)
 
 ## Response Type
 
-[`Search Team Members Response Hash`](../../doc/models/search-team-members-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Team Members Response Hash`](../../doc/models/search-team-members-response.md).
 
 ## Example Usage
 
@@ -285,7 +285,7 @@ def retrieve_team_member(team_member_id:)
 
 ## Response Type
 
-[`Retrieve Team Member Response Hash`](../../doc/models/retrieve-team-member-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Team Member Response Hash`](../../doc/models/retrieve-team-member-response.md).
 
 ## Example Usage
 
@@ -322,7 +322,7 @@ def update_team_member(team_member_id:,
 
 ## Response Type
 
-[`Update Team Member Response Hash`](../../doc/models/update-team-member-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Team Member Response Hash`](../../doc/models/update-team-member-response.md).
 
 ## Example Usage
 
@@ -379,7 +379,7 @@ def retrieve_wage_setting(team_member_id:)
 
 ## Response Type
 
-[`Retrieve Wage Setting Response Hash`](../../doc/models/retrieve-wage-setting-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Wage Setting Response Hash`](../../doc/models/retrieve-wage-setting-response.md).
 
 ## Example Usage
 
@@ -419,7 +419,7 @@ def update_wage_setting(team_member_id:,
 
 ## Response Type
 
-[`Update Wage Setting Response Hash`](../../doc/models/update-wage-setting-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Wage Setting Response Hash`](../../doc/models/update-wage-setting-response.md).
 
 ## Example Usage
 

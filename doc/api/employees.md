@@ -38,7 +38,7 @@ def list_employees(location_id: nil,
 
 ## Response Type
 
-[`List Employees Response Hash`](../../doc/models/list-employees-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Employees Response Hash`](../../doc/models/list-employees-response.md).
 
 ## Example Usage
 
@@ -71,7 +71,7 @@ def retrieve_employee(id:)
 
 ## Response Type
 
-[`Retrieve Employee Response Hash`](../../doc/models/retrieve-employee-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Employee Response Hash`](../../doc/models/retrieve-employee-response.md).
 
 ## Example Usage
 
