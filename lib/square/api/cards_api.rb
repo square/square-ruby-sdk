@@ -11,7 +11,7 @@ module Square
     # @param [String] customer_id Optional parameter: Limit results to cards
     # associated with the customer supplied. By default, all cards owned by the
     # merchant are returned.
-    # @param [TrueClass|FalseClass] include_disabled Optional parameter:
+    # @param [TrueClass | FalseClass] include_disabled Optional parameter:
     # Includes disabled cards. By default, all enabled cards owned by the
     # merchant are returned.
     # @param [String] reference_id Optional parameter: Limit results to cards

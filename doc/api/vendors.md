@@ -35,7 +35,7 @@ def bulk_create_vendors(body:)
 
 ## Response Type
 
-[`Bulk Create Vendors Response Hash`](../../doc/models/bulk-create-vendors-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Create Vendors Response Hash`](../../doc/models/bulk-create-vendors-response.md).
 
 ## Example Usage
 
@@ -74,7 +74,7 @@ def bulk_retrieve_vendors(body:)
 
 ## Response Type
 
-[`Bulk Retrieve Vendors Response Hash`](../../doc/models/bulk-retrieve-vendors-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Retrieve Vendors Response Hash`](../../doc/models/bulk-retrieve-vendors-response.md).
 
 ## Example Usage
 
@@ -112,7 +112,7 @@ def bulk_update_vendors(body:)
 
 ## Response Type
 
-[`Bulk Update Vendors Response Hash`](../../doc/models/bulk-update-vendors-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Update Vendors Response Hash`](../../doc/models/bulk-update-vendors-response.md).
 
 ## Example Usage
 
@@ -155,7 +155,7 @@ def create_vendor(body:)
 
 ## Response Type
 
-[`Create Vendor Response Hash`](../../doc/models/create-vendor-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Vendor Response Hash`](../../doc/models/create-vendor-response.md).
 
 ## Example Usage
 
@@ -191,7 +191,7 @@ def search_vendors(body:)
 
 ## Response Type
 
-[`Search Vendors Response Hash`](../../doc/models/search-vendors-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Vendors Response Hash`](../../doc/models/search-vendors-response.md).
 
 ## Example Usage
 
@@ -225,7 +225,7 @@ def retrieve_vendor(vendor_id:)
 
 ## Response Type
 
-[`Retrieve Vendor Response Hash`](../../doc/models/retrieve-vendor-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Vendor Response Hash`](../../doc/models/retrieve-vendor-response.md).
 
 ## Example Usage
 
@@ -261,7 +261,7 @@ def update_vendor(body:,
 
 ## Response Type
 
-[`Update Vendor Response Hash`](../../doc/models/update-vendor-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Vendor Response Hash`](../../doc/models/update-vendor-response.md).
 
 ## Example Usage
 

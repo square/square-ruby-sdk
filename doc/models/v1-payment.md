@@ -56,7 +56,7 @@ Monetary values are <b>negative</b> if they represent an
 | `itemizations` | [`Array<V1 Payment Itemization Hash>`](../../doc/models/v1-payment-itemization.md) | Optional | The items purchased in the payment. |
 | `surcharge_money` | [`V1 Money Hash`](../../doc/models/v1-money.md) | Optional | - |
 | `surcharges` | [`Array<V1 Payment Surcharge Hash>`](../../doc/models/v1-payment-surcharge.md) | Optional | A list of all surcharges associated with the payment. |
-| `is_partial` | `TrueClass\|FalseClass` | Optional | Indicates whether or not the payment is only partially paid for.<br>If true, this payment will have the tenders collected so far, but the<br>itemizations will be empty until the payment is completed. |
+| `is_partial` | `TrueClass \| FalseClass` | Optional | Indicates whether or not the payment is only partially paid for.<br>If true, this payment will have the tenders collected so far, but the<br>itemizations will be empty until the payment is completed. |
 
 ## Example (as JSON)
 

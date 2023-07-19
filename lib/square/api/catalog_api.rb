@@ -308,20 +308,20 @@ module Square
     # any [CatalogTax]($m/CatalogTax) objects that apply to it.
     # @param [String] object_id Required parameter: The object ID of any type of
     # catalog objects to be retrieved.
-    # @param [TrueClass|FalseClass] include_related_objects Optional parameter:
-    # If `true`, the response will include additional objects that are related
-    # to the requested objects. Related objects are defined as any objects
-    # referenced by ID by the results in the `objects` field of the response.
-    # These objects are put in the `related_objects` field. Setting this to
-    # `true` is helpful when the objects are needed for immediate display to a
-    # user. This process only goes one level deep. Objects referenced by the
-    # related objects will not be included. For example,  if the `objects` field
-    # of the response contains a CatalogItem, its associated CatalogCategory
-    # objects, CatalogTax objects, CatalogImage objects and CatalogModifierLists
-    # will be returned in the `related_objects` field of the response. If the
-    # `objects` field of the response contains a CatalogItemVariation, its
-    # parent CatalogItem will be returned in the `related_objects` field of the
-    # response.  Default value: `false`
+    # @param [TrueClass | FalseClass] include_related_objects Optional
+    # parameter: If `true`, the response will include additional objects that
+    # are related to the requested objects. Related objects are defined as any
+    # objects referenced by ID by the results in the `objects` field of the
+    # response. These objects are put in the `related_objects` field. Setting
+    # this to `true` is helpful when the objects are needed for immediate
+    # display to a user. This process only goes one level deep. Objects
+    # referenced by the related objects will not be included. For example,  if
+    # the `objects` field of the response contains a CatalogItem, its associated
+    # CatalogCategory objects, CatalogTax objects, CatalogImage objects and
+    # CatalogModifierLists will be returned in the `related_objects` field of
+    # the response. If the `objects` field of the response contains a
+    # CatalogItemVariation, its parent CatalogItem will be returned in the
+    # `related_objects` field of the response.  Default value: `false`
     # @param [Integer] catalog_version Optional parameter: Requests objects as
     # of a specific version of the catalog. This allows you to retrieve
     # historical versions of objects. The value to retrieve a specific version

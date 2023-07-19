@@ -17,7 +17,7 @@ For more information, see [Subscription Plans and Variations](https://developer.
 | `subscription_plan_variations` | [`Array<Catalog Object Hash>`](../../doc/models/catalog-object.md) | Optional | The list of subscription plan variations available for this product |
 | `eligible_item_ids` | `Array<String>` | Optional | The list of IDs of `CatalogItems` that are eligible for subscription by this SubscriptionPlan's variations. |
 | `eligible_category_ids` | `Array<String>` | Optional | The list of IDs of `CatalogCategory` that are eligible for subscription by this SubscriptionPlan's variations. |
-| `all_items` | `TrueClass\|FalseClass` | Optional | If true, all items in the merchant's catalog are subscribable by this SubscriptionPlan. |
+| `all_items` | `TrueClass \| FalseClass` | Optional | If true, all items in the merchant's catalog are subscribable by this SubscriptionPlan. |
 
 ## Example (as JSON)
 
@@ -31,7 +31,7 @@ For more information, see [Subscription Plans and Variations](https://developer.
       "periods": 241,
       "recurring_price_money": {
         "amount": 193,
-        "currency": "MOP"
+        "currency": "CHE"
       },
       "ordinal": 207,
       "pricing": {
@@ -43,7 +43,7 @@ For more information, see [Subscription Plans and Variations](https://developer.
         ],
         "price_money": {
           "amount": 251,
-          "currency": "SLL"
+          "currency": "NZD"
         }
       }
     },
@@ -53,7 +53,7 @@ For more information, see [Subscription Plans and Variations](https://developer.
       "periods": 242,
       "recurring_price_money": {
         "amount": 194,
-        "currency": "MRO"
+        "currency": "CHF"
       },
       "ordinal": 208,
       "pricing": {
@@ -64,7 +64,7 @@ For more information, see [Subscription Plans and Variations](https://developer.
         ],
         "price_money": {
           "amount": 252,
-          "currency": "SOS"
+          "currency": "OMR"
         }
       }
     }

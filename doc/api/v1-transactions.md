@@ -45,7 +45,7 @@ def v1_list_orders(location_id:,
 
 ## Response Type
 
-[`Array<V1 Order Hash>`](../../doc/models/v1-order.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Array<V1 Order Hash>`](../../doc/models/v1-order.md).
 
 ## Example Usage
 
@@ -83,7 +83,7 @@ def v1_retrieve_order(location_id:,
 
 ## Response Type
 
-[`V1 Order Hash`](../../doc/models/v1-order.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`V1 Order Hash`](../../doc/models/v1-order.md).
 
 ## Example Usage
 
@@ -128,7 +128,7 @@ def v1_update_order(location_id:,
 
 ## Response Type
 
-[`V1 Order Hash`](../../doc/models/v1-order.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`V1 Order Hash`](../../doc/models/v1-order.md).
 
 ## Example Usage
 
@@ -192,11 +192,11 @@ def v1_list_payments(location_id:,
 | `end_time` | `String` | Query, Optional | The end of the requested reporting period, in ISO 8601 format. If this value is more than one year greater than begin_time, this endpoint returns an error. Default value: The current time. |
 | `limit` | `Integer` | Query, Optional | The maximum number of payments to return in a single response. This value cannot exceed 200. |
 | `batch_token` | `String` | Query, Optional | A pagination cursor to retrieve the next set of results for your<br>original query to the endpoint. |
-| `include_partial` | `TrueClass\|FalseClass` | Query, Optional | Indicates whether or not to include partial payments in the response. Partial payments will have the tenders collected so far, but the itemizations will be empty until the payment is completed.<br>**Default**: `false` |
+| `include_partial` | `TrueClass \| FalseClass` | Query, Optional | Indicates whether or not to include partial payments in the response. Partial payments will have the tenders collected so far, but the itemizations will be empty until the payment is completed.<br>**Default**: `false` |
 
 ## Response Type
 
-[`Array<V1 Payment Hash>`](../../doc/models/v1-payment.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Array<V1 Payment Hash>`](../../doc/models/v1-payment.md).
 
 ## Example Usage
 
@@ -239,7 +239,7 @@ def v1_retrieve_payment(location_id:,
 
 ## Response Type
 
-[`V1 Payment Hash`](../../doc/models/v1-payment.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`V1 Payment Hash`](../../doc/models/v1-payment.md).
 
 ## Example Usage
 
@@ -290,7 +290,7 @@ def v1_list_refunds(location_id:,
 
 ## Response Type
 
-[`Array<V1 Refund Hash>`](../../doc/models/v1-refund.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Array<V1 Refund Hash>`](../../doc/models/v1-refund.md).
 
 ## Example Usage
 
@@ -339,7 +339,7 @@ def v1_create_refund(location_id:,
 
 ## Response Type
 
-[`V1 Refund Hash`](../../doc/models/v1-refund.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`V1 Refund Hash`](../../doc/models/v1-refund.md).
 
 ## Example Usage
 
@@ -401,7 +401,7 @@ def v1_list_settlements(location_id:,
 
 ## Response Type
 
-[`Array<V1 Settlement Hash>`](../../doc/models/v1-settlement.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Array<V1 Settlement Hash>`](../../doc/models/v1-settlement.md).
 
 ## Example Usage
 
@@ -455,7 +455,7 @@ def v1_retrieve_settlement(location_id:,
 
 ## Response Type
 
-[`V1 Settlement Hash`](../../doc/models/v1-settlement.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`V1 Settlement Hash`](../../doc/models/v1-settlement.md).
 
 ## Example Usage
 

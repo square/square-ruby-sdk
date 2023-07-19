@@ -27,13 +27,13 @@ Describes delivery details of an order fulfillment.
 | `cancel_reason` | `String` | Optional | The delivery cancellation reason. Max length: 100 characters.<br>**Constraints**: *Maximum Length*: `100` |
 | `courier_pickup_at` | `String` | Optional | The [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates)<br>indicating when an order can be picked up by the courier for delivery.<br>The timestamp must be in RFC 3339 format (for example, "2016-09-04T23:59:33.123Z"). |
 | `courier_pickup_window_duration` | `String` | Optional | The period of time in which the order should be picked up by the courier after the<br>`courier_pickup_at` timestamp.<br>The time must be in RFC 3339 format (for example, "P1W3D"). |
-| `is_no_contact_delivery` | `TrueClass\|FalseClass` | Optional | Whether the delivery is preferred to be no contact. |
+| `is_no_contact_delivery` | `TrueClass \| FalseClass` | Optional | Whether the delivery is preferred to be no contact. |
 | `dropoff_notes` | `String` | Optional | A note to provide additional instructions about how to deliver the order.<br>**Constraints**: *Maximum Length*: `550` |
 | `courier_provider_name` | `String` | Optional | The name of the courier provider.<br>**Constraints**: *Maximum Length*: `255` |
 | `courier_support_phone_number` | `String` | Optional | The support phone number of the courier.<br>**Constraints**: *Maximum Length*: `17` |
 | `square_delivery_id` | `String` | Optional | The identifier for the delivery created by Square.<br>**Constraints**: *Maximum Length*: `50` |
 | `external_delivery_id` | `String` | Optional | The identifier for the delivery created by the third-party courier service.<br>**Constraints**: *Maximum Length*: `50` |
-| `managed_delivery` | `TrueClass\|FalseClass` | Optional | The flag to indicate the delivery is managed by a third party (ie DoorDash), which means<br>we may not receive all recipient information for PII purposes. |
+| `managed_delivery` | `TrueClass \| FalseClass` | Optional | The flag to indicate the delivery is managed by a third party (ie DoorDash), which means<br>we may not receive all recipient information for PII purposes. |
 
 ## Example (as JSON)
 

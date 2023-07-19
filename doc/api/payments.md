@@ -56,7 +56,7 @@ def list_payments(begin_time: nil,
 
 ## Response Type
 
-[`List Payments Response Hash`](../../doc/models/list-payments-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Payments Response Hash`](../../doc/models/list-payments-response.md).
 
 ## Example Usage
 
@@ -94,7 +94,7 @@ def create_payment(body:)
 
 ## Response Type
 
-[`Create Payment Response Hash`](../../doc/models/create-payment-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Payment Response Hash`](../../doc/models/create-payment-response.md).
 
 ## Example Usage
 
@@ -154,7 +154,7 @@ def cancel_payment_by_idempotency_key(body:)
 
 ## Response Type
 
-[`Cancel Payment by Idempotency Key Response Hash`](../../doc/models/cancel-payment-by-idempotency-key-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Cancel Payment by Idempotency Key Response Hash`](../../doc/models/cancel-payment-by-idempotency-key-response.md).
 
 ## Example Usage
 
@@ -190,7 +190,7 @@ def get_payment(payment_id:)
 
 ## Response Type
 
-[`Get Payment Response Hash`](../../doc/models/get-payment-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Payment Response Hash`](../../doc/models/get-payment-response.md).
 
 ## Example Usage
 
@@ -227,7 +227,7 @@ def update_payment(payment_id:,
 
 ## Response Type
 
-[`Update Payment Response Hash`](../../doc/models/update-payment-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Payment Response Hash`](../../doc/models/update-payment-response.md).
 
 ## Example Usage
 
@@ -280,7 +280,7 @@ def cancel_payment(payment_id:)
 
 ## Response Type
 
-[`Cancel Payment Response Hash`](../../doc/models/cancel-payment-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Cancel Payment Response Hash`](../../doc/models/cancel-payment-response.md).
 
 ## Example Usage
 
@@ -319,7 +319,7 @@ def complete_payment(payment_id:,
 
 ## Response Type
 
-[`Complete Payment Response Hash`](../../doc/models/complete-payment-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Complete Payment Response Hash`](../../doc/models/complete-payment-response.md).
 
 ## Example Usage
 

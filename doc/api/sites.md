@@ -21,7 +21,7 @@ def list_sites
 
 ## Response Type
 
-[`List Sites Response Hash`](../../doc/models/list-sites-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Sites Response Hash`](../../doc/models/list-sites-response.md).
 
 ## Example Usage
 

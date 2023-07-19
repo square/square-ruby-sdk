@@ -48,7 +48,7 @@ def list_break_types(location_id: nil,
 
 ## Response Type
 
-[`List Break Types Response Hash`](../../doc/models/list-break-types-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Break Types Response Hash`](../../doc/models/list-break-types-response.md).
 
 ## Example Usage
 
@@ -92,7 +92,7 @@ def create_break_type(body:)
 
 ## Response Type
 
-[`Create Break Type Response Hash`](../../doc/models/create-break-type-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Break Type Response Hash`](../../doc/models/create-break-type-response.md).
 
 ## Example Usage
 
@@ -136,7 +136,7 @@ def delete_break_type(id:)
 
 ## Response Type
 
-[`Delete Break Type Response Hash`](../../doc/models/delete-break-type-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Break Type Response Hash`](../../doc/models/delete-break-type-response.md).
 
 ## Example Usage
 
@@ -170,7 +170,7 @@ def get_break_type(id:)
 
 ## Response Type
 
-[`Get Break Type Response Hash`](../../doc/models/get-break-type-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Break Type Response Hash`](../../doc/models/get-break-type-response.md).
 
 ## Example Usage
 
@@ -206,7 +206,7 @@ def update_break_type(id:,
 
 ## Response Type
 
-[`Update Break Type Response Hash`](../../doc/models/update-break-type-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Break Type Response Hash`](../../doc/models/update-break-type-response.md).
 
 ## Example Usage
 
@@ -259,7 +259,7 @@ def list_employee_wages(employee_id: nil,
 
 ## Response Type
 
-[`List Employee Wages Response Hash`](../../doc/models/list-employee-wages-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Employee Wages Response Hash`](../../doc/models/list-employee-wages-response.md).
 
 ## Example Usage
 
@@ -292,7 +292,7 @@ def get_employee_wage(id:)
 
 ## Response Type
 
-[`Get Employee Wage Response Hash`](../../doc/models/get-employee-wage-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Employee Wage Response Hash`](../../doc/models/get-employee-wage-response.md).
 
 ## Example Usage
 
@@ -344,7 +344,7 @@ def create_shift(body:)
 
 ## Response Type
 
-[`Create Shift Response Hash`](../../doc/models/create-shift-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Shift Response Hash`](../../doc/models/create-shift-response.md).
 
 ## Example Usage
 
@@ -418,7 +418,7 @@ def search_shifts(body:)
 
 ## Response Type
 
-[`Search Shifts Response Hash`](../../doc/models/search-shifts-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Shifts Response Hash`](../../doc/models/search-shifts-response.md).
 
 ## Example Usage
 
@@ -466,7 +466,7 @@ def delete_shift(id:)
 
 ## Response Type
 
-[`Delete Shift Response Hash`](../../doc/models/delete-shift-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Shift Response Hash`](../../doc/models/delete-shift-response.md).
 
 ## Example Usage
 
@@ -500,7 +500,7 @@ def get_shift(id:)
 
 ## Response Type
 
-[`Get Shift Response Hash`](../../doc/models/get-shift-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Shift Response Hash`](../../doc/models/get-shift-response.md).
 
 ## Example Usage
 
@@ -542,7 +542,7 @@ def update_shift(id:,
 
 ## Response Type
 
-[`Update Shift Response Hash`](../../doc/models/update-shift-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Shift Response Hash`](../../doc/models/update-shift-response.md).
 
 ## Example Usage
 
@@ -611,7 +611,7 @@ def list_team_member_wages(team_member_id: nil,
 
 ## Response Type
 
-[`List Team Member Wages Response Hash`](../../doc/models/list-team-member-wages-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Team Member Wages Response Hash`](../../doc/models/list-team-member-wages-response.md).
 
 ## Example Usage
 
@@ -642,7 +642,7 @@ def get_team_member_wage(id:)
 
 ## Response Type
 
-[`Get Team Member Wage Response Hash`](../../doc/models/get-team-member-wage-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Team Member Wage Response Hash`](../../doc/models/get-team-member-wage-response.md).
 
 ## Example Usage
 
@@ -678,7 +678,7 @@ def list_workweek_configs(limit: nil,
 
 ## Response Type
 
-[`List Workweek Configs Response Hash`](../../doc/models/list-workweek-configs-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Workweek Configs Response Hash`](../../doc/models/list-workweek-configs-response.md).
 
 ## Example Usage
 
@@ -711,7 +711,7 @@ def update_workweek_config(id:,
 
 ## Response Type
 
-[`Update Workweek Config Response Hash`](../../doc/models/update-workweek-config-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Workweek Config Response Hash`](../../doc/models/update-workweek-config-response.md).
 
 ## Example Usage
 

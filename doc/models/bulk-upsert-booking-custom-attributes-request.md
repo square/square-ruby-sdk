@@ -11,7 +11,7 @@ Represents a [BulkUpsertBookingCustomAttributes](../../doc/api/booking-custom-at
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `values` | [`Hash of Booking Custom Attribute Upsert Request Hash`](../../doc/models/booking-custom-attribute-upsert-request.md) | Required | A map containing 1 to 25 individual upsert requests. For each request, provide an<br>arbitrary ID that is unique for this `BulkUpsertBookingCustomAttributes` request and the<br>information needed to create or update a custom attribute. |
+| `values` | [`Hash String Booking Custom Attribute Upsert Request Hash`](../../doc/models/booking-custom-attribute-upsert-request.md) | Required | A map containing 1 to 25 individual upsert requests. For each request, provide an<br>arbitrary ID that is unique for this `BulkUpsertBookingCustomAttributes` request and the<br>information needed to create or update a custom attribute. |
 
 ## Example (as JSON)
 

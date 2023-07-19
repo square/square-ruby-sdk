@@ -26,11 +26,15 @@ module Square
     # @param [SortOrder] sort_order Optional parameter: Indicates whether
     # customers should be sorted in ascending (`ASC`) or descending (`DESC`)
     # order.  The default value is `ASC`.
+    # @param [TrueClass | FalseClass] count Optional parameter: Indicates
+    # whether to return the total count of customers in the `count` field of the
+    # response.  The default value is `false`.
     # @return [ListCustomersResponse Hash] response from the API call
     def list_customers(cursor: nil,
                        limit: nil,
                        sort_field: nil,
-                       sort_order: nil)
+                       sort_order: nil,
+                       count: false)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/v2/customers',
@@ -39,6 +43,7 @@ module Square
                    .query_param(new_parameter(limit, key: 'limit'))
                    .query_param(new_parameter(sort_field, key: 'sort_field'))
                    .query_param(new_parameter(sort_order, key: 'sort_order'))
+                   .query_param(new_parameter(count, key: 'count'))
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler

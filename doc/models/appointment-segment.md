@@ -16,7 +16,7 @@ Defines an appointment segment of a booking.
 | `team_member_id` | `String` | Required | The ID of the [TeamMember](entity:TeamMember) object representing the team member booked in this segment.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `32` |
 | `service_variation_version` | `Integer` | Optional | The current version of the item variation representing the service booked in this segment. |
 | `intermission_minutes` | `Integer` | Optional | Time between the end of this segment and the beginning of the subsequent segment. |
-| `any_team_member` | `TrueClass\|FalseClass` | Optional | Whether the customer accepts any team member, instead of a specific one, to serve this segment. |
+| `any_team_member` | `TrueClass \| FalseClass` | Optional | Whether the customer accepts any team member, instead of a specific one, to serve this segment. |
 | `resource_ids` | `Array<String>` | Optional | The IDs of the seller-accessible resources used for this appointment segment. |
 
 ## Example (as JSON)

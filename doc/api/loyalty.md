@@ -46,7 +46,7 @@ def create_loyalty_account(body:)
 
 ## Response Type
 
-[`Create Loyalty Account Response Hash`](../../doc/models/create-loyalty-account-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Loyalty Account Response Hash`](../../doc/models/create-loyalty-account-response.md).
 
 ## Example Usage
 
@@ -92,7 +92,7 @@ def search_loyalty_accounts(body:)
 
 ## Response Type
 
-[`Search Loyalty Accounts Response Hash`](../../doc/models/search-loyalty-accounts-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Loyalty Accounts Response Hash`](../../doc/models/search-loyalty-accounts-response.md).
 
 ## Example Usage
 
@@ -135,7 +135,7 @@ def retrieve_loyalty_account(account_id:)
 
 ## Response Type
 
-[`Retrieve Loyalty Account Response Hash`](../../doc/models/retrieve-loyalty-account-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Loyalty Account Response Hash`](../../doc/models/retrieve-loyalty-account-response.md).
 
 ## Example Usage
 
@@ -184,7 +184,7 @@ def accumulate_loyalty_points(account_id:,
 
 ## Response Type
 
-[`Accumulate Loyalty Points Response Hash`](../../doc/models/accumulate-loyalty-points-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Accumulate Loyalty Points Response Hash`](../../doc/models/accumulate-loyalty-points-response.md).
 
 ## Example Usage
 
@@ -235,7 +235,7 @@ def adjust_loyalty_points(account_id:,
 
 ## Response Type
 
-[`Adjust Loyalty Points Response Hash`](../../doc/models/adjust-loyalty-points-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Adjust Loyalty Points Response Hash`](../../doc/models/adjust-loyalty-points-response.md).
 
 ## Example Usage
 
@@ -287,7 +287,7 @@ def search_loyalty_events(body:)
 
 ## Response Type
 
-[`Search Loyalty Events Response Hash`](../../doc/models/search-loyalty-events-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Loyalty Events Response Hash`](../../doc/models/search-loyalty-events-response.md).
 
 ## Example Usage
 
@@ -329,7 +329,7 @@ def list_loyalty_programs
 
 ## Response Type
 
-[`List Loyalty Programs Response Hash`](../../doc/models/list-loyalty-programs-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Loyalty Programs Response Hash`](../../doc/models/list-loyalty-programs-response.md).
 
 ## Example Usage
 
@@ -362,7 +362,7 @@ def retrieve_loyalty_program(program_id:)
 
 ## Response Type
 
-[`Retrieve Loyalty Program Response Hash`](../../doc/models/retrieve-loyalty-program-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Loyalty Program Response Hash`](../../doc/models/retrieve-loyalty-program-response.md).
 
 ## Example Usage
 
@@ -412,7 +412,7 @@ def calculate_loyalty_points(program_id:,
 
 ## Response Type
 
-[`Calculate Loyalty Points Response Hash`](../../doc/models/calculate-loyalty-points-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Calculate Loyalty Points Response Hash`](../../doc/models/calculate-loyalty-points-response.md).
 
 ## Example Usage
 
@@ -461,7 +461,7 @@ def list_loyalty_promotions(program_id:,
 
 ## Response Type
 
-[`List Loyalty Promotions Response Hash`](../../doc/models/list-loyalty-promotions-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Loyalty Promotions Response Hash`](../../doc/models/list-loyalty-promotions-response.md).
 
 ## Example Usage
 
@@ -502,7 +502,7 @@ def create_loyalty_promotion(program_id:,
 
 ## Response Type
 
-[`Create Loyalty Promotion Response Hash`](../../doc/models/create-loyalty-promotion-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Loyalty Promotion Response Hash`](../../doc/models/create-loyalty-promotion-response.md).
 
 ## Example Usage
 
@@ -574,7 +574,7 @@ def retrieve_loyalty_promotion(promotion_id:,
 
 ## Response Type
 
-[`Retrieve Loyalty Promotion Response Hash`](../../doc/models/retrieve-loyalty-promotion-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Loyalty Promotion Response Hash`](../../doc/models/retrieve-loyalty-promotion-response.md).
 
 ## Example Usage
 
@@ -620,7 +620,7 @@ def cancel_loyalty_promotion(promotion_id:,
 
 ## Response Type
 
-[`Cancel Loyalty Promotion Response Hash`](../../doc/models/cancel-loyalty-promotion-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Cancel Loyalty Promotion Response Hash`](../../doc/models/cancel-loyalty-promotion-response.md).
 
 ## Example Usage
 
@@ -666,7 +666,7 @@ def create_loyalty_reward(body:)
 
 ## Response Type
 
-[`Create Loyalty Reward Response Hash`](../../doc/models/create-loyalty-reward-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Loyalty Reward Response Hash`](../../doc/models/create-loyalty-reward-response.md).
 
 ## Example Usage
 
@@ -713,7 +713,7 @@ def search_loyalty_rewards(body:)
 
 ## Response Type
 
-[`Search Loyalty Rewards Response Hash`](../../doc/models/search-loyalty-rewards-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Loyalty Rewards Response Hash`](../../doc/models/search-loyalty-rewards-response.md).
 
 ## Example Usage
 
@@ -760,7 +760,7 @@ def delete_loyalty_reward(reward_id:)
 
 ## Response Type
 
-[`Delete Loyalty Reward Response Hash`](../../doc/models/delete-loyalty-reward-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Loyalty Reward Response Hash`](../../doc/models/delete-loyalty-reward-response.md).
 
 ## Example Usage
 
@@ -794,7 +794,7 @@ def retrieve_loyalty_reward(reward_id:)
 
 ## Response Type
 
-[`Retrieve Loyalty Reward Response Hash`](../../doc/models/retrieve-loyalty-reward-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Loyalty Reward Response Hash`](../../doc/models/retrieve-loyalty-reward-response.md).
 
 ## Example Usage
 
@@ -840,7 +840,7 @@ def redeem_loyalty_reward(reward_id:,
 
 ## Response Type
 
-[`Redeem Loyalty Reward Response Hash`](../../doc/models/redeem-loyalty-reward-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Redeem Loyalty Reward Response Hash`](../../doc/models/redeem-loyalty-reward-response.md).
 
 ## Example Usage
 

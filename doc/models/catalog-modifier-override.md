@@ -12,7 +12,7 @@ Options to control how to override the default behavior of the specified modifie
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `modifier_id` | `String` | Required | The ID of the `CatalogModifier` whose default behavior is being overridden.<br>**Constraints**: *Minimum Length*: `1` |
-| `on_by_default` | `TrueClass\|FalseClass` | Optional | If `true`, this `CatalogModifier` should be selected by default for this `CatalogItem`. |
+| `on_by_default` | `TrueClass \| FalseClass` | Optional | If `true`, this `CatalogModifier` should be selected by default for this `CatalogItem`. |
 
 ## Example (as JSON)
 

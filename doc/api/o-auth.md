@@ -58,7 +58,7 @@ def renew_token(client_id:,
 
 ## Response Type
 
-[`Renew Token Response Hash`](../../doc/models/renew-token-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Renew Token Response Hash`](../../doc/models/renew-token-response.md).
 
 ## Example Usage
 
@@ -121,7 +121,7 @@ def revoke_token(body:,
 
 ## Response Type
 
-[`Revoke Token Response Hash`](../../doc/models/revoke-token-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Revoke Token Response Hash`](../../doc/models/revoke-token-response.md).
 
 ## Example Usage
 
@@ -181,7 +181,7 @@ def obtain_token(body:)
 
 ## Response Type
 
-[`Obtain Token Response Hash`](../../doc/models/obtain-token-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Obtain Token Response Hash`](../../doc/models/obtain-token-response.md).
 
 ## Example Usage
 
@@ -235,7 +235,7 @@ def retrieve_token_status(authorization:)
 
 ## Response Type
 
-[`Retrieve Token Status Response Hash`](../../doc/models/retrieve-token-status-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Token Status Response Hash`](../../doc/models/retrieve-token-status-response.md).
 
 ## Example Usage
 

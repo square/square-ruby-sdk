@@ -27,7 +27,7 @@ Contains details necessary to fulfill a pickup order.
 | `picked_up_at` | `String` | Optional | The [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates)<br>indicating when the fulfillment was picked up by the recipient. The timestamp must be in RFC 3339 format<br>(for example, "2016-09-04T23:59:33.123Z"). |
 | `canceled_at` | `String` | Optional | The [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates)<br>indicating when the fulfillment was canceled. The timestamp must be in RFC 3339 format<br>(for example, "2016-09-04T23:59:33.123Z"). |
 | `cancel_reason` | `String` | Optional | A description of why the pickup was canceled. The maximum length: 100 characters.<br>**Constraints**: *Maximum Length*: `100` |
-| `is_curbside_pickup` | `TrueClass\|FalseClass` | Optional | If set to `true`, indicates that this pickup order is for curbside pickup, not in-store pickup. |
+| `is_curbside_pickup` | `TrueClass \| FalseClass` | Optional | If set to `true`, indicates that this pickup order is for curbside pickup, not in-store pickup. |
 | `curbside_pickup_details` | [`Fulfillment Pickup Details Curbside Pickup Details Hash`](../../doc/models/fulfillment-pickup-details-curbside-pickup-details.md) | Optional | Specific details for curbside pickup. |
 
 ## Example (as JSON)

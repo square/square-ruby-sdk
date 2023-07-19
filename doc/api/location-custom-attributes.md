@@ -46,7 +46,7 @@ def list_location_custom_attribute_definitions(visibility_filter: nil,
 
 ## Response Type
 
-[`List Location Custom Attribute Definitions Response Hash`](../../doc/models/list-location-custom-attribute-definitions-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Location Custom Attribute Definitions Response Hash`](../../doc/models/list-location-custom-attribute-definitions-response.md).
 
 ## Example Usage
 
@@ -83,7 +83,7 @@ def create_location_custom_attribute_definition(body:)
 
 ## Response Type
 
-[`Create Location Custom Attribute Definition Response Hash`](../../doc/models/create-location-custom-attribute-definition-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Location Custom Attribute Definition Response Hash`](../../doc/models/create-location-custom-attribute-definition-response.md).
 
 ## Example Usage
 
@@ -127,7 +127,7 @@ def delete_location_custom_attribute_definition(key:)
 
 ## Response Type
 
-[`Delete Location Custom Attribute Definition Response Hash`](../../doc/models/delete-location-custom-attribute-definition-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Location Custom Attribute Definition Response Hash`](../../doc/models/delete-location-custom-attribute-definition-response.md).
 
 ## Example Usage
 
@@ -165,7 +165,7 @@ def retrieve_location_custom_attribute_definition(key:,
 
 ## Response Type
 
-[`Retrieve Location Custom Attribute Definition Response Hash`](../../doc/models/retrieve-location-custom-attribute-definition-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Location Custom Attribute Definition Response Hash`](../../doc/models/retrieve-location-custom-attribute-definition-response.md).
 
 ## Example Usage
 
@@ -204,7 +204,7 @@ def update_location_custom_attribute_definition(key:,
 
 ## Response Type
 
-[`Update Location Custom Attribute Definition Response Hash`](../../doc/models/update-location-custom-attribute-definition-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Location Custom Attribute Definition Response Hash`](../../doc/models/update-location-custom-attribute-definition-response.md).
 
 ## Example Usage
 
@@ -250,7 +250,7 @@ def bulk_delete_location_custom_attributes(body:)
 
 ## Response Type
 
-[`Bulk Delete Location Custom Attributes Response Hash`](../../doc/models/bulk-delete-location-custom-attributes-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Delete Location Custom Attributes Response Hash`](../../doc/models/bulk-delete-location-custom-attributes-response.md).
 
 ## Example Usage
 
@@ -299,7 +299,7 @@ def bulk_upsert_location_custom_attributes(body:)
 
 ## Response Type
 
-[`Bulk Upsert Location Custom Attributes Response Hash`](../../doc/models/bulk-upsert-location-custom-attributes-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Upsert Location Custom Attributes Response Hash`](../../doc/models/bulk-upsert-location-custom-attributes-response.md).
 
 ## Example Usage
 
@@ -353,11 +353,11 @@ def list_location_custom_attributes(location_id:,
 | `visibility_filter` | [`String (Visibility Filter)`](../../doc/models/visibility-filter.md) | Query, Optional | Filters the `CustomAttributeDefinition` results by their `visibility` values. |
 | `limit` | `Integer` | Query, Optional | The maximum number of results to return in a single paged response. This limit is advisory.<br>The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.<br>The default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 | `cursor` | `String` | Query, Optional | The cursor returned in the paged response from the previous call to this endpoint.<br>Provide this cursor to retrieve the next page of results for your original request. For more<br>information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
-| `with_definitions` | `TrueClass\|FalseClass` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
+| `with_definitions` | `TrueClass \| FalseClass` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 
 ## Response Type
 
-[`List Location Custom Attributes Response Hash`](../../doc/models/list-location-custom-attributes-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Location Custom Attributes Response Hash`](../../doc/models/list-location-custom-attributes-response.md).
 
 ## Example Usage
 
@@ -400,7 +400,7 @@ def delete_location_custom_attribute(location_id:,
 
 ## Response Type
 
-[`Delete Location Custom Attribute Response Hash`](../../doc/models/delete-location-custom-attribute-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Location Custom Attribute Response Hash`](../../doc/models/delete-location-custom-attribute-response.md).
 
 ## Example Usage
 
@@ -444,12 +444,12 @@ def retrieve_location_custom_attribute(location_id:,
 |  --- | --- | --- | --- |
 | `location_id` | `String` | Template, Required | The ID of the target [location](entity:Location). |
 | `key` | `String` | Template, Required | The key of the custom attribute to retrieve. This key must match the `key` of a custom<br>attribute definition in the Square seller account. If the requesting application is not the<br>definition owner, you must use the qualified key. |
-| `with_definition` | `TrueClass\|FalseClass` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of<br>the custom attribute. Set this parameter to `true` to get the name and description of the custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
+| `with_definition` | `TrueClass \| FalseClass` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of<br>the custom attribute. Set this parameter to `true` to get the name and description of the custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 | `version` | `Integer` | Query, Optional | The current version of the custom attribute, which is used for strongly consistent reads to<br>guarantee that you receive the most up-to-date data. When included in the request, Square<br>returns the specified version or a higher version if one exists. If the specified version is<br>higher than the current version, Square returns a `BAD_REQUEST` error. |
 
 ## Response Type
 
-[`Retrieve Location Custom Attribute Response Hash`](../../doc/models/retrieve-location-custom-attribute-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Location Custom Attribute Response Hash`](../../doc/models/retrieve-location-custom-attribute-response.md).
 
 ## Example Usage
 
@@ -500,7 +500,7 @@ def upsert_location_custom_attribute(location_id:,
 
 ## Response Type
 
-[`Upsert Location Custom Attribute Response Hash`](../../doc/models/upsert-location-custom-attribute-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Upsert Location Custom Attribute Response Hash`](../../doc/models/upsert-location-custom-attribute-response.md).
 
 ## Example Usage
 

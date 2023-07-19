@@ -35,7 +35,7 @@ def list_bank_accounts(cursor: nil,
 
 ## Response Type
 
-[`List Bank Accounts Response Hash`](../../doc/models/list-bank-accounts-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Bank Accounts Response Hash`](../../doc/models/list-bank-accounts-response.md).
 
 ## Example Usage
 
@@ -66,7 +66,7 @@ def get_bank_account_by_v1_id(v1_bank_account_id:)
 
 ## Response Type
 
-[`Get Bank Account by V1 Id Response Hash`](../../doc/models/get-bank-account-by-v1-id-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Bank Account by V1 Id Response Hash`](../../doc/models/get-bank-account-by-v1-id-response.md).
 
 ## Example Usage
 
@@ -101,7 +101,7 @@ def get_bank_account(bank_account_id:)
 
 ## Response Type
 
-[`Get Bank Account Response Hash`](../../doc/models/get-bank-account-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Bank Account Response Hash`](../../doc/models/get-bank-account-response.md).
 
 ## Example Usage
 

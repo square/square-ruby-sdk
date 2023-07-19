@@ -45,7 +45,7 @@ def create_checkout(location_id:,
 
 ## Response Type
 
-[`Create Checkout Response Hash`](../../doc/models/create-checkout-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Checkout Response Hash`](../../doc/models/create-checkout-response.md).
 
 ## Example Usage
 
@@ -175,7 +175,7 @@ def list_payment_links(cursor: nil,
 
 ## Response Type
 
-[`List Payment Links Response Hash`](../../doc/models/list-payment-links-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Payment Links Response Hash`](../../doc/models/list-payment-links-response.md).
 
 ## Example Usage
 
@@ -206,7 +206,7 @@ def create_payment_link(body:)
 
 ## Response Type
 
-[`Create Payment Link Response Hash`](../../doc/models/create-payment-link-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Payment Link Response Hash`](../../doc/models/create-payment-link-response.md).
 
 ## Example Usage
 
@@ -250,7 +250,7 @@ def delete_payment_link(id:)
 
 ## Response Type
 
-[`Delete Payment Link Response Hash`](../../doc/models/delete-payment-link-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Payment Link Response Hash`](../../doc/models/delete-payment-link-response.md).
 
 ## Example Usage
 
@@ -284,7 +284,7 @@ def retrieve_payment_link(id:)
 
 ## Response Type
 
-[`Retrieve Payment Link Response Hash`](../../doc/models/retrieve-payment-link-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Payment Link Response Hash`](../../doc/models/retrieve-payment-link-response.md).
 
 ## Example Usage
 
@@ -322,7 +322,7 @@ def update_payment_link(id:,
 
 ## Response Type
 
-[`Update Payment Link Response Hash`](../../doc/models/update-payment-link-response.md)
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Payment Link Response Hash`](../../doc/models/update-payment-link-response.md).
 
 ## Example Usage
 
