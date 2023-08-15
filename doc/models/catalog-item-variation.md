@@ -41,7 +41,6 @@ decreases by 2, and the stockable count automatically decreases by 0.4 bottle ac
 | `image_ids` | `Array<String>` | Optional | The IDs of images associated with this `CatalogItemVariation` instance.<br>These images will be shown to customers in Square Online Store. |
 | `team_member_ids` | `Array<String>` | Optional | Tokens of employees that can perform the service represented by this variation. Only valid for<br>variations of type `APPOINTMENTS_SERVICE`. |
 | `stockable_conversion` | [`Catalog Stock Conversion Hash`](../../doc/models/catalog-stock-conversion.md) | Optional | Represents the rule of conversion between a stockable [CatalogItemVariation](../../doc/models/catalog-item-variation.md)<br>and a non-stockable sell-by or receive-by `CatalogItemVariation` that<br>share the same underlying stock. |
-| `item_variation_vendor_info_ids` | `Array<String>` | Optional | A list of ids of [CatalogItemVariationVendorInfo](entity:CatalogItemVariationVendorInfo) objects that<br>reference this ItemVariation. (Deprecated in favor of item_variation_vendor_infos) |
 
 ## Example (as JSON)
 

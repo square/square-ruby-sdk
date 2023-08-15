@@ -34,6 +34,7 @@ Describes a request to create a payment using
 | `statement_description_identifier` | `String` | Optional | Optional additional payment information to include on the customer's card statement<br>as part of the statement description. This can be, for example, an invoice number, ticket number,<br>or short description that uniquely identifies the purchase.<br><br>Note that the `statement_description_identifier` might get truncated on the statement description<br>to fit the required information including the Square identifier (SQ *) and name of the<br>seller taking the payment.<br>**Constraints**: *Maximum Length*: `20` |
 | `cash_details` | [`Cash Payment Details Hash`](../../doc/models/cash-payment-details.md) | Optional | Stores details about a cash payment. Contains only non-confidential information. For more information, see<br>[Take Cash Payments](https://developer.squareup.com/docs/payments-api/take-payments/cash-payments). |
 | `external_details` | [`External Payment Details Hash`](../../doc/models/external-payment-details.md) | Optional | Stores details about an external payment. Contains only non-confidential information.<br>For more information, see<br>[Take External Payments](https://developer.squareup.com/docs/payments-api/take-payments/external-payments). |
+| `customer_details` | [`Customer Details Hash`](../../doc/models/customer-details.md) | Optional | Details about the customer making the payment. |
 
 ## Example (as JSON)
 

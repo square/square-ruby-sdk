@@ -11,6 +11,9 @@ module Square
     # @param [String] cursor Optional parameter: The pagination cursor from the
     # preceding response to return the next page of the results. Do not set this
     # when retrieving the first page of the results.
+    # @param [String] customer_id Optional parameter: The
+    # [customer](entity:Customer) for whom to retrieve bookings. If this is not
+    # set, bookings for all customers are retrieved.
     # @param [String] team_member_id Optional parameter: The team member for
     # whom to retrieve bookings. If this is not set, bookings of all members are
     # retrieved.
@@ -26,6 +29,7 @@ module Square
     # @return [ListBookingsResponse Hash] response from the API call
     def list_bookings(limit: nil,
                       cursor: nil,
+                      customer_id: nil,
                       team_member_id: nil,
                       location_id: nil,
                       start_at_min: nil,
@@ -36,6 +40,7 @@ module Square
                                      'default')
                    .query_param(new_parameter(limit, key: 'limit'))
                    .query_param(new_parameter(cursor, key: 'cursor'))
+                   .query_param(new_parameter(customer_id, key: 'customer_id'))
                    .query_param(new_parameter(team_member_id, key: 'team_member_id'))
                    .query_param(new_parameter(location_id, key: 'location_id'))
                    .query_param(new_parameter(start_at_min, key: 'start_at_min'))
@@ -97,6 +102,32 @@ module Square
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
                                      '/v2/bookings/availability/search',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
+    # Bulk-Retrieves a list of bookings by booking IDs.
+    # To call this endpoint with buyer-level permissions, set
+    # `APPOINTMENTS_READ` for the OAuth scope.
+    # To call this endpoint with seller-level permissions, set
+    # `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
+    # @param [BulkRetrieveBookingsRequest] body Required parameter: An object
+    # containing the fields to POST for the request.  See the corresponding
+    # object definition for field details.
+    # @return [BulkRetrieveBookingsResponse Hash] response from the API call
+    def bulk_retrieve_bookings(body:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/bookings/bulk-retrieve',
                                      'default')
                    .header_param(new_parameter('application/json', key: 'Content-Type'))
                    .body_param(new_parameter(body))
