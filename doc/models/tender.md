@@ -23,6 +23,9 @@ Represents a tender (i.e., a method of payment) used in a Square transaction.
 | `type` | [`String (Tender Type)`](../../doc/models/tender-type.md) | Required | Indicates a tender's type. |
 | `card_details` | [`Tender Card Details Hash`](../../doc/models/tender-card-details.md) | Optional | Represents additional details of a tender with `type` `CARD` or `SQUARE_GIFT_CARD` |
 | `cash_details` | [`Tender Cash Details Hash`](../../doc/models/tender-cash-details.md) | Optional | Represents the details of a tender with `type` `CASH`. |
+| `bank_account_details` | [`Tender Bank Account Details Hash`](../../doc/models/tender-bank-account-details.md) | Optional | Represents the details of a tender with `type` `BANK_ACCOUNT`.<br><br>See [BankAccountPaymentDetails](../../doc/models/bank-account-payment-details.md)<br>for more exposed details of a bank account payment. |
+| `buy_now_pay_later_details` | [`Tender Buy Now Pay Later Details Hash`](../../doc/models/tender-buy-now-pay-later-details.md) | Optional | Represents the details of a tender with `type` `BUY_NOW_PAY_LATER`. |
+| `square_account_details` | [`Tender Square Account Details Hash`](../../doc/models/tender-square-account-details.md) | Optional | Represents the details of a tender with `type` `SQUARE_ACCOUNT`. |
 | `additional_recipients` | [`Array<Additional Recipient Hash>`](../../doc/models/additional-recipient.md) | Optional | Additional recipients (other than the merchant) receiving a portion of this tender.<br>For example, fees assessed on the purchase by a third party integration. |
 | `payment_id` | `String` | Optional | The ID of the [Payment](entity:Payment) that corresponds to this tender.<br>This value is only present for payments created with the v2 Payments API.<br>**Constraints**: *Maximum Length*: `192` |
 
@@ -35,7 +38,7 @@ Represents a tender (i.e., a method of payment) used in a Square transaction.
   "transaction_id": "transaction_id8",
   "created_at": "created_at2",
   "note": "note4",
-  "type": "WALLET"
+  "type": "CARD"
 }
 ```
 

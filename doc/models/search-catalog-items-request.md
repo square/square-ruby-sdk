@@ -20,6 +20,7 @@ Defines the request body for the [SearchCatalogItems](../../doc/api/catalog.md#s
 | `sort_order` | [`String (Sort Order)`](../../doc/models/sort-order.md) | Optional | The order (e.g., chronological or alphabetical) in which results from a request are returned. |
 | `product_types` | [`Array<String (Catalog Item Product Type)>`](../../doc/models/catalog-item-product-type.md) | Optional | The product types query expression to return items or item variations having the specified product types. |
 | `custom_attribute_filters` | [`Array<Custom Attribute Filter Hash>`](../../doc/models/custom-attribute-filter.md) | Optional | The customer-attribute filter to return items or item variations matching the specified<br>custom attribute expressions. A maximum number of 10 custom attribute expressions are supported in<br>a single call to the [SearchCatalogItems](api-endpoint:Catalog-SearchCatalogItems) endpoint. |
+| `archived_state` | [`String (Archived State)`](../../doc/models/archived-state.md) | Optional | Defines the values for the `archived_state` query expression<br>used in [SearchCatalogItems](../../doc/api/catalog.md#search-catalog-items)<br>to return the archived, not archived or either type of catalog items. |
 
 ## Example (as JSON)
 

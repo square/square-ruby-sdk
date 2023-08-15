@@ -1,22 +1,24 @@
 
-# Update Item Modifier Lists Response
+# Square Account Details
+
+Additional details about Square Account payments.
 
 ## Structure
 
-`Update Item Modifier Lists Response`
+`Square Account Details`
 
 ## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `updated_at` | `String` | Optional | The database [timestamp](https://developer.squareup.com/docs/build-basics/common-data-types/working-with-dates) of this update in RFC 3339 format, e.g., `2016-09-04T23:59:33.123Z`. |
+| `payment_source_token` | `String` | Optional | Unique identifier for the payment source used for this payment.<br>**Constraints**: *Maximum Length*: `255` |
+| `errors` | [`Array<Error Hash>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
 
 ## Example (as JSON)
 
 ```json
 {
-  "updated_at": "2016-11-16T22:25:24.878Z",
+  "payment_source_token": "payment_source_token4",
   "errors": [
     {
       "category": "REFUND_ERROR",

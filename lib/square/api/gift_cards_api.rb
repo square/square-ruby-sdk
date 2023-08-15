@@ -13,7 +13,7 @@ module Square
     # cards of all states.
     # @param [Integer] limit Optional parameter: If a limit is provided, the
     # endpoint returns only the specified number of results per page. The
-    # maximum value is 50. The default value is 30. For more information, see
+    # maximum value is 200. The default value is 30. For more information, see
     # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
     # ion).
     # @param [String] cursor Optional parameter: A pagination cursor returned by

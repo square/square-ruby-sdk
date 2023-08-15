@@ -515,16 +515,12 @@ body = {
     :incentive => {
       :type => 'POINTS_MULTIPLIER',
       :points_multiplier_data => {
-        :points_multiplier => 3
+        :multiplier => '3.0'
       }
     },
     :available_time => {
       :time_periods => [
-        'BEGIN:VEVENT
-DTSTART:20220816T160000
-DURATION:PT2H
-RRULE:FREQ=WEEKLY;BYDAY=TU
-END:VEVENT'
+        'BEGIN:VEVENT\nDTSTART:20220816T160000\nDURATION:PT2H\nRRULE:FREQ=WEEKLY;BYDAY=TU\nEND:VEVENT'
       ]
     },
     :trigger_limit => {
