@@ -43,7 +43,7 @@ module Square
       @additional_headers = additional_headers.clone
 
       # The Http Client to use for making requests.
-      set_http_client CoreLibrary::FaradayClient.new(self)
+      set_http_client Square::FaradayClient.new(self)
 
       # User agent detail, to be appended with user-agent header.
       @user_agent_detail = get_user_agent(user_agent_detail)

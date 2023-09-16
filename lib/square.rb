@@ -16,6 +16,7 @@ require_relative 'square/utilities/date_time_helper'
 
 # Http
 require_relative 'square/http/api_response'
+require_relative 'square/http/faraday_client'
 require_relative 'square/http/http_call_back'
 require_relative 'square/http/http_method_enum'
 require_relative 'square/http/http_request'
