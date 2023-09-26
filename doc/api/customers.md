@@ -166,8 +166,8 @@ body = {
         :rule => 'INCLUDE'
       },
       :created_at => {
-        :start_at => '2018-01-01T00:00:00+00:00',
-        :end_at => '2018-02-01T00:00:00+00:00'
+        :start_at => '2018-01-01T00:00:00-00:00',
+        :end_at => '2018-02-01T00:00:00-00:00'
       },
       :email_address => {
         :fuzzy => 'example.com'

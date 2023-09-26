@@ -191,6 +191,28 @@ module Square
         .execute
     end
 
+    # Retrieves one or more team members' booking profiles.
+    # @param [BulkRetrieveTeamMemberBookingProfilesRequest] body Required
+    # parameter: An object containing the fields to POST for the request.  See
+    # the corresponding object definition for field details.
+    # @return [BulkRetrieveTeamMemberBookingProfilesResponse Hash] response from the API call
+    def bulk_retrieve_team_member_booking_profiles(body:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/bookings/team-member-booking-profiles/bulk-retrieve',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
     # Retrieves a team member's booking profile.
     # @param [String] team_member_id Required parameter: The ID of the team
     # member to retrieve.

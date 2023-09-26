@@ -188,8 +188,8 @@ body = {
   :states => [
     'IN_STOCK'
   ],
-  :updated_after => '2016-11-01T00:00:00Z',
-  :updated_before => '2016-12-01T00:00:00Z'
+  :updated_after => '2016-11-01T00:00:00.000Z',
+  :updated_before => '2016-12-01T00:00:00.000Z'
 }
 
 
@@ -234,7 +234,7 @@ body = {
   :location_ids => [
     '59TNP9SA8VGDA'
   ],
-  :updated_after => '2016-11-16T00:00:00Z'
+  :updated_after => '2016-11-16T00:00:00.000Z'
 }
 
 
@@ -344,8 +344,8 @@ body = {
   :states => [
     'IN_STOCK'
   ],
-  :updated_after => '2016-11-01T00:00:00Z',
-  :updated_before => '2016-12-01T00:00:00Z'
+  :updated_after => '2016-11-01T00:00:00.000Z',
+  :updated_before => '2016-12-01T00:00:00.000Z'
 }
 
 
@@ -397,7 +397,7 @@ body = {
   :location_ids => [
     '59TNP9SA8VGDA'
   ],
-  :updated_after => '2016-11-16T00:00:00Z'
+  :updated_after => '2016-11-16T00:00:00.000Z'
 }
 
 

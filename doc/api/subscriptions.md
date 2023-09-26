@@ -204,7 +204,10 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 subscription_id = 'subscription_id0'
 
 body = {
-  :subscription => {}
+  :subscription => {
+    :canceled_date => 'canceled_date6',
+    :card_id => '{NEW CARD ID}'
+  }
 }
 
 

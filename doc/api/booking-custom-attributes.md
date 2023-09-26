@@ -259,12 +259,12 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 body = {
   :values => {
     'key0': {
-      :booking_id => 'booking_id8',
-      :key => 'key4'
+      :booking_id => 'booking_id4',
+      :key => 'key0'
     },
     'key1': {
-      :booking_id => 'booking_id9',
-      :key => 'key5'
+      :booking_id => 'booking_id4',
+      :key => 'key0'
     }
   }
 }
@@ -310,11 +310,11 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 body = {
   :values => {
     'key0': {
-      :booking_id => 'booking_id8',
+      :booking_id => 'booking_id4',
       :custom_attribute => {}
     },
     'key1': {
-      :booking_id => 'booking_id9',
+      :booking_id => 'booking_id4',
       :custom_attribute => {}
     }
   }

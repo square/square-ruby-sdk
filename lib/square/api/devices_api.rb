@@ -1,6 +1,42 @@
 module Square
   # DevicesApi
   class DevicesApi < BaseApi
+    # List devices associated with the merchant. Currently, only Terminal API
+    # devices are supported.
+    # @param [String] cursor Optional parameter: A pagination cursor returned by
+    # a previous call to this endpoint. Provide this cursor to retrieve the next
+    # set of results for the original query. See
+    # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
+    # atterns/pagination) for more information.
+    # @param [SortOrder] sort_order Optional parameter: The order in which
+    # results are listed. - `ASC` - Oldest to newest. - `DESC` - Newest to
+    # oldest (default).
+    # @param [Integer] limit Optional parameter: The number of results to return
+    # in a single page.
+    # @param [String] location_id Optional parameter: If present, only returns
+    # devices at the target location.
+    # @return [ListDevicesResponse Hash] response from the API call
+    def list_devices(cursor: nil,
+                     sort_order: nil,
+                     limit: nil,
+                     location_id: nil)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/devices',
+                                     'default')
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .query_param(new_parameter(sort_order, key: 'sort_order'))
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(location_id, key: 'location_id'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
     # Lists all DeviceCodes associated with the merchant.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this to retrieve the next set of
@@ -72,6 +108,26 @@ module Square
                                      '/v2/devices/codes/{id}',
                                      'default')
                    .template_param(new_parameter(id, key: 'id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
+    # Retrieves Device with the associated `device_id`.
+    # @param [String] device_id Required parameter: The unique ID for the
+    # desired `Device`.
+    # @return [GetDeviceResponse Hash] response from the API call
+    def get_device(device_id:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/devices/{device_id}',
+                                     'default')
+                   .template_param(new_parameter(device_id, key: 'device_id')
                                     .should_encode(true))
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
