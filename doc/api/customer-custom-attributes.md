@@ -279,11 +279,11 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 body = {
   :values => {
     'key0': {
-      :customer_id => 'customer_id2',
+      :customer_id => 'customer_id8',
       :custom_attribute => {}
     },
     'key1': {
-      :customer_id => 'customer_id3',
+      :customer_id => 'customer_id8',
       :custom_attribute => {}
     }
   }

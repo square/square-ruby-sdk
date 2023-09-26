@@ -10,9 +10,49 @@ devices_api = client.devices
 
 ## Methods
 
+* [List Devices](../../doc/api/devices.md#list-devices)
 * [List Device Codes](../../doc/api/devices.md#list-device-codes)
 * [Create Device Code](../../doc/api/devices.md#create-device-code)
 * [Get Device Code](../../doc/api/devices.md#get-device-code)
+* [Get Device](../../doc/api/devices.md#get-device)
+
+
+# List Devices
+
+List devices associated with the merchant. Currently, only Terminal API
+devices are supported.
+
+```ruby
+def list_devices(cursor: nil,
+                 sort_order: nil,
+                 limit: nil,
+                 location_id: nil)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>See [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination) for more information. |
+| `sort_order` | [`String (Sort Order)`](../../doc/models/sort-order.md) | Query, Optional | The order in which results are listed.<br><br>- `ASC` - Oldest to newest.<br>- `DESC` - Newest to oldest (default). |
+| `limit` | `Integer` | Query, Optional | The number of results to return in a single page. |
+| `location_id` | `String` | Query, Optional | If present, only returns devices at the target location. |
+
+## Response Type
+
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Devices Response Hash`](../../doc/models/list-devices-response.md).
+
+## Example Usage
+
+```ruby
+result = devices_api.list_devices
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
 
 
 # List Device Codes
@@ -119,6 +159,40 @@ id = 'id0'
 
 
 result = devices_api.get_device_code(id: id)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Get Device
+
+Retrieves Device with the associated `device_id`.
+
+```ruby
+def get_device(device_id:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `device_id` | `String` | Template, Required | The unique ID for the desired `Device`. |
+
+## Response Type
+
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Device Response Hash`](../../doc/models/get-device-response.md).
+
+## Example Usage
+
+```ruby
+device_id = 'device_id6'
+
+
+result = devices_api.get_device(device_id: device_id)
 
 if result.success?
   puts result.data

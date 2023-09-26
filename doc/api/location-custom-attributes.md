@@ -257,9 +257,15 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 ```ruby
 body = {
   :values => {
-    'id1': {},
-    'id2': {},
-    'id3': {}
+    'id1': {
+      :key => 'bestseller'
+    },
+    'id2': {
+      :key => 'bestseller'
+    },
+    'id3': {
+      :key => 'phone-number'
+    }
   }
 }
 
@@ -307,11 +313,11 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 body = {
   :values => {
     'key0': {
-      :location_id => 'location_id8',
+      :location_id => 'location_id4',
       :custom_attribute => {}
     },
     'key1': {
-      :location_id => 'location_id9',
+      :location_id => 'location_id4',
       :custom_attribute => {}
     }
   }
