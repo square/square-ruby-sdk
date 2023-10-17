@@ -11,10 +11,12 @@ subscriptions_api = client.subscriptions
 ## Methods
 
 * [Create Subscription](../../doc/api/subscriptions.md#create-subscription)
+* [Bulk Swap Plan](../../doc/api/subscriptions.md#bulk-swap-plan)
 * [Search Subscriptions](../../doc/api/subscriptions.md#search-subscriptions)
 * [Retrieve Subscription](../../doc/api/subscriptions.md#retrieve-subscription)
 * [Update Subscription](../../doc/api/subscriptions.md#update-subscription)
 * [Delete Subscription Action](../../doc/api/subscriptions.md#delete-subscription-action)
+* [Change Billing Anchor Date](../../doc/api/subscriptions.md#change-billing-anchor-date)
 * [Cancel Subscription](../../doc/api/subscriptions.md#cancel-subscription)
 * [List Subscription Events](../../doc/api/subscriptions.md#list-subscription-events)
 * [Pause Subscription](../../doc/api/subscriptions.md#pause-subscription)
@@ -71,6 +73,45 @@ body = {
 
 
 result = subscriptions_api.create_subscription(body: body)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Bulk Swap Plan
+
+Schedules a plan variation change for all active subscriptions under a given plan
+variation. For more information, see [Swap Subscription Plan Variations](https://developer.squareup.com/docs/subscriptions-api/swap-plan-variations).
+
+```ruby
+def bulk_swap_plan(body:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Bulk Swap Plan Request Hash`](../../doc/models/bulk-swap-plan-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Swap Plan Response Hash`](../../doc/models/bulk-swap-plan-response.md).
+
+## Example Usage
+
+```ruby
+body = {
+  :new_plan_variation_id => 'FQ7CDXXWSLUJRPM3GFJSJGZ7',
+  :old_plan_variation_id => '6JHXF3B2CW3YKHDV4XEM674H',
+  :location_id => 'S8GWD5R9QB376'
+}
+
+
+result = subscriptions_api.bulk_swap_plan(body: body)
 
 if result.success?
   puts result.data
@@ -255,6 +296,50 @@ action_id = 'action_id6'
 result = subscriptions_api.delete_subscription_action(
   subscription_id: subscription_id,
   action_id: action_id
+)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Change Billing Anchor Date
+
+Changes the [billing anchor date](https://developer.squareup.com/docs/subscriptions-api/subscription-billing#billing-dates)
+for a subscription.
+
+```ruby
+def change_billing_anchor_date(subscription_id:,
+                               body:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `String` | Template, Required | The ID of the subscription to update the billing anchor date. |
+| `body` | [`Change Billing Anchor Date Request Hash`](../../doc/models/change-billing-anchor-date-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Change Billing Anchor Date Response Hash`](../../doc/models/change-billing-anchor-date-response.md).
+
+## Example Usage
+
+```ruby
+subscription_id = 'subscription_id0'
+
+body = {
+  :monthly_billing_anchor_date => 1
+}
+
+
+result = subscriptions_api.change_billing_anchor_date(
+  subscription_id: subscription_id,
+  body: body
 )
 
 if result.success?

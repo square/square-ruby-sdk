@@ -18,8 +18,6 @@ employees_api = client.employees
 
 **This endpoint is deprecated.**
 
-ListEmployees
-
 ```ruby
 def list_employees(location_id: nil,
                    status: nil,
@@ -56,8 +54,6 @@ end
 # Retrieve Employee
 
 **This endpoint is deprecated.**
-
-RetrieveEmployee
 
 ```ruby
 def retrieve_employee(id:)
