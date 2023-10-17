@@ -157,6 +157,50 @@ module Square
         .execute
     end
 
+    # Lists location booking profiles of a seller.
+    # @param [Integer] limit Optional parameter: The maximum number of results
+    # to return in a paged response.
+    # @param [String] cursor Optional parameter: The pagination cursor from the
+    # preceding response to return the next page of the results. Do not set this
+    # when retrieving the first page of the results.
+    # @return [ListLocationBookingProfilesResponse Hash] response from the API call
+    def list_location_booking_profiles(limit: nil,
+                                       cursor: nil)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/bookings/location-booking-profiles',
+                                     'default')
+                   .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
+    # Retrieves a seller's location booking profile.
+    # @param [String] location_id Required parameter: The ID of the location to
+    # retrieve the booking profile.
+    # @return [RetrieveLocationBookingProfileResponse Hash] response from the API call
+    def retrieve_location_booking_profile(location_id:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/bookings/location-booking-profiles/{location_id}',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
     # Lists booking profiles for team members.
     # @param [TrueClass | FalseClass] bookable_only Optional parameter:
     # Indicates whether to include only bookable team members in the returned

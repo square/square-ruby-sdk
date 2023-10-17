@@ -15,6 +15,9 @@ For more information, see [Subscription Plans and Variations](https://developer.
 | `name` | `String` | Required | The name of the plan variation. |
 | `phases` | [`Array<Subscription Phase Hash>`](../../doc/models/subscription-phase.md) | Required | A list containing each [SubscriptionPhase](entity:SubscriptionPhase) for this plan variation. |
 | `subscription_plan_id` | `String` | Optional | The id of the subscription plan, if there is one. |
+| `monthly_billing_anchor_date` | `Integer` | Optional | The day of the month the billing period starts.<br>**Constraints**: `>= 1`, `<= 31` |
+| `can_prorate` | `TrueClass \| FalseClass` | Optional | Whether bills for this plan variation can be split for proration. |
+| `successor_plan_variation_id` | `String` | Optional | The ID of a "successor" plan variation to this one. If the field is set, and this object is disabled at all<br>locations, it indicates that this variation is deprecated and the object identified by the successor ID be used in<br>its stead. |
 
 ## Example (as JSON)
 
@@ -44,7 +47,10 @@ For more information, see [Subscription Plans and Variations](https://developer.
       }
     }
   ],
-  "subscription_plan_id": "subscription_plan_id0"
+  "subscription_plan_id": "subscription_plan_id0",
+  "monthly_billing_anchor_date": 38,
+  "can_prorate": false,
+  "successor_plan_variation_id": "successor_plan_variation_id2"
 }
 ```
 

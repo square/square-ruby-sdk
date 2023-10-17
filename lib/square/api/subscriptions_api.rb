@@ -32,6 +32,32 @@ module Square
         .execute
     end
 
+    # Schedules a plan variation change for all active subscriptions under a
+    # given plan
+    # variation. For more information, see [Swap Subscription Plan
+    # Variations](https://developer.squareup.com/docs/subscriptions-api/swap-pla
+    # n-variations).
+    # @param [BulkSwapPlanRequest] body Required parameter: An object containing
+    # the fields to POST for the request.  See the corresponding object
+    # definition for field details.
+    # @return [BulkSwapPlanResponse Hash] response from the API call
+    def bulk_swap_plan(body:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/subscriptions/bulk-swap-plan',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
     # Searches for subscriptions.
     # Results are ordered chronologically by subscription creation date. If
     # the request specifies more than one location ID,
@@ -138,6 +164,36 @@ module Square
                    .template_param(new_parameter(action_id, key: 'action_id')
                                     .should_encode(true))
                    .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
+    # Changes the [billing anchor
+    # date](https://developer.squareup.com/docs/subscriptions-api/subscription-b
+    # illing#billing-dates)
+    # for a subscription.
+    # @param [String] subscription_id Required parameter: The ID of the
+    # subscription to update the billing anchor date.
+    # @param [ChangeBillingAnchorDateRequest] body Required parameter: An object
+    # containing the fields to POST for the request.  See the corresponding
+    # object definition for field details.
+    # @return [ChangeBillingAnchorDateResponse Hash] response from the API call
+    def change_billing_anchor_date(subscription_id:,
+                                   body:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/subscriptions/{subscription_id}/billing-anchor',
+                                     'default')
+                   .template_param(new_parameter(subscription_id, key: 'subscription_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
                    .auth(Single.new('global')))
         .response(new_response_handler
                    .deserializer(APIHelper.method(:json_deserialize))

@@ -1,7 +1,7 @@
 module Square
   # EmployeesApi
   class EmployeesApi < BaseApi
-    # ListEmployees
+    # TODO: type endpoint description here
     # @param [String] location_id Optional parameter: Example:
     # @param [EmployeeStatus] status Optional parameter: Specifies the
     # EmployeeStatus to filter the employee by.
@@ -32,7 +32,7 @@ module Square
         .execute
     end
 
-    # RetrieveEmployee
+    # TODO: type endpoint description here
     # @param [String] id Required parameter: UUID for the employee that was
     # requested.
     # @return [RetrieveEmployeeResponse Hash] response from the API call
