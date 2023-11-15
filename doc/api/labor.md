@@ -351,15 +351,16 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 ```ruby
 body = {
   :shift => {
-    :start_at => '2019-01-25T03:11:00-05:00',
     :location_id => 'PAA1RJZZKXBFG',
+    :start_at => '2019-01-25T03:11:00-05:00',
     :end_at => '2019-01-25T13:11:00-05:00',
     :wage => {
       :title => 'Barista',
       :hourly_rate => {
         :amount => 1100,
         :currency => 'USD'
-      }
+      },
+      :tip_eligible => true
     },
     :breaks => [
       {
@@ -371,7 +372,11 @@ body = {
         :end_at => '2019-01-25T06:16:00-05:00'
       }
     ],
-    :team_member_id => 'ormj0jJJZ5OZIzxrZYJI'
+    :team_member_id => 'ormj0jJJZ5OZIzxrZYJI',
+    :declared_cash_tip_money => {
+      :amount => 500,
+      :currency => 'USD'
+    }
   },
   :idempotency_key => 'HIDSNG5KS478L'
 }
@@ -551,15 +556,16 @@ id = 'id0'
 
 body = {
   :shift => {
-    :start_at => '2019-01-25T03:11:00-05:00',
     :location_id => 'PAA1RJZZKXBFG',
+    :start_at => '2019-01-25T03:11:00-05:00',
     :end_at => '2019-01-25T13:11:00-05:00',
     :wage => {
       :title => 'Bartender',
       :hourly_rate => {
         :amount => 1500,
         :currency => 'USD'
-      }
+      },
+      :tip_eligible => true
     },
     :breaks => [
       {
@@ -573,7 +579,11 @@ body = {
       }
     ],
     :version => 1,
-    :team_member_id => 'ormj0jJJZ5OZIzxrZYJI'
+    :team_member_id => 'ormj0jJJZ5OZIzxrZYJI',
+    :declared_cash_tip_money => {
+      :amount => 500,
+      :currency => 'USD'
+    }
   }
 }
 
