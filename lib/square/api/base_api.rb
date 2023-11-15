@@ -4,7 +4,7 @@ module Square
     attr_accessor :config, :http_call_back
 
     def self.user_agent
-      'Square-Ruby-SDK/33.0.0.20231018 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}'
+      'Square-Ruby-SDK/34.0.0.20231115 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}'
     end
 
     def self.user_agent_parameters

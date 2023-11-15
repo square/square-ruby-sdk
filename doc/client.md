@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2023-10-18'` |
+| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2023-11-15'` |
 | `custom_url` | `String` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `'https://connect.squareup.com'` |
 | `environment` | `string` | The API environment. <br> **Default: `production`** |
 | `connection` | `Faraday::Connection` | The Faraday connection object passed by the SDK user for making requests |
@@ -25,7 +25,7 @@ The API client can be initialized as follows:
 
 ```ruby
 client = Square::Client.new(
-  square_version: '2023-10-18',
+  square_version: '2023-11-15',
   access_token: 'AccessToken',
   environment: 'production',
   custom_url: 'https://connect.squareup.com'
