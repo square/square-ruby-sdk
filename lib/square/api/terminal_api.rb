@@ -94,7 +94,7 @@ module Square
     # Actions](https://developer.squareup.com/docs/terminal-api/advanced-feature
     # s/custom-workflows/link-and-dismiss-actions) for more details.
     # @param [String] action_id Required parameter: Unique ID for the
-    # `TerminalAction` associated with the waiting dialog to be dismissed.
+    # `TerminalAction` associated with the action to be dismissed.
     # @return [DismissTerminalActionResponse Hash] response from the API call
     def dismiss_terminal_action(action_id:)
       new_api_call_builder
@@ -203,6 +203,27 @@ module Square
         .execute
     end
 
+    # Dismisses a Terminal checkout request if the status and type of the
+    # request permits it.
+    # @param [String] checkout_id Required parameter: Unique ID for the
+    # `TerminalCheckout` associated with the checkout to be dismissed.
+    # @return [DismissTerminalCheckoutResponse Hash] response from the API call
+    def dismiss_terminal_checkout(checkout_id:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/terminals/checkouts/{checkout_id}/dismiss',
+                                     'default')
+                   .template_param(new_parameter(checkout_id, key: 'checkout_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
     # Creates a request to refund an Interac payment completed on a Square
     # Terminal. Refunds for Interac payments on a Square Terminal are supported
     # only for Interac debit cards in Canada. Other refunds for Terminal
@@ -283,6 +304,27 @@ module Square
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
                                      '/v2/terminals/refunds/{terminal_refund_id}/cancel',
+                                     'default')
+                   .template_param(new_parameter(terminal_refund_id, key: 'terminal_refund_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
+    # Dismisses a Terminal refund request if the status and type of the request
+    # permits it.
+    # @param [String] terminal_refund_id Required parameter: Unique ID for the
+    # `TerminalRefund` associated with the refund to be dismissed.
+    # @return [DismissTerminalRefundResponse Hash] response from the API call
+    def dismiss_terminal_refund(terminal_refund_id:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/terminals/refunds/{terminal_refund_id}/dismiss',
                                      'default')
                    .template_param(new_parameter(terminal_refund_id, key: 'terminal_refund_id')
                                     .should_encode(true))

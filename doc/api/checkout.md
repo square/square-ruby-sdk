@@ -11,6 +11,10 @@ checkout_api = client.checkout
 ## Methods
 
 * [Create Checkout](../../doc/api/checkout.md#create-checkout)
+* [Retrieve Location Settings](../../doc/api/checkout.md#retrieve-location-settings)
+* [Update Location Settings](../../doc/api/checkout.md#update-location-settings)
+* [Retrieve Merchant Settings](../../doc/api/checkout.md#retrieve-merchant-settings)
+* [Update Merchant Settings](../../doc/api/checkout.md#update-merchant-settings)
 * [List Payment Links](../../doc/api/checkout.md#list-payment-links)
 * [Create Payment Link](../../doc/api/checkout.md#create-payment-link)
 * [Delete Payment Link](../../doc/api/checkout.md#delete-payment-link)
@@ -146,6 +150,144 @@ result = checkout_api.create_checkout(
   location_id: location_id,
   body: body
 )
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Retrieve Location Settings
+
+Retrieves the location-level settings for a Square-hosted checkout page.
+
+```ruby
+def retrieve_location_settings(location_id:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `location_id` | `String` | Template, Required | The ID of the location for which to retrieve settings. |
+
+## Response Type
+
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Location Settings Response Hash`](../../doc/models/retrieve-location-settings-response.md).
+
+## Example Usage
+
+```ruby
+location_id = 'location_id4'
+
+
+result = checkout_api.retrieve_location_settings(location_id: location_id)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Update Location Settings
+
+Updates the location-level settings for a Square-hosted checkout page.
+
+```ruby
+def update_location_settings(location_id:,
+                             body:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `location_id` | `String` | Template, Required | The ID of the location for which to retrieve settings. |
+| `body` | [`Update Location Settings Request Hash`](../../doc/models/update-location-settings-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Location Settings Response Hash`](../../doc/models/update-location-settings-response.md).
+
+## Example Usage
+
+```ruby
+location_id = 'location_id4'
+
+body = {
+  :location_settings => {}
+}
+
+
+result = checkout_api.update_location_settings(
+  location_id: location_id,
+  body: body
+)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Retrieve Merchant Settings
+
+Retrieves the merchant-level settings for a Square-hosted checkout page.
+
+```ruby
+def retrieve_merchant_settings
+```
+
+## Response Type
+
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Merchant Settings Response Hash`](../../doc/models/retrieve-merchant-settings-response.md).
+
+## Example Usage
+
+```ruby
+result = checkout_api.retrieve_merchant_settings
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Update Merchant Settings
+
+Updates the merchant-level settings for a Square-hosted checkout page.
+
+```ruby
+def update_merchant_settings(body:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Update Merchant Settings Request Hash`](../../doc/models/update-merchant-settings-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Merchant Settings Response Hash`](../../doc/models/update-merchant-settings-response.md).
+
+## Example Usage
+
+```ruby
+body = {
+  :merchant_settings => {}
+}
+
+
+result = checkout_api.update_merchant_settings(body: body)
 
 if result.success?
   puts result.data
