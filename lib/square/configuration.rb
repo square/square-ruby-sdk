@@ -19,7 +19,7 @@ module Square
                    retry_methods: %i[get put], http_callback: nil,
                    environment: 'production',
                    custom_url: 'https://connect.squareup.com', access_token: '',
-                   square_version: '2023-11-15', user_agent_detail: '',
+                   square_version: '2023-12-13', user_agent_detail: '',
                    additional_headers: {})
 
       super connection: connection, adapter: adapter, timeout: timeout,

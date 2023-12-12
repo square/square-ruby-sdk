@@ -19,10 +19,12 @@ terminal_api = client.terminal
 * [Search Terminal Checkouts](../../doc/api/terminal.md#search-terminal-checkouts)
 * [Get Terminal Checkout](../../doc/api/terminal.md#get-terminal-checkout)
 * [Cancel Terminal Checkout](../../doc/api/terminal.md#cancel-terminal-checkout)
+* [Dismiss Terminal Checkout](../../doc/api/terminal.md#dismiss-terminal-checkout)
 * [Create Terminal Refund](../../doc/api/terminal.md#create-terminal-refund)
 * [Search Terminal Refunds](../../doc/api/terminal.md#search-terminal-refunds)
 * [Get Terminal Refund](../../doc/api/terminal.md#get-terminal-refund)
 * [Cancel Terminal Refund](../../doc/api/terminal.md#cancel-terminal-refund)
+* [Dismiss Terminal Refund](../../doc/api/terminal.md#dismiss-terminal-refund)
 
 
 # Create Terminal Action
@@ -198,7 +200,7 @@ def dismiss_terminal_action(action_id:)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `action_id` | `String` | Template, Required | Unique ID for the `TerminalAction` associated with the waiting dialog to be dismissed. |
+| `action_id` | `String` | Template, Required | Unique ID for the `TerminalAction` associated with the action to be dismissed. |
 
 ## Response Type
 
@@ -377,6 +379,40 @@ end
 ```
 
 
+# Dismiss Terminal Checkout
+
+Dismisses a Terminal checkout request if the status and type of the request permits it.
+
+```ruby
+def dismiss_terminal_checkout(checkout_id:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `checkout_id` | `String` | Template, Required | Unique ID for the `TerminalCheckout` associated with the checkout to be dismissed. |
+
+## Response Type
+
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Dismiss Terminal Checkout Response Hash`](../../doc/models/dismiss-terminal-checkout-response.md).
+
+## Example Usage
+
+```ruby
+checkout_id = 'checkout_id8'
+
+
+result = terminal_api.dismiss_terminal_checkout(checkout_id: checkout_id)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
 # Create Terminal Refund
 
 Creates a request to refund an Interac payment completed on a Square Terminal. Refunds for Interac payments on a Square Terminal are supported only for Interac debit cards in Canada. Other refunds for Terminal payments should use the Refunds API. For more information, see [Refunds API](../../doc/api/refunds.md).
@@ -522,6 +558,40 @@ terminal_refund_id = 'terminal_refund_id0'
 
 
 result = terminal_api.cancel_terminal_refund(terminal_refund_id: terminal_refund_id)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Dismiss Terminal Refund
+
+Dismisses a Terminal refund request if the status and type of the request permits it.
+
+```ruby
+def dismiss_terminal_refund(terminal_refund_id:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `terminal_refund_id` | `String` | Template, Required | Unique ID for the `TerminalRefund` associated with the refund to be dismissed. |
+
+## Response Type
+
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Dismiss Terminal Refund Response Hash`](../../doc/models/dismiss-terminal-refund-response.md).
+
+## Example Usage
+
+```ruby
+terminal_refund_id = 'terminal_refund_id0'
+
+
+result = terminal_api.dismiss_terminal_refund(terminal_refund_id: terminal_refund_id)
 
 if result.success?
   puts result.data

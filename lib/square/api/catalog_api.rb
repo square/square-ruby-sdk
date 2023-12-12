@@ -328,10 +328,19 @@ module Square
     # of an object can be found in the version field of
     # [CatalogObject]($m/CatalogObject)s. If not included, results will be from
     # the current version of the catalog.
+    # @param [TrueClass | FalseClass] include_category_path_to_root Optional
+    # parameter: Specifies whether or not to include the `path_to_root` list for
+    # each returned category instance. The `path_to_root` list consists of
+    # `CategoryPathToRootNode` objects and specifies the path that starts with
+    # the immediate parent category of the returned category and ends with its
+    # root category. If the returned category is a top-level category, the
+    # `path_to_root` list is empty and is not returned in the response
+    # payload.
     # @return [RetrieveCatalogObjectResponse Hash] response from the API call
     def retrieve_catalog_object(object_id:,
                                 include_related_objects: false,
-                                catalog_version: nil)
+                                catalog_version: nil,
+                                include_category_path_to_root: false)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/v2/catalog/object/{object_id}',
@@ -340,6 +349,7 @@ module Square
                                     .should_encode(true))
                    .query_param(new_parameter(include_related_objects, key: 'include_related_objects'))
                    .query_param(new_parameter(catalog_version, key: 'catalog_version'))
+                   .query_param(new_parameter(include_category_path_to_root, key: 'include_category_path_to_root'))
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler

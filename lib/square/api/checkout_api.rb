@@ -35,6 +35,91 @@ module Square
         .execute
     end
 
+    # Retrieves the location-level settings for a Square-hosted checkout page.
+    # @param [String] location_id Required parameter: The ID of the location for
+    # which to retrieve settings.
+    # @return [RetrieveLocationSettingsResponse Hash] response from the API call
+    def retrieve_location_settings(location_id:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/online-checkout/location-settings/{location_id}',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
+    # Updates the location-level settings for a Square-hosted checkout page.
+    # @param [String] location_id Required parameter: The ID of the location for
+    # which to retrieve settings.
+    # @param [UpdateLocationSettingsRequest] body Required parameter: An object
+    # containing the fields to POST for the request.  See the corresponding
+    # object definition for field details.
+    # @return [UpdateLocationSettingsResponse Hash] response from the API call
+    def update_location_settings(location_id:,
+                                 body:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::PUT,
+                                     '/v2/online-checkout/location-settings/{location_id}',
+                                     'default')
+                   .template_param(new_parameter(location_id, key: 'location_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
+    # Retrieves the merchant-level settings for a Square-hosted checkout page.
+    # @return [RetrieveMerchantSettingsResponse Hash] response from the API call
+    def retrieve_merchant_settings
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/online-checkout/merchant-settings',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
+    # Updates the merchant-level settings for a Square-hosted checkout page.
+    # @param [UpdateMerchantSettingsRequest] body Required parameter: An object
+    # containing the fields to POST for the request.  See the corresponding
+    # object definition for field details.
+    # @return [UpdateMerchantSettingsResponse Hash] response from the API call
+    def update_merchant_settings(body:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::PUT,
+                                     '/v2/online-checkout/merchant-settings',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
     # Lists all payment links.
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this cursor to retrieve the next
