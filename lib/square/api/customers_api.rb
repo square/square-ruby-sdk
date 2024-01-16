@@ -177,7 +177,7 @@ module Square
     # Updates a customer profile. This endpoint supports sparse updates, so only
     # new or changed fields are required in the request.
     # To add or update a field, specify the new value. To remove a field,
-    # specify `null` and include the `X-Clear-Null` header set to `true`
+    # specify `null`
     # (recommended) or specify an empty string (string fields only).
     # As a best practice, include the `version` field in the request to enable
     # [optimistic
