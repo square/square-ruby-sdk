@@ -171,6 +171,71 @@ module Square
         .execute
     end
 
+    # Uploads a file and attaches it to an invoice. This endpoint accepts HTTP
+    # multipart/form-data file uploads
+    # with a JSON `request` part and a `file` part. The `file` part must be a
+    # `readable stream` that contains a file
+    # in a supported format: GIF, JPEG, PNG, TIFF, BMP, or PDF.
+    # Invoices can have up to 10 attachments with a total file size of 25 MB.
+    # Attachments can be added only to invoices
+    # in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
+    # @param [String] invoice_id Required parameter: The ID of the
+    # [invoice](entity:Invoice) to attach the file to.
+    # @param [CreateInvoiceAttachmentRequest] request Optional parameter:
+    # Represents a
+    # [CreateInvoiceAttachment]($e/Invoices/CreateInvoiceAttachment) request.
+    # @param [File | UploadIO] image_file Optional parameter: Example:
+    # @return [CreateInvoiceAttachmentResponse Hash] response from the API call
+    def create_invoice_attachment(invoice_id:,
+                                  request: nil,
+                                  image_file: nil)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/invoices/{invoice_id}/attachments',
+                                     'default')
+                   .template_param(new_parameter(invoice_id, key: 'invoice_id')
+                                    .should_encode(true))
+                   .multipart_param(new_parameter(StringIO.new(request.to_json), key: 'request')
+                                     .default_content_type('application/json; charset=utf-8'))
+                   .multipart_param(new_parameter(image_file, key: 'image_file')
+                                     .default_content_type('image/jpeg'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
+    # Removes an attachment from an invoice and permanently deletes the file.
+    # Attachments can be removed only
+    # from invoices in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID`
+    # state.
+    # @param [String] invoice_id Required parameter: The ID of the
+    # [invoice](entity:Invoice) to delete the attachment from.
+    # @param [String] attachment_id Required parameter: The ID of the
+    # [attachment](entity:InvoiceAttachment) to delete.
+    # @return [DeleteInvoiceAttachmentResponse Hash] response from the API call
+    def delete_invoice_attachment(invoice_id:,
+                                  attachment_id:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::DELETE,
+                                     '/v2/invoices/{invoice_id}/attachments/{attachment_id}',
+                                     'default')
+                   .template_param(new_parameter(invoice_id, key: 'invoice_id')
+                                    .should_encode(true))
+                   .template_param(new_parameter(attachment_id, key: 'attachment_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
     # Cancels an invoice. The seller cannot collect payments for
     # the canceled invoice.
     # You cannot cancel an invoice in the `DRAFT` state or in a terminal state:

@@ -16,6 +16,8 @@ invoices_api = client.invoices
 * [Delete Invoice](../../doc/api/invoices.md#delete-invoice)
 * [Get Invoice](../../doc/api/invoices.md#get-invoice)
 * [Update Invoice](../../doc/api/invoices.md#update-invoice)
+* [Create Invoice Attachment](../../doc/api/invoices.md#create-invoice-attachment)
+* [Delete Invoice Attachment](../../doc/api/invoices.md#delete-invoice-attachment)
 * [Cancel Invoice](../../doc/api/invoices.md#cancel-invoice)
 * [Publish Invoice](../../doc/api/invoices.md#publish-invoice)
 
@@ -322,6 +324,99 @@ body = {
 result = invoices_api.update_invoice(
   invoice_id: invoice_id,
   body: body
+)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Create Invoice Attachment
+
+Uploads a file and attaches it to an invoice. This endpoint accepts HTTP multipart/form-data file uploads
+with a JSON `request` part and a `file` part. The `file` part must be a `readable stream` that contains a file
+in a supported format: GIF, JPEG, PNG, TIFF, BMP, or PDF.
+
+Invoices can have up to 10 attachments with a total file size of 25 MB. Attachments can be added only to invoices
+in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
+
+```ruby
+def create_invoice_attachment(invoice_id:,
+                              request: nil,
+                              image_file: nil)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `invoice_id` | `String` | Template, Required | The ID of the [invoice](entity:Invoice) to attach the file to. |
+| `request` | [`Create Invoice Attachment Request Hash`](../../doc/models/create-invoice-attachment-request.md) | Form (JSON-Encoded), Optional | Represents a [CreateInvoiceAttachment](../../doc/api/invoices.md#create-invoice-attachment) request. |
+| `image_file` | `File \| UploadIO` | Form, Optional | - |
+
+## Response Type
+
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Invoice Attachment Response Hash`](../../doc/models/create-invoice-attachment-response.md).
+
+## Example Usage
+
+```ruby
+invoice_id = 'invoice_id0'
+
+request = {
+  :idempotency_key => 'ae5e84f9-4742-4fc1-ba12-a3ce3748f1c3',
+  :description => 'Service contract'
+}
+
+
+result = invoices_api.create_invoice_attachment(
+  invoice_id: invoice_id,
+  request: request
+)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Delete Invoice Attachment
+
+Removes an attachment from an invoice and permanently deletes the file. Attachments can be removed only
+from invoices in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
+
+```ruby
+def delete_invoice_attachment(invoice_id:,
+                              attachment_id:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `invoice_id` | `String` | Template, Required | The ID of the [invoice](entity:Invoice) to delete the attachment from. |
+| `attachment_id` | `String` | Template, Required | The ID of the [attachment](entity:InvoiceAttachment) to delete. |
+
+## Response Type
+
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Invoice Attachment Response Hash`](../../doc/models/delete-invoice-attachment-response.md).
+
+## Example Usage
+
+```ruby
+invoice_id = 'invoice_id0'
+
+attachment_id = 'attachment_id6'
+
+
+result = invoices_api.delete_invoice_attachment(
+  invoice_id: invoice_id,
+  attachment_id: attachment_id
 )
 
 if result.success?
