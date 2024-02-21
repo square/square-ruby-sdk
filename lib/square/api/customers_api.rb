@@ -83,6 +83,109 @@ module Square
         .execute
     end
 
+    # Creates multiple [customer profiles]($m/Customer) for a business.
+    # This endpoint takes a map of individual create requests and returns a map
+    # of responses.
+    # You must provide at least one of the following values in each create
+    # request:
+    # - `given_name`
+    # - `family_name`
+    # - `company_name`
+    # - `email_address`
+    # - `phone_number`
+    # @param [BulkCreateCustomersRequest] body Required parameter: An object
+    # containing the fields to POST for the request.  See the corresponding
+    # object definition for field details.
+    # @return [BulkCreateCustomersResponse Hash] response from the API call
+    def bulk_create_customers(body:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/customers/bulk-create',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
+    # Deletes multiple customer profiles.
+    # The endpoint takes a list of customer IDs and returns a map of responses.
+    # @param [BulkDeleteCustomersRequest] body Required parameter: An object
+    # containing the fields to POST for the request.  See the corresponding
+    # object definition for field details.
+    # @return [BulkDeleteCustomersResponse Hash] response from the API call
+    def bulk_delete_customers(body:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/customers/bulk-delete',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
+    # Retrieves multiple customer profiles.
+    # This endpoint takes a list of customer IDs and returns a map of responses.
+    # @param [BulkRetrieveCustomersRequest] body Required parameter: An object
+    # containing the fields to POST for the request.  See the corresponding
+    # object definition for field details.
+    # @return [BulkRetrieveCustomersResponse Hash] response from the API call
+    def bulk_retrieve_customers(body:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/customers/bulk-retrieve',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
+    # Updates multiple customer profiles.
+    # This endpoint takes a map of individual update requests and returns a map
+    # of responses.
+    # You cannot use this endpoint to change cards on file. To make changes, use
+    # the [Cards API]($e/Cards) or [Gift Cards API]($e/GiftCards).
+    # @param [BulkUpdateCustomersRequest] body Required parameter: An object
+    # containing the fields to POST for the request.  See the corresponding
+    # object definition for field details.
+    # @return [BulkUpdateCustomersResponse Hash] response from the API call
+    def bulk_update_customers(body:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/customers/bulk-update',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                   .deserializer(APIHelper.method(:json_deserialize))
+                   .is_api_response(true)
+                   .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
     # Searches the customer profiles associated with a Square account using one
     # or more supported query filters.
     # Calling `SearchCustomers` without any explicit query filter returns all
@@ -117,12 +220,6 @@ module Square
 
     # Deletes a customer profile from a business. This operation also unlinks
     # any associated cards on file.
-    # As a best practice, include the `version` field in the request to enable
-    # [optimistic
-    # concurrency](https://developer.squareup.com/docs/build-basics/common-api-p
-    # atterns/optimistic-concurrency) control.
-    # If included, the value must be set to the current version of the customer
-    # profile.
     # To delete a customer profile that was created by merging existing
     # profiles, you must use the ID of the newly created profile.
     # @param [String] customer_id Required parameter: The ID of the customer to
@@ -177,14 +274,7 @@ module Square
     # Updates a customer profile. This endpoint supports sparse updates, so only
     # new or changed fields are required in the request.
     # To add or update a field, specify the new value. To remove a field,
-    # specify `null`
-    # (recommended) or specify an empty string (string fields only).
-    # As a best practice, include the `version` field in the request to enable
-    # [optimistic
-    # concurrency](https://developer.squareup.com/docs/build-basics/common-api-p
-    # atterns/optimistic-concurrency) control.
-    # If included, the value must be set to the current version of the customer
-    # profile.
+    # specify `null`.
     # To update a customer profile that was created by merging existing
     # profiles, you must use the ID of the newly created profile.
     # You cannot use this endpoint to change cards on file. To make changes, use

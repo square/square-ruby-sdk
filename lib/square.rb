@@ -3,9 +3,6 @@ require 'json'
 require 'apimatic_core_interfaces'
 require 'apimatic_core'
 require 'apimatic_faraday_client_adapter'
-# rubocop:disable Style/MixinUsage
-include CoreLibrary
-# rubocop:enable Style/MixinUsage
 
 require_relative 'square/api_helper'
 require_relative 'square/client'
