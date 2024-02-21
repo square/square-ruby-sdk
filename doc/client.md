@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2024-01-18'` |
+| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2024-02-22'` |
 | `custom_url` | `String` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `'https://connect.squareup.com'` |
 | `environment` | `string` | The API environment. <br> **Default: `production`** |
 | `connection` | `Faraday::Connection` | The Faraday connection object passed by the SDK user for making requests |
@@ -19,14 +19,16 @@ The following parameters are configurable for the API Client:
 | `http_callback` | `HttpCallBack` | The Http CallBack allows defining callables for pre and post API calls. |
 | `user_agent_detail` | `string` | User agent detail, to be appended with user-agent header. |
 | `additional_headers` | `String` | Additional headers to add to each API request |
-| `access_token` | `String` | The OAuth 2.0 Access Token to use for API requests. |
+| `bearer_auth_credentials` | [`BearerAuthCredentials`](auth/oauth-2-bearer-token.md) | The credential object for OAuth 2 Bearer token |
 
 The API client can be initialized as follows:
 
 ```ruby
 client = Square::Client.new(
-  square_version: '2024-01-18',
-  access_token: 'AccessToken',
+  square_version: '2024-02-22',
+  bearer_auth_credentials: BearerAuthCredentials.new(
+    access_token: 'AccessToken'
+  ),
   environment: 'production',
   custom_url: 'https://connect.squareup.com'
 )
@@ -53,7 +55,9 @@ require 'square'
 include Square
 
 client = Square::Client.new(
-  access_token: 'AccessToken'
+  bearer_auth_credentials: BearerAuthCredentials.new(
+    access_token: 'AccessToken'
+  )
 )
 
 result = client.locations.list_locations

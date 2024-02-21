@@ -3,7 +3,8 @@ module Square
   class LocationsApi < BaseApi
     # Provides details about all of the seller's
     # [locations](https://developer.squareup.com/docs/locations-api),
-    # including those with an inactive status.
+    # including those with an inactive status. Locations are listed
+    # alphabetically by `name`.
     # @return [ListLocationsResponse Hash] response from the API call
     def list_locations
       new_api_call_builder

@@ -9,6 +9,7 @@ require_relative '../http_response_catcher'
 class ApiTestBase < Minitest::Test
   parallelize_me!
   include Square
+  include CoreLibrary
 
   # Create configuration and set any test parameters
   def create_configuration
@@ -22,6 +23,5 @@ class ApiTestBase < Minitest::Test
   def setup_class
     _config = create_configuration
     @client = Client.new(config: _config)
-    _auth_managers = @client.auth_managers
   end
 end

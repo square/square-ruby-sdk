@@ -9,7 +9,7 @@ class LocationsApiTests < ApiTestBase
   end
 
   # Provides details about all of the seller's [locations](https://developer.squareup.com/docs/locations-api),
-  #including those with an inactive status.
+  #including those with an inactive status. Locations are listed alphabetically by `name`.
   def test_list_locations
 
     # Perform the API call through the SDK function

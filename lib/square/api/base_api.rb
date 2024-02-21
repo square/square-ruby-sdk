@@ -1,10 +1,11 @@
 module Square
   # BaseApi.
   class BaseApi
+    include CoreLibrary
     attr_accessor :config, :http_call_back
 
     def self.user_agent
-      'Square-Ruby-SDK/35.0.1.20240118 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}'
+      'Square-Ruby-SDK/36.0.0.20240222 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}'
     end
 
     def self.user_agent_parameters

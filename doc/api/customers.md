@@ -12,6 +12,10 @@ customers_api = client.customers
 
 * [List Customers](../../doc/api/customers.md#list-customers)
 * [Create Customer](../../doc/api/customers.md#create-customer)
+* [Bulk Create Customers](../../doc/api/customers.md#bulk-create-customers)
+* [Bulk Delete Customers](../../doc/api/customers.md#bulk-delete-customers)
+* [Bulk Retrieve Customers](../../doc/api/customers.md#bulk-retrieve-customers)
+* [Bulk Update Customers](../../doc/api/customers.md#bulk-update-customers)
 * [Search Customers](../../doc/api/customers.md#search-customers)
 * [Delete Customer](../../doc/api/customers.md#delete-customer)
 * [Retrieve Customer](../../doc/api/customers.md#retrieve-customer)
@@ -126,6 +130,221 @@ end
 ```
 
 
+# Bulk Create Customers
+
+Creates multiple [customer profiles](../../doc/models/customer.md) for a business.
+
+This endpoint takes a map of individual create requests and returns a map of responses.
+
+You must provide at least one of the following values in each create request:
+
+- `given_name`
+- `family_name`
+- `company_name`
+- `email_address`
+- `phone_number`
+
+```ruby
+def bulk_create_customers(body:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Bulk Create Customers Request Hash`](../../doc/models/bulk-create-customers-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Create Customers Response Hash`](../../doc/models/bulk-create-customers-response.md).
+
+## Example Usage
+
+```ruby
+body = {
+  :customers => {
+    '8bb76c4f-e35d-4c5b-90de-1194cd9179f0': {
+      :given_name => 'Amelia',
+      :family_name => 'Earhart',
+      :email_address => 'Amelia.Earhart@example.com',
+      :address => {
+        :address_line_1 => '500 Electric Ave',
+        :address_line_2 => 'Suite 600',
+        :locality => 'New York',
+        :administrative_district_level_1 => 'NY',
+        :postal_code => '10003',
+        :country => 'US'
+      },
+      :phone_number => '+1-212-555-4240',
+      :reference_id => 'YOUR_REFERENCE_ID',
+      :note => 'a customer'
+    },
+    'd1689f23-b25d-4932-b2f0-aed00f5e2029': {
+      :given_name => 'Marie',
+      :family_name => 'Curie',
+      :email_address => 'Marie.Curie@example.com',
+      :address => {
+        :address_line_1 => '500 Electric Ave',
+        :address_line_2 => 'Suite 601',
+        :locality => 'New York',
+        :administrative_district_level_1 => 'NY',
+        :postal_code => '10003',
+        :country => 'US'
+      },
+      :phone_number => '+1-212-444-4240',
+      :reference_id => 'YOUR_REFERENCE_ID',
+      :note => 'another customer'
+    }
+  }
+}
+
+
+result = customers_api.bulk_create_customers(body: body)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Bulk Delete Customers
+
+Deletes multiple customer profiles.
+
+The endpoint takes a list of customer IDs and returns a map of responses.
+
+```ruby
+def bulk_delete_customers(body:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Bulk Delete Customers Request Hash`](../../doc/models/bulk-delete-customers-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Delete Customers Response Hash`](../../doc/models/bulk-delete-customers-response.md).
+
+## Example Usage
+
+```ruby
+body = {
+  :customer_ids => [
+    '8DDA5NZVBZFGAX0V3HPF81HHE0',
+    'N18CPRVXR5214XPBBA6BZQWF3C',
+    '2GYD7WNXF7BJZW1PMGNXZ3Y8M8'
+  ]
+}
+
+
+result = customers_api.bulk_delete_customers(body: body)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Bulk Retrieve Customers
+
+Retrieves multiple customer profiles.
+
+This endpoint takes a list of customer IDs and returns a map of responses.
+
+```ruby
+def bulk_retrieve_customers(body:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Bulk Retrieve Customers Request Hash`](../../doc/models/bulk-retrieve-customers-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Retrieve Customers Response Hash`](../../doc/models/bulk-retrieve-customers-response.md).
+
+## Example Usage
+
+```ruby
+body = {
+  :customer_ids => [
+    '8DDA5NZVBZFGAX0V3HPF81HHE0',
+    'N18CPRVXR5214XPBBA6BZQWF3C',
+    '2GYD7WNXF7BJZW1PMGNXZ3Y8M8'
+  ]
+}
+
+
+result = customers_api.bulk_retrieve_customers(body: body)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Bulk Update Customers
+
+Updates multiple customer profiles.
+
+This endpoint takes a map of individual update requests and returns a map of responses.
+
+You cannot use this endpoint to change cards on file. To make changes, use the [Cards API](../../doc/api/cards.md) or [Gift Cards API](../../doc/api/gift-cards.md).
+
+```ruby
+def bulk_update_customers(body:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Bulk Update Customers Request Hash`](../../doc/models/bulk-update-customers-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Update Customers Response Hash`](../../doc/models/bulk-update-customers-response.md).
+
+## Example Usage
+
+```ruby
+body = {
+  :customers => {
+    '8DDA5NZVBZFGAX0V3HPF81HHE0': {
+      :email_address => 'New.Amelia.Earhart@example.com',
+      :phone_number => 'phone_number2',
+      :note => 'updated customer note',
+      :version => 2
+    },
+    'N18CPRVXR5214XPBBA6BZQWF3C': {
+      :given_name => 'Marie',
+      :family_name => 'Curie',
+      :version => 0
+    }
+  }
+}
+
+
+result = customers_api.bulk_update_customers(body: body)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
 # Search Customers
 
 Searches the customer profiles associated with a Square account using one or more supported query filters.
@@ -200,9 +419,6 @@ end
 
 Deletes a customer profile from a business. This operation also unlinks any associated cards on file.
 
-As a best practice, include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.
-If included, the value must be set to the current version of the customer profile.
-
 To delete a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile.
 
 ```ruby
@@ -274,11 +490,7 @@ end
 # Update Customer
 
 Updates a customer profile. This endpoint supports sparse updates, so only new or changed fields are required in the request.
-To add or update a field, specify the new value. To remove a field, specify `null`
-(recommended) or specify an empty string (string fields only).
-
-As a best practice, include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.
-If included, the value must be set to the current version of the customer profile.
+To add or update a field, specify the new value. To remove a field, specify `null`.
 
 To update a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile.
 
@@ -307,7 +519,7 @@ customer_id = 'customer_id8'
 
 body = {
   :email_address => 'New.Amelia.Earhart@example.com',
-  :phone_number => '',
+  :phone_number => 'phone_number2',
   :note => 'updated customer note',
   :version => 2
 }
