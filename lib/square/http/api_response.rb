@@ -20,7 +20,7 @@ module Square
 
         @cursor = data.fetch(:cursor, nil)
         data.reject! { |k| %i[cursor errors].include?(k) }
-        @data = Struct.new(*data.keys).new(*data.values) if data.keys.any?
+        @data = data.keys.any? ? Struct.new(*data.keys).new(*data.values) : nil
       else
         @data = data
         @body = data
