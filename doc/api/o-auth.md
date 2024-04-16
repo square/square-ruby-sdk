@@ -10,80 +10,9 @@ o_auth_api = client.o_auth
 
 ## Methods
 
-* [Renew Token](../../doc/api/o-auth.md#renew-token)
 * [Revoke Token](../../doc/api/o-auth.md#revoke-token)
 * [Obtain Token](../../doc/api/o-auth.md#obtain-token)
 * [Retrieve Token Status](../../doc/api/o-auth.md#retrieve-token-status)
-
-
-# Renew Token
-
-**This endpoint is deprecated.**
-
-`RenewToken` is deprecated. For information about refreshing OAuth access tokens, see
-[Migrate from Renew to Refresh OAuth Tokens](https://developer.squareup.com/docs/oauth-api/migrate-to-refresh-tokens).
-
-Renews an OAuth access token before it expires.
-
-OAuth access tokens besides your application's personal access token expire after 30 days.
-You can also renew expired tokens within 15 days of their expiration.
-You cannot renew an access token that has been expired for more than 15 days.
-Instead, the associated user must recomplete the OAuth flow from the beginning.
-
-__Important:__ The `Authorization` header for this endpoint must have the
-following format:
-
-```
-Authorization: Client APPLICATION_SECRET
-```
-
-Replace `APPLICATION_SECRET` with the application secret on the **Credentials**
-page in the [Developer Dashboard](https://developer.squareup.com/apps).
-
-:information_source: **Note** This endpoint does not require authentication.
-
-```ruby
-def renew_token(client_id:,
-                body:,
-                authorization:)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `client_id` | `String` | Template, Required | Your application ID, which is available on the **OAuth** page in the [Developer Dashboard](https://developer.squareup.com/apps). |
-| `body` | [`Renew Token Request Hash`](../../doc/models/renew-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
-| `authorization` | `String` | Header, Required | Client APPLICATION_SECRET |
-
-## Response Type
-
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Renew Token Response Hash`](../../doc/models/renew-token-response.md).
-
-## Example Usage
-
-```ruby
-client_id = 'client_id8'
-
-body = {
-  :access_token => 'ACCESS_TOKEN'
-}
-
-authorization = 'Client CLIENT_SECRET'
-
-
-result = o_auth_api.renew_token(
-  client_id: client_id,
-  body: body,
-  authorization: authorization
-)
-
-if result.success?
-  puts result.data
-elsif result.error?
-  warn result.errors
-end
-```
 
 
 # Revoke Token

@@ -1,58 +1,6 @@
 module Square
   # OAuthApi
   class OAuthApi < BaseApi
-    # `RenewToken` is deprecated. For information about refreshing OAuth access
-    # tokens, see
-    # [Migrate from Renew to Refresh OAuth
-    # Tokens](https://developer.squareup.com/docs/oauth-api/migrate-to-refresh-t
-    # okens).
-    # Renews an OAuth access token before it expires.
-    # OAuth access tokens besides your application's personal access token
-    # expire after 30 days.
-    # You can also renew expired tokens within 15 days of their expiration.
-    # You cannot renew an access token that has been expired for more than 15
-    # days.
-    # Instead, the associated user must recomplete the OAuth flow from the
-    # beginning.
-    # __Important:__ The `Authorization` header for this endpoint must have the
-    # following format:
-    # ```
-    # Authorization: Client APPLICATION_SECRET
-    # ```
-    # Replace `APPLICATION_SECRET` with the application secret on the
-    # **Credentials**
-    # page in the [Developer Dashboard](https://developer.squareup.com/apps).
-    # @param [String] client_id Required parameter: Your application ID, which
-    # is available on the **OAuth** page in the [Developer
-    # Dashboard](https://developer.squareup.com/apps).
-    # @param [RenewTokenRequest] body Required parameter: An object containing
-    # the fields to POST for the request.  See the corresponding object
-    # definition for field details.
-    # @param [String] authorization Required parameter: Client
-    # APPLICATION_SECRET
-    # @return [RenewTokenResponse Hash] response from the API call
-    def renew_token(client_id:,
-                    body:,
-                    authorization:)
-      warn 'Endpoint renew_token in OAuthApi is deprecated'
-      new_api_call_builder
-        .request(new_request_builder(HttpMethodEnum::POST,
-                                     '/oauth2/clients/{client_id}/access-token/renew',
-                                     'default')
-                   .template_param(new_parameter(client_id, key: 'client_id')
-                                    .should_encode(true))
-                   .header_param(new_parameter('application/json', key: 'Content-Type'))
-                   .body_param(new_parameter(body))
-                   .header_param(new_parameter(authorization, key: 'Authorization'))
-                   .header_param(new_parameter('application/json', key: 'accept'))
-                   .body_serializer(proc do |param| param.to_json unless param.nil? end))
-        .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
-        .execute
-    end
-
     # Revokes an access token generated with the OAuth flow.
     # If an account has more than one OAuth access token for your application,
     # this
