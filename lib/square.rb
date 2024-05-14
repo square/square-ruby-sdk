@@ -1,5 +1,6 @@
 require 'date'
 require 'json'
+
 require 'apimatic_core_interfaces'
 require 'apimatic_core'
 require 'apimatic_faraday_client_adapter'
@@ -17,6 +18,8 @@ require_relative 'square/http/http_call_back'
 require_relative 'square/http/http_method_enum'
 require_relative 'square/http/http_request'
 require_relative 'square/http/http_response'
+
+# Logger
 require_relative 'square/http/auth/o_auth2'
 
 # Models
