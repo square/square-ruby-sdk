@@ -5,7 +5,7 @@ module Square
     attr_reader :config, :auth_managers
 
     def sdk_version
-      '38.0.0.20240515'
+      '38.1.0.20240604'
     end
 
     def square_version
@@ -116,6 +116,12 @@ module Square
     # @return [EmployeesApi] Returns the controller instance.
     def employees
       @employees ||= EmployeesApi.new @global_configuration
+    end
+
+    # Access to events controller.
+    # @return [EventsApi] Returns the controller instance.
+    def events
+      @events ||= EventsApi.new @global_configuration
     end
 
     # Access to gift_cards controller.
@@ -268,7 +274,7 @@ module Square
       retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
       retry_methods: %i[get put], http_callback: nil, environment: 'production',
       custom_url: 'https://connect.squareup.com', access_token: nil,
-      bearer_auth_credentials: nil, square_version: '2024-05-15',
+      bearer_auth_credentials: nil, square_version: '2024-06-04',
       user_agent_detail: '', additional_headers: {}, config: nil
     )
       @config = if config.nil?

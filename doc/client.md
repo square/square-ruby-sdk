@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2024-05-15'` |
+| `square_version` | `String` | Square Connect API versions<br>*Default*: `'2024-06-04'` |
 | `custom_url` | `String` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `'https://connect.squareup.com'` |
 | `environment` | `string` | The API environment. <br> **Default: `production`** |
 | `connection` | `Faraday::Connection` | The Faraday connection object passed by the SDK user for making requests |
@@ -25,7 +25,7 @@ The API client can be initialized as follows:
 
 ```ruby
 client = Square::Client.new(
-  square_version: '2024-05-15',
+  square_version: '2024-06-04',
   bearer_auth_credentials: BearerAuthCredentials.new(
     access_token: 'AccessToken'
   ),
@@ -94,6 +94,7 @@ The gateway for the SDK. This class acts as a factory for the Apis and also hold
 | devices | Gets DevicesApi |
 | disputes | Gets DisputesApi |
 | employees | Gets EmployeesApi |
+| events | Gets EventsApi |
 | gift_cards | Gets GiftCardsApi |
 | gift_card_activities | Gets GiftCardActivitiesApi |
 | inventory | Gets InventoryApi |
