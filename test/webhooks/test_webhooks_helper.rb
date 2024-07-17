@@ -27,6 +27,23 @@ class WebhooksHelperTest < Minitest::Test
     assert_equal true, is_valid
   end
 
+  def test_signature_validation_escaped_pass
+    @logger.info('Running test_signature_validation_pass') # Log a message
+    
+    escpaedRequestBody = '{"data":{"type":"webhooks","id":">id<"}}';
+    newSignatureHeader = "Cxt7+aTi4rKgcA0bC4g9EHdVtLSDWdqccmL5MvihU4U=";
+    signatureKey = "signature-key";
+    url = "https://webhook.site/webhooks";
+
+    is_valid = Square::WebhooksHelper.is_valid_webhook_event_signature(
+      escpaedRequestBody,
+      newSignatureHeader,
+      signatureKey,
+      url
+    )
+    assert_equal true, is_valid
+  end
+
   def test_signature_validation_fails_on_notification_url_mismatch
     @logger.info('Running test_signature_validation_fails_on_notification_url_mismatch') # Log a message
     is_valid = Square::WebhooksHelper.is_valid_webhook_event_signature(

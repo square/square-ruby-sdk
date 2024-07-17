@@ -28,9 +28,9 @@ module Square
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
@@ -54,9 +54,9 @@ module Square
                    .body_serializer(proc do |param| param.to_json unless param.nil? end)
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
@@ -82,9 +82,9 @@ module Square
                    .body_serializer(proc do |param| param.to_json unless param.nil? end)
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
@@ -111,9 +111,9 @@ module Square
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
@@ -131,20 +131,19 @@ module Square
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
-    # Updates an invoice by modifying fields, clearing fields, or both. For most
-    # updates, you can use a sparse
-    # `Invoice` object to add fields or change values and use the
-    # `fields_to_clear` field to specify fields to clear.
-    # However, some restrictions apply. For example, you cannot change the
-    # `order_id` or `location_id` field and you
-    # must provide the complete `custom_fields` list to update a custom field.
-    # Published invoices have additional restrictions.
+    # Updates an invoice. This endpoint supports sparse updates, so you only
+    # need
+    # to specify the fields you want to change along with the required `version`
+    # field.
+    # Some restrictions apply to updating invoices. For example, you cannot
+    # change the
+    # `order_id` or `location_id` field.
     # @param [String] invoice_id Required parameter: The ID of the invoice to
     # update.
     # @param [UpdateInvoiceRequest] body Required parameter: An object
@@ -165,9 +164,9 @@ module Square
                    .body_serializer(proc do |param| param.to_json unless param.nil? end)
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
@@ -202,9 +201,9 @@ module Square
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
@@ -230,9 +229,9 @@ module Square
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
@@ -260,9 +259,9 @@ module Square
                    .body_serializer(proc do |param| param.to_json unless param.nil? end)
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
@@ -303,9 +302,9 @@ module Square
                    .body_serializer(proc do |param| param.to_json unless param.nil? end)
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
   end
