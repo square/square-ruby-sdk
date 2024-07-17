@@ -27,9 +27,9 @@ module Square
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
@@ -47,9 +47,9 @@ module Square
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
@@ -72,9 +72,9 @@ module Square
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
@@ -98,9 +98,9 @@ module Square
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
@@ -130,9 +130,9 @@ module Square
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
@@ -157,9 +157,9 @@ module Square
                    .body_serializer(proc do |param| param.to_json unless param.nil? end)
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
@@ -183,9 +183,9 @@ module Square
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
@@ -210,9 +210,9 @@ module Square
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
 
@@ -238,9 +238,9 @@ module Square
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:json_deserialize))
-                   .is_api_response(true)
-                   .convertor(ApiResponse.method(:create)))
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
         .execute
     end
   end
