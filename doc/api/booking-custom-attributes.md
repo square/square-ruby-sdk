@@ -258,11 +258,11 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 ```ruby
 body = {
   :values => {
-    'key0': {
+    'key0' => {
       :booking_id => 'booking_id4',
       :key => 'key0'
     },
-    'key1': {
+    'key1' => {
       :booking_id => 'booking_id4',
       :key => 'key0'
     }
@@ -309,11 +309,11 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 ```ruby
 body = {
   :values => {
-    'key0': {
+    'key0' => {
       :booking_id => 'booking_id4',
       :custom_attribute => {}
     },
-    'key1': {
+    'key1' => {
       :booking_id => 'booking_id4',
       :custom_attribute => {}
     }

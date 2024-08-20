@@ -163,7 +163,7 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 ```ruby
 body = {
   :customers => {
-    '8bb76c4f-e35d-4c5b-90de-1194cd9179f0': {
+    '8bb76c4f-e35d-4c5b-90de-1194cd9179f0' => {
       :given_name => 'Amelia',
       :family_name => 'Earhart',
       :email_address => 'Amelia.Earhart@example.com',
@@ -179,7 +179,7 @@ body = {
       :reference_id => 'YOUR_REFERENCE_ID',
       :note => 'a customer'
     },
-    'd1689f23-b25d-4932-b2f0-aed00f5e2029': {
+    'd1689f23-b25d-4932-b2f0-aed00f5e2029' => {
       :given_name => 'Marie',
       :family_name => 'Curie',
       :email_address => 'Marie.Curie@example.com',
@@ -320,13 +320,13 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 ```ruby
 body = {
   :customers => {
-    '8DDA5NZVBZFGAX0V3HPF81HHE0': {
+    '8DDA5NZVBZFGAX0V3HPF81HHE0' => {
       :email_address => 'New.Amelia.Earhart@example.com',
       :phone_number => 'phone_number2',
       :note => 'updated customer note',
       :version => 2
     },
-    'N18CPRVXR5214XPBBA6BZQWF3C': {
+    'N18CPRVXR5214XPBBA6BZQWF3C' => {
       :given_name => 'Marie',
       :family_name => 'Curie',
       :version => 0

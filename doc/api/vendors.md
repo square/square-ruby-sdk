@@ -42,8 +42,8 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 ```ruby
 body = {
   :vendors => {
-    'key0': {},
-    'key1': {}
+    'key0' => {},
+    'key1' => {}
   }
 }
 
@@ -119,10 +119,10 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 ```ruby
 body = {
   :vendors => {
-    'key0': {
+    'key0' => {
       :vendor => {}
     },
-    'key1': {
+    'key1' => {
       :vendor => {}
     }
   }

@@ -37,6 +37,22 @@ module Square
     # also the maximum allowed value. If the provided value is  greater than
     # 100, it is ignored and the default value is used instead.  Default:
     # `100`
+    # @param [TrueClass | FalseClass] is_offline_payment Optional parameter:
+    # Whether the payment was taken offline or not.
+    # @param [String] offline_begin_time Optional parameter: Indicates the start
+    # of the time range for which to retrieve offline payments, in RFC 3339
+    # format for timestamps. The range is determined using the
+    # `offline_payment_details.client_created_at` field for each Payment. If
+    # set, payments without a value set in
+    # `offline_payment_details.client_created_at` will not be returned.
+    # Default: The current time.
+    # @param [String] offline_end_time Optional parameter: Indicates the end of
+    # the time range for which to retrieve offline payments, in RFC 3339 format
+    # for timestamps. The range is determined using the
+    # `offline_payment_details.client_created_at` field for each Payment. If
+    # set, payments without a value set in
+    # `offline_payment_details.client_created_at` will not be returned.
+    # Default: The current time.
     # @return [ListPaymentsResponse Hash] response from the API call
     def list_payments(begin_time: nil,
                       end_time: nil,
@@ -46,7 +62,10 @@ module Square
                       total: nil,
                       last_4: nil,
                       card_brand: nil,
-                      limit: nil)
+                      limit: nil,
+                      is_offline_payment: false,
+                      offline_begin_time: nil,
+                      offline_end_time: nil)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/v2/payments',
@@ -60,6 +79,9 @@ module Square
                    .query_param(new_parameter(last_4, key: 'last_4'))
                    .query_param(new_parameter(card_brand, key: 'card_brand'))
                    .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(is_offline_payment, key: 'is_offline_payment'))
+                   .query_param(new_parameter(offline_begin_time, key: 'offline_begin_time'))
+                   .query_param(new_parameter(offline_end_time, key: 'offline_end_time'))
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler

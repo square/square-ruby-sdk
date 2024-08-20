@@ -278,11 +278,11 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 ```ruby
 body = {
   :values => {
-    'key0': {
+    'key0' => {
       :customer_id => 'customer_id8',
       :custom_attribute => {}
     },
-    'key1': {
+    'key1' => {
       :customer_id => 'customer_id8',
       :custom_attribute => {}
     }

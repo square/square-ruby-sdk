@@ -105,7 +105,7 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 ```ruby
 body = {
   :team_members => {
-    'idempotency-key-1': {
+    'idempotency-key-1' => {
       :team_member => {
         :reference_id => 'reference_id_1',
         :given_name => 'Joe',
@@ -121,7 +121,7 @@ body = {
         }
       }
     },
-    'idempotency-key-2': {
+    'idempotency-key-2' => {
       :team_member => {
         :reference_id => 'reference_id_2',
         :given_name => 'Jane',
@@ -174,7 +174,7 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 ```ruby
 body = {
   :team_members => {
-    'AFMwA08kR-MIF-3Vs0OE': {
+    'AFMwA08kR-MIF-3Vs0OE' => {
       :team_member => {
         :reference_id => 'reference_id_2',
         :is_owner => false,
@@ -188,7 +188,7 @@ body = {
         }
       }
     },
-    'fpgteZNMaf0qOK-a4t6P': {
+    'fpgteZNMaf0qOK-a4t6P' => {
       :team_member => {
         :reference_id => 'reference_id_1',
         :is_owner => false,

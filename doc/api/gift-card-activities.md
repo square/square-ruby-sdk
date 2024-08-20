@@ -65,8 +65,7 @@ end
 # Create Gift Card Activity
 
 Creates a gift card activity to manage the balance or state of a [gift card](../../doc/models/gift-card.md).
-For example, you create an `ACTIVATE` activity to activate a gift card with an initial balance
-before the gift card can be used.
+For example, create an `ACTIVATE` activity to activate a gift card with an initial balance before first use.
 
 ```ruby
 def create_gift_card_activity(body:)
