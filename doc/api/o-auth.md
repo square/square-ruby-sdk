@@ -148,17 +148,9 @@ where `ACCESS_TOKEN` is a
 
 If the access token is expired or not a valid access token, the endpoint returns an `UNAUTHORIZED` error.
 
-:information_source: **Note** This endpoint does not require authentication.
-
 ```ruby
-def retrieve_token_status(authorization:)
+def retrieve_token_status
 ```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `authorization` | `String` | Header, Required | Client APPLICATION_SECRET |
 
 ## Response Type
 
@@ -167,10 +159,7 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 ## Example Usage
 
 ```ruby
-authorization = 'Client CLIENT_SECRET'
-
-
-result = o_auth_api.retrieve_token_status(authorization: authorization)
+result = o_auth_api.retrieve_token_status
 
 if result.success?
   puts result.data

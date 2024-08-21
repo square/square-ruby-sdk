@@ -271,11 +271,11 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 ```ruby
 body = {
   :values => {
-    'cover-count': {
+    'cover-count' => {
       :order_id => '7BbXGEIWNldxAzrtGf9GPVZTwZ4F',
       :key => 'cover-count'
     },
-    'table-number': {
+    'table-number' => {
       :order_id => '7BbXGEIWNldxAzrtGf9GPVZTwZ4F',
       :key => 'table-number'
     }
@@ -329,11 +329,11 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 ```ruby
 body = {
   :values => {
-    'key0': {
+    'key0' => {
       :custom_attribute => {},
       :order_id => 'order_id4'
     },
-    'key1': {
+    'key1' => {
       :custom_attribute => {},
       :order_id => 'order_id4'
     }

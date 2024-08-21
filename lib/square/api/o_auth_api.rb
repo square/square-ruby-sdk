@@ -89,16 +89,14 @@ module Square
     # ).
     # If the access token is expired or not a valid access token, the endpoint
     # returns an `UNAUTHORIZED` error.
-    # @param [String] authorization Required parameter: Client
-    # APPLICATION_SECRET
     # @return [RetrieveTokenStatusResponse Hash] response from the API call
-    def retrieve_token_status(authorization:)
+    def retrieve_token_status
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
                                      '/oauth2/token/status',
                                      'default')
-                   .header_param(new_parameter(authorization, key: 'Authorization'))
-                   .header_param(new_parameter('application/json', key: 'accept')))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
         .response(new_response_handler
                     .deserializer(APIHelper.method(:json_deserialize))
                     .is_api_response(true)

@@ -37,7 +37,10 @@ def list_payments(begin_time: nil,
                   total: nil,
                   last_4: nil,
                   card_brand: nil,
-                  limit: nil)
+                  limit: nil,
+                  is_offline_payment: false,
+                  offline_begin_time: nil,
+                  offline_end_time: nil)
 ```
 
 ## Parameters
@@ -53,6 +56,9 @@ def list_payments(begin_time: nil,
 | `last_4` | `String` | Query, Optional | The last four digits of a payment card. |
 | `card_brand` | `String` | Query, Optional | The brand of the payment card (for example, VISA). |
 | `limit` | `Integer` | Query, Optional | The maximum number of results to be returned in a single page.<br>It is possible to receive fewer results than the specified limit on a given page.<br><br>The default value of 100 is also the maximum allowed value. If the provided value is<br>greater than 100, it is ignored and the default value is used instead.<br><br>Default: `100` |
+| `is_offline_payment` | `TrueClass \| FalseClass` | Query, Optional | Whether the payment was taken offline or not. |
+| `offline_begin_time` | `String` | Query, Optional | Indicates the start of the time range for which to retrieve offline payments, in RFC 3339<br>format for timestamps. The range is determined using the<br>`offline_payment_details.client_created_at` field for each Payment. If set, payments without a<br>value set in `offline_payment_details.client_created_at` will not be returned.<br><br>Default: The current time. |
+| `offline_end_time` | `String` | Query, Optional | Indicates the end of the time range for which to retrieve offline payments, in RFC 3339<br>format for timestamps. The range is determined using the<br>`offline_payment_details.client_created_at` field for each Payment. If set, payments without a<br>value set in `offline_payment_details.client_created_at` will not be returned.<br><br>Default: The current time. |
 
 ## Response Type
 
@@ -61,7 +67,10 @@ This method returns a `\ApiResponse` instance. The `data` property in this insta
 ## Example Usage
 
 ```ruby
-result = payments_api.list_payments
+is_offline_payment = false
+
+
+result = payments_api.list_payments(is_offline_payment: is_offline_payment)
 
 if result.success?
   puts result.data
