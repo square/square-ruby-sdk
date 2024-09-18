@@ -9,7 +9,7 @@ module Square
     # returned on each page.
     # @param [String] cursor Optional parameter: The token required to retrieve
     # the specified page of results.
-    # @return [ListEmployeesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_employees(location_id: nil,
                        status: nil,
                        limit: nil,
@@ -35,7 +35,7 @@ module Square
     # TODO: type endpoint description here
     # @param [String] id Required parameter: UUID for the employee that was
     # requested.
-    # @return [RetrieveEmployeeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_employee(id:)
       warn 'Endpoint retrieve_employee in EmployeesApi is deprecated'
       new_api_call_builder

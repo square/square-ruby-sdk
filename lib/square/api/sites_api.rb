@@ -8,7 +8,7 @@ module Square
     # Online
     # APIs](https://developer.squareup.com/docs/online-api#early-access-program-
     # for-square-online-apis).
-    # @return [ListSitesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_sites
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,

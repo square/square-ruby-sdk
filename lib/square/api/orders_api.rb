@@ -12,7 +12,7 @@ module Square
     # @param [CreateOrderRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
-    # @return [CreateOrderResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_order(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -36,7 +36,7 @@ module Square
     # @param [BatchRetrieveOrdersRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [BatchRetrieveOrdersResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def batch_retrieve_orders(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -58,7 +58,7 @@ module Square
     # @param [CalculateOrderRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CalculateOrderResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def calculate_order(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -83,7 +83,7 @@ module Square
     # @param [CloneOrderRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
-    # @return [CloneOrderResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def clone_order(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -121,7 +121,7 @@ module Square
     # @param [SearchOrdersRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
-    # @return [SearchOrdersResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_orders(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -142,7 +142,7 @@ module Square
     # Retrieves an [Order]($m/Order) by ID.
     # @param [String] order_id Required parameter: The ID of the order to
     # retrieve.
-    # @return [RetrieveOrderResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_order(order_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -182,7 +182,7 @@ module Square
     # @param [UpdateOrderRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
-    # @return [UpdateOrderResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_order(order_id:,
                      body:)
       new_api_call_builder
@@ -227,7 +227,7 @@ module Square
     # @param [PayOrderRequest] body Required parameter: An object containing the
     # fields to POST for the request.  See the corresponding object definition
     # for field details.
-    # @return [PayOrderResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def pay_order(order_id:,
                   body:)
       new_api_call_builder

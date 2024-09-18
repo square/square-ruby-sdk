@@ -56,7 +56,7 @@ def list_bookings(limit: nil,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Bookings Response Hash`](../../doc/models/list-bookings-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Bookings Response Hash`](../../doc/models/list-bookings-response.md).
 
 ## Example Usage
 
@@ -101,7 +101,7 @@ def create_booking(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Booking Response Hash`](../../doc/models/create-booking-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Booking Response Hash`](../../doc/models/create-booking-response.md).
 
 ## Example Usage
 
@@ -140,7 +140,7 @@ def search_availability(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Availability Response Hash`](../../doc/models/search-availability-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Availability Response Hash`](../../doc/models/search-availability-response.md).
 
 ## Example Usage
 
@@ -183,7 +183,7 @@ def bulk_retrieve_bookings(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Retrieve Bookings Response Hash`](../../doc/models/bulk-retrieve-bookings-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Retrieve Bookings Response Hash`](../../doc/models/bulk-retrieve-bookings-response.md).
 
 ## Example Usage
 
@@ -217,7 +217,7 @@ def retrieve_business_booking_profile
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Business Booking Profile Response Hash`](../../doc/models/retrieve-business-booking-profile-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Business Booking Profile Response Hash`](../../doc/models/retrieve-business-booking-profile-response.md).
 
 ## Example Usage
 
@@ -250,7 +250,7 @@ def list_location_booking_profiles(limit: nil,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Location Booking Profiles Response Hash`](../../doc/models/list-location-booking-profiles-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Location Booking Profiles Response Hash`](../../doc/models/list-location-booking-profiles-response.md).
 
 ## Example Usage
 
@@ -281,7 +281,7 @@ def retrieve_location_booking_profile(location_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Location Booking Profile Response Hash`](../../doc/models/retrieve-location-booking-profile-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Location Booking Profile Response Hash`](../../doc/models/retrieve-location-booking-profile-response.md).
 
 ## Example Usage
 
@@ -314,14 +314,14 @@ def list_team_member_booking_profiles(bookable_only: false,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `bookable_only` | `TrueClass \| FalseClass` | Query, Optional | Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`). |
+| `bookable_only` | `TrueClass \| FalseClass` | Query, Optional | Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`).<br>**Default**: `false` |
 | `limit` | `Integer` | Query, Optional | The maximum number of results to return in a paged response. |
 | `cursor` | `String` | Query, Optional | The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results. |
 | `location_id` | `String` | Query, Optional | Indicates whether to include only team members enabled at the given location in the returned result. |
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Team Member Booking Profiles Response Hash`](../../doc/models/list-team-member-booking-profiles-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Team Member Booking Profiles Response Hash`](../../doc/models/list-team-member-booking-profiles-response.md).
 
 ## Example Usage
 
@@ -355,7 +355,7 @@ def bulk_retrieve_team_member_booking_profiles(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Retrieve Team Member Booking Profiles Response Hash`](../../doc/models/bulk-retrieve-team-member-booking-profiles-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Retrieve Team Member Booking Profiles Response Hash`](../../doc/models/bulk-retrieve-team-member-booking-profiles-response.md).
 
 ## Example Usage
 
@@ -395,7 +395,7 @@ def retrieve_team_member_booking_profile(team_member_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Team Member Booking Profile Response Hash`](../../doc/models/retrieve-team-member-booking-profile-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Team Member Booking Profile Response Hash`](../../doc/models/retrieve-team-member-booking-profile-response.md).
 
 ## Example Usage
 
@@ -432,7 +432,7 @@ def retrieve_booking(booking_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Booking Response Hash`](../../doc/models/retrieve-booking-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Booking Response Hash`](../../doc/models/retrieve-booking-response.md).
 
 ## Example Usage
 
@@ -474,7 +474,7 @@ def update_booking(booking_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Booking Response Hash`](../../doc/models/update-booking-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Booking Response Hash`](../../doc/models/update-booking-response.md).
 
 ## Example Usage
 
@@ -523,7 +523,7 @@ def cancel_booking(booking_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Cancel Booking Response Hash`](../../doc/models/cancel-booking-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Cancel Booking Response Hash`](../../doc/models/cancel-booking-response.md).
 
 ## Example Usage
 

@@ -47,7 +47,7 @@ def list_transactions(location_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Transactions Response Hash`](../../doc/models/list-transactions-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Transactions Response Hash`](../../doc/models/list-transactions-response.md).
 
 ## Example Usage
 
@@ -85,7 +85,7 @@ def retrieve_transaction(location_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Transaction Response Hash`](../../doc/models/retrieve-transaction-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Transaction Response Hash`](../../doc/models/retrieve-transaction-response.md).
 
 ## Example Usage
 
@@ -132,7 +132,7 @@ def capture_transaction(location_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Capture Transaction Response Hash`](../../doc/models/capture-transaction-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Capture Transaction Response Hash`](../../doc/models/capture-transaction-response.md).
 
 ## Example Usage
 
@@ -179,7 +179,7 @@ def void_transaction(location_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Void Transaction Response Hash`](../../doc/models/void-transaction-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Void Transaction Response Hash`](../../doc/models/void-transaction-response.md).
 
 ## Example Usage
 

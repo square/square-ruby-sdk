@@ -19,7 +19,7 @@ module Square
     # @param [SortOrder] sort_order Optional parameter: Sorts the returned list
     # by when the card was created with the specified order. This field defaults
     # to ASC.
-    # @return [ListCardsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_cards(cursor: nil,
                    customer_id: nil,
                    include_disabled: false,
@@ -47,7 +47,7 @@ module Square
     # @param [CreateCardRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
-    # @return [CreateCardResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_card(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -68,7 +68,7 @@ module Square
     # Retrieves details for a specific Card.
     # @param [String] card_id Required parameter: Unique ID for the desired
     # Card.
-    # @return [RetrieveCardResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_card(card_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -89,7 +89,7 @@ module Square
     # Disabling an already disabled card is allowed but has no effect.
     # @param [String] card_id Required parameter: Unique ID for the desired
     # Card.
-    # @return [DisableCardResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def disable_card(card_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,

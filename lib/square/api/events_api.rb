@@ -5,7 +5,7 @@ module Square
     # @param [SearchEventsRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
-    # @return [SearchEventsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_events(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -28,7 +28,7 @@ module Square
     # searchable.
     # Disabling events for a specific time period prevents them from being
     # searchable, even if you re-enable them later.
-    # @return [DisableEventsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def disable_events
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::PUT,
@@ -45,7 +45,7 @@ module Square
 
     # Enables events to make them searchable. Only events that occur while in
     # the enabled state are searchable.
-    # @return [EnableEventsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def enable_events
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::PUT,
@@ -65,7 +65,7 @@ module Square
     # @param [String] api_version Optional parameter: The API version for which
     # to list event types. Setting this field overrides the default version used
     # by the application.
-    # @return [ListEventTypesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_event_types(api_version: nil)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,

@@ -55,7 +55,7 @@ def batch_delete_catalog_objects(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Batch Delete Catalog Objects Response Hash`](../../doc/models/batch-delete-catalog-objects-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Batch Delete Catalog Objects Response Hash`](../../doc/models/batch-delete-catalog-objects-response.md).
 
 ## Example Usage
 
@@ -99,7 +99,7 @@ def batch_retrieve_catalog_objects(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Batch Retrieve Catalog Objects Response Hash`](../../doc/models/batch-retrieve-catalog-objects-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Batch Retrieve Catalog Objects Response Hash`](../../doc/models/batch-retrieve-catalog-objects-response.md).
 
 ## Example Usage
 
@@ -151,7 +151,7 @@ def batch_upsert_catalog_objects(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Batch Upsert Catalog Objects Response Hash`](../../doc/models/batch-upsert-catalog-objects-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Batch Upsert Catalog Objects Response Hash`](../../doc/models/batch-upsert-catalog-objects-response.md).
 
 ## Example Usage
 
@@ -301,7 +301,7 @@ def create_catalog_image(request: nil,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Catalog Image Response Hash`](../../doc/models/create-catalog-image-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Catalog Image Response Hash`](../../doc/models/create-catalog-image-response.md).
 
 ## Example Usage
 
@@ -352,7 +352,7 @@ def update_catalog_image(image_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Catalog Image Response Hash`](../../doc/models/update-catalog-image-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Catalog Image Response Hash`](../../doc/models/update-catalog-image-response.md).
 
 ## Example Usage
 
@@ -388,7 +388,7 @@ def catalog_info
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Catalog Info Response Hash`](../../doc/models/catalog-info-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Catalog Info Response Hash`](../../doc/models/catalog-info-response.md).
 
 ## Example Usage
 
@@ -430,7 +430,7 @@ def list_catalog(cursor: nil,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Catalog Response Hash`](../../doc/models/list-catalog-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Catalog Response Hash`](../../doc/models/list-catalog-response.md).
 
 ## Example Usage
 
@@ -465,7 +465,7 @@ def upsert_catalog_object(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Upsert Catalog Object Response Hash`](../../doc/models/upsert-catalog-object-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Upsert Catalog Object Response Hash`](../../doc/models/upsert-catalog-object-response.md).
 
 ## Example Usage
 
@@ -543,7 +543,7 @@ def delete_catalog_object(object_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Catalog Object Response Hash`](../../doc/models/delete-catalog-object-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Catalog Object Response Hash`](../../doc/models/delete-catalog-object-response.md).
 
 ## Example Usage
 
@@ -583,13 +583,13 @@ def retrieve_catalog_object(object_id:,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `object_id` | `String` | Template, Required | The object ID of any type of catalog objects to be retrieved. |
-| `include_related_objects` | `TrueClass \| FalseClass` | Query, Optional | If `true`, the response will include additional objects that are related to the<br>requested objects. Related objects are defined as any objects referenced by ID by the results in the `objects` field<br>of the response. These objects are put in the `related_objects` field. Setting this to `true` is<br>helpful when the objects are needed for immediate display to a user.<br>This process only goes one level deep. Objects referenced by the related objects will not be included. For example,<br><br>if the `objects` field of the response contains a CatalogItem, its associated<br>CatalogCategory objects, CatalogTax objects, CatalogImage objects and<br>CatalogModifierLists will be returned in the `related_objects` field of the<br>response. If the `objects` field of the response contains a CatalogItemVariation,<br>its parent CatalogItem will be returned in the `related_objects` field of<br>the response.<br><br>Default value: `false` |
+| `include_related_objects` | `TrueClass \| FalseClass` | Query, Optional | If `true`, the response will include additional objects that are related to the<br>requested objects. Related objects are defined as any objects referenced by ID by the results in the `objects` field<br>of the response. These objects are put in the `related_objects` field. Setting this to `true` is<br>helpful when the objects are needed for immediate display to a user.<br>This process only goes one level deep. Objects referenced by the related objects will not be included. For example,<br><br>if the `objects` field of the response contains a CatalogItem, its associated<br>CatalogCategory objects, CatalogTax objects, CatalogImage objects and<br>CatalogModifierLists will be returned in the `related_objects` field of the<br>response. If the `objects` field of the response contains a CatalogItemVariation,<br>its parent CatalogItem will be returned in the `related_objects` field of<br>the response.<br><br>Default value: `false`<br>**Default**: `false` |
 | `catalog_version` | `Integer` | Query, Optional | Requests objects as of a specific version of the catalog. This allows you to retrieve historical<br>versions of objects. The value to retrieve a specific version of an object can be found<br>in the version field of [CatalogObject](../../doc/models/catalog-object.md)s. If not included, results will<br>be from the current version of the catalog. |
-| `include_category_path_to_root` | `TrueClass \| FalseClass` | Query, Optional | Specifies whether or not to include the `path_to_root` list for each returned category instance. The `path_to_root` list consists<br>of `CategoryPathToRootNode` objects and specifies the path that starts with the immediate parent category of the returned category<br>and ends with its root category. If the returned category is a top-level category, the `path_to_root` list is empty and is not returned<br>in the response payload. |
+| `include_category_path_to_root` | `TrueClass \| FalseClass` | Query, Optional | Specifies whether or not to include the `path_to_root` list for each returned category instance. The `path_to_root` list consists<br>of `CategoryPathToRootNode` objects and specifies the path that starts with the immediate parent category of the returned category<br>and ends with its root category. If the returned category is a top-level category, the `path_to_root` list is empty and is not returned<br>in the response payload.<br>**Default**: `false` |
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Catalog Object Response Hash`](../../doc/models/retrieve-catalog-object-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Catalog Object Response Hash`](../../doc/models/retrieve-catalog-object-response.md).
 
 ## Example Usage
 
@@ -640,7 +640,7 @@ def search_catalog_objects(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Catalog Objects Response Hash`](../../doc/models/search-catalog-objects-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Catalog Objects Response Hash`](../../doc/models/search-catalog-objects-response.md).
 
 ## Example Usage
 
@@ -694,7 +694,7 @@ def search_catalog_items(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Catalog Items Response Hash`](../../doc/models/search-catalog-items-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Catalog Items Response Hash`](../../doc/models/search-catalog-items-response.md).
 
 ## Example Usage
 
@@ -767,7 +767,7 @@ def update_item_modifier_lists(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Item Modifier Lists Response Hash`](../../doc/models/update-item-modifier-lists-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Item Modifier Lists Response Hash`](../../doc/models/update-item-modifier-lists-response.md).
 
 ## Example Usage
 
@@ -815,7 +815,7 @@ def update_item_taxes(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Item Taxes Response Hash`](../../doc/models/update-item-taxes-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Item Taxes Response Hash`](../../doc/models/update-item-taxes-response.md).
 
 ## Example Usage
 

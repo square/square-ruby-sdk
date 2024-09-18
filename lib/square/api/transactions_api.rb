@@ -28,7 +28,7 @@ module Square
     # results for your original query.  See [Paginating
     # results](https://developer.squareup.com/docs/working-with-apis/pagination)
     # for more information.
-    # @return [ListTransactionsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_transactions(location_id:,
                           begin_time: nil,
                           end_time: nil,
@@ -59,7 +59,7 @@ module Square
     # transaction's associated location.
     # @param [String] transaction_id Required parameter: The ID of the
     # transaction to retrieve.
-    # @return [RetrieveTransactionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_transaction(location_id:,
                              transaction_id:)
       warn 'Endpoint retrieve_transaction in TransactionsApi is deprecated'
@@ -89,7 +89,7 @@ module Square
     # for more information.
     # @param [String] location_id Required parameter: Example:
     # @param [String] transaction_id Required parameter: Example:
-    # @return [CaptureTransactionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def capture_transaction(location_id:,
                             transaction_id:)
       warn 'Endpoint capture_transaction in TransactionsApi is deprecated'
@@ -119,7 +119,7 @@ module Square
     # for more information.
     # @param [String] location_id Required parameter: Example:
     # @param [String] transaction_id Required parameter: Example:
-    # @return [VoidTransactionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def void_transaction(location_id:,
                          transaction_id:)
       warn 'Endpoint void_transaction in TransactionsApi is deprecated'

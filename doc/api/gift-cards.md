@@ -44,7 +44,7 @@ def list_gift_cards(type: nil,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Gift Cards Response Hash`](../../doc/models/list-gift-cards-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Gift Cards Response Hash`](../../doc/models/list-gift-cards-response.md).
 
 ## Example Usage
 
@@ -79,7 +79,7 @@ def create_gift_card(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Gift Card Response Hash`](../../doc/models/create-gift-card-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Gift Card Response Hash`](../../doc/models/create-gift-card-response.md).
 
 ## Example Usage
 
@@ -119,7 +119,7 @@ def retrieve_gift_card_from_gan(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Gift Card From GAN Response Hash`](../../doc/models/retrieve-gift-card-from-gan-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Gift Card From GAN Response Hash`](../../doc/models/retrieve-gift-card-from-gan-response.md).
 
 ## Example Usage
 
@@ -155,7 +155,7 @@ def retrieve_gift_card_from_nonce(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Gift Card From Nonce Response Hash`](../../doc/models/retrieve-gift-card-from-nonce-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Gift Card From Nonce Response Hash`](../../doc/models/retrieve-gift-card-from-nonce-response.md).
 
 ## Example Usage
 
@@ -193,7 +193,7 @@ def link_customer_to_gift_card(gift_card_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Link Customer to Gift Card Response Hash`](../../doc/models/link-customer-to-gift-card-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Link Customer to Gift Card Response Hash`](../../doc/models/link-customer-to-gift-card-response.md).
 
 ## Example Usage
 
@@ -236,7 +236,7 @@ def unlink_customer_from_gift_card(gift_card_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Unlink Customer From Gift Card Response Hash`](../../doc/models/unlink-customer-from-gift-card-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Unlink Customer From Gift Card Response Hash`](../../doc/models/unlink-customer-from-gift-card-response.md).
 
 ## Example Usage
 
@@ -277,7 +277,7 @@ def retrieve_gift_card(id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Gift Card Response Hash`](../../doc/models/retrieve-gift-card-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Gift Card Response Hash`](../../doc/models/retrieve-gift-card-response.md).
 
 ## Example Usage
 

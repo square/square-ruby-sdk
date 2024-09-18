@@ -6,7 +6,7 @@ module Square
     # @param [BulkCreateVendorsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [BulkCreateVendorsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_create_vendors(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -28,7 +28,7 @@ module Square
     # @param [BulkRetrieveVendorsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [BulkRetrieveVendorsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_retrieve_vendors(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -51,7 +51,7 @@ module Square
     # @param [BulkUpdateVendorsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [BulkUpdateVendorsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_update_vendors(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::PUT,
@@ -74,7 +74,7 @@ module Square
     # @param [CreateVendorRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
-    # @return [CreateVendorResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_vendor(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -97,7 +97,7 @@ module Square
     # @param [SearchVendorsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [SearchVendorsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_vendors(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -118,7 +118,7 @@ module Square
     # Retrieves the vendor of a specified [Vendor]($m/Vendor) ID.
     # @param [String] vendor_id Required parameter: ID of the
     # [Vendor](entity:Vendor) to retrieve.
-    # @return [RetrieveVendorResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_vendor(vendor_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -140,7 +140,7 @@ module Square
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
     # @param [String] vendor_id Required parameter: Example:
-    # @return [UpdateVendorResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_vendor(body:,
                       vendor_id:)
       new_api_call_builder

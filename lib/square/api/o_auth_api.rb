@@ -17,7 +17,7 @@ module Square
     # definition for field details.
     # @param [String] authorization Required parameter: Client
     # APPLICATION_SECRET
-    # @return [RevokeTokenResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def revoke_token(body:,
                      authorization:)
       new_api_call_builder
@@ -55,7 +55,7 @@ module Square
     # @param [ObtainTokenRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
-    # @return [ObtainTokenResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def obtain_token(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -89,7 +89,7 @@ module Square
     # ).
     # If the access token is expired or not a valid access token, the endpoint
     # returns an `UNAUTHORIZED` error.
-    # @return [RetrieveTokenStatusResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_token_status
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,

@@ -11,7 +11,7 @@ module Square
     # for-square-online-apis).
     # @param [String] site_id Required parameter: The ID of the site that
     # contains the snippet.
-    # @return [DeleteSnippetResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_snippet(site_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::DELETE,
@@ -40,7 +40,7 @@ module Square
     # for-square-online-apis).
     # @param [String] site_id Required parameter: The ID of the site that
     # contains the snippet.
-    # @return [RetrieveSnippetResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_snippet(site_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -74,7 +74,7 @@ module Square
     # @param [UpsertSnippetRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpsertSnippetResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def upsert_snippet(site_id:,
                        body:)
       new_api_call_builder

@@ -14,7 +14,7 @@ module Square
     # VALUE_TOO_HIGH` error. The default value is 50.  For more information, see
     # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
     # atterns/pagination).
-    # @return [ListCustomerSegmentsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_customer_segments(cursor: nil,
                                limit: nil)
       new_api_call_builder
@@ -36,7 +36,7 @@ module Square
     # value.
     # @param [String] segment_id Required parameter: The Square-issued ID of the
     # customer segment.
-    # @return [RetrieveCustomerSegmentResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_customer_segment(segment_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,

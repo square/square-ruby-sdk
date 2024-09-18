@@ -40,7 +40,7 @@ def list_devices(cursor: nil,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Devices Response Hash`](../../doc/models/list-devices-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Devices Response Hash`](../../doc/models/list-devices-response.md).
 
 ## Example Usage
 
@@ -77,7 +77,7 @@ def list_device_codes(cursor: nil,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Device Codes Response Hash`](../../doc/models/list-device-codes-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Device Codes Response Hash`](../../doc/models/list-device-codes-response.md).
 
 ## Example Usage
 
@@ -109,7 +109,7 @@ def create_device_code(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Device Code Response Hash`](../../doc/models/create-device-code-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Device Code Response Hash`](../../doc/models/create-device-code-response.md).
 
 ## Example Usage
 
@@ -150,7 +150,7 @@ def get_device_code(id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Device Code Response Hash`](../../doc/models/get-device-code-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Device Code Response Hash`](../../doc/models/get-device-code-response.md).
 
 ## Example Usage
 
@@ -184,7 +184,7 @@ def get_device(device_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Device Response Hash`](../../doc/models/get-device-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Device Response Hash`](../../doc/models/get-device-response.md).
 
 ## Example Usage
 

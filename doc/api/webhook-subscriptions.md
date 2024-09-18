@@ -36,7 +36,7 @@ def list_webhook_event_types(api_version: nil)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Webhook Event Types Response Hash`](../../doc/models/list-webhook-event-types-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Webhook Event Types Response Hash`](../../doc/models/list-webhook-event-types-response.md).
 
 ## Example Usage
 
@@ -67,13 +67,13 @@ def list_webhook_subscriptions(cursor: nil,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `cursor` | `String` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
-| `include_disabled` | `TrueClass \| FalseClass` | Query, Optional | Includes disabled [Subscription](entity:WebhookSubscription)s.<br>By default, all enabled [Subscription](entity:WebhookSubscription)s are returned. |
+| `include_disabled` | `TrueClass \| FalseClass` | Query, Optional | Includes disabled [Subscription](entity:WebhookSubscription)s.<br>By default, all enabled [Subscription](entity:WebhookSubscription)s are returned.<br>**Default**: `false` |
 | `sort_order` | [`String (Sort Order)`](../../doc/models/sort-order.md) | Query, Optional | Sorts the returned list by when the [Subscription](entity:WebhookSubscription) was created with the specified order.<br>This field defaults to ASC. |
 | `limit` | `Integer` | Query, Optional | The maximum number of results to be returned in a single page.<br>It is possible to receive fewer results than the specified limit on a given page.<br>The default value of 100 is also the maximum allowed value.<br><br>Default: 100 |
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Webhook Subscriptions Response Hash`](../../doc/models/list-webhook-subscriptions-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Webhook Subscriptions Response Hash`](../../doc/models/list-webhook-subscriptions-response.md).
 
 ## Example Usage
 
@@ -107,7 +107,7 @@ def create_webhook_subscription(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Webhook Subscription Response Hash`](../../doc/models/create-webhook-subscription-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Webhook Subscription Response Hash`](../../doc/models/create-webhook-subscription-response.md).
 
 ## Example Usage
 
@@ -152,7 +152,7 @@ def delete_webhook_subscription(subscription_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Webhook Subscription Response Hash`](../../doc/models/delete-webhook-subscription-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Webhook Subscription Response Hash`](../../doc/models/delete-webhook-subscription-response.md).
 
 ## Example Usage
 
@@ -186,7 +186,7 @@ def retrieve_webhook_subscription(subscription_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Webhook Subscription Response Hash`](../../doc/models/retrieve-webhook-subscription-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Webhook Subscription Response Hash`](../../doc/models/retrieve-webhook-subscription-response.md).
 
 ## Example Usage
 
@@ -222,7 +222,7 @@ def update_webhook_subscription(subscription_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Webhook Subscription Response Hash`](../../doc/models/update-webhook-subscription-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Webhook Subscription Response Hash`](../../doc/models/update-webhook-subscription-response.md).
 
 ## Example Usage
 
@@ -268,7 +268,7 @@ def update_webhook_subscription_signature_key(subscription_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Webhook Subscription Signature Key Response Hash`](../../doc/models/update-webhook-subscription-signature-key-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Webhook Subscription Signature Key Response Hash`](../../doc/models/update-webhook-subscription-signature-key-response.md).
 
 ## Example Usage
 
@@ -311,7 +311,7 @@ def test_webhook_subscription(subscription_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Test Webhook Subscription Response Hash`](../../doc/models/test-webhook-subscription-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Test Webhook Subscription Response Hash`](../../doc/models/test-webhook-subscription-response.md).
 
 ## Example Usage
 

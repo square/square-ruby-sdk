@@ -41,7 +41,7 @@ module Square
     # @param [String] sort_order Optional parameter: The order in which the
     # endpoint returns the activities, based on `created_at`. - `ASC` - Oldest
     # to newest. - `DESC` - Newest to oldest (default).
-    # @return [ListGiftCardActivitiesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_gift_card_activities(gift_card_id: nil,
                                   type: nil,
                                   location_id: nil,
@@ -78,7 +78,7 @@ module Square
     # @param [CreateGiftCardActivityRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateGiftCardActivityResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_gift_card_activity(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,

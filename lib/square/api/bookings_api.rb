@@ -26,7 +26,7 @@ module Square
     # @param [String] start_at_max Optional parameter: The RFC 3339 timestamp
     # specifying the latest of the start time. If this is not set, the time of
     # 31 days after `start_at_min` is used.
-    # @return [ListBookingsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_bookings(limit: nil,
                       cursor: nil,
                       customer_id: nil,
@@ -71,7 +71,7 @@ module Square
     # @param [CreateBookingRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateBookingResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_booking(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -97,7 +97,7 @@ module Square
     # @param [SearchAvailabilityRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [SearchAvailabilityResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_availability(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -123,7 +123,7 @@ module Square
     # @param [BulkRetrieveBookingsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [BulkRetrieveBookingsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_retrieve_bookings(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -142,7 +142,7 @@ module Square
     end
 
     # Retrieves a seller's booking profile.
-    # @return [RetrieveBusinessBookingProfileResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_business_booking_profile
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -163,7 +163,7 @@ module Square
     # @param [String] cursor Optional parameter: The pagination cursor from the
     # preceding response to return the next page of the results. Do not set this
     # when retrieving the first page of the results.
-    # @return [ListLocationBookingProfilesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_location_booking_profiles(limit: nil,
                                        cursor: nil)
       new_api_call_builder
@@ -184,7 +184,7 @@ module Square
     # Retrieves a seller's location booking profile.
     # @param [String] location_id Required parameter: The ID of the location to
     # retrieve the booking profile.
-    # @return [RetrieveLocationBookingProfileResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_location_booking_profile(location_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -213,7 +213,7 @@ module Square
     # @param [String] location_id Optional parameter: Indicates whether to
     # include only team members enabled at the given location in the returned
     # result.
-    # @return [ListTeamMemberBookingProfilesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_team_member_booking_profiles(bookable_only: false,
                                           limit: nil,
                                           cursor: nil,
@@ -239,7 +239,7 @@ module Square
     # @param [BulkRetrieveTeamMemberBookingProfilesRequest] body Required
     # parameter: An object containing the fields to POST for the request.  See
     # the corresponding object definition for field details.
-    # @return [BulkRetrieveTeamMemberBookingProfilesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_retrieve_team_member_booking_profiles(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -260,7 +260,7 @@ module Square
     # Retrieves a team member's booking profile.
     # @param [String] team_member_id Required parameter: The ID of the team
     # member to retrieve.
-    # @return [RetrieveTeamMemberBookingProfileResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_team_member_booking_profile(team_member_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -285,7 +285,7 @@ module Square
     # @param [String] booking_id Required parameter: The ID of the
     # [Booking](entity:Booking) object representing the to-be-retrieved
     # booking.
-    # @return [RetrieveBookingResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_booking(booking_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -315,7 +315,7 @@ module Square
     # @param [UpdateBookingRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpdateBookingResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_booking(booking_id:,
                        body:)
       new_api_call_builder
@@ -350,7 +350,7 @@ module Square
     # @param [CancelBookingRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CancelBookingResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def cancel_booking(booking_id:,
                        body:)
       new_api_call_builder

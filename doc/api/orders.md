@@ -42,7 +42,7 @@ def create_order(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Order Response Hash`](../../doc/models/create-order-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Order Response Hash`](../../doc/models/create-order-response.md).
 
 ## Example Usage
 
@@ -138,7 +138,7 @@ def batch_retrieve_orders(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Batch Retrieve Orders Response Hash`](../../doc/models/batch-retrieve-orders-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Batch Retrieve Orders Response Hash`](../../doc/models/batch-retrieve-orders-response.md).
 
 ## Example Usage
 
@@ -178,7 +178,7 @@ def calculate_order(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Calculate Order Response Hash`](../../doc/models/calculate-order-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Calculate Order Response Hash`](../../doc/models/calculate-order-response.md).
 
 ## Example Usage
 
@@ -242,7 +242,7 @@ def clone_order(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Clone Order Response Hash`](../../doc/models/clone-order-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Clone Order Response Hash`](../../doc/models/clone-order-response.md).
 
 ## Example Usage
 
@@ -296,7 +296,7 @@ def search_orders(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Orders Response Hash`](../../doc/models/search-orders-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Orders Response Hash`](../../doc/models/search-orders-response.md).
 
 ## Example Usage
 
@@ -356,7 +356,7 @@ def retrieve_order(order_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Order Response Hash`](../../doc/models/retrieve-order-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Order Response Hash`](../../doc/models/retrieve-order-response.md).
 
 ## Example Usage
 
@@ -406,7 +406,7 @@ def update_order(order_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Order Response Hash`](../../doc/models/update-order-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Order Response Hash`](../../doc/models/update-order-response.md).
 
 ## Example Usage
 
@@ -460,7 +460,7 @@ def pay_order(order_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Pay Order Response Hash`](../../doc/models/pay-order-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Pay Order Response Hash`](../../doc/models/pay-order-response.md).
 
 ## Example Usage
 

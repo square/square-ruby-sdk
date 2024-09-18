@@ -20,7 +20,7 @@ module Square
     # @param [BatchDeleteCatalogObjectsRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [BatchDeleteCatalogObjectsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def batch_delete_catalog_objects(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -47,7 +47,7 @@ module Square
     # @param [BatchRetrieveCatalogObjectsRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [BatchRetrieveCatalogObjectsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def batch_retrieve_catalog_objects(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -87,7 +87,7 @@ module Square
     # @param [BatchUpsertCatalogObjectsRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [BatchUpsertCatalogObjectsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def batch_upsert_catalog_objects(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -115,7 +115,7 @@ module Square
     # JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
     # @param [CreateCatalogImageRequest] request Optional parameter: Example:
     # @param [File | UploadIO] image_file Optional parameter: Example:
-    # @return [CreateCatalogImageResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_catalog_image(request: nil,
                              image_file: nil)
       new_api_call_builder
@@ -144,7 +144,7 @@ module Square
     # object to update the encapsulated image file.
     # @param [UpdateCatalogImageRequest] request Optional parameter: Example:
     # @param [File | UploadIO] image_file Optional parameter: Example:
-    # @return [UpdateCatalogImageResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_catalog_image(image_id:,
                              request: nil,
                              image_file: nil)
@@ -169,7 +169,7 @@ module Square
 
     # Retrieves information about the Square Catalog API, such as batch size
     # limits that can be used by the `BatchUpsertCatalogObjects` endpoint.
-    # @return [CatalogInfoResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def catalog_info
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -218,7 +218,7 @@ module Square
     # matched against the [CatalogObject]($m/CatalogObject)s' `version`
     # attribute.  If not included, results will be from the current version of
     # the catalog.
-    # @return [ListCatalogResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_catalog(cursor: nil,
                      types: nil,
                      catalog_version: nil)
@@ -247,7 +247,7 @@ module Square
     # @param [UpsertCatalogObjectRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpsertCatalogObjectResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def upsert_catalog_object(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -282,7 +282,7 @@ module Square
     # to be deleted. When an object is deleted, other objects in the graph that
     # depend on that object will be deleted as well (for example, deleting a
     # catalog item will delete its catalog item variations).
-    # @return [DeleteCatalogObjectResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_catalog_object(object_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::DELETE,
@@ -336,7 +336,7 @@ module Square
     # root category. If the returned category is a top-level category, the
     # `path_to_root` list is empty and is not returned in the response
     # payload.
-    # @return [RetrieveCatalogObjectResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_catalog_object(object_id:,
                                 include_related_objects: false,
                                 catalog_version: nil,
@@ -379,7 +379,7 @@ module Square
     # @param [SearchCatalogObjectsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [SearchCatalogObjectsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_catalog_objects(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -417,7 +417,7 @@ module Square
     # @param [SearchCatalogItemsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [SearchCatalogItemsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_catalog_items(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -441,7 +441,7 @@ module Square
     # @param [UpdateItemModifierListsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpdateItemModifierListsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_item_modifier_lists(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -465,7 +465,7 @@ module Square
     # @param [UpdateItemTaxesRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpdateItemTaxesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_item_taxes(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,

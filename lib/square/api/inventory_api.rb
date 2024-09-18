@@ -7,7 +7,7 @@ module Square
     # is updated to conform to the standard convention.
     # @param [String] adjustment_id Required parameter: ID of the
     # [InventoryAdjustment](entity:InventoryAdjustment) to retrieve.
-    # @return [RetrieveInventoryAdjustmentResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def deprecated_retrieve_inventory_adjustment(adjustment_id:)
       warn 'Endpoint deprecated_retrieve_inventory_adjustment in InventoryApi '\
            'is deprecated'
@@ -30,7 +30,7 @@ module Square
     # with the provided `adjustment_id`.
     # @param [String] adjustment_id Required parameter: ID of the
     # [InventoryAdjustment](entity:InventoryAdjustment) to retrieve.
-    # @return [RetrieveInventoryAdjustmentResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_inventory_adjustment(adjustment_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -54,7 +54,7 @@ module Square
     # @param [BatchChangeInventoryRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [BatchChangeInventoryResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def deprecated_batch_change_inventory(body:)
       warn 'Endpoint deprecated_batch_change_inventory in InventoryApi is depr'\
            'ecated'
@@ -81,7 +81,7 @@ module Square
     # @param [BatchRetrieveInventoryChangesRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [BatchRetrieveInventoryChangesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def deprecated_batch_retrieve_inventory_changes(body:)
       warn 'Endpoint deprecated_batch_retrieve_inventory_changes in InventoryA'\
            'pi is deprecated'
@@ -108,7 +108,7 @@ module Square
     # @param [BatchRetrieveInventoryCountsRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [BatchRetrieveInventoryCountsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def deprecated_batch_retrieve_inventory_counts(body:)
       warn 'Endpoint deprecated_batch_retrieve_inventory_counts in InventoryAp'\
            'i is deprecated'
@@ -135,7 +135,7 @@ module Square
     # @param [BatchChangeInventoryRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [BatchChangeInventoryResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def batch_change_inventory(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -162,7 +162,7 @@ module Square
     # @param [BatchRetrieveInventoryChangesRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [BatchRetrieveInventoryChangesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def batch_retrieve_inventory_changes(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -193,7 +193,7 @@ module Square
     # @param [BatchRetrieveInventoryCountsRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [BatchRetrieveInventoryCountsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def batch_retrieve_inventory_counts(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -217,7 +217,7 @@ module Square
     # is updated to conform to the standard convention.
     # @param [String] physical_count_id Required parameter: ID of the
     # [InventoryPhysicalCount](entity:InventoryPhysicalCount) to retrieve.
-    # @return [RetrieveInventoryPhysicalCountResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def deprecated_retrieve_inventory_physical_count(physical_count_id:)
       warn 'Endpoint deprecated_retrieve_inventory_physical_count in Inventory'\
            'Api is deprecated'
@@ -240,7 +240,7 @@ module Square
     # object with the provided `physical_count_id`.
     # @param [String] physical_count_id Required parameter: ID of the
     # [InventoryPhysicalCount](entity:InventoryPhysicalCount) to retrieve.
-    # @return [RetrieveInventoryPhysicalCountResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_inventory_physical_count(physical_count_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -261,7 +261,7 @@ module Square
     # with the provided `transfer_id`.
     # @param [String] transfer_id Required parameter: ID of the
     # [InventoryTransfer](entity:InventoryTransfer) to retrieve.
-    # @return [RetrieveInventoryTransferResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_inventory_transfer(transfer_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -292,7 +292,7 @@ module Square
     # results for the original query.  See the
     # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
     # ion) guide for more information.
-    # @return [RetrieveInventoryCountResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_inventory_count(catalog_object_id:,
                                  location_ids: nil,
                                  cursor: nil)
@@ -337,7 +337,7 @@ module Square
     # results for the original query.  See the
     # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
     # ion) guide for more information.
-    # @return [RetrieveInventoryChangesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_inventory_changes(catalog_object_id:,
                                    location_ids: nil,
                                    cursor: nil)

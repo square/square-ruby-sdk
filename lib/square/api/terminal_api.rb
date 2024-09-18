@@ -5,7 +5,7 @@ module Square
     # @param [CreateTerminalActionRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateTerminalActionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_terminal_action(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -29,7 +29,7 @@ module Square
     # @param [SearchTerminalActionsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [SearchTerminalActionsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_terminal_actions(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -51,7 +51,7 @@ module Square
     # requests are available for 30 days.
     # @param [String] action_id Required parameter: Unique ID for the desired
     # `TerminalAction`.
-    # @return [GetTerminalActionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def get_terminal_action(action_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -71,7 +71,7 @@ module Square
     # Cancels a Terminal action request if the status of the request permits it.
     # @param [String] action_id Required parameter: Unique ID for the desired
     # `TerminalAction`.
-    # @return [CancelTerminalActionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def cancel_terminal_action(action_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -95,7 +95,7 @@ module Square
     # s/custom-workflows/link-and-dismiss-actions) for more details.
     # @param [String] action_id Required parameter: Unique ID for the
     # `TerminalAction` associated with the action to be dismissed.
-    # @return [DismissTerminalActionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def dismiss_terminal_action(action_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -118,7 +118,7 @@ module Square
     # @param [CreateTerminalCheckoutRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateTerminalCheckoutResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_terminal_checkout(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -143,7 +143,7 @@ module Square
     # @param [SearchTerminalCheckoutsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [SearchTerminalCheckoutsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_terminal_checkouts(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -165,7 +165,7 @@ module Square
     # requests are available for 30 days.
     # @param [String] checkout_id Required parameter: The unique ID for the
     # desired `TerminalCheckout`.
-    # @return [GetTerminalCheckoutResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def get_terminal_checkout(checkout_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -186,7 +186,7 @@ module Square
     # it.
     # @param [String] checkout_id Required parameter: The unique ID for the
     # desired `TerminalCheckout`.
-    # @return [CancelTerminalCheckoutResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def cancel_terminal_checkout(checkout_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -207,7 +207,7 @@ module Square
     # request permits it.
     # @param [String] checkout_id Required parameter: Unique ID for the
     # `TerminalCheckout` associated with the checkout to be dismissed.
-    # @return [DismissTerminalCheckoutResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def dismiss_terminal_checkout(checkout_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -232,7 +232,7 @@ module Square
     # @param [CreateTerminalRefundRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateTerminalRefundResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_terminal_refund(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -256,7 +256,7 @@ module Square
     # @param [SearchTerminalRefundsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [SearchTerminalRefundsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_terminal_refunds(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -278,7 +278,7 @@ module Square
     # are available for 30 days.
     # @param [String] terminal_refund_id Required parameter: The unique ID for
     # the desired `TerminalRefund`.
-    # @return [GetTerminalRefundResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def get_terminal_refund(terminal_refund_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -299,7 +299,7 @@ module Square
     # status of the request permits it.
     # @param [String] terminal_refund_id Required parameter: The unique ID for
     # the desired `TerminalRefund`.
-    # @return [CancelTerminalRefundResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def cancel_terminal_refund(terminal_refund_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -320,7 +320,7 @@ module Square
     # permits it.
     # @param [String] terminal_refund_id Required parameter: Unique ID for the
     # `TerminalRefund` associated with the refund to be dismissed.
-    # @return [DismissTerminalRefundResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def dismiss_terminal_refund(terminal_refund_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,

@@ -39,7 +39,7 @@ def list_merchants(cursor: nil)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Merchants Response Hash`](../../doc/models/list-merchants-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Merchants Response Hash`](../../doc/models/list-merchants-response.md).
 
 ## Example Usage
 
@@ -70,7 +70,7 @@ def retrieve_merchant(merchant_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Merchant Response Hash`](../../doc/models/retrieve-merchant-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Merchant Response Hash`](../../doc/models/retrieve-merchant-response.md).
 
 ## Example Usage
 

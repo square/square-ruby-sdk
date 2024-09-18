@@ -56,13 +56,13 @@ def list_payments(begin_time: nil,
 | `last_4` | `String` | Query, Optional | The last four digits of a payment card. |
 | `card_brand` | `String` | Query, Optional | The brand of the payment card (for example, VISA). |
 | `limit` | `Integer` | Query, Optional | The maximum number of results to be returned in a single page.<br>It is possible to receive fewer results than the specified limit on a given page.<br><br>The default value of 100 is also the maximum allowed value. If the provided value is<br>greater than 100, it is ignored and the default value is used instead.<br><br>Default: `100` |
-| `is_offline_payment` | `TrueClass \| FalseClass` | Query, Optional | Whether the payment was taken offline or not. |
+| `is_offline_payment` | `TrueClass \| FalseClass` | Query, Optional | Whether the payment was taken offline or not.<br>**Default**: `false` |
 | `offline_begin_time` | `String` | Query, Optional | Indicates the start of the time range for which to retrieve offline payments, in RFC 3339<br>format for timestamps. The range is determined using the<br>`offline_payment_details.client_created_at` field for each Payment. If set, payments without a<br>value set in `offline_payment_details.client_created_at` will not be returned.<br><br>Default: The current time. |
 | `offline_end_time` | `String` | Query, Optional | Indicates the end of the time range for which to retrieve offline payments, in RFC 3339<br>format for timestamps. The range is determined using the<br>`offline_payment_details.client_created_at` field for each Payment. If set, payments without a<br>value set in `offline_payment_details.client_created_at` will not be returned.<br><br>Default: The current time. |
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Payments Response Hash`](../../doc/models/list-payments-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Payments Response Hash`](../../doc/models/list-payments-response.md).
 
 ## Example Usage
 
@@ -103,7 +103,7 @@ def create_payment(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Payment Response Hash`](../../doc/models/create-payment-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Payment Response Hash`](../../doc/models/create-payment-response.md).
 
 ## Example Usage
 
@@ -163,7 +163,7 @@ def cancel_payment_by_idempotency_key(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Cancel Payment by Idempotency Key Response Hash`](../../doc/models/cancel-payment-by-idempotency-key-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Cancel Payment by Idempotency Key Response Hash`](../../doc/models/cancel-payment-by-idempotency-key-response.md).
 
 ## Example Usage
 
@@ -199,7 +199,7 @@ def get_payment(payment_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Payment Response Hash`](../../doc/models/get-payment-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Payment Response Hash`](../../doc/models/get-payment-response.md).
 
 ## Example Usage
 
@@ -236,7 +236,7 @@ def update_payment(payment_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Payment Response Hash`](../../doc/models/update-payment-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Payment Response Hash`](../../doc/models/update-payment-response.md).
 
 ## Example Usage
 
@@ -289,7 +289,7 @@ def cancel_payment(payment_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Cancel Payment Response Hash`](../../doc/models/cancel-payment-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Cancel Payment Response Hash`](../../doc/models/cancel-payment-response.md).
 
 ## Example Usage
 
@@ -328,7 +328,7 @@ def complete_payment(payment_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Complete Payment Response Hash`](../../doc/models/complete-payment-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Complete Payment Response Hash`](../../doc/models/complete-payment-response.md).
 
 ## Example Usage
 
