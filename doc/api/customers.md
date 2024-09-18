@@ -50,11 +50,11 @@ def list_customers(cursor: nil,
 | `limit` | `Integer` | Query, Optional | The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.<br>If the specified limit is less than 1 or greater than 100, Square returns a `400 VALUE_TOO_LOW` or `400 VALUE_TOO_HIGH` error. The default value is 100.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 | `sort_field` | [`String (Customer Sort Field)`](../../doc/models/customer-sort-field.md) | Query, Optional | Indicates how customers should be sorted.<br><br>The default value is `DEFAULT`. |
 | `sort_order` | [`String (Sort Order)`](../../doc/models/sort-order.md) | Query, Optional | Indicates whether customers should be sorted in ascending (`ASC`) or<br>descending (`DESC`) order.<br><br>The default value is `ASC`. |
-| `count` | `TrueClass \| FalseClass` | Query, Optional | Indicates whether to return the total count of customers in the `count` field of the response.<br><br>The default value is `false`. |
+| `count` | `TrueClass \| FalseClass` | Query, Optional | Indicates whether to return the total count of customers in the `count` field of the response.<br><br>The default value is `false`.<br>**Default**: `false` |
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Customers Response Hash`](../../doc/models/list-customers-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Customers Response Hash`](../../doc/models/list-customers-response.md).
 
 ## Example Usage
 
@@ -97,7 +97,7 @@ def create_customer(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Customer Response Hash`](../../doc/models/create-customer-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Customer Response Hash`](../../doc/models/create-customer-response.md).
 
 ## Example Usage
 
@@ -156,7 +156,7 @@ def bulk_create_customers(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Create Customers Response Hash`](../../doc/models/bulk-create-customers-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Create Customers Response Hash`](../../doc/models/bulk-create-customers-response.md).
 
 ## Example Usage
 
@@ -227,7 +227,7 @@ def bulk_delete_customers(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Delete Customers Response Hash`](../../doc/models/bulk-delete-customers-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Delete Customers Response Hash`](../../doc/models/bulk-delete-customers-response.md).
 
 ## Example Usage
 
@@ -269,7 +269,7 @@ def bulk_retrieve_customers(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Retrieve Customers Response Hash`](../../doc/models/bulk-retrieve-customers-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Retrieve Customers Response Hash`](../../doc/models/bulk-retrieve-customers-response.md).
 
 ## Example Usage
 
@@ -313,7 +313,7 @@ def bulk_update_customers(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Update Customers Response Hash`](../../doc/models/bulk-update-customers-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Update Customers Response Hash`](../../doc/models/bulk-update-customers-response.md).
 
 ## Example Usage
 
@@ -369,7 +369,7 @@ def search_customers(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Customers Response Hash`](../../doc/models/search-customers-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Customers Response Hash`](../../doc/models/search-customers-response.md).
 
 ## Example Usage
 
@@ -435,7 +435,7 @@ def delete_customer(customer_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Customer Response Hash`](../../doc/models/delete-customer-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Customer Response Hash`](../../doc/models/delete-customer-response.md).
 
 ## Example Usage
 
@@ -469,7 +469,7 @@ def retrieve_customer(customer_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Customer Response Hash`](../../doc/models/retrieve-customer-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Customer Response Hash`](../../doc/models/retrieve-customer-response.md).
 
 ## Example Usage
 
@@ -510,7 +510,7 @@ def update_customer(customer_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Customer Response Hash`](../../doc/models/update-customer-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Customer Response Hash`](../../doc/models/update-customer-response.md).
 
 ## Example Usage
 
@@ -562,7 +562,7 @@ def create_customer_card(customer_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Customer Card Response Hash`](../../doc/models/create-customer-card-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Customer Card Response Hash`](../../doc/models/create-customer-card-response.md).
 
 ## Example Usage
 
@@ -616,7 +616,7 @@ def delete_customer_card(customer_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Customer Card Response Hash`](../../doc/models/delete-customer-card-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Customer Card Response Hash`](../../doc/models/delete-customer-card-response.md).
 
 ## Example Usage
 
@@ -660,7 +660,7 @@ def remove_group_from_customer(customer_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Remove Group From Customer Response Hash`](../../doc/models/remove-group-from-customer-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Remove Group From Customer Response Hash`](../../doc/models/remove-group-from-customer-response.md).
 
 ## Example Usage
 
@@ -704,7 +704,7 @@ def add_group_to_customer(customer_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Add Group to Customer Response Hash`](../../doc/models/add-group-to-customer-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Add Group to Customer Response Hash`](../../doc/models/add-group-to-customer-response.md).
 
 ## Example Usage
 

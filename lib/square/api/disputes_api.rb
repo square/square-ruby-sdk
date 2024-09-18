@@ -13,7 +13,7 @@ module Square
     # @param [String] location_id Optional parameter: The ID of the location for
     # which to return a list of disputes. If not specified, the endpoint returns
     # disputes associated with all locations.
-    # @return [ListDisputesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_disputes(cursor: nil,
                       states: nil,
                       location_id: nil)
@@ -36,7 +36,7 @@ module Square
     # Returns details about a specific dispute.
     # @param [String] dispute_id Required parameter: The ID of the dispute you
     # want more details about.
-    # @return [RetrieveDisputeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_dispute(dispute_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -61,7 +61,7 @@ module Square
     # does not have sufficient funds, Square debits the associated bank account.
     # @param [String] dispute_id Required parameter: The ID of the dispute you
     # want to accept.
-    # @return [AcceptDisputeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def accept_dispute(dispute_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -85,7 +85,7 @@ module Square
     # set of results for the original query. For more information, see
     # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
     # atterns/pagination).
-    # @return [ListDisputeEvidenceResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_dispute_evidence(dispute_id:,
                               cursor: nil)
       new_api_call_builder
@@ -113,7 +113,7 @@ module Square
     # @param [CreateDisputeEvidenceFileRequest] request Optional parameter:
     # Defines the parameters for a `CreateDisputeEvidenceFile` request.
     # @param [File | UploadIO] image_file Optional parameter: Example:
-    # @return [CreateDisputeEvidenceFileResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_dispute_evidence_file(dispute_id:,
                                      request: nil,
                                      image_file: nil)
@@ -142,7 +142,7 @@ module Square
     # @param [CreateDisputeEvidenceTextRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [CreateDisputeEvidenceTextResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_dispute_evidence_text(dispute_id:,
                                      body:)
       new_api_call_builder
@@ -169,7 +169,7 @@ module Square
     # which you want to remove evidence.
     # @param [String] evidence_id Required parameter: The ID of the evidence you
     # want to remove.
-    # @return [DeleteDisputeEvidenceResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_dispute_evidence(dispute_id:,
                                 evidence_id:)
       new_api_call_builder
@@ -196,7 +196,7 @@ module Square
     # which you want to retrieve evidence metadata.
     # @param [String] evidence_id Required parameter: The ID of the evidence to
     # retrieve.
-    # @return [RetrieveDisputeEvidenceResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_dispute_evidence(dispute_id:,
                                   evidence_id:)
       new_api_call_builder
@@ -227,7 +227,7 @@ module Square
     # a dispute after submission.
     # @param [String] dispute_id Required parameter: The ID of the dispute for
     # which you want to submit evidence.
-    # @return [SubmitEvidenceResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def submit_evidence(dispute_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,

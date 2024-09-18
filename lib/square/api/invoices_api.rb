@@ -14,7 +14,7 @@ module Square
     # @param [Integer] limit Optional parameter: The maximum number of invoices
     # to return (200 is the maximum `limit`).  If not provided, the server uses
     # a default limit of 100 invoices.
-    # @return [ListInvoicesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_invoices(location_id:,
                       cursor: nil,
                       limit: nil)
@@ -42,7 +42,7 @@ module Square
     # @param [CreateInvoiceRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateInvoiceResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_invoice(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -70,7 +70,7 @@ module Square
     # @param [SearchInvoicesRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [SearchInvoicesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_invoices(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -98,7 +98,7 @@ module Square
     # [invoice](entity:Invoice) to delete. If you do not know the version, you
     # can call [GetInvoice](api-endpoint:Invoices-GetInvoice) or
     # [ListInvoices](api-endpoint:Invoices-ListInvoices).
-    # @return [DeleteInvoiceResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_invoice(invoice_id:,
                        version: nil)
       new_api_call_builder
@@ -120,7 +120,7 @@ module Square
     # Retrieves an invoice by invoice ID.
     # @param [String] invoice_id Required parameter: The ID of the invoice to
     # retrieve.
-    # @return [GetInvoiceResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def get_invoice(invoice_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -149,7 +149,7 @@ module Square
     # @param [UpdateInvoiceRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpdateInvoiceResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_invoice(invoice_id:,
                        body:)
       new_api_call_builder
@@ -184,7 +184,7 @@ module Square
     # Represents a
     # [CreateInvoiceAttachment]($e/Invoices/CreateInvoiceAttachment) request.
     # @param [File | UploadIO] image_file Optional parameter: Example:
-    # @return [CreateInvoiceAttachmentResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_invoice_attachment(invoice_id:,
                                   request: nil,
                                   image_file: nil)
@@ -215,7 +215,7 @@ module Square
     # [invoice](entity:Invoice) to delete the attachment from.
     # @param [String] attachment_id Required parameter: The ID of the
     # [attachment](entity:InvoiceAttachment) to delete.
-    # @return [DeleteInvoiceAttachmentResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_invoice_attachment(invoice_id:,
                                   attachment_id:)
       new_api_call_builder
@@ -244,7 +244,7 @@ module Square
     # @param [CancelInvoiceRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CancelInvoiceResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def cancel_invoice(invoice_id:,
                        body:)
       new_api_call_builder
@@ -287,7 +287,7 @@ module Square
     # @param [PublishInvoiceRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [PublishInvoiceResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def publish_invoice(invoice_id:,
                         body:)
       new_api_call_builder

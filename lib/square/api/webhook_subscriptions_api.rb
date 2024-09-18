@@ -5,7 +5,7 @@ module Square
     # @param [String] api_version Optional parameter: The API version for which
     # to list event types. Setting this field overrides the default version used
     # by the application.
-    # @return [ListWebhookEventTypesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_webhook_event_types(api_version: nil)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -37,7 +37,7 @@ module Square
     # to be returned in a single page. It is possible to receive fewer results
     # than the specified limit on a given page. The default value of 100 is also
     # the maximum allowed value.  Default: 100
-    # @return [ListWebhookSubscriptionsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_webhook_subscriptions(cursor: nil,
                                    include_disabled: false,
                                    sort_order: nil,
@@ -63,7 +63,7 @@ module Square
     # @param [CreateWebhookSubscriptionRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [CreateWebhookSubscriptionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_webhook_subscription(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -84,7 +84,7 @@ module Square
     # Deletes a webhook subscription.
     # @param [String] subscription_id Required parameter: [REQUIRED] The ID of
     # the [Subscription](entity:WebhookSubscription) to delete.
-    # @return [DeleteWebhookSubscriptionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_webhook_subscription(subscription_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::DELETE,
@@ -104,7 +104,7 @@ module Square
     # Retrieves a webhook subscription identified by its ID.
     # @param [String] subscription_id Required parameter: [REQUIRED] The ID of
     # the [Subscription](entity:WebhookSubscription) to retrieve.
-    # @return [RetrieveWebhookSubscriptionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_webhook_subscription(subscription_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -127,7 +127,7 @@ module Square
     # @param [UpdateWebhookSubscriptionRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [UpdateWebhookSubscriptionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_webhook_subscription(subscription_id:,
                                     body:)
       new_api_call_builder
@@ -155,7 +155,7 @@ module Square
     # @param [UpdateWebhookSubscriptionSignatureKeyRequest] body Required
     # parameter: An object containing the fields to POST for the request.  See
     # the corresponding object definition for field details.
-    # @return [UpdateWebhookSubscriptionSignatureKeyResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_webhook_subscription_signature_key(subscription_id:,
                                                   body:)
       new_api_call_builder
@@ -183,7 +183,7 @@ module Square
     # @param [TestWebhookSubscriptionRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [TestWebhookSubscriptionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def test_webhook_subscription(subscription_id:,
                                   body:)
       new_api_call_builder

@@ -42,7 +42,7 @@ def list_cash_drawer_shifts(location_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Cash Drawer Shifts Response Hash`](../../doc/models/list-cash-drawer-shifts-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Cash Drawer Shifts Response Hash`](../../doc/models/list-cash-drawer-shifts-response.md).
 
 ## Example Usage
 
@@ -79,7 +79,7 @@ def retrieve_cash_drawer_shift(location_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Cash Drawer Shift Response Hash`](../../doc/models/retrieve-cash-drawer-shift-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Cash Drawer Shift Response Hash`](../../doc/models/retrieve-cash-drawer-shift-response.md).
 
 ## Example Usage
 
@@ -124,7 +124,7 @@ def list_cash_drawer_shift_events(location_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Cash Drawer Shift Events Response Hash`](../../doc/models/list-cash-drawer-shift-events-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Cash Drawer Shift Events Response Hash`](../../doc/models/list-cash-drawer-shift-events-response.md).
 
 ## Example Usage
 

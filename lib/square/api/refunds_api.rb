@@ -40,7 +40,7 @@ module Square
     # to be returned in a single page.  It is possible to receive fewer results
     # than the specified limit on a given page.  If the supplied value is
     # greater than 100, no more than 100 results are returned.  Default: 100
-    # @return [ListPaymentRefundsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_payment_refunds(begin_time: nil,
                              end_time: nil,
                              sort_order: nil,
@@ -80,7 +80,7 @@ module Square
     # @param [RefundPaymentRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [RefundPaymentResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def refund_payment(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -101,7 +101,7 @@ module Square
     # Retrieves a specific refund using the `refund_id`.
     # @param [String] refund_id Required parameter: The unique ID for the
     # desired `PaymentRefund`.
-    # @return [GetPaymentRefundResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def get_payment_refund(refund_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,

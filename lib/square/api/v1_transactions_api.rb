@@ -11,7 +11,7 @@ module Square
     # @param [String] batch_token Optional parameter: A pagination cursor to
     # retrieve the next set of results for your original query to the
     # endpoint.
-    # @return [Array[V1Order] Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def v1_list_orders(location_id:,
                        order: nil,
                        limit: nil,
@@ -43,7 +43,7 @@ module Square
     # @param [String] order_id Required parameter: The order's Square-issued ID.
     # You obtain this value from Order objects returned by the List Orders
     # endpoint
-    # @return [V1Order Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def v1_retrieve_order(location_id:,
                           order_id:)
       warn 'Endpoint v1_retrieve_order in V1TransactionsApi is deprecated'
@@ -74,7 +74,7 @@ module Square
     # @param [V1UpdateOrderRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [V1Order Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def v1_update_order(location_id:,
                         order_id:,
                         body:)

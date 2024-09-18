@@ -29,7 +29,7 @@ module Square
     # @param [TrueClass | FalseClass] count Optional parameter: Indicates
     # whether to return the total count of customers in the `count` field of the
     # response.  The default value is `false`.
-    # @return [ListCustomersResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_customers(cursor: nil,
                        limit: nil,
                        sort_field: nil,
@@ -65,7 +65,7 @@ module Square
     # @param [CreateCustomerRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateCustomerResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_customer(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -96,7 +96,7 @@ module Square
     # @param [BulkCreateCustomersRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [BulkCreateCustomersResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_create_customers(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -119,7 +119,7 @@ module Square
     # @param [BulkDeleteCustomersRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [BulkDeleteCustomersResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_delete_customers(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -142,7 +142,7 @@ module Square
     # @param [BulkRetrieveCustomersRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [BulkRetrieveCustomersResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_retrieve_customers(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -168,7 +168,7 @@ module Square
     # @param [BulkUpdateCustomersRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [BulkUpdateCustomersResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_update_customers(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -200,7 +200,7 @@ module Square
     # @param [SearchCustomersRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [SearchCustomersResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_customers(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -232,7 +232,7 @@ module Square
     # [Delete a customer
     # profile](https://developer.squareup.com/docs/customers-api/use-the-api/kee
     # p-records#delete-customer-profile).
-    # @return [DeleteCustomerResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_customer(customer_id:,
                         version: nil)
       new_api_call_builder
@@ -254,7 +254,7 @@ module Square
     # Returns details for a single customer.
     # @param [String] customer_id Required parameter: The ID of the customer to
     # retrieve.
-    # @return [RetrieveCustomerResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_customer(customer_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -284,7 +284,7 @@ module Square
     # @param [UpdateCustomerRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpdateCustomerResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_customer(customer_id:,
                         body:)
       new_api_call_builder
@@ -315,7 +315,7 @@ module Square
     # @param [CreateCustomerCardRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateCustomerCardResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_customer_card(customer_id:,
                              body:)
       warn 'Endpoint create_customer_card in CustomersApi is deprecated'
@@ -342,7 +342,7 @@ module Square
     # that the card on file belongs to.
     # @param [String] card_id Required parameter: The ID of the card on file to
     # delete.
-    # @return [DeleteCustomerCardResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_customer_card(customer_id:,
                              card_id:)
       warn 'Endpoint delete_customer_card in CustomersApi is deprecated'
@@ -370,7 +370,7 @@ module Square
     # remove from the group.
     # @param [String] group_id Required parameter: The ID of the customer group
     # to remove the customer from.
-    # @return [RemoveGroupFromCustomerResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def remove_group_from_customer(customer_id:,
                                    group_id:)
       new_api_call_builder
@@ -397,7 +397,7 @@ module Square
     # add to a group.
     # @param [String] group_id Required parameter: The ID of the customer group
     # to add the customer to.
-    # @return [AddGroupToCustomerResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def add_group_to_customer(customer_id:,
                               group_id:)
       new_api_call_builder

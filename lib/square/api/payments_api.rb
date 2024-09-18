@@ -53,7 +53,7 @@ module Square
     # set, payments without a value set in
     # `offline_payment_details.client_created_at` will not be returned.
     # Default: The current time.
-    # @return [ListPaymentsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_payments(begin_time: nil,
                       end_time: nil,
                       sort_order: nil,
@@ -102,7 +102,7 @@ module Square
     # @param [CreatePaymentRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreatePaymentResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_payment(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -138,7 +138,7 @@ module Square
     # @param [CancelPaymentByIdempotencyKeyRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [CancelPaymentByIdempotencyKeyResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def cancel_payment_by_idempotency_key(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -159,7 +159,7 @@ module Square
     # Retrieves details for a specific payment.
     # @param [String] payment_id Required parameter: A unique ID for the desired
     # payment.
-    # @return [GetPaymentResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def get_payment(payment_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -183,7 +183,7 @@ module Square
     # @param [UpdatePaymentRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpdatePaymentResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_payment(payment_id:,
                        body:)
       new_api_call_builder
@@ -209,7 +209,7 @@ module Square
     # the APPROVED `status`.
     # @param [String] payment_id Required parameter: The ID of the payment to
     # cancel.
-    # @return [CancelPaymentResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def cancel_payment(payment_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -236,7 +236,7 @@ module Square
     # @param [CompletePaymentRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CompletePaymentResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def complete_payment(payment_id:,
                          body:)
       new_api_call_builder

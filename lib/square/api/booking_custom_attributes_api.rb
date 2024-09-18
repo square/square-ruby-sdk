@@ -18,7 +18,7 @@ module Square
     # more information, see
     # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
     # atterns/pagination).
-    # @return [ListBookingCustomAttributeDefinitionsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_booking_custom_attribute_definitions(limit: nil,
                                                   cursor: nil)
       new_api_call_builder
@@ -47,7 +47,7 @@ module Square
     # @param [CreateBookingCustomAttributeDefinitionRequest] body Required
     # parameter: An object containing the fields to POST for the request.  See
     # the corresponding object definition for field details.
-    # @return [CreateBookingCustomAttributeDefinitionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_booking_custom_attribute_definition(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -75,7 +75,7 @@ module Square
     # or *Appointments Premium*.
     # @param [String] key Required parameter: The key of the custom attribute
     # definition to delete.
-    # @return [DeleteBookingCustomAttributeDefinitionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_booking_custom_attribute_definition(key:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::DELETE,
@@ -106,7 +106,7 @@ module Square
     # the request, Square returns the specified version or a higher version if
     # one exists. If the specified version is higher than the current version,
     # Square returns a `BAD_REQUEST` error.
-    # @return [RetrieveBookingCustomAttributeDefinitionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_booking_custom_attribute_definition(key:,
                                                      version: nil)
       new_api_call_builder
@@ -138,7 +138,7 @@ module Square
     # @param [UpdateBookingCustomAttributeDefinitionRequest] body Required
     # parameter: An object containing the fields to POST for the request.  See
     # the corresponding object definition for field details.
-    # @return [UpdateBookingCustomAttributeDefinitionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_booking_custom_attribute_definition(key:,
                                                    body:)
       new_api_call_builder
@@ -170,7 +170,7 @@ module Square
     # @param [BulkDeleteBookingCustomAttributesRequest] body Required parameter:
     # An object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [BulkDeleteBookingCustomAttributesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_delete_booking_custom_attributes(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -199,7 +199,7 @@ module Square
     # @param [BulkUpsertBookingCustomAttributesRequest] body Required parameter:
     # An object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [BulkUpsertBookingCustomAttributesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_upsert_booking_custom_attributes(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -242,7 +242,7 @@ module Square
     # each custom attribute. Set this parameter to `true` to get the name and
     # description of each custom attribute, information about the data type, or
     # other definition details. The default value is `false`.
-    # @return [ListBookingCustomAttributesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_booking_custom_attributes(booking_id:,
                                        limit: nil,
                                        cursor: nil,
@@ -279,7 +279,7 @@ module Square
     # delete. This key must match the `key` of a custom attribute definition in
     # the Square seller account. If the requesting application is not the
     # definition owner, you must use the qualified key.
-    # @return [DeleteBookingCustomAttributeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_booking_custom_attribute(booking_id:,
                                         key:)
       new_api_call_builder
@@ -322,7 +322,7 @@ module Square
     # Square returns the specified version or a higher version if one exists. If
     # the specified version is higher than the current version, Square returns a
     # `BAD_REQUEST` error.
-    # @return [RetrieveBookingCustomAttributeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_booking_custom_attribute(booking_id:,
                                           key:,
                                           with_definition: false,
@@ -363,7 +363,7 @@ module Square
     # @param [UpsertBookingCustomAttributeRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [UpsertBookingCustomAttributeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def upsert_booking_custom_attribute(booking_id:,
                                         key:,
                                         body:)

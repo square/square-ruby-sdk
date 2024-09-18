@@ -14,7 +14,7 @@ module Square
     # @param [CreateSubscriptionRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateSubscriptionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_subscription(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -40,7 +40,7 @@ module Square
     # @param [BulkSwapPlanRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
-    # @return [BulkSwapPlanResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_swap_plan(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -74,7 +74,7 @@ module Square
     # @param [SearchSubscriptionsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [SearchSubscriptionsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_subscriptions(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -99,7 +99,7 @@ module Square
     # related information to be included in the response.   The supported query
     # parameter values are:   - `actions`: to include scheduled actions on the
     # targeted subscription.
-    # @return [RetrieveSubscriptionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_subscription(subscription_id:,
                               include: nil)
       new_api_call_builder
@@ -126,7 +126,7 @@ module Square
     # @param [UpdateSubscriptionRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpdateSubscriptionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_subscription(subscription_id:,
                             body:)
       new_api_call_builder
@@ -152,7 +152,7 @@ module Square
     # subscription the targeted action is to act upon.
     # @param [String] action_id Required parameter: The ID of the targeted
     # action to be deleted.
-    # @return [DeleteSubscriptionActionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_subscription_action(subscription_id:,
                                    action_id:)
       new_api_call_builder
@@ -181,7 +181,7 @@ module Square
     # @param [ChangeBillingAnchorDateRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [ChangeBillingAnchorDateResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def change_billing_anchor_date(subscription_id:,
                                    body:)
       new_api_call_builder
@@ -208,7 +208,7 @@ module Square
     # the subscription status changes from ACTIVE to CANCELED.
     # @param [String] subscription_id Required parameter: The ID of the
     # subscription to cancel.
-    # @return [CancelSubscriptionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def cancel_subscription(subscription_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -239,7 +239,7 @@ module Square
     # atterns/pagination).
     # @param [Integer] limit Optional parameter: The upper limit on the number
     # of subscription events to return in a paged response.
-    # @return [ListSubscriptionEventsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_subscription_events(subscription_id:,
                                  cursor: nil,
                                  limit: nil)
@@ -266,7 +266,7 @@ module Square
     # @param [PauseSubscriptionRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [PauseSubscriptionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def pause_subscription(subscription_id:,
                            body:)
       new_api_call_builder
@@ -294,7 +294,7 @@ module Square
     # @param [ResumeSubscriptionRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [ResumeSubscriptionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def resume_subscription(subscription_id:,
                             body:)
       new_api_call_builder
@@ -325,7 +325,7 @@ module Square
     # @param [SwapPlanRequest] body Required parameter: An object containing the
     # fields to POST for the request.  See the corresponding object definition
     # for field details.
-    # @return [SwapPlanResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def swap_plan(subscription_id:,
                   body:)
       new_api_call_builder

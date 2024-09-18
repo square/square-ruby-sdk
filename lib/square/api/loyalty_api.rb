@@ -6,7 +6,7 @@ module Square
     # @param [CreateLoyaltyAccountRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateLoyaltyAccountResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_loyalty_account(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -32,7 +32,7 @@ module Square
     # @param [SearchLoyaltyAccountsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [SearchLoyaltyAccountsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_loyalty_accounts(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -53,7 +53,7 @@ module Square
     # Retrieves a loyalty account.
     # @param [String] account_id Required parameter: The ID of the [loyalty
     # account](entity:LoyaltyAccount) to retrieve.
-    # @return [RetrieveLoyaltyAccountResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_loyalty_account(account_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -100,7 +100,7 @@ module Square
     # @param [AccumulateLoyaltyPointsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [AccumulateLoyaltyPointsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def accumulate_loyalty_points(account_id:,
                                   body:)
       new_api_call_builder
@@ -131,7 +131,7 @@ module Square
     # @param [AdjustLoyaltyPointsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [AdjustLoyaltyPointsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def adjust_loyalty_points(account_id:,
                               body:)
       new_api_call_builder
@@ -163,7 +163,7 @@ module Square
     # @param [SearchLoyaltyEventsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [SearchLoyaltyEventsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_loyalty_events(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -190,7 +190,7 @@ module Square
     # Replaced with
     # [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) when
     # used with the keyword `main`.
-    # @return [ListLoyaltyProgramsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_loyalty_programs
       warn 'Endpoint list_loyalty_programs in LoyaltyApi is deprecated'
       new_api_call_builder
@@ -216,7 +216,7 @@ module Square
     # @param [String] program_id Required parameter: The ID of the loyalty
     # program or the keyword `main`. Either value can be used to retrieve the
     # single loyalty program that belongs to the seller.
-    # @return [RetrieveLoyaltyProgramResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_loyalty_program(program_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -263,7 +263,7 @@ module Square
     # @param [CalculateLoyaltyPointsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CalculateLoyaltyPointsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def calculate_loyalty_points(program_id:,
                                  body:)
       new_api_call_builder
@@ -307,7 +307,7 @@ module Square
     # maximum value is 30. The default value is 30. For more information, see
     # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
     # atterns/pagination).
-    # @return [ListLoyaltyPromotionsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_loyalty_promotions(program_id:,
                                 status: nil,
                                 cursor: nil,
@@ -347,7 +347,7 @@ module Square
     # @param [CreateLoyaltyPromotionRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateLoyaltyPromotionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_loyalty_promotion(program_id:,
                                  body:)
       new_api_call_builder
@@ -375,7 +375,7 @@ module Square
     # program](entity:LoyaltyProgram). To get the program ID, call
     # [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram)
     # using the `main` keyword.
-    # @return [RetrieveLoyaltyPromotionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_loyalty_promotion(promotion_id:,
                                    program_id:)
       new_api_call_builder
@@ -408,7 +408,7 @@ module Square
     # that has an `ACTIVE` or `SCHEDULED` status.
     # @param [String] program_id Required parameter: The ID of the base [loyalty
     # program](entity:LoyaltyProgram).
-    # @return [CancelLoyaltyPromotionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def cancel_loyalty_promotion(promotion_id:,
                                  program_id:)
       new_api_call_builder
@@ -439,7 +439,7 @@ module Square
     # @param [CreateLoyaltyRewardRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateLoyaltyRewardResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_loyalty_reward(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -467,7 +467,7 @@ module Square
     # @param [SearchLoyaltyRewardsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [SearchLoyaltyRewardsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_loyalty_rewards(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -494,7 +494,7 @@ module Square
     # You cannot delete a reward that has reached the terminal state (REDEEMED).
     # @param [String] reward_id Required parameter: The ID of the [loyalty
     # reward](entity:LoyaltyReward) to delete.
-    # @return [DeleteLoyaltyRewardResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_loyalty_reward(reward_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::DELETE,
@@ -514,7 +514,7 @@ module Square
     # Retrieves a loyalty reward.
     # @param [String] reward_id Required parameter: The ID of the [loyalty
     # reward](entity:LoyaltyReward) to retrieve.
-    # @return [RetrieveLoyaltyRewardResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_loyalty_reward(reward_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -544,7 +544,7 @@ module Square
     # @param [RedeemLoyaltyRewardRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [RedeemLoyaltyRewardResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def redeem_loyalty_reward(reward_id:,
                               body:)
       new_api_call_builder

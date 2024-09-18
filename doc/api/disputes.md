@@ -41,7 +41,7 @@ def list_disputes(cursor: nil,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Disputes Response Hash`](../../doc/models/list-disputes-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Disputes Response Hash`](../../doc/models/list-disputes-response.md).
 
 ## Example Usage
 
@@ -72,7 +72,7 @@ def retrieve_dispute(dispute_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Dispute Response Hash`](../../doc/models/retrieve-dispute-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Dispute Response Hash`](../../doc/models/retrieve-dispute-response.md).
 
 ## Example Usage
 
@@ -110,7 +110,7 @@ def accept_dispute(dispute_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Accept Dispute Response Hash`](../../doc/models/accept-dispute-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Accept Dispute Response Hash`](../../doc/models/accept-dispute-response.md).
 
 ## Example Usage
 
@@ -146,7 +146,7 @@ def list_dispute_evidence(dispute_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Dispute Evidence Response Hash`](../../doc/models/list-dispute-evidence-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Dispute Evidence Response Hash`](../../doc/models/list-dispute-evidence-response.md).
 
 ## Example Usage
 
@@ -185,7 +185,7 @@ def create_dispute_evidence_file(dispute_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Dispute Evidence File Response Hash`](../../doc/models/create-dispute-evidence-file-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Dispute Evidence File Response Hash`](../../doc/models/create-dispute-evidence-file-response.md).
 
 ## Example Usage
 
@@ -221,7 +221,7 @@ def create_dispute_evidence_text(dispute_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Dispute Evidence Text Response Hash`](../../doc/models/create-dispute-evidence-text-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Dispute Evidence Text Response Hash`](../../doc/models/create-dispute-evidence-text-response.md).
 
 ## Example Usage
 
@@ -267,7 +267,7 @@ def delete_dispute_evidence(dispute_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Dispute Evidence Response Hash`](../../doc/models/delete-dispute-evidence-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Dispute Evidence Response Hash`](../../doc/models/delete-dispute-evidence-response.md).
 
 ## Example Usage
 
@@ -310,7 +310,7 @@ def retrieve_dispute_evidence(dispute_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Dispute Evidence Response Hash`](../../doc/models/retrieve-dispute-evidence-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Dispute Evidence Response Hash`](../../doc/models/retrieve-dispute-evidence-response.md).
 
 ## Example Usage
 
@@ -355,7 +355,7 @@ def submit_evidence(dispute_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Submit Evidence Response Hash`](../../doc/models/submit-evidence-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Submit Evidence Response Hash`](../../doc/models/submit-evidence-response.md).
 
 ## Example Usage
 

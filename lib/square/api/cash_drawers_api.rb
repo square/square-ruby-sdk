@@ -16,7 +16,7 @@ module Square
     # events in a page of results (200 by default, 1000 max).
     # @param [String] cursor Optional parameter: Opaque cursor for fetching the
     # next page of results.
-    # @return [ListCashDrawerShiftsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_cash_drawer_shifts(location_id:,
                                 sort_order: nil,
                                 begin_time: nil,
@@ -48,7 +48,7 @@ module Square
     # @param [String] location_id Required parameter: The ID of the location to
     # retrieve cash drawer shifts from.
     # @param [String] shift_id Required parameter: The shift ID.
-    # @return [RetrieveCashDrawerShiftResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_cash_drawer_shift(location_id:,
                                    shift_id:)
       new_api_call_builder
@@ -75,7 +75,7 @@ module Square
     # returned in a page of results (200 by default, 1000 max).
     # @param [String] cursor Optional parameter: Opaque cursor for fetching the
     # next page of results.
-    # @return [ListCashDrawerShiftEventsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_cash_drawer_shift_events(location_id:,
                                       shift_id:,
                                       limit: nil,

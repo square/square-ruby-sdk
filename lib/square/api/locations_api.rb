@@ -5,7 +5,7 @@ module Square
     # [locations](https://developer.squareup.com/docs/locations-api),
     # including those with an inactive status. Locations are listed
     # alphabetically by `name`.
-    # @return [ListLocationsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_locations
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -33,7 +33,7 @@ module Square
     # @param [CreateLocationRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateLocationResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_location(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -57,7 +57,7 @@ module Square
     # -location).
     # @param [String] location_id Required parameter: The ID of the location to
     # retrieve. Specify the string "main" to return the main location.
-    # @return [RetrieveLocationResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_location(location_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -80,7 +80,7 @@ module Square
     # @param [UpdateLocationRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpdateLocationResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_location(location_id:,
                         body:)
       new_api_call_builder

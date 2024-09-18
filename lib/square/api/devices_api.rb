@@ -15,7 +15,7 @@ module Square
     # in a single page.
     # @param [String] location_id Optional parameter: If present, only returns
     # devices at the target location.
-    # @return [ListDevicesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_devices(cursor: nil,
                      sort_order: nil,
                      limit: nil,
@@ -52,7 +52,7 @@ module Square
     # @param [DeviceCodeStatus] status Optional parameter: If specified, returns
     # DeviceCodes with the specified statuses. Returns DeviceCodes of status
     # `PAIRED` and `UNPAIRED` if empty.
-    # @return [ListDeviceCodesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_device_codes(cursor: nil,
                           location_id: nil,
                           product_type: nil,
@@ -80,7 +80,7 @@ module Square
     # @param [CreateDeviceCodeRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateDeviceCodeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_device_code(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -101,7 +101,7 @@ module Square
     # Retrieves DeviceCode with the associated ID.
     # @param [String] id Required parameter: The unique identifier for the
     # device code.
-    # @return [GetDeviceCodeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def get_device_code(id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -121,7 +121,7 @@ module Square
     # Retrieves Device with the associated `device_id`.
     # @param [String] device_id Required parameter: The unique ID for the
     # desired `Device`.
-    # @return [GetDeviceResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def get_device(device_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,

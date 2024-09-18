@@ -44,7 +44,7 @@ def list_invoices(location_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Invoices Response Hash`](../../doc/models/list-invoices-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Invoices Response Hash`](../../doc/models/list-invoices-response.md).
 
 ## Example Usage
 
@@ -82,7 +82,7 @@ def create_invoice(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Invoice Response Hash`](../../doc/models/create-invoice-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Invoice Response Hash`](../../doc/models/create-invoice-response.md).
 
 ## Example Usage
 
@@ -171,7 +171,7 @@ def search_invoices(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Invoices Response Hash`](../../doc/models/search-invoices-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Invoices Response Hash`](../../doc/models/search-invoices-response.md).
 
 ## Example Usage
 
@@ -224,7 +224,7 @@ def delete_invoice(invoice_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Invoice Response Hash`](../../doc/models/delete-invoice-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Invoice Response Hash`](../../doc/models/delete-invoice-response.md).
 
 ## Example Usage
 
@@ -258,7 +258,7 @@ def get_invoice(invoice_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Invoice Response Hash`](../../doc/models/get-invoice-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Invoice Response Hash`](../../doc/models/get-invoice-response.md).
 
 ## Example Usage
 
@@ -297,7 +297,7 @@ def update_invoice(invoice_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Invoice Response Hash`](../../doc/models/update-invoice-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Invoice Response Hash`](../../doc/models/update-invoice-response.md).
 
 ## Example Usage
 
@@ -361,7 +361,7 @@ def create_invoice_attachment(invoice_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Invoice Attachment Response Hash`](../../doc/models/create-invoice-attachment-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Invoice Attachment Response Hash`](../../doc/models/create-invoice-attachment-response.md).
 
 ## Example Usage
 
@@ -406,7 +406,7 @@ def delete_invoice_attachment(invoice_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Invoice Attachment Response Hash`](../../doc/models/delete-invoice-attachment-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Invoice Attachment Response Hash`](../../doc/models/delete-invoice-attachment-response.md).
 
 ## Example Usage
 
@@ -450,7 +450,7 @@ def cancel_invoice(invoice_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Cancel Invoice Response Hash`](../../doc/models/cancel-invoice-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Cancel Invoice Response Hash`](../../doc/models/cancel-invoice-response.md).
 
 ## Example Usage
 
@@ -506,7 +506,7 @@ def publish_invoice(invoice_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Publish Invoice Response Hash`](../../doc/models/publish-invoice-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Publish Invoice Response Hash`](../../doc/models/publish-invoice-response.md).
 
 ## Example Usage
 

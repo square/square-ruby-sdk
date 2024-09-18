@@ -13,7 +13,7 @@ module Square
     # @param [CreateCheckoutRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateCheckoutResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_checkout(location_id:,
                         body:)
       warn 'Endpoint create_checkout in CheckoutApi is deprecated'
@@ -38,7 +38,7 @@ module Square
     # Retrieves the location-level settings for a Square-hosted checkout page.
     # @param [String] location_id Required parameter: The ID of the location for
     # which to retrieve settings.
-    # @return [RetrieveLocationSettingsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_location_settings(location_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -61,7 +61,7 @@ module Square
     # @param [UpdateLocationSettingsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpdateLocationSettingsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_location_settings(location_id:,
                                  body:)
       new_api_call_builder
@@ -83,7 +83,7 @@ module Square
     end
 
     # Retrieves the merchant-level settings for a Square-hosted checkout page.
-    # @return [RetrieveMerchantSettingsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_merchant_settings
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -102,7 +102,7 @@ module Square
     # @param [UpdateMerchantSettingsRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpdateMerchantSettingsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_merchant_settings(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::PUT,
@@ -132,7 +132,7 @@ module Square
     # might return more or less results. If the supplied limit is negative,
     # zero, or greater than the maximum limit of 1000, it is ignored.  Default
     # value: `100`
-    # @return [ListPaymentLinksResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_payment_links(cursor: nil,
                            limit: nil)
       new_api_call_builder
@@ -155,7 +155,7 @@ module Square
     # @param [CreatePaymentLinkRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreatePaymentLinkResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_payment_link(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -176,7 +176,7 @@ module Square
     # Deletes a payment link.
     # @param [String] id Required parameter: The ID of the payment link to
     # delete.
-    # @return [DeletePaymentLinkResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_payment_link(id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::DELETE,
@@ -195,7 +195,7 @@ module Square
 
     # Retrieves a payment link.
     # @param [String] id Required parameter: The ID of link to retrieve.
-    # @return [RetrievePaymentLinkResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_payment_link(id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -221,7 +221,7 @@ module Square
     # @param [UpdatePaymentLinkRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpdatePaymentLinkResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_payment_link(id:,
                             body:)
       new_api_call_builder

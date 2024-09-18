@@ -35,7 +35,7 @@ def list_customer_groups(cursor: nil,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Customer Groups Response Hash`](../../doc/models/list-customer-groups-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Customer Groups Response Hash`](../../doc/models/list-customer-groups-response.md).
 
 ## Example Usage
 
@@ -68,7 +68,7 @@ def create_customer_group(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Customer Group Response Hash`](../../doc/models/create-customer-group-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Customer Group Response Hash`](../../doc/models/create-customer-group-response.md).
 
 ## Example Usage
 
@@ -106,7 +106,7 @@ def delete_customer_group(group_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Customer Group Response Hash`](../../doc/models/delete-customer-group-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Customer Group Response Hash`](../../doc/models/delete-customer-group-response.md).
 
 ## Example Usage
 
@@ -140,7 +140,7 @@ def retrieve_customer_group(group_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Customer Group Response Hash`](../../doc/models/retrieve-customer-group-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Customer Group Response Hash`](../../doc/models/retrieve-customer-group-response.md).
 
 ## Example Usage
 
@@ -176,7 +176,7 @@ def update_customer_group(group_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Customer Group Response Hash`](../../doc/models/update-customer-group-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Customer Group Response Hash`](../../doc/models/update-customer-group-response.md).
 
 ## Example Usage
 

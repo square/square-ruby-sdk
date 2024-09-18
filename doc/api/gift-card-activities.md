@@ -47,7 +47,7 @@ def list_gift_card_activities(gift_card_id: nil,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Gift Card Activities Response Hash`](../../doc/models/list-gift-card-activities-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Gift Card Activities Response Hash`](../../doc/models/list-gift-card-activities-response.md).
 
 ## Example Usage
 
@@ -79,7 +79,7 @@ def create_gift_card_activity(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Gift Card Activity Response Hash`](../../doc/models/create-gift-card-activity-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Gift Card Activity Response Hash`](../../doc/models/create-gift-card-activity-response.md).
 
 ## Example Usage
 

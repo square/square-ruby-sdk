@@ -25,7 +25,7 @@ module Square
     # @param [String] customer_id Optional parameter: If a customer ID is
     # provided, the endpoint returns only the gift cards linked to the specified
     # customer.
-    # @return [ListGiftCardsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_gift_cards(type: nil,
                         state: nil,
                         limit: nil,
@@ -61,7 +61,7 @@ module Square
     # @param [CreateGiftCardRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateGiftCardResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_gift_card(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -83,7 +83,7 @@ module Square
     # @param [RetrieveGiftCardFromGANRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [RetrieveGiftCardFromGANResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_gift_card_from_gan(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -106,7 +106,7 @@ module Square
     # @param [RetrieveGiftCardFromNonceRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [RetrieveGiftCardFromNonceResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_gift_card_from_nonce(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -131,7 +131,7 @@ module Square
     # @param [LinkCustomerToGiftCardRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [LinkCustomerToGiftCardResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def link_customer_to_gift_card(gift_card_id:,
                                    body:)
       new_api_call_builder
@@ -159,7 +159,7 @@ module Square
     # @param [UnlinkCustomerFromGiftCardRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [UnlinkCustomerFromGiftCardResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def unlink_customer_from_gift_card(gift_card_id:,
                                        body:)
       new_api_call_builder
@@ -183,7 +183,7 @@ module Square
     # Retrieves a gift card using the gift card ID.
     # @param [String] id Required parameter: The ID of the gift card to
     # retrieve.
-    # @return [RetrieveGiftCardResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_gift_card(id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,

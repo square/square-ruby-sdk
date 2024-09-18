@@ -15,7 +15,7 @@ module Square
     # @param [String] location_id Optional parameter: Location ID. You can
     # specify this optional filter  to retrieve only the linked bank accounts
     # belonging to a specific location.
-    # @return [ListBankAccountsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_bank_accounts(cursor: nil,
                            limit: nil,
                            location_id: nil)
@@ -42,7 +42,7 @@ module Square
     # account by using an ID issued by V1 Bank Accounts
     # API](https://developer.squareup.com/docs/bank-accounts-api#retrieve-a-bank
     # -account-by-using-an-id-issued-by-v1-bank-accounts-api).
-    # @return [GetBankAccountByV1IdResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def get_bank_account_by_v1_id(v1_bank_account_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -63,7 +63,7 @@ module Square
     # linked to a Square account.
     # @param [String] bank_account_id Required parameter: Square-issued ID of
     # the desired `BankAccount`.
-    # @return [GetBankAccountResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def get_bank_account(bank_account_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,

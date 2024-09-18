@@ -24,7 +24,7 @@ module Square
     # more information, see
     # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
     # atterns/pagination).
-    # @return [ListLocationCustomAttributeDefinitionsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_location_custom_attribute_definitions(visibility_filter: nil,
                                                    limit: nil,
                                                    cursor: nil)
@@ -59,7 +59,7 @@ module Square
     # @param [CreateLocationCustomAttributeDefinitionRequest] body Required
     # parameter: An object containing the fields to POST for the request.  See
     # the corresponding object definition for field details.
-    # @return [CreateLocationCustomAttributeDefinitionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_location_custom_attribute_definition(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -85,7 +85,7 @@ module Square
     # Only the definition owner can delete a custom attribute definition.
     # @param [String] key Required parameter: The key of the custom attribute
     # definition to delete.
-    # @return [DeleteLocationCustomAttributeDefinitionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_location_custom_attribute_definition(key:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::DELETE,
@@ -116,7 +116,7 @@ module Square
     # the request, Square returns the specified version or a higher version if
     # one exists. If the specified version is higher than the current version,
     # Square returns a `BAD_REQUEST` error.
-    # @return [RetrieveLocationCustomAttributeDefinitionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_location_custom_attribute_definition(key:,
                                                       version: nil)
       new_api_call_builder
@@ -146,7 +146,7 @@ module Square
     # @param [UpdateLocationCustomAttributeDefinitionRequest] body Required
     # parameter: An object containing the fields to POST for the request.  See
     # the corresponding object definition for field details.
-    # @return [UpdateLocationCustomAttributeDefinitionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_location_custom_attribute_definition(key:,
                                                     body:)
       new_api_call_builder
@@ -175,7 +175,7 @@ module Square
     # @param [BulkDeleteLocationCustomAttributesRequest] body Required
     # parameter: An object containing the fields to POST for the request.  See
     # the corresponding object definition for field details.
-    # @return [BulkDeleteLocationCustomAttributesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_delete_location_custom_attributes(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -215,7 +215,7 @@ module Square
     # @param [BulkUpsertLocationCustomAttributesRequest] body Required
     # parameter: An object containing the fields to POST for the request.  See
     # the corresponding object definition for field details.
-    # @return [BulkUpsertLocationCustomAttributesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_upsert_location_custom_attributes(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -265,7 +265,7 @@ module Square
     # each custom attribute. Set this parameter to `true` to get the name and
     # description of each custom attribute, information about the data type, or
     # other definition details. The default value is `false`.
-    # @return [ListLocationCustomAttributesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_location_custom_attributes(location_id:,
                                         visibility_filter: nil,
                                         limit: nil,
@@ -301,7 +301,7 @@ module Square
     # delete. This key must match the `key` of a custom attribute definition in
     # the Square seller account. If the requesting application is not the
     # definition owner, you must use the qualified key.
-    # @return [DeleteLocationCustomAttributeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_location_custom_attribute(location_id:,
                                          key:)
       new_api_call_builder
@@ -347,7 +347,7 @@ module Square
     # Square returns the specified version or a higher version if one exists. If
     # the specified version is higher than the current version, Square returns a
     # `BAD_REQUEST` error.
-    # @return [RetrieveLocationCustomAttributeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_location_custom_attribute(location_id:,
                                            key:,
                                            with_definition: false,
@@ -392,7 +392,7 @@ module Square
     # @param [UpsertLocationCustomAttributeRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [UpsertLocationCustomAttributeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def upsert_location_custom_attribute(location_id:,
                                          key:,
                                          body:)

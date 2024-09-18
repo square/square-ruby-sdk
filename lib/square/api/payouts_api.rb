@@ -28,7 +28,7 @@ module Square
     # than the specified limit on a given page. The default value of 100 is also
     # the maximum allowed value. If the provided value is greater than 100, it
     # is ignored and the default value is used instead. Default: `100`
-    # @return [ListPayoutsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_payouts(location_id: nil,
                      status: nil,
                      begin_time: nil,
@@ -60,7 +60,7 @@ module Square
     # To call this endpoint, set `PAYOUTS_READ` for the OAuth scope.
     # @param [String] payout_id Required parameter: The ID of the payout to
     # retrieve the information for.
-    # @return [GetPayoutResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def get_payout(payout_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -94,7 +94,7 @@ module Square
     # than the specified limit on a given page. The default value of 100 is also
     # the maximum allowed value. If the provided value is greater than 100, it
     # is ignored and the default value is used instead. Default: `100`
-    # @return [ListPayoutEntriesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_payout_entries(payout_id:,
                             sort_order: nil,
                             cursor: nil,

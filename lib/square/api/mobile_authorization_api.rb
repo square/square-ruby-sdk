@@ -17,7 +17,7 @@ module Square
     # @param [CreateMobileAuthorizationCodeRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [CreateMobileAuthorizationCodeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_mobile_authorization_code(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,

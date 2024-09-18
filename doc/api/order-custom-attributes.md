@@ -48,7 +48,7 @@ def list_order_custom_attribute_definitions(visibility_filter: nil,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Order Custom Attribute Definitions Response Hash`](../../doc/models/list-order-custom-attribute-definitions-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Order Custom Attribute Definitions Response Hash`](../../doc/models/list-order-custom-attribute-definitions-response.md).
 
 ## Example Usage
 
@@ -83,7 +83,7 @@ def create_order_custom_attribute_definition(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Order Custom Attribute Definition Response Hash`](../../doc/models/create-order-custom-attribute-definition-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Order Custom Attribute Definition Response Hash`](../../doc/models/create-order-custom-attribute-definition-response.md).
 
 ## Example Usage
 
@@ -127,7 +127,7 @@ def delete_order_custom_attribute_definition(key:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Order Custom Attribute Definition Response Hash`](../../doc/models/delete-order-custom-attribute-definition-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Order Custom Attribute Definition Response Hash`](../../doc/models/delete-order-custom-attribute-definition-response.md).
 
 ## Example Usage
 
@@ -167,7 +167,7 @@ def retrieve_order_custom_attribute_definition(key:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Order Custom Attribute Definition Response Hash`](../../doc/models/retrieve-order-custom-attribute-definition-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Order Custom Attribute Definition Response Hash`](../../doc/models/retrieve-order-custom-attribute-definition-response.md).
 
 ## Example Usage
 
@@ -205,7 +205,7 @@ def update_order_custom_attribute_definition(key:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Order Custom Attribute Definition Response Hash`](../../doc/models/update-order-custom-attribute-definition-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Order Custom Attribute Definition Response Hash`](../../doc/models/update-order-custom-attribute-definition-response.md).
 
 ## Example Usage
 
@@ -264,7 +264,7 @@ def bulk_delete_order_custom_attributes(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Delete Order Custom Attributes Response Hash`](../../doc/models/bulk-delete-order-custom-attributes-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Delete Order Custom Attributes Response Hash`](../../doc/models/bulk-delete-order-custom-attributes-response.md).
 
 ## Example Usage
 
@@ -322,7 +322,7 @@ def bulk_upsert_order_custom_attributes(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Upsert Order Custom Attributes Response Hash`](../../doc/models/bulk-upsert-order-custom-attributes-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Bulk Upsert Order Custom Attributes Response Hash`](../../doc/models/bulk-upsert-order-custom-attributes-response.md).
 
 ## Example Usage
 
@@ -378,11 +378,11 @@ def list_order_custom_attributes(order_id:,
 | `visibility_filter` | [`String (Visibility Filter)`](../../doc/models/visibility-filter.md) | Query, Optional | Requests that all of the custom attributes be returned, or only those that are read-only or read-write. |
 | `cursor` | `String` | Query, Optional | The cursor returned in the paged response from the previous call to this endpoint.<br>Provide this cursor to retrieve the next page of results for your original request.<br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
 | `limit` | `Integer` | Query, Optional | The maximum number of results to return in a single paged response. This limit is advisory.<br>The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.<br>The default value is 20.<br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
-| `with_definitions` | `TrueClass \| FalseClass` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,<br>information about the data type, or other definition details. The default value is `false`. |
+| `with_definitions` | `TrueClass \| FalseClass` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,<br>information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Order Custom Attributes Response Hash`](../../doc/models/list-order-custom-attributes-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Order Custom Attributes Response Hash`](../../doc/models/list-order-custom-attributes-response.md).
 
 ## Example Usage
 
@@ -427,7 +427,7 @@ def delete_order_custom_attribute(order_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Order Custom Attribute Response Hash`](../../doc/models/delete-order-custom-attribute-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Delete Order Custom Attribute Response Hash`](../../doc/models/delete-order-custom-attribute-response.md).
 
 ## Example Usage
 
@@ -475,11 +475,11 @@ def retrieve_order_custom_attribute(order_id:,
 | `order_id` | `String` | Template, Required | The ID of the target [order](entity:Order). |
 | `custom_attribute_key` | `String` | Template, Required | The key of the custom attribute to retrieve.  This key must match the key of an<br>existing custom attribute definition. |
 | `version` | `Integer` | Query, Optional | To enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency)<br>control, include this optional field and specify the current version of the custom attribute. |
-| `with_definition` | `TrueClass \| FalseClass` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,<br>information about the data type, or other definition details. The default value is `false`. |
+| `with_definition` | `TrueClass \| FalseClass` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,<br>information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Order Custom Attribute Response Hash`](../../doc/models/retrieve-order-custom-attribute-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Order Custom Attribute Response Hash`](../../doc/models/retrieve-order-custom-attribute-response.md).
 
 ## Example Usage
 
@@ -533,7 +533,7 @@ def upsert_order_custom_attribute(order_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Upsert Order Custom Attribute Response Hash`](../../doc/models/upsert-order-custom-attribute-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Upsert Order Custom Attribute Response Hash`](../../doc/models/upsert-order-custom-attribute-response.md).
 
 ## Example Usage
 

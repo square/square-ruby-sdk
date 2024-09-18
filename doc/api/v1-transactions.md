@@ -39,7 +39,7 @@ def v1_list_orders(location_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Array<V1 Order Hash>`](../../doc/models/v1-order.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Array<V1 Order Hash>`](../../doc/models/v1-order.md).
 
 ## Example Usage
 
@@ -77,7 +77,7 @@ def v1_retrieve_order(location_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`V1 Order Hash`](../../doc/models/v1-order.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`V1 Order Hash`](../../doc/models/v1-order.md).
 
 ## Example Usage
 
@@ -122,7 +122,7 @@ def v1_update_order(location_id:,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`V1 Order Hash`](../../doc/models/v1-order.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`V1 Order Hash`](../../doc/models/v1-order.md).
 
 ## Example Usage
 

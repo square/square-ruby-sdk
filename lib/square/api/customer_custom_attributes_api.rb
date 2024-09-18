@@ -24,7 +24,7 @@ module Square
     # more information, see
     # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
     # atterns/pagination).
-    # @return [ListCustomerCustomAttributeDefinitionsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_customer_custom_attribute_definitions(limit: nil,
                                                    cursor: nil)
       new_api_call_builder
@@ -61,7 +61,7 @@ module Square
     # @param [CreateCustomerCustomAttributeDefinitionRequest] body Required
     # parameter: An object containing the fields to POST for the request.  See
     # the corresponding object definition for field details.
-    # @return [CreateCustomerCustomAttributeDefinitionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_customer_custom_attribute_definition(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -87,7 +87,7 @@ module Square
     # Only the definition owner can delete a custom attribute definition.
     # @param [String] key Required parameter: The key of the custom attribute
     # definition to delete.
-    # @return [DeleteCustomerCustomAttributeDefinitionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_customer_custom_attribute_definition(key:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::DELETE,
@@ -121,7 +121,7 @@ module Square
     # the request, Square returns the specified version or a higher version if
     # one exists. If the specified version is higher than the current version,
     # Square returns a `BAD_REQUEST` error.
-    # @return [RetrieveCustomerCustomAttributeDefinitionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_customer_custom_attribute_definition(key:,
                                                       version: nil)
       new_api_call_builder
@@ -154,7 +154,7 @@ module Square
     # @param [UpdateCustomerCustomAttributeDefinitionRequest] body Required
     # parameter: An object containing the fields to POST for the request.  See
     # the corresponding object definition for field details.
-    # @return [UpdateCustomerCustomAttributeDefinitionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_customer_custom_attribute_definition(key:,
                                                     body:)
       new_api_call_builder
@@ -200,7 +200,7 @@ module Square
     # @param [BulkUpsertCustomerCustomAttributesRequest] body Required
     # parameter: An object containing the fields to POST for the request.  See
     # the corresponding object definition for field details.
-    # @return [BulkUpsertCustomerCustomAttributesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_upsert_customer_custom_attributes(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -248,7 +248,7 @@ module Square
     # each custom attribute. Set this parameter to `true` to get the name and
     # description of each custom attribute, information about the data type, or
     # other definition details. The default value is `false`.
-    # @return [ListCustomerCustomAttributesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_customer_custom_attributes(customer_id:,
                                         limit: nil,
                                         cursor: nil,
@@ -284,7 +284,7 @@ module Square
     # delete. This key must match the `key` of a custom attribute definition in
     # the Square seller account. If the requesting application is not the
     # definition owner, you must use the qualified key.
-    # @return [DeleteCustomerCustomAttributeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_customer_custom_attribute(customer_id:,
                                          key:)
       new_api_call_builder
@@ -333,7 +333,7 @@ module Square
     # Square returns the specified version or a higher version if one exists. If
     # the specified version is higher than the current version, Square returns a
     # `BAD_REQUEST` error.
-    # @return [RetrieveCustomerCustomAttributeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_customer_custom_attribute(customer_id:,
                                            key:,
                                            with_definition: false,
@@ -381,7 +381,7 @@ module Square
     # @param [UpsertCustomerCustomAttributeRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [UpsertCustomerCustomAttributeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def upsert_customer_custom_attribute(customer_id:,
                                          key:,
                                          body:)

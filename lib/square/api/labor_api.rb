@@ -10,7 +10,7 @@ module Square
     # 200. The default is 200.
     # @param [String] cursor Optional parameter: A pointer to the next page of
     # `BreakType` results to fetch.
-    # @return [ListBreakTypesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_break_types(location_id: nil,
                          limit: nil,
                          cursor: nil)
@@ -46,7 +46,7 @@ module Square
     # @param [CreateBreakTypeRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateBreakTypeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_break_type(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -68,7 +68,7 @@ module Square
     # A `BreakType` can be deleted even if it is referenced from a `Shift`.
     # @param [String] id Required parameter: The UUID for the `BreakType` being
     # deleted.
-    # @return [DeleteBreakTypeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_break_type(id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::DELETE,
@@ -88,7 +88,7 @@ module Square
     # Returns a single `BreakType` specified by `id`.
     # @param [String] id Required parameter: The UUID for the `BreakType` being
     # retrieved.
-    # @return [GetBreakTypeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def get_break_type(id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -111,7 +111,7 @@ module Square
     # @param [UpdateBreakTypeRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpdateBreakTypeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_break_type(id:,
                           body:)
       new_api_call_builder
@@ -140,7 +140,7 @@ module Square
     # and 200. The default is 200.
     # @param [String] cursor Optional parameter: A pointer to the next page of
     # `EmployeeWage` results to fetch.
-    # @return [ListEmployeeWagesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_employee_wages(employee_id: nil,
                             limit: nil,
                             cursor: nil)
@@ -164,7 +164,7 @@ module Square
     # Returns a single `EmployeeWage` specified by `id`.
     # @param [String] id Required parameter: The UUID for the `EmployeeWage`
     # being retrieved.
-    # @return [GetEmployeeWageResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def get_employee_wage(id:)
       warn 'Endpoint get_employee_wage in LaborApi is deprecated'
       new_api_call_builder
@@ -203,7 +203,7 @@ module Square
     # @param [CreateShiftRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
-    # @return [CreateShiftResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_shift(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -237,7 +237,7 @@ module Square
     # @param [SearchShiftsRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
-    # @return [SearchShiftsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_shifts(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -258,7 +258,7 @@ module Square
     # Deletes a `Shift`.
     # @param [String] id Required parameter: The UUID for the `Shift` being
     # deleted.
-    # @return [DeleteShiftResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_shift(id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::DELETE,
@@ -278,7 +278,7 @@ module Square
     # Returns a single `Shift` specified by `id`.
     # @param [String] id Required parameter: The UUID for the `Shift` being
     # retrieved.
-    # @return [GetShiftResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def get_shift(id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -307,7 +307,7 @@ module Square
     # @param [UpdateShiftRequest] body Required parameter: An object containing
     # the fields to POST for the request.  See the corresponding object
     # definition for field details.
-    # @return [UpdateShiftResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_shift(id:,
                      body:)
       new_api_call_builder
@@ -336,7 +336,7 @@ module Square
     # 1 and 200. The default is 200.
     # @param [String] cursor Optional parameter: A pointer to the next page of
     # `EmployeeWage` results to fetch.
-    # @return [ListTeamMemberWagesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_team_member_wages(team_member_id: nil,
                                limit: nil,
                                cursor: nil)
@@ -359,7 +359,7 @@ module Square
     # Returns a single `TeamMemberWage` specified by `id`.
     # @param [String] id Required parameter: The UUID for the `TeamMemberWage`
     # being retrieved.
-    # @return [GetTeamMemberWageResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def get_team_member_wage(id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -381,7 +381,7 @@ module Square
     # `WorkweekConfigs` results to return per page.
     # @param [String] cursor Optional parameter: A pointer to the next page of
     # `WorkweekConfig` results to fetch.
-    # @return [ListWorkweekConfigsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_workweek_configs(limit: nil,
                               cursor: nil)
       new_api_call_builder
@@ -405,7 +405,7 @@ module Square
     # @param [UpdateWorkweekConfigRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpdateWorkweekConfigResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_workweek_config(id:,
                                body:)
       new_api_call_builder

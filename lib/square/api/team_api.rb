@@ -12,7 +12,7 @@ module Square
     # @param [CreateTeamMemberRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateTeamMemberResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_team_member(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -43,7 +43,7 @@ module Square
     # @param [BulkCreateTeamMembersRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [BulkCreateTeamMembersResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_create_team_members(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -74,7 +74,7 @@ module Square
     # @param [BulkUpdateTeamMembersRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [BulkUpdateTeamMembersResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_update_team_members(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -99,7 +99,7 @@ module Square
     # @param [SearchTeamMembersRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [SearchTeamMembersResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def search_team_members(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -123,7 +123,7 @@ module Square
     # eam-member).
     # @param [String] team_member_id Required parameter: The ID of the team
     # member to retrieve.
-    # @return [RetrieveTeamMemberResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_team_member(team_member_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -150,7 +150,7 @@ module Square
     # @param [UpdateTeamMemberRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpdateTeamMemberResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_team_member(team_member_id:,
                            body:)
       new_api_call_builder
@@ -178,7 +178,7 @@ module Square
     # setting).
     # @param [String] team_member_id Required parameter: The ID of the team
     # member for which to retrieve the wage setting.
-    # @return [RetrieveWageSettingResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_wage_setting(team_member_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -208,7 +208,7 @@ module Square
     # @param [UpdateWageSettingRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpdateWageSettingResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_wage_setting(team_member_id:,
                             body:)
       new_api_call_builder

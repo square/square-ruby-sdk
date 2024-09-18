@@ -14,7 +14,7 @@ module Square
     # The default value is 50.  For more information, see
     # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
     # atterns/pagination).
-    # @return [ListCustomerGroupsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_customer_groups(cursor: nil,
                              limit: nil)
       new_api_call_builder
@@ -37,7 +37,7 @@ module Square
     # @param [CreateCustomerGroupRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [CreateCustomerGroupResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_customer_group(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -58,7 +58,7 @@ module Square
     # Deletes a customer group as identified by the `group_id` value.
     # @param [String] group_id Required parameter: The ID of the customer group
     # to delete.
-    # @return [DeleteCustomerGroupResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_customer_group(group_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::DELETE,
@@ -78,7 +78,7 @@ module Square
     # Retrieves a specific customer group as identified by the `group_id` value.
     # @param [String] group_id Required parameter: The ID of the customer group
     # to retrieve.
-    # @return [RetrieveCustomerGroupResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_customer_group(group_id:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
@@ -101,7 +101,7 @@ module Square
     # @param [UpdateCustomerGroupRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
-    # @return [UpdateCustomerGroupResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_customer_group(group_id:,
                               body:)
       new_api_call_builder

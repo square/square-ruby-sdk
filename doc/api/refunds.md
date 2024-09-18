@@ -50,7 +50,7 @@ def list_payment_refunds(begin_time: nil,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Payment Refunds Response Hash`](../../doc/models/list-payment-refunds-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Payment Refunds Response Hash`](../../doc/models/list-payment-refunds-response.md).
 
 ## Example Usage
 
@@ -84,7 +84,7 @@ def refund_payment(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Refund Payment Response Hash`](../../doc/models/refund-payment-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Refund Payment Response Hash`](../../doc/models/refund-payment-response.md).
 
 ## Example Usage
 
@@ -130,7 +130,7 @@ def get_payment_refund(refund_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Payment Refund Response Hash`](../../doc/models/get-payment-refund-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Get Payment Refund Response Hash`](../../doc/models/get-payment-refund-response.md).
 
 ## Example Usage
 

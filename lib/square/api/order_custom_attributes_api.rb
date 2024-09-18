@@ -28,7 +28,7 @@ module Square
     # see
     # [Pagination](https://developer.squareup.com/docs/working-with-apis/paginat
     # ion).
-    # @return [ListOrderCustomAttributeDefinitionsResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_order_custom_attribute_definitions(visibility_filter: nil,
                                                 cursor: nil,
                                                 limit: nil)
@@ -57,7 +57,7 @@ module Square
     # @param [CreateOrderCustomAttributeDefinitionRequest] body Required
     # parameter: An object containing the fields to POST for the request.  See
     # the corresponding object definition for field details.
-    # @return [CreateOrderCustomAttributeDefinitionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def create_order_custom_attribute_definition(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -80,7 +80,7 @@ module Square
     # Only the definition owner can delete a custom attribute definition.
     # @param [String] key Required parameter: The key of the custom attribute
     # definition to delete.
-    # @return [DeleteOrderCustomAttributeDefinitionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_order_custom_attribute_definition(key:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::DELETE,
@@ -111,7 +111,7 @@ module Square
     # concurrency](https://developer.squareup.com/docs/build-basics/common-api-p
     # atterns/optimistic-concurrency) control, include this optional field and
     # specify the current version of the custom attribute.
-    # @return [RetrieveOrderCustomAttributeDefinitionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_order_custom_attribute_definition(key:,
                                                    version: nil)
       new_api_call_builder
@@ -140,7 +140,7 @@ module Square
     # @param [UpdateOrderCustomAttributeDefinitionRequest] body Required
     # parameter: An object containing the fields to POST for the request.  See
     # the corresponding object definition for field details.
-    # @return [UpdateOrderCustomAttributeDefinitionResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def update_order_custom_attribute_definition(key:,
                                                  body:)
       new_api_call_builder
@@ -185,7 +185,7 @@ module Square
     # @param [BulkDeleteOrderCustomAttributesRequest] body Required parameter:
     # An object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [BulkDeleteOrderCustomAttributesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_delete_order_custom_attributes(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -228,7 +228,7 @@ module Square
     # @param [BulkUpsertOrderCustomAttributesRequest] body Required parameter:
     # An object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [BulkUpsertOrderCustomAttributesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def bulk_upsert_order_custom_attributes(body:)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
@@ -280,7 +280,7 @@ module Square
     # each custom attribute. Set this parameter to `true` to get the name and
     # description of each custom attribute,  information about the data type, or
     # other definition details. The default value is `false`.
-    # @return [ListOrderCustomAttributesResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_order_custom_attributes(order_id:,
                                      visibility_filter: nil,
                                      cursor: nil,
@@ -317,7 +317,7 @@ module Square
     # @param [String] custom_attribute_key Required parameter: The key of the
     # custom attribute to delete.  This key must match the key of an existing
     # custom attribute definition.
-    # @return [DeleteOrderCustomAttributeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def delete_order_custom_attribute(order_id:,
                                       custom_attribute_key:)
       new_api_call_builder
@@ -363,7 +363,7 @@ module Square
     # each  custom attribute. Set this parameter to `true` to get the name and
     # description of each custom attribute,  information about the data type, or
     # other definition details. The default value is `false`.
-    # @return [RetrieveOrderCustomAttributeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def retrieve_order_custom_attribute(order_id:,
                                         custom_attribute_key:,
                                         version: nil,
@@ -409,7 +409,7 @@ module Square
     # @param [UpsertOrderCustomAttributeRequest] body Required parameter: An
     # object containing the fields to POST for the request.  See the
     # corresponding object definition for field details.
-    # @return [UpsertOrderCustomAttributeResponse Hash] response from the API call
+    # @return [ApiResponse]  the complete http response with raw body and status code.
     def upsert_order_custom_attribute(order_id:,
                                       custom_attribute_key:,
                                       body:)

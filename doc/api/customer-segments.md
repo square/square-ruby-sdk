@@ -32,7 +32,7 @@ def list_customer_segments(cursor: nil,
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Customer Segments Response Hash`](../../doc/models/list-customer-segments-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Customer Segments Response Hash`](../../doc/models/list-customer-segments-response.md).
 
 ## Example Usage
 
@@ -63,7 +63,7 @@ def retrieve_customer_segment(segment_id:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Customer Segment Response Hash`](../../doc/models/retrieve-customer-segment-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Customer Segment Response Hash`](../../doc/models/retrieve-customer-segment-response.md).
 
 ## Example Usage
 

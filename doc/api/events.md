@@ -32,7 +32,7 @@ def search_events(body:)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Events Response Hash`](../../doc/models/search-events-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Search Events Response Hash`](../../doc/models/search-events-response.md).
 
 ## Example Usage
 
@@ -62,7 +62,7 @@ def disable_events
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Disable Events Response Hash`](../../doc/models/disable-events-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Disable Events Response Hash`](../../doc/models/disable-events-response.md).
 
 ## Example Usage
 
@@ -87,7 +87,7 @@ def enable_events
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Enable Events Response Hash`](../../doc/models/enable-events-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Enable Events Response Hash`](../../doc/models/enable-events-response.md).
 
 ## Example Usage
 
@@ -118,7 +118,7 @@ def list_event_types(api_version: nil)
 
 ## Response Type
 
-This method returns a `\ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Event Types Response Hash`](../../doc/models/list-event-types-response.md).
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Event Types Response Hash`](../../doc/models/list-event-types-response.md).
 
 ## Example Usage
 
