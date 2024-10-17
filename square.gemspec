@@ -1,11 +1,11 @@
 Gem::Specification.new do |s|
   s.name = 'square.rb'
-  s.version = '39.1.0.20240919'
+  s.version = '39.2.0.20241017'
   s.summary = 'square'
   s.description = ''
   s.authors = ['Square Developer Platform']
   s.email = ['developers@squareup.com']
-  s.homepage = ''
+  s.homepage = 'https://squareup.com/developers'
   s.licenses = ['Apache-2.0']
   s.add_dependency('apimatic_core_interfaces', '~> 0.2.1')
   s.add_dependency('apimatic_core', '~> 0.3.9')
