@@ -257,12 +257,8 @@ This method returns a `ApiResponse` instance. The `data` property in this instan
 ```ruby
 body = {
   :values => {
-    'id1' => {
-      :key => 'alternative_seller_name'
-    },
-    'id2' => {
-      :key => 'has_seen_tutorial'
-    }
+    'id1' => {},
+    'id2' => {}
   }
 }
 
