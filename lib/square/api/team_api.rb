@@ -92,10 +92,109 @@ module Square
         .execute
     end
 
+    # Lists jobs in a seller account. Results are sorted by title in ascending
+    # order.
+    # @param [String] cursor Optional parameter: The pagination cursor returned
+    # by the previous call to this endpoint. Provide this cursor to retrieve the
+    # next page of results for your original request. For more information, see
+    # [Pagination](https://developer.squareup.com/docs/build-basics/common-api-p
+    # atterns/pagination).
+    # @return [ApiResponse]  the complete http response with raw body and status code.
+    def list_jobs(cursor: nil)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/team-members/jobs',
+                                     'default')
+                   .query_param(new_parameter(cursor, key: 'cursor'))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
+    # Creates a job in a seller account. A job defines a title and tip
+    # eligibility. Note that
+    # compensation is defined in a [job assignment]($m/JobAssignment) in a team
+    # member's wage setting.
+    # @param [CreateJobRequest] body Required parameter: An object containing
+    # the fields to POST for the request.  See the corresponding object
+    # definition for field details.
+    # @return [ApiResponse]  the complete http response with raw body and status code.
+    def create_job(body:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/v2/team-members/jobs',
+                                     'default')
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
+    # Retrieves a specified job.
+    # @param [String] job_id Required parameter: The ID of the job to
+    # retrieve.
+    # @return [ApiResponse]  the complete http response with raw body and status code.
+    def retrieve_job(job_id:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::GET,
+                                     '/v2/team-members/jobs/{job_id}',
+                                     'default')
+                   .template_param(new_parameter(job_id, key: 'job_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
+    # Updates the title or tip eligibility of a job. Changes to the title
+    # propagate to all
+    # `JobAssignment`, `Shift`, and `TeamMemberWage` objects that reference the
+    # job ID. Changes to
+    # tip eligibility propagate to all `TeamMemberWage` objects that reference
+    # the job ID.
+    # @param [String] job_id Required parameter: The ID of the job to update.
+    # @param [UpdateJobRequest] body Required parameter: An object containing
+    # the fields to POST for the request.  See the corresponding object
+    # definition for field details.
+    # @return [ApiResponse]  the complete http response with raw body and status code.
+    def update_job(job_id:,
+                   body:)
+      new_api_call_builder
+        .request(new_request_builder(HttpMethodEnum::PUT,
+                                     '/v2/team-members/jobs/{job_id}',
+                                     'default')
+                   .template_param(new_parameter(job_id, key: 'job_id')
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('global')))
+        .response(new_response_handler
+                    .deserializer(APIHelper.method(:json_deserialize))
+                    .is_api_response(true)
+                    .convertor(ApiResponse.method(:create)))
+        .execute
+    end
+
     # Returns a paginated list of `TeamMember` objects for a business.
-    # The list can be filtered by the following:
-    # - location IDs
-    # - `status`
+    # The list can be filtered by location IDs, `ACTIVE` or `INACTIVE` status,
+    # or whether
+    # the team member is the Square account owner.
     # @param [SearchTeamMembersRequest] body Required parameter: An object
     # containing the fields to POST for the request.  See the corresponding
     # object definition for field details.
@@ -172,10 +271,13 @@ module Square
     end
 
     # Retrieves a `WageSetting` object for a team member specified
-    # by `TeamMember.id`.
-    # Learn about [Troubleshooting the Team
+    # by `TeamMember.id`. For more information, see
+    # [Troubleshooting the Team
     # API](https://developer.squareup.com/docs/team/troubleshooting#retrievewage
     # setting).
+    # Square recommends using [RetrieveTeamMember]($e/Team/RetrieveTeamMember)
+    # or [SearchTeamMembers]($e/Team/SearchTeamMembers)
+    # to get this information directly from the `TeamMember.wage_setting` field.
     # @param [String] team_member_id Required parameter: The ID of the team
     # member for which to retrieve the wage setting.
     # @return [ApiResponse]  the complete http response with raw body and status code.
@@ -196,13 +298,17 @@ module Square
     end
 
     # Creates or updates a `WageSetting` object. The object is created if a
-    # `WageSetting` with the specified `team_member_id` does not exist.
+    # `WageSetting` with the specified `team_member_id` doesn't exist.
     # Otherwise,
     # it fully replaces the `WageSetting` object for the team member.
-    # The `WageSetting` is returned on a successful update.
-    # Learn about [Troubleshooting the Team
+    # The `WageSetting` is returned on a successful update. For more
+    # information, see
+    # [Troubleshooting the Team
     # API](https://developer.squareup.com/docs/team/troubleshooting#create-or-up
     # date-a-wage-setting).
+    # Square recommends using [CreateTeamMember]($e/Team/CreateTeamMember) or
+    # [UpdateTeamMember]($e/Team/UpdateTeamMember)
+    # to manage the `TeamMember.wage_setting` field directly.
     # @param [String] team_member_id Required parameter: The ID of the team
     # member for which to update the `WageSetting` object.
     # @param [UpdateWageSettingRequest] body Required parameter: An object
