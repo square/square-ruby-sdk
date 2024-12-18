@@ -15,8 +15,8 @@ module Square
     # determined using the `created_at` field for each Payment.  Default: The
     # current time.
     # @param [String] sort_order Optional parameter: The order in which results
-    # are listed by `Payment.created_at`: - `ASC` - Oldest to newest. - `DESC` -
-    # Newest to oldest (default).
+    # are listed by `ListPaymentsRequest.sort_field`: - `ASC` - Oldest to
+    # newest. - `DESC` - Newest to oldest (default).
     # @param [String] cursor Optional parameter: A pagination cursor returned by
     # a previous call to this endpoint. Provide this cursor to retrieve the next
     # set of results for the original query.  For more information, see
@@ -53,6 +53,14 @@ module Square
     # set, payments without a value set in
     # `offline_payment_details.client_created_at` will not be returned.
     # Default: The current time.
+    # @param [String] updated_at_begin_time Optional parameter: Indicates the
+    # start of the time range to retrieve payments for, in RFC 3339 format.  The
+    # range is determined using the `updated_at` field for each Payment.
+    # @param [String] updated_at_end_time Optional parameter: Indicates the end
+    # of the time range to retrieve payments for, in RFC 3339 format.  The range
+    # is determined using the `updated_at` field for each Payment.
+    # @param [PaymentSortField] sort_field Optional parameter: The field used to
+    # sort results by. The default is `CREATED_AT`.
     # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_payments(begin_time: nil,
                       end_time: nil,
@@ -65,7 +73,10 @@ module Square
                       limit: nil,
                       is_offline_payment: false,
                       offline_begin_time: nil,
-                      offline_end_time: nil)
+                      offline_end_time: nil,
+                      updated_at_begin_time: nil,
+                      updated_at_end_time: nil,
+                      sort_field: nil)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/v2/payments',
@@ -82,6 +93,9 @@ module Square
                    .query_param(new_parameter(is_offline_payment, key: 'is_offline_payment'))
                    .query_param(new_parameter(offline_begin_time, key: 'offline_begin_time'))
                    .query_param(new_parameter(offline_end_time, key: 'offline_end_time'))
+                   .query_param(new_parameter(updated_at_begin_time, key: 'updated_at_begin_time'))
+                   .query_param(new_parameter(updated_at_end_time, key: 'updated_at_end_time'))
+                   .query_param(new_parameter(sort_field, key: 'sort_field'))
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler

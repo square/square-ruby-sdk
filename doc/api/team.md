@@ -13,6 +13,10 @@ team_api = client.team
 * [Create Team Member](../../doc/api/team.md#create-team-member)
 * [Bulk Create Team Members](../../doc/api/team.md#bulk-create-team-members)
 * [Bulk Update Team Members](../../doc/api/team.md#bulk-update-team-members)
+* [List Jobs](../../doc/api/team.md#list-jobs)
+* [Create Job](../../doc/api/team.md#create-job)
+* [Retrieve Job](../../doc/api/team.md#retrieve-job)
+* [Update Job](../../doc/api/team.md#update-job)
 * [Search Team Members](../../doc/api/team.md#search-team-members)
 * [Retrieve Team Member](../../doc/api/team.md#retrieve-team-member)
 * [Update Team Member](../../doc/api/team.md#update-team-member)
@@ -62,6 +66,28 @@ body = {
         'YSGH2WBKG94QZ',
         'GA2Y9HSJ8KRYT'
       ]
+    },
+    :wage_setting => {
+      :job_assignments => [
+        {
+          :pay_type => 'SALARY',
+          :annual_rate => {
+            :amount => 3000000,
+            :currency => 'USD'
+          },
+          :weekly_hours => 40,
+          :job_id => 'FjS8x95cqHiMenw4f1NAUH4P'
+        },
+        {
+          :pay_type => 'HOURLY',
+          :hourly_rate => {
+            :amount => 2000,
+            :currency => 'USD'
+          },
+          :job_id => 'VDNpRv8da51NU8qZFC5zDWpF'
+        }
+      ],
+      :is_overtime_exempt => true
     }
   }
 }
@@ -218,13 +244,165 @@ end
 ```
 
 
+# List Jobs
+
+Lists jobs in a seller account. Results are sorted by title in ascending order.
+
+```ruby
+def list_jobs(cursor: nil)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `cursor` | `String` | Query, Optional | The pagination cursor returned by the previous call to this endpoint. Provide this<br>cursor to retrieve the next page of results for your original request. For more information,<br>see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
+
+## Response Type
+
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`List Jobs Response Hash`](../../doc/models/list-jobs-response.md).
+
+## Example Usage
+
+```ruby
+result = team_api.list_jobs
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Create Job
+
+Creates a job in a seller account. A job defines a title and tip eligibility. Note that
+compensation is defined in a [job assignment](../../doc/models/job-assignment.md) in a team member's wage setting.
+
+```ruby
+def create_job(body:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Create Job Request Hash`](../../doc/models/create-job-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Create Job Response Hash`](../../doc/models/create-job-response.md).
+
+## Example Usage
+
+```ruby
+body = {
+  :job => {
+    :title => 'Cashier',
+    :is_tip_eligible => true
+  },
+  :idempotency_key => 'idempotency-key-0'
+}
+
+
+result = team_api.create_job(body: body)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Retrieve Job
+
+Retrieves a specified job.
+
+```ruby
+def retrieve_job(job_id:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `job_id` | `String` | Template, Required | The ID of the job to retrieve. |
+
+## Response Type
+
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Retrieve Job Response Hash`](../../doc/models/retrieve-job-response.md).
+
+## Example Usage
+
+```ruby
+job_id = 'job_id2'
+
+
+result = team_api.retrieve_job(job_id: job_id)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
+# Update Job
+
+Updates the title or tip eligibility of a job. Changes to the title propagate to all
+`JobAssignment`, `Shift`, and `TeamMemberWage` objects that reference the job ID. Changes to
+tip eligibility propagate to all `TeamMemberWage` objects that reference the job ID.
+
+```ruby
+def update_job(job_id:,
+               body:)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `job_id` | `String` | Template, Required | The ID of the job to update. |
+| `body` | [`Update Job Request Hash`](../../doc/models/update-job-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+This method returns a `ApiResponse` instance. The `data` property in this instance returns the response data which is of type [`Update Job Response Hash`](../../doc/models/update-job-response.md).
+
+## Example Usage
+
+```ruby
+job_id = 'job_id2'
+
+body = {
+  :job => {
+    :title => 'Cashier 1',
+    :is_tip_eligible => true
+  }
+}
+
+
+result = team_api.update_job(
+  job_id: job_id,
+  body: body
+)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+
 # Search Team Members
 
 Returns a paginated list of `TeamMember` objects for a business.
-The list can be filtered by the following:
-
-- location IDs
-- `status`
+The list can be filtered by location IDs, `ACTIVE` or `INACTIVE` status, or whether
+the team member is the Square account owner.
 
 ```ruby
 def search_team_members(body:)
@@ -362,8 +540,11 @@ end
 # Retrieve Wage Setting
 
 Retrieves a `WageSetting` object for a team member specified
-by `TeamMember.id`.
-Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#retrievewagesetting).
+by `TeamMember.id`. For more information, see
+[Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#retrievewagesetting).
+
+Square recommends using [RetrieveTeamMember](../../doc/api/team.md#retrieve-team-member) or [SearchTeamMembers](../../doc/api/team.md#search-team-members)
+to get this information directly from the `TeamMember.wage_setting` field.
 
 ```ruby
 def retrieve_wage_setting(team_member_id:)
@@ -398,10 +579,13 @@ end
 # Update Wage Setting
 
 Creates or updates a `WageSetting` object. The object is created if a
-`WageSetting` with the specified `team_member_id` does not exist. Otherwise,
+`WageSetting` with the specified `team_member_id` doesn't exist. Otherwise,
 it fully replaces the `WageSetting` object for the team member.
-The `WageSetting` is returned on a successful update.
-Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#create-or-update-a-wage-setting).
+The `WageSetting` is returned on a successful update. For more information, see
+[Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#create-or-update-a-wage-setting).
+
+Square recommends using [CreateTeamMember](../../doc/api/team.md#create-team-member) or [UpdateTeamMember](../../doc/api/team.md#update-team-member)
+to manage the `TeamMember.wage_setting` field directly.
 
 ```ruby
 def update_wage_setting(team_member_id:,
@@ -428,8 +612,8 @@ body = {
   :wage_setting => {
     :job_assignments => [
       {
-        :job_title => 'Manager',
         :pay_type => 'SALARY',
+        :job_title => 'Manager',
         :annual_rate => {
           :amount => 3000000,
           :currency => 'USD'
@@ -437,10 +621,10 @@ body = {
         :weekly_hours => 40
       },
       {
-        :job_title => 'Cashier',
         :pay_type => 'HOURLY',
+        :job_title => 'Cashier',
         :hourly_rate => {
-          :amount => 1200,
+          :amount => 2000,
           :currency => 'USD'
         }
       }
