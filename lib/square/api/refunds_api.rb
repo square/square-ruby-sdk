@@ -40,6 +40,18 @@ module Square
     # to be returned in a single page.  It is possible to receive fewer results
     # than the specified limit on a given page.  If the supplied value is
     # greater than 100, no more than 100 results are returned.  Default: 100
+    # @param [String] updated_at_begin_time Optional parameter: Indicates the
+    # start of the time range to retrieve each `PaymentRefund` for, in RFC 3339
+    # format.  The range is determined using the `updated_at` field for each
+    # `PaymentRefund`.  Default: if omitted, the time range starts at
+    # `begin_time`.
+    # @param [String] updated_at_end_time Optional parameter: Indicates the end
+    # of the time range to retrieve each `PaymentRefund` for, in RFC 3339
+    # format.  The range is determined using the `updated_at` field for each
+    # `PaymentRefund`.  Default: The current time.
+    # @param [String] sort_field Optional parameter: The field used to sort
+    # results by. The default is `CREATED_AT`. Current values include
+    # `CREATED_AT` and `UPDATED_AT`.
     # @return [ApiResponse]  the complete http response with raw body and status code.
     def list_payment_refunds(begin_time: nil,
                              end_time: nil,
