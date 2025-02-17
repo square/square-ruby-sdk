@@ -48,7 +48,10 @@ module Square
                              location_id: nil,
                              status: nil,
                              source_type: nil,
-                             limit: nil)
+                             limit: nil,
+                             updated_at_begin_time: nil,
+                             updated_at_end_time: nil,
+                             sort_field: nil)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/v2/refunds',
@@ -61,6 +64,9 @@ module Square
                    .query_param(new_parameter(status, key: 'status'))
                    .query_param(new_parameter(source_type, key: 'source_type'))
                    .query_param(new_parameter(limit, key: 'limit'))
+                   .query_param(new_parameter(updated_at_begin_time, key: 'updated_at_begin_time'))
+                   .query_param(new_parameter(updated_at_end_time, key: 'updated_at_end_time'))
+                   .query_param(new_parameter(sort_field, key: 'sort_field'))
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('global')))
         .response(new_response_handler
