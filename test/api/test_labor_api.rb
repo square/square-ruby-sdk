@@ -1,5 +1,3 @@
-
-
 require_relative 'api_test_base'
 
 class LaborApiTests < ApiTestBase
@@ -68,4 +66,17 @@ class LaborApiTests < ApiTestBase
     assert(ComparisonHelper.match_headers(expected_headers, @response_catcher.response.headers))
   end
 
+  def test_search_timecards()
+    # Perform the API call through the SDK function
+    result = @controller.search_timecards(body: {limit: 100})
+
+    # Test response code
+    assert_equal(200, @response_catcher.response.status_code)
+
+    # Test headers
+    expected_headers = {}
+    expected_headers['content-type'] = 'application/json'
+
+    assert(ComparisonHelper.match_headers(expected_headers, @response_catcher.response.headers))
+  end
 end
