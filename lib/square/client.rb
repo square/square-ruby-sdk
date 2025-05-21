@@ -5,7 +5,7 @@ module Square
     attr_reader :config, :auth_managers
 
     def sdk_version
-      '43.0.0.20250521'
+      '42.2.0.20250521'
     end
 
     def square_version
