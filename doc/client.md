@@ -25,7 +25,7 @@ The API client can be initialized as follows:
 
 ```ruby
 client = Square::Client.new(
-  square_version: '2025-05-21',
+  square_version: '2025-06-18',
   bearer_auth_credentials: BearerAuthCredentials.new(
     access_token: 'AccessToken'
   ),
@@ -55,7 +55,7 @@ require 'square'
 include Square
 
 client = Square::Client.new(
-  square_version: '2025-05-21',
+  square_version: '2025-06-18',
   bearer_auth_credentials: BearerAuthCredentials.new(
     access_token: 'AccessToken'
   ),
