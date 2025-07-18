@@ -3,6 +3,25 @@ name: Publish
 on: [push]
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7  # Matches your requirement of >= 2.6
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Run tests
+        env:
+          SQUARE_SANDBOX_TOKEN: ${{ secrets.SQUARE_SANDBOX_TOKEN }}
+        run: bundle exec rake test
+
   publish:
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
@@ -14,9 +33,6 @@ jobs:
         with:
           ruby-version: 2.7
           bundler-cache: true
-
-      - name: Test gem
-        run: bundle install && bundle exec rake test
 
       - name: Build and Push Gem
         env:
