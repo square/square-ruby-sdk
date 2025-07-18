@@ -40,4 +40,4 @@ jobs:
         run: |
           gem build square.gemspec
 
-          gem push square-*.gem --host https://rubygems.org/
+          gem push square.rb-*.gem --host https://rubygems.org/
