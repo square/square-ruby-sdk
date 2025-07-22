@@ -8,12 +8,11 @@ module Square
       raise 'signature_key is null or empty' if signature_key.nil? || signature_key.empty?
       raise 'notification_url is null or empty' if notification_url.nil? || notification_url.empty?
 
-      # Perform UTF-8 encoding to bytes
-      payload_bytes = "#{notification_url}#{request_body}".force_encoding('utf-8')
-      signature_key_bytes = signature_key.force_encoding('utf-8')
+      # Prepare the message as it was signed by the sender
+      message = "#{notification_url}#{request_body}"
 
       # Compute the hash value
-      hmac = OpenSSL::HMAC.digest('sha256', signature_key_bytes, payload_bytes)
+      hmac = OpenSSL::HMAC.digest('sha256', signature_key, message)
 
       # Compare the computed hash vs the value in the signature header
       hash_base64 = Base64.strict_encode64(hmac)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../../lib/square/utilities/webhooks_helper.rb'
 require 'minitest/autorun'
 require 'minitest/hell'
