@@ -1,16 +1,32 @@
-Metrics/ClassLength:
+AllCops:
+  TargetRubyVersion: 2.7
+  
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+  
+Style/StringLiteralsInInterpolation:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+Layout/FirstHashElementLineBreak:
+  Enabled: true
+
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: true
+
+# Generated files may be more complex than standard, disable
+# these rules for now as a known limitation.
+Metrics/ParameterLists:
   Enabled: false
 
 Metrics/MethodLength:
   Enabled: false
 
-Metrics/BlockLength:
-  Enabled: false  
-
-Metrics/ParameterLists:
+Metrics/AbcSize:
   Enabled: false
 
-Metrics/AbcSize:
+Metrics/ClassLength:
   Enabled: false
 
 Metrics/CyclomaticComplexity:
@@ -18,29 +34,3 @@ Metrics/CyclomaticComplexity:
 
 Metrics/PerceivedComplexity:
   Enabled: false
-
-Metrics/LineLength:
-  Enabled: false
-
-Lint/UnderscorePrefixedVariableName:
-  Enabled: false
-
-Naming/AccessorMethodName:
-  Enabled: false
-
-Naming/UncommunicativeMethodParamName:
-  Enabled: false
-
-Style/AsciiComments:
-  Enabled: false
-
-Style/StringLiterals:
-  Enabled: false
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
-AllCops:
-  Exclude:
-    - './test/**/*'
-    - './*'
