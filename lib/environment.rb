@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+module square.rb
+  class Environment
+
+    PRODUCTION = "https://connect.squareup.com"
+    SANDBOX = "https://connect.squareupsandbox.com"
+
+  end
+end

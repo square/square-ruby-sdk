@@ -1,0 +1,28 @@
+# frozen_string_literal: true
+
+module square.rb
+# Indicates the method used to create the customer profile.
+  class CustomerCreationSource
+
+    OTHER = "OTHER"
+    APPOINTMENTS = "APPOINTMENTS"
+    COUPON = "COUPON"
+    DELETION_RECOVERY = "DELETION_RECOVERY"
+    DIRECTORY = "DIRECTORY"
+    EGIFTING = "EGIFTING"
+    EMAIL_COLLECTION = "EMAIL_COLLECTION"
+    FEEDBACK = "FEEDBACK"
+    IMPORT = "IMPORT"
+    INVOICES = "INVOICES"
+    LOYALTY = "LOYALTY"
+    MARKETING = "MARKETING"
+    MERGE = "MERGE"
+    ONLINE_STORE = "ONLINE_STORE"
+    INSTANT_PROFILE = "INSTANT_PROFILE"
+    TERMINAL = "TERMINAL"
+    THIRD_PARTY = "THIRD_PARTY"
+    THIRD_PARTY_IMPORT = "THIRD_PARTY_IMPORT"
+    UNMERGE_RECOVERY = "UNMERGE_RECOVERY"
+
+  end
+end
