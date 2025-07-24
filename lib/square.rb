@@ -1,76 +1,290 @@
-require 'date'
-require 'json'
+# frozen_string_literal: true
+require_relative "environment"
+require_relative "types_export"
+require_relative "requests"
+require_relative "square/mobile/client"
+require_relative "square/o_auth/client"
+require_relative "square/v_1_transactions/client"
+require_relative "square/apple_pay/client"
+require_relative "square/bank_accounts/client"
+require_relative "square/bookings/client"
+require_relative "square/cards/client"
+require_relative "square/catalog/client"
+require_relative "square/customers/client"
+require_relative "square/devices/client"
+require_relative "square/disputes/client"
+require_relative "square/employees/client"
+require_relative "square/events/client"
+require_relative "square/gift_cards/client"
+require_relative "square/inventory/client"
+require_relative "square/invoices/client"
+require_relative "square/labor/client"
+require_relative "square/locations/client"
+require_relative "square/loyalty/client"
+require_relative "square/merchants/client"
+require_relative "square/checkout/client"
+require_relative "square/orders/client"
+require_relative "square/payments/client"
+require_relative "square/payouts/client"
+require_relative "square/refunds/client"
+require_relative "square/sites/client"
+require_relative "square/snippets/client"
+require_relative "square/subscriptions/client"
+require_relative "square/team_members/client"
+require_relative "square/team/client"
+require_relative "square/terminal/client"
+require_relative "square/vendors/client"
+require_relative "square/cash_drawers/client"
+require_relative "square/webhooks/client"
+require_relative "requests"
+require_relative "square/cash_drawers/client"
+require_relative "square/webhooks/client"
 
-require 'apimatic_core_interfaces'
-require 'apimatic_core'
-require 'apimatic_faraday_client_adapter'
+module SquareApiClient
+  class Client
+  # @return [SquareApiClient::MobileClient] 
+    attr_reader :mobile
+  # @return [SquareApiClient::OAuthClient] 
+    attr_reader :o_auth
+  # @return [SquareApiClient::V1TransactionsClient] 
+    attr_reader :v_1_transactions
+  # @return [SquareApiClient::ApplePayClient] 
+    attr_reader :apple_pay
+  # @return [SquareApiClient::BankAccountsClient] 
+    attr_reader :bank_accounts
+  # @return [SquareApiClient::BookingsClient] 
+    attr_reader :bookings
+  # @return [SquareApiClient::CardsClient] 
+    attr_reader :cards
+  # @return [SquareApiClient::CatalogClient] 
+    attr_reader :catalog
+  # @return [SquareApiClient::CustomersClient] 
+    attr_reader :customers
+  # @return [SquareApiClient::DevicesClient] 
+    attr_reader :devices
+  # @return [SquareApiClient::DisputesClient] 
+    attr_reader :disputes
+  # @return [SquareApiClient::EmployeesClient] 
+    attr_reader :employees
+  # @return [SquareApiClient::EventsClient] 
+    attr_reader :events
+  # @return [SquareApiClient::GiftCardsClient] 
+    attr_reader :gift_cards
+  # @return [SquareApiClient::InventoryClient] 
+    attr_reader :inventory
+  # @return [SquareApiClient::InvoicesClient] 
+    attr_reader :invoices
+  # @return [SquareApiClient::LaborClient] 
+    attr_reader :labor
+  # @return [SquareApiClient::LocationsClient] 
+    attr_reader :locations
+  # @return [SquareApiClient::LoyaltyClient] 
+    attr_reader :loyalty
+  # @return [SquareApiClient::MerchantsClient] 
+    attr_reader :merchants
+  # @return [SquareApiClient::CheckoutClient] 
+    attr_reader :checkout
+  # @return [SquareApiClient::OrdersClient] 
+    attr_reader :orders
+  # @return [SquareApiClient::PaymentsClient] 
+    attr_reader :payments
+  # @return [SquareApiClient::PayoutsClient] 
+    attr_reader :payouts
+  # @return [SquareApiClient::RefundsClient] 
+    attr_reader :refunds
+  # @return [SquareApiClient::SitesClient] 
+    attr_reader :sites
+  # @return [SquareApiClient::SnippetsClient] 
+    attr_reader :snippets
+  # @return [SquareApiClient::SubscriptionsClient] 
+    attr_reader :subscriptions
+  # @return [SquareApiClient::TeamMembersClient] 
+    attr_reader :team_members
+  # @return [SquareApiClient::TeamClient] 
+    attr_reader :team
+  # @return [SquareApiClient::TerminalClient] 
+    attr_reader :terminal
+  # @return [SquareApiClient::VendorsClient] 
+    attr_reader :vendors
+  # @return [SquareApiClient::CashDrawers::Client] 
+    attr_reader :cash_drawers
+  # @return [SquareApiClient::Webhooks::Client] 
+    attr_reader :webhooks
 
-require_relative 'square/api_helper'
-require_relative 'square/client'
 
-# Utilities
-require_relative 'square/utilities/file_wrapper'
-require_relative 'square/utilities/date_time_helper'
+    # @param base_url [String] 
+    # @param environment [SquareApiClient::Environment] 
+    # @param max_retries [Long] The number of times to retry a failed request, defaults to 2.
+    # @param timeout_in_seconds [Long] 
+    # @param token [String] 
+    # @param version [String] 
+    # @return [SquareApiClient::Client]
+    def initialize(base_url: nil, environment: SquareApiClient::Environment::PRODUCTION, max_retries: nil, timeout_in_seconds: nil, token: ENV["SQUARE_TOKEN"], version:)
+      @request_client = SquareApiClient::RequestClient.new(
+  base_url: base_url,
+  environment: environment,
+  max_retries: max_retries,
+  timeout_in_seconds: timeout_in_seconds,
+  token: token,
+  version: version
+)
+      @mobile = SquareApiClient::MobileClient.new(request_client: @request_client)
+      @o_auth = SquareApiClient::OAuthClient.new(request_client: @request_client)
+      @v_1_transactions = SquareApiClient::V1TransactionsClient.new(request_client: @request_client)
+      @apple_pay = SquareApiClient::ApplePayClient.new(request_client: @request_client)
+      @bank_accounts = SquareApiClient::BankAccountsClient.new(request_client: @request_client)
+      @bookings = SquareApiClient::BookingsClient.new(request_client: @request_client)
+      @cards = SquareApiClient::CardsClient.new(request_client: @request_client)
+      @catalog = SquareApiClient::CatalogClient.new(request_client: @request_client)
+      @customers = SquareApiClient::CustomersClient.new(request_client: @request_client)
+      @devices = SquareApiClient::DevicesClient.new(request_client: @request_client)
+      @disputes = SquareApiClient::DisputesClient.new(request_client: @request_client)
+      @employees = SquareApiClient::EmployeesClient.new(request_client: @request_client)
+      @events = SquareApiClient::EventsClient.new(request_client: @request_client)
+      @gift_cards = SquareApiClient::GiftCardsClient.new(request_client: @request_client)
+      @inventory = SquareApiClient::InventoryClient.new(request_client: @request_client)
+      @invoices = SquareApiClient::InvoicesClient.new(request_client: @request_client)
+      @labor = SquareApiClient::LaborClient.new(request_client: @request_client)
+      @locations = SquareApiClient::LocationsClient.new(request_client: @request_client)
+      @loyalty = SquareApiClient::LoyaltyClient.new(request_client: @request_client)
+      @merchants = SquareApiClient::MerchantsClient.new(request_client: @request_client)
+      @checkout = SquareApiClient::CheckoutClient.new(request_client: @request_client)
+      @orders = SquareApiClient::OrdersClient.new(request_client: @request_client)
+      @payments = SquareApiClient::PaymentsClient.new(request_client: @request_client)
+      @payouts = SquareApiClient::PayoutsClient.new(request_client: @request_client)
+      @refunds = SquareApiClient::RefundsClient.new(request_client: @request_client)
+      @sites = SquareApiClient::SitesClient.new(request_client: @request_client)
+      @snippets = SquareApiClient::SnippetsClient.new(request_client: @request_client)
+      @subscriptions = SquareApiClient::SubscriptionsClient.new(request_client: @request_client)
+      @team_members = SquareApiClient::TeamMembersClient.new(request_client: @request_client)
+      @team = SquareApiClient::TeamClient.new(request_client: @request_client)
+      @terminal = SquareApiClient::TerminalClient.new(request_client: @request_client)
+      @vendors = SquareApiClient::VendorsClient.new(request_client: @request_client)
+      @cash_drawers = SquareApiClient::CashDrawers::Client.new(request_client: @request_client)
+      @webhooks = SquareApiClient::Webhooks::Client.new(request_client: @request_client)
+    end
+  end
+  class AsyncClient
+  # @return [SquareApiClient::AsyncMobileClient] 
+    attr_reader :mobile
+  # @return [SquareApiClient::AsyncOAuthClient] 
+    attr_reader :o_auth
+  # @return [SquareApiClient::AsyncV1TransactionsClient] 
+    attr_reader :v_1_transactions
+  # @return [SquareApiClient::AsyncApplePayClient] 
+    attr_reader :apple_pay
+  # @return [SquareApiClient::AsyncBankAccountsClient] 
+    attr_reader :bank_accounts
+  # @return [SquareApiClient::AsyncBookingsClient] 
+    attr_reader :bookings
+  # @return [SquareApiClient::AsyncCardsClient] 
+    attr_reader :cards
+  # @return [SquareApiClient::AsyncCatalogClient] 
+    attr_reader :catalog
+  # @return [SquareApiClient::AsyncCustomersClient] 
+    attr_reader :customers
+  # @return [SquareApiClient::AsyncDevicesClient] 
+    attr_reader :devices
+  # @return [SquareApiClient::AsyncDisputesClient] 
+    attr_reader :disputes
+  # @return [SquareApiClient::AsyncEmployeesClient] 
+    attr_reader :employees
+  # @return [SquareApiClient::AsyncEventsClient] 
+    attr_reader :events
+  # @return [SquareApiClient::AsyncGiftCardsClient] 
+    attr_reader :gift_cards
+  # @return [SquareApiClient::AsyncInventoryClient] 
+    attr_reader :inventory
+  # @return [SquareApiClient::AsyncInvoicesClient] 
+    attr_reader :invoices
+  # @return [SquareApiClient::AsyncLaborClient] 
+    attr_reader :labor
+  # @return [SquareApiClient::AsyncLocationsClient] 
+    attr_reader :locations
+  # @return [SquareApiClient::AsyncLoyaltyClient] 
+    attr_reader :loyalty
+  # @return [SquareApiClient::AsyncMerchantsClient] 
+    attr_reader :merchants
+  # @return [SquareApiClient::AsyncCheckoutClient] 
+    attr_reader :checkout
+  # @return [SquareApiClient::AsyncOrdersClient] 
+    attr_reader :orders
+  # @return [SquareApiClient::AsyncPaymentsClient] 
+    attr_reader :payments
+  # @return [SquareApiClient::AsyncPayoutsClient] 
+    attr_reader :payouts
+  # @return [SquareApiClient::AsyncRefundsClient] 
+    attr_reader :refunds
+  # @return [SquareApiClient::AsyncSitesClient] 
+    attr_reader :sites
+  # @return [SquareApiClient::AsyncSnippetsClient] 
+    attr_reader :snippets
+  # @return [SquareApiClient::AsyncSubscriptionsClient] 
+    attr_reader :subscriptions
+  # @return [SquareApiClient::AsyncTeamMembersClient] 
+    attr_reader :team_members
+  # @return [SquareApiClient::AsyncTeamClient] 
+    attr_reader :team
+  # @return [SquareApiClient::AsyncTerminalClient] 
+    attr_reader :terminal
+  # @return [SquareApiClient::AsyncVendorsClient] 
+    attr_reader :vendors
+  # @return [SquareApiClient::CashDrawers::AsyncClient] 
+    attr_reader :cash_drawers
+  # @return [SquareApiClient::Webhooks::AsyncClient] 
+    attr_reader :webhooks
 
-# Http
-require_relative 'square/http/api_response'
-require_relative 'square/http/http_call_back'
-require_relative 'square/http/http_method_enum'
-require_relative 'square/http/http_request'
-require_relative 'square/http/http_response'
 
-# Logger
-require_relative 'square/http/auth/o_auth2'
-
-# Models
-
-# Exceptions
-require_relative 'square/exceptions/api_exception'
-
-require_relative 'square/configuration'
-
-# Controllers
-require_relative 'square/api/base_api'
-require_relative 'square/api/mobile_authorization_api'
-require_relative 'square/api/o_auth_api'
-require_relative 'square/api/v1_transactions_api'
-require_relative 'square/api/apple_pay_api'
-require_relative 'square/api/bank_accounts_api'
-require_relative 'square/api/bookings_api'
-require_relative 'square/api/booking_custom_attributes_api'
-require_relative 'square/api/cards_api'
-require_relative 'square/api/cash_drawers_api'
-require_relative 'square/api/catalog_api'
-require_relative 'square/api/customers_api'
-require_relative 'square/api/customer_custom_attributes_api'
-require_relative 'square/api/customer_groups_api'
-require_relative 'square/api/customer_segments_api'
-require_relative 'square/api/devices_api'
-require_relative 'square/api/disputes_api'
-require_relative 'square/api/employees_api'
-require_relative 'square/api/events_api'
-require_relative 'square/api/gift_cards_api'
-require_relative 'square/api/gift_card_activities_api'
-require_relative 'square/api/inventory_api'
-require_relative 'square/api/invoices_api'
-require_relative 'square/api/labor_api'
-require_relative 'square/api/locations_api'
-require_relative 'square/api/location_custom_attributes_api'
-require_relative 'square/api/checkout_api'
-require_relative 'square/api/transactions_api'
-require_relative 'square/api/loyalty_api'
-require_relative 'square/api/merchants_api'
-require_relative 'square/api/merchant_custom_attributes_api'
-require_relative 'square/api/orders_api'
-require_relative 'square/api/order_custom_attributes_api'
-require_relative 'square/api/payments_api'
-require_relative 'square/api/payouts_api'
-require_relative 'square/api/refunds_api'
-require_relative 'square/api/sites_api'
-require_relative 'square/api/snippets_api'
-require_relative 'square/api/subscriptions_api'
-require_relative 'square/api/team_api'
-require_relative 'square/api/terminal_api'
-require_relative 'square/api/vendors_api'
-require_relative 'square/api/webhook_subscriptions_api'
-require_relative 'square/utilities/webhooks_helper'
+    # @param base_url [String] 
+    # @param environment [SquareApiClient::Environment] 
+    # @param max_retries [Long] The number of times to retry a failed request, defaults to 2.
+    # @param timeout_in_seconds [Long] 
+    # @param token [String] 
+    # @param version [String] 
+    # @return [SquareApiClient::AsyncClient]
+    def initialize(base_url: nil, environment: SquareApiClient::Environment::PRODUCTION, max_retries: nil, timeout_in_seconds: nil, token: ENV["SQUARE_TOKEN"], version:)
+      @async_request_client = SquareApiClient::AsyncRequestClient.new(
+  base_url: base_url,
+  environment: environment,
+  max_retries: max_retries,
+  timeout_in_seconds: timeout_in_seconds,
+  token: token,
+  version: version
+)
+      @mobile = SquareApiClient::AsyncMobileClient.new(request_client: @async_request_client)
+      @o_auth = SquareApiClient::AsyncOAuthClient.new(request_client: @async_request_client)
+      @v_1_transactions = SquareApiClient::AsyncV1TransactionsClient.new(request_client: @async_request_client)
+      @apple_pay = SquareApiClient::AsyncApplePayClient.new(request_client: @async_request_client)
+      @bank_accounts = SquareApiClient::AsyncBankAccountsClient.new(request_client: @async_request_client)
+      @bookings = SquareApiClient::AsyncBookingsClient.new(request_client: @async_request_client)
+      @cards = SquareApiClient::AsyncCardsClient.new(request_client: @async_request_client)
+      @catalog = SquareApiClient::AsyncCatalogClient.new(request_client: @async_request_client)
+      @customers = SquareApiClient::AsyncCustomersClient.new(request_client: @async_request_client)
+      @devices = SquareApiClient::AsyncDevicesClient.new(request_client: @async_request_client)
+      @disputes = SquareApiClient::AsyncDisputesClient.new(request_client: @async_request_client)
+      @employees = SquareApiClient::AsyncEmployeesClient.new(request_client: @async_request_client)
+      @events = SquareApiClient::AsyncEventsClient.new(request_client: @async_request_client)
+      @gift_cards = SquareApiClient::AsyncGiftCardsClient.new(request_client: @async_request_client)
+      @inventory = SquareApiClient::AsyncInventoryClient.new(request_client: @async_request_client)
+      @invoices = SquareApiClient::AsyncInvoicesClient.new(request_client: @async_request_client)
+      @labor = SquareApiClient::AsyncLaborClient.new(request_client: @async_request_client)
+      @locations = SquareApiClient::AsyncLocationsClient.new(request_client: @async_request_client)
+      @loyalty = SquareApiClient::AsyncLoyaltyClient.new(request_client: @async_request_client)
+      @merchants = SquareApiClient::AsyncMerchantsClient.new(request_client: @async_request_client)
+      @checkout = SquareApiClient::AsyncCheckoutClient.new(request_client: @async_request_client)
+      @orders = SquareApiClient::AsyncOrdersClient.new(request_client: @async_request_client)
+      @payments = SquareApiClient::AsyncPaymentsClient.new(request_client: @async_request_client)
+      @payouts = SquareApiClient::AsyncPayoutsClient.new(request_client: @async_request_client)
+      @refunds = SquareApiClient::AsyncRefundsClient.new(request_client: @async_request_client)
+      @sites = SquareApiClient::AsyncSitesClient.new(request_client: @async_request_client)
+      @snippets = SquareApiClient::AsyncSnippetsClient.new(request_client: @async_request_client)
+      @subscriptions = SquareApiClient::AsyncSubscriptionsClient.new(request_client: @async_request_client)
+      @team_members = SquareApiClient::AsyncTeamMembersClient.new(request_client: @async_request_client)
+      @team = SquareApiClient::AsyncTeamClient.new(request_client: @async_request_client)
+      @terminal = SquareApiClient::AsyncTerminalClient.new(request_client: @async_request_client)
+      @vendors = SquareApiClient::AsyncVendorsClient.new(request_client: @async_request_client)
+      @cash_drawers = SquareApiClient::CashDrawers::AsyncClient.new(request_client: @async_request_client)
+      @webhooks = SquareApiClient::Webhooks::AsyncClient.new(request_client: @async_request_client)
+    end
+  end
+end
