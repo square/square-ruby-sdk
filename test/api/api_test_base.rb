@@ -3,12 +3,12 @@ require 'minitest/autorun'
 require 'minitest/hell'
 require 'minitest/pride'
 require 'minitest/proveit'
-require 'square'
+require 'square_legacy'
 require_relative '../http_response_catcher'
 
 class ApiTestBase < Minitest::Test
   parallelize_me!
-  include Square
+  include SquareLegacy
   include CoreLibrary
 
   # Create configuration and set any test parameters

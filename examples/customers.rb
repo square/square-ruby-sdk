@@ -1,7 +1,7 @@
-require 'square'
+require 'square_legacy'
 
 # Initialize Square Client
-square = Square::Client.new(
+square = SquareLegacy::Client.new(
   access_token: 'ACCESS_TOKEN'
 )
 

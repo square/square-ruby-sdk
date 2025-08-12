@@ -30,11 +30,11 @@ describe "UserJourney" do
   end
 
   let :sq do
-    Square::Client.new(access_token: access_token, environment: environment)
+    SquareLegacy::Client.new(access_token: access_token, environment: environment)
   end
 
   let :unauthoerized_sq do
-    Square::Client.new(access_token: "bad_token")
+    SquareLegacy::Client.new(access_token: "bad_token")
   end
 
   let :customer2 do
@@ -77,7 +77,7 @@ describe "UserJourney" do
   #     access_token = "your_production_access_token"
   #     name1 = "fruit"
   #     name2 = "drink"
-  #     api = Square::Client.new(access_token: access_token).v1_items
+  #     api = SquareLegacy::Client.new(access_token: access_token).v1_items
   #
   #     # create
   #     response = api.create_category(location_id: location_id, body: {name: name1})

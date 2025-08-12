@@ -1,4 +1,4 @@
-class HttpResponseCatcher < Square::HttpCallBack
+class HttpResponseCatcher < SquareLegacy::HttpCallBack
   attr_accessor :response
 
   def on_before_request(request)

@@ -1,4 +1,4 @@
-require_relative '../../lib/square/utilities/webhooks_helper.rb'
+require_relative '../../lib/square_legacy/utilities/webhooks_helper.rb'
 require 'minitest/autorun'
 require 'minitest/hell'
 require 'minitest/pride'
@@ -18,7 +18,7 @@ class WebhooksHelperTest < Minitest::Test
 
   def test_signature_validation_pass
     @logger.info('Running test_signature_validation_pass') # Log a message
-    is_valid = Square::WebhooksHelper.is_valid_webhook_event_signature(
+    is_valid = SquareLegacy::WebhooksHelper.is_valid_webhook_event_signature(
       @request_body,
       @signature_header,
       @signature_key,
@@ -35,7 +35,7 @@ class WebhooksHelperTest < Minitest::Test
     signatureKey = "signature-key";
     url = "https://webhook.site/webhooks";
 
-    is_valid = Square::WebhooksHelper.is_valid_webhook_event_signature(
+    is_valid = SquareLegacy::WebhooksHelper.is_valid_webhook_event_signature(
       escpaedRequestBody,
       newSignatureHeader,
       signatureKey,
@@ -46,7 +46,7 @@ class WebhooksHelperTest < Minitest::Test
 
   def test_signature_validation_fails_on_notification_url_mismatch
     @logger.info('Running test_signature_validation_fails_on_notification_url_mismatch') # Log a message
-    is_valid = Square::WebhooksHelper.is_valid_webhook_event_signature(
+    is_valid = SquareLegacy::WebhooksHelper.is_valid_webhook_event_signature(
       @request_body,
       @signature_header,
       @signature_key,
@@ -57,7 +57,7 @@ class WebhooksHelperTest < Minitest::Test
 
   def test_signature_validation_fails_on_invalid_signature_key
     @logger.info('Running test_signature_validation_fails_on_invalid_signature_key') # Log a message
-    is_valid = Square::WebhooksHelper.is_valid_webhook_event_signature(
+    is_valid = SquareLegacy::WebhooksHelper.is_valid_webhook_event_signature(
       @request_body,
       @signature_header,
       'MCmhFRxGX82xMwg5FsaoQA',
@@ -67,7 +67,7 @@ class WebhooksHelperTest < Minitest::Test
   end
 
   def test_signature_validation_fails_on_invalid_signature_header
-    is_valid = Square::WebhooksHelper.is_valid_webhook_event_signature(
+    is_valid = SquareLegacy::WebhooksHelper.is_valid_webhook_event_signature(
       @request_body,
       '1z2n3DEJJiUPKcPzQo1ftvbxGdw=',
       @signature_key,
@@ -78,7 +78,7 @@ class WebhooksHelperTest < Minitest::Test
 
   def test_signature_validation_fails_on_request_body_mismatch
     request_body = '{"merchant_id":"MLEFBHHSJGVHD","type":"webhooks.test_notification","event_id":"ac3ac95b-f97d-458c-a6e6-18981597e05f","created_at":"2022-06-13T20:30:59.037339943Z","data":{"type":"webhooks","id":"bc368e64-01aa-407e-b46e-3231809b1129"}}'
-    is_valid = Square::WebhooksHelper.is_valid_webhook_event_signature(
+    is_valid = SquareLegacy::WebhooksHelper.is_valid_webhook_event_signature(
       request_body,
       @signature_header,
       @signature_key,
@@ -98,7 +98,7 @@ class WebhooksHelperTest < Minitest::Test
                 "id": "bc368e64-01aa-407e-b46e-3231809b1129"
             }
         }'
-    is_valid = Square::WebhooksHelper.is_valid_webhook_event_signature(
+    is_valid = SquareLegacy::WebhooksHelper.is_valid_webhook_event_signature(
       request_body,
       @signature_header,
       @signature_key,
@@ -109,7 +109,7 @@ class WebhooksHelperTest < Minitest::Test
 
   def test_throws_error_on_empty_signature_key
     assert_raises(RuntimeError, 'signature_key is null or empty') do
-      Square::WebhooksHelper.is_valid_webhook_event_signature(
+      SquareLegacy::WebhooksHelper.is_valid_webhook_event_signature(
         @request_body,
         @signature_header,
         '',
@@ -120,7 +120,7 @@ class WebhooksHelperTest < Minitest::Test
 
   def test_throws_error_on_signature_key_not_configured
     assert_raises(RuntimeError) do
-      Square::WebhooksHelper.is_valid_webhook_event_signature(
+      SquareLegacy::WebhooksHelper.is_valid_webhook_event_signature(
         @request_body,
         @signature_header,
         nil,
@@ -131,7 +131,7 @@ class WebhooksHelperTest < Minitest::Test
 
   def test_throws_error_on_empty_notification_url
     assert_raises(RuntimeError, 'notification_url is null or empty') do
-      Square::WebhooksHelper.is_valid_webhook_event_signature(
+      SquareLegacy::WebhooksHelper.is_valid_webhook_event_signature(
         @request_body,
         @signature_header,
         @signature_key,
@@ -142,7 +142,7 @@ class WebhooksHelperTest < Minitest::Test
 
   def test_throws_error_on_notification_url_not_configured
     assert_raises(RuntimeError) do
-      Square::WebhooksHelper.is_valid_webhook_event_signature(
+      SquareLegacy::WebhooksHelper.is_valid_webhook_event_signature(
         @request_body,
         @signature_header,
         @signature_key,
