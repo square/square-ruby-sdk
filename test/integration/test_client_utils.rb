@@ -25,6 +25,6 @@ class ClientUtilsTest < IntegrationTestBase
 
   def test_should_get_the_default_location_id
     location_id = get_default_location_id(@client)
-    assert location_id
+    refute_nil location_id
   end
 end
