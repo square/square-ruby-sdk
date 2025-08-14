@@ -5,7 +5,7 @@ module Square
     module Types
       # @abstract
       module Type
-        include square::Internal::JSON::Serializable
+        include Square::Internal::JSON::Serializable
 
         # Coerces a value to this type
         #

@@ -4,7 +4,7 @@ module Square
   module Internal
     module Types
       module Boolean
-      extend square::Internal::Types::Union
+      extend Square::Internal::Types::Union
 
         member TrueClass
         member FalseClass

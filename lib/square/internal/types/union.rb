@@ -5,7 +5,7 @@ module Square
     module Types
       # Define a union between two types
       module Union
-        include square::Internal::Types::Type
+        include Square::Internal::Types::Type
 
         def members
           @members ||= []

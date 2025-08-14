@@ -16,7 +16,7 @@ module Square
           #
           # @return [Hash<Symbol, Field>]
           def fields
-            @fields ||= if self < square::Internal::Types::Model
+            @fields ||= if self < Square::Internal::Types::Model
                           superclass.fields.dup
                         else
                           {}
