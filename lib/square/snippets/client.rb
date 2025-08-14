@@ -26,6 +26,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Adds a snippet to a Square Online site or updates the existing snippet on the site. 
@@ -46,6 +47,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Removes your snippet from a Square Online site.
@@ -65,6 +67,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

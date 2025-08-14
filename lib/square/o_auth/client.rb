@@ -34,6 +34,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns an OAuth access token and refresh token using the `authorization_code`
@@ -68,6 +69,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns information about an [OAuth access token](https://developer.squareup.com/docs/build-basics/access-tokens#get-an-oauth-access-token) or an application’s [personal access token](https://developer.squareup.com/docs/build-basics/access-tokens#get-a-personal-access-token).
@@ -95,6 +97,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # @return [untyped]
@@ -107,6 +110,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

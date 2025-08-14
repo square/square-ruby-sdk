@@ -29,6 +29,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Creates multiple `TeamMember` objects. The created `TeamMember` objects are returned on successful creates.
@@ -48,6 +49,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates multiple `TeamMember` objects. The updated `TeamMember` objects are returned on successful updates.
@@ -66,6 +68,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns a paginated list of `TeamMember` objects for a business. 
@@ -82,6 +85,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves a `TeamMember` object for the given `TeamMember.id`.
@@ -97,6 +101,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates a single `TeamMember` object. The `TeamMember` object is returned on successful updates.
@@ -112,6 +117,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

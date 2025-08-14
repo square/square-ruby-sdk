@@ -24,6 +24,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Creates a booking.
@@ -51,6 +52,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Searches for availabilities for booking.
@@ -68,6 +70,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Bulk-Retrieves a list of bookings by booking IDs.
@@ -85,6 +88,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves a seller's booking profile.
@@ -99,6 +103,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves a seller's location booking profile.
@@ -113,6 +118,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves one or more team members' booking profiles.
@@ -127,6 +133,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves a booking.
@@ -144,6 +151,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates a booking.
@@ -164,6 +172,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Cancels an existing booking.
@@ -184,6 +193,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

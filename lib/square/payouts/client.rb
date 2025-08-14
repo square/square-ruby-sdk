@@ -23,6 +23,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves details of a specific payout identified by a payout ID.
@@ -38,6 +39,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves a list of all payout entries for a specific payout.
@@ -53,6 +55,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

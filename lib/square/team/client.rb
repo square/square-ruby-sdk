@@ -21,6 +21,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Creates a job in a seller account. A job defines a title and tip eligibility. Note that
@@ -36,6 +37,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves a specified job.
@@ -50,6 +52,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates the title or tip eligibility of a job. Changes to the title propagate to all
@@ -66,6 +69,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

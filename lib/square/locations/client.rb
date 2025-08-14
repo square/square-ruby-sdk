@@ -22,6 +22,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Creates a [location](https://developer.squareup.com/docs/locations-api).
@@ -42,6 +43,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves details of a single location. Specify "main"
@@ -57,6 +59,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates a [location](https://developer.squareup.com/docs/locations-api).
@@ -71,6 +74,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Links a `checkoutId` to a `checkout_page_url` that customers are
@@ -91,6 +95,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

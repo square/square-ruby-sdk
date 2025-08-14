@@ -22,6 +22,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Adds a card on file to an existing merchant.
@@ -36,6 +37,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves details for a specific Card.
@@ -50,6 +52,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Disables the card, preventing any further updates or charges.
@@ -65,6 +68,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

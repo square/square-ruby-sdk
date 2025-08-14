@@ -21,6 +21,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns details of a [BankAccount](entity:BankAccount) identified by V1 bank account ID.
@@ -35,6 +36,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns details of a [BankAccount](entity:BankAccount)
@@ -50,6 +52,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

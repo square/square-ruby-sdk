@@ -21,6 +21,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates the location-level settings for a Square-hosted checkout page.
@@ -35,6 +36,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves the merchant-level settings for a Square-hosted checkout page.
@@ -49,6 +51,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates the merchant-level settings for a Square-hosted checkout page.
@@ -63,6 +66,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

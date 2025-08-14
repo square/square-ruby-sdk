@@ -21,6 +21,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Disables events to prevent them from being searchable.
@@ -37,6 +38,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Enables events to make them searchable. Only events that occur while in the enabled state are searchable.
@@ -51,6 +53,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Lists all event types that you can subscribe to as webhooks or query using the Events API.
@@ -65,6 +68,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

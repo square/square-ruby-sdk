@@ -28,6 +28,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Schedules a plan variation change for all active subscriptions under a given plan
@@ -43,6 +44,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Searches for subscriptions.
@@ -70,6 +72,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves a specific subscription.
@@ -84,6 +87,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates a subscription by modifying or clearing `subscription` field values.
@@ -99,6 +103,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Deletes a scheduled action for a subscription.
@@ -113,6 +118,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Changes the [billing anchor date](https://developer.squareup.com/docs/subscriptions-api/subscription-billing#billing-dates)
@@ -128,6 +134,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Schedules a `CANCEL` action to cancel an active subscription. This 
@@ -144,6 +151,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Lists all [events](https://developer.squareup.com/docs/subscriptions-api/actions-events) for a specific subscription.
@@ -158,6 +166,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Schedules a `PAUSE` action to pause an active subscription.
@@ -172,6 +181,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Schedules a `RESUME` action to resume a paused or a deactivated subscription.
@@ -186,6 +196,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Schedules a `SWAP_PLAN` action to swap a subscription plan variation in an existing subscription. 
@@ -201,6 +212,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

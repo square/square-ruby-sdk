@@ -26,6 +26,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Creates a payment using the provided source. You can use this endpoint 
@@ -47,6 +48,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Cancels (voids) a payment identified by the idempotency key that is specified in the
@@ -71,6 +73,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves details for a specific payment.
@@ -85,6 +88,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates a payment with the APPROVED status.
@@ -100,6 +104,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Cancels (voids) a payment. You can use this endpoint to cancel a payment with 
@@ -115,6 +120,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Completes (captures) a payment.
@@ -132,6 +138,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

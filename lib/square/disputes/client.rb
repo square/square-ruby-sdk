@@ -21,6 +21,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns details about a specific dispute.
@@ -35,6 +36,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Accepts the loss on a dispute. Square returns the disputed amount to the cardholder and
@@ -53,6 +55,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Uploads a file to use as evidence in a dispute challenge. The endpoint accepts HTTP
@@ -68,6 +71,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Uploads text to use as evidence for a dispute challenge.
@@ -82,6 +86,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Submits evidence to the cardholder's bank.
@@ -102,6 +107,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

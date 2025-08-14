@@ -22,6 +22,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns the [InventoryAdjustment](entity:InventoryAdjustment) object
@@ -37,6 +38,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Deprecated version of [BatchChangeInventory](api-endpoint:Inventory-BatchChangeInventory) after the endpoint URL
@@ -55,6 +57,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Deprecated version of [BatchRetrieveInventoryChanges](api-endpoint:Inventory-BatchRetrieveInventoryChanges) after the endpoint URL
@@ -73,6 +76,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Deprecated version of [BatchRetrieveInventoryCounts](api-endpoint:Inventory-BatchRetrieveInventoryCounts) after the endpoint URL
@@ -91,6 +95,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Applies adjustments and counts to the provided item quantities.
@@ -112,6 +117,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns historical physical counts and adjustments based on the
@@ -136,6 +142,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns current counts for the provided
@@ -163,6 +170,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Deprecated version of [RetrieveInventoryPhysicalCount](api-endpoint:Inventory-RetrieveInventoryPhysicalCount) after the endpoint URL
@@ -178,6 +186,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns the [InventoryPhysicalCount](entity:InventoryPhysicalCount)
@@ -193,6 +202,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns the [InventoryTransfer](entity:InventoryTransfer) object
@@ -208,6 +218,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves the current calculated stock count for a given
@@ -225,6 +236,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns a set of physical counts and inventory adjustments for the
@@ -251,6 +263,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

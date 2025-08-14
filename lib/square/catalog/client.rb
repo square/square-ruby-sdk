@@ -34,6 +34,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns a set of objects based on the provided ID.
@@ -53,6 +54,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Creates or updates up to 10,000 target objects based on the provided
@@ -79,6 +81,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves information about the Square Catalog API, such as batch size
@@ -94,6 +97,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns a list of all [CatalogObject](entity:CatalogObject)s of the specified types in the catalog.
@@ -115,6 +119,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Searches for [CatalogObject](entity:CatalogObject) of any type by matching supported search attribute values,
@@ -138,6 +143,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Searches for catalog items or item variations by matching supported search attribute values, including
@@ -161,6 +167,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates the [CatalogModifierList](entity:CatalogModifierList) objects
@@ -177,6 +184,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates the [CatalogTax](entity:CatalogTax) objects that apply to the
@@ -193,6 +201,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

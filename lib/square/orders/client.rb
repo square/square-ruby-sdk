@@ -30,6 +30,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves a set of [orders](entity:Order) by their IDs.
@@ -46,6 +47,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Enables applications to preview order pricing without creating an order.
@@ -60,6 +62,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Creates a new order, in the `DRAFT` state, by duplicating an existing order. The newly created order has
@@ -75,6 +78,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Search all orders for one or more locations. Orders include all sales,
@@ -105,6 +109,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves an [Order](entity:Order) by ID.
@@ -119,6 +124,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates an open [order](entity:Order) by adding, replacing, or deleting
@@ -147,6 +153,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Pay for an [order](entity:Order) using one or more approved [payments](entity:Payment)
@@ -174,6 +181,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

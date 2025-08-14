@@ -21,6 +21,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves one or more vendors of specified [Vendor](entity:Vendor) IDs.
@@ -35,6 +36,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates one or more of existing [Vendor](entity:Vendor) objects as suppliers to a seller.
@@ -49,6 +51,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Creates a single [Vendor](entity:Vendor) object to represent a supplier to a seller.
@@ -63,6 +66,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Searches for vendors using a filter against supported [Vendor](entity:Vendor) properties and a supported sorter.
@@ -77,6 +81,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves the vendor of a specified [Vendor](entity:Vendor) ID.
@@ -91,6 +96,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates an existing [Vendor](entity:Vendor) object as a supplier to a seller.
@@ -105,6 +111,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

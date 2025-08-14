@@ -26,6 +26,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Refunds a payment. You can refund the entire payment amount or a
@@ -43,6 +44,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves a specific refund using the `refund_id`.
@@ -57,6 +59,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

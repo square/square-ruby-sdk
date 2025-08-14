@@ -23,6 +23,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Dismisses a Terminal checkout request if the status and type of the request permits it.
@@ -37,6 +38,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Dismisses a Terminal refund request if the status and type of the request permits it.
@@ -51,6 +53,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

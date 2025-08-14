@@ -30,6 +30,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves the `Merchant` object for the given `merchant_id`.
@@ -44,6 +45,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

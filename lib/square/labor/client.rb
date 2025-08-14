@@ -28,6 +28,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Publishes 1 - 100 scheduled shifts. This endpoint takes a map of individual publish
@@ -47,6 +48,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns a paginated list of scheduled shifts, with optional filter and sort settings.
@@ -62,6 +64,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves a scheduled shift by ID.
@@ -76,6 +79,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates the draft shift details for a scheduled shift. This endpoint supports
@@ -99,6 +103,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Publishes a scheduled shift. When a scheduled shift is published, Square keeps the
@@ -114,6 +119,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Creates a new `Timecard`.
@@ -145,6 +151,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns a paginated list of `Timecard` records for a business.
@@ -172,6 +179,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns a single `Timecard` specified by `id`.
@@ -186,6 +194,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates an existing `Timecard`.
@@ -206,6 +215,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Deletes a `Timecard`.
@@ -220,6 +230,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

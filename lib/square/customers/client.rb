@@ -25,6 +25,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Creates a new customer for a business.
@@ -48,6 +49,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Creates multiple [customer profiles](entity:Customer) for a business.
@@ -72,6 +74,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Deletes multiple customer profiles.
@@ -88,6 +91,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves multiple customer profiles.
@@ -104,6 +108,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates multiple customer profiles.
@@ -120,6 +125,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Searches the customer profiles associated with a Square account using one or more supported query filters.
@@ -142,6 +148,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Returns details for a single customer.
@@ -156,6 +163,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates a customer profile. This endpoint supports sparse updates, so only new or changed fields are required in the request.
@@ -173,6 +181,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Deletes a customer profile from a business.
@@ -189,6 +198,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

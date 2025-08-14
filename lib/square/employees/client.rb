@@ -19,6 +19,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # @return [Square::GetEmployeeResponse]
@@ -31,6 +32,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

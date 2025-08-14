@@ -23,6 +23,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Creates a draft [invoice](entity:Invoice) 
@@ -41,6 +42,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Searches for invoices from a location specified in 
@@ -61,6 +63,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves an invoice by invoice ID.
@@ -75,6 +78,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates an invoice. This endpoint supports sparse updates, so you only need
@@ -92,6 +96,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Deletes the specified invoice. When an invoice is deleted, the 
@@ -108,6 +113,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Uploads a file and attaches it to an invoice. This endpoint accepts HTTP multipart/form-data file uploads
@@ -129,6 +135,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Removes an attachment from an invoice and permanently deletes the file. Attachments can be removed only
@@ -144,6 +151,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Cancels an invoice. The seller cannot collect payments for 
@@ -161,6 +169,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Publishes the specified draft invoice. 
@@ -188,6 +197,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

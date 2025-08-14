@@ -20,6 +20,7 @@ module Square
                     return 
                 else
                     raise _response.body
+                end
             end
 
             # Provides comprehensive information for a single online store order, including the order's history.
@@ -34,6 +35,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Updates the details of an online store order. Every update you perform on an order corresponds to one of three actions:
@@ -48,6 +50,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

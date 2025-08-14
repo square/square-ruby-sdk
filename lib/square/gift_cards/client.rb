@@ -22,6 +22,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Creates a digital gift card or registers a physical (plastic) gift card. The resulting gift card
@@ -40,6 +41,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves a gift card using the gift card account number (GAN).
@@ -54,6 +56,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves a gift card using a secure payment token that represents the gift card.
@@ -68,6 +71,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Links a customer to a gift card, which is also referred to as adding a card on file.
@@ -82,6 +86,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Unlinks a customer from a gift card, which is also referred to as removing a card on file.
@@ -96,6 +101,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves a gift card using the gift card ID.
@@ -110,6 +116,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end

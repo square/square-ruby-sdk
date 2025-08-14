@@ -22,6 +22,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
 
             # Retrieves Device with the associated `device_id`.
@@ -36,6 +37,7 @@ module Square
 
                 else
                     raise _response.body
+                end
             end
         end
     end
