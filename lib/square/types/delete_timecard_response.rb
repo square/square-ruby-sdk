@@ -5,7 +5,7 @@ module Square
         # The response to a request to delete a `Timecard`. The response might contain a set of 
         # `Error` objects if the request resulted in errors.
         class DeleteTimecardResponse < Square::Internal::Types::Model
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
         end
     end
 end

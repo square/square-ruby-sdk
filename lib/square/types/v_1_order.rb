@@ -4,7 +4,7 @@ module Square
     module Types
         # V1Order
         class V1Order < Square::Internal::Types::Model
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :buyer_email, String, optional: true, nullable: false
             field :recipient_name, String, optional: true, nullable: false

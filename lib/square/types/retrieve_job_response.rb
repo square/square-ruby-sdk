@@ -6,7 +6,7 @@ module Square
         # is present in the response.
         class RetrieveJobResponse < Square::Internal::Types::Model
             field :job, Square::Job, optional: true, nullable: false
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
         end
     end
 end

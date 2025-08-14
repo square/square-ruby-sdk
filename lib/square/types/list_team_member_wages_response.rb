@@ -7,7 +7,7 @@ module Square
         class ListTeamMemberWagesResponse < Square::Internal::Types::Model
             field :team_member_wages, Square::Internal::Types::Array[Square::TeamMemberWage], optional: true, nullable: false
             field :cursor, String, optional: true, nullable: false
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
         end
     end
 end

@@ -4,7 +4,7 @@ module Square
     module Types
         # Represents a `ListSites` response. The response can include either `sites` or `errors`.
         class ListSitesResponse < Square::Internal::Types::Model
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
             field :sites, Square::Internal::Types::Array[Square::Site], optional: true, nullable: false
         end
     end

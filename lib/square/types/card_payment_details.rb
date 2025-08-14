@@ -19,7 +19,7 @@ module Square
             field :device_details, Square::DeviceDetails, optional: true, nullable: false
             field :card_payment_timeline, Square::CardPaymentTimeline, optional: true, nullable: false
             field :refund_requires_card_presence, Square::Internal::Types::Boolean, optional: true, nullable: false
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
         end
     end
 end

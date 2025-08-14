@@ -13,7 +13,7 @@ module Square
             field :id_token, String, optional: true, nullable: false
             field :refresh_token, String, optional: true, nullable: false
             field :short_lived, Square::Internal::Types::Boolean, optional: true, nullable: false
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
             field :refresh_token_expires_at, String, optional: true, nullable: false
         end
     end

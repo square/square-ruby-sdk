@@ -4,7 +4,7 @@ module Square
     module Types
         class GetPayoutResponse < Square::Internal::Types::Model
             field :payout, Square::Payout, optional: true, nullable: false
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
         end
     end
 end

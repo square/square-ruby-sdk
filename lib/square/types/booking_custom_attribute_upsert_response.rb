@@ -6,7 +6,7 @@ module Square
         class BookingCustomAttributeUpsertResponse < Square::Internal::Types::Model
             field :booking_id, String, optional: true, nullable: false
             field :custom_attribute, Square::CustomAttribute, optional: true, nullable: false
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
         end
     end
 end

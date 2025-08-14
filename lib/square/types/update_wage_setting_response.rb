@@ -6,7 +6,7 @@ module Square
         # or error messages.
         class UpdateWageSettingResponse < Square::Internal::Types::Model
             field :wage_setting, Square::WageSetting, optional: true, nullable: false
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
         end
     end
 end

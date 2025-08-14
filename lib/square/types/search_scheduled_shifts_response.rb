@@ -7,7 +7,7 @@ module Square
         class SearchScheduledShiftsResponse < Square::Internal::Types::Model
             field :scheduled_shifts, Square::Internal::Types::Array[Square::ScheduledShift], optional: true, nullable: false
             field :cursor, String, optional: true, nullable: false
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
         end
     end
 end

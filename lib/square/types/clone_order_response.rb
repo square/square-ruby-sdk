@@ -6,7 +6,7 @@ module Square
         # a request to the [CloneOrder](api-endpoint:Orders-CloneOrder) endpoint.
         class CloneOrderResponse < Square::Internal::Types::Model
             field :order, Square::Order, optional: true, nullable: false
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
         end
     end
 end

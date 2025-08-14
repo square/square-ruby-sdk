@@ -5,7 +5,7 @@ module Square
         # Represents a response from getting an order custom attribute definition.
         class RetrieveOrderCustomAttributeDefinitionResponse < Square::Internal::Types::Model
             field :custom_attribute_definition, Square::CustomAttributeDefinition, optional: true, nullable: false
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
         end
     end
 end

@@ -7,7 +7,7 @@ module Square
         class ListJobsResponse < Square::Internal::Types::Model
             field :jobs, Square::Internal::Types::Array[Square::Job], optional: true, nullable: false
             field :cursor, String, optional: true, nullable: false
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
         end
     end
 end

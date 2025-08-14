@@ -6,7 +6,7 @@ module Square
         # a request to the `CreateCheckout` endpoint.
         class CreateCheckoutResponse < Square::Internal::Types::Model
             field :checkout, Square::Checkout, optional: true, nullable: false
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
         end
     end
 end

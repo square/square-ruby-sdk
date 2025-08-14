@@ -7,7 +7,7 @@ module Square
         # the request resulted in errors.
         class GetEmployeeWageResponse < Square::Internal::Types::Model
             field :employee_wage, Square::EmployeeWage, optional: true, nullable: false
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
         end
     end
 end

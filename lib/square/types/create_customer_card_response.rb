@@ -7,7 +7,7 @@ module Square
         # 
         # Either `errors` or `card` is present in a given response (never both).
         class CreateCustomerCardResponse < Square::Internal::Types::Model
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
             field :card, Square::Card, optional: true, nullable: false
         end
     end

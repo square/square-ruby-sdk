@@ -7,7 +7,7 @@ module Square
         # 
         # One of `errors` or `transaction` is present in a given response (never both).
         class GetTransactionResponse < Square::Internal::Types::Model
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
             field :transaction, Square::Transaction, optional: true, nullable: false
         end
     end

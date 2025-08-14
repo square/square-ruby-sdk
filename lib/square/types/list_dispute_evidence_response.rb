@@ -5,7 +5,7 @@ module Square
         # Defines the fields in a `ListDisputeEvidence` response.
         class ListDisputeEvidenceResponse < Square::Internal::Types::Model
             field :evidence, Square::Internal::Types::Array[Square::DisputeEvidence], optional: true, nullable: false
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
             field :cursor, String, optional: true, nullable: false
         end
     end

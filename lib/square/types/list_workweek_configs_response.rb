@@ -8,7 +8,7 @@ module Square
         class ListWorkweekConfigsResponse < Square::Internal::Types::Model
             field :workweek_configs, Square::Internal::Types::Array[Square::WorkweekConfig], optional: true, nullable: false
             field :cursor, String, optional: true, nullable: false
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
         end
     end
 end

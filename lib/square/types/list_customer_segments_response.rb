@@ -6,7 +6,7 @@ module Square
         # 
         # Either `errors` or `segments` is present in a given response (never both).
         class ListCustomerSegmentsResponse < Square::Internal::Types::Model
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
             field :segments, Square::Internal::Types::Array[Square::CustomerSegment], optional: true, nullable: false
             field :cursor, String, optional: true, nullable: false
         end

@@ -8,7 +8,7 @@ module Square
         class ListMerchantCustomAttributesResponse < Square::Internal::Types::Model
             field :custom_attributes, Square::Internal::Types::Array[Square::CustomAttribute], optional: true, nullable: false
             field :cursor, String, optional: true, nullable: false
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
         end
     end
 end

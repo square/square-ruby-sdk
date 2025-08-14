@@ -5,7 +5,7 @@ module Square
         # A response that contains a `GiftCard`. The response might contain a set of `Error` objects
         # if the request resulted in errors.
         class GetGiftCardResponse < Square::Internal::Types::Model
-            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
             field :gift_card, Square::GiftCard, optional: true, nullable: false
         end
     end
