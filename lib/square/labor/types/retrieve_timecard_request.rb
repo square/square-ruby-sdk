@@ -1,7 +1,7 @@
 
 module Square
     module Labor
-        class RetrieveTimecardRequest
+        class RetrieveTimecardRequest < Square::Internal::Types::Model
             field :id, String, optional: false, nullable: false
         end
     end

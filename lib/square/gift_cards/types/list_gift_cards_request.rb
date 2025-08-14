@@ -1,7 +1,7 @@
 
 module Square
     module GiftCards
-        class ListGiftCardsRequest
+        class ListGiftCardsRequest < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :state, String, optional: true, nullable: false
             field :limit, Integer, optional: true, nullable: false

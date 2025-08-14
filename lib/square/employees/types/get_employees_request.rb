@@ -1,7 +1,7 @@
 
 module Square
     module Employees
-        class GetEmployeesRequest
+        class GetEmployeesRequest < Square::Internal::Types::Model
             field :id, String, optional: false, nullable: false
         end
     end

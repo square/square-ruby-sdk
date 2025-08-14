@@ -1,7 +1,7 @@
 
 module Square
     module Disputes
-        class SubmitEvidenceDisputesRequest
+        class SubmitEvidenceDisputesRequest < Square::Internal::Types::Model
             field :dispute_id, String, optional: false, nullable: false
         end
     end

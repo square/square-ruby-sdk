@@ -1,7 +1,7 @@
 
 module Square
     module V1Transactions
-        class V1ListOrdersRequest
+        class V1ListOrdersRequest < Square::Internal::Types::Model
             field :location_id, String, optional: false, nullable: false
             field :order, Square::SortOrder, optional: true, nullable: false
             field :limit, Integer, optional: true, nullable: false

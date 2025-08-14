@@ -1,7 +1,7 @@
 
 module Square
     module Cards
-        class ListCardsRequest
+        class ListCardsRequest < Square::Internal::Types::Model
             field :cursor, String, optional: true, nullable: false
             field :customer_id, String, optional: true, nullable: false
             field :include_disabled, Square::Internal::Types::Boolean, optional: true, nullable: false

@@ -1,7 +1,7 @@
 
 module Square
     module BankAccounts
-        class ListBankAccountsRequest
+        class ListBankAccountsRequest < Square::Internal::Types::Model
             field :cursor, String, optional: true, nullable: false
             field :limit, Integer, optional: true, nullable: false
             field :location_id, String, optional: true, nullable: false

@@ -1,7 +1,7 @@
 
 module Square
     module Payments
-        class GetPaymentsRequest
+        class GetPaymentsRequest < Square::Internal::Types::Model
             field :payment_id, String, optional: false, nullable: false
         end
     end
