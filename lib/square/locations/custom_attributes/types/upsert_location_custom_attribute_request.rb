@@ -1,0 +1,10 @@
+
+module Square
+    module Locations
+        module CustomAttributes
+            class UpsertLocationCustomAttributeRequest
+                field :location_id, String, optional: false, nullable: false
+                field :key, String, optional: false, nullable: falseend
+        end
+    end
+end
