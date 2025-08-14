@@ -2,6 +2,8 @@
 module Square
     module Merchants
         module CustomAttributes
-            class BulkDeleteMerchantCustomAttributesRequest; endend
+            class BulkDeleteMerchantCustomAttributesRequest
+        end
+    end
     end
 end

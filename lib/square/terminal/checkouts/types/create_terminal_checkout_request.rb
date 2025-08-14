@@ -2,6 +2,8 @@
 module Square
     module Terminal
         module Checkouts
-            class CreateTerminalCheckoutRequest; endend
+            class CreateTerminalCheckoutRequest
+        end
+    end
     end
 end

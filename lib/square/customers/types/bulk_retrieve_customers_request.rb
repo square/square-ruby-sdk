@@ -1,5 +1,7 @@
 
 module Square
     module Customers
-        class BulkRetrieveCustomersRequest; endend
+        class BulkRetrieveCustomersRequest
+        end
+    end
 end

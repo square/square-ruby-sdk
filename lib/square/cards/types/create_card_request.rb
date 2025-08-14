@@ -1,5 +1,7 @@
 
 module Square
     module Cards
-        class CreateCardRequest; endend
+        class CreateCardRequest
+        end
+    end
 end

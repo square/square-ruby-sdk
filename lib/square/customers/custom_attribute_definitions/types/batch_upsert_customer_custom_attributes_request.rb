@@ -2,6 +2,8 @@
 module Square
     module Customers
         module CustomAttributeDefinitions
-            class BatchUpsertCustomerCustomAttributesRequest; endend
+            class BatchUpsertCustomerCustomAttributesRequest
+        end
+    end
     end
 end

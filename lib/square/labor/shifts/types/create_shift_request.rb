@@ -2,6 +2,8 @@
 module Square
     module Labor
         module Shifts
-            class CreateShiftRequest; endend
+            class CreateShiftRequest
+        end
+    end
     end
 end

@@ -1,5 +1,7 @@
 
 module Square
     module Orders
-        class BatchGetOrdersRequest; endend
+        class BatchGetOrdersRequest
+        end
+    end
 end

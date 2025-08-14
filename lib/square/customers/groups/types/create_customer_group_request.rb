@@ -2,6 +2,8 @@
 module Square
     module Customers
         module Groups
-            class CreateCustomerGroupRequest; endend
+            class CreateCustomerGroupRequest
+        end
+    end
     end
 end

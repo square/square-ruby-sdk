@@ -1,5 +1,7 @@
 
 module Square
     module Loyalty
-        class SearchLoyaltyEventsRequest; endend
+        class SearchLoyaltyEventsRequest
+        end
+    end
 end

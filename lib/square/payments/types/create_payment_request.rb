@@ -1,5 +1,7 @@
 
 module Square
     module Payments
-        class CreatePaymentRequest; endend
+        class CreatePaymentRequest
+        end
+    end
 end

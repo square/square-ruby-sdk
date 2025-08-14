@@ -2,6 +2,8 @@
 module Square
     module Locations
         module CustomAttributes
-            class BulkDeleteLocationCustomAttributesRequest; endend
+            class BulkDeleteLocationCustomAttributesRequest
+        end
+    end
     end
 end

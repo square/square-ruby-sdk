@@ -1,5 +1,7 @@
 
 module Square
     module Invoices
-        class CreateInvoiceRequest; endend
+        class CreateInvoiceRequest
+        end
+    end
 end

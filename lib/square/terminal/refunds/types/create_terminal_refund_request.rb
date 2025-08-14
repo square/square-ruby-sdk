@@ -2,6 +2,8 @@
 module Square
     module Terminal
         module Refunds
-            class CreateTerminalRefundRequest; endend
+            class CreateTerminalRefundRequest
+        end
+    end
     end
 end

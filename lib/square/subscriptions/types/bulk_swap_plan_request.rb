@@ -1,5 +1,7 @@
 
 module Square
     module Subscriptions
-        class BulkSwapPlanRequest; endend
+        class BulkSwapPlanRequest
+        end
+    end
 end

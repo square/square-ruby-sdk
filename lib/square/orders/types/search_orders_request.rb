@@ -1,5 +1,7 @@
 
 module Square
     module Orders
-        class SearchOrdersRequest; endend
+        class SearchOrdersRequest
+        end
+    end
 end

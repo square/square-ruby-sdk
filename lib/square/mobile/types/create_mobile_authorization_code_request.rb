@@ -1,5 +1,7 @@
 
 module Square
     module Mobile
-        class CreateMobileAuthorizationCodeRequest; endend
+        class CreateMobileAuthorizationCodeRequest
+        end
+    end
 end

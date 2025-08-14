@@ -1,5 +1,7 @@
 
 module Square
     module Payments
-        class CancelPaymentByIdempotencyKeyRequest; endend
+        class CancelPaymentByIdempotencyKeyRequest
+        end
+    end
 end

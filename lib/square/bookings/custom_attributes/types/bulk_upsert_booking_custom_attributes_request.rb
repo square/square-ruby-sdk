@@ -2,6 +2,8 @@
 module Square
     module Bookings
         module CustomAttributes
-            class BulkUpsertBookingCustomAttributesRequest; endend
+            class BulkUpsertBookingCustomAttributesRequest
+        end
+    end
     end
 end

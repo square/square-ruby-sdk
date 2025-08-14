@@ -1,5 +1,7 @@
 
 module Square
     module ApplePay
-        class RegisterDomainRequest; endend
+        class RegisterDomainRequest
+        end
+    end
 end

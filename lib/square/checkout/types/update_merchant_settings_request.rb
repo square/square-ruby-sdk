@@ -1,5 +1,7 @@
 
 module Square
     module Checkout
-        class UpdateMerchantSettingsRequest; endend
+        class UpdateMerchantSettingsRequest
+        end
+    end
 end

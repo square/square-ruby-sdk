@@ -1,5 +1,7 @@
 
 module Square
     module Subscriptions
-        class CreateSubscriptionRequest; endend
+        class CreateSubscriptionRequest
+        end
+    end
 end

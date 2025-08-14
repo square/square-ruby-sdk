@@ -1,5 +1,7 @@
 
 module Square
     module GiftCards
-        class CreateGiftCardRequest; endend
+        class CreateGiftCardRequest
+        end
+    end
 end

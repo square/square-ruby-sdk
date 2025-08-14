@@ -2,6 +2,8 @@
 module Square
     module Bookings
         module CustomAttributes
-            class BulkDeleteBookingCustomAttributesRequest; endend
+            class BulkDeleteBookingCustomAttributesRequest
+        end
+    end
     end
 end

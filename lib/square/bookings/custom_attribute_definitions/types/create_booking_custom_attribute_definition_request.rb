@@ -2,6 +2,8 @@
 module Square
     module Bookings
         module CustomAttributeDefinitions
-            class CreateBookingCustomAttributeDefinitionRequest; endend
+            class CreateBookingCustomAttributeDefinitionRequest
+        end
+    end
     end
 end

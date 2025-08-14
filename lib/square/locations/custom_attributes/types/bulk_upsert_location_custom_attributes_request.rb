@@ -2,6 +2,8 @@
 module Square
     module Locations
         module CustomAttributes
-            class BulkUpsertLocationCustomAttributesRequest; endend
+            class BulkUpsertLocationCustomAttributesRequest
+        end
+    end
     end
 end

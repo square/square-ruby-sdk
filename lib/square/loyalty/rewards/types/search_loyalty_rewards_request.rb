@@ -2,6 +2,8 @@
 module Square
     module Loyalty
         module Rewards
-            class SearchLoyaltyRewardsRequest; endend
+            class SearchLoyaltyRewardsRequest
+        end
+    end
     end
 end

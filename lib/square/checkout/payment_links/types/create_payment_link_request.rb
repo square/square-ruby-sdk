@@ -2,6 +2,8 @@
 module Square
     module Checkout
         module PaymentLinks
-            class CreatePaymentLinkRequest; endend
+            class CreatePaymentLinkRequest
+        end
+    end
     end
 end

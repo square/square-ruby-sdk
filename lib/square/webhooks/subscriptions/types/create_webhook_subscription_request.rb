@@ -2,6 +2,8 @@
 module Square
     module Webhooks
         module Subscriptions
-            class CreateWebhookSubscriptionRequest; endend
+            class CreateWebhookSubscriptionRequest
+        end
+    end
     end
 end

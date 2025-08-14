@@ -2,6 +2,8 @@
 module Square
     module Devices
         module Codes
-            class CreateDeviceCodeRequest; endend
+            class CreateDeviceCodeRequest
+        end
+    end
     end
 end

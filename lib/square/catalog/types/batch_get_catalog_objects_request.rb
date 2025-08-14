@@ -1,5 +1,7 @@
 
 module Square
     module Catalog
-        class BatchGetCatalogObjectsRequest; endend
+        class BatchGetCatalogObjectsRequest
+        end
+    end
 end

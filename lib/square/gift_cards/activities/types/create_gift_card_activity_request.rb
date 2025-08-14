@@ -2,6 +2,8 @@
 module Square
     module GiftCards
         module Activities
-            class CreateGiftCardActivityRequest; endend
+            class CreateGiftCardActivityRequest
+        end
+    end
     end
 end

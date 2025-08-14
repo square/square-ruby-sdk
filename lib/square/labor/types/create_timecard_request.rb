@@ -1,5 +1,7 @@
 
 module Square
     module Labor
-        class CreateTimecardRequest; endend
+        class CreateTimecardRequest
+        end
+    end
 end

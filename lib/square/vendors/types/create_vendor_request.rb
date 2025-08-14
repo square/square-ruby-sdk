@@ -1,5 +1,7 @@
 
 module Square
     module Vendors
-        class CreateVendorRequest; endend
+        class CreateVendorRequest
+        end
+    end
 end

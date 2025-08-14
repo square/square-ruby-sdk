@@ -1,5 +1,7 @@
 
 module Square
     module Labor
-        class CreateScheduledShiftRequest; endend
+        class CreateScheduledShiftRequest
+        end
+    end
 end

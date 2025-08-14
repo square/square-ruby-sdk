@@ -2,6 +2,8 @@
 module Square
     module Merchants
         module CustomAttributes
-            class BulkUpsertMerchantCustomAttributesRequest; endend
+            class BulkUpsertMerchantCustomAttributesRequest
+        end
+    end
     end
 end

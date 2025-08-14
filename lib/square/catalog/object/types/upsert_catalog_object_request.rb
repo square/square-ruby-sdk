@@ -2,6 +2,8 @@
 module Square
     module Catalog
         module Object_
-            class UpsertCatalogObjectRequest; endend
+            class UpsertCatalogObjectRequest
+        end
+    end
     end
 end

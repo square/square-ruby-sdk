@@ -1,5 +1,7 @@
 
 module Square
     module Catalog
-        class BatchUpsertCatalogObjectsRequest; endend
+        class BatchUpsertCatalogObjectsRequest
+        end
+    end
 end

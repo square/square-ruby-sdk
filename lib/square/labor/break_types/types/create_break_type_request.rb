@@ -2,6 +2,8 @@
 module Square
     module Labor
         module BreakTypes
-            class CreateBreakTypeRequest; endend
+            class CreateBreakTypeRequest
+        end
+    end
     end
 end
