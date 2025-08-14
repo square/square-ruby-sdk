@@ -1,6 +1,11 @@
 require 'securerandom'
 require_relative '../../lib/square_legacy'
 require_relative '../../lib/square/client'
+require_relative '../../lib/square/types/money'
+require_relative '../../lib/square/types/catalog_item'
+require_relative '../../lib/square/types/catalog_object'
+require_relative '../../lib/square/types/address'
+require_relative '../../lib/square/types/customer_request'
 
 module Helpers
   def create_client
@@ -9,7 +14,7 @@ module Helpers
 
     Square::Client.new(
       token: token,
-      base_url: 'https://connect.squareupsandbox.com',
+      base_url: Square::Environment::SANDBOX,
     )
   end
 
@@ -58,7 +63,7 @@ module Helpers
   end
 
   def create_test_catalog_item(opts = {})
-    variation = {
+    variation = Square::Types::CatalogObject.new(
       type: 'ITEM_VARIATION',
       id: "##{new_test_uuid}",
       present_at_all_locations: true,
@@ -71,9 +76,9 @@ module Helpers
           currency: opts[:currency] || 'USD'
         }
       }
-    }
+    )
 
-    {
+    Square::Types::CatalogObject.new(
       type: 'ITEM',
       id: "##{new_test_uuid}",
       present_at_all_locations: true,
@@ -83,29 +88,29 @@ module Helpers
         abbreviation: opts[:abbreviation] || 'TST',
         variations: [variation]
       }
-    }
+    )
   end
 
   def test_address
-    {
+    Square::Types::Address.new(
       address_line_1: '500 Electric Ave',
       address_line_2: 'Suite 600',
       locality: 'New York',
       administrative_district_level_1: 'NY',
       postal_code: '10003',
       country: 'US'
-    }
+    )
   end
 
   def create_test_customer_request
-    {
+    Square::Types::CustomerRequest.new(
       idempotency_key: new_test_uuid,
       given_name: 'Amelia',
       family_name: 'Earhart',
       phone_number: '1-212-555-4240',
       note: 'test customer',
       address: test_address
-    }
+    )
   end
 
   def create_test_customer(client)
