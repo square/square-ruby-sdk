@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class V1TenderCardBrand
-            extends Square::Internal::Types::Enum
+        class V1TenderCardBrand < Square::Internal::Types::Enum
             OTHER_BRAND = "OTHER_BRAND"
             VISA = "VISA"
             MASTER_CARD = "MASTER_CARD"

@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class MeasurementUnitTime
-            extends Square::Internal::Types::Enum
+        class MeasurementUnitTime < Square::Internal::Types::Enum
             GENERIC_MILLISECOND = "GENERIC_MILLISECOND"
             GENERIC_SECOND = "GENERIC_SECOND"
             GENERIC_MINUTE = "GENERIC_MINUTE"

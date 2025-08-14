@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class ArchivedState
-            extends Square::Internal::Types::Enum
+        class ArchivedState < Square::Internal::Types::Enum
             ARCHIVED_STATE_NOT_ARCHIVED = "ARCHIVED_STATE_NOT_ARCHIVED"
             ARCHIVED_STATE_ARCHIVED = "ARCHIVED_STATE_ARCHIVED"
             ARCHIVED_STATE_ALL = "ARCHIVED_STATE_ALL"

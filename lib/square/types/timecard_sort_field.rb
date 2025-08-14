@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class TimecardSortField
-            extends Square::Internal::Types::Enum
+        class TimecardSortField < Square::Internal::Types::Enum
             START_AT = "START_AT"
             END_AT = "END_AT"
             CREATED_AT = "CREATED_AT"

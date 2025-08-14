@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class Country
-            extends Square::Internal::Types::Enum
+        class Country < Square::Internal::Types::Enum
             ZZ = "ZZ"
             AD = "AD"
             AE = "AE"

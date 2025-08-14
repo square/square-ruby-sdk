@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class OrderServiceChargeType
-            extends Square::Internal::Types::Enum
+        class OrderServiceChargeType < Square::Internal::Types::Enum
             AUTO_GRATUITY = "AUTO_GRATUITY"
             CUSTOM = "CUSTOM"
         end

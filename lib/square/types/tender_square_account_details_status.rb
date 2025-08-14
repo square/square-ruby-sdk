@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class TenderSquareAccountDetailsStatus
-            extends Square::Internal::Types::Enum
+        class TenderSquareAccountDetailsStatus < Square::Internal::Types::Enum
             AUTHORIZED = "AUTHORIZED"
             CAPTURED = "CAPTURED"
             VOIDED = "VOIDED"

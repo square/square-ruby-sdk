@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class ComponentComponentType
-            extends Square::Internal::Types::Enum
+        class ComponentComponentType < Square::Internal::Types::Enum
             APPLICATION = "APPLICATION"
             CARD_READER = "CARD_READER"
             BATTERY = "BATTERY"

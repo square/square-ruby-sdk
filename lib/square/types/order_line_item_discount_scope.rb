@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class OrderLineItemDiscountScope
-            extends Square::Internal::Types::Enum
+        class OrderLineItemDiscountScope < Square::Internal::Types::Enum
             OTHER_DISCOUNT_SCOPE = "OTHER_DISCOUNT_SCOPE"
             LINE_ITEM = "LINE_ITEM"
             ORDER = "ORDER"

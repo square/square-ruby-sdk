@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class ErrorCode
-            extends Square::Internal::Types::Enum
+        class ErrorCode < Square::Internal::Types::Enum
             INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR"
             UNAUTHORIZED = "UNAUTHORIZED"
             ACCESS_TOKEN_EXPIRED = "ACCESS_TOKEN_EXPIRED"

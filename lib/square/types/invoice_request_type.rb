@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class InvoiceRequestType
-            extends Square::Internal::Types::Enum
+        class InvoiceRequestType < Square::Internal::Types::Enum
             BALANCE = "BALANCE"
             DEPOSIT = "DEPOSIT"
             INSTALLMENT = "INSTALLMENT"

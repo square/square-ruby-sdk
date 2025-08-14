@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class TenderCardDetailsEntryMethod
-            extends Square::Internal::Types::Enum
+        class TenderCardDetailsEntryMethod < Square::Internal::Types::Enum
             SWIPED = "SWIPED"
             KEYED = "KEYED"
             EMV = "EMV"

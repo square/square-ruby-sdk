@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class JobAssignmentPayType
-            extends Square::Internal::Types::Enum
+        class JobAssignmentPayType < Square::Internal::Types::Enum
             NONE = "NONE"
             HOURLY = "HOURLY"
             SALARY = "SALARY"

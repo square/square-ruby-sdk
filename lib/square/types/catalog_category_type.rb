@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class CatalogCategoryType
-            extends Square::Internal::Types::Enum
+        class CatalogCategoryType < Square::Internal::Types::Enum
             REGULAR_CATEGORY = "REGULAR_CATEGORY"
             MENU_CATEGORY = "MENU_CATEGORY"
             KITCHEN_CATEGORY = "KITCHEN_CATEGORY"

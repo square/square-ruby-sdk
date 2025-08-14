@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class TerminalActionActionType
-            extends Square::Internal::Types::Enum
+        class TerminalActionActionType < Square::Internal::Types::Enum
             QR_CODE = "QR_CODE"
             PING = "PING"
             SAVE_CARD = "SAVE_CARD"

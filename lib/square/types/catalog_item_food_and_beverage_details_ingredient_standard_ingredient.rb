@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class CatalogItemFoodAndBeverageDetailsIngredientStandardIngredient
-            extends Square::Internal::Types::Enum
+        class CatalogItemFoodAndBeverageDetailsIngredientStandardIngredient < Square::Internal::Types::Enum
             CELERY = "CELERY"
             CRUSTACEANS = "CRUSTACEANS"
             EGGS = "EGGS"

@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class CustomerCreationSource
-            extends Square::Internal::Types::Enum
+        class CustomerCreationSource < Square::Internal::Types::Enum
             OTHER = "OTHER"
             APPOINTMENTS = "APPOINTMENTS"
             COUPON = "COUPON"

@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class CatalogCustomAttributeDefinitionType
-            extends Square::Internal::Types::Enum
+        class CatalogCustomAttributeDefinitionType < Square::Internal::Types::Enum
             STRING = "STRING"
             BOOLEAN = "BOOLEAN"
             NUMBER = "NUMBER"

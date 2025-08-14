@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class GiftCardActivityType
-            extends Square::Internal::Types::Enum
+        class GiftCardActivityType < Square::Internal::Types::Enum
             ACTIVATE = "ACTIVATE"
             LOAD = "LOAD"
             REDEEM = "REDEEM"

@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class TeamMemberStatus
-            extends Square::Internal::Types::Enum
+        class TeamMemberStatus < Square::Internal::Types::Enum
             ACTIVE = "ACTIVE"
             INACTIVE = "INACTIVE"
         end

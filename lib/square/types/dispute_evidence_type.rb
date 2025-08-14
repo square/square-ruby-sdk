@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class DisputeEvidenceType
-            extends Square::Internal::Types::Enum
+        class DisputeEvidenceType < Square::Internal::Types::Enum
             GENERIC_EVIDENCE = "GENERIC_EVIDENCE"
             ONLINE_OR_APP_ACCESS_LOG = "ONLINE_OR_APP_ACCESS_LOG"
             AUTHORIZATION_DOCUMENTATION = "AUTHORIZATION_DOCUMENTATION"

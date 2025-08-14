@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class LocationStatus
-            extends Square::Internal::Types::Enum
+        class LocationStatus < Square::Internal::Types::Enum
             ACTIVE = "ACTIVE"
             INACTIVE = "INACTIVE"
         end

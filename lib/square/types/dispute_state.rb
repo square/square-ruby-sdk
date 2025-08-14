@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class DisputeState
-            extends Square::Internal::Types::Enum
+        class DisputeState < Square::Internal::Types::Enum
             INQUIRY_EVIDENCE_REQUIRED = "INQUIRY_EVIDENCE_REQUIRED"
             INQUIRY_PROCESSING = "INQUIRY_PROCESSING"
             INQUIRY_CLOSED = "INQUIRY_CLOSED"

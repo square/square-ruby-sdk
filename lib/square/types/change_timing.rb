@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class ChangeTiming
-            extends Square::Internal::Types::Enum
+        class ChangeTiming < Square::Internal::Types::Enum
             IMMEDIATE = "IMMEDIATE"
             END_OF_BILLING_CYCLE = "END_OF_BILLING_CYCLE"
         end

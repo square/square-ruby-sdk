@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class LoyaltyProgramAccrualRuleType
-            extends Square::Internal::Types::Enum
+        class LoyaltyProgramAccrualRuleType < Square::Internal::Types::Enum
             VISIT = "VISIT"
             SPEND = "SPEND"
             ITEM_VARIATION = "ITEM_VARIATION"

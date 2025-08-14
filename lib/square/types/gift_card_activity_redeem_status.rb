@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class GiftCardActivityRedeemStatus
-            extends Square::Internal::Types::Enum
+        class GiftCardActivityRedeemStatus < Square::Internal::Types::Enum
             PENDING = "PENDING"
             COMPLETED = "COMPLETED"
             CANCELED = "CANCELED"

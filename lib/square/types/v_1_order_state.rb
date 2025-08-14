@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class V1OrderState
-            extends Square::Internal::Types::Enum
+        class V1OrderState < Square::Internal::Types::Enum
             PENDING = "PENDING"
             OPEN = "OPEN"
             COMPLETED = "COMPLETED"

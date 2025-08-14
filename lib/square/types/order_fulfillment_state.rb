@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class OrderFulfillmentState
-            extends Square::Internal::Types::Enum
+        class OrderFulfillmentState < Square::Internal::Types::Enum
             PROPOSED = "PROPOSED"
             RESERVED = "RESERVED"
             PREPARED = "PREPARED"

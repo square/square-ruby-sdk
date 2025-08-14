@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class CustomAttributeDefinitionVisibility
-            extends Square::Internal::Types::Enum
+        class CustomAttributeDefinitionVisibility < Square::Internal::Types::Enum
             VISIBILITY_HIDDEN = "VISIBILITY_HIDDEN"
             VISIBILITY_READ_ONLY = "VISIBILITY_READ_ONLY"
             VISIBILITY_READ_WRITE_VALUES = "VISIBILITY_READ_WRITE_VALUES"

@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class InvoiceCustomFieldPlacement
-            extends Square::Internal::Types::Enum
+        class InvoiceCustomFieldPlacement < Square::Internal::Types::Enum
             ABOVE_LINE_ITEMS = "ABOVE_LINE_ITEMS"
             BELOW_LINE_ITEMS = "BELOW_LINE_ITEMS"
         end

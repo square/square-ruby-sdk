@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class CatalogItemProductType
-            extends Square::Internal::Types::Enum
+        class CatalogItemProductType < Square::Internal::Types::Enum
             REGULAR = "REGULAR"
             GIFT_CARD = "GIFT_CARD"
             APPOINTMENTS_SERVICE = "APPOINTMENTS_SERVICE"

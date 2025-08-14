@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class TimecardFilterStatus
-            extends Square::Internal::Types::Enum
+        class TimecardFilterStatus < Square::Internal::Types::Enum
             OPEN = "OPEN"
             CLOSED = "CLOSED"
         end

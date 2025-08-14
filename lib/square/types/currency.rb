@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class Currency
-            extends Square::Internal::Types::Enum
+        class Currency < Square::Internal::Types::Enum
             UNKNOWN_CURRENCY = "UNKNOWN_CURRENCY"
             AED = "AED"
             AFN = "AFN"

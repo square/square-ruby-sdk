@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class TenderBankAccountDetailsStatus
-            extends Square::Internal::Types::Enum
+        class TenderBankAccountDetailsStatus < Square::Internal::Types::Enum
             PENDING = "PENDING"
             COMPLETED = "COMPLETED"
             FAILED = "FAILED"

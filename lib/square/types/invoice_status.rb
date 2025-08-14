@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class InvoiceStatus
-            extends Square::Internal::Types::Enum
+        class InvoiceStatus < Square::Internal::Types::Enum
             DRAFT = "DRAFT"
             UNPAID = "UNPAID"
             SCHEDULED = "SCHEDULED"

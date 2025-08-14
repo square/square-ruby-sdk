@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class DisputeReason
-            extends Square::Internal::Types::Enum
+        class DisputeReason < Square::Internal::Types::Enum
             AMOUNT_DIFFERS = "AMOUNT_DIFFERS"
             CANCELLED = "CANCELLED"
             DUPLICATE = "DUPLICATE"

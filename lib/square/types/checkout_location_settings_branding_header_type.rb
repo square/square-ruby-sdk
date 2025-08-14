@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class CheckoutLocationSettingsBrandingHeaderType
-            extends Square::Internal::Types::Enum
+        class CheckoutLocationSettingsBrandingHeaderType < Square::Internal::Types::Enum
             BUSINESS_NAME = "BUSINESS_NAME"
             FRAMED_LOGO = "FRAMED_LOGO"
             FULL_WIDTH_LOGO = "FULL_WIDTH_LOGO"

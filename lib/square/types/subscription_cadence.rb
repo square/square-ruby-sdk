@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class SubscriptionCadence
-            extends Square::Internal::Types::Enum
+        class SubscriptionCadence < Square::Internal::Types::Enum
             DAILY = "DAILY"
             WEEKLY = "WEEKLY"
             EVERY_TWO_WEEKS = "EVERY_TWO_WEEKS"

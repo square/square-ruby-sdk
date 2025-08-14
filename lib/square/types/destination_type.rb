@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class DestinationType
-            extends Square::Internal::Types::Enum
+        class DestinationType < Square::Internal::Types::Enum
             BANK_ACCOUNT = "BANK_ACCOUNT"
             CARD = "CARD"
             SQUARE_BALANCE = "SQUARE_BALANCE"

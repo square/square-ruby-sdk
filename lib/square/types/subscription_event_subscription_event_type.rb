@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class SubscriptionEventSubscriptionEventType
-            extends Square::Internal::Types::Enum
+        class SubscriptionEventSubscriptionEventType < Square::Internal::Types::Enum
             START_SUBSCRIPTION = "START_SUBSCRIPTION"
             PLAN_CHANGE = "PLAN_CHANGE"
             STOP_SUBSCRIPTION = "STOP_SUBSCRIPTION"

@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class ShiftSortField
-            extends Square::Internal::Types::Enum
+        class ShiftSortField < Square::Internal::Types::Enum
             START_AT = "START_AT"
             END_AT = "END_AT"
             CREATED_AT = "CREATED_AT"

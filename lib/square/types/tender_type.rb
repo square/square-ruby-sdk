@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class TenderType
-            extends Square::Internal::Types::Enum
+        class TenderType < Square::Internal::Types::Enum
             CARD = "CARD"
             CASH = "CASH"
             THIRD_PARTY_CARD = "THIRD_PARTY_CARD"

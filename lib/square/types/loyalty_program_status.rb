@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class LoyaltyProgramStatus
-            extends Square::Internal::Types::Enum
+        class LoyaltyProgramStatus < Square::Internal::Types::Enum
             INACTIVE = "INACTIVE"
             ACTIVE = "ACTIVE"
         end

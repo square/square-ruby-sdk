@@ -1,8 +1,7 @@
 
 module Square
     module Types
-        class OrderFulfillmentDeliveryDetailsScheduleType
-            extends Square::Internal::Types::Enum
+        class OrderFulfillmentDeliveryDetailsScheduleType < Square::Internal::Types::Enum
             SCHEDULED = "SCHEDULED"
             ASAP = "ASAP"
         end
