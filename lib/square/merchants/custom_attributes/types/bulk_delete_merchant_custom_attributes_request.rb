@@ -2,7 +2,7 @@
 module Square
     module Merchants
         module CustomAttributes
-            class BulkDeleteMerchantCustomAttributesRequest
+            class BulkDeleteMerchantCustomAttributesRequest < Internal::Types::Model
         end
     end
     end

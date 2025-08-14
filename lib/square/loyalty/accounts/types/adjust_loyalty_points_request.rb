@@ -2,7 +2,7 @@
 module Square
     module Loyalty
         module Accounts
-            class AdjustLoyaltyPointsRequest
+            class AdjustLoyaltyPointsRequest < Internal::Types::Model
                 field :account_id, String, optional: false, nullable: falseend
         end
     end

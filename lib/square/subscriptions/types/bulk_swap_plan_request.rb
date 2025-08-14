@@ -1,7 +1,7 @@
 
 module Square
     module Subscriptions
-        class BulkSwapPlanRequest
+        class BulkSwapPlanRequest < Internal::Types::Model
         end
     end
 end

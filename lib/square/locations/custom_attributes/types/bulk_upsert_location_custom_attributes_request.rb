@@ -2,7 +2,7 @@
 module Square
     module Locations
         module CustomAttributes
-            class BulkUpsertLocationCustomAttributesRequest
+            class BulkUpsertLocationCustomAttributesRequest < Internal::Types::Model
         end
     end
     end

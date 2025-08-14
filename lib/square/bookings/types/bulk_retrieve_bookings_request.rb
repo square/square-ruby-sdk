@@ -1,7 +1,7 @@
 
 module Square
     module Bookings
-        class BulkRetrieveBookingsRequest
+        class BulkRetrieveBookingsRequest < Internal::Types::Model
         end
     end
 end

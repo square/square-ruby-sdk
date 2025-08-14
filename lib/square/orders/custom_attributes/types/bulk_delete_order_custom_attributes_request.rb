@@ -2,7 +2,7 @@
 module Square
     module Orders
         module CustomAttributes
-            class BulkDeleteOrderCustomAttributesRequest
+            class BulkDeleteOrderCustomAttributesRequest < Internal::Types::Model
         end
     end
     end

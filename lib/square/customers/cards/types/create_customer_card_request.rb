@@ -2,7 +2,7 @@
 module Square
     module Customers
         module Cards
-            class CreateCustomerCardRequest
+            class CreateCustomerCardRequest < Internal::Types::Model
                 field :customer_id, String, optional: false, nullable: falseend
         end
     end

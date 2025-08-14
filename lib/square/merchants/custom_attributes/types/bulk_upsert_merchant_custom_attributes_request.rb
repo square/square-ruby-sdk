@@ -2,7 +2,7 @@
 module Square
     module Merchants
         module CustomAttributes
-            class BulkUpsertMerchantCustomAttributesRequest
+            class BulkUpsertMerchantCustomAttributesRequest < Internal::Types::Model
         end
     end
     end

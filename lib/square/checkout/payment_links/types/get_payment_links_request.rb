@@ -2,7 +2,7 @@
 module Square
     module Checkout
         module PaymentLinks
-            class GetPaymentLinksRequest
+            class GetPaymentLinksRequest < Internal::Types::Model
                 field :id, String, optional: false, nullable: false
             end
         end

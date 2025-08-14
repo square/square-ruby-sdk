@@ -1,7 +1,7 @@
 
 module Square
     module Customers
-        class BulkUpdateCustomersRequest
+        class BulkUpdateCustomersRequest < Internal::Types::Model
         end
     end
 end

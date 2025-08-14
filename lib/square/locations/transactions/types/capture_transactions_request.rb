@@ -2,7 +2,7 @@
 module Square
     module Locations
         module Transactions
-            class CaptureTransactionsRequest
+            class CaptureTransactionsRequest < Internal::Types::Model
                 field :location_id, String, optional: false, nullable: false
                 field :transaction_id, String, optional: false, nullable: false
             end

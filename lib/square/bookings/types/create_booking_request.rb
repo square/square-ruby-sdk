@@ -1,7 +1,7 @@
 
 module Square
     module Bookings
-        class CreateBookingRequest
+        class CreateBookingRequest < Internal::Types::Model
         end
     end
 end

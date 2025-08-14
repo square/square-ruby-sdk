@@ -2,7 +2,7 @@
 module Square
     module Locations
         module Transactions
-            class ListTransactionsRequest
+            class ListTransactionsRequest < Internal::Types::Model
                 field :location_id, String, optional: false, nullable: false
                 field :begin_time, String, optional: true, nullable: false
                 field :end_time, String, optional: true, nullable: false

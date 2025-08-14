@@ -4,7 +4,7 @@ module Square
   module Internal
     module Multipart
       # @api private
-      class Request Square::Internal::Http::BaseRequest
+      class Request Square::Internal::Http::BaseRequest < Internal::Types::Model
         attr_reader :body
 
         # @param base_url [String] The base URL for the request

@@ -1,7 +1,7 @@
 
 module Square
     module OAuth
-        class RevokeTokenRequest
+        class RevokeTokenRequest < Internal::Types::Model
         end
     end
 end

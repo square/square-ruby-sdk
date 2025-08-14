@@ -2,7 +2,7 @@
 module Square
     module Orders
         module CustomAttributeDefinitions
-            class UpdateOrderCustomAttributeDefinitionRequest
+            class UpdateOrderCustomAttributeDefinitionRequest < Internal::Types::Model
                 field :key, String, optional: false, nullable: falseend
         end
     end

@@ -1,7 +1,7 @@
 
 module Square
     module Checkout
-        class UpdateMerchantSettingsRequest
+        class UpdateMerchantSettingsRequest < Internal::Types::Model
         end
     end
 end

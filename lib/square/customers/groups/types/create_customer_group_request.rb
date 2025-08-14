@@ -2,7 +2,7 @@
 module Square
     module Customers
         module Groups
-            class CreateCustomerGroupRequest
+            class CreateCustomerGroupRequest < Internal::Types::Model
         end
     end
     end

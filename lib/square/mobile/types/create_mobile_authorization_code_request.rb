@@ -1,7 +1,7 @@
 
 module Square
     module Mobile
-        class CreateMobileAuthorizationCodeRequest
+        class CreateMobileAuthorizationCodeRequest < Internal::Types::Model
         end
     end
 end

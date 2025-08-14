@@ -2,7 +2,7 @@
 module Square
     module Locations
         module CustomAttributeDefinitions
-            class CreateLocationCustomAttributeDefinitionRequest
+            class CreateLocationCustomAttributeDefinitionRequest < Internal::Types::Model
         end
     end
     end

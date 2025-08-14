@@ -1,7 +1,7 @@
 
 module Square
     module Orders
-        class SearchOrdersRequest
+        class SearchOrdersRequest < Internal::Types::Model
         end
     end
 end

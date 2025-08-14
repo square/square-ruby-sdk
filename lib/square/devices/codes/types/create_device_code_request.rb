@@ -2,7 +2,7 @@
 module Square
     module Devices
         module Codes
-            class CreateDeviceCodeRequest
+            class CreateDeviceCodeRequest < Internal::Types::Model
         end
     end
     end

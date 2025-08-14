@@ -2,7 +2,7 @@
 module Square
     module Terminal
         module Actions
-            class CreateTerminalActionRequest
+            class CreateTerminalActionRequest < Internal::Types::Model
         end
     end
     end

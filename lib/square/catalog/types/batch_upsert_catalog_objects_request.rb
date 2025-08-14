@@ -1,7 +1,7 @@
 
 module Square
     module Catalog
-        class BatchUpsertCatalogObjectsRequest
+        class BatchUpsertCatalogObjectsRequest < Internal::Types::Model
         end
     end
 end

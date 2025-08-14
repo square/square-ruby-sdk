@@ -1,7 +1,7 @@
 
 module Square
     module Team
-        class CreateJobRequest
+        class CreateJobRequest < Internal::Types::Model
         end
     end
 end

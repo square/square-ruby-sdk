@@ -1,7 +1,7 @@
 
 module Square
     module Customers
-        class BulkDeleteCustomersRequest
+        class BulkDeleteCustomersRequest < Internal::Types::Model
         end
     end
 end

@@ -2,7 +2,7 @@
 module Square
     module Catalog
         module Object_
-            class UpsertCatalogObjectRequest
+            class UpsertCatalogObjectRequest < Internal::Types::Model
         end
     end
     end

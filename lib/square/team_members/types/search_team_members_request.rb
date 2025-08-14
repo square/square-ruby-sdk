@@ -1,7 +1,7 @@
 
 module Square
     module TeamMembers
-        class SearchTeamMembersRequest
+        class SearchTeamMembersRequest < Internal::Types::Model
         end
     end
 end

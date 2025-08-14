@@ -2,7 +2,7 @@
 module Square
     module Catalog
         module Object_
-            class GetObjectRequest
+            class GetObjectRequest < Internal::Types::Model
                 field :object_id, String, optional: false, nullable: false
                 field :include_related_objects, Square::Internal::Types::Boolean, optional: true, nullable: false
                 field :catalog_version, Integer, optional: true, nullable: false

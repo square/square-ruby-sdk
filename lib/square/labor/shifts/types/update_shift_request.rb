@@ -2,7 +2,7 @@
 module Square
     module Labor
         module Shifts
-            class UpdateShiftRequest
+            class UpdateShiftRequest < Internal::Types::Model
                 field :id, String, optional: false, nullable: falseend
         end
     end

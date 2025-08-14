@@ -2,7 +2,7 @@
 module Square
     module GiftCards
         module Activities
-            class CreateGiftCardActivityRequest
+            class CreateGiftCardActivityRequest < Internal::Types::Model
         end
     end
     end

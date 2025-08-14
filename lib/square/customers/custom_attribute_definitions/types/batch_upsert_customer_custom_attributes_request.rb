@@ -2,7 +2,7 @@
 module Square
     module Customers
         module CustomAttributeDefinitions
-            class BatchUpsertCustomerCustomAttributesRequest
+            class BatchUpsertCustomerCustomAttributesRequest < Internal::Types::Model
         end
     end
     end

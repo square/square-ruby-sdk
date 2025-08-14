@@ -2,7 +2,7 @@
 module Square
     module Orders
         module CustomAttributeDefinitions
-            class CreateOrderCustomAttributeDefinitionRequest
+            class CreateOrderCustomAttributeDefinitionRequest < Internal::Types::Model
         end
     end
     end

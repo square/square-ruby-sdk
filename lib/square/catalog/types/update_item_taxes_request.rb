@@ -1,7 +1,7 @@
 
 module Square
     module Catalog
-        class UpdateItemTaxesRequest
+        class UpdateItemTaxesRequest < Internal::Types::Model
         end
     end
 end

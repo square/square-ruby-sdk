@@ -2,7 +2,7 @@
 module Square
     module Locations
         module CustomAttributeDefinitions
-            class DeleteCustomAttributeDefinitionsRequest
+            class DeleteCustomAttributeDefinitionsRequest < Internal::Types::Model
                 field :key, String, optional: false, nullable: false
             end
         end

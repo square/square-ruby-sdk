@@ -2,7 +2,7 @@
 module Square
     module CashDrawers
         module Shifts
-            class ListShiftsRequest
+            class ListShiftsRequest < Internal::Types::Model
                 field :location_id, String, optional: false, nullable: false
                 field :sort_order, Square::SortOrder, optional: true, nullable: false
                 field :begin_time, String, optional: true, nullable: false

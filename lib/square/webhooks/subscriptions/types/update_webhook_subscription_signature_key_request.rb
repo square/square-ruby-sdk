@@ -2,7 +2,7 @@
 module Square
     module Webhooks
         module Subscriptions
-            class UpdateWebhookSubscriptionSignatureKeyRequest
+            class UpdateWebhookSubscriptionSignatureKeyRequest < Internal::Types::Model
                 field :subscription_id, String, optional: false, nullable: falseend
         end
     end

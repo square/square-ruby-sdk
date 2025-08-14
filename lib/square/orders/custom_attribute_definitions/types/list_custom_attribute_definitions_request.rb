@@ -2,7 +2,7 @@
 module Square
     module Orders
         module CustomAttributeDefinitions
-            class ListCustomAttributeDefinitionsRequest
+            class ListCustomAttributeDefinitionsRequest < Internal::Types::Model
                 field :visibility_filter, Square::VisibilityFilter, optional: true, nullable: false
                 field :cursor, String, optional: true, nullable: false
                 field :limit, Integer, optional: true, nullable: false

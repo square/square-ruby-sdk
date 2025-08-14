@@ -2,7 +2,7 @@
 module Square
     module Terminal
         module Refunds
-            class SearchTerminalRefundsRequest
+            class SearchTerminalRefundsRequest < Internal::Types::Model
         end
     end
     end

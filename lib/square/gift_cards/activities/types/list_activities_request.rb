@@ -2,7 +2,7 @@
 module Square
     module GiftCards
         module Activities
-            class ListActivitiesRequest
+            class ListActivitiesRequest < Internal::Types::Model
                 field :gift_card_id, String, optional: true, nullable: false
                 field :type, String, optional: true, nullable: false
                 field :location_id, String, optional: true, nullable: false

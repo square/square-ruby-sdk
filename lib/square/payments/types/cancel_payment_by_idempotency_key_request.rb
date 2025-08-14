@@ -1,7 +1,7 @@
 
 module Square
     module Payments
-        class CancelPaymentByIdempotencyKeyRequest
+        class CancelPaymentByIdempotencyKeyRequest < Internal::Types::Model
         end
     end
 end

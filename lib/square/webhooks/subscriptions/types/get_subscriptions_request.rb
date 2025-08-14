@@ -2,7 +2,7 @@
 module Square
     module Webhooks
         module Subscriptions
-            class GetSubscriptionsRequest
+            class GetSubscriptionsRequest < Internal::Types::Model
                 field :subscription_id, String, optional: false, nullable: false
             end
         end

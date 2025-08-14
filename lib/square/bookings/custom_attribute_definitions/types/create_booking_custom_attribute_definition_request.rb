@@ -2,7 +2,7 @@
 module Square
     module Bookings
         module CustomAttributeDefinitions
-            class CreateBookingCustomAttributeDefinitionRequest
+            class CreateBookingCustomAttributeDefinitionRequest < Internal::Types::Model
         end
     end
     end

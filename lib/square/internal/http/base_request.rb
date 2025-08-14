@@ -4,7 +4,7 @@ module Square
   module Internal
     module Http
       # @api private
-      class BaseRequest
+      class BaseRequest < Internal::Types::Model
         attr_reader :base_url, :path, :method, :headers, :query, :request_options
 
         # @param base_url [String] The base URL for the request

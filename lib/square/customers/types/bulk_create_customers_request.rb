@@ -1,7 +1,7 @@
 
 module Square
     module Customers
-        class BulkCreateCustomersRequest
+        class BulkCreateCustomersRequest < Internal::Types::Model
         end
     end
 end
