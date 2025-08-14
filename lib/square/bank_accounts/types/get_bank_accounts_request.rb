@@ -1,7 +1,7 @@
 
 module Square
   module BankAccounts
-    class GetBankAccountsRequest
+    class GetBankAccountsRequest < Internal::Types::Model
       field :bank_account_id, String, optional: false, nullable: false
 
     end

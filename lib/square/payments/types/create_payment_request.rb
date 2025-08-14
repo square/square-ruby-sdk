@@ -1,6 +1,6 @@
 
 module Square
   module Payments
-    class CreatePaymentRequest; end
+    class CreatePaymentRequest < Internal::Types::Model; end
   end
 end

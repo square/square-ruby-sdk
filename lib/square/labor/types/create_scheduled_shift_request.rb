@@ -1,6 +1,6 @@
 
 module Square
   module Labor
-    class CreateScheduledShiftRequest; end
+    class CreateScheduledShiftRequest < Internal::Types::Model; end
   end
 end

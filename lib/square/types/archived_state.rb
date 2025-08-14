@@ -1,7 +1,7 @@
 
 module Square
   class ArchivedState
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     ARCHIVED_STATE_NOT_ARCHIVED = "ARCHIVED_STATE_NOT_ARCHIVED"
     ARCHIVED_STATE_ARCHIVED = "ARCHIVED_STATE_ARCHIVED"
     ARCHIVED_STATE_ALL = "ARCHIVED_STATE_ALL"

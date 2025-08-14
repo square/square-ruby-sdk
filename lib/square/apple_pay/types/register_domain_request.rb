@@ -1,6 +1,6 @@
 
 module Square
   module ApplePay
-    class RegisterDomainRequest; end
+    class RegisterDomainRequest < Internal::Types::Model; end
   end
 end

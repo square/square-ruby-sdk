@@ -1,7 +1,7 @@
 
 module Square
   class DisputeReason
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     AMOUNT_DIFFERS = "AMOUNT_DIFFERS"
     CANCELLED = "CANCELLED"
     DUPLICATE = "DUPLICATE"

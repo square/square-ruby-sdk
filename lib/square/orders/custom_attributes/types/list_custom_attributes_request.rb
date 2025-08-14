@@ -2,7 +2,7 @@
 module Square
   module Orders
     module CustomAttributes
-      class ListCustomAttributesRequest
+      class ListCustomAttributesRequest < Internal::Types::Model
         field :order_id, String, optional: false, nullable: false
         field :visibility_filter, Square::VisibilityFilter, optional: true, nullable: false
         field :cursor, String, optional: true, nullable: false

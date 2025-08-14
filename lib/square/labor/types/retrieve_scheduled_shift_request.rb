@@ -1,7 +1,7 @@
 
 module Square
   module Labor
-    class RetrieveScheduledShiftRequest
+    class RetrieveScheduledShiftRequest < Internal::Types::Model
       field :id, String, optional: false, nullable: false
 
     end

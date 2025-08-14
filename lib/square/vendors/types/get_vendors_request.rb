@@ -1,7 +1,7 @@
 
 module Square
   module Vendors
-    class GetVendorsRequest
+    class GetVendorsRequest < Internal::Types::Model
       field :vendor_id, String, optional: false, nullable: false
 
     end

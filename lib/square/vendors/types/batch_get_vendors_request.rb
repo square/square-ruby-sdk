@@ -1,6 +1,6 @@
 
 module Square
   module Vendors
-    class BatchGetVendorsRequest; end
+    class BatchGetVendorsRequest < Internal::Types::Model; end
   end
 end

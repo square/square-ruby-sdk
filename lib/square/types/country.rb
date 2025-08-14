@@ -1,7 +1,7 @@
 
 module Square
   class Country
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     ZZ = "ZZ"
     AD = "AD"
     AE = "AE"

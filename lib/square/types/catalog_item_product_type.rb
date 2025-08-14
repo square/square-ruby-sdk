@@ -1,7 +1,7 @@
 
 module Square
   class CatalogItemProductType
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     REGULAR = "REGULAR"
     GIFT_CARD = "GIFT_CARD"
     APPOINTMENTS_SERVICE = "APPOINTMENTS_SERVICE"

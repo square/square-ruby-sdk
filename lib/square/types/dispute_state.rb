@@ -1,7 +1,7 @@
 
 module Square
   class DisputeState
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     INQUIRY_EVIDENCE_REQUIRED = "INQUIRY_EVIDENCE_REQUIRED"
     INQUIRY_PROCESSING = "INQUIRY_PROCESSING"
     INQUIRY_CLOSED = "INQUIRY_CLOSED"

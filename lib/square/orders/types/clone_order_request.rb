@@ -1,6 +1,6 @@
 
 module Square
   module Orders
-    class CloneOrderRequest; end
+    class CloneOrderRequest < Internal::Types::Model; end
   end
 end

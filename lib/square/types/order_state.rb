@@ -1,7 +1,7 @@
 
 module Square
   class OrderState
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     OPEN = "OPEN"
     COMPLETED = "COMPLETED"
     CANCELED = "CANCELED"

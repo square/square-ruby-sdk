@@ -1,7 +1,7 @@
 
 module Square
   class V1OrderHistoryEntryAction
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     ORDER_PLACED = "ORDER_PLACED"
     DECLINED = "DECLINED"
     PAYMENT_RECEIVED = "PAYMENT_RECEIVED"

@@ -2,7 +2,7 @@
 module Square
   module Merchants
     module CustomAttributes
-      class ListCustomAttributesRequest
+      class ListCustomAttributesRequest < Internal::Types::Model
         field :merchant_id, String, optional: false, nullable: false
         field :visibility_filter, Square::VisibilityFilter, optional: true, nullable: false
         field :limit, Integer, optional: true, nullable: false

@@ -1,7 +1,7 @@
 
 module Square
   module Subscriptions
-    class PauseSubscriptionRequest
+    class PauseSubscriptionRequest < Internal::Types::Model
       field :subscription_id, String, optional: false, nullable: false
     end
   end

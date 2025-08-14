@@ -1,6 +1,6 @@
 
 module Square
   module Catalog
-    class BatchDeleteCatalogObjectsRequest; end
+    class BatchDeleteCatalogObjectsRequest < Internal::Types::Model; end
   end
 end

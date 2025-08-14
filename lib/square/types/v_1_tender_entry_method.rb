@@ -1,7 +1,7 @@
 
 module Square
   class V1TenderEntryMethod
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     MANUAL = "MANUAL"
     SCANNED = "SCANNED"
     SQUARE_CASH = "SQUARE_CASH"

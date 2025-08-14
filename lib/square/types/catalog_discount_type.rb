@@ -1,7 +1,7 @@
 
 module Square
   class CatalogDiscountType
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     FIXED_PERCENTAGE = "FIXED_PERCENTAGE"
     FIXED_AMOUNT = "FIXED_AMOUNT"
     VARIABLE_PERCENTAGE = "VARIABLE_PERCENTAGE"

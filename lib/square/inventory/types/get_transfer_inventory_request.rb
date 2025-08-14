@@ -1,7 +1,7 @@
 
 module Square
   module Inventory
-    class GetTransferInventoryRequest
+    class GetTransferInventoryRequest < Internal::Types::Model
       field :transfer_id, String, optional: false, nullable: false
 
     end

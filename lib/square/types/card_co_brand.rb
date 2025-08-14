@@ -1,7 +1,7 @@
 
 module Square
   class CardCoBrand
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     UNKNOWN = "UNKNOWN"
     AFTERPAY = "AFTERPAY"
     CLEARPAY = "CLEARPAY"

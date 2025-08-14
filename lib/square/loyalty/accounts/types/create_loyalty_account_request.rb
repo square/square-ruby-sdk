@@ -2,7 +2,7 @@
 module Square
   module Loyalty
     module Accounts
-      class CreateLoyaltyAccountRequest; end
+      class CreateLoyaltyAccountRequest < Internal::Types::Model; end
     end
   end
 end

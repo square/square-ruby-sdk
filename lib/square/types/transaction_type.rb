@@ -1,7 +1,7 @@
 
 module Square
   class TransactionType
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     DEBIT = "DEBIT"
     CREDIT = "CREDIT"
   end

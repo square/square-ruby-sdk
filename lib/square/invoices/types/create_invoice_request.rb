@@ -1,6 +1,6 @@
 
 module Square
   module Invoices
-    class CreateInvoiceRequest; end
+    class CreateInvoiceRequest < Internal::Types::Model; end
   end
 end

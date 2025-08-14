@@ -1,6 +1,6 @@
 
 module Square
   module Bookings
-    class SearchAvailabilityRequest; end
+    class SearchAvailabilityRequest < Internal::Types::Model; end
   end
 end

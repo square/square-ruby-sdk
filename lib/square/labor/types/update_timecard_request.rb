@@ -1,7 +1,7 @@
 
 module Square
   module Labor
-    class UpdateTimecardRequest
+    class UpdateTimecardRequest < Internal::Types::Model
       field :id, String, optional: false, nullable: false
     end
   end

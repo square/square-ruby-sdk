@@ -1,7 +1,7 @@
 
 module Square
   class LoyaltyPromotionTriggerLimitInterval
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     ALL_TIME = "ALL_TIME"
     DAY = "DAY"
   end

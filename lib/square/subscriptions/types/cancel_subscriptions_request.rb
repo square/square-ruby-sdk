@@ -1,7 +1,7 @@
 
 module Square
   module Subscriptions
-    class CancelSubscriptionsRequest
+    class CancelSubscriptionsRequest < Internal::Types::Model
       field :subscription_id, String, optional: false, nullable: false
 
     end

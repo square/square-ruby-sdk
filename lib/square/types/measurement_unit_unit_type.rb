@@ -1,7 +1,7 @@
 
 module Square
   class MeasurementUnitUnitType
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     TYPE_CUSTOM = "TYPE_CUSTOM"
     TYPE_AREA = "TYPE_AREA"
     TYPE_LENGTH = "TYPE_LENGTH"

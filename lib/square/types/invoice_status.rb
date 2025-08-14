@@ -1,7 +1,7 @@
 
 module Square
   class InvoiceStatus
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     DRAFT = "DRAFT"
     UNPAID = "UNPAID"
     SCHEDULED = "SCHEDULED"

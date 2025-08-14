@@ -2,7 +2,7 @@
 module Square
   module Bookings
     module CustomAttributeDefinitions
-      class ListCustomAttributeDefinitionsRequest
+      class ListCustomAttributeDefinitionsRequest < Internal::Types::Model
         field :limit, Integer, optional: true, nullable: false
         field :cursor, String, optional: true, nullable: false
 

@@ -2,7 +2,7 @@
 module Square
   module Customers
     module CustomAttributeDefinitions
-      class CreateCustomerCustomAttributeDefinitionRequest; end
+      class CreateCustomerCustomAttributeDefinitionRequest < Internal::Types::Model; end
     end
   end
 end

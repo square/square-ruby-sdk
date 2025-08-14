@@ -1,7 +1,7 @@
 
 module Square
   class ActivityType
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     ADJUSTMENT = "ADJUSTMENT"
     APP_FEE_REFUND = "APP_FEE_REFUND"
     APP_FEE_REVENUE = "APP_FEE_REVENUE"

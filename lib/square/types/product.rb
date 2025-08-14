@@ -1,7 +1,7 @@
 
 module Square
   class Product
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     SQUARE_POS = "SQUARE_POS"
     EXTERNAL_API = "EXTERNAL_API"
     BILLING = "BILLING"

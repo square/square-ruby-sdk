@@ -1,7 +1,7 @@
 
 module Square
   class OrderServiceChargeCalculationPhase
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     SUBTOTAL_PHASE = "SUBTOTAL_PHASE"
     TOTAL_PHASE = "TOTAL_PHASE"
     APPORTIONED_PERCENTAGE_PHASE = "APPORTIONED_PERCENTAGE_PHASE"

@@ -1,7 +1,7 @@
 
 module Square
   class TransactionProduct
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     REGISTER = "REGISTER"
     EXTERNAL_API = "EXTERNAL_API"
     BILLING = "BILLING"

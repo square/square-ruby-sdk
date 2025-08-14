@@ -2,7 +2,7 @@
 module Square
   module Customers
     module CustomAttributeDefinitions
-      class ListCustomAttributeDefinitionsRequest
+      class ListCustomAttributeDefinitionsRequest < Internal::Types::Model
         field :limit, Integer, optional: true, nullable: false
         field :cursor, String, optional: true, nullable: false
 

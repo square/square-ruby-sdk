@@ -1,7 +1,7 @@
 
 module Square
   class MeasurementUnitWeight
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     IMPERIAL_WEIGHT_OUNCE = "IMPERIAL_WEIGHT_OUNCE"
     IMPERIAL_POUND = "IMPERIAL_POUND"
     IMPERIAL_STONE = "IMPERIAL_STONE"

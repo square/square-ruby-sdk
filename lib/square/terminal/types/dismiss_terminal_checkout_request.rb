@@ -1,7 +1,7 @@
 
 module Square
   module Terminal
-    class DismissTerminalCheckoutRequest
+    class DismissTerminalCheckoutRequest < Internal::Types::Model
       field :checkout_id, String, optional: false, nullable: false
 
     end

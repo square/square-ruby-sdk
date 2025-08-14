@@ -1,7 +1,7 @@
 
 module Square
   class ErrorCode
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR"
     UNAUTHORIZED = "UNAUTHORIZED"
     ACCESS_TOKEN_EXPIRED = "ACCESS_TOKEN_EXPIRED"

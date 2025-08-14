@@ -1,7 +1,7 @@
 
 module Square
   class InvoiceRequestType
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     BALANCE = "BALANCE"
     DEPOSIT = "DEPOSIT"
     INSTALLMENT = "INSTALLMENT"

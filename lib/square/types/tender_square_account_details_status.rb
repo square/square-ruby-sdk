@@ -1,7 +1,7 @@
 
 module Square
   class TenderSquareAccountDetailsStatus
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     AUTHORIZED = "AUTHORIZED"
     CAPTURED = "CAPTURED"
     VOIDED = "VOIDED"

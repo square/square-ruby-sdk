@@ -1,7 +1,7 @@
 
 module Square
   class DestinationType
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     BANK_ACCOUNT = "BANK_ACCOUNT"
     CARD = "CARD"
     SQUARE_BALANCE = "SQUARE_BALANCE"

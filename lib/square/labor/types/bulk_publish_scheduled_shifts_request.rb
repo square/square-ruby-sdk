@@ -1,6 +1,6 @@
 
 module Square
   module Labor
-    class BulkPublishScheduledShiftsRequest; end
+    class BulkPublishScheduledShiftsRequest < Internal::Types::Model; end
   end
 end

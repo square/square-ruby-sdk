@@ -1,7 +1,7 @@
 
 module Square
   class MeasurementUnitVolume
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     GENERIC_FLUID_OUNCE = "GENERIC_FLUID_OUNCE"
     GENERIC_SHOT = "GENERIC_SHOT"
     GENERIC_CUP = "GENERIC_CUP"

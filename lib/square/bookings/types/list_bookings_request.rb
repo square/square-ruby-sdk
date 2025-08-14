@@ -1,7 +1,7 @@
 
 module Square
   module Bookings
-    class ListBookingsRequest
+    class ListBookingsRequest < Internal::Types::Model
       field :limit, Integer, optional: true, nullable: false
       field :cursor, String, optional: true, nullable: false
       field :customer_id, String, optional: true, nullable: false

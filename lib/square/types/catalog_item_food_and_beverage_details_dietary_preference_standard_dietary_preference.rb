@@ -1,7 +1,7 @@
 
 module Square
   class CatalogItemFoodAndBeverageDetailsDietaryPreferenceStandardDietaryPreference
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     DAIRY_FREE = "DAIRY_FREE"
     GLUTEN_FREE = "GLUTEN_FREE"
     HALAL = "HALAL"

@@ -2,7 +2,7 @@
 module Square
   module Customers
     module Segments
-      class ListSegmentsRequest
+      class ListSegmentsRequest < Internal::Types::Model
         field :cursor, String, optional: true, nullable: false
         field :limit, Integer, optional: true, nullable: false
 

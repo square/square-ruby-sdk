@@ -1,6 +1,6 @@
 
 module Square
   module Catalog
-    class SearchCatalogItemsRequest; end
+    class SearchCatalogItemsRequest < Internal::Types::Model; end
   end
 end

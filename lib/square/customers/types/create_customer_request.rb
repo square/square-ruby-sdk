@@ -1,6 +1,6 @@
 
 module Square
   module Customers
-    class CreateCustomerRequest; end
+    class CreateCustomerRequest < Internal::Types::Model; end
   end
 end

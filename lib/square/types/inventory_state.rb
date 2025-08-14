@@ -1,7 +1,7 @@
 
 module Square
   class InventoryState
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     CUSTOM = "CUSTOM"
     IN_STOCK = "IN_STOCK"
     SOLD = "SOLD"

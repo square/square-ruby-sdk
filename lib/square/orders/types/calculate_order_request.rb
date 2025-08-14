@@ -1,6 +1,6 @@
 
 module Square
   module Orders
-    class CalculateOrderRequest; end
+    class CalculateOrderRequest < Internal::Types::Model; end
   end
 end

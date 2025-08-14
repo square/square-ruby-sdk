@@ -1,7 +1,7 @@
 
 module Square
   class ScheduledShiftFilterScheduledShiftStatus
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     DRAFT = "DRAFT"
     PUBLISHED = "PUBLISHED"
   end

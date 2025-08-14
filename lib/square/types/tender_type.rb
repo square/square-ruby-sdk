@@ -1,7 +1,7 @@
 
 module Square
   class TenderType
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     CARD = "CARD"
     CASH = "CASH"
     THIRD_PARTY_CARD = "THIRD_PARTY_CARD"

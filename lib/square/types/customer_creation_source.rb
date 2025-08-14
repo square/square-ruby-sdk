@@ -1,7 +1,7 @@
 
 module Square
   class CustomerCreationSource
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     OTHER = "OTHER"
     APPOINTMENTS = "APPOINTMENTS"
     COUPON = "COUPON"

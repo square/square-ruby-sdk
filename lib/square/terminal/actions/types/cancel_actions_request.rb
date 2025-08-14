@@ -2,7 +2,7 @@
 module Square
   module Terminal
     module Actions
-      class CancelActionsRequest
+      class CancelActionsRequest < Internal::Types::Model
         field :action_id, String, optional: false, nullable: false
 
       end

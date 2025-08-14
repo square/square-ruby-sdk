@@ -1,7 +1,7 @@
 
 module Square
   module Employees
-    class ListEmployeesRequest
+    class ListEmployeesRequest < Internal::Types::Model
       field :location_id, String, optional: true, nullable: false
       field :status, Square::EmployeeStatus, optional: true, nullable: false
       field :limit, Integer, optional: true, nullable: false

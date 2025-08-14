@@ -2,7 +2,7 @@
 module Square
   module Locations
     module CustomAttributes
-      class GetCustomAttributesRequest
+      class GetCustomAttributesRequest < Internal::Types::Model
         field :location_id, String, optional: false, nullable: false
         field :key, String, optional: false, nullable: false
         field :with_definition, Internal::Types::Boolean, optional: true, nullable: false

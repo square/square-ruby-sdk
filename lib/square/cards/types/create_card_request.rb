@@ -1,6 +1,6 @@
 
 module Square
   module Cards
-    class CreateCardRequest; end
+    class CreateCardRequest < Internal::Types::Model; end
   end
 end

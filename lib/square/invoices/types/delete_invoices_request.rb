@@ -1,7 +1,7 @@
 
 module Square
   module Invoices
-    class DeleteInvoicesRequest
+    class DeleteInvoicesRequest < Internal::Types::Model
       field :invoice_id, String, optional: false, nullable: false
       field :version, Integer, optional: true, nullable: false
 

@@ -1,7 +1,7 @@
 
 module Square
   class BookingStatus
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     PENDING = "PENDING"
     CANCELLED_BY_CUSTOMER = "CANCELLED_BY_CUSTOMER"
     CANCELLED_BY_SELLER = "CANCELLED_BY_SELLER"

@@ -1,6 +1,6 @@
 
 module Square
   module GiftCards
-    class GetGiftCardFromNonceRequest; end
+    class GetGiftCardFromNonceRequest < Internal::Types::Model; end
   end
 end

@@ -2,7 +2,7 @@
 module Square
   module Terminal
     module Actions
-      class SearchTerminalActionsRequest; end
+      class SearchTerminalActionsRequest < Internal::Types::Model; end
     end
   end
 end

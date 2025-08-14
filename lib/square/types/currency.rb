@@ -1,7 +1,7 @@
 
 module Square
   class Currency
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     UNKNOWN_CURRENCY = "UNKNOWN_CURRENCY"
     AED = "AED"
     AFN = "AFN"

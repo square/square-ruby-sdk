@@ -1,7 +1,7 @@
 
 module Square
   class DayOfWeek
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     SUN = "SUN"
     MON = "MON"
     TUE = "TUE"

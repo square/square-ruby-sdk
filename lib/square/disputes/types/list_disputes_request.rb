@@ -1,7 +1,7 @@
 
 module Square
   module Disputes
-    class ListDisputesRequest
+    class ListDisputesRequest < Internal::Types::Model
       field :cursor, String, optional: true, nullable: false
       field :states, Square::DisputeState, optional: true, nullable: false
       field :location_id, String, optional: true, nullable: false

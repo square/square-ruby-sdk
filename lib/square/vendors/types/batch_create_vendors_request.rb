@@ -1,6 +1,6 @@
 
 module Square
   module Vendors
-    class BatchCreateVendorsRequest; end
+    class BatchCreateVendorsRequest < Internal::Types::Model; end
   end
 end

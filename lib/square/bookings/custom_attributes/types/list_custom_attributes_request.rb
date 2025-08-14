@@ -2,7 +2,7 @@
 module Square
   module Bookings
     module CustomAttributes
-      class ListCustomAttributesRequest
+      class ListCustomAttributesRequest < Internal::Types::Model
         field :booking_id, String, optional: false, nullable: false
         field :limit, Integer, optional: true, nullable: false
         field :cursor, String, optional: true, nullable: false

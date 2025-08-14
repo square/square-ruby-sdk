@@ -1,7 +1,7 @@
 
 module Square
   module Customers
-    class ListCustomersRequest
+    class ListCustomersRequest < Internal::Types::Model
       field :cursor, String, optional: true, nullable: false
       field :limit, Integer, optional: true, nullable: false
       field :sort_field, Square::CustomerSortField, optional: true, nullable: false

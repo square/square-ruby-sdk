@@ -1,7 +1,7 @@
 
 module Square
   module Bookings
-    class GetBookingsRequest
+    class GetBookingsRequest < Internal::Types::Model
       field :booking_id, String, optional: false, nullable: false
 
     end

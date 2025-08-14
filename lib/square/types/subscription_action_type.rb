@@ -1,7 +1,7 @@
 
 module Square
   class SubscriptionActionType
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     CANCEL = "CANCEL"
     PAUSE = "PAUSE"
     RESUME = "RESUME"

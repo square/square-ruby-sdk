@@ -1,7 +1,7 @@
 
 module Square
   class TerminalActionActionType
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     QR_CODE = "QR_CODE"
     PING = "PING"
     SAVE_CARD = "SAVE_CARD"

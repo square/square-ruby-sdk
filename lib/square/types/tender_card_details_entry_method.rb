@@ -1,7 +1,7 @@
 
 module Square
   class TenderCardDetailsEntryMethod
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     SWIPED = "SWIPED"
     KEYED = "KEYED"
     EMV = "EMV"

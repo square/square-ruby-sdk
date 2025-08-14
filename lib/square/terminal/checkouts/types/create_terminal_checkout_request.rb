@@ -2,7 +2,7 @@
 module Square
   module Terminal
     module Checkouts
-      class CreateTerminalCheckoutRequest; end
+      class CreateTerminalCheckoutRequest < Internal::Types::Model; end
     end
   end
 end

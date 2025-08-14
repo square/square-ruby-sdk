@@ -1,7 +1,7 @@
 
 module Square
   module Merchants
-    class ListMerchantsRequest
+    class ListMerchantsRequest < Internal::Types::Model
       field :cursor, Integer, optional: true, nullable: false
 
     end

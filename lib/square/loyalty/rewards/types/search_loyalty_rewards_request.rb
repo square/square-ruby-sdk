@@ -2,7 +2,7 @@
 module Square
   module Loyalty
     module Rewards
-      class SearchLoyaltyRewardsRequest; end
+      class SearchLoyaltyRewardsRequest < Internal::Types::Model; end
     end
   end
 end

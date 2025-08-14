@@ -1,6 +1,6 @@
 
 module Square
   module Events
-    class SearchEventsRequest; end
+    class SearchEventsRequest < Internal::Types::Model; end
   end
 end

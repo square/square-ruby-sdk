@@ -1,7 +1,7 @@
 
 module Square
   class DeviceComponentDetailsExternalPower
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     AVAILABLE_CHARGING = "AVAILABLE_CHARGING"
     AVAILABLE_NOT_IN_USE = "AVAILABLE_NOT_IN_USE"
     UNAVAILABLE = "UNAVAILABLE"

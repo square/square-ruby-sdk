@@ -2,7 +2,7 @@
 module Square
   module Merchants
     module CustomAttributeDefinitions
-      class CreateMerchantCustomAttributeDefinitionRequest; end
+      class CreateMerchantCustomAttributeDefinitionRequest < Internal::Types::Model; end
     end
   end
 end

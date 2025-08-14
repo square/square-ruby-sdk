@@ -2,7 +2,7 @@
 module Square
   module Labor
     module WorkweekConfigs
-      class UpdateWorkweekConfigRequest
+      class UpdateWorkweekConfigRequest < Internal::Types::Model
         field :id, String, optional: false, nullable: false
       end
     end

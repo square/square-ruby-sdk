@@ -1,6 +1,6 @@
 
 module Square
   module Orders
-    class BatchGetOrdersRequest; end
+    class BatchGetOrdersRequest < Internal::Types::Model; end
   end
 end

@@ -2,7 +2,7 @@
 module Square
   module Checkout
     module PaymentLinks
-      class ListPaymentLinksRequest
+      class ListPaymentLinksRequest < Internal::Types::Model
         field :cursor, String, optional: true, nullable: false
         field :limit, Integer, optional: true, nullable: false
 

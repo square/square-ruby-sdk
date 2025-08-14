@@ -2,7 +2,7 @@
 module Square
   module Bookings
     module CustomAttributeDefinitions
-      class GetCustomAttributeDefinitionsRequest
+      class GetCustomAttributeDefinitionsRequest < Internal::Types::Model
         field :key, String, optional: false, nullable: false
         field :version, Integer, optional: true, nullable: false
 

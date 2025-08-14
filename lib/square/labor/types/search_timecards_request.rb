@@ -1,6 +1,6 @@
 
 module Square
   module Labor
-    class SearchTimecardsRequest; end
+    class SearchTimecardsRequest < Internal::Types::Model; end
   end
 end

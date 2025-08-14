@@ -1,7 +1,7 @@
 
 module Square
   class V1OrderState
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     PENDING = "PENDING"
     OPEN = "OPEN"
     COMPLETED = "COMPLETED"

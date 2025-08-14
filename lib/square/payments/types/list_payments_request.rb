@@ -1,7 +1,7 @@
 
 module Square
   module Payments
-    class ListPaymentsRequest
+    class ListPaymentsRequest < Internal::Types::Model
       field :begin_time, String, optional: true, nullable: false
       field :end_time, String, optional: true, nullable: false
       field :sort_order, String, optional: true, nullable: false

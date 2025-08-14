@@ -2,7 +2,7 @@
 module Square
   module Checkout
     module PaymentLinks
-      class CreatePaymentLinkRequest; end
+      class CreatePaymentLinkRequest < Internal::Types::Model; end
     end
   end
 end

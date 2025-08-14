@@ -2,7 +2,7 @@
 module Square
   module Labor
     module Shifts
-      class SearchShiftsRequest; end
+      class SearchShiftsRequest < Internal::Types::Model; end
     end
   end
 end

@@ -2,7 +2,7 @@
 module Square
   module Labor
     module Shifts
-      class DeleteShiftsRequest
+      class DeleteShiftsRequest < Internal::Types::Model
         field :id, String, optional: false, nullable: false
 
       end

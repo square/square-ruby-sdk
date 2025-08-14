@@ -1,7 +1,7 @@
 
 module Square
   class InvoiceRequestMethod
-    includes Square::Internal::Types::Enum
+    include Square::Internal::Types::Enum
     EMAIL = "EMAIL"
     CHARGE_CARD_ON_FILE = "CHARGE_CARD_ON_FILE"
     SHARE_MANUALLY = "SHARE_MANUALLY"
