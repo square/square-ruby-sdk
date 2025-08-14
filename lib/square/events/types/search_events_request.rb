@@ -1,5 +1,6 @@
 
 module Square
   module Events
-    class SearchEventsRequest; endend
+    class SearchEventsRequest; end
+  end
 end

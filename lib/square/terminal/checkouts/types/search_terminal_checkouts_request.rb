@@ -2,6 +2,7 @@
 module Square
   module Terminal
     module Checkouts
-      class SearchTerminalCheckoutsRequest; endend
+      class SearchTerminalCheckoutsRequest; end
+    end
   end
 end

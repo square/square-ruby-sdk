@@ -1,5 +1,6 @@
 
 module Square
   module Catalog
-    class UpdateItemModifierListsRequest; endend
+    class UpdateItemModifierListsRequest; end
+  end
 end

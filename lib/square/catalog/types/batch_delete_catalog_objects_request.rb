@@ -1,5 +1,6 @@
 
 module Square
   module Catalog
-    class BatchDeleteCatalogObjectsRequest; endend
+    class BatchDeleteCatalogObjectsRequest; end
+  end
 end

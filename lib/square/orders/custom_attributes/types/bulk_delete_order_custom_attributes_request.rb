@@ -2,6 +2,7 @@
 module Square
   module Orders
     module CustomAttributes
-      class BulkDeleteOrderCustomAttributesRequest; endend
+      class BulkDeleteOrderCustomAttributesRequest; end
+    end
   end
 end

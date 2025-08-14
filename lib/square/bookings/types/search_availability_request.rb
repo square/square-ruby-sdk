@@ -1,5 +1,6 @@
 
 module Square
   module Bookings
-    class SearchAvailabilityRequest; endend
+    class SearchAvailabilityRequest; end
+  end
 end

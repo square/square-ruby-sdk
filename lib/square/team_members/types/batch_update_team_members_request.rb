@@ -1,5 +1,6 @@
 
 module Square
   module TeamMembers
-    class BatchUpdateTeamMembersRequest; endend
+    class BatchUpdateTeamMembersRequest; end
+  end
 end

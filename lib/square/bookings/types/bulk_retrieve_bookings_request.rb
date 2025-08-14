@@ -1,5 +1,6 @@
 
 module Square
   module Bookings
-    class BulkRetrieveBookingsRequest; endend
+    class BulkRetrieveBookingsRequest; end
+  end
 end

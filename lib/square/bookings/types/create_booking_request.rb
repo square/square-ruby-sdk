@@ -1,5 +1,6 @@
 
 module Square
   module Bookings
-    class CreateBookingRequest; endend
+    class CreateBookingRequest; end
+  end
 end

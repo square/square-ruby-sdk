@@ -2,6 +2,7 @@
 module Square
   module Locations
     module CustomAttributeDefinitions
-      class CreateLocationCustomAttributeDefinitionRequest; endend
+      class CreateLocationCustomAttributeDefinitionRequest; end
+    end
   end
 end

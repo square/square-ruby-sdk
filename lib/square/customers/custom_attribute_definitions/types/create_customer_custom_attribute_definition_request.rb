@@ -2,6 +2,7 @@
 module Square
   module Customers
     module CustomAttributeDefinitions
-      class CreateCustomerCustomAttributeDefinitionRequest; endend
+      class CreateCustomerCustomAttributeDefinitionRequest; end
+    end
   end
 end

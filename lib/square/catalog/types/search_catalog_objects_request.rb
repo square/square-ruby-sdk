@@ -1,5 +1,6 @@
 
 module Square
   module Catalog
-    class SearchCatalogObjectsRequest; endend
+    class SearchCatalogObjectsRequest; end
+  end
 end

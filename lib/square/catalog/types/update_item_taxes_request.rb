@@ -1,5 +1,6 @@
 
 module Square
   module Catalog
-    class UpdateItemTaxesRequest; endend
+    class UpdateItemTaxesRequest; end
+  end
 end

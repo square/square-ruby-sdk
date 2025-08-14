@@ -1,5 +1,6 @@
 
 module Square
   module Customers
-    class BulkUpdateCustomersRequest; endend
+    class BulkUpdateCustomersRequest; end
+  end
 end

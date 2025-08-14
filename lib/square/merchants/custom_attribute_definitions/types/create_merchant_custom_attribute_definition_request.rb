@@ -2,6 +2,7 @@
 module Square
   module Merchants
     module CustomAttributeDefinitions
-      class CreateMerchantCustomAttributeDefinitionRequest; endend
+      class CreateMerchantCustomAttributeDefinitionRequest; end
+    end
   end
 end

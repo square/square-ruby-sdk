@@ -1,5 +1,6 @@
 
 module Square
   module Labor
-    class BulkPublishScheduledShiftsRequest; endend
+    class BulkPublishScheduledShiftsRequest; end
+  end
 end

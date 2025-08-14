@@ -2,6 +2,7 @@
 module Square
   module Loyalty
     module Accounts
-      class CreateLoyaltyAccountRequest; endend
+      class CreateLoyaltyAccountRequest; end
+    end
   end
 end

@@ -1,5 +1,6 @@
 
 module Square
   module Vendors
-    class BatchCreateVendorsRequest; endend
+    class BatchCreateVendorsRequest; end
+  end
 end

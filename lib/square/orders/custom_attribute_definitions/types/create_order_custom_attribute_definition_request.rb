@@ -2,6 +2,7 @@
 module Square
   module Orders
     module CustomAttributeDefinitions
-      class CreateOrderCustomAttributeDefinitionRequest; endend
+      class CreateOrderCustomAttributeDefinitionRequest; end
+    end
   end
 end

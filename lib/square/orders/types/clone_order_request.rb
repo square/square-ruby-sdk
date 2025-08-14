@@ -1,5 +1,6 @@
 
 module Square
   module Orders
-    class CloneOrderRequest; endend
+    class CloneOrderRequest; end
+  end
 end

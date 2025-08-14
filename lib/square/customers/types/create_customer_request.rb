@@ -1,5 +1,6 @@
 
 module Square
   module Customers
-    class CreateCustomerRequest; endend
+    class CreateCustomerRequest; end
+  end
 end

@@ -1,5 +1,6 @@
 
 module Square
   module Orders
-    class CalculateOrderRequest; endend
+    class CalculateOrderRequest; end
+  end
 end

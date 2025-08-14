@@ -1,5 +1,6 @@
 
 module Square
   module Locations
-    class CreateLocationRequest; endend
+    class CreateLocationRequest; end
+  end
 end

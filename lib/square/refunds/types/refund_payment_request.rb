@@ -1,5 +1,6 @@
 
 module Square
   module Refunds
-    class RefundPaymentRequest; endend
+    class RefundPaymentRequest; end
+  end
 end

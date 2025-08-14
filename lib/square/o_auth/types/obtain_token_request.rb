@@ -1,5 +1,6 @@
 
 module Square
   module OAuth
-    class ObtainTokenRequest; endend
+    class ObtainTokenRequest; end
+  end
 end

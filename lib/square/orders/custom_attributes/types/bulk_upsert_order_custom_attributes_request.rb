@@ -2,6 +2,7 @@
 module Square
   module Orders
     module CustomAttributes
-      class BulkUpsertOrderCustomAttributesRequest; endend
+      class BulkUpsertOrderCustomAttributesRequest; end
+    end
   end
 end

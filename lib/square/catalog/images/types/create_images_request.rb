@@ -2,6 +2,7 @@
 module Square
   module Catalog
     module Images
-      class CreateImagesRequest; endend
+      class CreateImagesRequest; end
+    end
   end
 end

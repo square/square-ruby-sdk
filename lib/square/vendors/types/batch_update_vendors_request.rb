@@ -1,5 +1,6 @@
 
 module Square
   module Vendors
-    class BatchUpdateVendorsRequest; endend
+    class BatchUpdateVendorsRequest; end
+  end
 end

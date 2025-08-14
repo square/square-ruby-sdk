@@ -1,5 +1,6 @@
 
 module Square
   module GiftCards
-    class GetGiftCardFromNonceRequest; endend
+    class GetGiftCardFromNonceRequest; end
+  end
 end

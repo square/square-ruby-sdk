@@ -1,5 +1,6 @@
 
 module Square
   module Customers
-    class SearchCustomersRequest; endend
+    class SearchCustomersRequest; end
+  end
 end
