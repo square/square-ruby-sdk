@@ -1,23 +1,24 @@
 # frozen_string_literal: true
 
 module Square
-    module Types
-        # Represents a tax that applies to one or more line item in the order.
-        # 
-        # Fixed-amount, order-scoped taxes are distributed across all non-zero line item totals.
-        # The amount distributed to each line item is relative to the amount the item
-        # contributes to the order subtotal.
-        class OrderLineItemTax < Square::Internal::Types::Model
-            field :uid, String, optional: true, nullable: false
-            field :catalog_object_id, String, optional: true, nullable: false
-            field :catalog_version, Integer, optional: true, nullable: false
-            field :name, String, optional: true, nullable: false
-            field :type, Square::OrderLineItemTaxType, optional: true, nullable: false
-            field :percentage, String, optional: true, nullable: false
-            field :metadata, Square::Internal::Types::Hash[String, String], optional: true, nullable: false
-            field :applied_money, Square::Money, optional: true, nullable: false
-            field :scope, Square::OrderLineItemTaxScope, optional: true, nullable: false
-            field :auto_applied, Square::Internal::Types::Boolean, optional: true, nullable: false
-        end
+  module Types
+    # Represents a tax that applies to one or more line item in the order.
+    # 
+    # Fixed-amount, order-scoped taxes are distributed across all non-zero line item totals.
+    # The amount distributed to each line item is relative to the amount the item
+    # contributes to the order subtotal.
+    class OrderLineItemTax < Internal::Types::Model
+      field :uid, String, optional: true, nullable: false
+      field :catalog_object_id, String, optional: true, nullable: false
+      field :catalog_version, Integer, optional: true, nullable: false
+      field :name, String, optional: true, nullable: false
+      field :type, Square::OrderLineItemTaxType, optional: true, nullable: false
+      field :percentage, String, optional: true, nullable: false
+      field :metadata, Internal::Types::Hash[String, String], optional: true, nullable: false
+      field :applied_money, Square::Money, optional: true, nullable: false
+      field :scope, Square::OrderLineItemTaxScope, optional: true, nullable: false
+      field :auto_applied, Internal::Types::Boolean, optional: true, nullable: false
+
     end
+  end
 end

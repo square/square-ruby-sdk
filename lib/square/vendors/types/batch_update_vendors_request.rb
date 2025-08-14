@@ -1,7 +1,5 @@
 
 module Square
-    module Vendors
-        class BatchUpdateVendorsRequest < Internal::Types::Model
-        end
-    end
+  module Vendors
+    class BatchUpdateVendorsRequest; endend
 end

@@ -1,9 +1,7 @@
 
 module Square
-    module Locations
-        module CustomAttributes
-            class BulkDeleteLocationCustomAttributesRequest < Internal::Types::Model
-        end
-    end
-    end
+  module Locations
+    module CustomAttributes
+      class BulkDeleteLocationCustomAttributesRequest; endend
+  end
 end

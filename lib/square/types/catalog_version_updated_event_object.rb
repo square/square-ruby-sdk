@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 module Square
-    module Types
-        class CatalogVersionUpdatedEventObject < Square::Internal::Types::Model
-            field :catalog_version, Square::CatalogVersionUpdatedEventCatalogVersion, optional: true, nullable: false
-        end
+  module Types
+    class CatalogVersionUpdatedEventObject < Internal::Types::Model
+      field :catalog_version, Square::CatalogVersionUpdatedEventCatalogVersion, optional: true, nullable: false
+
     end
+  end
 end

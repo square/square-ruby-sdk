@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module Square
+module square
   module Internal
     module Types
       # Define a union between two types
       module Union
-        include Square::Internal::Types::Type
+        include square::Internal::Types::Type
 
         def members
           @members ||= []

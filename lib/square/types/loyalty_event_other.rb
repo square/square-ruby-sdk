@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 module Square
-    module Types
-        # Provides metadata when the event `type` is `OTHER`.
-        class LoyaltyEventOther < Square::Internal::Types::Model
-            field :loyalty_program_id, String, optional: true, nullable: false
-            field :points, Integer, optional: false, nullable: false
-        end
+  module Types
+    # Provides metadata when the event `type` is `OTHER`.
+    class LoyaltyEventOther < Internal::Types::Model
+      field :loyalty_program_id, String, optional: true, nullable: false
+      field :points, Integer, optional: false, nullable: false
+
     end
+  end
 end

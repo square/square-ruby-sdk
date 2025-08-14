@@ -1,9 +1,8 @@
 
 module Square
-    module Types
-        class TenderBuyNowPayLaterDetailsBrand < Square::Internal::Types::Enum
-            OTHER_BRAND = "OTHER_BRAND"
-            AFTERPAY = "AFTERPAY"
-        end
-    end
+  class TenderBuyNowPayLaterDetailsBrand
+    includes Square::Internal::Types::Enum
+    OTHER_BRAND = "OTHER_BRAND"
+    AFTERPAY = "AFTERPAY"
+  end
 end

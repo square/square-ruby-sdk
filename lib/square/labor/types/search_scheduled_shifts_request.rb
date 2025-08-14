@@ -1,7 +1,5 @@
 
 module Square
-    module Labor
-        class SearchScheduledShiftsRequest < Internal::Types::Model
-        end
-    end
+  module Labor
+    class SearchScheduledShiftsRequest; endend
 end

@@ -1,7 +1,5 @@
 
 module Square
-    module GiftCards
-        class GetGiftCardFromGanRequest < Internal::Types::Model
-        end
-    end
+  module GiftCards
+    class GetGiftCardFromGanRequest; endend
 end

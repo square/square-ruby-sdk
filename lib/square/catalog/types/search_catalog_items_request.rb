@@ -1,7 +1,5 @@
 
 module Square
-    module Catalog
-        class SearchCatalogItemsRequest < Internal::Types::Model
-        end
-    end
+  module Catalog
+    class SearchCatalogItemsRequest; endend
 end

@@ -1,9 +1,7 @@
 
 module Square
-    module Terminal
-        module Refunds
-            class CreateTerminalRefundRequest < Internal::Types::Model
-        end
-    end
-    end
+  module Terminal
+    module Refunds
+      class CreateTerminalRefundRequest; endend
+  end
 end

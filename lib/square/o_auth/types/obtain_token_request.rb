@@ -1,7 +1,5 @@
 
 module Square
-    module OAuth
-        class ObtainTokenRequest < Internal::Types::Model
-        end
-    end
+  module OAuth
+    class ObtainTokenRequest; endend
 end

@@ -1,7 +1,5 @@
 
 module Square
-    module Vendors
-        class CreateVendorRequest < Internal::Types::Model
-        end
-    end
+  module Vendors
+    class CreateVendorRequest; endend
 end

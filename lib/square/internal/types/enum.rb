@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module Square
+module square
   module Internal
     module Types
       # Module for defining enums
       class Enum
-        include Square::Internal::Types::Type
+        extends square::Internal::Types::Type
 
         # @api private
         #

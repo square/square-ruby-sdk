@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-module Square
+module square
   module Internal
     module Multipart
       # @api private
-      class Request < Square::Internal::Http::BaseRequest
+      class Request < square::Internal::Http::BaseRequest
         attr_reader :body
 
         # @param base_url [String] The base URL for the request

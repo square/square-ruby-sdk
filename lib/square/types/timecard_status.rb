@@ -1,9 +1,8 @@
 
 module Square
-    module Types
-        class TimecardStatus < Square::Internal::Types::Enum
-            OPEN = "OPEN"
-            CLOSED = "CLOSED"
-        end
-    end
+  class TimecardStatus
+    includes Square::Internal::Types::Enum
+    OPEN = "OPEN"
+    CLOSED = "CLOSED"
+  end
 end

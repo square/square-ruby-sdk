@@ -1,7 +1,5 @@
 
 module Square
-    module Locations
-        class CreateLocationRequest < Internal::Types::Model
-        end
-    end
+  module Locations
+    class CreateLocationRequest; endend
 end

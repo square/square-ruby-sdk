@@ -1,14 +1,15 @@
 
 module Square
-    module Locations
-        module CustomAttributes
-            class ListCustomAttributesRequest < Internal::Types::Model
-                field :location_id, String, optional: false, nullable: false
-                field :visibility_filter, Square::VisibilityFilter, optional: true, nullable: false
-                field :limit, Integer, optional: true, nullable: false
-                field :cursor, String, optional: true, nullable: false
-                field :with_definitions, Square::Internal::Types::Boolean, optional: true, nullable: false
-            end
-        end
+  module Locations
+    module CustomAttributes
+      class ListCustomAttributesRequest
+        field :location_id, String, optional: false, nullable: false
+        field :visibility_filter, Square::VisibilityFilter, optional: true, nullable: false
+        field :limit, Integer, optional: true, nullable: false
+        field :cursor, String, optional: true, nullable: false
+        field :with_definitions, Internal::Types::Boolean, optional: true, nullable: false
+
+      end
     end
+  end
 end

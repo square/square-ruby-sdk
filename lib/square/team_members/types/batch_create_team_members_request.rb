@@ -1,7 +1,5 @@
 
 module Square
-    module TeamMembers
-        class BatchCreateTeamMembersRequest < Internal::Types::Model
-        end
-    end
+  module TeamMembers
+    class BatchCreateTeamMembersRequest; endend
 end

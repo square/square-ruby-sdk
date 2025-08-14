@@ -1,9 +1,8 @@
 
 module Square
-    module Types
-        class SortOrder < Square::Internal::Types::Enum
-            DESC = "DESC"
-            ASC = "ASC"
-        end
-    end
+  class SortOrder
+    includes Square::Internal::Types::Enum
+    DESC = "DESC"
+    ASC = "ASC"
+  end
 end

@@ -1,10 +1,11 @@
 
 module Square
-    module Inventory
-        class ChangesInventoryRequest < Square::Internal::Types::Model
-            field :catalog_object_id, String, optional: false, nullable: false
-            field :location_ids, String, optional: true, nullable: false
-            field :cursor, String, optional: true, nullable: false
-        end
+  module Inventory
+    class ChangesInventoryRequest
+      field :catalog_object_id, String, optional: false, nullable: false
+      field :location_ids, String, optional: true, nullable: false
+      field :cursor, String, optional: true, nullable: false
+
     end
+  end
 end

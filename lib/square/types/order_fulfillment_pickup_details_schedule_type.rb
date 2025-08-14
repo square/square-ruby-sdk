@@ -1,9 +1,8 @@
 
 module Square
-    module Types
-        class OrderFulfillmentPickupDetailsScheduleType < Square::Internal::Types::Enum
-            SCHEDULED = "SCHEDULED"
-            ASAP = "ASAP"
-        end
-    end
+  class OrderFulfillmentPickupDetailsScheduleType
+    includes Square::Internal::Types::Enum
+    SCHEDULED = "SCHEDULED"
+    ASAP = "ASAP"
+  end
 end

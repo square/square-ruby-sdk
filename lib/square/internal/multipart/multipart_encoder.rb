@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Square
+module square
   module Internal
     module Multipart
       # Encodes parameters into a `multipart/form-data` payload as described by RFC

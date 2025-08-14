@@ -1,22 +1,21 @@
 
 module Square
-    module Types
-        class GiftCardActivityType < Square::Internal::Types::Enum
-            ACTIVATE = "ACTIVATE"
-            LOAD = "LOAD"
-            REDEEM = "REDEEM"
-            CLEAR_BALANCE = "CLEAR_BALANCE"
-            DEACTIVATE = "DEACTIVATE"
-            ADJUST_INCREMENT = "ADJUST_INCREMENT"
-            ADJUST_DECREMENT = "ADJUST_DECREMENT"
-            REFUND = "REFUND"
-            UNLINKED_ACTIVITY_REFUND = "UNLINKED_ACTIVITY_REFUND"
-            IMPORT = "IMPORT"
-            BLOCK = "BLOCK"
-            UNBLOCK = "UNBLOCK"
-            IMPORT_REVERSAL = "IMPORT_REVERSAL"
-            TRANSFER_BALANCE_FROM = "TRANSFER_BALANCE_FROM"
-            TRANSFER_BALANCE_TO = "TRANSFER_BALANCE_TO"
-        end
-    end
+  class GiftCardActivityType
+    includes Square::Internal::Types::Enum
+    ACTIVATE = "ACTIVATE"
+    LOAD = "LOAD"
+    REDEEM = "REDEEM"
+    CLEAR_BALANCE = "CLEAR_BALANCE"
+    DEACTIVATE = "DEACTIVATE"
+    ADJUST_INCREMENT = "ADJUST_INCREMENT"
+    ADJUST_DECREMENT = "ADJUST_DECREMENT"
+    REFUND = "REFUND"
+    UNLINKED_ACTIVITY_REFUND = "UNLINKED_ACTIVITY_REFUND"
+    IMPORT = "IMPORT"
+    BLOCK = "BLOCK"
+    UNBLOCK = "UNBLOCK"
+    IMPORT_REVERSAL = "IMPORT_REVERSAL"
+    TRANSFER_BALANCE_FROM = "TRANSFER_BALANCE_FROM"
+    TRANSFER_BALANCE_TO = "TRANSFER_BALANCE_TO"
+  end
 end

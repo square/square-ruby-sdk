@@ -1,15 +1,14 @@
 
 module Square
-    module Types
-        class DisputeState < Square::Internal::Types::Enum
-            INQUIRY_EVIDENCE_REQUIRED = "INQUIRY_EVIDENCE_REQUIRED"
-            INQUIRY_PROCESSING = "INQUIRY_PROCESSING"
-            INQUIRY_CLOSED = "INQUIRY_CLOSED"
-            EVIDENCE_REQUIRED = "EVIDENCE_REQUIRED"
-            PROCESSING = "PROCESSING"
-            WON = "WON"
-            LOST = "LOST"
-            ACCEPTED = "ACCEPTED"
-        end
-    end
+  class DisputeState
+    includes Square::Internal::Types::Enum
+    INQUIRY_EVIDENCE_REQUIRED = "INQUIRY_EVIDENCE_REQUIRED"
+    INQUIRY_PROCESSING = "INQUIRY_PROCESSING"
+    INQUIRY_CLOSED = "INQUIRY_CLOSED"
+    EVIDENCE_REQUIRED = "EVIDENCE_REQUIRED"
+    PROCESSING = "PROCESSING"
+    WON = "WON"
+    LOST = "LOST"
+    ACCEPTED = "ACCEPTED"
+  end
 end

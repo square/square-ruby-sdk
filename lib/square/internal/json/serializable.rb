@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-module Square
+module square
   module Internal
     module JSON
-      module Serializable
+      class Serializable
         # Loads data from JSON into its deserialized form
         #
         # @param str [String] Raw JSON to load into an object

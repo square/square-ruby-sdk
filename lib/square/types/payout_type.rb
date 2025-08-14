@@ -1,9 +1,8 @@
 
 module Square
-    module Types
-        class PayoutType < Square::Internal::Types::Enum
-            BATCH = "BATCH"
-            SIMPLE = "SIMPLE"
-        end
-    end
+  class PayoutType
+    includes Square::Internal::Types::Enum
+    BATCH = "BATCH"
+    SIMPLE = "SIMPLE"
+  end
 end

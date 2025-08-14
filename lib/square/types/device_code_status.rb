@@ -1,11 +1,10 @@
 
 module Square
-    module Types
-        class DeviceCodeStatus < Square::Internal::Types::Enum
-            UNKNOWN = "UNKNOWN"
-            UNPAIRED = "UNPAIRED"
-            PAIRED = "PAIRED"
-            EXPIRED = "EXPIRED"
-        end
-    end
+  class DeviceCodeStatus
+    includes Square::Internal::Types::Enum
+    UNKNOWN = "UNKNOWN"
+    UNPAIRED = "UNPAIRED"
+    PAIRED = "PAIRED"
+    EXPIRED = "EXPIRED"
+  end
 end

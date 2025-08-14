@@ -1,7 +1,5 @@
 
 module Square
-    module Subscriptions
-        class SearchSubscriptionsRequest < Internal::Types::Model
-        end
-    end
+  module Subscriptions
+    class SearchSubscriptionsRequest; endend
 end

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-module Square
+module square
   module Internal
     module Types
       module Unknown
-        include Square::Internal::Types::Type
+        include square::Internal::Types::Type
 
         def coerce(value)
           value

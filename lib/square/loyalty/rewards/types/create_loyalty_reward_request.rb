@@ -1,9 +1,7 @@
 
 module Square
-    module Loyalty
-        module Rewards
-            class CreateLoyaltyRewardRequest < Internal::Types::Model
-        end
-    end
-    end
+  module Loyalty
+    module Rewards
+      class CreateLoyaltyRewardRequest; endend
+  end
 end

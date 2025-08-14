@@ -1,7 +1,5 @@
 
 module Square
-    module Refunds
-        class RefundPaymentRequest < Internal::Types::Model
-        end
-    end
+  module Refunds
+    class RefundPaymentRequest; endend
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Square
+module square
   module Internal
     module Types
       # @abstract
@@ -16,7 +16,7 @@ module Square
           #
           # @return [Hash<Symbol, Field>]
           def fields
-            @fields ||= if self < Square::Internal::Types::Model
+            @fields ||= if self < square::Internal::Types::Model
                           superclass.fields.dup
                         else
                           {}

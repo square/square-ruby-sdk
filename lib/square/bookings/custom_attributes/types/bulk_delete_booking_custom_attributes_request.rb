@@ -1,9 +1,7 @@
 
 module Square
-    module Bookings
-        module CustomAttributes
-            class BulkDeleteBookingCustomAttributesRequest < Internal::Types::Model
-        end
-    end
-    end
+  module Bookings
+    module CustomAttributes
+      class BulkDeleteBookingCustomAttributesRequest; endend
+  end
 end

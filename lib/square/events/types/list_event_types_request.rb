@@ -1,8 +1,9 @@
 
 module Square
-    module Events
-        class ListEventTypesRequest < Square::Internal::Types::Model
-            field :api_version, String, optional: true, nullable: false
-        end
+  module Events
+    class ListEventTypesRequest
+      field :api_version, String, optional: true, nullable: false
+
     end
+  end
 end

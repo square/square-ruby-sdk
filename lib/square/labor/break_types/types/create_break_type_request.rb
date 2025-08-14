@@ -1,9 +1,7 @@
 
 module Square
-    module Labor
-        module BreakTypes
-            class CreateBreakTypeRequest < Internal::Types::Model
-        end
-    end
-    end
+  module Labor
+    module BreakTypes
+      class CreateBreakTypeRequest; endend
+  end
 end

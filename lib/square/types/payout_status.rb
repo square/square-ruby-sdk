@@ -1,10 +1,9 @@
 
 module Square
-    module Types
-        class PayoutStatus < Square::Internal::Types::Enum
-            SENT = "SENT"
-            FAILED = "FAILED"
-            PAID = "PAID"
-        end
-    end
+  class PayoutStatus
+    includes Square::Internal::Types::Enum
+    SENT = "SENT"
+    FAILED = "FAILED"
+    PAID = "PAID"
+  end
 end

@@ -1,8 +1,8 @@
 
 module Square
-    module Locations
-        class CreateCheckoutRequest < Square::Internal::Types::Model
-            field :location_id, String, optional: false, nullable: false
-        end
+  module Locations
+    class CreateCheckoutRequest
+      field :location_id, String, optional: false, nullable: false
     end
+  end
 end

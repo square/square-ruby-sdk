@@ -1,7 +1,5 @@
 
 module Square
-    module Loyalty
-        class SearchLoyaltyEventsRequest < Internal::Types::Model
-        end
-    end
+  module Loyalty
+    class SearchLoyaltyEventsRequest; endend
 end

@@ -1,7 +1,5 @@
 
 module Square
-    module Catalog
-        class UpdateItemModifierListsRequest < Internal::Types::Model
-        end
-    end
+  module Catalog
+    class UpdateItemModifierListsRequest; endend
 end

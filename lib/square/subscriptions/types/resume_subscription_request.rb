@@ -1,8 +1,8 @@
 
 module Square
-    module Subscriptions
-        class ResumeSubscriptionRequest < Square::Internal::Types::Model
-            field :subscription_id, String, optional: false, nullable: false
-        end
+  module Subscriptions
+    class ResumeSubscriptionRequest
+      field :subscription_id, String, optional: false, nullable: false
     end
+  end
 end

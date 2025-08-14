@@ -1,9 +1,7 @@
 
 module Square
-    module Customers
-        module Groups
-            class CreateCustomerGroupRequest < Internal::Types::Model
-        end
-    end
-    end
+  module Customers
+    module Groups
+      class CreateCustomerGroupRequest; endend
+  end
 end

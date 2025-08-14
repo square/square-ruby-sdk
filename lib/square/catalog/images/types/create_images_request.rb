@@ -1,9 +1,7 @@
 
 module Square
-    module Catalog
-        module Images
-            class CreateImagesRequest < Internal::Types::Model
-        end
-    end
-    end
+  module Catalog
+    module Images
+      class CreateImagesRequest; endend
+  end
 end

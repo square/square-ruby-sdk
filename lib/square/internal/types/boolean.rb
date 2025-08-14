@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-module Square
+module square
   module Internal
     module Types
       module Boolean
-      extend Square::Internal::Types::Union
+      extend square::Internal::Types::Union
 
         member TrueClass
         member FalseClass

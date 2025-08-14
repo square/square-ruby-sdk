@@ -1,7 +1,5 @@
 
 module Square
-    module Invoices
-        class SearchInvoicesRequest < Internal::Types::Model
-        end
-    end
+  module Invoices
+    class SearchInvoicesRequest; endend
 end
