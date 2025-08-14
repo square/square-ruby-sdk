@@ -2,7 +2,7 @@
 
 require "securerandom"
 
-module square
+module Square
   module Internal
     module Multipart
       # @api private

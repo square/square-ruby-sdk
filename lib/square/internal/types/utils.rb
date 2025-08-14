@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module square
+module Square
   module Internal
     module Types
       # Utilities for dealing with and checking types

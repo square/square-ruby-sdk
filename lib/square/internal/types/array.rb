@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module square
+module Square
   module Internal
     module Types
       # An array of a specific type
