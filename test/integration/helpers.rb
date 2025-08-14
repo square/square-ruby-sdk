@@ -1,6 +1,6 @@
 require 'securerandom'
-require 'square'
-require 'square_legacy'
+require_relative '../../lib/square'
+require_relative '../../lib/square_legacy'
 
 module Helpers
   def create_client
