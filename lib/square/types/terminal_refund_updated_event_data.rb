@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class TerminalRefundUpdatedEventData < Internal::Types::Model
+        class TerminalRefundUpdatedEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :object, Square::TerminalRefundUpdatedEventObject, optional: true, nullable: false

@@ -3,7 +3,7 @@
 module Square
     module Types
         # Published when a [ScheduledShift](entity:ScheduledShift) is published.
-        class LaborScheduledShiftPublishedEvent < Internal::Types::Model
+        class LaborScheduledShiftPublishedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :location_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false

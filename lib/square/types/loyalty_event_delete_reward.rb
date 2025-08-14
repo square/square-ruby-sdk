@@ -3,7 +3,7 @@
 module Square
     module Types
         # Provides metadata when the event `type` is `DELETE_REWARD`.
-        class LoyaltyEventDeleteReward < Internal::Types::Model
+        class LoyaltyEventDeleteReward < Square::Internal::Types::Model
             field :loyalty_program_id, String, optional: true, nullable: false
             field :reward_id, String, optional: true, nullable: false
             field :points, Integer, optional: true, nullable: false

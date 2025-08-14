@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class DeviceComponentDetailsApplicationDetails < Internal::Types::Model
+        class DeviceComponentDetailsApplicationDetails < Square::Internal::Types::Model
             field :application_type, String, optional: true, nullable: false
             field :version, String, optional: true, nullable: false
             field :session_location, String, optional: true, nullable: false

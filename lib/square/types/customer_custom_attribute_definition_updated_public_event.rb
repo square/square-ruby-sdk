@@ -9,7 +9,7 @@ module Square
         # This event is replaced by 
         # [customer.custom_attribute_definition.visible.updated](webhook:customer.custom_attribute_definition.visible.updated),
         # which applies to custom attribute definitions that are visible to the subscribing application.
-        class CustomerCustomAttributeDefinitionUpdatedPublicEvent < Internal::Types::Model
+        class CustomerCustomAttributeDefinitionUpdatedPublicEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

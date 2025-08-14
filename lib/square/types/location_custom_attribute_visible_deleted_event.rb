@@ -11,7 +11,7 @@ module Square
         # Custom attributes set to `VISIBILITY_READ_WRITE_VALUES` can be deleted by any application, but those set to
         # `VISIBILITY_READ_ONLY` or `VISIBILITY_HIDDEN` can only be deleted by the owner. Custom attributes are owned
         # by the application that created the corresponding [custom attribute definition](entity:CustomAttributeDefinition).
-        class LocationCustomAttributeVisibleDeletedEvent < Internal::Types::Model
+        class LocationCustomAttributeVisibleDeletedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

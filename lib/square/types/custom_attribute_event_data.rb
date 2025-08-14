@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class CustomAttributeEventData < Internal::Types::Model
+        class CustomAttributeEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :object, Square::CustomAttributeEventDataObject, optional: true, nullable: false

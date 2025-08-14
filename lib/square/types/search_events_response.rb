@@ -7,10 +7,10 @@ module Square
         # 
         # Note: if there are errors processing the request, the events field will not be
         # present.
-        class SearchEventsResponse < Internal::Types::Model
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
-            field :events, Internal::Types::Array[Square::Event], optional: true, nullable: false
-            field :metadata, Internal::Types::Array[Square::EventMetadata], optional: true, nullable: false
+        class SearchEventsResponse < Square::Internal::Types::Model
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :events, Square::Internal::Types::Array[Square::Event], optional: true, nullable: false
+            field :metadata, Square::Internal::Types::Array[Square::EventMetadata], optional: true, nullable: false
             field :cursor, String, optional: true, nullable: false
         end
     end

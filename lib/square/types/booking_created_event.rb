@@ -6,7 +6,7 @@ module Square
         # 
         # To receive this event with buyer-level permissions, you must have `APPOINTMENTS_READ` set for the OAuth scope.  
         # To receive this event with seller-level permissions, you must have `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` set for the OAuth scope.
-        class BookingCreatedEvent < Internal::Types::Model
+        class BookingCreatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

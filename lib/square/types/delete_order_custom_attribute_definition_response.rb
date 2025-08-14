@@ -3,8 +3,8 @@
 module Square
     module Types
         # Represents a response from deleting an order custom attribute definition.
-        class DeleteOrderCustomAttributeDefinitionResponse < Internal::Types::Model
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+        class DeleteOrderCustomAttributeDefinitionResponse < Square::Internal::Types::Model
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
         end
     end
 end

@@ -3,7 +3,7 @@
 module Square
     module Types
         # Published when a [Location](entity:Location) is created.
-        class LocationCreatedEvent < Internal::Types::Model
+        class LocationCreatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :location_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false

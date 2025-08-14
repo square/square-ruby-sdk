@@ -4,7 +4,7 @@ module Square
     module Types
         # Provides information about a loyalty event. 
         # For more information, see [Search for Balance-Changing Loyalty Events](https://developer.squareup.com/docs/loyalty-api/loyalty-events).
-        class LoyaltyEvent < Internal::Types::Model
+        class LoyaltyEvent < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :type, Square::LoyaltyEventType, optional: false, nullable: false
             field :created_at, String, optional: true, nullable: false

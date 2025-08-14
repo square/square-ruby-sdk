@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class VendorCreatedEventObject < Internal::Types::Model
+        class VendorCreatedEventObject < Square::Internal::Types::Model
             field :operation, String, optional: true, nullable: false
             field :vendor, Square::Vendor, optional: true, nullable: false
         end

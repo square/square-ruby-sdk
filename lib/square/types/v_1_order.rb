@@ -3,8 +3,8 @@
 module Square
     module Types
         # V1Order
-        class V1Order < Internal::Types::Model
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+        class V1Order < Square::Internal::Types::Model
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :buyer_email, String, optional: true, nullable: false
             field :recipient_name, String, optional: true, nullable: false
@@ -25,7 +25,7 @@ module Square
             field :refunded_note, String, optional: true, nullable: false
             field :canceled_note, String, optional: true, nullable: false
             field :tender, Square::V1Tender, optional: true, nullable: false
-            field :order_history, Internal::Types::Array[Square::V1OrderHistoryEntry], optional: true, nullable: false
+            field :order_history, Square::Internal::Types::Array[Square::V1OrderHistoryEntry], optional: true, nullable: false
             field :promo_code, String, optional: true, nullable: false
             field :btc_receive_address, String, optional: true, nullable: false
             field :btc_price_satoshi, Integer, optional: true, nullable: false

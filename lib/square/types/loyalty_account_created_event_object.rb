@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class LoyaltyAccountCreatedEventObject < Internal::Types::Model
+        class LoyaltyAccountCreatedEventObject < Square::Internal::Types::Model
             field :loyalty_account, Square::LoyaltyAccount, optional: true, nullable: false
         end
     end

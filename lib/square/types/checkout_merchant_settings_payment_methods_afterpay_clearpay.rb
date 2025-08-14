@@ -3,10 +3,10 @@
 module Square
     module Types
         # The settings allowed for AfterpayClearpay.
-        class CheckoutMerchantSettingsPaymentMethodsAfterpayClearpay < Internal::Types::Model
+        class CheckoutMerchantSettingsPaymentMethodsAfterpayClearpay < Square::Internal::Types::Model
             field :order_eligibility_range, Square::CheckoutMerchantSettingsPaymentMethodsAfterpayClearpayEligibilityRange, optional: true, nullable: false
             field :item_eligibility_range, Square::CheckoutMerchantSettingsPaymentMethodsAfterpayClearpayEligibilityRange, optional: true, nullable: false
-            field :enabled, Internal::Types::Boolean, optional: true, nullable: false
+            field :enabled, Square::Internal::Types::Boolean, optional: true, nullable: false
         end
     end
 end

@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class PaymentBalanceActivityOtherDetail < Internal::Types::Model
+        class PaymentBalanceActivityOtherDetail < Square::Internal::Types::Model
             field :payment_id, String, optional: true, nullable: false
         end
     end

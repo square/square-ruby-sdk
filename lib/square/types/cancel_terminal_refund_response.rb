@@ -2,8 +2,8 @@
 
 module Square
     module Types
-        class CancelTerminalRefundResponse < Internal::Types::Model
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+        class CancelTerminalRefundResponse < Square::Internal::Types::Model
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
             field :refund, Square::TerminalRefund, optional: true, nullable: false
         end
     end

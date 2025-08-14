@@ -2,8 +2,8 @@
 
 module Square
     module Types
-        class GetTerminalActionResponse < Internal::Types::Model
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+        class GetTerminalActionResponse < Square::Internal::Types::Model
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
             field :action, Square::TerminalAction, optional: true, nullable: false
         end
     end

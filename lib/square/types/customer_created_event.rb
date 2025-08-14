@@ -6,7 +6,7 @@ module Square
         # For more information, see [Use Customer Webhooks](https://developer.squareup.com/docs/customers-api/use-the-api/customer-webhooks).
         # 
         # The `customer` object in the event notification does not include the `segment_ids` field.
-        class CustomerCreatedEvent < Internal::Types::Model
+        class CustomerCreatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

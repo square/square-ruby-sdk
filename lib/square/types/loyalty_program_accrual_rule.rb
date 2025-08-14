@@ -3,7 +3,7 @@
 module Square
     module Types
         # Represents an accrual rule, which defines how buyers can earn points from the base [loyalty program](entity:LoyaltyProgram).
-        class LoyaltyProgramAccrualRule < Internal::Types::Model
+        class LoyaltyProgramAccrualRule < Square::Internal::Types::Model
             field :accrual_type, Square::LoyaltyProgramAccrualRuleType, optional: false, nullable: false
             field :points, Integer, optional: true, nullable: false
             field :visit_data, Square::LoyaltyProgramAccrualRuleVisitData, optional: true, nullable: false

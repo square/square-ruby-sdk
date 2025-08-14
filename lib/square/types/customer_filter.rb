@@ -4,7 +4,7 @@ module Square
     module Types
         # Represents the filtering criteria in a [search query](entity:CustomerQuery) that defines how to filter
         # customer profiles returned in [SearchCustomers](api-endpoint:Customers-SearchCustomers) results.
-        class CustomerFilter < Internal::Types::Model
+        class CustomerFilter < Square::Internal::Types::Model
             field :creation_source, Square::CustomerCreationSourceFilter, optional: true, nullable: false
             field :created_at, Square::TimeRange, optional: true, nullable: false
             field :updated_at, Square::TimeRange, optional: true, nullable: false

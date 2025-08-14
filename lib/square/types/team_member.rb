@@ -3,10 +3,10 @@
 module Square
     module Types
         # A record representing an individual team member for a business.
-        class TeamMember < Internal::Types::Model
+        class TeamMember < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :reference_id, String, optional: true, nullable: false
-            field :is_owner, Internal::Types::Boolean, optional: true, nullable: false
+            field :is_owner, Square::Internal::Types::Boolean, optional: true, nullable: false
             field :status, Square::TeamMemberStatus, optional: true, nullable: false
             field :given_name, String, optional: true, nullable: false
             field :family_name, String, optional: true, nullable: false

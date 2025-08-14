@@ -6,7 +6,7 @@ module Square
         # 
         # See [BankAccountPaymentDetails](entity:BankAccountPaymentDetails)
         # for more exposed details of a bank account payment.
-        class TenderBankAccountDetails < Internal::Types::Model
+        class TenderBankAccountDetails < Square::Internal::Types::Model
             field :status, Square::TenderBankAccountDetailsStatus, optional: true, nullable: false
         end
     end

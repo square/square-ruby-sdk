@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class DeviceCreatedEventObject < Internal::Types::Model
+        class DeviceCreatedEventObject < Square::Internal::Types::Model
             field :device, Square::Device, optional: true, nullable: false
         end
     end

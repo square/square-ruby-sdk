@@ -6,7 +6,7 @@ module Square
         # to earn extra points on top of those earned from the base program.
         # 
         # A loyalty program can have a maximum of 10 loyalty promotions with an `ACTIVE` or `SCHEDULED` status.
-        class LoyaltyPromotion < Internal::Types::Model
+        class LoyaltyPromotion < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :name, String, optional: false, nullable: false
             field :incentive, Square::LoyaltyPromotionIncentive, optional: false, nullable: false
@@ -18,8 +18,8 @@ module Square
             field :updated_at, String, optional: true, nullable: false
             field :loyalty_program_id, String, optional: true, nullable: false
             field :minimum_spend_amount_money, Square::Money, optional: true, nullable: false
-            field :qualifying_item_variation_ids, Internal::Types::Array[String], optional: true, nullable: false
-            field :qualifying_category_ids, Internal::Types::Array[String], optional: true, nullable: false
+            field :qualifying_item_variation_ids, Square::Internal::Types::Array[String], optional: true, nullable: false
+            field :qualifying_category_ids, Square::Internal::Types::Array[String], optional: true, nullable: false
         end
     end
 end

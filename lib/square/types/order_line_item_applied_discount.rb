@@ -8,7 +8,7 @@ module Square
         # Line-item scoped discounts must have applied discounts added manually for any applicable line
         # items. The corresponding applied money is automatically computed based on participating
         # line items.
-        class OrderLineItemAppliedDiscount < Internal::Types::Model
+        class OrderLineItemAppliedDiscount < Square::Internal::Types::Model
             field :uid, String, optional: true, nullable: false
             field :discount_uid, String, optional: false, nullable: false
             field :applied_money, Square::Money, optional: true, nullable: false

@@ -3,7 +3,7 @@
 module Square
     module Types
         # Additional details about `WALLET` type payments. Contains only non-confidential information.
-        class DigitalWalletDetails < Internal::Types::Model
+        class DigitalWalletDetails < Square::Internal::Types::Model
             field :status, String, optional: true, nullable: false
             field :brand, String, optional: true, nullable: false
             field :cash_app_details, Square::CashAppDetails, optional: true, nullable: false

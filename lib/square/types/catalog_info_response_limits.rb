@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class CatalogInfoResponseLimits < Internal::Types::Model
+        class CatalogInfoResponseLimits < Square::Internal::Types::Model
             field :batch_upsert_max_objects_per_batch, Integer, optional: true, nullable: false
             field :batch_upsert_max_total_objects, Integer, optional: true, nullable: false
             field :batch_retrieve_max_object_ids, Integer, optional: true, nullable: false

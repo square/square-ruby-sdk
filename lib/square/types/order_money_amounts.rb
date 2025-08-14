@@ -3,7 +3,7 @@
 module Square
     module Types
         # A collection of various money amounts.
-        class OrderMoneyAmounts < Internal::Types::Model
+        class OrderMoneyAmounts < Square::Internal::Types::Model
             field :total_money, Square::Money, optional: true, nullable: false
             field :tax_money, Square::Money, optional: true, nullable: false
             field :discount_money, Square::Money, optional: true, nullable: false

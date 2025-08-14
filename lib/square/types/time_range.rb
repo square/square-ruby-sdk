@@ -7,7 +7,7 @@ module Square
         # inclusive or exclusive based on the needs of a particular endpoint.
         # Refer to the relevant endpoint-specific documentation to determine
         # how time ranges are handled.
-        class TimeRange < Internal::Types::Model
+        class TimeRange < Square::Internal::Types::Model
             field :start_at, String, optional: true, nullable: false
             field :end_at, String, optional: true, nullable: false
         end

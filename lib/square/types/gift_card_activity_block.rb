@@ -3,7 +3,7 @@
 module Square
     module Types
         # Represents details about a `BLOCK` [gift card activity type](entity:GiftCardActivityType).
-        class GiftCardActivityBlock < Internal::Types::Model
+        class GiftCardActivityBlock < Square::Internal::Types::Model
             field :reason, String, optional: false, nullable: false
         end
     end

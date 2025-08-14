@@ -6,7 +6,7 @@ module Square
         # This model contains only the money counted to start a cash drawer shift, counted
         # at the end of the shift, and the amount that should be in the drawer at shift
         # end based on summing all cash drawer shift events.
-        class CashDrawerShiftSummary < Internal::Types::Model
+        class CashDrawerShiftSummary < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :state, Square::CashDrawerShiftState, optional: true, nullable: false
             field :opened_at, String, optional: true, nullable: false

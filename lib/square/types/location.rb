@@ -3,12 +3,12 @@
 module Square
     module Types
         # Represents one of a business' [locations](https://developer.squareup.com/docs/locations-api).
-        class Location < Internal::Types::Model
+        class Location < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :name, String, optional: true, nullable: false
             field :address, Square::Address, optional: true, nullable: false
             field :timezone, String, optional: true, nullable: false
-            field :capabilities, Internal::Types::Array[Square::LocationCapability], optional: true, nullable: false
+            field :capabilities, Square::Internal::Types::Array[Square::LocationCapability], optional: true, nullable: false
             field :status, Square::LocationStatus, optional: true, nullable: false
             field :created_at, String, optional: true, nullable: false
             field :merchant_id, String, optional: true, nullable: false

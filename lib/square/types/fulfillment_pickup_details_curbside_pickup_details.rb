@@ -3,7 +3,7 @@
 module Square
     module Types
         # Specific details for curbside pickup.
-        class FulfillmentPickupDetailsCurbsidePickupDetails < Internal::Types::Model
+        class FulfillmentPickupDetailsCurbsidePickupDetails < Square::Internal::Types::Model
             field :curbside_details, String, optional: true, nullable: false
             field :buyer_arrived_at, String, optional: true, nullable: false
         end

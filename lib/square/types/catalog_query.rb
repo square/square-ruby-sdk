@@ -28,7 +28,7 @@ module Square
         # 
         # For example, to search for [CatalogItem](entity:CatalogItem) objects by searchable attributes, you can use
         # the `"name"`, `"description"`, or `"abbreviation"` attribute in an applicable query filter.
-        class CatalogQuery < Internal::Types::Model
+        class CatalogQuery < Square::Internal::Types::Model
             field :sorted_attribute_query, Square::CatalogQuerySortedAttribute, optional: true, nullable: false
             field :exact_query, Square::CatalogQueryExact, optional: true, nullable: false
             field :set_query, Square::CatalogQuerySet, optional: true, nullable: false

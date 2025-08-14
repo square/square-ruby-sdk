@@ -5,7 +5,7 @@ module Square
         # Published when a merchant [custom attribute definition](entity:CustomAttributeDefinition)
         # is updated by the subscribing application. Subscribe to this event to be notified
         # when your application updates a merchant custom attribute definition.
-        class MerchantCustomAttributeDefinitionOwnedUpdatedEvent < Internal::Types::Model
+        class MerchantCustomAttributeDefinitionOwnedUpdatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

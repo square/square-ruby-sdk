@@ -6,8 +6,8 @@ module Square
         # a request to the [RetrieveCustomerGroup](api-endpoint:CustomerGroups-RetrieveCustomerGroup) endpoint.
         # 
         # Either `errors` or `group` is present in a given response (never both).
-        class GetCustomerGroupResponse < Internal::Types::Model
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+        class GetCustomerGroupResponse < Square::Internal::Types::Model
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
             field :group, Square::CustomerGroup, optional: true, nullable: false
         end
     end

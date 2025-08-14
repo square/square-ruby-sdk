@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class BankAccountDisabledEventObject < Internal::Types::Model
+        class BankAccountDisabledEventObject < Square::Internal::Types::Model
             field :bank_account, Square::BankAccount, optional: true, nullable: false
         end
     end

@@ -4,9 +4,9 @@ module Square
     module Types
         # Defines how discounts are automatically applied to a set of items that match the pricing rule
         # during the active time period.
-        class CatalogPricingRule < Internal::Types::Model
+        class CatalogPricingRule < Square::Internal::Types::Model
             field :name, String, optional: true, nullable: false
-            field :time_period_ids, Internal::Types::Array[String], optional: true, nullable: false
+            field :time_period_ids, Square::Internal::Types::Array[String], optional: true, nullable: false
             field :discount_id, String, optional: true, nullable: false
             field :match_products_id, String, optional: true, nullable: false
             field :apply_products_id, String, optional: true, nullable: false
@@ -17,7 +17,7 @@ module Square
             field :valid_until_local_time, String, optional: true, nullable: false
             field :exclude_strategy, Square::ExcludeStrategy, optional: true, nullable: false
             field :minimum_order_subtotal_money, Square::Money, optional: true, nullable: false
-            field :customer_group_ids_any, Internal::Types::Array[String], optional: true, nullable: false
+            field :customer_group_ids_any, Square::Internal::Types::Array[String], optional: true, nullable: false
         end
     end
 end

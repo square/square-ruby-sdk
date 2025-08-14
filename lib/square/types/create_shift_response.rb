@@ -5,9 +5,9 @@ module Square
         # The response to a request to create a `Shift`. The response contains
         # the created `Shift` object and might contain a set of `Error` objects if
         # the request resulted in errors.
-        class CreateShiftResponse < Internal::Types::Model
+        class CreateShiftResponse < Square::Internal::Types::Model
             field :shift, Square::Shift, optional: true, nullable: false
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
         end
     end
 end

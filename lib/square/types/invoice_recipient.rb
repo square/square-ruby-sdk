@@ -8,7 +8,7 @@ module Square
         # When you provide a customer ID for a draft invoice, Square retrieves the associated customer profile and populates 
         # the remaining `InvoiceRecipient` fields. You cannot update these fields after the invoice is published. 
         # Square updates the customer ID in response to a merge operation, but does not update other fields.
-        class InvoiceRecipient < Internal::Types::Model
+        class InvoiceRecipient < Square::Internal::Types::Model
             field :customer_id, String, optional: true, nullable: false
             field :given_name, String, optional: true, nullable: false
             field :family_name, String, optional: true, nullable: false

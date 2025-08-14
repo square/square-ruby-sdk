@@ -12,7 +12,7 @@ module Square
         # converted to stockable count. Typically, the seller defines this unit conversion. For example, 1 bottle equals 5 glasses. The Square API exposes
         # the `stockable_conversion` property on the variation to specify the conversion. Thus, when two glasses of the wine are sold, the sellable count
         # decreases by 2, and the stockable count automatically decreases by 0.4 bottle according to the conversion.
-        class CatalogItemVariation < Internal::Types::Model
+        class CatalogItemVariation < Square::Internal::Types::Model
             field :item_id, String, optional: true, nullable: false
             field :name, String, optional: true, nullable: false
             field :sku, String, optional: true, nullable: false
@@ -20,19 +20,19 @@ module Square
             field :ordinal, Integer, optional: true, nullable: false
             field :pricing_type, Square::CatalogPricingType, optional: true, nullable: false
             field :price_money, Square::Money, optional: true, nullable: false
-            field :location_overrides, Internal::Types::Array[Square::ItemVariationLocationOverrides], optional: true, nullable: false
-            field :track_inventory, Internal::Types::Boolean, optional: true, nullable: false
+            field :location_overrides, Square::Internal::Types::Array[Square::ItemVariationLocationOverrides], optional: true, nullable: false
+            field :track_inventory, Square::Internal::Types::Boolean, optional: true, nullable: false
             field :inventory_alert_type, Square::InventoryAlertType, optional: true, nullable: false
             field :inventory_alert_threshold, Integer, optional: true, nullable: false
             field :user_data, String, optional: true, nullable: false
             field :service_duration, Integer, optional: true, nullable: false
-            field :available_for_booking, Internal::Types::Boolean, optional: true, nullable: false
-            field :item_option_values, Internal::Types::Array[Square::CatalogItemOptionValueForItemVariation], optional: true, nullable: false
+            field :available_for_booking, Square::Internal::Types::Boolean, optional: true, nullable: false
+            field :item_option_values, Square::Internal::Types::Array[Square::CatalogItemOptionValueForItemVariation], optional: true, nullable: false
             field :measurement_unit_id, String, optional: true, nullable: false
-            field :sellable, Internal::Types::Boolean, optional: true, nullable: false
-            field :stockable, Internal::Types::Boolean, optional: true, nullable: false
-            field :image_ids, Internal::Types::Array[String], optional: true, nullable: false
-            field :team_member_ids, Internal::Types::Array[String], optional: true, nullable: false
+            field :sellable, Square::Internal::Types::Boolean, optional: true, nullable: false
+            field :stockable, Square::Internal::Types::Boolean, optional: true, nullable: false
+            field :image_ids, Square::Internal::Types::Array[String], optional: true, nullable: false
+            field :team_member_ids, Square::Internal::Types::Array[String], optional: true, nullable: false
             field :stockable_conversion, Square::CatalogStockConversion, optional: true, nullable: false
         end
     end

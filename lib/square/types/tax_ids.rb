@@ -3,7 +3,7 @@
 module Square
     module Types
         # Identifiers for the location used by various governments for tax purposes.
-        class TaxIds < Internal::Types::Model
+        class TaxIds < Square::Internal::Types::Model
             field :eu_vat, String, optional: true, nullable: false
             field :fr_siret, String, optional: true, nullable: false
             field :fr_naf, String, optional: true, nullable: false

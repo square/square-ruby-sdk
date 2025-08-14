@@ -3,7 +3,7 @@
 module Square
     module Types
         # Represents a query used to search for loyalty events.
-        class LoyaltyEventQuery < Internal::Types::Model
+        class LoyaltyEventQuery < Square::Internal::Types::Model
             field :filter, Square::LoyaltyEventFilter, optional: true, nullable: false
         end
     end

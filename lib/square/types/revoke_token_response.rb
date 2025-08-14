@@ -2,9 +2,9 @@
 
 module Square
     module Types
-        class RevokeTokenResponse < Internal::Types::Model
-            field :success, Internal::Types::Boolean, optional: true, nullable: false
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+        class RevokeTokenResponse < Square::Internal::Types::Model
+            field :success, Square::Internal::Types::Boolean, optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
         end
     end
 end

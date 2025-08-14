@@ -5,7 +5,7 @@ module Square
         # Published when a booking [custom attribute definition](entity:CustomAttributeDefinition) 
         # is created by the subscribing application. Subscribe to this event to be notified 
         # when your application creates a booking custom attribute definition.
-        class BookingCustomAttributeDefinitionOwnedCreatedEvent < Internal::Types::Model
+        class BookingCustomAttributeDefinitionOwnedCreatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

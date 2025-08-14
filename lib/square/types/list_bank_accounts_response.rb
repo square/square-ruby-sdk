@@ -3,9 +3,9 @@
 module Square
     module Types
         # Response object returned by ListBankAccounts.
-        class ListBankAccountsResponse < Internal::Types::Model
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
-            field :bank_accounts, Internal::Types::Array[Square::BankAccount], optional: true, nullable: false
+        class ListBankAccountsResponse < Square::Internal::Types::Model
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :bank_accounts, Square::Internal::Types::Array[Square::BankAccount], optional: true, nullable: false
             field :cursor, String, optional: true, nullable: false
         end
     end

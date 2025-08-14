@@ -3,8 +3,8 @@
 module Square
     module Types
         # Filter by the current order `state`.
-        class SearchOrdersStateFilter < Internal::Types::Model
-            field :states, Internal::Types::Array[Square::OrderState], optional: false, nullable: false
+        class SearchOrdersStateFilter < Square::Internal::Types::Model
+            field :states, Square::Internal::Types::Array[Square::OrderState], optional: false, nullable: false
         end
     end
 end

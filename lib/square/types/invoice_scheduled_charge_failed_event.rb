@@ -3,7 +3,7 @@
 module Square
     module Types
         # Published when an automatic scheduled payment for an [Invoice](entity:Invoice) has failed.
-        class InvoiceScheduledChargeFailedEvent < Internal::Types::Model
+        class InvoiceScheduledChargeFailedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

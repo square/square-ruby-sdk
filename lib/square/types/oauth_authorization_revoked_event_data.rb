@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class OauthAuthorizationRevokedEventData < Internal::Types::Model
+        class OauthAuthorizationRevokedEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :object, Square::OauthAuthorizationRevokedEventObject, optional: true, nullable: false

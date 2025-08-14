@@ -3,7 +3,7 @@
 module Square
     module Types
         # Represents a time period of availability.
-        class CatalogAvailabilityPeriod < Internal::Types::Model
+        class CatalogAvailabilityPeriod < Square::Internal::Types::Model
             field :start_local_time, String, optional: true, nullable: false
             field :end_local_time, String, optional: true, nullable: false
             field :day_of_week, Square::DayOfWeek, optional: true, nullable: false

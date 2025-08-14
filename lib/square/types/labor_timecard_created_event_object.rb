@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class LaborTimecardCreatedEventObject < Internal::Types::Model
+        class LaborTimecardCreatedEventObject < Square::Internal::Types::Model
             field :timecard, Square::Timecard, optional: true, nullable: false
         end
     end

@@ -5,7 +5,7 @@ module Square
         # Published when a [Shift](entity:Shift) is deleted.
         # 
         # Deprecated at Square API version 2025-05-21. Replaced by `labor.timecard.deleted`.
-        class LaborShiftDeletedEvent < Internal::Types::Model
+        class LaborShiftDeletedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class RefundCreatedEventData < Internal::Types::Model
+        class RefundCreatedEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :object, Square::RefundCreatedEventObject, optional: true, nullable: false

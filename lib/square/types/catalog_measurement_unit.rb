@@ -4,7 +4,7 @@ module Square
     module Types
         # Represents the unit used to measure a `CatalogItemVariation` and
         # specifies the precision for decimal quantities.
-        class CatalogMeasurementUnit < Internal::Types::Model
+        class CatalogMeasurementUnit < Square::Internal::Types::Model
             field :measurement_unit, Square::MeasurementUnit, optional: true, nullable: false
             field :precision, Integer, optional: true, nullable: false
         end

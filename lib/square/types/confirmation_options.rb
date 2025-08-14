@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class ConfirmationOptions < Internal::Types::Model
+        class ConfirmationOptions < Square::Internal::Types::Model
             field :title, String, optional: false, nullable: false
             field :body, String, optional: false, nullable: false
             field :agree_button_text, String, optional: false, nullable: false

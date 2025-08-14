@@ -7,7 +7,7 @@ module Square
         # by the application that created it. A notification is sent when your application updates a custom attribute 
         # definition or when another application updates a custom attribute definition whose `visibility` is 
         # `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
-        class LocationCustomAttributeDefinitionVisibleUpdatedEvent < Internal::Types::Model
+        class LocationCustomAttributeDefinitionVisibleUpdatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

@@ -3,7 +3,7 @@
 module Square
     module Types
         # Published when a [TerminalCheckout](entity:TerminalCheckout) is created.
-        class TerminalCheckoutCreatedEvent < Internal::Types::Model
+        class TerminalCheckoutCreatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

@@ -3,7 +3,7 @@
 module Square
     module Types
         # Represents a payment refund processed by the Square Terminal. Only supports Interac (Canadian debit network) payment refunds.
-        class TerminalRefund < Internal::Types::Model
+        class TerminalRefund < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :refund_id, String, optional: true, nullable: false
             field :payment_id, String, optional: false, nullable: false

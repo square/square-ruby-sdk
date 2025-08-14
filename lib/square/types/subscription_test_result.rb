@@ -4,7 +4,7 @@ module Square
     module Types
         # Represents the details of a webhook subscription, including notification URL,
         # event types, and signature key.
-        class SubscriptionTestResult < Internal::Types::Model
+        class SubscriptionTestResult < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :status_code, Integer, optional: true, nullable: false
             field :payload, String, optional: true, nullable: false

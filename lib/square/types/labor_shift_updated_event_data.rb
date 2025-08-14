@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class LaborShiftUpdatedEventData < Internal::Types::Model
+        class LaborShiftUpdatedEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :object, Square::LaborShiftUpdatedEventObject, optional: true, nullable: false

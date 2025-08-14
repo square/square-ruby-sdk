@@ -7,7 +7,7 @@ module Square
         # - An update to the `REDEEM` activity for a gift card redemption made from a Square product (such as Square Point of Sale). 
         # These redemptions are initially assigned a `PENDING` state, but then change to a `COMPLETED` or `CANCELED` state.
         # - An update to the `IMPORT` activity for an imported gift card when the balance is later adjusted by Square.
-        class GiftCardActivityUpdatedEvent < Internal::Types::Model
+        class GiftCardActivityUpdatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

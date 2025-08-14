@@ -3,7 +3,7 @@
 module Square
     module Types
         # Published when an [Invoice](entity:Invoice) is updated.
-        class InvoiceUpdatedEvent < Internal::Types::Model
+        class InvoiceUpdatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

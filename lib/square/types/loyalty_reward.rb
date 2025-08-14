@@ -4,7 +4,7 @@ module Square
     module Types
         # Represents a contract to redeem loyalty points for a [reward tier](entity:LoyaltyProgramRewardTier) discount. Loyalty rewards can be in an ISSUED, REDEEMED, or DELETED state. 
         # For more information, see [Manage loyalty rewards](https://developer.squareup.com/docs/loyalty-api/loyalty-rewards).
-        class LoyaltyReward < Internal::Types::Model
+        class LoyaltyReward < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :status, Square::LoyaltyRewardStatus, optional: true, nullable: false
             field :loyalty_account_id, String, optional: false, nullable: false

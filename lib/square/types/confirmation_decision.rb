@@ -2,8 +2,8 @@
 
 module Square
     module Types
-        class ConfirmationDecision < Internal::Types::Model
-            field :has_agreed, Internal::Types::Boolean, optional: true, nullable: false
+        class ConfirmationDecision < Square::Internal::Types::Model
+            field :has_agreed, Square::Internal::Types::Boolean, optional: true, nullable: false
         end
     end
 end

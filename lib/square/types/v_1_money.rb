@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class V1Money < Internal::Types::Model
+        class V1Money < Square::Internal::Types::Model
             field :amount, Integer, optional: true, nullable: false
             field :currency_code, Square::Currency, optional: true, nullable: false
         end

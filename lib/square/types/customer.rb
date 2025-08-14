@@ -3,7 +3,7 @@
 module Square
     module Types
         # Represents a Square customer profile in the Customer Directory of a Square seller.
-        class Customer < Internal::Types::Model
+        class Customer < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :created_at, String, optional: true, nullable: false
             field :updated_at, String, optional: true, nullable: false
@@ -19,8 +19,8 @@ module Square
             field :note, String, optional: true, nullable: false
             field :preferences, Square::CustomerPreferences, optional: true, nullable: false
             field :creation_source, Square::CustomerCreationSource, optional: true, nullable: false
-            field :group_ids, Internal::Types::Array[String], optional: true, nullable: false
-            field :segment_ids, Internal::Types::Array[String], optional: true, nullable: false
+            field :group_ids, Square::Internal::Types::Array[String], optional: true, nullable: false
+            field :segment_ids, Square::Internal::Types::Array[String], optional: true, nullable: false
             field :version, Integer, optional: true, nullable: false
             field :tax_ids, Square::CustomerTaxIds, optional: true, nullable: false
         end

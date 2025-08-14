@@ -3,7 +3,7 @@
 module Square
     module Types
         # Represents a payment processed by the Square API.
-        class Payment < Internal::Types::Model
+        class Payment < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :created_at, String, optional: true, nullable: false
             field :updated_at, String, optional: true, nullable: false
@@ -12,7 +12,7 @@ module Square
             field :total_money, Square::Money, optional: true, nullable: false
             field :app_fee_money, Square::Money, optional: true, nullable: false
             field :approved_money, Square::Money, optional: true, nullable: false
-            field :processing_fee, Internal::Types::Array[Square::ProcessingFee], optional: true, nullable: false
+            field :processing_fee, Square::Internal::Types::Array[Square::ProcessingFee], optional: true, nullable: false
             field :refunded_money, Square::Money, optional: true, nullable: false
             field :status, String, optional: true, nullable: false
             field :delay_duration, String, optional: true, nullable: false
@@ -32,7 +32,7 @@ module Square
             field :customer_id, String, optional: true, nullable: false
             field :employee_id, String, optional: true, nullable: false
             field :team_member_id, String, optional: true, nullable: false
-            field :refund_ids, Internal::Types::Array[String], optional: true, nullable: false
+            field :refund_ids, Square::Internal::Types::Array[String], optional: true, nullable: false
             field :risk_evaluation, Square::RiskEvaluation, optional: true, nullable: false
             field :terminal_checkout_id, String, optional: true, nullable: false
             field :buyer_email_address, String, optional: true, nullable: false
@@ -40,12 +40,12 @@ module Square
             field :shipping_address, Square::Address, optional: true, nullable: false
             field :note, String, optional: true, nullable: false
             field :statement_description_identifier, String, optional: true, nullable: false
-            field :capabilities, Internal::Types::Array[String], optional: true, nullable: false
+            field :capabilities, Square::Internal::Types::Array[String], optional: true, nullable: false
             field :receipt_number, String, optional: true, nullable: false
             field :receipt_url, String, optional: true, nullable: false
             field :device_details, Square::DeviceDetails, optional: true, nullable: false
             field :application_details, Square::ApplicationDetails, optional: true, nullable: false
-            field :is_offline_payment, Internal::Types::Boolean, optional: true, nullable: false
+            field :is_offline_payment, Square::Internal::Types::Boolean, optional: true, nullable: false
             field :offline_payment_details, Square::OfflinePaymentDetails, optional: true, nullable: false
             field :version_token, String, optional: true, nullable: false
         end

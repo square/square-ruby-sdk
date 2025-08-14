@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class TerminalCheckoutQuerySort < Internal::Types::Model
+        class TerminalCheckoutQuerySort < Square::Internal::Types::Model
             field :sort_order, Square::SortOrder, optional: true, nullable: false
         end
     end

@@ -3,7 +3,7 @@
 module Square
     module Types
         # Contains details necessary to fulfill a pickup order.
-        class FulfillmentPickupDetails < Internal::Types::Model
+        class FulfillmentPickupDetails < Square::Internal::Types::Model
             field :recipient, Square::FulfillmentRecipient, optional: true, nullable: false
             field :expires_at, String, optional: true, nullable: false
             field :auto_complete_duration, String, optional: true, nullable: false
@@ -20,7 +20,7 @@ module Square
             field :picked_up_at, String, optional: true, nullable: false
             field :canceled_at, String, optional: true, nullable: false
             field :cancel_reason, String, optional: true, nullable: false
-            field :is_curbside_pickup, Internal::Types::Boolean, optional: true, nullable: false
+            field :is_curbside_pickup, Square::Internal::Types::Boolean, optional: true, nullable: false
             field :curbside_pickup_details, Square::FulfillmentPickupDetailsCurbsidePickupDetails, optional: true, nullable: false
         end
     end

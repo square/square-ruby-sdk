@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class TerminalCheckoutQuery < Internal::Types::Model
+        class TerminalCheckoutQuery < Square::Internal::Types::Model
             field :filter, Square::TerminalCheckoutQueryFilter, optional: true, nullable: false
             field :sort, Square::TerminalCheckoutQuerySort, optional: true, nullable: false
         end

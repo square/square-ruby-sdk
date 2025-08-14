@@ -3,7 +3,7 @@
 module Square
     module Types
         # Published when a Wage Setting is updated.
-        class TeamMemberWageSettingUpdatedEvent < Internal::Types::Model
+        class TeamMemberWageSettingUpdatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

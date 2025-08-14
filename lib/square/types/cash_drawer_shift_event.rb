@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class CashDrawerShiftEvent < Internal::Types::Model
+        class CashDrawerShiftEvent < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :event_type, Square::CashDrawerEventType, optional: true, nullable: false
             field :event_money, Square::Money, optional: true, nullable: false

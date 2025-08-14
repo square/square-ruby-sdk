@@ -3,7 +3,7 @@
 module Square
     module Types
         # Represents an [ObtainToken](api-endpoint:OAuth-ObtainToken) response.
-        class ObtainTokenResponse < Internal::Types::Model
+        class ObtainTokenResponse < Square::Internal::Types::Model
             field :access_token, String, optional: true, nullable: false
             field :token_type, String, optional: true, nullable: false
             field :expires_at, String, optional: true, nullable: false
@@ -12,8 +12,8 @@ module Square
             field :plan_id, String, optional: true, nullable: false
             field :id_token, String, optional: true, nullable: false
             field :refresh_token, String, optional: true, nullable: false
-            field :short_lived, Internal::Types::Boolean, optional: true, nullable: false
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :short_lived, Square::Internal::Types::Boolean, optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
             field :refresh_token_expires_at, String, optional: true, nullable: false
         end
     end

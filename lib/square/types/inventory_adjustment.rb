@@ -4,7 +4,7 @@ module Square
     module Types
         # Represents a change in state or quantity of product inventory at a
         # particular time and location.
-        class InventoryAdjustment < Internal::Types::Model
+        class InventoryAdjustment < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :reference_id, String, optional: true, nullable: false
             field :from_state, Square::InventoryState, optional: true, nullable: false

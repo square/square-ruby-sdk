@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class Event < Internal::Types::Model
+        class Event < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :location_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false

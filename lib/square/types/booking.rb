@@ -4,7 +4,7 @@ module Square
     module Types
         # Represents a booking as a time-bound service contract for a seller's staff member to provide a specified service
         # at a given location to a requesting customer in one or more appointment segments.
-        class Booking < Internal::Types::Model
+        class Booking < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :version, Integer, optional: true, nullable: false
             field :status, Square::BookingStatus, optional: true, nullable: false
@@ -15,9 +15,9 @@ module Square
             field :customer_id, String, optional: true, nullable: false
             field :customer_note, String, optional: true, nullable: false
             field :seller_note, String, optional: true, nullable: false
-            field :appointment_segments, Internal::Types::Array[Square::AppointmentSegment], optional: true, nullable: false
+            field :appointment_segments, Square::Internal::Types::Array[Square::AppointmentSegment], optional: true, nullable: false
             field :transition_time_minutes, Integer, optional: true, nullable: false
-            field :all_day, Internal::Types::Boolean, optional: true, nullable: false
+            field :all_day, Square::Internal::Types::Boolean, optional: true, nullable: false
             field :location_type, Square::BusinessAppointmentSettingsBookingLocationType, optional: true, nullable: false
             field :creator_details, Square::BookingCreatorDetails, optional: true, nullable: false
             field :source, Square::BookingBookingSource, optional: true, nullable: false

@@ -4,7 +4,7 @@ module Square
     module Types
         # Sets the day of the week and hour of the day that a business starts a
         # workweek. This is used to calculate overtime pay.
-        class WorkweekConfig < Internal::Types::Model
+        class WorkweekConfig < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :start_of_week, Square::Weekday, optional: false, nullable: false
             field :start_of_day_local_time, String, optional: false, nullable: false

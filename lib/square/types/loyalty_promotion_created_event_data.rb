@@ -3,7 +3,7 @@
 module Square
     module Types
         # The data associated with a `loyalty.promotion.created` event.
-        class LoyaltyPromotionCreatedEventData < Internal::Types::Model
+        class LoyaltyPromotionCreatedEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :object, Square::LoyaltyPromotionCreatedEventObject, optional: true, nullable: false

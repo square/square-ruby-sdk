@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class DeviceCode < Internal::Types::Model
+        class DeviceCode < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :name, String, optional: true, nullable: false
             field :code, String, optional: true, nullable: false

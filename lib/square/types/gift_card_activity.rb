@@ -5,7 +5,7 @@ module Square
         # Represents an action performed on a [gift card](entity:GiftCard) that affects its state or balance. 
         # A gift card activity contains information about a specific activity type. For example, a `REDEEM` activity
         # includes a `redeem_activity_details` field that contains information about the redemption.
-        class GiftCardActivity < Internal::Types::Model
+        class GiftCardActivity < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :type, Square::GiftCardActivityType, optional: false, nullable: false
             field :location_id, String, optional: false, nullable: false

@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class PaymentUpdatedEventData < Internal::Types::Model
+        class PaymentUpdatedEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :object, Square::PaymentUpdatedEventObject, optional: true, nullable: false

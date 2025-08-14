@@ -5,7 +5,7 @@ module Square
         # Represents the rule of conversion between a stockable [CatalogItemVariation](entity:CatalogItemVariation)
         # and a non-stockable sell-by or receive-by `CatalogItemVariation` that
         # share the same underlying stock.
-        class CatalogStockConversion < Internal::Types::Model
+        class CatalogStockConversion < Square::Internal::Types::Model
             field :stockable_item_variation_id, String, optional: false, nullable: false
             field :stockable_quantity, String, optional: false, nullable: false
             field :nonstockable_quantity, String, optional: false, nullable: false

@@ -3,7 +3,7 @@
 module Square
     module Types
         # Published when an order [custom attribute definition](entity:CustomAttributeDefinition) that is visible to the subscribing app is created.
-        class OrderCustomAttributeDefinitionVisibleCreatedEvent < Internal::Types::Model
+        class OrderCustomAttributeDefinitionVisibleCreatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

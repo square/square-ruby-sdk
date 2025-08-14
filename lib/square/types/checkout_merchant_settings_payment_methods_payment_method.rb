@@ -3,8 +3,8 @@
 module Square
     module Types
         # The settings allowed for a payment method.
-        class CheckoutMerchantSettingsPaymentMethodsPaymentMethod < Internal::Types::Model
-            field :enabled, Internal::Types::Boolean, optional: true, nullable: false
+        class CheckoutMerchantSettingsPaymentMethodsPaymentMethod < Square::Internal::Types::Model
+            field :enabled, Square::Internal::Types::Boolean, optional: true, nullable: false
         end
     end
 end

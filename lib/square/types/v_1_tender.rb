@@ -24,7 +24,7 @@ module Square
         # reduced and the merchant receives no funds. A `Tender` object with a type of
         # `SQUARE_GIFT_CARD` indicates a gift card was used for some or all of the
         # associated payment.
-        class V1Tender < Internal::Types::Model
+        class V1Tender < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :type, Square::V1TenderType, optional: true, nullable: false
             field :name, String, optional: true, nullable: false
@@ -40,7 +40,7 @@ module Square
             field :settled_at, String, optional: true, nullable: false
             field :change_back_money, Square::V1Money, optional: true, nullable: false
             field :refunded_money, Square::V1Money, optional: true, nullable: false
-            field :is_exchange, Internal::Types::Boolean, optional: true, nullable: false
+            field :is_exchange, Square::Internal::Types::Boolean, optional: true, nullable: false
         end
     end
 end

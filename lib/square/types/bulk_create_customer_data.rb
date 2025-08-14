@@ -4,7 +4,7 @@ module Square
     module Types
         # Defines the customer data provided in individual create requests for a
         # [BulkCreateCustomers](api-endpoint:Customers-BulkCreateCustomers) operation.
-        class BulkCreateCustomerData < Internal::Types::Model
+        class BulkCreateCustomerData < Square::Internal::Types::Model
             field :given_name, String, optional: true, nullable: false
             field :family_name, String, optional: true, nullable: false
             field :company_name, String, optional: true, nullable: false

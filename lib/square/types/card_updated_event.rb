@@ -3,7 +3,7 @@
 module Square
     module Types
         # Published when a [card](entity:Card) is updated by the seller in the Square Dashboard.
-        class CardUpdatedEvent < Internal::Types::Model
+        class CardUpdatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

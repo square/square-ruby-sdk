@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class PayoutFailedEventObject < Internal::Types::Model
+        class PayoutFailedEventObject < Square::Internal::Types::Model
             field :payout, Square::Payout, optional: true, nullable: false
         end
     end

@@ -7,7 +7,7 @@ module Square
         # 
         # Adding custom fields to an invoice requires an 
         # [Invoices Plus subscription](https://developer.squareup.com/docs/invoices-api/overview#invoices-plus-subscription).
-        class InvoiceCustomField < Internal::Types::Model
+        class InvoiceCustomField < Square::Internal::Types::Model
             field :label, String, optional: true, nullable: false
             field :value, String, optional: true, nullable: false
             field :placement, Square::InvoiceCustomFieldPlacement, optional: true, nullable: false

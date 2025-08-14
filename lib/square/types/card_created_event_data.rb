@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class CardCreatedEventData < Internal::Types::Model
+        class CardCreatedEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :object, Square::CardCreatedEventObject, optional: true, nullable: false

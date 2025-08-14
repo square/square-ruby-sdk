@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class DisputeStateUpdatedEventObject < Internal::Types::Model
+        class DisputeStateUpdatedEventObject < Square::Internal::Types::Model
             field :object, Square::Dispute, optional: true, nullable: false
         end
     end

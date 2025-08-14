@@ -3,7 +3,7 @@
 module Square
     module Types
         # Criteria to sort events by.
-        class SearchEventsSort < Internal::Types::Model
+        class SearchEventsSort < Square::Internal::Types::Model
             field :field, String, optional: true, nullable: false
             field :order, Square::SortOrder, optional: true, nullable: false
         end

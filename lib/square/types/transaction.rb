@@ -7,12 +7,12 @@ module Square
         # 
         # The `tenders` field of this object lists all methods of payment used to pay in
         # the transaction.
-        class Transaction < Internal::Types::Model
+        class Transaction < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :location_id, String, optional: true, nullable: false
             field :created_at, String, optional: true, nullable: false
-            field :tenders, Internal::Types::Array[Square::Tender], optional: true, nullable: false
-            field :refunds, Internal::Types::Array[Square::Refund], optional: true, nullable: false
+            field :tenders, Square::Internal::Types::Array[Square::Tender], optional: true, nullable: false
+            field :refunds, Square::Internal::Types::Array[Square::Refund], optional: true, nullable: false
             field :reference_id, String, optional: true, nullable: false
             field :product, Square::TransactionProduct, optional: true, nullable: false
             field :client_id, String, optional: true, nullable: false

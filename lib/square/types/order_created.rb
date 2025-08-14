@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class OrderCreated < Internal::Types::Model
+        class OrderCreated < Square::Internal::Types::Model
             field :order_id, String, optional: true, nullable: false
             field :version, Integer, optional: true, nullable: false
             field :location_id, String, optional: true, nullable: false

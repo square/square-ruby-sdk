@@ -8,7 +8,7 @@ module Square
         # Line item taxes must be referenced from any applicable line items.
         # The corresponding applied money is automatically computed, based on the
         # set of participating line items.
-        class OrderLineItemAppliedTax < Internal::Types::Model
+        class OrderLineItemAppliedTax < Square::Internal::Types::Model
             field :uid, String, optional: true, nullable: false
             field :tax_uid, String, optional: false, nullable: false
             field :applied_money, Square::Money, optional: true, nullable: false

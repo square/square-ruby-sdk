@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class DeviceMetadata < Internal::Types::Model
+        class DeviceMetadata < Square::Internal::Types::Model
             field :battery_percentage, String, optional: true, nullable: false
             field :charging_state, String, optional: true, nullable: false
             field :location_id, String, optional: true, nullable: false

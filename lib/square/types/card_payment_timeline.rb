@@ -3,7 +3,7 @@
 module Square
     module Types
         # The timeline for card payments.
-        class CardPaymentTimeline < Internal::Types::Model
+        class CardPaymentTimeline < Square::Internal::Types::Model
             field :authorized_at, String, optional: true, nullable: false
             field :captured_at, String, optional: true, nullable: false
             field :voided_at, String, optional: true, nullable: false

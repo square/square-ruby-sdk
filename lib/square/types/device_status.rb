@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class DeviceStatus < Internal::Types::Model
+        class DeviceStatus < Square::Internal::Types::Model
             field :category, Square::DeviceStatusCategory, optional: true, nullable: false
         end
     end

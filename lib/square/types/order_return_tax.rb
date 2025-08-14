@@ -7,7 +7,7 @@ module Square
         # Fixed-amount, order-scoped taxes are distributed across all non-zero return line item totals.
         # The amount distributed to each return line item is relative to that item’s contribution to the
         # order subtotal.
-        class OrderReturnTax < Internal::Types::Model
+        class OrderReturnTax < Square::Internal::Types::Model
             field :uid, String, optional: true, nullable: false
             field :source_tax_uid, String, optional: true, nullable: false
             field :catalog_object_id, String, optional: true, nullable: false

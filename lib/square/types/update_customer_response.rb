@@ -7,8 +7,8 @@ module Square
         # [BulkUpdateCustomers](api-endpoint:Customers-BulkUpdateCustomers) endpoint.
         # 
         # Either `errors` or `customer` is present in a given response (never both).
-        class UpdateCustomerResponse < Internal::Types::Model
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+        class UpdateCustomerResponse < Square::Internal::Types::Model
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
             field :customer, Square::Customer, optional: true, nullable: false
         end
     end

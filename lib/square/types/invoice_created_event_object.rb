@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class InvoiceCreatedEventObject < Internal::Types::Model
+        class InvoiceCreatedEventObject < Square::Internal::Types::Model
             field :invoice, Square::Invoice, optional: true, nullable: false
         end
     end

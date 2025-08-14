@@ -3,7 +3,7 @@
 module Square
     module Types
         # The wrapper object for the component entries of a given component type.
-        class Component < Internal::Types::Model
+        class Component < Square::Internal::Types::Model
             field :type, Square::ComponentComponentType, optional: false, nullable: false
             field :application_details, Square::DeviceComponentDetailsApplicationDetails, optional: true, nullable: false
             field :card_reader_details, Square::DeviceComponentDetailsCardReaderDetails, optional: true, nullable: false

@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class OrderCreatedEventData < Internal::Types::Model
+        class OrderCreatedEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :object, Square::OrderCreatedObject, optional: true, nullable: false

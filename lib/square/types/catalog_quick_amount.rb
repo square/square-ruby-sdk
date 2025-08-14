@@ -3,7 +3,7 @@
 module Square
     module Types
         # Represents a Quick Amount in the Catalog.
-        class CatalogQuickAmount < Internal::Types::Model
+        class CatalogQuickAmount < Square::Internal::Types::Model
             field :type, Square::CatalogQuickAmountType, optional: false, nullable: false
             field :amount, Square::Money, optional: false, nullable: false
             field :score, Integer, optional: true, nullable: false

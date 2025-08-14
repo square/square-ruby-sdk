@@ -4,8 +4,8 @@ module Square
     module Types
         # Defines output parameters in a response from the
         # [UpdateSubscription](api-endpoint:Subscriptions-UpdateSubscription) endpoint.
-        class UpdateSubscriptionResponse < Internal::Types::Model
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+        class UpdateSubscriptionResponse < Square::Internal::Types::Model
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
             field :subscription, Square::Subscription, optional: true, nullable: false
         end
     end

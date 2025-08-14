@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class DisputeCreatedEventData < Internal::Types::Model
+        class DisputeCreatedEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :object, Square::DisputeCreatedEventObject, optional: true, nullable: false

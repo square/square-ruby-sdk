@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class InventoryCountUpdatedEventData < Internal::Types::Model
+        class InventoryCountUpdatedEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :object, Square::InventoryCountUpdatedEventObject, optional: true, nullable: false

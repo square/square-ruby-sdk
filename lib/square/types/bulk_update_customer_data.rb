@@ -4,7 +4,7 @@ module Square
     module Types
         # Defines the customer data provided in individual update requests for a
         # [BulkUpdateCustomers](api-endpoint:Customers-BulkUpdateCustomers) operation.
-        class BulkUpdateCustomerData < Internal::Types::Model
+        class BulkUpdateCustomerData < Square::Internal::Types::Model
             field :given_name, String, optional: true, nullable: false
             field :family_name, String, optional: true, nullable: false
             field :company_name, String, optional: true, nullable: false

@@ -5,7 +5,7 @@ module Square
         # Represents a single physical count, inventory, adjustment, or transfer
         # that is part of the history of inventory changes for a particular
         # [CatalogObject](entity:CatalogObject) instance.
-        class InventoryChange < Internal::Types::Model
+        class InventoryChange < Square::Internal::Types::Model
             field :type, Square::InventoryChangeType, optional: true, nullable: false
             field :physical_count, Square::InventoryPhysicalCount, optional: true, nullable: false
             field :adjustment, Square::InventoryAdjustment, optional: true, nullable: false

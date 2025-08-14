@@ -9,10 +9,10 @@ module Square
         # filter = (locations_ids = ["A", "B"], status = ACTIVE)
         # ```
         # returns only active team members assigned to either location "A" or "B".
-        class SearchTeamMembersFilter < Internal::Types::Model
-            field :location_ids, Internal::Types::Array[String], optional: true, nullable: false
+        class SearchTeamMembersFilter < Square::Internal::Types::Model
+            field :location_ids, Square::Internal::Types::Array[String], optional: true, nullable: false
             field :status, Square::TeamMemberStatus, optional: true, nullable: false
-            field :is_owner, Internal::Types::Boolean, optional: true, nullable: false
+            field :is_owner, Square::Internal::Types::Boolean, optional: true, nullable: false
         end
     end
 end

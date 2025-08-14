@@ -6,9 +6,9 @@ module Square
         # a request to the `CreateOrder` endpoint.
         # 
         # Either `errors` or `order` is present in a given response, but never both.
-        class CreateOrderResponse < Internal::Types::Model
+        class CreateOrderResponse < Square::Internal::Types::Model
             field :order, Square::Order, optional: true, nullable: false
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
         end
     end
 end

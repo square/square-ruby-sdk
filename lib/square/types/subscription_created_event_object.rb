@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class SubscriptionCreatedEventObject < Internal::Types::Model
+        class SubscriptionCreatedEventObject < Square::Internal::Types::Model
             field :subscription, Square::Subscription, optional: true, nullable: false
         end
     end

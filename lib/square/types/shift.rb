@@ -8,7 +8,7 @@ module Square
         # 
         # Deprecated at Square API version 2025-05-21. Replaced by [Timecard](entity:Timecard).
         # See the [migration notes](https://developer.squareup.com/docs/labor-api/what-it-does#migration-notes).
-        class Shift < Internal::Types::Model
+        class Shift < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :employee_id, String, optional: true, nullable: false
             field :location_id, String, optional: false, nullable: false
@@ -16,7 +16,7 @@ module Square
             field :start_at, String, optional: false, nullable: false
             field :end_at, String, optional: true, nullable: false
             field :wage, Square::ShiftWage, optional: true, nullable: false
-            field :breaks, Internal::Types::Array[Square::Break], optional: true, nullable: false
+            field :breaks, Square::Internal::Types::Array[Square::Break], optional: true, nullable: false
             field :status, Square::ShiftStatus, optional: true, nullable: false
             field :version, Integer, optional: true, nullable: false
             field :created_at, String, optional: true, nullable: false

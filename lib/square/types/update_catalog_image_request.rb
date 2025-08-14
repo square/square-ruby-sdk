@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class UpdateCatalogImageRequest < Internal::Types::Model
+        class UpdateCatalogImageRequest < Square::Internal::Types::Model
             field :idempotency_key, String, optional: false, nullable: false
         end
     end

@@ -3,7 +3,7 @@
 module Square
     module Types
         # Additional details about BANK_ACCOUNT type payments.
-        class BankAccountPaymentDetails < Internal::Types::Model
+        class BankAccountPaymentDetails < Square::Internal::Types::Model
             field :bank_name, String, optional: true, nullable: false
             field :transfer_type, String, optional: true, nullable: false
             field :account_ownership_type, String, optional: true, nullable: false
@@ -11,7 +11,7 @@ module Square
             field :country, String, optional: true, nullable: false
             field :statement_description, String, optional: true, nullable: false
             field :ach_details, Square::AchDetails, optional: true, nullable: false
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
         end
     end
 end

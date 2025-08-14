@@ -6,7 +6,7 @@ module Square
         # 
         # For more information, see
         # [Manage Subscriptions](https://developer.squareup.com/docs/subscriptions-api/manage-subscriptions).
-        class Subscription < Internal::Types::Model
+        class Subscription < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :location_id, String, optional: true, nullable: false
             field :plan_variation_id, String, optional: true, nullable: false
@@ -16,16 +16,16 @@ module Square
             field :charged_through_date, String, optional: true, nullable: false
             field :status, Square::SubscriptionStatus, optional: true, nullable: false
             field :tax_percentage, String, optional: true, nullable: false
-            field :invoice_ids, Internal::Types::Array[String], optional: true, nullable: false
+            field :invoice_ids, Square::Internal::Types::Array[String], optional: true, nullable: false
             field :price_override_money, Square::Money, optional: true, nullable: false
             field :version, Integer, optional: true, nullable: false
             field :created_at, String, optional: true, nullable: false
             field :card_id, String, optional: true, nullable: false
             field :timezone, String, optional: true, nullable: false
             field :source, Square::SubscriptionSource, optional: true, nullable: false
-            field :actions, Internal::Types::Array[Square::SubscriptionAction], optional: true, nullable: false
+            field :actions, Square::Internal::Types::Array[Square::SubscriptionAction], optional: true, nullable: false
             field :monthly_billing_anchor_date, Integer, optional: true, nullable: false
-            field :phases, Internal::Types::Array[Square::Phase], optional: true, nullable: false
+            field :phases, Square::Internal::Types::Array[Square::Phase], optional: true, nullable: false
         end
     end
 end

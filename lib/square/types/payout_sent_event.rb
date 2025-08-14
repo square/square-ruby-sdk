@@ -3,7 +3,7 @@
 module Square
     module Types
         # Published when a [Payout](entity:Payout) is sent.
-        class PayoutSentEvent < Internal::Types::Model
+        class PayoutSentEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :location_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false

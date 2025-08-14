@@ -5,7 +5,7 @@ module Square
         # Represents a bank account. For more information about 
         # linking a bank account to a Square account, see 
         # [Bank Accounts API](https://developer.squareup.com/docs/bank-accounts-api).
-        class BankAccount < Internal::Types::Model
+        class BankAccount < Square::Internal::Types::Model
             field :id, String, optional: false, nullable: false
             field :account_number_suffix, String, optional: false, nullable: false
             field :country, Square::Country, optional: false, nullable: false
@@ -18,8 +18,8 @@ module Square
             field :reference_id, String, optional: true, nullable: false
             field :location_id, String, optional: true, nullable: false
             field :status, Square::BankAccountStatus, optional: false, nullable: false
-            field :creditable, Internal::Types::Boolean, optional: false, nullable: false
-            field :debitable, Internal::Types::Boolean, optional: false, nullable: false
+            field :creditable, Square::Internal::Types::Boolean, optional: false, nullable: false
+            field :debitable, Square::Internal::Types::Boolean, optional: false, nullable: false
             field :fingerprint, String, optional: true, nullable: false
             field :version, Integer, optional: true, nullable: false
             field :bank_name, String, optional: true, nullable: false

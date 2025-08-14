@@ -4,7 +4,7 @@ module Square
     module Types
         # Represents the sorting criteria in a [search query](entity:CustomerQuery) that defines how to sort
         # customer profiles returned in [SearchCustomers](api-endpoint:Customers-SearchCustomers) results.
-        class CustomerSort < Internal::Types::Model
+        class CustomerSort < Square::Internal::Types::Model
             field :field, Square::CustomerSortField, optional: true, nullable: false
             field :order, Square::SortOrder, optional: true, nullable: false
         end

@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class CatalogVersionUpdatedEventCatalogVersion < Internal::Types::Model
+        class CatalogVersionUpdatedEventCatalogVersion < Square::Internal::Types::Model
             field :updated_at, String, optional: true, nullable: false
         end
     end

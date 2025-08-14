@@ -4,7 +4,7 @@ module Square
     module Types
         # Represents the transfer of a quantity of product inventory at a
         # particular time from one location to another.
-        class InventoryTransfer < Internal::Types::Model
+        class InventoryTransfer < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :reference_id, String, optional: true, nullable: false
             field :state, Square::InventoryState, optional: true, nullable: false

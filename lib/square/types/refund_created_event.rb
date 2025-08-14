@@ -3,7 +3,7 @@
 module Square
     module Types
         # Published when a [Refund](entity:PaymentRefund) is created.
-        class RefundCreatedEvent < Internal::Types::Model
+        class RefundCreatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

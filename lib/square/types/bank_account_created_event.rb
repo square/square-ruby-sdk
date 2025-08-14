@@ -5,7 +5,7 @@ module Square
         # Published when you link an external bank account to a Square
         # account in the Seller Dashboard. Square sets the initial status to
         # `VERIFICATION_IN_PROGRESS` and publishes the event.
-        class BankAccountCreatedEvent < Internal::Types::Model
+        class BankAccountCreatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :location_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false

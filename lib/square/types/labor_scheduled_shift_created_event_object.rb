@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class LaborScheduledShiftCreatedEventObject < Internal::Types::Model
+        class LaborScheduledShiftCreatedEventObject < Square::Internal::Types::Model
             field :scheduled_shift, Square::ScheduledShift, optional: true, nullable: false
         end
     end

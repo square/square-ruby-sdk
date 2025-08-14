@@ -4,7 +4,7 @@ module Square
     module Types
         # Filtering criteria to use for a `SearchOrders` request. Multiple filters
         # are ANDed together.
-        class SearchOrdersFilter < Internal::Types::Model
+        class SearchOrdersFilter < Square::Internal::Types::Model
             field :state_filter, Square::SearchOrdersStateFilter, optional: true, nullable: false
             field :date_time_filter, Square::SearchOrdersDateTimeFilter, optional: true, nullable: false
             field :fulfillment_filter, Square::SearchOrdersFulfillmentFilter, optional: true, nullable: false

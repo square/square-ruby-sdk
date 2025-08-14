@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class MerchantSettingsUpdatedEventObject < Internal::Types::Model
+        class MerchantSettingsUpdatedEventObject < Square::Internal::Types::Model
             field :merchant_settings, Square::CheckoutMerchantSettings, optional: true, nullable: false
         end
     end

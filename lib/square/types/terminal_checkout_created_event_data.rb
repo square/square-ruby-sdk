@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class TerminalCheckoutCreatedEventData < Internal::Types::Model
+        class TerminalCheckoutCreatedEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :object, Square::TerminalCheckoutCreatedEventObject, optional: true, nullable: false

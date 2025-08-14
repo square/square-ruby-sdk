@@ -3,7 +3,7 @@
 module Square
     module Types
         # Represents a file attached to an [invoice](entity:Invoice).
-        class InvoiceAttachment < Internal::Types::Model
+        class InvoiceAttachment < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :filename, String, optional: true, nullable: false
             field :description, String, optional: true, nullable: false

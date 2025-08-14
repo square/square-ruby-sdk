@@ -3,7 +3,7 @@
 module Square
     module Types
         # Represents a tender (i.e., a method of payment) used in a Square transaction.
-        class Tender < Internal::Types::Model
+        class Tender < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :location_id, String, optional: true, nullable: false
             field :transaction_id, String, optional: true, nullable: false
@@ -19,7 +19,7 @@ module Square
             field :bank_account_details, Square::TenderBankAccountDetails, optional: true, nullable: false
             field :buy_now_pay_later_details, Square::TenderBuyNowPayLaterDetails, optional: true, nullable: false
             field :square_account_details, Square::TenderSquareAccountDetails, optional: true, nullable: false
-            field :additional_recipients, Internal::Types::Array[Square::AdditionalRecipient], optional: true, nullable: false
+            field :additional_recipients, Square::Internal::Types::Array[Square::AdditionalRecipient], optional: true, nullable: false
             field :payment_id, String, optional: true, nullable: false
         end
     end

@@ -3,7 +3,7 @@
 module Square
     module Types
         # Published when a [customer](entity:Customer) is unlinked from a [gift card](entity:GiftCard).
-        class GiftCardCustomerUnlinkedEvent < Internal::Types::Model
+        class GiftCardCustomerUnlinkedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

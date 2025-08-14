@@ -4,7 +4,7 @@ module Square
     module Types
         # An object that contains the gift card activity associated with a 
         # `gift_card.activity.updated` event.
-        class GiftCardActivityUpdatedEventObject < Internal::Types::Model
+        class GiftCardActivityUpdatedEventObject < Square::Internal::Types::Model
             field :gift_card_activity, Square::GiftCardActivity, optional: true, nullable: false
         end
     end

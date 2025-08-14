@@ -6,8 +6,8 @@ module Square
         # a request to the [RetrieveTransaction](api-endpoint:Transactions-RetrieveTransaction) endpoint.
         # 
         # One of `errors` or `transaction` is present in a given response (never both).
-        class GetTransactionResponse < Internal::Types::Model
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+        class GetTransactionResponse < Square::Internal::Types::Model
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
             field :transaction, Square::Transaction, optional: true, nullable: false
         end
     end

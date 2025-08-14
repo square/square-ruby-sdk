@@ -16,7 +16,7 @@ module Square
         # in `DateTimeFilter`, you must set the `sort_field` in `SearchOrdersSort` to
         # `CLOSED_AT`. Otherwise, `SearchOrders` throws an error.
         # [Learn more about filtering orders by time range.](https://developer.squareup.com/docs/orders-api/manage-orders/search-orders#important-note-about-filtering-orders-by-time-range)
-        class SearchOrdersDateTimeFilter < Internal::Types::Model
+        class SearchOrdersDateTimeFilter < Square::Internal::Types::Model
             field :created_at, Square::TimeRange, optional: true, nullable: false
             field :updated_at, Square::TimeRange, optional: true, nullable: false
             field :closed_at, Square::TimeRange, optional: true, nullable: false

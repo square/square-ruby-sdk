@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class CashDrawerDevice < Internal::Types::Model
+        class CashDrawerDevice < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :name, String, optional: true, nullable: false
         end

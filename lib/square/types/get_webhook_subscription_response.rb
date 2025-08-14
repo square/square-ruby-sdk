@@ -7,8 +7,8 @@ module Square
         # 
         # Note: if there are errors processing the request, the [Subscription](entity:WebhookSubscription) will not be
         # present.
-        class GetWebhookSubscriptionResponse < Internal::Types::Model
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+        class GetWebhookSubscriptionResponse < Square::Internal::Types::Model
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
             field :subscription, Square::WebhookSubscription, optional: true, nullable: false
         end
     end

@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class InvoiceScheduledChargeFailedEventData < Internal::Types::Model
+        class InvoiceScheduledChargeFailedEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :object, Square::InvoiceScheduledChargeFailedEventObject, optional: true, nullable: false

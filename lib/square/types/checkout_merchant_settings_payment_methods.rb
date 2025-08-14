@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class CheckoutMerchantSettingsPaymentMethods < Internal::Types::Model
+        class CheckoutMerchantSettingsPaymentMethods < Square::Internal::Types::Model
             field :apple_pay, Square::CheckoutMerchantSettingsPaymentMethodsPaymentMethod, optional: true, nullable: false
             field :google_pay, Square::CheckoutMerchantSettingsPaymentMethodsPaymentMethod, optional: true, nullable: false
             field :cash_app, Square::CheckoutMerchantSettingsPaymentMethodsPaymentMethod, optional: true, nullable: false

@@ -3,7 +3,7 @@
 module Square
     module Types
         # The data associated with the event.
-        class CustomerUpdatedEventData < Internal::Types::Model
+        class CustomerUpdatedEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :object, Square::CustomerUpdatedEventObject, optional: true, nullable: false

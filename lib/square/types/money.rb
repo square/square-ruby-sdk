@@ -8,7 +8,7 @@ module Square
         # sign of the value indicates the purpose of the money transfer. See
         # [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         # for more information.
-        class Money < Internal::Types::Model
+        class Money < Square::Internal::Types::Model
             field :amount, Integer, optional: true, nullable: false
             field :currency, Square::Currency, optional: true, nullable: false
         end

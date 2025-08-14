@@ -2,8 +2,8 @@
 
 module Square
     module Types
-        class RetrieveLocationSettingsResponse < Internal::Types::Model
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+        class RetrieveLocationSettingsResponse < Square::Internal::Types::Model
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
             field :location_settings, Square::CheckoutLocationSettings, optional: true, nullable: false
         end
     end

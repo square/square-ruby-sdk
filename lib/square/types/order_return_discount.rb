@@ -8,7 +8,7 @@ module Square
         # Fixed-amount, order-scoped discounts are distributed across all non-zero return line item totals.
         # The amount distributed to each return line item is relative to that item’s contribution to the
         # order subtotal.
-        class OrderReturnDiscount < Internal::Types::Model
+        class OrderReturnDiscount < Square::Internal::Types::Model
             field :uid, String, optional: true, nullable: false
             field :source_discount_uid, String, optional: true, nullable: false
             field :catalog_object_id, String, optional: true, nullable: false

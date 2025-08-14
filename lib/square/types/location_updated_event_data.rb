@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class LocationUpdatedEventData < Internal::Types::Model
+        class LocationUpdatedEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
         end

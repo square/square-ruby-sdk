@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class PaymentBalanceActivityRefundDetail < Internal::Types::Model
+        class PaymentBalanceActivityRefundDetail < Square::Internal::Types::Model
             field :payment_id, String, optional: true, nullable: false
             field :refund_id, String, optional: true, nullable: false
         end

@@ -5,7 +5,7 @@ module Square
         # Published when evidence is removed from a [Dispute](entity:Dispute)
         # from the Disputes Dashboard in the Seller Dashboard, the Square Point of Sale app,
         # or by calling [DeleteDisputeEvidence](api-endpoint:Disputes-DeleteDisputeEvidence).
-        class DisputeEvidenceDeletedEvent < Internal::Types::Model
+        class DisputeEvidenceDeletedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :location_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false

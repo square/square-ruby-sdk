@@ -4,9 +4,9 @@ module Square
     module Types
         # Represents a definition for custom attribute values. A custom attribute definition
         # specifies the key, visibility, schema, and other properties for a custom attribute.
-        class CustomAttributeDefinition < Internal::Types::Model
+        class CustomAttributeDefinition < Square::Internal::Types::Model
             field :key, String, optional: true, nullable: false
-            field :schema, Internal::Types::Hash[String, Internal::Types::Hash[String, ]], optional: true, nullable: false
+            field :schema, Square::Internal::Types::Hash[String, Square::Internal::Types::Hash[String, ]], optional: true, nullable: false
             field :name, String, optional: true, nullable: false
             field :description, String, optional: true, nullable: false
             field :visibility, Square::CustomAttributeDefinitionVisibility, optional: true, nullable: false

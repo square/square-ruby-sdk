@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class TerminalRefundQuery < Internal::Types::Model
+        class TerminalRefundQuery < Square::Internal::Types::Model
             field :filter, Square::TerminalRefundQueryFilter, optional: true, nullable: false
             field :sort, Square::TerminalRefundQuerySort, optional: true, nullable: false
         end

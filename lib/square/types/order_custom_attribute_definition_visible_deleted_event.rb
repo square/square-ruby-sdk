@@ -3,7 +3,7 @@
 module Square
     module Types
         # Published when an order [custom attribute definition](entity:CustomAttributeDefinition) that is visible to the subscribing app is deleted.
-        class OrderCustomAttributeDefinitionVisibleDeletedEvent < Internal::Types::Model
+        class OrderCustomAttributeDefinitionVisibleDeletedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

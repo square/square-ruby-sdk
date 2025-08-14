@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class TeamMemberCreatedEventData < Internal::Types::Model
+        class TeamMemberCreatedEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :object, Square::TeamMemberCreatedEventObject, optional: true, nullable: false

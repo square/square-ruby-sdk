@@ -3,7 +3,7 @@
 module Square
     module Types
         # Represents the metadata for a `POINTS_MULTIPLIER` type of [loyalty promotion incentive](entity:LoyaltyPromotionIncentive).
-        class LoyaltyPromotionIncentivePointsMultiplierData < Internal::Types::Model
+        class LoyaltyPromotionIncentivePointsMultiplierData < Square::Internal::Types::Model
             field :points_multiplier, Integer, optional: true, nullable: false
             field :multiplier, String, optional: true, nullable: false
         end

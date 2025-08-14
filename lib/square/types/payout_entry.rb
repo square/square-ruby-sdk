@@ -4,7 +4,7 @@ module Square
     module Types
         # One or more PayoutEntries that make up a Payout. Each one has a date, amount, and type of activity.
         # The total amount of the payout will equal the sum of the payout entries for a batch payout
-        class PayoutEntry < Internal::Types::Model
+        class PayoutEntry < Square::Internal::Types::Model
             field :id, String, optional: false, nullable: false
             field :payout_id, String, optional: false, nullable: false
             field :effective_at, String, optional: true, nullable: false

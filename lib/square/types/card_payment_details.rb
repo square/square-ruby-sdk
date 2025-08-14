@@ -3,7 +3,7 @@
 module Square
     module Types
         # Reflects the current status of a card payment. Contains only non-confidential information.
-        class CardPaymentDetails < Internal::Types::Model
+        class CardPaymentDetails < Square::Internal::Types::Model
             field :status, String, optional: true, nullable: false
             field :card, Square::Card, optional: true, nullable: false
             field :entry_method, String, optional: true, nullable: false
@@ -18,8 +18,8 @@ module Square
             field :statement_description, String, optional: true, nullable: false
             field :device_details, Square::DeviceDetails, optional: true, nullable: false
             field :card_payment_timeline, Square::CardPaymentTimeline, optional: true, nullable: false
-            field :refund_requires_card_presence, Internal::Types::Boolean, optional: true, nullable: false
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :refund_requires_card_presence, Square::Internal::Types::Boolean, optional: true, nullable: false
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
         end
     end
 end

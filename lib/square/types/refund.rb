@@ -3,7 +3,7 @@
 module Square
     module Types
         # Represents a refund processed for a Square transaction.
-        class Refund < Internal::Types::Model
+        class Refund < Square::Internal::Types::Model
             field :id, String, optional: false, nullable: false
             field :location_id, String, optional: false, nullable: false
             field :transaction_id, String, optional: true, nullable: false
@@ -13,7 +13,7 @@ module Square
             field :amount_money, Square::Money, optional: false, nullable: false
             field :status, Square::RefundStatus, optional: false, nullable: false
             field :processing_fee_money, Square::Money, optional: true, nullable: false
-            field :additional_recipients, Internal::Types::Array[Square::AdditionalRecipient], optional: true, nullable: false
+            field :additional_recipients, Square::Internal::Types::Array[Square::AdditionalRecipient], optional: true, nullable: false
         end
     end
 end

@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class DeviceAttributes < Internal::Types::Model
+        class DeviceAttributes < Square::Internal::Types::Model
             field :type, String, optional: false, nullable: false
             field :manufacturer, String, optional: false, nullable: false
             field :model, String, optional: true, nullable: false

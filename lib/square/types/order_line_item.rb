@@ -4,7 +4,7 @@ module Square
     module Types
         # Represents a line item in an order. Each line item describes a different
         # product to purchase, with its own quantity and price details.
-        class OrderLineItem < Internal::Types::Model
+        class OrderLineItem < Square::Internal::Types::Model
             field :uid, String, optional: true, nullable: false
             field :name, String, optional: true, nullable: false
             field :quantity, String, optional: false, nullable: false
@@ -14,11 +14,11 @@ module Square
             field :catalog_version, Integer, optional: true, nullable: false
             field :variation_name, String, optional: true, nullable: false
             field :item_type, Square::OrderLineItemItemType, optional: true, nullable: false
-            field :metadata, Internal::Types::Hash[String, String], optional: true, nullable: false
-            field :modifiers, Internal::Types::Array[Square::OrderLineItemModifier], optional: true, nullable: false
-            field :applied_taxes, Internal::Types::Array[Square::OrderLineItemAppliedTax], optional: true, nullable: false
-            field :applied_discounts, Internal::Types::Array[Square::OrderLineItemAppliedDiscount], optional: true, nullable: false
-            field :applied_service_charges, Internal::Types::Array[Square::OrderLineItemAppliedServiceCharge], optional: true, nullable: false
+            field :metadata, Square::Internal::Types::Hash[String, String], optional: true, nullable: false
+            field :modifiers, Square::Internal::Types::Array[Square::OrderLineItemModifier], optional: true, nullable: false
+            field :applied_taxes, Square::Internal::Types::Array[Square::OrderLineItemAppliedTax], optional: true, nullable: false
+            field :applied_discounts, Square::Internal::Types::Array[Square::OrderLineItemAppliedDiscount], optional: true, nullable: false
+            field :applied_service_charges, Square::Internal::Types::Array[Square::OrderLineItemAppliedServiceCharge], optional: true, nullable: false
             field :base_price_money, Square::Money, optional: true, nullable: false
             field :variation_total_price_money, Square::Money, optional: true, nullable: false
             field :gross_sales_money, Square::Money, optional: true, nullable: false

@@ -3,7 +3,7 @@
 module Square
     module Types
         # Represents a business that sells with Square.
-        class Merchant < Internal::Types::Model
+        class Merchant < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :business_name, String, optional: true, nullable: false
             field :country, Square::Country, optional: false, nullable: false

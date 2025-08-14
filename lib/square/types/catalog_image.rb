@@ -8,7 +8,7 @@ module Square
         # Only the first image on an item is displayed in Square Point of Sale (SPOS).
         # Images on items and variations are displayed through Square Online Store.
         # Images on other object types are for use by 3rd party application developers.
-        class CatalogImage < Internal::Types::Model
+        class CatalogImage < Square::Internal::Types::Model
             field :name, String, optional: true, nullable: false
             field :url, String, optional: true, nullable: false
             field :caption, String, optional: true, nullable: false

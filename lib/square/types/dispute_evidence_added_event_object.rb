@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class DisputeEvidenceAddedEventObject < Internal::Types::Model
+        class DisputeEvidenceAddedEventObject < Square::Internal::Types::Model
             field :object, Square::Dispute, optional: true, nullable: false
         end
     end

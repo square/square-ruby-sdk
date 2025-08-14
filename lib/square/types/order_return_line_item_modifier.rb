@@ -3,7 +3,7 @@
 module Square
     module Types
         # A line item modifier being returned.
-        class OrderReturnLineItemModifier < Internal::Types::Model
+        class OrderReturnLineItemModifier < Square::Internal::Types::Model
             field :uid, String, optional: true, nullable: false
             field :source_modifier_uid, String, optional: true, nullable: false
             field :catalog_object_id, String, optional: true, nullable: false

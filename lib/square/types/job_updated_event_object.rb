@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class JobUpdatedEventObject < Internal::Types::Model
+        class JobUpdatedEventObject < Square::Internal::Types::Model
             field :job, Square::Job, optional: true, nullable: false
         end
     end

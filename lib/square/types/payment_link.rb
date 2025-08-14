@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class PaymentLink < Internal::Types::Model
+        class PaymentLink < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :version, Integer, optional: false, nullable: false
             field :description, String, optional: true, nullable: false

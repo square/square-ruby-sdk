@@ -3,7 +3,7 @@
 module Square
     module Types
         # Contains the details necessary to fulfill a shipment order.
-        class FulfillmentShipmentDetails < Internal::Types::Model
+        class FulfillmentShipmentDetails < Square::Internal::Types::Model
             field :recipient, Square::FulfillmentRecipient, optional: true, nullable: false
             field :carrier, String, optional: true, nullable: false
             field :shipping_note, String, optional: true, nullable: false

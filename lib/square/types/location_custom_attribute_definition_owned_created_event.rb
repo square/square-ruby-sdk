@@ -4,7 +4,7 @@ module Square
     module Types
         # Published when a location [custom attribute definition](entity:CustomAttributeDefinition)
         # is created by the subscribing application.
-        class LocationCustomAttributeDefinitionOwnedCreatedEvent < Internal::Types::Model
+        class LocationCustomAttributeDefinitionOwnedCreatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

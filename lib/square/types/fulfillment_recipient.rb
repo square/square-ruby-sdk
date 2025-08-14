@@ -3,7 +3,7 @@
 module Square
     module Types
         # Information about the fulfillment recipient.
-        class FulfillmentRecipient < Internal::Types::Model
+        class FulfillmentRecipient < Square::Internal::Types::Model
             field :customer_id, String, optional: true, nullable: false
             field :display_name, String, optional: true, nullable: false
             field :email_address, String, optional: true, nullable: false

@@ -3,7 +3,7 @@
 module Square
     module Types
         # Represents an action processed by the Square Terminal.
-        class TerminalAction < Internal::Types::Model
+        class TerminalAction < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :device_id, String, optional: true, nullable: false
             field :deadline_duration, String, optional: true, nullable: false
@@ -22,7 +22,7 @@ module Square
             field :data_collection_options, Square::DataCollectionOptions, optional: true, nullable: false
             field :select_options, Square::SelectOptions, optional: true, nullable: false
             field :device_metadata, Square::DeviceMetadata, optional: true, nullable: false
-            field :await_next_action, Internal::Types::Boolean, optional: true, nullable: false
+            field :await_next_action, Square::Internal::Types::Boolean, optional: true, nullable: false
             field :await_next_action_duration, String, optional: true, nullable: false
         end
     end

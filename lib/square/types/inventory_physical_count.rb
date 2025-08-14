@@ -6,7 +6,7 @@ module Square
         # at a specific location, verified by a seller or a seller's employee. For example,
         # a physical count might come from an employee counting the item variations on
         # hand or from syncing with an external system.
-        class InventoryPhysicalCount < Internal::Types::Model
+        class InventoryPhysicalCount < Square::Internal::Types::Model
             field :id, String, optional: true, nullable: false
             field :reference_id, String, optional: true, nullable: false
             field :catalog_object_id, String, optional: true, nullable: false

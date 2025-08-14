@@ -5,7 +5,7 @@ module Square
         # Published when a [Shift](entity:Shift) is updated.
         # 
         # Deprecated at Square API version 2025-05-21. Replaced by `labor.timecard.updated`.
-        class LaborShiftUpdatedEvent < Internal::Types::Model
+        class LaborShiftUpdatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class TerminalRefundUpdatedEventObject < Internal::Types::Model
+        class TerminalRefundUpdatedEventObject < Square::Internal::Types::Model
             field :refund, Square::TerminalRefund, optional: true, nullable: false
         end
     end

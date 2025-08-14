@@ -7,8 +7,8 @@ module Square
         # 
         # Note: if there are errors processing the request, the card field will not be
         # present.
-        class CreateCardResponse < Internal::Types::Model
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+        class CreateCardResponse < Square::Internal::Types::Model
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
             field :card, Square::Card, optional: true, nullable: false
         end
     end

@@ -2,9 +2,9 @@
 
 module Square
     module Types
-        class BatchGetInventoryChangesResponse < Internal::Types::Model
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
-            field :changes, Internal::Types::Array[Square::InventoryChange], optional: true, nullable: false
+        class BatchGetInventoryChangesResponse < Square::Internal::Types::Model
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :changes, Square::Internal::Types::Array[Square::InventoryChange], optional: true, nullable: false
             field :cursor, String, optional: true, nullable: false
         end
     end

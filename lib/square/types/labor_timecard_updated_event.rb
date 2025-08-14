@@ -3,7 +3,7 @@
 module Square
     module Types
         # Published when a [Timecard](entity:Timecard) is updated.
-        class LaborTimecardUpdatedEvent < Internal::Types::Model
+        class LaborTimecardUpdatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

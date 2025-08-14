@@ -8,7 +8,7 @@ module Square
         # 
         # This event is replaced by 
         # [customer.custom_attribute_definition.owned.updated](webhook:customer.custom_attribute_definition.owned.updated).
-        class CustomerCustomAttributeDefinitionUpdatedEvent < Internal::Types::Model
+        class CustomerCustomAttributeDefinitionUpdatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

@@ -6,7 +6,7 @@ module Square
         # subscribing application is created or updated. Custom attributes are owned by the application that created
         # the corresponding [custom attribute definition](entity:CustomAttributeDefinition). Custom attributes whose
         # `visibility` is `VISIBILITY_READ_WRITE_VALUES` can be created or updated by any application.
-        class CustomerCustomAttributeOwnedUpdatedEvent < Internal::Types::Model
+        class CustomerCustomAttributeOwnedUpdatedEvent < Square::Internal::Types::Model
             field :merchant_id, String, optional: true, nullable: false
             field :type, String, optional: true, nullable: false
             field :event_id, String, optional: true, nullable: false

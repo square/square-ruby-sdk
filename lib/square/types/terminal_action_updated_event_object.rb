@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class TerminalActionUpdatedEventObject < Internal::Types::Model
+        class TerminalActionUpdatedEventObject < Square::Internal::Types::Model
             field :action, Square::TerminalAction, optional: true, nullable: false
         end
     end

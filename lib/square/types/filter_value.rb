@@ -7,10 +7,10 @@ module Square
         # all properties can be set or only a subset will be available.
         # 
         # Refer to the documentation of the field.
-        class FilterValue < Internal::Types::Model
-            field :all, Internal::Types::Array[String], optional: true, nullable: false
-            field :any, Internal::Types::Array[String], optional: true, nullable: false
-            field :none, Internal::Types::Array[String], optional: true, nullable: false
+        class FilterValue < Square::Internal::Types::Model
+            field :all, Square::Internal::Types::Array[String], optional: true, nullable: false
+            field :any, Square::Internal::Types::Array[String], optional: true, nullable: false
+            field :none, Square::Internal::Types::Array[String], optional: true, nullable: false
         end
     end
 end

@@ -2,9 +2,9 @@
 
 module Square
     module Types
-        class GetInventoryCountResponse < Internal::Types::Model
-            field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
-            field :counts, Internal::Types::Array[Square::InventoryCount], optional: true, nullable: false
+        class GetInventoryCountResponse < Square::Internal::Types::Model
+            field :errors, Square::Internal::Types::Array[Square::Error], optional: true, nullable: false
+            field :counts, Square::Internal::Types::Array[Square::InventoryCount], optional: true, nullable: false
             field :cursor, String, optional: true, nullable: false
         end
     end

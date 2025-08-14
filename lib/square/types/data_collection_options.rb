@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class DataCollectionOptions < Internal::Types::Model
+        class DataCollectionOptions < Square::Internal::Types::Model
             field :title, String, optional: false, nullable: false
             field :body, String, optional: false, nullable: false
             field :input_type, Square::DataCollectionOptionsInputType, optional: false, nullable: false

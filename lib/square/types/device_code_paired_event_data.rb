@@ -2,7 +2,7 @@
 
 module Square
     module Types
-        class DeviceCodePairedEventData < Internal::Types::Model
+        class DeviceCodePairedEventData < Square::Internal::Types::Model
             field :type, String, optional: true, nullable: false
             field :id, String, optional: true, nullable: false
             field :object, Square::DeviceCodePairedEventObject, optional: true, nullable: false
