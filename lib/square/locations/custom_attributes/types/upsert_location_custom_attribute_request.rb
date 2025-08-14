@@ -4,7 +4,8 @@ module Square
         module CustomAttributes
             class UpsertLocationCustomAttributeRequest < Internal::Types::Model
                 field :location_id, String, optional: false, nullable: false
-                field :key, String, optional: false, nullable: falseend
+                field :key, String, optional: false, nullable: false
+            end
         end
     end
 end
