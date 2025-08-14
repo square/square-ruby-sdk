@@ -1,9 +1,10 @@
 
 module Square
     module Types
-        module ShiftFilterStatus
+        class ShiftFilterStatus
             extends Square::Internal::Types::Enum
             OPEN = "OPEN"
-            CLOSED = "CLOSED"end
+            CLOSED = "CLOSED"
+        end
     end
 end

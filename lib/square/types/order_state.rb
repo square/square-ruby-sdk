@@ -1,11 +1,12 @@
 
 module Square
     module Types
-        module OrderState
+        class OrderState
             extends Square::Internal::Types::Enum
             OPEN = "OPEN"
             COMPLETED = "COMPLETED"
             CANCELED = "CANCELED"
-            DRAFT = "DRAFT"end
+            DRAFT = "DRAFT"
+        end
     end
 end

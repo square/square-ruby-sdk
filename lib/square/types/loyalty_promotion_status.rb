@@ -1,11 +1,12 @@
 
 module Square
     module Types
-        module LoyaltyPromotionStatus
+        class LoyaltyPromotionStatus
             extends Square::Internal::Types::Enum
             ACTIVE = "ACTIVE"
             ENDED = "ENDED"
             CANCELED = "CANCELED"
-            SCHEDULED = "SCHEDULED"end
+            SCHEDULED = "SCHEDULED"
+        end
     end
 end

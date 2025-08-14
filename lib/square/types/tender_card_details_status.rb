@@ -1,11 +1,12 @@
 
 module Square
     module Types
-        module TenderCardDetailsStatus
+        class TenderCardDetailsStatus
             extends Square::Internal::Types::Enum
             AUTHORIZED = "AUTHORIZED"
             CAPTURED = "CAPTURED"
             VOIDED = "VOIDED"
-            FAILED = "FAILED"end
+            FAILED = "FAILED"
+        end
     end
 end

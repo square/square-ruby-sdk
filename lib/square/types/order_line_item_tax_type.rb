@@ -1,10 +1,11 @@
 
 module Square
     module Types
-        module OrderLineItemTaxType
+        class OrderLineItemTaxType
             extends Square::Internal::Types::Enum
             UNKNOWN_TAX = "UNKNOWN_TAX"
             ADDITIVE = "ADDITIVE"
-            INCLUSIVE = "INCLUSIVE"end
+            INCLUSIVE = "INCLUSIVE"
+        end
     end
 end

@@ -1,9 +1,10 @@
 
 module Square
     module Types
-        module SubscriptionPricingType
+        class SubscriptionPricingType
             extends Square::Internal::Types::Enum
             STATIC = "STATIC"
-            RELATIVE = "RELATIVE"end
+            RELATIVE = "RELATIVE"
+        end
     end
 end

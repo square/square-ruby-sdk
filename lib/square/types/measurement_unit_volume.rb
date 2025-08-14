@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module MeasurementUnitVolume
+        class MeasurementUnitVolume
             extends Square::Internal::Types::Enum
             GENERIC_FLUID_OUNCE = "GENERIC_FLUID_OUNCE"
             GENERIC_SHOT = "GENERIC_SHOT"
@@ -13,6 +13,7 @@ module Square
             IMPERIAL_CUBIC_FOOT = "IMPERIAL_CUBIC_FOOT"
             IMPERIAL_CUBIC_YARD = "IMPERIAL_CUBIC_YARD"
             METRIC_MILLILITER = "METRIC_MILLILITER"
-            METRIC_LITER = "METRIC_LITER"end
+            METRIC_LITER = "METRIC_LITER"
+        end
     end
 end

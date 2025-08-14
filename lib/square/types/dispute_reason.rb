@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module DisputeReason
+        class DisputeReason
             extends Square::Internal::Types::Enum
             AMOUNT_DIFFERS = "AMOUNT_DIFFERS"
             CANCELLED = "CANCELLED"
@@ -11,6 +11,7 @@ module Square
             NOT_RECEIVED = "NOT_RECEIVED"
             PAID_BY_OTHER_MEANS = "PAID_BY_OTHER_MEANS"
             CUSTOMER_REQUESTS_CREDIT = "CUSTOMER_REQUESTS_CREDIT"
-            EMV_LIABILITY_SHIFT = "EMV_LIABILITY_SHIFT"end
+            EMV_LIABILITY_SHIFT = "EMV_LIABILITY_SHIFT"
+        end
     end
 end

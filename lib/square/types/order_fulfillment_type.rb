@@ -1,10 +1,11 @@
 
 module Square
     module Types
-        module OrderFulfillmentType
+        class OrderFulfillmentType
             extends Square::Internal::Types::Enum
             PICKUP = "PICKUP"
             SHIPMENT = "SHIPMENT"
-            DELIVERY = "DELIVERY"end
+            DELIVERY = "DELIVERY"
+        end
     end
 end

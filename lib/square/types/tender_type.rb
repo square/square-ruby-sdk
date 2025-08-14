@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module TenderType
+        class TenderType
             extends Square::Internal::Types::Enum
             CARD = "CARD"
             CASH = "CASH"
@@ -12,6 +12,7 @@ module Square
             WALLET = "WALLET"
             BUY_NOW_PAY_LATER = "BUY_NOW_PAY_LATER"
             SQUARE_ACCOUNT = "SQUARE_ACCOUNT"
-            OTHER = "OTHER"end
+            OTHER = "OTHER"
+        end
     end
 end

@@ -1,10 +1,11 @@
 
 module Square
     module Types
-        module OrderLineItemItemType
+        class OrderLineItemItemType
             extends Square::Internal::Types::Enum
             ITEM = "ITEM"
             CUSTOM_AMOUNT = "CUSTOM_AMOUNT"
-            GIFT_CARD = "GIFT_CARD"end
+            GIFT_CARD = "GIFT_CARD"
+        end
     end
 end

@@ -1,10 +1,11 @@
 
 module Square
     module Types
-        module ScheduledShiftNotificationAudience
+        class ScheduledShiftNotificationAudience
             extends Square::Internal::Types::Enum
             ALL = "ALL"
             AFFECTED = "AFFECTED"
-            NONE = "NONE"end
+            NONE = "NONE"
+        end
     end
 end

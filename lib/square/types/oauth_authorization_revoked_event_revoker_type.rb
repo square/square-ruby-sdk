@@ -1,10 +1,11 @@
 
 module Square
     module Types
-        module OauthAuthorizationRevokedEventRevokerType
+        class OauthAuthorizationRevokedEventRevokerType
             extends Square::Internal::Types::Enum
             APPLICATION = "APPLICATION"
             MERCHANT = "MERCHANT"
-            SQUARE = "SQUARE"end
+            SQUARE = "SQUARE"
+        end
     end
 end

@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module InventoryState
+        class InventoryState
             extends Square::Internal::Types::Enum
             CUSTOM = "CUSTOM"
             IN_STOCK = "IN_STOCK"
@@ -18,6 +18,7 @@ module Square
             COMPOSED = "COMPOSED"
             DECOMPOSED = "DECOMPOSED"
             SUPPORTED_BY_NEWER_VERSION = "SUPPORTED_BY_NEWER_VERSION"
-            IN_TRANSIT = "IN_TRANSIT"end
+            IN_TRANSIT = "IN_TRANSIT"
+        end
     end
 end

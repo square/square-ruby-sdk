@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module TerminalActionActionType
+        class TerminalActionActionType
             extends Square::Internal::Types::Enum
             QR_CODE = "QR_CODE"
             PING = "PING"
@@ -10,6 +10,7 @@ module Square
             CONFIRMATION = "CONFIRMATION"
             RECEIPT = "RECEIPT"
             DATA_COLLECTION = "DATA_COLLECTION"
-            SELECT = "SELECT"end
+            SELECT = "SELECT"
+        end
     end
 end

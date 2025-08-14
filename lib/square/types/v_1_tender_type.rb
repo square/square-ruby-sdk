@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module V1TenderType
+        class V1TenderType
             extends Square::Internal::Types::Enum
             CREDIT_CARD = "CREDIT_CARD"
             CASH = "CASH"
@@ -10,6 +10,7 @@ module Square
             SQUARE_WALLET = "SQUARE_WALLET"
             SQUARE_GIFT_CARD = "SQUARE_GIFT_CARD"
             UNKNOWN = "UNKNOWN"
-            OTHER = "OTHER"end
+            OTHER = "OTHER"
+        end
     end
 end

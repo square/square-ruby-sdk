@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module ActivityType
+        class ActivityType
             extends Square::Internal::Types::Enum
             ADJUSTMENT = "ADJUSTMENT"
             APP_FEE_REFUND = "APP_FEE_REFUND"
@@ -60,6 +60,7 @@ module Square
             GIFT_CARD_POOL_TRANSFER = "GIFT_CARD_POOL_TRANSFER"
             GIFT_CARD_POOL_TRANSFER_REVERSED = "GIFT_CARD_POOL_TRANSFER_REVERSED"
             SQUARE_PAYROLL_TRANSFER = "SQUARE_PAYROLL_TRANSFER"
-            SQUARE_PAYROLL_TRANSFER_REVERSED = "SQUARE_PAYROLL_TRANSFER_REVERSED"end
+            SQUARE_PAYROLL_TRANSFER_REVERSED = "SQUARE_PAYROLL_TRANSFER_REVERSED"
+        end
     end
 end

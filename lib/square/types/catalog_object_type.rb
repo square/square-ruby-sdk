@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module CatalogObjectType
+        class CatalogObjectType
             extends Square::Internal::Types::Enum
             ITEM = "ITEM"
             IMAGE = "IMAGE"
@@ -21,6 +21,7 @@ module Square
             CUSTOM_ATTRIBUTE_DEFINITION = "CUSTOM_ATTRIBUTE_DEFINITION"
             QUICK_AMOUNTS_SETTINGS = "QUICK_AMOUNTS_SETTINGS"
             SUBSCRIPTION_PLAN = "SUBSCRIPTION_PLAN"
-            AVAILABILITY_PERIOD = "AVAILABILITY_PERIOD"end
+            AVAILABILITY_PERIOD = "AVAILABILITY_PERIOD"
+        end
     end
 end

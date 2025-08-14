@@ -1,9 +1,10 @@
 
 module Square
     module Types
-        module InventoryAlertType
+        class InventoryAlertType
             extends Square::Internal::Types::Enum
             NONE = "NONE"
-            LOW_QUANTITY = "LOW_QUANTITY"end
+            LOW_QUANTITY = "LOW_QUANTITY"
+        end
     end
 end

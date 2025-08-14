@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module InvoiceStatus
+        class InvoiceStatus
             extends Square::Internal::Types::Enum
             DRAFT = "DRAFT"
             UNPAID = "UNPAID"
@@ -12,6 +12,7 @@ module Square
             REFUNDED = "REFUNDED"
             CANCELED = "CANCELED"
             FAILED = "FAILED"
-            PAYMENT_PENDING = "PAYMENT_PENDING"end
+            PAYMENT_PENDING = "PAYMENT_PENDING"
+        end
     end
 end

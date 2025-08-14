@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module Product
+        class Product
             extends Square::Internal::Types::Enum
             SQUARE_POS = "SQUARE_POS"
             EXTERNAL_API = "EXTERNAL_API"
@@ -12,6 +12,7 @@ module Square
             PAYROLL = "PAYROLL"
             DASHBOARD = "DASHBOARD"
             ITEM_LIBRARY_IMPORT = "ITEM_LIBRARY_IMPORT"
-            OTHER = "OTHER"end
+            OTHER = "OTHER"
+        end
     end
 end

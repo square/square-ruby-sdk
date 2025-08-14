@@ -1,9 +1,10 @@
 
 module Square
     module Types
-        module ScheduledShiftFilterAssignmentStatus
+        class ScheduledShiftFilterAssignmentStatus
             extends Square::Internal::Types::Enum
             ASSIGNED = "ASSIGNED"
-            UNASSIGNED = "UNASSIGNED"end
+            UNASSIGNED = "UNASSIGNED"
+        end
     end
 end

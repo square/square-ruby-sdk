@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module SubscriptionEventSubscriptionEventType
+        class SubscriptionEventSubscriptionEventType
             extends Square::Internal::Types::Enum
             START_SUBSCRIPTION = "START_SUBSCRIPTION"
             PLAN_CHANGE = "PLAN_CHANGE"
@@ -9,6 +9,7 @@ module Square
             DEACTIVATE_SUBSCRIPTION = "DEACTIVATE_SUBSCRIPTION"
             RESUME_SUBSCRIPTION = "RESUME_SUBSCRIPTION"
             PAUSE_SUBSCRIPTION = "PAUSE_SUBSCRIPTION"
-            BILLING_ANCHOR_DATE_CHANGED = "BILLING_ANCHOR_DATE_CHANGED"end
+            BILLING_ANCHOR_DATE_CHANGED = "BILLING_ANCHOR_DATE_CHANGED"
+        end
     end
 end

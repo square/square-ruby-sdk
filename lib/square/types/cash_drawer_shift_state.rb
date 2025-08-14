@@ -1,10 +1,11 @@
 
 module Square
     module Types
-        module CashDrawerShiftState
+        class CashDrawerShiftState
             extends Square::Internal::Types::Enum
             OPEN = "OPEN"
             ENDED = "ENDED"
-            CLOSED = "CLOSED"end
+            CLOSED = "CLOSED"
+        end
     end
 end

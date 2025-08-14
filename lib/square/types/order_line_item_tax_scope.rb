@@ -1,10 +1,11 @@
 
 module Square
     module Types
-        module OrderLineItemTaxScope
+        class OrderLineItemTaxScope
             extends Square::Internal::Types::Enum
             OTHER_TAX_SCOPE = "OTHER_TAX_SCOPE"
             LINE_ITEM = "LINE_ITEM"
-            ORDER = "ORDER"end
+            ORDER = "ORDER"
+        end
     end
 end

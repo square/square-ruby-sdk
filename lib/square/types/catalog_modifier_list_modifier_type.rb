@@ -1,9 +1,10 @@
 
 module Square
     module Types
-        module CatalogModifierListModifierType
+        class CatalogModifierListModifierType
             extends Square::Internal::Types::Enum
             LIST = "LIST"
-            TEXT = "TEXT"end
+            TEXT = "TEXT"
+        end
     end
 end

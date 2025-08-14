@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module InvoiceRequestMethod
+        class InvoiceRequestMethod
             extends Square::Internal::Types::Enum
             EMAIL = "EMAIL"
             CHARGE_CARD_ON_FILE = "CHARGE_CARD_ON_FILE"
@@ -9,6 +9,7 @@ module Square
             CHARGE_BANK_ON_FILE = "CHARGE_BANK_ON_FILE"
             SMS = "SMS"
             SMS_CHARGE_CARD_ON_FILE = "SMS_CHARGE_CARD_ON_FILE"
-            SMS_CHARGE_BANK_ON_FILE = "SMS_CHARGE_BANK_ON_FILE"end
+            SMS_CHARGE_BANK_ON_FILE = "SMS_CHARGE_BANK_ON_FILE"
+        end
     end
 end

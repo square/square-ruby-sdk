@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module DisputeEvidenceType
+        class DisputeEvidenceType
             extends Square::Internal::Types::Enum
             GENERIC_EVIDENCE = "GENERIC_EVIDENCE"
             ONLINE_OR_APP_ACCESS_LOG = "ONLINE_OR_APP_ACCESS_LOG"
@@ -17,6 +17,7 @@ module Square
             PROOF_OF_DELIVERY_DOCUMENTATION = "PROOF_OF_DELIVERY_DOCUMENTATION"
             RELATED_TRANSACTION_DOCUMENTATION = "RELATED_TRANSACTION_DOCUMENTATION"
             REBUTTAL_EXPLANATION = "REBUTTAL_EXPLANATION"
-            TRACKING_NUMBER = "TRACKING_NUMBER"end
+            TRACKING_NUMBER = "TRACKING_NUMBER"
+        end
     end
 end

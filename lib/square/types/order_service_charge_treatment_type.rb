@@ -1,9 +1,10 @@
 
 module Square
     module Types
-        module OrderServiceChargeTreatmentType
+        class OrderServiceChargeTreatmentType
             extends Square::Internal::Types::Enum
             LINE_ITEM_TREATMENT = "LINE_ITEM_TREATMENT"
-            APPORTIONED_TREATMENT = "APPORTIONED_TREATMENT"end
+            APPORTIONED_TREATMENT = "APPORTIONED_TREATMENT"
+        end
     end
 end

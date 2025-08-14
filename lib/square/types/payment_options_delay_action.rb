@@ -1,9 +1,10 @@
 
 module Square
     module Types
-        module PaymentOptionsDelayAction
+        class PaymentOptionsDelayAction
             extends Square::Internal::Types::Enum
             CANCEL = "CANCEL"
-            COMPLETE = "COMPLETE"end
+            COMPLETE = "COMPLETE"
+        end
     end
 end

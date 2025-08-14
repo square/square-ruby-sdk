@@ -1,9 +1,10 @@
 
 module Square
     module Types
-        module ScheduledShiftFilterScheduledShiftStatus
+        class ScheduledShiftFilterScheduledShiftStatus
             extends Square::Internal::Types::Enum
             DRAFT = "DRAFT"
-            PUBLISHED = "PUBLISHED"end
+            PUBLISHED = "PUBLISHED"
+        end
     end
 end

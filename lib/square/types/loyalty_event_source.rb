@@ -1,9 +1,10 @@
 
 module Square
     module Types
-        module LoyaltyEventSource
+        class LoyaltyEventSource
             extends Square::Internal::Types::Enum
             SQUARE = "SQUARE"
-            LOYALTY_API = "LOYALTY_API"end
+            LOYALTY_API = "LOYALTY_API"
+        end
     end
 end

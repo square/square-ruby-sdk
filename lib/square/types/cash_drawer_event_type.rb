@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module CashDrawerEventType
+        class CashDrawerEventType
             extends Square::Internal::Types::Enum
             NO_SALE = "NO_SALE"
             CASH_TENDER_PAYMENT = "CASH_TENDER_PAYMENT"
@@ -11,6 +11,7 @@ module Square
             CASH_TENDER_REFUND = "CASH_TENDER_REFUND"
             OTHER_TENDER_REFUND = "OTHER_TENDER_REFUND"
             PAID_IN = "PAID_IN"
-            PAID_OUT = "PAID_OUT"end
+            PAID_OUT = "PAID_OUT"
+        end
     end
 end

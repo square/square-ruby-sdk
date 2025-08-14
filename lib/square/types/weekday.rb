@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module Weekday
+        class Weekday
             extends Square::Internal::Types::Enum
             MON = "MON"
             TUE = "TUE"
@@ -9,6 +9,7 @@ module Square
             THU = "THU"
             FRI = "FRI"
             SAT = "SAT"
-            SUN = "SUN"end
+            SUN = "SUN"
+        end
     end
 end

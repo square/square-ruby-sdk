@@ -1,11 +1,12 @@
 
 module Square
     module Types
-        module DeviceCodeStatus
+        class DeviceCodeStatus
             extends Square::Internal::Types::Enum
             UNKNOWN = "UNKNOWN"
             UNPAIRED = "UNPAIRED"
             PAIRED = "PAIRED"
-            EXPIRED = "EXPIRED"end
+            EXPIRED = "EXPIRED"
+        end
     end
 end

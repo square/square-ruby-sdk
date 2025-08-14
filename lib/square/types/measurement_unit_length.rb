@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module MeasurementUnitLength
+        class MeasurementUnitLength
             extends Square::Internal::Types::Enum
             IMPERIAL_INCH = "IMPERIAL_INCH"
             IMPERIAL_FOOT = "IMPERIAL_FOOT"
@@ -10,6 +10,7 @@ module Square
             METRIC_MILLIMETER = "METRIC_MILLIMETER"
             METRIC_CENTIMETER = "METRIC_CENTIMETER"
             METRIC_METER = "METRIC_METER"
-            METRIC_KILOMETER = "METRIC_KILOMETER"end
+            METRIC_KILOMETER = "METRIC_KILOMETER"
+        end
     end
 end

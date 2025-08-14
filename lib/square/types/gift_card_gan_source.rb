@@ -1,9 +1,10 @@
 
 module Square
     module Types
-        module GiftCardGanSource
+        class GiftCardGanSource
             extends Square::Internal::Types::Enum
             SQUARE = "SQUARE"
-            OTHER = "OTHER"end
+            OTHER = "OTHER"
+        end
     end
 end

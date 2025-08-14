@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module CardBrand
+        class CardBrand
             extends Square::Internal::Types::Enum
             OTHER_BRAND = "OTHER_BRAND"
             VISA = "VISA"
@@ -16,6 +16,7 @@ module Square
             INTERAC = "INTERAC"
             EFTPOS = "EFTPOS"
             FELICA = "FELICA"
-            EBT = "EBT"end
+            EBT = "EBT"
+        end
     end
 end

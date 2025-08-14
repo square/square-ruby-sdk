@@ -1,10 +1,11 @@
 
 module Square
     module Types
-        module TimecardWorkdayMatcher
+        class TimecardWorkdayMatcher
             extends Square::Internal::Types::Enum
             START_AT = "START_AT"
             END_AT = "END_AT"
-            INTERSECTION = "INTERSECTION"end
+            INTERSECTION = "INTERSECTION"
+        end
     end
 end

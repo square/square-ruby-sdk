@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module CatalogItemFoodAndBeverageDetailsIngredientStandardIngredient
+        class CatalogItemFoodAndBeverageDetailsIngredientStandardIngredient
             extends Square::Internal::Types::Enum
             CELERY = "CELERY"
             CRUSTACEANS = "CRUSTACEANS"
@@ -16,6 +16,7 @@ module Square
             SESAME = "SESAME"
             SOY = "SOY"
             SULPHITES = "SULPHITES"
-            TREE_NUTS = "TREE_NUTS"end
+            TREE_NUTS = "TREE_NUTS"
+        end
     end
 end

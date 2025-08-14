@@ -1,9 +1,10 @@
 
 module Square
     module Types
-        module VendorStatus
+        class VendorStatus
             extends Square::Internal::Types::Enum
             ACTIVE = "ACTIVE"
-            INACTIVE = "INACTIVE"end
+            INACTIVE = "INACTIVE"
+        end
     end
 end

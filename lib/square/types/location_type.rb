@@ -1,9 +1,10 @@
 
 module Square
     module Types
-        module LocationType
+        class LocationType
             extends Square::Internal::Types::Enum
             PHYSICAL = "PHYSICAL"
-            MOBILE = "MOBILE"end
+            MOBILE = "MOBILE"
+        end
     end
 end

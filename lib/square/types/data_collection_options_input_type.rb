@@ -1,9 +1,10 @@
 
 module Square
     module Types
-        module DataCollectionOptionsInputType
+        class DataCollectionOptionsInputType
             extends Square::Internal::Types::Enum
             EMAIL = "EMAIL"
-            PHONE_NUMBER = "PHONE_NUMBER"end
+            PHONE_NUMBER = "PHONE_NUMBER"
+        end
     end
 end

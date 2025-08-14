@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module ErrorCode
+        class ErrorCode
             extends Square::Internal::Types::Enum
             INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR"
             UNAUTHORIZED = "UNAUTHORIZED"
@@ -155,6 +155,7 @@ module Square
             BAD_GATEWAY = "BAD_GATEWAY"
             SERVICE_UNAVAILABLE = "SERVICE_UNAVAILABLE"
             TEMPORARY_ERROR = "TEMPORARY_ERROR"
-            GATEWAY_TIMEOUT = "GATEWAY_TIMEOUT"end
+            GATEWAY_TIMEOUT = "GATEWAY_TIMEOUT"
+        end
     end
 end

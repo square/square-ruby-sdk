@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module GiftCardActivityType
+        class GiftCardActivityType
             extends Square::Internal::Types::Enum
             ACTIVATE = "ACTIVATE"
             LOAD = "LOAD"
@@ -17,6 +17,7 @@ module Square
             UNBLOCK = "UNBLOCK"
             IMPORT_REVERSAL = "IMPORT_REVERSAL"
             TRANSFER_BALANCE_FROM = "TRANSFER_BALANCE_FROM"
-            TRANSFER_BALANCE_TO = "TRANSFER_BALANCE_TO"end
+            TRANSFER_BALANCE_TO = "TRANSFER_BALANCE_TO"
+        end
     end
 end

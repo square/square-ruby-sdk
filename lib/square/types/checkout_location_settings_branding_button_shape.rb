@@ -1,10 +1,11 @@
 
 module Square
     module Types
-        module CheckoutLocationSettingsBrandingButtonShape
+        class CheckoutLocationSettingsBrandingButtonShape
             extends Square::Internal::Types::Enum
             SQUARED = "SQUARED"
             ROUNDED = "ROUNDED"
-            PILL = "PILL"end
+            PILL = "PILL"
+        end
     end
 end

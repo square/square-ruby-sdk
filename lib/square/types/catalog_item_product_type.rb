@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module CatalogItemProductType
+        class CatalogItemProductType
             extends Square::Internal::Types::Enum
             REGULAR = "REGULAR"
             GIFT_CARD = "GIFT_CARD"
@@ -11,6 +11,7 @@ module Square
             DIGITAL = "DIGITAL"
             DONATION = "DONATION"
             LEGACY_SQUARE_ONLINE_SERVICE = "LEGACY_SQUARE_ONLINE_SERVICE"
-            LEGACY_SQUARE_ONLINE_MEMBERSHIP = "LEGACY_SQUARE_ONLINE_MEMBERSHIP"end
+            LEGACY_SQUARE_ONLINE_MEMBERSHIP = "LEGACY_SQUARE_ONLINE_MEMBERSHIP"
+        end
     end
 end

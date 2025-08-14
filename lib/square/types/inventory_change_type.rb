@@ -1,10 +1,11 @@
 
 module Square
     module Types
-        module InventoryChangeType
+        class InventoryChangeType
             extends Square::Internal::Types::Enum
             PHYSICAL_COUNT = "PHYSICAL_COUNT"
             ADJUSTMENT = "ADJUSTMENT"
-            TRANSFER = "TRANSFER"end
+            TRANSFER = "TRANSFER"
+        end
     end
 end

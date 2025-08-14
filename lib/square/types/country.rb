@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module Country
+        class Country
             extends Square::Internal::Types::Enum
             ZZ = "ZZ"
             AD = "AD"
@@ -252,6 +252,7 @@ module Square
             YT = "YT"
             ZA = "ZA"
             ZM = "ZM"
-            ZW = "ZW"end
+            ZW = "ZW"
+        end
     end
 end

@@ -1,10 +1,11 @@
 
 module Square
     module Types
-        module InvoiceDeliveryMethod
+        class InvoiceDeliveryMethod
             extends Square::Internal::Types::Enum
             EMAIL = "EMAIL"
             SHARE_MANUALLY = "SHARE_MANUALLY"
-            SMS = "SMS"end
+            SMS = "SMS"
+        end
     end
 end

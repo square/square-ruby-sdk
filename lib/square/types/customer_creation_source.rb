@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module CustomerCreationSource
+        class CustomerCreationSource
             extends Square::Internal::Types::Enum
             OTHER = "OTHER"
             APPOINTMENTS = "APPOINTMENTS"
@@ -21,6 +21,7 @@ module Square
             TERMINAL = "TERMINAL"
             THIRD_PARTY = "THIRD_PARTY"
             THIRD_PARTY_IMPORT = "THIRD_PARTY_IMPORT"
-            UNMERGE_RECOVERY = "UNMERGE_RECOVERY"end
+            UNMERGE_RECOVERY = "UNMERGE_RECOVERY"
+        end
     end
 end

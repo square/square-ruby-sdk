@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module ErrorCategory
+        class ErrorCategory
             extends Square::Internal::Types::Enum
             API_ERROR = "API_ERROR"
             AUTHENTICATION_ERROR = "AUTHENTICATION_ERROR"
@@ -10,6 +10,7 @@ module Square
             PAYMENT_METHOD_ERROR = "PAYMENT_METHOD_ERROR"
             REFUND_ERROR = "REFUND_ERROR"
             MERCHANT_SUBSCRIPTION_ERROR = "MERCHANT_SUBSCRIPTION_ERROR"
-            EXTERNAL_VENDOR_ERROR = "EXTERNAL_VENDOR_ERROR"end
+            EXTERNAL_VENDOR_ERROR = "EXTERNAL_VENDOR_ERROR"
+        end
     end
 end

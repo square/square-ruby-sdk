@@ -1,7 +1,7 @@
 
 module Square
     module Types
-        module TransactionProduct
+        class TransactionProduct
             extends Square::Internal::Types::Enum
             REGISTER = "REGISTER"
             EXTERNAL_API = "EXTERNAL_API"
@@ -10,6 +10,7 @@ module Square
             INVOICES = "INVOICES"
             ONLINE_STORE = "ONLINE_STORE"
             PAYROLL = "PAYROLL"
-            OTHER = "OTHER"end
+            OTHER = "OTHER"
+        end
     end
 end
