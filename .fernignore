@@ -1,2 +1,4 @@
 lib/square_legacy/
 lib/square_legacy.rb
+Gemfile
+Rakefile

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module square
+module Square
   module Internal
     module Types
       # An array of a specific type
       class Array
-        include square::Internal::Types::Type
+        include Square::Internal::Types::Type
 
         attr_reader :type
 
@@ -14,7 +14,7 @@ module square
           #
           # @param type [Object] The member type of this array
           #
-          # @return [square::Internal::Types::Array]
+          # @return [Square::Internal::Types::Array]
           def [](type)
             new(type)
           end

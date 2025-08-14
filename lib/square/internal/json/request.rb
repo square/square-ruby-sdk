@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-module square
+module Square
   module Internal
     module Multipart
       # @api private
-      class Request < square::Internal::Http::BaseRequest
+      class Request < Square::Internal::Http::BaseRequest
         attr_reader :body
 
         # @param base_url [String] The base URL for the request
@@ -13,7 +13,7 @@ module square
         # @param headers [Hash] Additional headers for the request (optional)
         # @param query [Hash] Query parameters for the request (optional)
         # @param body [Object, nil] The JSON request body (optional)
-        # @param request_options [square::RequestOptions, Hash{Symbol=>Object}, nil]
+        # @param request_options [Square::RequestOptions, Hash{Symbol=>Object}, nil]
         def initialize(base_url:, path:, method:, headers: {}, query: {}, body: nil, request_options: {})
           super(base_url:, path:, method:, headers:, query:, request_options:)
 

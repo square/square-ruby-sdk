@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-module square
+module Square
   module Internal
     module Types
       class Model

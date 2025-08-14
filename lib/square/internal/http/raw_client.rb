@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module square
+module Square
   module Internal
     module Http
       # @api private
@@ -20,7 +20,7 @@ module square
           }.merge(headers)
         end
 
-        # @param request [square::Internal::Http::BaseRequest] The HTTP request.
+        # @param request [Square::Internal::Http::BaseRequest] The HTTP request.
         # @return [HTTP::Response] The HTTP response.
         def send(request)
           url = build_url(request)
@@ -46,7 +46,7 @@ module square
           # end
         end
 
-        # @param request [square::Internal::Http::BaseRequest] The HTTP request.
+        # @param request [Square::Internal::Http::BaseRequest] The HTTP request.
         # @return [URI::Generic] The URL.
         def build_url(request)
           path = request.path.start_with?("/") ? request.path[1..] : request.path

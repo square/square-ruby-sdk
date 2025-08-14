@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module square
+module Square
   module Internal
     module Types
       # @abstract
       module Type
-        include square::Internal::JSON::Serializable
+        include Square::Internal::JSON::Serializable
 
         # Coerces a value to this type
         #
