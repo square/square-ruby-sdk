@@ -10,14 +10,14 @@ class PaymentsTest < IntegrationTestBase
     payment_response = @client.payments.create(
       source_id: "cnon:card-nonce-ok",
       idempotency_key: new_test_uuid,
-      amount_money: {
+      amount_money: Square::Types::Money.new(
         amount: 200,
         currency: "USD"
-      },
-      app_fee_money: {
+      ),
+      app_fee_money: Square::Types::Money.new(
         amount: 10,
         currency: "USD"
-      },
+      ),
       autocomplete: false
     )
     @payment_id = payment_response.payment.id
@@ -34,14 +34,14 @@ class PaymentsTest < IntegrationTestBase
     response = @client.payments.create(
       source_id: "cnon:card-nonce-ok",
       idempotency_key: new_test_uuid,
-      amount_money: {
+      amount_money: Square::Types::Money.new(
         amount: 200,
         currency: "USD"
-      },
-      app_fee_money: {
+      ),
+      app_fee_money: Square::Types::Money.new(
         amount: 10,
         currency: "USD"
-      },
+      ),
       autocomplete: true
     )
 
@@ -73,14 +73,14 @@ class PaymentsTest < IntegrationTestBase
     @client.payments.create(
       source_id: "cnon:card-nonce-ok",
       idempotency_key: idempotency_key,
-      amount_money: {
+      amount_money: Square::Types::Money.new(
         amount: 200,
         currency: "USD"
-      },
-      app_fee_money: {
+      ),
+      app_fee_money: Square::Types::Money.new(
         amount: 10,
         currency: "USD"
-      },
+      ),
       autocomplete: false
     )
 
@@ -95,14 +95,14 @@ class PaymentsTest < IntegrationTestBase
     create_response = @client.payments.create(
       source_id: "cnon:card-nonce-ok",
       idempotency_key: new_test_uuid,
-      amount_money: {
+      amount_money: Square::Types::Money.new(
         amount: 200,
         currency: "USD"
-      },
-      app_fee_money: {
+      ),
+      app_fee_money: Square::Types::Money.new(
         amount: 10,
         currency: "USD"
-      },
+      ),
       autocomplete: false
     )
 

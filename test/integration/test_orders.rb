@@ -9,19 +9,19 @@ class OrdersTest < IntegrationTestBase
     # Create initial order for testing
     order_response = @client.orders.create(
       idempotency_key: new_test_uuid,
-      order: {
+      order: Square::Types::Order.new(
         location_id: @location_id,
         line_items: [
-          {
+          Square::Types::OrderLineItem.new(
             name: "New Item",
             quantity: "1",
-            base_price_money: {
+            base_price_money: Square::Types::Money.new(
               amount: 100,
               currency: "USD"
-            }
-          }
+            )
+          )
         ]
-      }
+      )
     )
 
     @order_id = order_response.order.id
@@ -31,19 +31,19 @@ class OrdersTest < IntegrationTestBase
   def test_should_create_order
     response = @client.orders.create(
       idempotency_key: new_test_uuid,
-      order: {
+      order: Square::Types::Order.new(
         location_id: @location_id,
         line_items: [
-          {
+          Square::Types::OrderLineItem.new(
             name: "New Item",
             quantity: "1",
-            base_price_money: {
+            base_price_money: Square::Types::Money.new(
               amount: 100,
               currency: "USD"
-            }
-          }
+            )
+          )
         ]
-      }
+      )
     )
 
     refute_nil response.order
@@ -72,21 +72,21 @@ class OrdersTest < IntegrationTestBase
     response = @client.orders.update(
       order_id: @order_id,
       idempotency_key: new_test_uuid,
-      order: {
+      order: Square::Types::Order.new(
         version: 1,
         location_id: @location_id,
         line_items: [
-          {
+          Square::Types::OrderLineItem.new(
             name: "Updated Item",
             quantity: "1",
-            base_price_money: {
+            base_price_money: Square::Types::Money.new(
               amount: 0,
               currency: "USD"
-            },
+            ),
             note: nil
-          }
+          )
         ]
-      },
+      ),
       fields_to_clear: ["line_items[#{@line_item_uid}]"]
     )
 
@@ -109,19 +109,19 @@ class OrdersTest < IntegrationTestBase
 
   def test_should_calculate_order
     response = @client.orders.calculate(
-      order: {
+      order: Square::Types::Order.new(
         location_id: @location_id,
         line_items: [
-          {
+          Square::Types::OrderLineItem.new(
             name: "New Item",
             quantity: "1",
-            base_price_money: {
+            base_price_money: Square::Types::Money.new(
               amount: 100,
               currency: "USD"
-            }
-          }
+            )
+          )
         ]
-      }
+      )
     )
 
     refute_nil response.order

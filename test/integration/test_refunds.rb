@@ -8,14 +8,14 @@ class RefundsTest < IntegrationTestBase
     payment_response = @client.payments.create(
       source_id: "cnon:card-nonce-ok",
       idempotency_key: new_test_uuid,
-      amount_money: {
+      amount_money: Square::Types::Money.new(
         amount: 200,
         currency: "USD"
-      },
-      app_fee_money: {
+      ),
+      app_fee_money: Square::Types::Money.new(
         amount: 10,
         currency: "USD"
-      },
+      ),
       autocomplete: true
     )
     @payment_id = payment_response.payment.id
@@ -24,10 +24,10 @@ class RefundsTest < IntegrationTestBase
     refund_response = @client.refunds.refund_payment(
       idempotency_key: new_test_uuid,
       payment_id: @payment_id,
-      amount_money: {
+      amount_money: Square::Types::Money.new(
         amount: 200,
         currency: "USD"
-      }
+      )
     )
     @refund_id = refund_response.refund.id
   end
@@ -44,24 +44,24 @@ class RefundsTest < IntegrationTestBase
     payment_response = @client.payments.create(
       source_id: "cnon:card-nonce-ok",
       idempotency_key: new_test_uuid,
-      amount_money: {
+      amount_money: Square::Types::Money.new(
         amount: 200,
         currency: "USD"
-      },
-      app_fee_money: {
+      ),
+      app_fee_money: Square::Types::Money.new(
         amount: 10,
         currency: "USD"
-      },
+      ),
       autocomplete: true
     )
 
     response = @client.refunds.refund_payment(
       idempotency_key: new_test_uuid,
       payment_id: payment_response.payment.id,
-      amount_money: {
+      amount_money: Square::Types::Money.new(
         amount: 200,
         currency: "USD"
-      }
+      )
     )
 
     refute_nil response.refund

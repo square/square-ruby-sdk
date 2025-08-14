@@ -72,13 +72,13 @@ class TeamsTest < IntegrationTestBase
 
   # Helper function to create a test team member
   def create_test_team_member(location_ids)
-    {
-      assigned_locations: {
+    Square::Types::TeamMember.new(
+      assigned_locations: Square::Types::TeamMemberAssignedLocations.new(
         assignment_type: "EXPLICIT_LOCATIONS",
         location_ids: location_ids
-      },
+      ),
       family_name: "Doe",
       given_name: "Jane"
-    }
+    )
   end
 end

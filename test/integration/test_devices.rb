@@ -6,9 +6,9 @@ class DevicesTest < IntegrationTestBase
     setup_class
     create_response = @client.devices.codes.create(
       idempotency_key: new_test_uuid,
-      device_code: {
+      device_code: Square::Types::DeviceCode.new(
         product_type: "TERMINAL_API"
-      }
+      )
     )
     @device_code_id = create_response.device_code.id
   end
@@ -23,9 +23,9 @@ class DevicesTest < IntegrationTestBase
   def test_should_create_device_code
     response = @client.devices.codes.create(
       idempotency_key: new_test_uuid,
-      device_code: {
+      device_code: Square::Types::DeviceCode.new(
         product_type: "TERMINAL_API"
-      }
+      )
     )
 
     refute_nil response.device_code

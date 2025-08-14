@@ -9,15 +9,15 @@ class TerminalTest < IntegrationTestBase
     # Create terminal checkout for testing
     checkout_response = @client.terminal.checkouts.create(
       idempotency_key: new_test_uuid,
-      checkout: {
-        device_options: {
+      checkout: Square::Types::TerminalCheckout.new(
+        device_options: Square::Types::DeviceCheckoutOptions.new(
           device_id: @sandbox_device_id
-        },
-        amount_money: {
+        ),
+        amount_money: Square::Types::Money.new(
           amount: 100,
           currency: "USD"
-        }
-      }
+        )
+      )
     )
     @checkout_id = checkout_response.checkout.id
   end
@@ -25,15 +25,15 @@ class TerminalTest < IntegrationTestBase
   def test_should_create_terminal_checkout
     response = @client.terminal.checkouts.create(
       idempotency_key: new_test_uuid,
-      checkout: {
-        device_options: {
+      checkout: Square::Types::TerminalCheckout.new(
+        device_options: Square::Types::DeviceCheckoutOptions.new(
           device_id: @sandbox_device_id
-        },
-        amount_money: {
+        ),
+        amount_money: Square::Types::Money.new(
           amount: 100,
           currency: "USD"
-        }
-      }
+        )
+      )
     )
 
     refute_nil response.checkout
