@@ -1,11 +1,6 @@
 require 'securerandom'
-require_relative '../../lib/square_legacy'
-require_relative '../../lib/square/client'
-require_relative '../../lib/square/types/money'
-require_relative '../../lib/square/types/catalog_item'
-require_relative '../../lib/square/types/catalog_object'
-require_relative '../../lib/square/types/address'
-require_relative '../../lib/square/types/customer_request'
+require 'square'
+require 'square_legacy'
 
 module Helpers
   def create_client
