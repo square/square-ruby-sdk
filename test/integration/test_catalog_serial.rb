@@ -1,5 +1,5 @@
-require_relative './helpers'
-require_relative './integration_test_base'
+require_relative 'helpers'
+require_relative 'integration_test_base'
 
 class CatalogSerialTest < IntegrationTestBase
   MAX_CATALOG_PAGE_SIZE = 100

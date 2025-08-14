@@ -1,5 +1,5 @@
-require_relative './helpers'
-require_relative './integration_test_base'
+require_relative 'helpers'
+require_relative 'integration_test_base'
 
 class TeamsTest < IntegrationTestBase
   def setup
