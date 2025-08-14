@@ -24,6 +24,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Creates or updates [custom attributes](entity:CustomAttribute) for a merchant as a bulk operation.
@@ -47,6 +48,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Lists the [custom attributes](entity:CustomAttribute) associated with a merchant.
@@ -66,6 +68,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves a [custom attribute](entity:CustomAttribute) associated with a merchant.
@@ -84,6 +87,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Creates or updates a [custom attribute](entity:CustomAttribute) for a merchant.
@@ -103,6 +107,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Deletes a [custom attribute](entity:CustomAttribute) associated with a merchant.
@@ -119,6 +124,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

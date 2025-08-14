@@ -22,6 +22,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request. Terminal refund requests are available for 30 days.
@@ -36,6 +37,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves an Interac Terminal refund object by ID. Terminal refund objects are available for 30 days.
@@ -50,6 +52,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Cancels an Interac Terminal refund request by refund request ID if the status of the request permits it.
@@ -64,6 +67,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

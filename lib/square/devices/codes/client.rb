@@ -22,6 +22,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Creates a DeviceCode that can be used to login to a Square Terminal device to enter the connected
@@ -37,6 +38,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves DeviceCode with the associated ID.
@@ -51,6 +53,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

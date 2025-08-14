@@ -22,6 +22,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Creates a new customer group for a business.
@@ -38,6 +39,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves a specific customer group as identified by the `group_id` value.
@@ -52,6 +54,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Updates a customer group as identified by the `group_id` value.
@@ -66,6 +69,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Deletes a customer group as identified by the `group_id` value.
@@ -80,6 +84,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Adds a group membership to a customer.
@@ -97,6 +102,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Removes a group membership from a customer.
@@ -114,6 +120,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

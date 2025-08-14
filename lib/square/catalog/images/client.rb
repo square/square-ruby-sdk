@@ -27,6 +27,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Uploads a new image file to replace the existing one in the specified [CatalogImage](entity:CatalogImage) object.
@@ -44,6 +45,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

@@ -22,6 +22,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Returns the metadata for the evidence specified in the request URL path.
@@ -38,6 +39,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Removes specified evidence from a dispute.
@@ -53,6 +55,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

@@ -26,6 +26,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Returns a single [CatalogItem](entity:CatalogItem) as a
@@ -46,6 +47,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Deletes a single [CatalogObject](entity:CatalogObject) based on the
@@ -69,6 +71,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

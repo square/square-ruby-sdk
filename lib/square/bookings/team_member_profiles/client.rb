@@ -22,6 +22,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves a team member's booking profile.
@@ -36,6 +37,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

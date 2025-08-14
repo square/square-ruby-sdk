@@ -22,6 +22,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Creates a new `BreakType`.
@@ -49,6 +50,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Returns a single `BreakType` specified by `id`.
@@ -63,6 +65,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Updates an existing `BreakType`.
@@ -77,6 +80,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Deletes an existing `BreakType`.
@@ -93,6 +97,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

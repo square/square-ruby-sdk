@@ -27,6 +27,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Creates or updates a `WageSetting` object. The object is created if a
@@ -48,6 +49,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

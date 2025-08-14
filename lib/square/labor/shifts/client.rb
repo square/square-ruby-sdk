@@ -39,6 +39,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Returns a paginated list of `Shift` records for a business.
@@ -66,6 +67,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Returns a single `Shift` specified by `id`.
@@ -80,6 +82,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Updates an existing `Shift`.
@@ -100,6 +103,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Deletes a `Shift`.
@@ -114,6 +118,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

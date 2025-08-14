@@ -25,6 +25,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Creates a gift card activity to manage the balance or state of a [gift card](entity:GiftCard).
@@ -40,6 +41,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

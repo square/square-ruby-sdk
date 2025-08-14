@@ -26,6 +26,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves the loyalty program in a seller's account, specified by the program ID or the keyword `main`.
@@ -42,6 +43,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Calculates the number of points a buyer can earn from a purchase. Applications might call this endpoint
@@ -70,6 +72,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

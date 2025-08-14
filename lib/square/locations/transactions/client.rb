@@ -27,6 +27,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves details for a single transaction.
@@ -41,6 +42,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Captures a transaction that was created with the [Charge](api-endpoint:Transactions-Charge)
@@ -60,6 +62,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Cancels a transaction that was created with the [Charge](api-endpoint:Transactions-Charge)
@@ -79,6 +82,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

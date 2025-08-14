@@ -23,6 +23,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Provides the summary details for a single cash drawer shift. See
@@ -38,6 +39,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Provides a paginated list of events for a single cash drawer shift.
@@ -52,6 +54,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

@@ -27,6 +27,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Creates an order-related custom attribute definition.  Use this endpoint to
@@ -45,6 +46,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves an order-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square seller account.
@@ -63,6 +65,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Updates an order-related custom attribute definition for a Square seller account.
@@ -79,6 +82,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Deletes an order-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square seller account.
@@ -95,6 +99,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

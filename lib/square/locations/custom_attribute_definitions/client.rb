@@ -25,6 +25,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Creates a location-related [custom attribute definition](entity:CustomAttributeDefinition) for a Square seller account.
@@ -45,6 +46,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves a location-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square seller account.
@@ -61,6 +63,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Updates a location-related [custom attribute definition](entity:CustomAttributeDefinition) for a Square seller account.
@@ -78,6 +81,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Deletes a location-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square seller account.
@@ -95,6 +99,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

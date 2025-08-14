@@ -22,6 +22,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Searches for loyalty accounts in a loyalty program.
@@ -40,6 +41,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves a loyalty account.
@@ -54,6 +56,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Adds points earned from a purchase to a [loyalty account](entity:LoyaltyAccount).
@@ -81,6 +84,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Adds points to or subtracts points from a buyer's account.
@@ -99,6 +103,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

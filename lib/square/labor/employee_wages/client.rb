@@ -22,6 +22,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Returns a single `EmployeeWage` specified by `id`.
@@ -36,6 +37,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

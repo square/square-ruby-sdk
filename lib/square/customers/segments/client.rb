@@ -22,6 +22,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves a specific customer segment as identified by the `segment_id` value.
@@ -36,6 +37,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

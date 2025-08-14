@@ -26,6 +26,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Removes a card on file from a customer.
@@ -40,6 +41,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

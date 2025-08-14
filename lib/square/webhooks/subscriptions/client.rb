@@ -22,6 +22,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Creates a webhook subscription.
@@ -36,6 +37,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves a webhook subscription identified by its ID.
@@ -50,6 +52,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Updates a webhook subscription.
@@ -64,6 +67,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Deletes a webhook subscription.
@@ -78,6 +82,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Updates a webhook subscription by replacing the existing signature key with a new one.
@@ -92,6 +97,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Tests a webhook subscription by sending a test event to the notification URL.
@@ -106,6 +112,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

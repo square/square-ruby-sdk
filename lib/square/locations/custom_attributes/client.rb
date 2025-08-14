@@ -24,6 +24,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Creates or updates [custom attributes](entity:CustomAttribute) for locations as a bulk operation.
@@ -47,6 +48,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Lists the [custom attributes](entity:CustomAttribute) associated with a location.
@@ -66,6 +68,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves a [custom attribute](entity:CustomAttribute) associated with a location.
@@ -84,6 +87,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Creates or updates a [custom attribute](entity:CustomAttribute) for a location.
@@ -103,6 +107,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Deletes a [custom attribute](entity:CustomAttribute) associated with a location.
@@ -119,6 +124,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

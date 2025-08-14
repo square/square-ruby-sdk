@@ -22,6 +22,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Creates a Square-hosted checkout page. Applications can share the resulting payment link with their buyer to pay for goods and services.
@@ -36,6 +37,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves a payment link.
@@ -50,6 +52,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Updates a payment link. You can update the `payment_link` fields such as
@@ -66,6 +69,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Deletes a payment link.
@@ -80,6 +84,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

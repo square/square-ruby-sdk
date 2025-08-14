@@ -29,6 +29,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Searches for loyalty rewards. This endpoint accepts a request with no query filters and returns results for all loyalty accounts.
@@ -49,6 +50,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves a loyalty reward.
@@ -63,6 +65,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Deletes a loyalty reward by doing the following:
@@ -85,6 +88,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Redeems a loyalty reward.
@@ -109,6 +113,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

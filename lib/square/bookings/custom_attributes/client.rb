@@ -28,6 +28,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Bulk upserts bookings custom attributes.
@@ -48,6 +49,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Lists a booking's custom attributes.
@@ -65,6 +67,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves a bookings custom attribute.
@@ -82,6 +85,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Upserts a bookings custom attribute.
@@ -102,6 +106,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Deletes a bookings custom attribute.
@@ -122,6 +127,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

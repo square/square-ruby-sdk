@@ -29,6 +29,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves a [custom attribute](entity:CustomAttribute) associated with a customer profile.
@@ -50,6 +51,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Creates or updates a [custom attribute](entity:CustomAttribute) for a customer profile.
@@ -72,6 +74,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Deletes a [custom attribute](entity:CustomAttribute) associated with a customer profile.
@@ -90,6 +93,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end

@@ -27,6 +27,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Creates a customer-related [custom attribute definition](entity:CustomAttributeDefinition) for a Square seller account.
@@ -51,6 +52,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Retrieves a customer-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square seller account.
@@ -69,6 +71,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Updates a customer-related [custom attribute definition](entity:CustomAttributeDefinition) for a Square seller account.
@@ -89,6 +92,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Deletes a customer-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square seller account.
@@ -108,6 +112,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
 
                 # Creates or updates [custom attributes](entity:CustomAttribute) for customer profiles as a bulk operation.
@@ -135,6 +140,7 @@ module Square
 
                     else
                         raise _response.body
+                    end
                 end
             end
         end
