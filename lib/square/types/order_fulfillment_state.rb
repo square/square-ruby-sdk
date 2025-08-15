@@ -1,13 +1,12 @@
 
 module Square
-  module Types
-    module OrderFulfillmentState
-      extends Square::Internal::Types::Enum
-      PROPOSED = "PROPOSED"
-      RESERVED = "RESERVED"
-      PREPARED = "PREPARED"
-      COMPLETED = "COMPLETED"
-      CANCELED = "CANCELED"
-      FAILED = "FAILED"end
+  class OrderFulfillmentState
+    include Square::Internal::Types::Enum
+    PROPOSED = "PROPOSED"
+    RESERVED = "RESERVED"
+    PREPARED = "PREPARED"
+    COMPLETED = "COMPLETED"
+    CANCELED = "CANCELED"
+    FAILED = "FAILED"
   end
 end

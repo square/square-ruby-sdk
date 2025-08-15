@@ -1,9 +1,8 @@
 
 module Square
-  module Types
-    module SearchCatalogItemsRequestStockLevel
-      extends Square::Internal::Types::Enum
-      OUT = "OUT"
-      LOW = "LOW"end
+  class SearchCatalogItemsRequestStockLevel
+    include Square::Internal::Types::Enum
+    OUT = "OUT"
+    LOW = "LOW"
   end
 end

@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 module Square
-  module Types
-    class PaymentBalanceActivityReserveReleaseDetail < Internal::Types::Model
-      field :payment_id, String, optional: true, nullable: false
+  class PaymentBalanceActivityReserveReleaseDetail < Internal::Types::Model
+    field :payment_id, String, optional: true, nullable: false
 
-    end
   end
 end

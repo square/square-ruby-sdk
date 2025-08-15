@@ -1,9 +1,8 @@
 
 module Square
-  module Types
-    module MerchantStatus
-      extends Square::Internal::Types::Enum
-      ACTIVE = "ACTIVE"
-      INACTIVE = "INACTIVE"end
+  class MerchantStatus
+    include Square::Internal::Types::Enum
+    ACTIVE = "ACTIVE"
+    INACTIVE = "INACTIVE"
   end
 end

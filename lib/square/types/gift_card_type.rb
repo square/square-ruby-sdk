@@ -1,9 +1,8 @@
 
 module Square
-  module Types
-    module GiftCardType
-      extends Square::Internal::Types::Enum
-      PHYSICAL = "PHYSICAL"
-      DIGITAL = "DIGITAL"end
+  class GiftCardType
+    include Square::Internal::Types::Enum
+    PHYSICAL = "PHYSICAL"
+    DIGITAL = "DIGITAL"
   end
 end

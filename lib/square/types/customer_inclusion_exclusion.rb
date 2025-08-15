@@ -1,9 +1,8 @@
 
 module Square
-  module Types
-    module CustomerInclusionExclusion
-      extends Square::Internal::Types::Enum
-      INCLUDE = "INCLUDE"
-      EXCLUDE = "EXCLUDE"end
+  class CustomerInclusionExclusion
+    include Square::Internal::Types::Enum
+    INCLUDE = "INCLUDE"
+    EXCLUDE = "EXCLUDE"
   end
 end

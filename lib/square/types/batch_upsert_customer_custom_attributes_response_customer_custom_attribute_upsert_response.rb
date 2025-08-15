@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
 module Square
-  module Types
-    # Represents a response for an individual upsert request in a [BulkUpsertCustomerCustomAttributes](api-endpoint:CustomerCustomAttributes-BulkUpsertCustomerCustomAttributes) operation.
-    class BatchUpsertCustomerCustomAttributesResponseCustomerCustomAttributeUpsertResponse < Internal::Types::Model
-      field :customer_id, String, optional: true, nullable: false
-      field :custom_attribute, Square::CustomAttribute, optional: true, nullable: false
-      field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+  # Represents a response for an individual upsert request in a [BulkUpsertCustomerCustomAttributes](api-endpoint:CustomerCustomAttributes-BulkUpsertCustomerCustomAttributes) operation.
+  class BatchUpsertCustomerCustomAttributesResponseCustomerCustomAttributeUpsertResponse < Internal::Types::Model
+    field :customer_id, String, optional: true, nullable: false
+    field :custom_attribute, Square::CustomAttribute, optional: true, nullable: false
+    field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
 
-    end
   end
 end

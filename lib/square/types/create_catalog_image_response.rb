@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 module Square
-  module Types
-    class CreateCatalogImageResponse < Internal::Types::Model
-      field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
-      field :image, Square::CatalogObject, optional: true, nullable: false
+  class CreateCatalogImageResponse < Internal::Types::Model
+    field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+    field :image, Square::CatalogObject, optional: true, nullable: false
 
-    end
   end
 end
