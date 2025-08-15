@@ -15,13 +15,12 @@ module Square
         # @return [Square::ListEmployeeWagesResponse]
         def list(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::ListEmployeeWagesResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Returns a single `EmployeeWage` specified by `id`.
@@ -29,13 +28,12 @@ module Square
         # @return [Square::GetEmployeeWageResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::GetEmployeeWageResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

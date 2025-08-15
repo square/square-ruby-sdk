@@ -27,13 +27,12 @@ module Square
       # @return [Square::BatchDeleteCatalogObjectsResponse]
       def batch_delete(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchDeleteCatalogObjectsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns a set of objects based on the provided ID.
@@ -46,13 +45,12 @@ module Square
       # @return [Square::BatchGetCatalogObjectsResponse]
       def batch_get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchGetCatalogObjectsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Creates or updates up to 10,000 target objects based on the provided
@@ -72,13 +70,12 @@ module Square
       # @return [Square::BatchUpsertCatalogObjectsResponse]
       def batch_upsert(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchUpsertCatalogObjectsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves information about the Square Catalog API, such as batch size
@@ -87,13 +84,12 @@ module Square
       # @return [Square::CatalogInfoResponse]
       def info(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CatalogInfoResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns a list of all [CatalogObject](entity:CatalogObject)s of the specified types in the catalog.
@@ -108,13 +104,12 @@ module Square
       # @return [Square::ListCatalogResponse]
       def list(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListCatalogResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Searches for [CatalogObject](entity:CatalogObject) of any type by matching supported search attribute values,
@@ -131,13 +126,12 @@ module Square
       # @return [Square::SearchCatalogObjectsResponse]
       def search(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SearchCatalogObjectsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Searches for catalog items or item variations by matching supported search attribute values, including
@@ -154,13 +148,12 @@ module Square
       # @return [Square::SearchCatalogItemsResponse]
       def search_items(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SearchCatalogItemsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Updates the [CatalogModifierList](entity:CatalogModifierList) objects
@@ -170,13 +163,12 @@ module Square
       # @return [Square::UpdateItemModifierListsResponse]
       def update_item_modifier_lists(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UpdateItemModifierListsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Updates the [CatalogTax](entity:CatalogTax) objects that apply to the
@@ -186,13 +178,12 @@ module Square
       # @return [Square::UpdateItemTaxesResponse]
       def update_item_taxes(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UpdateItemTaxesResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

@@ -20,13 +20,12 @@ module Square
         # @return [Square::ListTransactionsResponse]
         def list(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::ListTransactionsResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Retrieves details for a single transaction.
@@ -34,13 +33,12 @@ module Square
         # @return [Square::GetTransactionResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::GetTransactionResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Captures a transaction that was created with the [Charge](api-endpoint:Transactions-Charge)
@@ -53,13 +51,12 @@ module Square
         # @return [Square::CaptureTransactionResponse]
         def capture(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::CaptureTransactionResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Cancels a transaction that was created with the [Charge](api-endpoint:Transactions-Charge)
@@ -72,13 +69,12 @@ module Square
         # @return [Square::VoidTransactionResponse]
         def void(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::VoidTransactionResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

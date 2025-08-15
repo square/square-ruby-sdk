@@ -14,12 +14,12 @@ module Square
       # @return [Array[Square::V1Order]]
       def v_1_list_orders(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return 
         else
           raise _response.body
+        end
       end
 
       # Provides comprehensive information for a single online store order, including the order's history.
@@ -27,13 +27,12 @@ module Square
       # @return [Square::V1Order]
       def v_1_retrieve_order(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::V1Order.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Updates the details of an online store order. Every update you perform on an order corresponds to one of three actions:
@@ -41,13 +40,12 @@ module Square
       # @return [Square::V1Order]
       def v_1_update_order(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::V1Order.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

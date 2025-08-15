@@ -15,13 +15,12 @@ module Square
       # @return [Square::ListGiftCardsResponse]
       def list(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListGiftCardsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Creates a digital gift card or registers a physical (plastic) gift card. The resulting gift card
@@ -33,13 +32,12 @@ module Square
       # @return [Square::CreateGiftCardResponse]
       def create(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CreateGiftCardResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves a gift card using the gift card account number (GAN).
@@ -47,13 +45,12 @@ module Square
       # @return [Square::GetGiftCardFromGanResponse]
       def get_from_gan(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetGiftCardFromGanResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves a gift card using a secure payment token that represents the gift card.
@@ -61,13 +58,12 @@ module Square
       # @return [Square::GetGiftCardFromNonceResponse]
       def get_from_nonce(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetGiftCardFromNonceResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Links a customer to a gift card, which is also referred to as adding a card on file.
@@ -75,13 +71,12 @@ module Square
       # @return [Square::LinkCustomerToGiftCardResponse]
       def link_customer(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::LinkCustomerToGiftCardResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Unlinks a customer from a gift card, which is also referred to as removing a card on file.
@@ -89,13 +84,12 @@ module Square
       # @return [Square::UnlinkCustomerFromGiftCardResponse]
       def unlink_customer(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UnlinkCustomerFromGiftCardResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves a gift card using the gift card ID.
@@ -103,13 +97,12 @@ module Square
       # @return [Square::GetGiftCardResponse]
       def get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetGiftCardResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

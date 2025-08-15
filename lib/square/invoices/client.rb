@@ -16,13 +16,12 @@ module Square
       # @return [Square::ListInvoicesResponse]
       def list(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListInvoicesResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Creates a draft [invoice](entity:Invoice) 
@@ -34,13 +33,12 @@ module Square
       # @return [Square::CreateInvoiceResponse]
       def create(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CreateInvoiceResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Searches for invoices from a location specified in 
@@ -54,13 +52,12 @@ module Square
       # @return [Square::SearchInvoicesResponse]
       def search(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SearchInvoicesResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves an invoice by invoice ID.
@@ -68,13 +65,12 @@ module Square
       # @return [Square::GetInvoiceResponse]
       def get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetInvoiceResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Updates an invoice. This endpoint supports sparse updates, so you only need
@@ -85,13 +81,12 @@ module Square
       # @return [Square::UpdateInvoiceResponse]
       def update(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UpdateInvoiceResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Deletes the specified invoice. When an invoice is deleted, the 
@@ -101,13 +96,12 @@ module Square
       # @return [Square::DeleteInvoiceResponse]
       def delete(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::DeleteInvoiceResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Uploads a file and attaches it to an invoice. This endpoint accepts HTTP multipart/form-data file uploads
@@ -122,13 +116,12 @@ module Square
       # @return [Square::CreateInvoiceAttachmentResponse]
       def create_invoice_attachment(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CreateInvoiceAttachmentResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Removes an attachment from an invoice and permanently deletes the file. Attachments can be removed only
@@ -137,13 +130,12 @@ module Square
       # @return [Square::DeleteInvoiceAttachmentResponse]
       def delete_invoice_attachment(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::DeleteInvoiceAttachmentResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Cancels an invoice. The seller cannot collect payments for 
@@ -154,13 +146,12 @@ module Square
       # @return [Square::CancelInvoiceResponse]
       def cancel(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CancelInvoiceResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Publishes the specified draft invoice. 
@@ -181,13 +172,12 @@ module Square
       # @return [Square::PublishInvoiceResponse]
       def publish(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::PublishInvoiceResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

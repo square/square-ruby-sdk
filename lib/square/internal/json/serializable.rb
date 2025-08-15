@@ -3,7 +3,7 @@
 module Square
   module Internal
     module JSON
-      class Serializable
+      module Serializable
         # Loads data from JSON into its deserialized form
         #
         # @param str [String] Raw JSON to load into an object

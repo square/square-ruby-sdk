@@ -15,13 +15,12 @@ module Square
         # @return [Square::ListDisputeEvidenceResponse]
         def list(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::ListDisputeEvidenceResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Returns the metadata for the evidence specified in the request URL path.
@@ -31,13 +30,12 @@ module Square
         # @return [Square::GetDisputeEvidenceResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::GetDisputeEvidenceResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Removes specified evidence from a dispute.
@@ -46,13 +44,12 @@ module Square
         # @return [Square::DeleteDisputeEvidenceResponse]
         def delete(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::DeleteDisputeEvidenceResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

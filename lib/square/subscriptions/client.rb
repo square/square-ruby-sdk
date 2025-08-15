@@ -21,13 +21,12 @@ module Square
       # @return [Square::CreateSubscriptionResponse]
       def create(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CreateSubscriptionResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Schedules a plan variation change for all active subscriptions under a given plan
@@ -36,13 +35,12 @@ module Square
       # @return [Square::BulkSwapPlanResponse]
       def bulk_swap_plan(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BulkSwapPlanResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Searches for subscriptions.
@@ -63,13 +61,12 @@ module Square
       # @return [Square::SearchSubscriptionsResponse]
       def search(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SearchSubscriptionsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves a specific subscription.
@@ -77,13 +74,12 @@ module Square
       # @return [Square::GetSubscriptionResponse]
       def get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetSubscriptionResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Updates a subscription by modifying or clearing `subscription` field values.
@@ -92,13 +88,12 @@ module Square
       # @return [Square::UpdateSubscriptionResponse]
       def update(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UpdateSubscriptionResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Deletes a scheduled action for a subscription.
@@ -106,13 +101,12 @@ module Square
       # @return [Square::DeleteSubscriptionActionResponse]
       def delete_action(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::DeleteSubscriptionActionResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Changes the [billing anchor date](https://developer.squareup.com/docs/subscriptions-api/subscription-billing#billing-dates)
@@ -121,13 +115,12 @@ module Square
       # @return [Square::ChangeBillingAnchorDateResponse]
       def change_billing_anchor_date(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ChangeBillingAnchorDateResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Schedules a `CANCEL` action to cancel an active subscription. This 
@@ -137,13 +130,12 @@ module Square
       # @return [Square::CancelSubscriptionResponse]
       def cancel(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CancelSubscriptionResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Lists all [events](https://developer.squareup.com/docs/subscriptions-api/actions-events) for a specific subscription.
@@ -151,13 +143,12 @@ module Square
       # @return [Square::ListSubscriptionEventsResponse]
       def list_events(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListSubscriptionEventsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Schedules a `PAUSE` action to pause an active subscription.
@@ -165,13 +156,12 @@ module Square
       # @return [Square::PauseSubscriptionResponse]
       def pause(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::PauseSubscriptionResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Schedules a `RESUME` action to resume a paused or a deactivated subscription.
@@ -179,13 +169,12 @@ module Square
       # @return [Square::ResumeSubscriptionResponse]
       def resume(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ResumeSubscriptionResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Schedules a `SWAP_PLAN` action to swap a subscription plan variation in an existing subscription. 
@@ -194,13 +183,12 @@ module Square
       # @return [Square::SwapPlanResponse]
       def swap_plan(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SwapPlanResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

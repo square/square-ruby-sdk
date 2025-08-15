@@ -1,9 +1,10 @@
 
 module Square
-  class CardPrepaidType
-    include Square::Internal::Types::Enum
-    UNKNOWN_PREPAID_TYPE = "UNKNOWN_PREPAID_TYPE"
-    NOT_PREPAID = "NOT_PREPAID"
-    PREPAID = "PREPAID"
+  module Types
+    module CardPrepaidType
+      extends Square::Internal::Types::Enum
+      UNKNOWN_PREPAID_TYPE = "UNKNOWN_PREPAID_TYPE"
+      NOT_PREPAID = "NOT_PREPAID"
+      PREPAID = "PREPAID"end
   end
 end

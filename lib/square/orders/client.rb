@@ -23,13 +23,12 @@ module Square
           method: POST,
           path: "v2/orders"
         )
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CreateOrderResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves a set of [orders](entity:Order) by their IDs.
@@ -39,13 +38,12 @@ module Square
       # @return [Square::BatchGetOrdersResponse]
       def batch_get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchGetOrdersResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Enables applications to preview order pricing without creating an order.
@@ -53,13 +51,12 @@ module Square
       # @return [Square::CalculateOrderResponse]
       def calculate(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CalculateOrderResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Creates a new order, in the `DRAFT` state, by duplicating an existing order. The newly created order has
@@ -68,13 +65,12 @@ module Square
       # @return [Square::CloneOrderResponse]
       def clone(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CloneOrderResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Search all orders for one or more locations. Orders include all sales,
@@ -98,13 +94,12 @@ module Square
       # @return [Square::SearchOrdersResponse]
       def search(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SearchOrdersResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves an [Order](entity:Order) by ID.
@@ -112,13 +107,12 @@ module Square
       # @return [Square::GetOrderResponse]
       def get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetOrderResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Updates an open [order](entity:Order) by adding, replacing, or deleting
@@ -140,13 +134,12 @@ module Square
       # @return [Square::UpdateOrderResponse]
       def update(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UpdateOrderResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Pay for an [order](entity:Order) using one or more approved [payments](entity:Payment)
@@ -167,13 +160,12 @@ module Square
       # @return [Square::PayOrderResponse]
       def pay(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::PayOrderResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

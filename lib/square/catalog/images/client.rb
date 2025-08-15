@@ -20,13 +20,12 @@ module Square
         # @return [Square::CreateCatalogImageResponse]
         def create(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::CreateCatalogImageResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Uploads a new image file to replace the existing one in the specified [CatalogImage](entity:CatalogImage) object.
@@ -37,13 +36,12 @@ module Square
         # @return [Square::UpdateCatalogImageResponse]
         def update(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::UpdateCatalogImageResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

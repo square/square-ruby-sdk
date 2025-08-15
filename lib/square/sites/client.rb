@@ -17,13 +17,12 @@ module Square
       # @return [Square::ListSitesResponse]
       def list(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListSitesResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

@@ -1,8 +1,9 @@
 
 module Square
-  class CatalogItemFoodAndBeverageDetailsDietaryPreferenceType
-    include Square::Internal::Types::Enum
-    STANDARD = "STANDARD"
-    CUSTOM = "CUSTOM"
+  module Types
+    module CatalogItemFoodAndBeverageDetailsDietaryPreferenceType
+      extends Square::Internal::Types::Enum
+      STANDARD = "STANDARD"
+      CUSTOM = "CUSTOM"end
   end
 end

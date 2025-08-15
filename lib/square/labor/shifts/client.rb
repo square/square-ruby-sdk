@@ -32,13 +32,12 @@ module Square
         # @return [Square::CreateShiftResponse]
         def create(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::CreateShiftResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Returns a paginated list of `Shift` records for a business.
@@ -59,13 +58,12 @@ module Square
         # @return [Square::SearchShiftsResponse]
         def search(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::SearchShiftsResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Returns a single `Shift` specified by `id`.
@@ -73,13 +71,12 @@ module Square
         # @return [Square::GetShiftResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::GetShiftResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Updates an existing `Shift`.
@@ -93,13 +90,12 @@ module Square
         # @return [Square::UpdateShiftResponse]
         def update(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::UpdateShiftResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Deletes a `Shift`.
@@ -107,13 +103,12 @@ module Square
         # @return [Square::DeleteShiftResponse]
         def delete(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::DeleteShiftResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

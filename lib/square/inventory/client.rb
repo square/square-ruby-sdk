@@ -15,13 +15,12 @@ module Square
       # @return [Square::GetInventoryAdjustmentResponse]
       def deprecated_get_adjustment(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetInventoryAdjustmentResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns the [InventoryAdjustment](entity:InventoryAdjustment) object
@@ -30,13 +29,12 @@ module Square
       # @return [Square::GetInventoryAdjustmentResponse]
       def get_adjustment(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetInventoryAdjustmentResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Deprecated version of [BatchChangeInventory](api-endpoint:Inventory-BatchChangeInventory) after the endpoint URL
@@ -48,13 +46,12 @@ module Square
           method: POST,
           path: "v2/inventory/batch-change"
         )
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchChangeInventoryResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Deprecated version of [BatchRetrieveInventoryChanges](api-endpoint:Inventory-BatchRetrieveInventoryChanges) after the endpoint URL
@@ -66,13 +63,12 @@ module Square
           method: POST,
           path: "v2/inventory/batch-retrieve-changes"
         )
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchGetInventoryChangesResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Deprecated version of [BatchRetrieveInventoryCounts](api-endpoint:Inventory-BatchRetrieveInventoryCounts) after the endpoint URL
@@ -84,13 +80,12 @@ module Square
           method: POST,
           path: "v2/inventory/batch-retrieve-counts"
         )
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchGetInventoryCountsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Applies adjustments and counts to the provided item quantities.
@@ -105,13 +100,12 @@ module Square
           method: POST,
           path: "v2/inventory/changes/batch-create"
         )
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchChangeInventoryResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns historical physical counts and adjustments based on the
@@ -129,13 +123,12 @@ module Square
           method: POST,
           path: "v2/inventory/changes/batch-retrieve"
         )
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchGetInventoryChangesResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns current counts for the provided
@@ -156,13 +149,12 @@ module Square
           method: POST,
           path: "v2/inventory/counts/batch-retrieve"
         )
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchGetInventoryCountsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Deprecated version of [RetrieveInventoryPhysicalCount](api-endpoint:Inventory-RetrieveInventoryPhysicalCount) after the endpoint URL
@@ -171,13 +163,12 @@ module Square
       # @return [Square::GetInventoryPhysicalCountResponse]
       def deprecated_get_physical_count(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetInventoryPhysicalCountResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns the [InventoryPhysicalCount](entity:InventoryPhysicalCount)
@@ -186,13 +177,12 @@ module Square
       # @return [Square::GetInventoryPhysicalCountResponse]
       def get_physical_count(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetInventoryPhysicalCountResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns the [InventoryTransfer](entity:InventoryTransfer) object
@@ -201,13 +191,12 @@ module Square
       # @return [Square::GetInventoryTransferResponse]
       def get_transfer(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetInventoryTransferResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves the current calculated stock count for a given
@@ -218,13 +207,12 @@ module Square
       # @return [Square::GetInventoryCountResponse]
       def get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetInventoryCountResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns a set of physical counts and inventory adjustments for the
@@ -244,13 +232,12 @@ module Square
       # @return [Square::GetInventoryChangesResponse]
       def changes(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetInventoryChangesResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

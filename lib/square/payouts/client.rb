@@ -16,13 +16,12 @@ module Square
       # @return [Square::ListPayoutsResponse]
       def list(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListPayoutsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves details of a specific payout identified by a payout ID.
@@ -31,13 +30,12 @@ module Square
       # @return [Square::GetPayoutResponse]
       def get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetPayoutResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves a list of all payout entries for a specific payout.
@@ -46,13 +44,12 @@ module Square
       # @return [Square::ListPayoutEntriesResponse]
       def list_entries(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListPayoutEntriesResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

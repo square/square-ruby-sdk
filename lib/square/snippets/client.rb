@@ -19,13 +19,12 @@ module Square
       # @return [Square::GetSnippetResponse]
       def get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetSnippetResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Adds a snippet to a Square Online site or updates the existing snippet on the site. 
@@ -39,13 +38,12 @@ module Square
       # @return [Square::UpsertSnippetResponse]
       def upsert(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UpsertSnippetResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Removes your snippet from a Square Online site.
@@ -58,13 +56,12 @@ module Square
       # @return [Square::DeleteSnippetResponse]
       def delete(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::DeleteSnippetResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

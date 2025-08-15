@@ -20,13 +20,12 @@ module Square
         # @return [Square::GetWageSettingResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::GetWageSettingResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Creates or updates a `WageSetting` object. The object is created if a
@@ -41,13 +40,12 @@ module Square
         # @return [Square::UpdateWageSettingResponse]
         def update(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::UpdateWageSettingResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

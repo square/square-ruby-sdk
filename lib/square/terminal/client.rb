@@ -16,13 +16,12 @@ module Square
       # @return [Square::DismissTerminalActionResponse]
       def dismiss_terminal_action(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::DismissTerminalActionResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Dismisses a Terminal checkout request if the status and type of the request permits it.
@@ -30,13 +29,12 @@ module Square
       # @return [Square::DismissTerminalCheckoutResponse]
       def dismiss_terminal_checkout(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::DismissTerminalCheckoutResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Dismisses a Terminal refund request if the status and type of the request permits it.
@@ -44,13 +42,12 @@ module Square
       # @return [Square::DismissTerminalRefundResponse]
       def dismiss_terminal_refund(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::DismissTerminalRefundResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

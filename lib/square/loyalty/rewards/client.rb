@@ -22,13 +22,12 @@ module Square
         # @return [Square::CreateLoyaltyRewardResponse]
         def create(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::CreateLoyaltyRewardResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Searches for loyalty rewards. This endpoint accepts a request with no query filters and returns results for all loyalty accounts.
@@ -42,13 +41,12 @@ module Square
         # @return [Square::SearchLoyaltyRewardsResponse]
         def search(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::SearchLoyaltyRewardsResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Retrieves a loyalty reward.
@@ -56,13 +54,12 @@ module Square
         # @return [Square::GetLoyaltyRewardResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::GetLoyaltyRewardResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Deletes a loyalty reward by doing the following:
@@ -78,13 +75,12 @@ module Square
         # @return [Square::DeleteLoyaltyRewardResponse]
         def delete(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::DeleteLoyaltyRewardResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Redeems a loyalty reward.
@@ -102,13 +98,12 @@ module Square
         # @return [Square::RedeemLoyaltyRewardResponse]
         def redeem(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::RedeemLoyaltyRewardResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

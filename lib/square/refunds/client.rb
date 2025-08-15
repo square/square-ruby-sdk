@@ -19,13 +19,12 @@ module Square
       # @return [Square::ListPaymentRefundsResponse]
       def list(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListPaymentRefundsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Refunds a payment. You can refund the entire payment amount or a
@@ -36,13 +35,12 @@ module Square
       # @return [Square::RefundPaymentResponse]
       def refund_payment(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::RefundPaymentResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves a specific refund using the `refund_id`.
@@ -50,13 +48,12 @@ module Square
       # @return [Square::GetPaymentRefundResponse]
       def get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetPaymentRefundResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

@@ -18,13 +18,12 @@ module Square
       # @return [Square::ListCustomersResponse]
       def list(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListCustomersResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Creates a new customer for a business.
@@ -41,13 +40,12 @@ module Square
       # @return [Square::CreateCustomerResponse]
       def create(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CreateCustomerResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Creates multiple [customer profiles](entity:Customer) for a business.
@@ -65,13 +63,12 @@ module Square
       # @return [Square::BulkCreateCustomersResponse]
       def batch_create(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BulkCreateCustomersResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Deletes multiple customer profiles.
@@ -81,13 +78,12 @@ module Square
       # @return [Square::BulkDeleteCustomersResponse]
       def bulk_delete_customers(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BulkDeleteCustomersResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves multiple customer profiles.
@@ -97,13 +93,12 @@ module Square
       # @return [Square::BulkRetrieveCustomersResponse]
       def bulk_retrieve_customers(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BulkRetrieveCustomersResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Updates multiple customer profiles.
@@ -113,13 +108,12 @@ module Square
       # @return [Square::BulkUpdateCustomersResponse]
       def bulk_update_customers(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BulkUpdateCustomersResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Searches the customer profiles associated with a Square account using one or more supported query filters.
@@ -135,13 +129,12 @@ module Square
       # @return [Square::SearchCustomersResponse]
       def search(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SearchCustomersResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns details for a single customer.
@@ -149,13 +142,12 @@ module Square
       # @return [Square::GetCustomerResponse]
       def get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetCustomerResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Updates a customer profile. This endpoint supports sparse updates, so only new or changed fields are required in the request.
@@ -166,13 +158,12 @@ module Square
       # @return [Square::UpdateCustomerResponse]
       def update(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UpdateCustomerResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Deletes a customer profile from a business.
@@ -182,13 +173,12 @@ module Square
       # @return [Square::DeleteCustomerResponse]
       def delete(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::DeleteCustomerResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

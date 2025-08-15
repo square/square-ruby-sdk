@@ -1,8 +1,9 @@
 
 module Square
-  class FulfillmentDeliveryDetailsOrderFulfillmentDeliveryDetailsScheduleType
-    include Square::Internal::Types::Enum
-    SCHEDULED = "SCHEDULED"
-    ASAP = "ASAP"
+  module Types
+    module FulfillmentDeliveryDetailsOrderFulfillmentDeliveryDetailsScheduleType
+      extends Square::Internal::Types::Enum
+      SCHEDULED = "SCHEDULED"
+      ASAP = "ASAP"end
   end
 end

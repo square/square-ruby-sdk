@@ -21,13 +21,12 @@ module Square
         # @return [Square::BulkDeleteBookingCustomAttributesResponse]
         def batch_delete(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::BulkDeleteBookingCustomAttributesResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Bulk upserts bookings custom attributes.
@@ -41,13 +40,12 @@ module Square
         # @return [Square::BulkUpsertBookingCustomAttributesResponse]
         def batch_upsert(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::BulkUpsertBookingCustomAttributesResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Lists a booking's custom attributes.
@@ -58,13 +56,12 @@ module Square
         # @return [Square::ListBookingCustomAttributesResponse]
         def list(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::ListBookingCustomAttributesResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Retrieves a bookings custom attribute.
@@ -75,13 +72,12 @@ module Square
         # @return [Square::RetrieveBookingCustomAttributeResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::RetrieveBookingCustomAttributeResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Upserts a bookings custom attribute.
@@ -95,13 +91,12 @@ module Square
         # @return [Square::UpsertBookingCustomAttributeResponse]
         def upsert(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::UpsertBookingCustomAttributeResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Deletes a bookings custom attribute.
@@ -115,13 +110,12 @@ module Square
         # @return [Square::DeleteBookingCustomAttributeResponse]
         def delete(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::DeleteBookingCustomAttributeResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

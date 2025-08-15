@@ -19,13 +19,12 @@ module Square
         # @return [Square::UpsertCatalogObjectResponse]
         def upsert(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::UpsertCatalogObjectResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Returns a single [CatalogItem](entity:CatalogItem) as a
@@ -39,13 +38,12 @@ module Square
         # @return [Square::GetCatalogObjectResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::GetCatalogObjectResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Deletes a single [CatalogObject](entity:CatalogObject) based on the
@@ -62,13 +60,12 @@ module Square
         # @return [Square::DeleteCatalogObjectResponse]
         def delete(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::DeleteCatalogObjectResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

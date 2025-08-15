@@ -14,13 +14,12 @@ module Square
       # @return [Square::ListJobsResponse]
       def list_jobs(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListJobsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Creates a job in a seller account. A job defines a title and tip eligibility. Note that
@@ -29,13 +28,12 @@ module Square
       # @return [Square::CreateJobResponse]
       def create_job(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CreateJobResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves a specified job.
@@ -43,13 +41,12 @@ module Square
       # @return [Square::RetrieveJobResponse]
       def retrieve_job(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::RetrieveJobResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Updates the title or tip eligibility of a job. Changes to the title propagate to all
@@ -59,13 +56,12 @@ module Square
       # @return [Square::UpdateJobResponse]
       def update_job(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UpdateJobResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

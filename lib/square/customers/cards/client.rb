@@ -19,13 +19,12 @@ module Square
         # @return [Square::CreateCustomerCardResponse]
         def create(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::CreateCustomerCardResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Removes a card on file from a customer.
@@ -33,13 +32,12 @@ module Square
         # @return [Square::DeleteCustomerCardResponse]
         def delete(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::DeleteCustomerCardResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

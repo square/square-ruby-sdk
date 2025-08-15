@@ -18,13 +18,12 @@ module Square
         # @return [Square::ListLocationCustomAttributeDefinitionsResponse]
         def list(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::ListLocationCustomAttributeDefinitionsResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Creates a location-related [custom attribute definition](entity:CustomAttributeDefinition) for a Square seller account.
@@ -38,13 +37,12 @@ module Square
         # @return [Square::CreateLocationCustomAttributeDefinitionResponse]
         def create(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::CreateLocationCustomAttributeDefinitionResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Retrieves a location-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square seller account.
@@ -54,13 +52,12 @@ module Square
         # @return [Square::RetrieveLocationCustomAttributeDefinitionResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::RetrieveLocationCustomAttributeDefinitionResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Updates a location-related [custom attribute definition](entity:CustomAttributeDefinition) for a Square seller account.
@@ -71,13 +68,12 @@ module Square
         # @return [Square::UpdateLocationCustomAttributeDefinitionResponse]
         def update(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::UpdateLocationCustomAttributeDefinitionResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Deletes a location-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square seller account.
@@ -88,13 +84,12 @@ module Square
         # @return [Square::DeleteLocationCustomAttributeDefinitionResponse]
         def delete(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::DeleteLocationCustomAttributeDefinitionResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

@@ -1,8 +1,9 @@
 
 module Square
-  class GiftCardGanSource
-    include Square::Internal::Types::Enum
-    SQUARE = "SQUARE"
-    OTHER = "OTHER"
+  module Types
+    module GiftCardGanSource
+      extends Square::Internal::Types::Enum
+      SQUARE = "SQUARE"
+      OTHER = "OTHER"end
   end
 end

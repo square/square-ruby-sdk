@@ -15,13 +15,12 @@ module Square
         # @return [Square::ListBreakTypesResponse]
         def list(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::ListBreakTypesResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Creates a new `BreakType`.
@@ -42,13 +41,12 @@ module Square
         # @return [Square::CreateBreakTypeResponse]
         def create(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::CreateBreakTypeResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Returns a single `BreakType` specified by `id`.
@@ -56,13 +54,12 @@ module Square
         # @return [Square::GetBreakTypeResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::GetBreakTypeResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Updates an existing `BreakType`.
@@ -70,13 +67,12 @@ module Square
         # @return [Square::UpdateBreakTypeResponse]
         def update(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::UpdateBreakTypeResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Deletes an existing `BreakType`.
@@ -86,13 +82,12 @@ module Square
         # @return [Square::DeleteBreakTypeResponse]
         def delete(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::DeleteBreakTypeResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

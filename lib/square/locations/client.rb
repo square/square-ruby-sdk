@@ -15,13 +15,12 @@ module Square
       # @return [Square::ListLocationsResponse]
       def list(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListLocationsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Creates a [location](https://developer.squareup.com/docs/locations-api).
@@ -35,13 +34,12 @@ module Square
       # @return [Square::CreateLocationResponse]
       def create(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CreateLocationResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves details of a single location. Specify "main"
@@ -50,13 +48,12 @@ module Square
       # @return [Square::GetLocationResponse]
       def get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetLocationResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Updates a [location](https://developer.squareup.com/docs/locations-api).
@@ -64,13 +61,12 @@ module Square
       # @return [Square::UpdateLocationResponse]
       def update(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UpdateLocationResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Links a `checkoutId` to a `checkout_page_url` that customers are
@@ -84,13 +80,12 @@ module Square
       # @return [Square::CreateCheckoutResponse]
       def checkouts(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CreateCheckoutResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

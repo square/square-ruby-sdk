@@ -22,13 +22,12 @@ module Square
           method: POST,
           path: "v2/team-members"
         )
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CreateTeamMemberResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Creates multiple `TeamMember` objects. The created `TeamMember` objects are returned on successful creates.
@@ -41,13 +40,12 @@ module Square
       # @return [Square::BatchCreateTeamMembersResponse]
       def batch_create(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchCreateTeamMembersResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Updates multiple `TeamMember` objects. The updated `TeamMember` objects are returned on successful updates.
@@ -59,13 +57,12 @@ module Square
       # @return [Square::BatchUpdateTeamMembersResponse]
       def batch_update(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchUpdateTeamMembersResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns a paginated list of `TeamMember` objects for a business. 
@@ -75,13 +72,12 @@ module Square
       # @return [Square::SearchTeamMembersResponse]
       def search(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SearchTeamMembersResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves a `TeamMember` object for the given `TeamMember.id`.
@@ -90,13 +86,12 @@ module Square
       # @return [Square::GetTeamMemberResponse]
       def get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetTeamMemberResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Updates a single `TeamMember` object. The `TeamMember` object is returned on successful updates.
@@ -105,13 +100,12 @@ module Square
       # @return [Square::UpdateTeamMemberResponse]
       def update(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UpdateTeamMemberResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

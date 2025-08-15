@@ -7,7 +7,7 @@ module Square
       #
       # An abstract model that all data objects will inherit from
       class Model
-        extend Type
+        include Type
 
         class << self
           # The defined fields for this model

@@ -17,13 +17,12 @@ module Square
           # @return [Square::ListLoyaltyPromotionsResponse]
           def list(request_options: {}, **params)
             _request = params
-
             _response = @client.send(_request)
             if _response.code >= "200" && _response.code < "300"
               return Square::Types::ListLoyaltyPromotionsResponse.load(_response.body)
-
             else
               raise _response.body
+            end
           end
 
           # Creates a loyalty promotion for a [loyalty program](entity:LoyaltyProgram). A loyalty promotion
@@ -36,13 +35,12 @@ module Square
           # @return [Square::CreateLoyaltyPromotionResponse]
           def create(request_options: {}, **params)
             _request = params
-
             _response = @client.send(_request)
             if _response.code >= "200" && _response.code < "300"
               return Square::Types::CreateLoyaltyPromotionResponse.load(_response.body)
-
             else
               raise _response.body
+            end
           end
 
           # Retrieves a loyalty promotion.
@@ -50,13 +48,12 @@ module Square
           # @return [Square::GetLoyaltyPromotionResponse]
           def get(request_options: {}, **params)
             _request = params
-
             _response = @client.send(_request)
             if _response.code >= "200" && _response.code < "300"
               return Square::Types::GetLoyaltyPromotionResponse.load(_response.body)
-
             else
               raise _response.body
+            end
           end
 
           # Cancels a loyalty promotion. Use this endpoint to cancel an `ACTIVE` promotion earlier than the
@@ -69,13 +66,12 @@ module Square
           # @return [Square::CancelLoyaltyPromotionResponse]
           def cancel(request_options: {}, **params)
             _request = params
-
             _response = @client.send(_request)
             if _response.code >= "200" && _response.code < "300"
               return Square::Types::CancelLoyaltyPromotionResponse.load(_response.body)
-
             else
               raise _response.body
+            end
           end
 
         end

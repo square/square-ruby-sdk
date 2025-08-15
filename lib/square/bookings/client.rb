@@ -17,13 +17,12 @@ module Square
       # @return [Square::ListBookingsResponse]
       def list(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListBookingsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Creates a booking.
@@ -44,13 +43,12 @@ module Square
       # @return [Square::CreateBookingResponse]
       def create(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CreateBookingResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Searches for availabilities for booking.
@@ -61,13 +59,12 @@ module Square
       # @return [Square::SearchAvailabilityResponse]
       def search_availability(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SearchAvailabilityResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Bulk-Retrieves a list of bookings by booking IDs.
@@ -78,13 +75,12 @@ module Square
       # @return [Square::BulkRetrieveBookingsResponse]
       def bulk_retrieve_bookings(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BulkRetrieveBookingsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves a seller's booking profile.
@@ -92,13 +88,12 @@ module Square
       # @return [Square::GetBusinessBookingProfileResponse]
       def get_business_profile(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetBusinessBookingProfileResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves a seller's location booking profile.
@@ -106,13 +101,12 @@ module Square
       # @return [Square::RetrieveLocationBookingProfileResponse]
       def retrieve_location_booking_profile(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::RetrieveLocationBookingProfileResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves one or more team members' booking profiles.
@@ -120,13 +114,12 @@ module Square
       # @return [Square::BulkRetrieveTeamMemberBookingProfilesResponse]
       def bulk_retrieve_team_member_booking_profiles(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BulkRetrieveTeamMemberBookingProfilesResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves a booking.
@@ -137,13 +130,12 @@ module Square
       # @return [Square::GetBookingResponse]
       def get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetBookingResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Updates a booking.
@@ -157,13 +149,12 @@ module Square
       # @return [Square::UpdateBookingResponse]
       def update(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UpdateBookingResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Cancels an existing booking.
@@ -177,13 +168,12 @@ module Square
       # @return [Square::CancelBookingResponse]
       def cancel(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CancelBookingResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

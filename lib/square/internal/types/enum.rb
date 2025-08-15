@@ -4,8 +4,8 @@ module Square
   module Internal
     module Types
       # Module for defining enums
-      class Enum
-        extends Square::Internal::Types::Type
+      module Enum
+        include Square::Internal::Types::Type
 
         # @api private
         #

@@ -1,9 +1,10 @@
 
 module Square
-  class LocationCapability
-    include Square::Internal::Types::Enum
-    CREDIT_CARD_PROCESSING = "CREDIT_CARD_PROCESSING"
-    AUTOMATIC_TRANSFERS = "AUTOMATIC_TRANSFERS"
-    UNLINKED_REFUNDS = "UNLINKED_REFUNDS"
+  module Types
+    module LocationCapability
+      extends Square::Internal::Types::Enum
+      CREDIT_CARD_PROCESSING = "CREDIT_CARD_PROCESSING"
+      AUTOMATIC_TRANSFERS = "AUTOMATIC_TRANSFERS"
+      UNLINKED_REFUNDS = "UNLINKED_REFUNDS"end
   end
 end

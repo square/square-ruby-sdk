@@ -20,13 +20,12 @@ module Square
         # @return [Square::ListCustomerCustomAttributeDefinitionsResponse]
         def list(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::ListCustomerCustomAttributeDefinitionsResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Creates a customer-related [custom attribute definition](entity:CustomAttributeDefinition) for a Square seller account.
@@ -44,13 +43,12 @@ module Square
         # @return [Square::CreateCustomerCustomAttributeDefinitionResponse]
         def create(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::CreateCustomerCustomAttributeDefinitionResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Retrieves a customer-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square seller account.
@@ -62,13 +60,12 @@ module Square
         # @return [Square::GetCustomerCustomAttributeDefinitionResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::GetCustomerCustomAttributeDefinitionResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Updates a customer-related [custom attribute definition](entity:CustomAttributeDefinition) for a Square seller account.
@@ -82,13 +79,12 @@ module Square
         # @return [Square::UpdateCustomerCustomAttributeDefinitionResponse]
         def update(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::UpdateCustomerCustomAttributeDefinitionResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Deletes a customer-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square seller account.
@@ -101,13 +97,12 @@ module Square
         # @return [Square::DeleteCustomerCustomAttributeDefinitionResponse]
         def delete(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::DeleteCustomerCustomAttributeDefinitionResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Creates or updates [custom attributes](entity:CustomAttribute) for customer profiles as a bulk operation.
@@ -128,13 +123,12 @@ module Square
         # @return [Square::BatchUpsertCustomerCustomAttributesResponse]
         def batch_upsert(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::BatchUpsertCustomerCustomAttributesResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

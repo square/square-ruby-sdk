@@ -14,13 +14,12 @@ module Square
       # @return [Square::ListBankAccountsResponse]
       def list(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListBankAccountsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns details of a [BankAccount](entity:BankAccount) identified by V1 bank account ID.
@@ -28,13 +27,12 @@ module Square
       # @return [Square::GetBankAccountByV1IdResponse]
       def get_by_v_1_id(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetBankAccountByV1IdResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns details of a [BankAccount](entity:BankAccount)
@@ -43,13 +41,12 @@ module Square
       # @return [Square::GetBankAccountResponse]
       def get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetBankAccountResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

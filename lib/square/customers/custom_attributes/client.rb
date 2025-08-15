@@ -22,13 +22,12 @@ module Square
         # @return [Square::ListCustomerCustomAttributesResponse]
         def list(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::ListCustomerCustomAttributesResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Retrieves a [custom attribute](entity:CustomAttribute) associated with a customer profile.
@@ -43,13 +42,12 @@ module Square
         # @return [Square::GetCustomerCustomAttributeResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::GetCustomerCustomAttributeResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Creates or updates a [custom attribute](entity:CustomAttribute) for a customer profile.
@@ -65,13 +63,12 @@ module Square
         # @return [Square::UpsertCustomerCustomAttributeResponse]
         def upsert(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::UpsertCustomerCustomAttributeResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Deletes a [custom attribute](entity:CustomAttribute) associated with a customer profile.
@@ -83,13 +80,12 @@ module Square
         # @return [Square::DeleteCustomerCustomAttributeResponse]
         def delete(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::DeleteCustomerCustomAttributeResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

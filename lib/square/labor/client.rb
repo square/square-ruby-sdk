@@ -21,13 +21,12 @@ module Square
       # @return [Square::CreateScheduledShiftResponse]
       def create_scheduled_shift(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CreateScheduledShiftResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Publishes 1 - 100 scheduled shifts. This endpoint takes a map of individual publish
@@ -40,13 +39,12 @@ module Square
       # @return [Square::BulkPublishScheduledShiftsResponse]
       def bulk_publish_scheduled_shifts(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BulkPublishScheduledShiftsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns a paginated list of scheduled shifts, with optional filter and sort settings.
@@ -55,13 +53,12 @@ module Square
       # @return [Square::SearchScheduledShiftsResponse]
       def search_scheduled_shifts(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SearchScheduledShiftsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves a scheduled shift by ID.
@@ -69,13 +66,12 @@ module Square
       # @return [Square::RetrieveScheduledShiftResponse]
       def retrieve_scheduled_shift(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::RetrieveScheduledShiftResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Updates the draft shift details for a scheduled shift. This endpoint supports
@@ -92,13 +88,12 @@ module Square
       # @return [Square::UpdateScheduledShiftResponse]
       def update_scheduled_shift(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UpdateScheduledShiftResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Publishes a scheduled shift. When a scheduled shift is published, Square keeps the
@@ -107,13 +102,12 @@ module Square
       # @return [Square::PublishScheduledShiftResponse]
       def publish_scheduled_shift(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::PublishScheduledShiftResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Creates a new `Timecard`.
@@ -138,13 +132,12 @@ module Square
       # @return [Square::CreateTimecardResponse]
       def create_timecard(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CreateTimecardResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns a paginated list of `Timecard` records for a business.
@@ -165,13 +158,12 @@ module Square
       # @return [Square::SearchTimecardsResponse]
       def search_timecards(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SearchTimecardsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns a single `Timecard` specified by `id`.
@@ -179,13 +171,12 @@ module Square
       # @return [Square::RetrieveTimecardResponse]
       def retrieve_timecard(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::RetrieveTimecardResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Updates an existing `Timecard`.
@@ -199,13 +190,12 @@ module Square
       # @return [Square::UpdateTimecardResponse]
       def update_timecard(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UpdateTimecardResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Deletes a `Timecard`.
@@ -213,13 +203,12 @@ module Square
       # @return [Square::DeleteTimecardResponse]
       def delete_timecard(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::DeleteTimecardResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

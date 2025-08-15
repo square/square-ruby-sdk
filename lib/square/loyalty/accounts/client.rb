@@ -15,13 +15,12 @@ module Square
         # @return [Square::CreateLoyaltyAccountResponse]
         def create(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::CreateLoyaltyAccountResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Searches for loyalty accounts in a loyalty program.
@@ -33,13 +32,12 @@ module Square
         # @return [Square::SearchLoyaltyAccountsResponse]
         def search(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::SearchLoyaltyAccountsResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Retrieves a loyalty account.
@@ -47,13 +45,12 @@ module Square
         # @return [Square::GetLoyaltyAccountResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::GetLoyaltyAccountResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Adds points earned from a purchase to a [loyalty account](entity:LoyaltyAccount).
@@ -74,13 +71,12 @@ module Square
         # @return [Square::AccumulateLoyaltyPointsResponse]
         def accumulate_points(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::AccumulateLoyaltyPointsResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Adds points to or subtracts points from a buyer's account.
@@ -92,13 +88,12 @@ module Square
         # @return [Square::AdjustLoyaltyPointsResponse]
         def adjust(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::AdjustLoyaltyPointsResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

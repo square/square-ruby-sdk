@@ -1,8 +1,9 @@
 
 module Square
-  class TaxInclusionType
-    include Square::Internal::Types::Enum
-    ADDITIVE = "ADDITIVE"
-    INCLUSIVE = "INCLUSIVE"
+  module Types
+    module TaxInclusionType
+      extends Square::Internal::Types::Enum
+      ADDITIVE = "ADDITIVE"
+      INCLUSIVE = "INCLUSIVE"end
   end
 end

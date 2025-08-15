@@ -1,9 +1,10 @@
 
 module Square
-  class LoyaltyRewardStatus
-    include Square::Internal::Types::Enum
-    ISSUED = "ISSUED"
-    REDEEMED = "REDEEMED"
-    DELETED = "DELETED"
+  module Types
+    module LoyaltyRewardStatus
+      extends Square::Internal::Types::Enum
+      ISSUED = "ISSUED"
+      REDEEMED = "REDEEMED"
+      DELETED = "DELETED"end
   end
 end

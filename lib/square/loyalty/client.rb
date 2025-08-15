@@ -21,13 +21,12 @@ module Square
       # @return [Square::SearchLoyaltyEventsResponse]
       def search_events(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SearchLoyaltyEventsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

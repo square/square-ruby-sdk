@@ -19,13 +19,12 @@ module Square
         # @return [Square::ListLoyaltyProgramsResponse]
         def list(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::ListLoyaltyProgramsResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Retrieves the loyalty program in a seller's account, specified by the program ID or the keyword `main`.
@@ -35,13 +34,12 @@ module Square
         # @return [Square::GetLoyaltyProgramResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::GetLoyaltyProgramResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Calculates the number of points a buyer can earn from a purchase. Applications might call this endpoint
@@ -63,13 +61,12 @@ module Square
         # @return [Square::CalculateLoyaltyPointsResponse]
         def calculate(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::CalculateLoyaltyPointsResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

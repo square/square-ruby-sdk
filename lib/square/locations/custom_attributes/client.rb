@@ -17,13 +17,12 @@ module Square
         # @return [Square::BulkDeleteLocationCustomAttributesResponse]
         def batch_delete(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::BulkDeleteLocationCustomAttributesResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Creates or updates [custom attributes](entity:CustomAttribute) for locations as a bulk operation.
@@ -40,13 +39,12 @@ module Square
         # @return [Square::BulkUpsertLocationCustomAttributesResponse]
         def batch_upsert(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::BulkUpsertLocationCustomAttributesResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Lists the [custom attributes](entity:CustomAttribute) associated with a location.
@@ -59,13 +57,12 @@ module Square
         # @return [Square::ListLocationCustomAttributesResponse]
         def list(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::ListLocationCustomAttributesResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Retrieves a [custom attribute](entity:CustomAttribute) associated with a location.
@@ -77,13 +74,12 @@ module Square
         # @return [Square::RetrieveLocationCustomAttributeResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::RetrieveLocationCustomAttributeResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Creates or updates a [custom attribute](entity:CustomAttribute) for a location.
@@ -96,13 +92,12 @@ module Square
         # @return [Square::UpsertLocationCustomAttributeResponse]
         def upsert(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::UpsertLocationCustomAttributeResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Deletes a [custom attribute](entity:CustomAttribute) associated with a location.
@@ -112,13 +107,12 @@ module Square
         # @return [Square::DeleteLocationCustomAttributeResponse]
         def delete(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::DeleteLocationCustomAttributeResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

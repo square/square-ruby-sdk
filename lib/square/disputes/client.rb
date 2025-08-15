@@ -14,13 +14,12 @@ module Square
       # @return [Square::ListDisputesResponse]
       def list(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListDisputesResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns details about a specific dispute.
@@ -28,13 +27,12 @@ module Square
       # @return [Square::GetDisputeResponse]
       def get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetDisputeResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Accepts the loss on a dispute. Square returns the disputed amount to the cardholder and
@@ -46,13 +44,12 @@ module Square
       # @return [Square::AcceptDisputeResponse]
       def accept(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::AcceptDisputeResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Uploads a file to use as evidence in a dispute challenge. The endpoint accepts HTTP
@@ -61,13 +58,12 @@ module Square
       # @return [Square::CreateDisputeEvidenceFileResponse]
       def create_evidence_file(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CreateDisputeEvidenceFileResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Uploads text to use as evidence for a dispute challenge.
@@ -75,13 +71,12 @@ module Square
       # @return [Square::CreateDisputeEvidenceTextResponse]
       def create_evidence_text(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CreateDisputeEvidenceTextResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Submits evidence to the cardholder's bank.
@@ -95,13 +90,12 @@ module Square
       # @return [Square::SubmitEvidenceResponse]
       def submit_evidence(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SubmitEvidenceResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

@@ -18,13 +18,12 @@ module Square
         # @return [Square::ListBookingCustomAttributeDefinitionsResponse]
         def list(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::ListBookingCustomAttributeDefinitionsResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Creates a bookings custom attribute definition.
@@ -38,13 +37,12 @@ module Square
         # @return [Square::CreateBookingCustomAttributeDefinitionResponse]
         def create(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::CreateBookingCustomAttributeDefinitionResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Retrieves a bookings custom attribute definition.
@@ -55,13 +53,12 @@ module Square
         # @return [Square::RetrieveBookingCustomAttributeDefinitionResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::RetrieveBookingCustomAttributeDefinitionResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Updates a bookings custom attribute definition.
@@ -75,13 +72,12 @@ module Square
         # @return [Square::UpdateBookingCustomAttributeDefinitionResponse]
         def update(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::UpdateBookingCustomAttributeDefinitionResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Deletes a bookings custom attribute definition.
@@ -95,13 +91,12 @@ module Square
         # @return [Square::DeleteBookingCustomAttributeDefinitionResponse]
         def delete(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::DeleteBookingCustomAttributeDefinitionResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

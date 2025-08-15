@@ -23,13 +23,12 @@ module Square
       # @return [Square::ListMerchantsResponse]
       def list(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListMerchantsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves the `Merchant` object for the given `merchant_id`.
@@ -37,13 +36,12 @@ module Square
       # @return [Square::GetMerchantResponse]
       def get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetMerchantResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

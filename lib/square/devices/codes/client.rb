@@ -15,13 +15,12 @@ module Square
         # @return [Square::ListDeviceCodesResponse]
         def list(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::ListDeviceCodesResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Creates a DeviceCode that can be used to login to a Square Terminal device to enter the connected
@@ -30,13 +29,12 @@ module Square
         # @return [Square::CreateDeviceCodeResponse]
         def create(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::CreateDeviceCodeResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
         # Retrieves DeviceCode with the associated ID.
@@ -44,13 +42,12 @@ module Square
         # @return [Square::GetDeviceCodeResponse]
         def get(request_options: {}, **params)
           _request = params
-
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::GetDeviceCodeResponse.load(_response.body)
-
           else
             raise _response.body
+          end
         end
 
       end

@@ -14,13 +14,12 @@ module Square
       # @return [Square::SearchEventsResponse]
       def search_events(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SearchEventsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Disables events to prevent them from being searchable.
@@ -30,13 +29,12 @@ module Square
       # @return [Square::DisableEventsResponse]
       def disable_events(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::DisableEventsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Enables events to make them searchable. Only events that occur while in the enabled state are searchable.
@@ -44,13 +42,12 @@ module Square
       # @return [Square::EnableEventsResponse]
       def enable_events(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::EnableEventsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Lists all event types that you can subscribe to as webhooks or query using the Events API.
@@ -58,13 +55,12 @@ module Square
       # @return [Square::ListEventTypesResponse]
       def list_event_types(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListEventTypesResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end

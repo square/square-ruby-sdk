@@ -27,13 +27,12 @@ module Square
       # @return [Square::RevokeTokenResponse]
       def revoke_token(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::RevokeTokenResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns an OAuth access token and refresh token using the `authorization_code`
@@ -61,13 +60,12 @@ module Square
       # @return [Square::ObtainTokenResponse]
       def obtain_token(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ObtainTokenResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Returns information about an [OAuth access token](https://developer.squareup.com/docs/build-basics/access-tokens#get-an-oauth-access-token) or an application’s [personal access token](https://developer.squareup.com/docs/build-basics/access-tokens#get-a-personal-access-token).
@@ -88,25 +86,23 @@ module Square
       # @return [Square::RetrieveTokenStatusResponse]
       def retrieve_token_status(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::RetrieveTokenStatusResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # @return [untyped]
       def authorize(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return
-
         else
           raise _response.body
+        end
       end
 
     end

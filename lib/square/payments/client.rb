@@ -19,13 +19,12 @@ module Square
       # @return [Square::ListPaymentsResponse]
       def list(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListPaymentsResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Creates a payment using the provided source. You can use this endpoint 
@@ -40,13 +39,12 @@ module Square
       # @return [Square::CreatePaymentResponse]
       def create(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CreatePaymentResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Cancels (voids) a payment identified by the idempotency key that is specified in the
@@ -64,13 +62,12 @@ module Square
       # @return [Square::CancelPaymentByIdempotencyKeyResponse]
       def cancel_by_idempotency_key(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CancelPaymentByIdempotencyKeyResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Retrieves details for a specific payment.
@@ -78,13 +75,12 @@ module Square
       # @return [Square::GetPaymentResponse]
       def get(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetPaymentResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Updates a payment with the APPROVED status.
@@ -93,13 +89,12 @@ module Square
       # @return [Square::UpdatePaymentResponse]
       def update(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UpdatePaymentResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Cancels (voids) a payment. You can use this endpoint to cancel a payment with 
@@ -108,13 +103,12 @@ module Square
       # @return [Square::CancelPaymentResponse]
       def cancel(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CancelPaymentResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
       # Completes (captures) a payment.
@@ -125,13 +119,12 @@ module Square
       # @return [Square::CompletePaymentResponse]
       def complete(request_options: {}, **params)
         _request = params
-
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CompletePaymentResponse.load(_response.body)
-
         else
           raise _response.body
+        end
       end
 
     end
