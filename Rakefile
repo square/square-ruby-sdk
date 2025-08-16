@@ -1,13 +1,14 @@
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+# frozen_string_literal: true
 
 require "bundler/gem_tasks"
-require 'rake/testtask'
+require "minitest/test_task"
 
-Rake::TestTask.new(:test) do |t|
-  t.libs << "test"
-  t.test_files = FileList['test/**/test_*.rb', 'spec/**/*_spec.rb']
-  t.warning = false
-end
+Minitest::TestTask.create
 
-task :default => :test
+require "rubocop/rake_task"
+
+RuboCop::RakeTask.new
+
+task default: %i[test]
+
+task lint: %i[rubocop]
