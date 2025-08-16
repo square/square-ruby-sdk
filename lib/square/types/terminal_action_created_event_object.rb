@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 module Square
-  class TerminalActionCreatedEventObject < Internal::Types::Model
-    field :action, Square::TerminalAction, optional: true, nullable: false
+  module Types
+    class TerminalActionCreatedEventObject < Internal::Types::Model
+      field :action, Square::TerminalAction, optional: true, nullable: false
 
+    end
   end
 end

@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 module Square
-  # Information about the destination against which the payout was made.
-  class Destination < Internal::Types::Model
-    field :type, Square::DestinationType, optional: true, nullable: false
-    field :id, String, optional: true, nullable: false
+  module Types
+    # Information about the destination against which the payout was made.
+    class Destination < Internal::Types::Model
+      field :type, Square::DestinationType, optional: true, nullable: false
+      field :id, String, optional: true, nullable: false
 
+    end
   end
 end

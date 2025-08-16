@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 module Square
-  class DeviceComponentDetailsCardReaderDetails < Internal::Types::Model
-    field :version, String, optional: true, nullable: false
+  module Types
+    class DeviceComponentDetailsCardReaderDetails < Internal::Types::Model
+      field :version, String, optional: true, nullable: false
 
+    end
   end
 end

@@ -1,9 +1,10 @@
 
 module Square
-  class OrderFulfillmentType
-    include Square::Internal::Types::Enum
-    PICKUP = "PICKUP"
-    SHIPMENT = "SHIPMENT"
-    DELIVERY = "DELIVERY"
+  module Types
+    module OrderFulfillmentType
+      extends Square::Internal::Types::Enum
+      PICKUP = "PICKUP"
+      SHIPMENT = "SHIPMENT"
+      DELIVERY = "DELIVERY"end
   end
 end

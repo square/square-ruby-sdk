@@ -1,10 +1,11 @@
 
 module Square
-  class TenderBuyNowPayLaterDetailsStatus
-    include Square::Internal::Types::Enum
-    AUTHORIZED = "AUTHORIZED"
-    CAPTURED = "CAPTURED"
-    VOIDED = "VOIDED"
-    FAILED = "FAILED"
+  module Types
+    module TenderBuyNowPayLaterDetailsStatus
+      extends Square::Internal::Types::Enum
+      AUTHORIZED = "AUTHORIZED"
+      CAPTURED = "CAPTURED"
+      VOIDED = "VOIDED"
+      FAILED = "FAILED"end
   end
 end

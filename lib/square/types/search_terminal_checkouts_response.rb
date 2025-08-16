@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 module Square
-  class SearchTerminalCheckoutsResponse < Internal::Types::Model
-    field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
-    field :checkouts, Internal::Types::Array[Square::TerminalCheckout], optional: true, nullable: false
-    field :cursor, String, optional: true, nullable: false
+  module Types
+    class SearchTerminalCheckoutsResponse < Internal::Types::Model
+      field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+      field :checkouts, Internal::Types::Array[Square::TerminalCheckout], optional: true, nullable: false
+      field :cursor, String, optional: true, nullable: false
 
+    end
   end
 end

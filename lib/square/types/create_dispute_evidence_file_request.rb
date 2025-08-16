@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 module Square
-  # Defines the parameters for a `CreateDisputeEvidenceFile` request.
-  class CreateDisputeEvidenceFileRequest < Internal::Types::Model
-    field :idempotency_key, String, optional: false, nullable: false
-    field :evidence_type, Square::DisputeEvidenceType, optional: true, nullable: false
-    field :content_type, String, optional: true, nullable: false
+  module Types
+    # Defines the parameters for a `CreateDisputeEvidenceFile` request.
+    class CreateDisputeEvidenceFileRequest < Internal::Types::Model
+      field :idempotency_key, String, optional: false, nullable: false
+      field :evidence_type, Square::DisputeEvidenceType, optional: true, nullable: false
+      field :content_type, String, optional: true, nullable: false
 
+    end
   end
 end

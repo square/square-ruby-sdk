@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 module Square
-  class DisputeEvidenceRemovedEventData < Internal::Types::Model
-    field :type, String, optional: true, nullable: false
-    field :id, String, optional: true, nullable: false
-    field :object, Square::DisputeEvidenceRemovedEventObject, optional: true, nullable: false
+  module Types
+    class DisputeEvidenceRemovedEventData < Internal::Types::Model
+      field :type, String, optional: true, nullable: false
+      field :id, String, optional: true, nullable: false
+      field :object, Square::DisputeEvidenceRemovedEventObject, optional: true, nullable: false
 
+    end
   end
 end

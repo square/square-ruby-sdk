@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 module Square
-  class PayoutFailedEventData < Internal::Types::Model
-    field :type, String, optional: true, nullable: false
-    field :id, String, optional: true, nullable: false
-    field :object, Square::PayoutFailedEventObject, optional: true, nullable: false
+  module Types
+    class PayoutFailedEventData < Internal::Types::Model
+      field :type, String, optional: true, nullable: false
+      field :id, String, optional: true, nullable: false
+      field :object, Square::PayoutFailedEventObject, optional: true, nullable: false
 
+    end
   end
 end

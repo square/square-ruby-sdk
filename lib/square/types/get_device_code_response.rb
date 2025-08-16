@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 module Square
-  class GetDeviceCodeResponse < Internal::Types::Model
-    field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
-    field :device_code, Square::DeviceCode, optional: true, nullable: false
+  module Types
+    class GetDeviceCodeResponse < Internal::Types::Model
+      field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+      field :device_code, Square::DeviceCode, optional: true, nullable: false
 
+    end
   end
 end

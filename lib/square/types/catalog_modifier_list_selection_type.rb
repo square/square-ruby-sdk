@@ -1,8 +1,9 @@
 
 module Square
-  class CatalogModifierListSelectionType
-    include Square::Internal::Types::Enum
-    SINGLE = "SINGLE"
-    MULTIPLE = "MULTIPLE"
+  module Types
+    module CatalogModifierListSelectionType
+      extends Square::Internal::Types::Enum
+      SINGLE = "SINGLE"
+      MULTIPLE = "MULTIPLE"end
   end
 end

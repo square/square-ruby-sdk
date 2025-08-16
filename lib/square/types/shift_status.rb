@@ -1,8 +1,9 @@
 
 module Square
-  class ShiftStatus
-    include Square::Internal::Types::Enum
-    OPEN = "OPEN"
-    CLOSED = "CLOSED"
+  module Types
+    module ShiftStatus
+      extends Square::Internal::Types::Enum
+      OPEN = "OPEN"
+      CLOSED = "CLOSED"end
   end
 end

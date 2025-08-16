@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 module Square
-  class CardAutomaticallyUpdatedEventObject < Internal::Types::Model
-    field :card, Square::Card, optional: true, nullable: false
+  module Types
+    class CardAutomaticallyUpdatedEventObject < Internal::Types::Model
+      field :card, Square::Card, optional: true, nullable: false
 
+    end
   end
 end

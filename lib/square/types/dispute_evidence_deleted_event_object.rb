@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 module Square
-  class DisputeEvidenceDeletedEventObject < Internal::Types::Model
-    field :object, Square::Dispute, optional: true, nullable: false
+  module Types
+    class DisputeEvidenceDeletedEventObject < Internal::Types::Model
+      field :object, Square::Dispute, optional: true, nullable: false
 
+    end
   end
 end

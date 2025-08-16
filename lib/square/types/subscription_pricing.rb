@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 module Square
-  # Describes the pricing for the subscription.
-  class SubscriptionPricing < Internal::Types::Model
-    field :type, Square::SubscriptionPricingType, optional: true, nullable: false
-    field :discount_ids, Internal::Types::Array[String], optional: true, nullable: false
-    field :price_money, Square::Money, optional: true, nullable: false
+  module Types
+    # Describes the pricing for the subscription.
+    class SubscriptionPricing < Internal::Types::Model
+      field :type, Square::SubscriptionPricingType, optional: true, nullable: false
+      field :discount_ids, Internal::Types::Array[String], optional: true, nullable: false
+      field :price_money, Square::Money, optional: true, nullable: false
 
+    end
   end
 end

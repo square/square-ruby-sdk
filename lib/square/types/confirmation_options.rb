@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 module Square
-  class ConfirmationOptions < Internal::Types::Model
-    field :title, String, optional: false, nullable: false
-    field :body, String, optional: false, nullable: false
-    field :agree_button_text, String, optional: false, nullable: false
-    field :disagree_button_text, String, optional: true, nullable: false
-    field :decision, Square::ConfirmationDecision, optional: true, nullable: false
+  module Types
+    class ConfirmationOptions < Internal::Types::Model
+      field :title, String, optional: false, nullable: false
+      field :body, String, optional: false, nullable: false
+      field :agree_button_text, String, optional: false, nullable: false
+      field :disagree_button_text, String, optional: true, nullable: false
+      field :decision, Square::ConfirmationDecision, optional: true, nullable: false
 
+    end
   end
 end

@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 module Square
-  class UpdateItemModifierListsResponse < Internal::Types::Model
-    field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
-    field :updated_at, String, optional: true, nullable: false
+  module Types
+    class UpdateItemModifierListsResponse < Internal::Types::Model
+      field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+      field :updated_at, String, optional: true, nullable: false
 
+    end
   end
 end

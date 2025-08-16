@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 module Square
-  class LaborScheduledShiftUpdatedEventObject < Internal::Types::Model
-    field :scheduled_shift, Square::ScheduledShift, optional: true, nullable: false
+  module Types
+    class LaborScheduledShiftUpdatedEventObject < Internal::Types::Model
+      field :scheduled_shift, Square::ScheduledShift, optional: true, nullable: false
 
+    end
   end
 end

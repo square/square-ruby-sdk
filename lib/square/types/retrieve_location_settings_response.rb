@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 module Square
-  class RetrieveLocationSettingsResponse < Internal::Types::Model
-    field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
-    field :location_settings, Square::CheckoutLocationSettings, optional: true, nullable: false
+  module Types
+    class RetrieveLocationSettingsResponse < Internal::Types::Model
+      field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+      field :location_settings, Square::CheckoutLocationSettings, optional: true, nullable: false
 
+    end
   end
 end

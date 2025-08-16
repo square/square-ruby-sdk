@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 module Square
-  # Represents a [CreateInvoiceAttachment](api-endpoint:Invoices-CreateInvoiceAttachment) response.
-  class CreateInvoiceAttachmentResponse < Internal::Types::Model
-    field :attachment, Square::InvoiceAttachment, optional: true, nullable: false
-    field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+  module Types
+    # Represents a [CreateInvoiceAttachment](api-endpoint:Invoices-CreateInvoiceAttachment) response.
+    class CreateInvoiceAttachmentResponse < Internal::Types::Model
+      field :attachment, Square::InvoiceAttachment, optional: true, nullable: false
+      field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
 
+    end
   end
 end

@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 module Square
-  class BatchGetInventoryCountsResponse < Internal::Types::Model
-    field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
-    field :counts, Internal::Types::Array[Square::InventoryCount], optional: true, nullable: false
-    field :cursor, String, optional: true, nullable: false
+  module Types
+    class BatchGetInventoryCountsResponse < Internal::Types::Model
+      field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+      field :counts, Internal::Types::Array[Square::InventoryCount], optional: true, nullable: false
+      field :cursor, String, optional: true, nullable: false
 
+    end
   end
 end

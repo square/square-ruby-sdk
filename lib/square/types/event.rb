@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 module Square
-  class Event < Internal::Types::Model
-    field :merchant_id, String, optional: true, nullable: false
-    field :location_id, String, optional: true, nullable: false
-    field :type, String, optional: true, nullable: false
-    field :event_id, String, optional: true, nullable: false
-    field :created_at, String, optional: true, nullable: false
-    field :data, Square::EventData, optional: true, nullable: false
+  module Types
+    class Event < Internal::Types::Model
+      field :merchant_id, String, optional: true, nullable: false
+      field :location_id, String, optional: true, nullable: false
+      field :type, String, optional: true, nullable: false
+      field :event_id, String, optional: true, nullable: false
+      field :created_at, String, optional: true, nullable: false
+      field :data, Square::EventData, optional: true, nullable: false
 
+    end
   end
 end

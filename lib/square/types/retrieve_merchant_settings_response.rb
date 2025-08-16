@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 module Square
-  class RetrieveMerchantSettingsResponse < Internal::Types::Model
-    field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
-    field :merchant_settings, Square::CheckoutMerchantSettings, optional: true, nullable: false
+  module Types
+    class RetrieveMerchantSettingsResponse < Internal::Types::Model
+      field :errors, Internal::Types::Array[Square::Error], optional: true, nullable: false
+      field :merchant_settings, Square::CheckoutMerchantSettings, optional: true, nullable: false
 
+    end
   end
 end
