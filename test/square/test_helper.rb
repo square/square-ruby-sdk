@@ -8,7 +8,8 @@ end
 
 def client
   @client ||= Square::Client.new(
-    token: test_token
+    token: test_token,
+    base_url: Square::Environment::SANDBOX
   )
 end
 
