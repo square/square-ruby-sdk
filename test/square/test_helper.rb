@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
+require "square"
+
+def test_token
+  @test_token ||= ENV.fetch("SQUARE_TOKEN", nil) || ENV.fetch("TEST_SQUARE_TOKEN", nil) || "test_token"
+end
+
+def client
+  @client ||= Square::Client.new(
+    token: test_token
+  )
+end
+
+require "minitest/autorun"
+require "minitest/rg"
+
+
