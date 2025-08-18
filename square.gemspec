@@ -13,6 +13,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency('minitest', '~> 5.19.0')
   s.add_development_dependency('minitest-proveit', '~> 1.0')
   s.required_ruby_version = ['>= 2.7']
-  s.files = Dir['{bin,lib,man,test,spec}/**/*', 'README*', 'LICENSE*']
+  s.files = Dir[
+    '{bin,lib,man,test,spec}/**/*',
+    'README*',
+    'LICENSE*'
+  ]
   s.require_paths = ['lib']
 end
