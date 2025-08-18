@@ -3,6 +3,12 @@
 module Square
   module Types
     class CatalogObjectSubscriptionPlan < Internal::Types::Model
+
+      # Manual Forward Declarations
+      class Square::Types::CatalogSubscriptionPlan < Internal::Types::Model; end
+      class Square::Types::CatalogCustomAttributeValue < Internal::Types::Model; end
+      class Square::Types::CatalogV1Id < Internal::Types::Model; end
+
       field :type, String, optional: false, nullable: false
       field :subscription_plan_data, Square::Types::CatalogSubscriptionPlan, optional: true, nullable: false
       field :id, String, optional: false, nullable: false
