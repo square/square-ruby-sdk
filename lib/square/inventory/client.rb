@@ -45,6 +45,7 @@ module Square
         _request = Square::Internal::Http::JSONRequest.new(
           method: POST,
           path: "v2/inventory/batch-change"
+          body: Square::Types::BatchChangeInventoryRequest.new(params[:request]).to_h,
         )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
@@ -62,6 +63,7 @@ module Square
         _request = Square::Internal::Http::JSONRequest.new(
           method: POST,
           path: "v2/inventory/batch-retrieve-changes"
+          body: Square::Types::BatchRetrieveInventoryChangesRequest.new(params[:request]).to_h,
         )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
@@ -79,6 +81,7 @@ module Square
         _request = Square::Internal::Http::JSONRequest.new(
           method: POST,
           path: "v2/inventory/batch-retrieve-counts"
+          body: Square::Types::BatchGetInventoryCountsRequest.new(params[:request]).to_h,
         )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
@@ -99,6 +102,7 @@ module Square
         _request = Square::Internal::Http::JSONRequest.new(
           method: POST,
           path: "v2/inventory/changes/batch-create"
+          body: Square::Types::BatchChangeInventoryRequest.new(params[:request]).to_h,
         )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
@@ -122,6 +126,7 @@ module Square
         _request = Square::Internal::Http::JSONRequest.new(
           method: POST,
           path: "v2/inventory/changes/batch-retrieve"
+          body: Square::Types::BatchRetrieveInventoryChangesRequest.new(params[:request]).to_h,
         )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
@@ -148,6 +153,7 @@ module Square
         _request = Square::Internal::Http::JSONRequest.new(
           method: POST,
           path: "v2/inventory/counts/batch-retrieve"
+          body: Square::Types::BatchGetInventoryCountsRequest.new(params[:request]).to_h,
         )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"

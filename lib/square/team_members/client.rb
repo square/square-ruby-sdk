@@ -21,6 +21,7 @@ module Square
         _request = Square::Internal::Http::JSONRequest.new(
           method: POST,
           path: "v2/team-members"
+          body: Square::Types::CreateTeamMemberRequest.new(params[:request]).to_h,
         )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
