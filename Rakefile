@@ -16,7 +16,7 @@ Rake::TestTask.new(:test) do |t|
   t.warning = false
 end
 
-# Eventual: Minitest::TestTask.create
+RuboCop::RakeTask.new
 
 task default: %i[test]
 
