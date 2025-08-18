@@ -3,6 +3,12 @@
 module Square
   module Types
     class CatalogObjectModifierList < Internal::Types::Model
+
+      # Manual Forward Declarations
+      class Square::Types::CatalogModifierList < Internal::Types::Model; end
+      class Square::Types::CatalogCustomAttributeValue < Internal::Types::Model; end
+      class Square::Types::CatalogV1Id < Internal::Types::Model; end
+
       field :type, String, optional: false, nullable: false
       field :modifier_list_data, Square::Types::CatalogModifierList, optional: true, nullable: false
       field :id, String, optional: false, nullable: false

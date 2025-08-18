@@ -6,6 +6,12 @@ module Square
     # to another category. For example, a clothing category can be assigned to a t-shirt item or 
     # be made as the parent category to the pants category.
     class CatalogObjectCategory < Internal::Types::Model
+
+      # Manual Forward Declarations
+      class Square::Types::CatalogCategory < Internal::Types::Model; end
+      class Square::Types::CatalogCustomAttributeValue < Internal::Types::Model; end
+      class Square::Types::CatalogV1Id < Internal::Types::Model; end
+
       field :id, String, optional: true, nullable: false
       field :ordinal, Integer, optional: true, nullable: false
       field :type, String, optional: false, nullable: false

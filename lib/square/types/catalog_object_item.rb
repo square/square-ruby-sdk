@@ -3,6 +3,12 @@
 module Square
   module Types
     class CatalogObjectItem < Internal::Types::Model
+
+      # Manual Forward Declarations
+      class Square::Types::CatalogItem < Internal::Types::Model; end
+      class Square::Types::CatalogCustomAttributeValue < Internal::Types::Model; end
+      class Square::Types::CatalogV1Id < Internal::Types::Model; end
+
       field :type, String, optional: false, nullable: false
       field :item_data, Square::Types::CatalogItem, optional: true, nullable: false
       field :id, String, optional: false, nullable: false
