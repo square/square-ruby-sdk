@@ -3,7 +3,7 @@ module Square
   module Disputes
     module Types
       class AcceptDisputesRequest < Internal::Types::Model
-        field :dispute_id, String, optional: false, nullable: false
+        field :dispute_id, -> { String }, optional: false, nullable: false
 
       end
     end

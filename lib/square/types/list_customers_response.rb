@@ -7,10 +7,10 @@ module Square
     # 
     # Either `errors` or `customers` is present in a given response (never both).
     class ListCustomersResponse < Internal::Types::Model
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
-      field :customers, Internal::Types::Array[Square::Types::Customer], optional: true, nullable: false
-      field :cursor, String, optional: true, nullable: false
-      field :count, Integer, optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
+      field :customers, -> { Internal::Types::Array[Square::Types::Customer] }, optional: true, nullable: false
+      field :cursor, -> { String }, optional: true, nullable: false
+      field :count, -> { Integer }, optional: true, nullable: false
 
     end
   end

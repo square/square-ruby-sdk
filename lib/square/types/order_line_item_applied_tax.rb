@@ -9,9 +9,9 @@ module Square
     # The corresponding applied money is automatically computed, based on the
     # set of participating line items.
     class OrderLineItemAppliedTax < Internal::Types::Model
-      field :uid, String, optional: true, nullable: false
-      field :tax_uid, String, optional: false, nullable: false
-      field :applied_money, Square::Types::Money, optional: true, nullable: false
+      field :uid, -> { String }, optional: true, nullable: false
+      field :tax_uid, -> { String }, optional: false, nullable: false
+      field :applied_money, -> { Square::Types::Money }, optional: true, nullable: false
 
     end
   end

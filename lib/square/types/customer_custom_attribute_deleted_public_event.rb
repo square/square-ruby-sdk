@@ -10,11 +10,11 @@ module Square
     # [customer.custom_attribute.visible.deleted](webhook:customer.custom_attribute.visible.deleted),
     # which applies to custom attributes that are visible to the subscribing application.
     class CustomerCustomAttributeDeletedPublicEvent < Internal::Types::Model
-      field :merchant_id, String, optional: true, nullable: false
-      field :type, String, optional: true, nullable: false
-      field :event_id, String, optional: true, nullable: false
-      field :created_at, String, optional: true, nullable: false
-      field :data, Square::Types::CustomAttributeEventData, optional: true, nullable: false
+      field :merchant_id, -> { String }, optional: true, nullable: false
+      field :type, -> { String }, optional: true, nullable: false
+      field :event_id, -> { String }, optional: true, nullable: false
+      field :created_at, -> { String }, optional: true, nullable: false
+      field :data, -> { Square::Types::CustomAttributeEventData }, optional: true, nullable: false
 
     end
   end

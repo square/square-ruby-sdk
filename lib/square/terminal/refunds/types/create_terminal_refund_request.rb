@@ -4,8 +4,8 @@ module Square
     module Refunds
       module Types
         class CreateTerminalRefundRequest < Internal::Types::Model
-          field :idempotency_key, String, optional: false, nullable: false
-          field :refund, Square::Types::TerminalRefund, optional: true, nullable: false
+          field :idempotency_key, -> { String }, optional: false, nullable: false
+          field :refund, -> { Square::Types::TerminalRefund }, optional: true, nullable: false
 
         end
       end

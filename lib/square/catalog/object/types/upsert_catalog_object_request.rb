@@ -4,8 +4,8 @@ module Square
     module Object_
       module Types
         class UpsertCatalogObjectRequest < Internal::Types::Model
-          field :idempotency_key, String, optional: false, nullable: false
-          field :object, Square::Types::CatalogObject, optional: false, nullable: false
+          field :idempotency_key, -> { String }, optional: false, nullable: false
+          field :object, -> { Square::Types::CatalogObject }, optional: false, nullable: false
 
         end
       end

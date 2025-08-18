@@ -4,7 +4,7 @@ module Square
     module EmployeeWages
       module Types
         class GetEmployeeWagesRequest < Internal::Types::Model
-          field :id, String, optional: false, nullable: false
+          field :id, -> { String }, optional: false, nullable: false
 
         end
       end

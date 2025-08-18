@@ -3,7 +3,7 @@
 module Square
   module Types
     class CatalogObjectDiscount < Internal::Types::Model
-      field :discount_data, Square::Types::CatalogDiscount, optional: true, nullable: false
+      field :discount_data, -> { Square::Types::CatalogDiscount }, optional: true, nullable: false
 
     end
   end

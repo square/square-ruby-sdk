@@ -13,27 +13,27 @@ module Square
     # the `stockable_conversion` property on the variation to specify the conversion. Thus, when two glasses of the wine are sold, the sellable count
     # decreases by 2, and the stockable count automatically decreases by 0.4 bottle according to the conversion.
     class CatalogItemVariation < Internal::Types::Model
-      field :item_id, String, optional: true, nullable: false
-      field :name, String, optional: true, nullable: false
-      field :sku, String, optional: true, nullable: false
-      field :upc, String, optional: true, nullable: false
-      field :ordinal, Integer, optional: true, nullable: false
-      field :pricing_type, Square::Types::CatalogPricingType, optional: true, nullable: false
-      field :price_money, Square::Types::Money, optional: true, nullable: false
-      field :location_overrides, Internal::Types::Array[Square::Types::ItemVariationLocationOverrides], optional: true, nullable: false
-      field :track_inventory, Internal::Types::Boolean, optional: true, nullable: false
-      field :inventory_alert_type, Square::Types::InventoryAlertType, optional: true, nullable: false
-      field :inventory_alert_threshold, Integer, optional: true, nullable: false
-      field :user_data, String, optional: true, nullable: false
-      field :service_duration, Integer, optional: true, nullable: false
-      field :available_for_booking, Internal::Types::Boolean, optional: true, nullable: false
-      field :item_option_values, Internal::Types::Array[Square::Types::CatalogItemOptionValueForItemVariation], optional: true, nullable: false
-      field :measurement_unit_id, String, optional: true, nullable: false
-      field :sellable, Internal::Types::Boolean, optional: true, nullable: false
-      field :stockable, Internal::Types::Boolean, optional: true, nullable: false
-      field :image_ids, Internal::Types::Array[String], optional: true, nullable: false
-      field :team_member_ids, Internal::Types::Array[String], optional: true, nullable: false
-      field :stockable_conversion, Square::Types::CatalogStockConversion, optional: true, nullable: false
+      field :item_id, -> { String }, optional: true, nullable: false
+      field :name, -> { String }, optional: true, nullable: false
+      field :sku, -> { String }, optional: true, nullable: false
+      field :upc, -> { String }, optional: true, nullable: false
+      field :ordinal, -> { Integer }, optional: true, nullable: false
+      field :pricing_type, -> { Square::Types::CatalogPricingType }, optional: true, nullable: false
+      field :price_money, -> { Square::Types::Money }, optional: true, nullable: false
+      field :location_overrides, -> { Internal::Types::Array[Square::Types::ItemVariationLocationOverrides] }, optional: true, nullable: false
+      field :track_inventory, -> { Internal::Types::Boolean }, optional: true, nullable: false
+      field :inventory_alert_type, -> { Square::Types::InventoryAlertType }, optional: true, nullable: false
+      field :inventory_alert_threshold, -> { Integer }, optional: true, nullable: false
+      field :user_data, -> { String }, optional: true, nullable: false
+      field :service_duration, -> { Integer }, optional: true, nullable: false
+      field :available_for_booking, -> { Internal::Types::Boolean }, optional: true, nullable: false
+      field :item_option_values, -> { Internal::Types::Array[Square::Types::CatalogItemOptionValueForItemVariation] }, optional: true, nullable: false
+      field :measurement_unit_id, -> { String }, optional: true, nullable: false
+      field :sellable, -> { Internal::Types::Boolean }, optional: true, nullable: false
+      field :stockable, -> { Internal::Types::Boolean }, optional: true, nullable: false
+      field :image_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+      field :team_member_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+      field :stockable_conversion, -> { Square::Types::CatalogStockConversion }, optional: true, nullable: false
 
     end
   end

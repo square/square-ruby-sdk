@@ -6,7 +6,7 @@ module Square
     # associated with the order. It does not filter based on the
     # [FulfillmentRecipient](entity:FulfillmentRecipient) `customer_id`.
     class SearchOrdersCustomerFilter < Internal::Types::Model
-      field :customer_ids, Internal::Types::Array[String], optional: true, nullable: false
+      field :customer_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
     end
   end

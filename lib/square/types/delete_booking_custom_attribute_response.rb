@@ -5,7 +5,7 @@ module Square
     # Represents a [DeleteBookingCustomAttribute](api-endpoint:BookingCustomAttributes-DeleteBookingCustomAttribute) response.
     # Either an empty object `{}` (for a successful deletion) or `errors` is present in the response.
     class DeleteBookingCustomAttributeResponse < Internal::Types::Model
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
 
     end
   end

@@ -3,7 +3,7 @@ module Square
   module Invoices
     module Types
       class CreateInvoiceAttachmentRequest < Internal::Types::Model
-        field :invoice_id, String, optional: false, nullable: false
+        field :invoice_id, -> { String }, optional: false, nullable: false
 
       end
     end

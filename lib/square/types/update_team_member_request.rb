@@ -4,7 +4,7 @@ module Square
   module Types
     # Represents an update request for a `TeamMember` object.
     class UpdateTeamMemberRequest < Internal::Types::Model
-      field :team_member, Square::Types::TeamMember, optional: true, nullable: false
+      field :team_member, -> { Square::Types::TeamMember }, optional: true, nullable: false
 
     end
   end

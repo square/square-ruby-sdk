@@ -6,8 +6,8 @@ module Square
     # 
     # Deprecated at Square API version 2025-05-21. See the [migration notes](https://developer.squareup.com/docs/labor-api/what-it-does#migration-notes).
     class ShiftSort < Internal::Types::Model
-      field :field, Square::Types::ShiftSortField, optional: true, nullable: false
-      field :order, Square::Types::SortOrder, optional: true, nullable: false
+      field :field, -> { Square::Types::ShiftSortField }, optional: true, nullable: false
+      field :order, -> { Square::Types::SortOrder }, optional: true, nullable: false
 
     end
   end

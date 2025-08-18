@@ -4,7 +4,7 @@ module Square
     module Images
       module Types
         class UpdateImagesRequest < Internal::Types::Model
-          field :image_id, String, optional: false, nullable: false
+          field :image_id, -> { String }, optional: false, nullable: false
 
         end
       end

@@ -4,11 +4,11 @@ module Square
   module Types
     # Published when a [loyalty account](entity:LoyaltyAccount) is deleted.
     class LoyaltyAccountDeletedEvent < Internal::Types::Model
-      field :merchant_id, String, optional: true, nullable: false
-      field :type, String, optional: true, nullable: false
-      field :event_id, String, optional: true, nullable: false
-      field :created_at, String, optional: true, nullable: false
-      field :data, Square::Types::LoyaltyAccountDeletedEventData, optional: true, nullable: false
+      field :merchant_id, -> { String }, optional: true, nullable: false
+      field :type, -> { String }, optional: true, nullable: false
+      field :event_id, -> { String }, optional: true, nullable: false
+      field :created_at, -> { String }, optional: true, nullable: false
+      field :data, -> { Square::Types::LoyaltyAccountDeletedEventData }, optional: true, nullable: false
 
     end
   end

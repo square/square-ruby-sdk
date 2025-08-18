@@ -8,11 +8,11 @@ module Square
     # definition or when another application deletes a custom attribute definition whose `visibility` is
     # `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
     class CustomerCustomAttributeDefinitionVisibleDeletedEvent < Internal::Types::Model
-      field :merchant_id, String, optional: true, nullable: false
-      field :type, String, optional: true, nullable: false
-      field :event_id, String, optional: true, nullable: false
-      field :created_at, String, optional: true, nullable: false
-      field :data, Square::Types::CustomAttributeDefinitionEventData, optional: true, nullable: false
+      field :merchant_id, -> { String }, optional: true, nullable: false
+      field :type, -> { String }, optional: true, nullable: false
+      field :event_id, -> { String }, optional: true, nullable: false
+      field :created_at, -> { String }, optional: true, nullable: false
+      field :data, -> { Square::Types::CustomAttributeDefinitionEventData }, optional: true, nullable: false
 
     end
   end

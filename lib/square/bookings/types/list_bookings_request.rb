@@ -3,13 +3,13 @@ module Square
   module Bookings
     module Types
       class ListBookingsRequest < Internal::Types::Model
-        field :limit, Integer, optional: true, nullable: false
-        field :cursor, String, optional: true, nullable: false
-        field :customer_id, String, optional: true, nullable: false
-        field :team_member_id, String, optional: true, nullable: false
-        field :location_id, String, optional: true, nullable: false
-        field :start_at_min, String, optional: true, nullable: false
-        field :start_at_max, String, optional: true, nullable: false
+        field :limit, -> { Integer }, optional: true, nullable: false
+        field :cursor, -> { String }, optional: true, nullable: false
+        field :customer_id, -> { String }, optional: true, nullable: false
+        field :team_member_id, -> { String }, optional: true, nullable: false
+        field :location_id, -> { String }, optional: true, nullable: false
+        field :start_at_min, -> { String }, optional: true, nullable: false
+        field :start_at_max, -> { String }, optional: true, nullable: false
 
       end
     end

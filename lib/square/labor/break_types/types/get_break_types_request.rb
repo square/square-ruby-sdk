@@ -4,7 +4,7 @@ module Square
     module BreakTypes
       module Types
         class GetBreakTypesRequest < Internal::Types::Model
-          field :id, String, optional: false, nullable: false
+          field :id, -> { String }, optional: false, nullable: false
 
         end
       end

@@ -6,8 +6,8 @@ module Square
     # They can be used, for example, to apply automatic price adjustments that are based on preconfigured
     # [pricing rules](entity:CatalogPricingRule).
     class OrderPricingOptions < Internal::Types::Model
-      field :auto_apply_discounts, Internal::Types::Boolean, optional: true, nullable: false
-      field :auto_apply_taxes, Internal::Types::Boolean, optional: true, nullable: false
+      field :auto_apply_discounts, -> { Internal::Types::Boolean }, optional: true, nullable: false
+      field :auto_apply_taxes, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
     end
   end

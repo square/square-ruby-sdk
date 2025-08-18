@@ -4,7 +4,7 @@ module Square
     module Codes
       module Types
         class GetCodesRequest < Internal::Types::Model
-          field :id, String, optional: false, nullable: false
+          field :id, -> { String }, optional: false, nullable: false
 
         end
       end

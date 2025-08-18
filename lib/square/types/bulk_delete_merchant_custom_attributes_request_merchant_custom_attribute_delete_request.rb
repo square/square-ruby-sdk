@@ -6,7 +6,7 @@ module Square
     # request. An individual request contains an optional ID of the associated custom attribute definition
     # and optional key of the associated custom attribute definition.
     class BulkDeleteMerchantCustomAttributesRequestMerchantCustomAttributeDeleteRequest < Internal::Types::Model
-      field :key, String, optional: true, nullable: false
+      field :key, -> { String }, optional: true, nullable: false
 
     end
   end

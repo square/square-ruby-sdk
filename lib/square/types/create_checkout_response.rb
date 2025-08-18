@@ -5,8 +5,8 @@ module Square
     # Defines the fields that are included in the response body of
     # a request to the `CreateCheckout` endpoint.
     class CreateCheckoutResponse < Internal::Types::Model
-      field :checkout, Square::Types::Checkout, optional: true, nullable: false
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
+      field :checkout, -> { Square::Types::Checkout }, optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
 
     end
   end
