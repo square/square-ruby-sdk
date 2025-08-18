@@ -5,7 +5,7 @@ module Square
     module Types
       # Module for defining enums
       module Enum
-        include Square::Internal::Types::Type
+        include Type
 
         # @api private
         #
