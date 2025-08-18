@@ -1,0 +1,11 @@
+
+module Square
+  module Merchants
+    module Types
+      class GetMerchantsRequest < Internal::Types::Model
+        field :merchant_id, String, optional: false, nullable: false
+
+      end
+    end
+  end
+end
