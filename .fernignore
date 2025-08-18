@@ -2,9 +2,7 @@ lib/square_legacy/
 lib/square_legacy.rb
 Gemfile
 Rakefile
-
-lib/square/types/catalog_object_category.rb
-lib/square/types/catalog_object_subscription_plan.rb
-lib/square/types/catalog_object_item_option.rb
-lib/square/types/catalog_object_modifier_list.rb
-lib/square/types/catalog_object_item.rb
+.rubocop
+square.gemspec
+.gitignore
+test/

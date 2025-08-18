@@ -3,7 +3,6 @@
 module Square
   module Types
     class CatalogObjectBase < Internal::Types::Model
-      field :type, Square::Types::CatalogObjectType, optional: false, nullable: false
       field :id, String, optional: false, nullable: false
       field :updated_at, String, optional: true, nullable: false
       field :version, Integer, optional: true, nullable: false
