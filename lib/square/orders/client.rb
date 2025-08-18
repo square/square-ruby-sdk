@@ -21,7 +21,7 @@ module Square
       def create(request_options: {}, **params)
         _request = Square::Internal::Http::JSONRequest.new(
           method: POST,
-          path: "v2/orders"
+          path: "v2/orders",
           body: Square::Types::CreateOrderRequest.new(params[:request]).to_h,
         )
         _response = @client.send(_request)
