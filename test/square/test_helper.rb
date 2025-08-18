@@ -3,7 +3,7 @@
 require_relative "../../lib/square"
 
 def test_token
-  @test_token ||= ENV.fetch("SQUARE_TOKEN", nil) || ENV.fetch("TEST_SQUARE_TOKEN", nil) || "test_token"
+  @test_token ||= ENV.fetch("SQUARE_TOKEN", nil) || ENV.fetch("TEST_SQUARE_TOKEN", nil) || ENV.fetch("SQUARE_SANDBOX_TOKEN", nil) || "test_token"
 end
 
 def client
