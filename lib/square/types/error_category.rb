@@ -3,7 +3,7 @@
 module Square
   module Types
     module ErrorCategory
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       API_ERROR = "API_ERROR"
       AUTHENTICATION_ERROR = "AUTHENTICATION_ERROR"
       INVALID_REQUEST_ERROR = "INVALID_REQUEST_ERROR"

@@ -3,7 +3,7 @@
 module Square
   module Types
     module OrderLineItemDiscountType
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       UNKNOWN_DISCOUNT = "UNKNOWN_DISCOUNT"
       FIXED_PERCENTAGE = "FIXED_PERCENTAGE"
       FIXED_AMOUNT = "FIXED_AMOUNT"

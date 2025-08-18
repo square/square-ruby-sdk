@@ -3,7 +3,7 @@
 module Square
   module Types
     module MeasurementUnitLength
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       IMPERIAL_INCH = "IMPERIAL_INCH"
       IMPERIAL_FOOT = "IMPERIAL_FOOT"
       IMPERIAL_YARD = "IMPERIAL_YARD"

@@ -3,7 +3,7 @@
 module Square
   module Types
     module V1TenderEntryMethod
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       MANUAL = "MANUAL"
       SCANNED = "SCANNED"
       SQUARE_CASH = "SQUARE_CASH"

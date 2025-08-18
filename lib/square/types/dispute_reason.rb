@@ -3,7 +3,7 @@
 module Square
   module Types
     module DisputeReason
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       AMOUNT_DIFFERS = "AMOUNT_DIFFERS"
       CANCELLED = "CANCELLED"
       DUPLICATE = "DUPLICATE"

@@ -3,7 +3,7 @@
 module Square
   module Types
     module ActivityType
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       ADJUSTMENT = "ADJUSTMENT"
       APP_FEE_REFUND = "APP_FEE_REFUND"
       APP_FEE_REVENUE = "APP_FEE_REVENUE"

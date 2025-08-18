@@ -3,7 +3,7 @@
 module Square
   module Types
     module LoyaltyRewardStatus
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       ISSUED = "ISSUED"
       REDEEMED = "REDEEMED"
       DELETED = "DELETED"end

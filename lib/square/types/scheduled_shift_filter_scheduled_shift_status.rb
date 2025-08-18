@@ -3,7 +3,7 @@
 module Square
   module Types
     module ScheduledShiftFilterScheduledShiftStatus
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       DRAFT = "DRAFT"
       PUBLISHED = "PUBLISHED"end
   end

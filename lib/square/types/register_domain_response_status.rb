@@ -3,7 +3,7 @@
 module Square
   module Types
     module RegisterDomainResponseStatus
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       PENDING = "PENDING"
       VERIFIED = "VERIFIED"end
   end

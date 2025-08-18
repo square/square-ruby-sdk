@@ -3,7 +3,7 @@
 module Square
   module Types
     module MeasurementUnitUnitType
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       TYPE_CUSTOM = "TYPE_CUSTOM"
       TYPE_AREA = "TYPE_AREA"
       TYPE_LENGTH = "TYPE_LENGTH"

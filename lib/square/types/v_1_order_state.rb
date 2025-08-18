@@ -3,7 +3,7 @@
 module Square
   module Types
     module V1OrderState
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       PENDING = "PENDING"
       OPEN = "OPEN"
       COMPLETED = "COMPLETED"

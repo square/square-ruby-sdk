@@ -3,7 +3,7 @@
 module Square
   module Types
     module CheckoutOptionsPaymentType
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       CARD_PRESENT = "CARD_PRESENT"
       MANUAL_CARD_ENTRY = "MANUAL_CARD_ENTRY"
       FELICA_ID = "FELICA_ID"

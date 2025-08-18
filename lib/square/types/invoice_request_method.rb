@@ -3,7 +3,7 @@
 module Square
   module Types
     module InvoiceRequestMethod
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       EMAIL = "EMAIL"
       CHARGE_CARD_ON_FILE = "CHARGE_CARD_ON_FILE"
       SHARE_MANUALLY = "SHARE_MANUALLY"

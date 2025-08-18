@@ -3,7 +3,7 @@
 module Square
   module Types
     module SubscriptionStatus
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       PENDING = "PENDING"
       ACTIVE = "ACTIVE"
       CANCELED = "CANCELED"

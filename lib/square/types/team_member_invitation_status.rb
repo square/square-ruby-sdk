@@ -3,7 +3,7 @@
 module Square
   module Types
     module TeamMemberInvitationStatus
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       UNINVITED = "UNINVITED"
       PENDING = "PENDING"
       ACCEPTED = "ACCEPTED"end

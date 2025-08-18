@@ -3,7 +3,7 @@
 module Square
   module Types
     module CatalogItemProductType
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       REGULAR = "REGULAR"
       GIFT_CARD = "GIFT_CARD"
       APPOINTMENTS_SERVICE = "APPOINTMENTS_SERVICE"

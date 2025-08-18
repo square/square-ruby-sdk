@@ -3,7 +3,7 @@
 module Square
   module Types
     module InvoiceRequestType
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       BALANCE = "BALANCE"
       DEPOSIT = "DEPOSIT"
       INSTALLMENT = "INSTALLMENT"end

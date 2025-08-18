@@ -3,7 +3,7 @@
 module Square
   module Types
     module TenderSquareAccountDetailsStatus
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       AUTHORIZED = "AUTHORIZED"
       CAPTURED = "CAPTURED"
       VOIDED = "VOIDED"

@@ -3,7 +3,7 @@
 module Square
   module Types
     module CatalogDiscountType
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       FIXED_PERCENTAGE = "FIXED_PERCENTAGE"
       FIXED_AMOUNT = "FIXED_AMOUNT"
       VARIABLE_PERCENTAGE = "VARIABLE_PERCENTAGE"

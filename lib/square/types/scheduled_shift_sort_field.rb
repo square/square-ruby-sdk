@@ -3,7 +3,7 @@
 module Square
   module Types
     module ScheduledShiftSortField
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       START_AT = "START_AT"
       END_AT = "END_AT"
       CREATED_AT = "CREATED_AT"

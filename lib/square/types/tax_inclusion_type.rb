@@ -3,7 +3,7 @@
 module Square
   module Types
     module TaxInclusionType
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       ADDITIVE = "ADDITIVE"
       INCLUSIVE = "INCLUSIVE"end
   end

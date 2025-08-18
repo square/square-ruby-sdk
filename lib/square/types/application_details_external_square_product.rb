@@ -3,7 +3,7 @@
 module Square
   module Types
     module ApplicationDetailsExternalSquareProduct
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       APPOINTMENTS = "APPOINTMENTS"
       ECOMMERCE_API = "ECOMMERCE_API"
       INVOICES = "INVOICES"

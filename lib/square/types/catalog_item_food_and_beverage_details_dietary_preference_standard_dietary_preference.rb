@@ -3,7 +3,7 @@
 module Square
   module Types
     module CatalogItemFoodAndBeverageDetailsDietaryPreferenceStandardDietaryPreference
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       DAIRY_FREE = "DAIRY_FREE"
       GLUTEN_FREE = "GLUTEN_FREE"
       HALAL = "HALAL"

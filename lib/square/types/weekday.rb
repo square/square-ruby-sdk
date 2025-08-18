@@ -3,7 +3,7 @@
 module Square
   module Types
     module Weekday
-      extends Square::Internal::Types::Enum
+      extend Square::Internal::Types::Enum
       MON = "MON"
       TUE = "TUE"
       WED = "WED"
