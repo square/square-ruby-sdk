@@ -6,60 +6,69 @@ describe Square::Catalog::Client do
   describe "#batch_upsert" do
     it "creates multiple catalog objects" do
 
-      # The new client should work with SDK types, not plain hashes
-      # Let's try creating the request object properly
-      request = Square::Catalog::Types::BatchUpsertCatalogObjectsRequest.new(
-        idempotency_key: SecureRandom.uuid,
-        batches: [
-          Square::Types::CatalogObjectBatch.new(
-            objects: [
-              Square::Types::CatalogObjectItem.new(
-                item_data: Square::Types::CatalogItem.new(
-                  name: "Coffee",
-                  description: "Strong coffee",
-                  abbreviation: "C",
-                  variations: [
-                    Square::Types::CatalogObjectItemVariation.new(
-                      item_variation_data: Square::Types::CatalogItemVariation.new(
-                        name: "Kona Coffee",
-                        track_inventory: false,
-                        pricing_type: Square::Types::CatalogPricingType::FIXED_PRICING,
-                        price_money: Square::Types::Money.new(
-                          amount: 1000,
-                          currency: Square::Types::Country::US
-                        )
-                      )
-                    )
-                  ]
-                )
-              ),
-              Square::Types::CatalogObjectItem.new(
-                item_data: Square::Types::CatalogItem.new(
-                  name: "Tea",
-                  description: "Strong tea",
-                  abbreviation: "T",
-                  variations: [
-                    Square::Types::CatalogObjectItemVariation.new(
-                      item_variation_data: Square::Types::CatalogItemVariation.new(
-                        name: "Gunpowder Green",
-                        track_inventory: false,
-                        pricing_type: Square::Types::CatalogPricingType::FIXED_PRICING,
-                        price_money: Square::Types::Money.new(
-                          amount: 2000,
-                          currency: Square::Types::Country::US
-                        )
-                      )
-                    )
-                  ]
-                )
-              )
-            ]
-          )
-        ]
+      response = client.catalog.batch_upsert(
+        request: {
+          idempotency_key: SecureRandom.uuid,
+          batches: [
+            {
+              objects: [
+                {
+                  type: "ITEM",
+                  id: "##{SecureRandom.uuid}",
+                  present_at_all_locations: true,
+                  item_data: {
+                    name: "Coffee",
+                    description: "Strong coffee",
+                    abbreviation: "C",
+                    variations: [
+                      {
+                        type: "ITEM_VARIATION",
+                        id: "##{SecureRandom.uuid}",
+                        present_at_all_locations: true,
+                        item_variation_data: {
+                          name: "Kona Coffee",
+                          track_inventory: false,
+                          pricing_type: "FIXED_PRICING",
+                          price_money: {
+                            amount: 1000,
+                            currency: "USD"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  type: "ITEM",
+                  id: "##{SecureRandom.uuid}",
+                  present_at_all_locations: true,
+                  item_data: {
+                    name: "Tea",
+                    description: "Strong tea",
+                    abbreviation: "T",
+                    variations: [
+                      {
+                        type: "ITEM_VARIATION",
+                        id: "##{SecureRandom.uuid}",
+                        present_at_all_locations: true,
+                        item_variation_data: {
+                          name: "Gunpowder Green",
+                          track_inventory: false,
+                          pricing_type: "FIXED_PRICING",
+                          price_money: {
+                            amount: 2000,
+                            currency: "USD"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
       )
-
-      # Try calling with the request object
-      response = client.catalog.batch_upsert(request: request)
 
       refute_nil response
     end

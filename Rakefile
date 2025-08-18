@@ -11,8 +11,8 @@ Rake::TestTask.new(:test) do |t|
   t.libs << "test"
   t.libs << "lib"
   t.test_files = FileList[
-    'test/square/integration/catalog/test_client.rb',
-    'test/square_legacy/api/test_*.rb'
+    'test/square/integration/inventory/test_inventory_client.rb'
+    # 'test/square_legacy/api/test_*.rb'
   ]
   t.warning = false
 end

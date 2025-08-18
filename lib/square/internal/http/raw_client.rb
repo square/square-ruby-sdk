@@ -22,8 +22,12 @@ module Square
 
         # @param request [Square::Internal::Http::BaseRequest] The HTTP request.
         # @return [HTTP::Response] The HTTP response.
-        def send(request)
+        def send_request(request)
           url = build_url(request)
+          puts "[DEBUG] RawClient#send - URL: #{url}"
+          puts "[DEBUG] RawClient#send - Method: #{request.method}"
+          puts "[DEBUG] RawClient#send - Headers: #{request.encode_headers}"
+          puts "[DEBUG] RawClient#send - Body: #{request.encode_body}"
 
           http_request = build_http_request(
             url:,
@@ -31,14 +35,23 @@ module Square
             headers: request.encode_headers,
             body: request.encode_body
           )
+          puts "[DEBUG] RawClient#send - Built HTTP request: #{http_request.class}"
 
           conn = connect(url)
+          puts "[DEBUG] RawClient#send - Connected to: #{url}"
           conn.open_timeout = @timeout
           conn.read_timeout = @timeout
           conn.write_timeout = @timeout
           conn.continue_timeout = @timeout
+          puts "[DEBUG] RawClient#send - Timeouts set: #{@timeout}s"
 
-          conn.request(http_request)
+          puts "[DEBUG] RawClient#send - Sending request..."
+          response = conn.request(http_request)
+          puts "[DEBUG] RawClient#send - Response received: #{response.class}"
+          puts "[DEBUG] RawClient#send - Response status: #{response.code}"
+          puts "[DEBUG] RawClient#send - Response headers: #{response.to_hash}"
+          
+          response
           # begin
           #   conn.request(http_request)
           # rescue StandardError => e

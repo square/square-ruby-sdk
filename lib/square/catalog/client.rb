@@ -69,8 +69,19 @@ module Square
       #
       # @return [Square::Types::BatchUpsertCatalogObjectsResponse]
       def batch_upsert(request_options: {}, **params)
-        _request = params
-        _response = @client.send(_request)
+        _body_content = Types::BatchUpsertCatalogObjectsRequest.new(params[:request])
+        _body = _body_content.to_h
+        _request = Internal::Multipart::Request.new(
+          base_url: Square::Environment::SANDBOX,
+          path: "/v2/catalog/batch-upsert",
+          method: "POST",
+          body: _body,
+          request_options: request_options
+        )
+        puts "@client: #{@client}\n"
+        puts "@client.inspect: #{@client.inspect}\n"
+        puts "@client.methods: #{@client.methods}\n"
+        _response = @client.send_request(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchUpsertCatalogObjectsResponse.load(_response.body)
         else
