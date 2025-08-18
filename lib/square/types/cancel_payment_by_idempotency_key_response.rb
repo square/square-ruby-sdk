@@ -6,7 +6,7 @@ module Square
     # [CancelPaymentByIdempotencyKey](api-endpoint:Payments-CancelPaymentByIdempotencyKey).
     # On success, `errors` is empty.
     class CancelPaymentByIdempotencyKeyResponse < Internal::Types::Model
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
 
     end
   end

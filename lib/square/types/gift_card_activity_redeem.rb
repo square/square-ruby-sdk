@@ -4,10 +4,10 @@ module Square
   module Types
     # Represents details about a `REDEEM` [gift card activity type](entity:GiftCardActivityType).
     class GiftCardActivityRedeem < Internal::Types::Model
-      field :amount_money, Square::Types::Money, optional: false, nullable: false
-      field :payment_id, String, optional: true, nullable: false
-      field :reference_id, String, optional: true, nullable: false
-      field :status, Square::Types::GiftCardActivityRedeemStatus, optional: true, nullable: false
+      field :amount_money, -> { Square::Types::Money }, optional: false, nullable: false
+      field :payment_id, -> { String }, optional: true, nullable: false
+      field :reference_id, -> { String }, optional: true, nullable: false
+      field :status, -> { Square::Types::GiftCardActivityRedeemStatus }, optional: true, nullable: false
 
     end
   end

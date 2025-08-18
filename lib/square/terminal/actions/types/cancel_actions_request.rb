@@ -4,7 +4,7 @@ module Square
     module Actions
       module Types
         class CancelActionsRequest < Internal::Types::Model
-          field :action_id, String, optional: false, nullable: false
+          field :action_id, -> { String }, optional: false, nullable: false
 
         end
       end

@@ -7,11 +7,11 @@ module Square
     # the corresponding [custom attribute definition](entity:CustomAttributeDefinition). Custom attributes whose
     # `visibility` is `VISIBILITY_READ_WRITE_VALUES` can be created or updated by any application.
     class CustomerCustomAttributeOwnedUpdatedEvent < Internal::Types::Model
-      field :merchant_id, String, optional: true, nullable: false
-      field :type, String, optional: true, nullable: false
-      field :event_id, String, optional: true, nullable: false
-      field :created_at, String, optional: true, nullable: false
-      field :data, Square::Types::CustomAttributeEventData, optional: true, nullable: false
+      field :merchant_id, -> { String }, optional: true, nullable: false
+      field :type, -> { String }, optional: true, nullable: false
+      field :event_id, -> { String }, optional: true, nullable: false
+      field :created_at, -> { String }, optional: true, nullable: false
+      field :data, -> { Square::Types::CustomAttributeEventData }, optional: true, nullable: false
 
     end
   end

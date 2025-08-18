@@ -6,8 +6,8 @@ module Square
     # the created `BreakType` object and might contain a set of `Error` objects if
     # the request resulted in errors.
     class CreateBreakTypeResponse < Internal::Types::Model
-      field :break_type, Square::Types::BreakType, optional: true, nullable: false
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
+      field :break_type, -> { Square::Types::BreakType }, optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
 
     end
   end

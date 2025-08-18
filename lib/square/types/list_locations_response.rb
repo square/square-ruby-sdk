@@ -7,8 +7,8 @@ module Square
     # 
     # Either `errors` or `locations` is present in a given response (never both).
     class ListLocationsResponse < Internal::Types::Model
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
-      field :locations, Internal::Types::Array[Square::Types::Location], optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
+      field :locations, -> { Internal::Types::Array[Square::Types::Location] }, optional: true, nullable: false
 
     end
   end

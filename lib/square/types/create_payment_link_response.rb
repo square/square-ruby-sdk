@@ -3,9 +3,9 @@
 module Square
   module Types
     class CreatePaymentLinkResponse < Internal::Types::Model
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
-      field :payment_link, Square::Types::PaymentLink, optional: true, nullable: false
-      field :related_resources, Square::Types::PaymentLinkRelatedResources, optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
+      field :payment_link, -> { Square::Types::PaymentLink }, optional: true, nullable: false
+      field :related_resources, -> { Square::Types::PaymentLinkRelatedResources }, optional: true, nullable: false
 
     end
   end

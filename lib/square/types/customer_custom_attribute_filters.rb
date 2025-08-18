@@ -6,7 +6,7 @@ module Square
     # to search based on [custom attributes](entity:CustomAttribute) that are assigned to customer profiles. For more information, see
     # [Search by custom attribute](https://developer.squareup.com/docs/customers-api/use-the-api/search-customers#search-by-custom-attribute).
     class CustomerCustomAttributeFilters < Internal::Types::Model
-      field :filters, Internal::Types::Array[Square::Types::CustomerCustomAttributeFilter], optional: true, nullable: false
+      field :filters, -> { Internal::Types::Array[Square::Types::CustomerCustomAttributeFilter] }, optional: true, nullable: false
 
     end
   end

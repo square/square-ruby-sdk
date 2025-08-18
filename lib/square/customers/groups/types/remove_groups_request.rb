@@ -4,8 +4,8 @@ module Square
     module Groups
       module Types
         class RemoveGroupsRequest < Internal::Types::Model
-          field :customer_id, String, optional: false, nullable: false
-          field :group_id, String, optional: false, nullable: false
+          field :customer_id, -> { String }, optional: false, nullable: false
+          field :group_id, -> { String }, optional: false, nullable: false
 
         end
       end

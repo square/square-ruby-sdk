@@ -4,8 +4,8 @@ module Square
   module Types
     # The response object returned by the [CreateLocation](api-endpoint:Locations-CreateLocation) endpoint.
     class CreateLocationResponse < Internal::Types::Model
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
-      field :location, Square::Types::Location, optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
+      field :location, -> { Square::Types::Location }, optional: true, nullable: false
 
     end
   end

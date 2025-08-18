@@ -3,8 +3,8 @@
 module Square
   module Types
     class PaymentBalanceActivityOpenDisputeDetail < Internal::Types::Model
-      field :payment_id, String, optional: true, nullable: false
-      field :dispute_id, String, optional: true, nullable: false
+      field :payment_id, -> { String }, optional: true, nullable: false
+      field :dispute_id, -> { String }, optional: true, nullable: false
 
     end
   end

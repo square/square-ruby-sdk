@@ -3,7 +3,7 @@
 module Square
   module Types
     class TerminalCheckoutCreatedEventObject < Internal::Types::Model
-      field :checkout, Square::Types::TerminalCheckout, optional: true, nullable: false
+      field :checkout, -> { Square::Types::TerminalCheckout }, optional: true, nullable: false
 
     end
   end

@@ -7,8 +7,8 @@ module Square
     # 
     # Either `errors` or `group` is present in a given response (never both).
     class UpdateCustomerGroupResponse < Internal::Types::Model
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
-      field :group, Square::Types::CustomerGroup, optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
+      field :group, -> { Square::Types::CustomerGroup }, optional: true, nullable: false
 
     end
   end

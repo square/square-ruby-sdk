@@ -3,8 +3,8 @@
 module Square
   module Types
     class PaymentBalanceActivityAutomaticSavingsReversedDetail < Internal::Types::Model
-      field :payment_id, String, optional: true, nullable: false
-      field :payout_id, String, optional: true, nullable: false
+      field :payment_id, -> { String }, optional: true, nullable: false
+      field :payout_id, -> { String }, optional: true, nullable: false
 
     end
   end

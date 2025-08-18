@@ -17,9 +17,9 @@ module Square
     # `CLOSED_AT`. Otherwise, `SearchOrders` throws an error.
     # [Learn more about filtering orders by time range.](https://developer.squareup.com/docs/orders-api/manage-orders/search-orders#important-note-about-filtering-orders-by-time-range)
     class SearchOrdersDateTimeFilter < Internal::Types::Model
-      field :created_at, Square::Types::TimeRange, optional: true, nullable: false
-      field :updated_at, Square::Types::TimeRange, optional: true, nullable: false
-      field :closed_at, Square::Types::TimeRange, optional: true, nullable: false
+      field :created_at, -> { Square::Types::TimeRange }, optional: true, nullable: false
+      field :updated_at, -> { Square::Types::TimeRange }, optional: true, nullable: false
+      field :closed_at, -> { Square::Types::TimeRange }, optional: true, nullable: false
 
     end
   end

@@ -7,8 +7,8 @@ module Square
     # If there are errors processing the request, the `payment` field might not be
     # present, or it might be present with a status of `FAILED`.
     class CreatePaymentResponse < Internal::Types::Model
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
-      field :payment, Square::Types::Payment, optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
+      field :payment, -> { Square::Types::Payment }, optional: true, nullable: false
 
     end
   end

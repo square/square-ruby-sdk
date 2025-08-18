@@ -3,9 +3,9 @@
 module Square
   module Types
     class DestinationDetailsCardRefundDetails < Internal::Types::Model
-      field :card, Square::Types::Card, optional: true, nullable: false
-      field :entry_method, String, optional: true, nullable: false
-      field :auth_result_code, String, optional: true, nullable: false
+      field :card, -> { Square::Types::Card }, optional: true, nullable: false
+      field :entry_method, -> { String }, optional: true, nullable: false
+      field :auth_result_code, -> { String }, optional: true, nullable: false
 
     end
   end

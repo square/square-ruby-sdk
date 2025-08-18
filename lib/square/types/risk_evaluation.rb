@@ -9,8 +9,8 @@ module Square
     # can use this information to determine the course of action (for example,
     # provide the goods/services or refund the payment).
     class RiskEvaluation < Internal::Types::Model
-      field :created_at, String, optional: true, nullable: false
-      field :risk_level, Square::Types::RiskEvaluationRiskLevel, optional: true, nullable: false
+      field :created_at, -> { String }, optional: true, nullable: false
+      field :risk_level, -> { Square::Types::RiskEvaluationRiskLevel }, optional: true, nullable: false
 
     end
   end

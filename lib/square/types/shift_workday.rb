@@ -7,9 +7,9 @@ module Square
     # 
     # Deprecated at Square API version 2025-05-21. See the [migration notes](https://developer.squareup.com/docs/labor-api/what-it-does#migration-notes).
     class ShiftWorkday < Internal::Types::Model
-      field :date_range, Square::Types::DateRange, optional: true, nullable: false
-      field :match_shifts_by, Square::Types::ShiftWorkdayMatcher, optional: true, nullable: false
-      field :default_timezone, String, optional: true, nullable: false
+      field :date_range, -> { Square::Types::DateRange }, optional: true, nullable: false
+      field :match_shifts_by, -> { Square::Types::ShiftWorkdayMatcher }, optional: true, nullable: false
+      field :default_timezone, -> { String }, optional: true, nullable: false
 
     end
   end

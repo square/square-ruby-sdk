@@ -3,7 +3,7 @@ module Square
   module ApplePay
     module Types
       class RegisterDomainRequest < Internal::Types::Model
-        field :domain_name, String, optional: false, nullable: false
+        field :domain_name, -> { String }, optional: false, nullable: false
 
       end
     end

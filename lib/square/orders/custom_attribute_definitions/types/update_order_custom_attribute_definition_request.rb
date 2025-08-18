@@ -4,9 +4,9 @@ module Square
     module CustomAttributeDefinitions
       module Types
         class UpdateOrderCustomAttributeDefinitionRequest < Internal::Types::Model
-          field :key, String, optional: false, nullable: false
-          field :custom_attribute_definition, Square::Types::CustomAttributeDefinition, optional: false, nullable: false
-          field :idempotency_key, String, optional: true, nullable: false
+          field :key, -> { String }, optional: false, nullable: false
+          field :custom_attribute_definition, -> { Square::Types::CustomAttributeDefinition }, optional: false, nullable: false
+          field :idempotency_key, -> { String }, optional: true, nullable: false
 
         end
       end

@@ -3,7 +3,7 @@ module Square
   module Payouts
     module Types
       class GetPayoutsRequest < Internal::Types::Model
-        field :payout_id, String, optional: false, nullable: false
+        field :payout_id, -> { String }, optional: false, nullable: false
 
       end
     end

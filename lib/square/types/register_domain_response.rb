@@ -7,8 +7,8 @@ module Square
     # 
     # Either `errors` or `status` are present in a given response (never both).
     class RegisterDomainResponse < Internal::Types::Model
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
-      field :status, Square::Types::RegisterDomainResponseStatus, optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
+      field :status, -> { Square::Types::RegisterDomainResponseStatus }, optional: true, nullable: false
 
     end
   end

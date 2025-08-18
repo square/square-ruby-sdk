@@ -25,22 +25,22 @@ module Square
     # `SQUARE_GIFT_CARD` indicates a gift card was used for some or all of the
     # associated payment.
     class V1Tender < Internal::Types::Model
-      field :id, String, optional: true, nullable: false
-      field :type, Square::Types::V1TenderType, optional: true, nullable: false
-      field :name, String, optional: true, nullable: false
-      field :employee_id, String, optional: true, nullable: false
-      field :receipt_url, String, optional: true, nullable: false
-      field :card_brand, Square::Types::V1TenderCardBrand, optional: true, nullable: false
-      field :pan_suffix, String, optional: true, nullable: false
-      field :entry_method, Square::Types::V1TenderEntryMethod, optional: true, nullable: false
-      field :payment_note, String, optional: true, nullable: false
-      field :total_money, Square::Types::V1Money, optional: true, nullable: false
-      field :tendered_money, Square::Types::V1Money, optional: true, nullable: false
-      field :tendered_at, String, optional: true, nullable: false
-      field :settled_at, String, optional: true, nullable: false
-      field :change_back_money, Square::Types::V1Money, optional: true, nullable: false
-      field :refunded_money, Square::Types::V1Money, optional: true, nullable: false
-      field :is_exchange, Internal::Types::Boolean, optional: true, nullable: false
+      field :id, -> { String }, optional: true, nullable: false
+      field :type, -> { Square::Types::V1TenderType }, optional: true, nullable: false
+      field :name, -> { String }, optional: true, nullable: false
+      field :employee_id, -> { String }, optional: true, nullable: false
+      field :receipt_url, -> { String }, optional: true, nullable: false
+      field :card_brand, -> { Square::Types::V1TenderCardBrand }, optional: true, nullable: false
+      field :pan_suffix, -> { String }, optional: true, nullable: false
+      field :entry_method, -> { Square::Types::V1TenderEntryMethod }, optional: true, nullable: false
+      field :payment_note, -> { String }, optional: true, nullable: false
+      field :total_money, -> { Square::Types::V1Money }, optional: true, nullable: false
+      field :tendered_money, -> { Square::Types::V1Money }, optional: true, nullable: false
+      field :tendered_at, -> { String }, optional: true, nullable: false
+      field :settled_at, -> { String }, optional: true, nullable: false
+      field :change_back_money, -> { Square::Types::V1Money }, optional: true, nullable: false
+      field :refunded_money, -> { Square::Types::V1Money }, optional: true, nullable: false
+      field :is_exchange, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
     end
   end

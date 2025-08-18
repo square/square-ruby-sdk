@@ -4,7 +4,7 @@ module Square
     module Subscriptions
       module Types
         class GetSubscriptionsRequest < Internal::Types::Model
-          field :subscription_id, String, optional: false, nullable: false
+          field :subscription_id, -> { String }, optional: false, nullable: false
 
         end
       end

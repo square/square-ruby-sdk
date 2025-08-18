@@ -7,9 +7,9 @@ module Square
     # 
     # Either `errors` or `groups` is present in a given response (never both).
     class ListCustomerGroupsResponse < Internal::Types::Model
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
-      field :groups, Internal::Types::Array[Square::Types::CustomerGroup], optional: true, nullable: false
-      field :cursor, String, optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
+      field :groups, -> { Internal::Types::Array[Square::Types::CustomerGroup] }, optional: true, nullable: false
+      field :cursor, -> { String }, optional: true, nullable: false
 
     end
   end

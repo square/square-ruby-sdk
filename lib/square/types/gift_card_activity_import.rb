@@ -6,7 +6,7 @@ module Square
     # This activity type is used when Square imports a third-party gift card, in which case the 
     # `gan_source` of the gift card is set to `OTHER`.
     class GiftCardActivityImport < Internal::Types::Model
-      field :amount_money, Square::Types::Money, optional: false, nullable: false
+      field :amount_money, -> { Square::Types::Money }, optional: false, nullable: false
 
     end
   end

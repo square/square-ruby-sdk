@@ -3,13 +3,13 @@
 module Square
   module Types
     class OrderFulfillmentUpdated < Internal::Types::Model
-      field :order_id, String, optional: true, nullable: false
-      field :version, Integer, optional: true, nullable: false
-      field :location_id, String, optional: true, nullable: false
-      field :state, Square::Types::OrderState, optional: true, nullable: false
-      field :created_at, String, optional: true, nullable: false
-      field :updated_at, String, optional: true, nullable: false
-      field :fulfillment_update, Internal::Types::Array[Square::Types::OrderFulfillmentUpdatedUpdate], optional: true, nullable: false
+      field :order_id, -> { String }, optional: true, nullable: false
+      field :version, -> { Integer }, optional: true, nullable: false
+      field :location_id, -> { String }, optional: true, nullable: false
+      field :state, -> { Square::Types::OrderState }, optional: true, nullable: false
+      field :created_at, -> { String }, optional: true, nullable: false
+      field :updated_at, -> { String }, optional: true, nullable: false
+      field :fulfillment_update, -> { Internal::Types::Array[Square::Types::OrderFulfillmentUpdatedUpdate] }, optional: true, nullable: false
 
     end
   end

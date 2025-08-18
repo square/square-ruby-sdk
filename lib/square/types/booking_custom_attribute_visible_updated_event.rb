@@ -7,11 +7,11 @@ module Square
     # An application that subscribes to this event is notified when a booking custom attribute is updated 
     # by any application for which the subscribing application has read access to the booking custom attribute.
     class BookingCustomAttributeVisibleUpdatedEvent < Internal::Types::Model
-      field :merchant_id, String, optional: true, nullable: false
-      field :type, String, optional: true, nullable: false
-      field :event_id, String, optional: true, nullable: false
-      field :created_at, String, optional: true, nullable: false
-      field :data, Square::Types::CustomAttributeEventData, optional: true, nullable: false
+      field :merchant_id, -> { String }, optional: true, nullable: false
+      field :type, -> { String }, optional: true, nullable: false
+      field :event_id, -> { String }, optional: true, nullable: false
+      field :created_at, -> { String }, optional: true, nullable: false
+      field :data, -> { Square::Types::CustomAttributeEventData }, optional: true, nullable: false
 
     end
   end

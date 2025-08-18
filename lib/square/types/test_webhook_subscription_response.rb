@@ -8,8 +8,8 @@ module Square
     # Note: If there are errors processing the request, the [SubscriptionTestResult](entity:SubscriptionTestResult) field is not
     # present.
     class TestWebhookSubscriptionResponse < Internal::Types::Model
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
-      field :subscription_test_result, Square::Types::SubscriptionTestResult, optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
+      field :subscription_test_result, -> { Square::Types::SubscriptionTestResult }, optional: true, nullable: false
 
     end
   end

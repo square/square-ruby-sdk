@@ -8,9 +8,9 @@ module Square
     # Note: if there are errors processing the request, the card field will not be
     # present.
     class ListCardsResponse < Internal::Types::Model
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
-      field :cards, Internal::Types::Array[Square::Types::Card], optional: true, nullable: false
-      field :cursor, String, optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
+      field :cards, -> { Internal::Types::Array[Square::Types::Card] }, optional: true, nullable: false
+      field :cursor, -> { String }, optional: true, nullable: false
 
     end
   end

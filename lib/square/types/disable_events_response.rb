@@ -8,7 +8,7 @@ module Square
     # Note: if there are errors processing the request, the events field will not be
     # present.
     class DisableEventsResponse < Internal::Types::Model
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
 
     end
   end

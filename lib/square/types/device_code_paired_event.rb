@@ -6,12 +6,12 @@ module Square
     # Terminal API client and the device_id of the paired Square Terminal is
     # available.
     class DeviceCodePairedEvent < Internal::Types::Model
-      field :merchant_id, String, optional: true, nullable: false
-      field :location_id, String, optional: true, nullable: false
-      field :type, String, optional: true, nullable: false
-      field :event_id, String, optional: true, nullable: false
-      field :created_at, String, optional: true, nullable: false
-      field :data, Square::Types::DeviceCodePairedEventData, optional: true, nullable: false
+      field :merchant_id, -> { String }, optional: true, nullable: false
+      field :location_id, -> { String }, optional: true, nullable: false
+      field :type, -> { String }, optional: true, nullable: false
+      field :event_id, -> { String }, optional: true, nullable: false
+      field :created_at, -> { String }, optional: true, nullable: false
+      field :data, -> { Square::Types::DeviceCodePairedEventData }, optional: true, nullable: false
 
     end
   end

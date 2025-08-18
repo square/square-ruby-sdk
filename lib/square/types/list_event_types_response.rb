@@ -8,9 +8,9 @@ module Square
     # Note: if there are errors processing the request, the event types field will not be
     # present.
     class ListEventTypesResponse < Internal::Types::Model
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
-      field :event_types, Internal::Types::Array[String], optional: true, nullable: false
-      field :metadata, Internal::Types::Array[Square::Types::EventTypeMetadata], optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
+      field :event_types, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+      field :metadata, -> { Internal::Types::Array[Square::Types::EventTypeMetadata] }, optional: true, nullable: false
 
     end
   end

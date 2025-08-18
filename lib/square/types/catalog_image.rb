@@ -9,10 +9,10 @@ module Square
     # Images on items and variations are displayed through Square Online Store.
     # Images on other object types are for use by 3rd party application developers.
     class CatalogImage < Internal::Types::Model
-      field :name, String, optional: true, nullable: false
-      field :url, String, optional: true, nullable: false
-      field :caption, String, optional: true, nullable: false
-      field :photo_studio_order_id, String, optional: true, nullable: false
+      field :name, -> { String }, optional: true, nullable: false
+      field :url, -> { String }, optional: true, nullable: false
+      field :caption, -> { String }, optional: true, nullable: false
+      field :photo_studio_order_id, -> { String }, optional: true, nullable: false
 
     end
   end

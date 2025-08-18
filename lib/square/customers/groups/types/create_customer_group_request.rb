@@ -4,8 +4,8 @@ module Square
     module Groups
       module Types
         class CreateCustomerGroupRequest < Internal::Types::Model
-          field :idempotency_key, String, optional: true, nullable: false
-          field :group, Square::Types::CustomerGroup, optional: false, nullable: false
+          field :idempotency_key, -> { String }, optional: true, nullable: false
+          field :group, -> { Square::Types::CustomerGroup }, optional: false, nullable: false
 
         end
       end

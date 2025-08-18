@@ -4,7 +4,7 @@ module Square
     module Groups
       module Types
         class GetGroupsRequest < Internal::Types::Model
-          field :group_id, String, optional: false, nullable: false
+          field :group_id, -> { String }, optional: false, nullable: false
 
         end
       end

@@ -4,9 +4,9 @@ module Square
   module Types
     # The response to retrieve payout records entries.
     class ListPayoutEntriesResponse < Internal::Types::Model
-      field :payout_entries, Internal::Types::Array[Square::Types::PayoutEntry], optional: true, nullable: false
-      field :cursor, String, optional: true, nullable: false
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
+      field :payout_entries, -> { Internal::Types::Array[Square::Types::PayoutEntry] }, optional: true, nullable: false
+      field :cursor, -> { String }, optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
 
     end
   end

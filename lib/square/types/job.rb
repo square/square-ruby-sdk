@@ -6,12 +6,12 @@ module Square
     # job's title and tip eligibility. Compensation is defined in a [job assignment](entity:JobAssignment)
     # in a team member's wage setting.
     class Job < Internal::Types::Model
-      field :id, String, optional: true, nullable: false
-      field :title, String, optional: true, nullable: false
-      field :is_tip_eligible, Internal::Types::Boolean, optional: true, nullable: false
-      field :created_at, String, optional: true, nullable: false
-      field :updated_at, String, optional: true, nullable: false
-      field :version, Integer, optional: true, nullable: false
+      field :id, -> { String }, optional: true, nullable: false
+      field :title, -> { String }, optional: true, nullable: false
+      field :is_tip_eligible, -> { Internal::Types::Boolean }, optional: true, nullable: false
+      field :created_at, -> { String }, optional: true, nullable: false
+      field :updated_at, -> { String }, optional: true, nullable: false
+      field :version, -> { Integer }, optional: true, nullable: false
 
     end
   end

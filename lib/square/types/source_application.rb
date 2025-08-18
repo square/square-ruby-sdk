@@ -4,9 +4,9 @@ module Square
   module Types
     # Represents information about the application used to generate a change.
     class SourceApplication < Internal::Types::Model
-      field :product, Square::Types::Product, optional: true, nullable: false
-      field :application_id, String, optional: true, nullable: false
-      field :name, String, optional: true, nullable: false
+      field :product, -> { Square::Types::Product }, optional: true, nullable: false
+      field :application_id, -> { String }, optional: true, nullable: false
+      field :name, -> { String }, optional: true, nullable: false
 
     end
   end

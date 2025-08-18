@@ -7,8 +7,8 @@ module Square
     # 
     # Either `errors` or `order` is present in a given response, but never both.
     class CreateOrderResponse < Internal::Types::Model
-      field :order, Square::Types::Order, optional: true, nullable: false
-      field :errors, Internal::Types::Array[Square::Types::Error], optional: true, nullable: false
+      field :order, -> { Square::Types::Order }, optional: true, nullable: false
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
 
     end
   end
