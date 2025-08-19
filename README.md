@@ -31,7 +31,6 @@ Or in your Gemfile:
 ```ruby
 gem 'square.rb', '~> 44.0.0'
 ```
-```
 
 ## Usage
 
