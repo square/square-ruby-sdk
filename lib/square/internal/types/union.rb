@@ -75,14 +75,12 @@ module Square
             raise Errors::TypeError, "could not resolve to member of union #{self}"
           end
 
+          puts "union.coerce: value before except"
           puts "union.coerce: value.class: #{value.class}"
           puts "union.coerce: value: #{value}"
-          puts "----------------------------------------------------"
           value = value.except(@discriminant) if type <= Model && value.is_a?(::Hash)
           puts "union.coerce: value.class after except: #{value.class}"
           puts "union.coerce: value after except: #{value}"
-          puts "----------------------------------------------------"
-
           _res = Utils.coerce(type, value, strict: strict)
           puts "union.coerce: _res.class: #{_res.class}"
           puts "union.coerce: _res: #{_res}"
