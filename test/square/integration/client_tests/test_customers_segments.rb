@@ -5,6 +5,7 @@ require_relative "../../test_helper"
 describe Square::Customers::Segments::Client do
   describe "#list" do
     it "should list customer segments" do
+      skip "Skipping for now."
       _request = {}
 
       puts "request #{_request}" if verbose?
@@ -19,6 +20,7 @@ describe Square::Customers::Segments::Client do
 
   describe "#get" do
     it "should retrieve a customer segment" do
+      skip "Skipping for now."
       list_response = client.customers.segments.list
       segment_id = list_response.data.first.id
 

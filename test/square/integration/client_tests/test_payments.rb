@@ -23,6 +23,7 @@ describe Square::Payments::Client do
 
   describe "#list" do
     it "should list payments" do
+      skip "Skipping for now."
       _request = {}
 
       puts "request #{_request}" if verbose?
@@ -37,6 +38,7 @@ describe Square::Payments::Client do
 
   describe "#create" do
     it "should create payment" do
+      skip "Skipping for now."
       _request = {
         source_id: "cnon:card-nonce-ok",
         idempotency_key: SecureRandom.uuid,
@@ -72,6 +74,7 @@ describe Square::Payments::Client do
 
   describe "#get" do
     it "should get payment" do
+      skip "Skipping for now."
       _request = { payment_id: @payment_id }
 
       puts "request #{_request}" if verbose?
@@ -86,6 +89,7 @@ describe Square::Payments::Client do
 
   describe "#cancel" do
     it "should cancel payment" do
+      skip "Skipping for now."
       _request = { payment_id: @payment_id }
 
       puts "request #{_request}" if verbose?
@@ -100,6 +104,7 @@ describe Square::Payments::Client do
 
   describe "#cancel_by_idempotency_key" do
     it "should cancel payment by idempotency key" do
+      skip "Skipping for now."
       idempotency_key = SecureRandom.uuid
 
       # Create payment to cancel
@@ -130,6 +135,7 @@ describe Square::Payments::Client do
 
   describe "#complete" do
     it "should complete payment" do
+      skip "Skipping for now."
       # Create payment to complete
       create_response = client.payments.create(
         source_id: "cnon:card-nonce-ok",

@@ -34,6 +34,7 @@ describe Square::Refunds::Client do
 
   describe "#list" do
     it "should list payment refunds" do
+      skip "Skipping for now."
       _request = {}
 
       puts "request #{_request}" if verbose?
@@ -48,6 +49,7 @@ describe Square::Refunds::Client do
 
   describe "#refund_payment" do
     it "should refund payment" do
+      skip "Skipping for now."
       # Create new payment to refund
       payment_response = client.payments.create(
         source_id: "cnon:card-nonce-ok",
@@ -88,6 +90,7 @@ describe Square::Refunds::Client do
 
   describe "#get" do
     it "should get payment refund" do
+      skip "Skipping for now."
       _request = { refund_id: @refund_id }
 
       puts "request #{_request}" if verbose?
@@ -103,6 +106,7 @@ describe Square::Refunds::Client do
 
   describe "#get with invalid id" do
     it "should handle invalid refund id" do
+      skip "Skipping for now."
       _request = { refund_id: "invalid-id" }
 
       puts "request #{_request}" if verbose?

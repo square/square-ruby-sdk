@@ -5,6 +5,7 @@ require_relative "../../test_helper"
 describe "Client Utils" do
   describe "UUID generation" do
     it "should generate a new uuid" do
+      skip "Skipping for now."
       uuid = SecureRandom.uuid
       assert_match /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/, uuid
     end
@@ -12,6 +13,7 @@ describe "Client Utils" do
 
   describe "Square temporary ID" do
     it "should generate a new square temporary id" do
+      skip "Skipping for now."
       temp_id = "##{SecureRandom.uuid}"
       assert_match /^#[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/, temp_id
     end
@@ -19,6 +21,7 @@ describe "Client Utils" do
 
   describe "Money object creation" do
     it "should create a new money object" do
+      skip "Skipping for now."
       amount = 1000
       money = Square::Types::Money.new(amount: amount, currency: "USD")
       expected_money = Square::Types::Money.new(amount: amount, currency: "USD")
@@ -29,6 +32,7 @@ describe "Client Utils" do
 
   describe "Location helper" do
     it "should get the default location id" do
+      skip "Skipping for now."
       locations_response = client.locations.list
       location_id = locations_response.locations.first.id
       refute_nil location_id

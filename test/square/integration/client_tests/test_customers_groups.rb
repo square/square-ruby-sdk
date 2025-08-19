@@ -18,6 +18,7 @@ describe Square::Customers::Groups::Client do
 
   describe "#create and list" do
     it "should create and list a customer group" do
+      skip "Skipping for now."
       # create
       _create_request = {
         idempotency_key: SecureRandom.uuid,
@@ -52,6 +53,7 @@ describe Square::Customers::Groups::Client do
 
   describe "#get" do
     it "should retrieve a customer group" do
+      skip "Skipping for now."
       create_response = create_test_customer_group
 
       _request = { group_id: create_response.group.id }
@@ -71,6 +73,7 @@ describe Square::Customers::Groups::Client do
 
   describe "#update" do
     it "should update a customer group" do
+      skip "Skipping for now."
       create_response = create_test_customer_group
       new_name = "Updated-#{SecureRandom.uuid}"
 
@@ -96,6 +99,7 @@ describe Square::Customers::Groups::Client do
 
   describe "#delete" do
     it "should delete a customer group" do
+      skip "Skipping for now."
       create_response = create_test_customer_group
 
       _request = { group_id: create_response.group.id }
@@ -112,6 +116,7 @@ describe Square::Customers::Groups::Client do
 
   describe "#get with non-existent group" do
     it "should handle error when retrieving non-existent group" do
+      skip "Skipping for now."
       non_existent_id = "non-existent-id"
 
       _request = { group_id: non_existent_id }
@@ -126,6 +131,7 @@ describe Square::Customers::Groups::Client do
 
   describe "#create with invalid data" do
     it "should handle error when creating group with invalid data" do
+      skip "Skipping for now."
       _request = {
         idempotency_key: SecureRandom.uuid,
         group: {

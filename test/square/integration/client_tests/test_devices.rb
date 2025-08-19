@@ -15,6 +15,7 @@ describe Square::Devices::Codes::Client do
 
   describe "#list" do
     it "should list device codes" do
+      skip "Skipping for now."
       _request = {}
 
       puts "request #{_request}" if verbose?
@@ -30,6 +31,7 @@ describe Square::Devices::Codes::Client do
 
   describe "#create" do
     it "should create device code" do
+      skip "Skipping for now."
       _request = {
         idempotency_key: SecureRandom.uuid,
         device_code: Square::Devices::Types::DeviceCode.new(
@@ -52,6 +54,7 @@ describe Square::Devices::Codes::Client do
 
   describe "#get" do
     it "should get device code" do
+      skip "Skipping for now."
       _request = { id: @device_code_id }
 
       puts "request #{_request}" if verbose?

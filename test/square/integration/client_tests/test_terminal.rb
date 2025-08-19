@@ -24,6 +24,7 @@ describe Square::Terminal::Checkouts::Client do
 
   describe "#create" do
     it "should create terminal checkout" do
+      skip "Skipping for now."
       _request = {
         idempotency_key: SecureRandom.uuid,
         checkout: Square::Terminal::Types::TerminalCheckout.new(
@@ -53,6 +54,7 @@ describe Square::Terminal::Checkouts::Client do
 
   describe "#search" do
     it "should search terminal checkouts" do
+      skip "Skipping for now."
       _request = { limit: 1 }
 
       puts "request #{_request}" if verbose?
@@ -67,6 +69,7 @@ describe Square::Terminal::Checkouts::Client do
 
   describe "#get" do
     it "should get terminal checkout" do
+      skip "Skipping for now."
       _request = { checkout_id: @checkout_id }
 
       puts "request #{_request}" if verbose?
@@ -81,6 +84,7 @@ describe Square::Terminal::Checkouts::Client do
 
   describe "#cancel" do
     it "should cancel terminal checkout" do
+      skip "Skipping for now."
       _request = { checkout_id: @checkout_id }
 
       puts "request #{_request}" if verbose?

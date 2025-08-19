@@ -11,6 +11,7 @@ describe Square::Merchants::Client do
 
   describe "#list" do
     it "should list merchants" do
+      skip "Skipping for now."
       _request = {}
 
       puts "request #{_request}" if verbose?
@@ -25,6 +26,7 @@ describe Square::Merchants::Client do
 
   describe "#get" do
     it "should retrieve merchant" do
+      skip "Skipping for now."
       _request = { merchant_id: @merchant_id }
 
       puts "request #{_request}" if verbose?

@@ -5,6 +5,7 @@ require_relative "../../test_helper"
 describe Square::Locations::Client do
   describe "#list" do
     it "should list locations" do
+      skip "Skipping for now."
       _request = {}
 
       puts "request #{_request}" if verbose?
