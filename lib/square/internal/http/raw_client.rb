@@ -32,9 +32,6 @@ module Square
             body: request.encode_body
           )
 
-          puts "raw_client.send: http_request.class: #{http_request.class}"
-          puts "raw_client.send: http_request.inspect: #{http_request.inspect}"
-
           conn = connect(url)
           conn.open_timeout = @timeout
           conn.read_timeout = @timeout
@@ -64,9 +61,6 @@ module Square
         # @param body [String, nil] The body for the request.
         # @return [HTTP::Request] The HTTP request.
         def build_http_request(url:, method:, headers: {}, body: nil)
-          puts "raw_client.build_http_request: body.class: #{body.class}"
-          puts "raw_client.build_http_request: body: #{body}"
-          puts "----------------------------------------------------"
           request = Net::HTTPGenericRequest.new(
             method,
             !body.nil?,
