@@ -175,7 +175,7 @@ module Square
       #
       # @return [Square::Types::DeleteCustomerResponse]
       def delete(request_options: {}, **params)
-        _request = Types::DeleteCustomerRequest.new(params[:request]).to_h
+        _request = Types::DeleteCustomersRequest.new(params[:request]).to_h
         # Pull out path params explicitly
         _customer_id = _request[:customer_id]
         _request = _request.except(:customer_id)

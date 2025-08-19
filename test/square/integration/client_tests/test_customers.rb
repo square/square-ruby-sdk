@@ -42,6 +42,7 @@ describe Square::Customers::Client do
       response = client.customers.delete(request: _delete_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::DeleteCustomerResponse
+      assert_nil response.errors
       puts "delete customer response #{response.to_h}" if verbose?
     end
   end
