@@ -71,11 +71,13 @@ module Square
       def batch_upsert(request_options: {}, **params)
         _body = Types::BatchUpsertCatalogObjectsRequest.new(params[:request])
         puts "batch_upsert._body.class: #{_body.class}"
+        _body_hash = _body.to_h
+        puts "batch_upsert._body_hash.class: #{_body_hash.class}"
         _request = Internal::JSON::Request.new(
           base_url: Square::Environment::SANDBOX,
           path: "/v2/catalog/batch-upsert",
           method: "POST",
-          body: _body,
+          body: _body_hash,
           request_options: request_options
         )
         puts "batch_upsert._request.class: #{_request.class}"

@@ -17,7 +17,6 @@ module Square
         def initialize(base_url:, path:, method:, headers: {}, query: {}, body: nil, request_options: {})
           super(base_url:, path:, method:, headers:, query:, request_options:)
 
-          puts "json.request: body.class: #{body.class}"
           @body = body
         end
 
@@ -31,7 +30,15 @@ module Square
 
         # @return [String, nil] The encoded HTTP request body.
         def encode_body
-          @body.nil? ? nil : ::JSON.generate(@body)
+          if @body.nil?
+            nil
+          else
+            puts "json.request.encode_body: @body.to_h.class: #{@body.to_h.class}"
+            puts "json.request.encode_body: @body.to_h: #{@body.to_h}"
+            puts "----------------------------------------------------"
+            ::JSON.generate(@body.to_h)
+          end
+          # @body.nil? ? nil : ::JSON.generate(@body)
         end
       end
     end
