@@ -71,6 +71,7 @@ describe Square::Catalog::Client do
       )
 
       refute_nil response
+      puts "response #{response.to_h}"
     end
   end
 end

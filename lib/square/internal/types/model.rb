@@ -112,7 +112,7 @@ module Square
             end
           end
 
-          def coerce(value, strict: strict?)
+          def coerce(value, strict: (respond_to?(:strict?) ? strict? : false))
             return value if value.is_a?(self)
 
             return value unless value.is_a?(::Hash)
