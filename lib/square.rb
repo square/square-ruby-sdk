@@ -3,6 +3,9 @@
 require "json"
 require "net/http"
 require "securerandom"
+require "fileutils"
+require "stringio"
+require "tempfile"
 
 # Internal Types
 require_relative 'square/internal/json/serializable'
@@ -18,6 +21,7 @@ require_relative 'square/internal/multipart/multipart_encoder'
 require_relative 'square/internal/multipart/multipart_form_data_part'
 require_relative 'square/internal/multipart/multipart_form_data'
 require_relative 'square/internal/multipart/multipart_request'
+require_relative 'square/file_param'
 require_relative 'square/internal/types/model/field'
 require_relative 'square/internal/types/model'
 require_relative 'square/internal/types/array'

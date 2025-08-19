@@ -17,16 +17,19 @@ module Square
       #
       # @return [Square::Types::CreateOrderResponse]
       def create(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          method: POST,
-          path: "v2/orders",
-          body: Square::Types::CreateOrderRequest.new(params[:request]).to_h,
+        response = @client.send(
+          Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            path: "/v2/orders",
+            method: "POST",
+            body: params,
+            request_options: request_options
+          )
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::CreateOrderResponse.load(_response.body)
+        if response.code >= "200" && response.code < "300"
+          return Square::Types::CreateOrderResponse.load(response.body)
         else
-          raise _response.body
+          raise response.body
         end
       end
 

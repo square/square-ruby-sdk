@@ -30,12 +30,19 @@ module Square
       #
       # @return [Square::Types::CreateInvoiceResponse]
       def create(request_options: {}, **params)
-        _request = params
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::CreateInvoiceResponse.load(_response.body)
+        response = @client.send(
+          Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            path: "/v2/invoices",
+            method: "POST",
+            body: params,
+            request_options: request_options
+          )
+        )
+        if response.code >= "200" && response.code < "300"
+          return Square::Types::CreateInvoiceResponse.load(response.body)
         else
-          raise _response.body
+          raise response.body
         end
       end
 
@@ -62,12 +69,18 @@ module Square
       #
       # @return [Square::Types::GetInvoiceResponse]
       def get(request_options: {}, **params)
-        _request = params
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::GetInvoiceResponse.load(_response.body)
+        response = @client.send(
+          Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            path: "/v2/invoices/#{params[:invoice_id]}",
+            method: "GET",
+            request_options: request_options
+          )
+        )
+        if response.code >= "200" && response.code < "300"
+          return Square::Types::GetInvoiceResponse.load(response.body)
         else
-          raise _response.body
+          raise response.body
         end
       end
 
@@ -102,23 +115,43 @@ module Square
         end
       end
 
-      # Uploads a file and attaches it to an invoice. This endpoint accepts HTTP multipart/form-data file uploads
-      # with a JSON `request` part and a `file` part. The `file` part must be a `readable stream` that contains a file
-      # in a supported format: GIF, JPEG, PNG, TIFF, BMP, or PDF.
-      # 
-      # Invoices can have up to 10 attachments with a total file size of 25 MB. Attachments can be added only to invoices
-      # in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
-      # 
-      # __NOTE:__ When testing in the Sandbox environment, the total file size is limited to 1 KB.
+      # Create an invoice attachment.
       #
-      # @return [Square::Types::CreateInvoiceAttachmentResponse]
+      # @option invoice_id [String] The ID of the invoice to attach the file to.
+      # @option request [Square::Invoices::CreateInvoiceAttachmentRequest, Hash[Symbol=>Object], nil] The request object.
+      # @option image_file [Square::FileParam, nil] The image file to attach.
+      # @option request_options [Square::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Square::Invoices::CreateInvoiceAttachmentResponse]
       def create_invoice_attachment(request_options: {}, **params)
-        _request = params
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::CreateInvoiceAttachmentResponse.load(_response.body)
+        body = Internal::Multipart::FormData.new
+
+        if params[:request]
+          body.add(
+            name: "request",
+            value: JSON.generate(Types::CreateInvoiceAttachmentRequest.new(params[:request]).to_h),
+            content_type: "application/json; charset=utf-8"
+          )
+        end
+
+        if params[:image_file]
+          body.add_part(params[:image_file].to_form_data_part(name: "image_file",
+                                                              content_type: "image/jpeg"))
+        end
+
+        response = @client.send(
+          Square::Internal::Multipart::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            path: "/v2/invoices/#{params[:invoice_id]}/attachments",
+            method: "POST",
+            body: body,
+            request_options: request_options
+          )
+        )
+        if response.code >= "200" && response.code < "300"
+          Square::Types::CreateInvoiceAttachmentResponse.load(response.body)
         else
-          raise _response.body
+          raise response.body
         end
       end
 

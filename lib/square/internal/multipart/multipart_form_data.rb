@@ -67,10 +67,14 @@ module Square
 
         def filename_for(file)
           if file.is_a?(::File) || file.respond_to?(:path)
-            ::File.basename(file.path)
+            path = file.path
+            return ::File.basename(path) if path && !path.empty?
           elsif file.respond_to?(:name)
-            file.name
+            return file.name if file.name
           end
+          
+          # Default fallback
+          "file"
         end
       end
     end

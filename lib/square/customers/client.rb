@@ -37,12 +37,19 @@ module Square
       #
       # @return [Square::Types::CreateCustomerResponse]
       def create(request_options: {}, **params)
-        _request = params
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::CreateCustomerResponse.load(_response.body)
+        response = @client.send(
+          Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            path: "/v2/customers",
+            method: "POST",
+            body: params,
+            request_options: request_options
+          )
+        )
+        if response.code >= "200" && response.code < "300"
+          return Square::Types::CreateCustomerResponse.load(response.body)
         else
-          raise _response.body
+          raise response.body
         end
       end
 
