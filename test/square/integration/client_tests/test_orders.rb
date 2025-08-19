@@ -7,8 +7,7 @@ describe Square::Orders::Client do
     skip "Skipping for now."
     @location_id = client.locations.list.locations.first.id
 
-    # Create initial order for testing
-    order_response = client.orders.create(
+    _create_request = Square::Orders::Types::CreateOrderRequest.new(
       idempotency_key: SecureRandom.uuid,
       order: Square::Orders::Types::Order.new(
         location_id: @location_id,
@@ -24,6 +23,14 @@ describe Square::Orders::Client do
         ]
       )
     )
+    # Create initial order for testing
+    order_response = client.orders.create(request: _create_request.to_h)
+    refute_nil order_response
+    assert_equal order_response.class, Square::Types::CreateOrderResponse
+    refute_nil order_response.order
+    assert_equal @location_id, order_response.order.location_id
+    assert_equal "New Item", order_response.order.line_items.first.name
+
     @order_id = order_response.order.id
     @line_item_uid = order_response.order.line_items.first.uid
   end
@@ -31,7 +38,7 @@ describe Square::Orders::Client do
   describe "#create" do
     it "should create order" do
       skip "Skipping for now."
-      _request = {
+      _request = Square::Orders::Types::CreateOrderRequest.new(
         idempotency_key: SecureRandom.uuid,
         order: Square::Orders::Types::Order.new(
           location_id: @location_id,
@@ -46,12 +53,13 @@ describe Square::Orders::Client do
             )
           ]
         )
-      }
+      )
 
       puts "request #{_request.to_h}" if verbose?
 
       response = client.orders.create(request: _request.to_h)
       refute_nil response.order
+      assert_equal response.class, Square::Types::CreateOrderResponse
       assert_equal @location_id, response.order.location_id
       assert_equal "New Item", response.order.line_items.first.name
 
@@ -62,11 +70,13 @@ describe Square::Orders::Client do
   describe "#batch_get" do
     it "should batch retrieve orders" do
       skip "Skipping for now."
-      _request = { order_ids: [@order_id] }
+      _request = Square::Orders::Types::BatchGetOrdersRequest.new(
+        order_ids: [@order_id]
+      )
 
-      puts "request #{_request.to_h}" if verbose?
-
-      response = client.orders.batch_get(order_ids: [@order_id])
+      response = client.orders.batch_get(request: _request.to_h)
+      refute_nil response
+      assert_equal response.class, Square::Types::BatchGetOrdersResponse
       refute_nil response.orders
       assert_equal @order_id, response.orders.first.id
 
@@ -77,17 +87,14 @@ describe Square::Orders::Client do
   describe "#search" do
     it "should search orders" do
       skip "Skipping for now."
-      _request = {
-        limit: 1,
-        location_ids: [@location_id]
-      }
-
-      puts "request #{_request.to_h}" if verbose?
-
-      response = client.orders.search(
+      _request = Square::Orders::Types::SearchOrdersRequest.new(
         limit: 1,
         location_ids: [@location_id]
       )
+
+      response = client.orders.search(request: _request.to_h)
+      refute_nil response
+      assert_equal response.class, Square::Types::SearchOrdersResponse
       refute_nil response.orders
       assert response.orders.length > 0
 
@@ -98,7 +105,7 @@ describe Square::Orders::Client do
   describe "#update" do
     it "should update order" do
       skip "Skipping for now."
-      _request = {
+      _request = Square::Orders::Types::UpdateOrderRequest.new(
         order_id: @order_id,
         idempotency_key: SecureRandom.uuid,
         order: Square::Orders::Types::Order.new(
@@ -117,9 +124,7 @@ describe Square::Orders::Client do
           ]
         ),
         fields_to_clear: ["line_items[#{@line_item_uid}]"]
-      }
-
-      puts "request #{_request.to_h}" if verbose?
+      )
 
       response = client.orders.update(request: _request.to_h)
       refute_nil response.order
@@ -133,14 +138,12 @@ describe Square::Orders::Client do
   describe "#pay" do
     it "should pay order" do
       skip "Skipping for now."
-      _request = {
+      _request = Square::Orders::Types::PayOrderRequest.new(
         order_id: @order_id,
         idempotency_key: SecureRandom.uuid,
         order_version: 2,
         payment_ids: []
-      }
-
-      puts "request #{_request.to_h}" if verbose?
+      )
 
       response = client.orders.pay(request: _request.to_h)
       refute_nil response.order
@@ -153,7 +156,7 @@ describe Square::Orders::Client do
   describe "#calculate" do
     it "should calculate order" do
       skip "Skipping for now."
-      _request = {
+      _request = Square::Orders::Types::CalculateOrderRequest.new(
         order: Square::Orders::Types::Order.new(
           location_id: @location_id,
           line_items: [
@@ -167,13 +170,12 @@ describe Square::Orders::Client do
             )
           ]
         )
-      }
-
-      puts "request #{_request.to_h}" if verbose?
+      )
 
       response = client.orders.calculate(request: _request.to_h)
       refute_nil response.order
       refute_nil response.order.total_money
+      assert_equal response.class, Square::Types::CalculateOrderResponse
 
       puts "response #{response.to_h}" if verbose?
     end

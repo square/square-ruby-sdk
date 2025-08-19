@@ -13,13 +13,12 @@ describe Square::Merchants::Client do
   describe "#list" do
     it "should list merchants" do
       skip "Skipping for now."
-      _request = {}
-
-      puts "request #{_request.to_h}" if verbose?
 
       response = client.merchants.list
-      refute_nil response.data
-      assert response.data.length > 0
+      refute_nil response
+      assert_equal response.class, Square::Types::ListMerchantsResponse
+      refute_nil response.merchant
+      assert response.merchant.length > 0
 
       puts "response #{response.to_h}" if verbose?
     end
@@ -28,11 +27,13 @@ describe Square::Merchants::Client do
   describe "#get" do
     it "should retrieve merchant" do
       skip "Skipping for now."
-      _request = { merchant_id: @merchant_id }
+      _request = Square::Merchants::Types::GetMerchantRequest.new(
+        merchant_id: @merchant_id
+      )
 
-      puts "request #{_request.to_h}" if verbose?
-
-      response = client.merchants.get(merchant_id: @merchant_id)
+      response = client.merchants.get(request: _request.to_h)
+      refute_nil response
+      assert_equal response.class, Square::Types::GetMerchantResponse
       refute_nil response.merchant
       assert_equal @merchant_id, response.merchant.id
 
