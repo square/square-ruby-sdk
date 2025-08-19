@@ -26,7 +26,7 @@ describe Square::Payments::Client do
       skip "Skipping for now."
       _request = {}
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.payments.list
       refute_nil response.data
@@ -77,7 +77,7 @@ describe Square::Payments::Client do
       skip "Skipping for now."
       _request = { payment_id: @payment_id }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.payments.get(payment_id: @payment_id)
       refute_nil response.payment
@@ -92,7 +92,7 @@ describe Square::Payments::Client do
       skip "Skipping for now."
       _request = { payment_id: @payment_id }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.payments.cancel(payment_id: @payment_id)
       refute_nil response.payment
@@ -124,7 +124,7 @@ describe Square::Payments::Client do
 
       _request = { idempotency_key: idempotency_key }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.payments.cancel_by_idempotency_key(idempotency_key: idempotency_key)
       refute_nil response
@@ -153,7 +153,7 @@ describe Square::Payments::Client do
 
       _request = { payment_id: create_response.payment.id }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.payments.complete(payment_id: create_response.payment.id)
       refute_nil response.payment

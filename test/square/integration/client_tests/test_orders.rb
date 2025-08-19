@@ -66,7 +66,7 @@ describe Square::Orders::Client do
       skip "Skipping for now."
       _request = { order_ids: [@order_id] }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.orders.batch_get(order_ids: [@order_id])
       refute_nil response.orders
@@ -84,7 +84,7 @@ describe Square::Orders::Client do
         location_ids: [@location_id]
       }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.orders.search(
         limit: 1,
@@ -147,7 +147,7 @@ describe Square::Orders::Client do
         payment_ids: []
       }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.orders.pay(
         order_id: _request[:order_id],

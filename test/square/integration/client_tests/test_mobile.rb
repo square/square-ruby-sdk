@@ -8,7 +8,7 @@ describe Square::Mobile::Client do
       skip "Skipping for now."
       _request = { location_id: client.locations.list.locations.first.id }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.mobile.authorization_code(location_id: _request[:location_id])
       refute_nil response.authorization_code

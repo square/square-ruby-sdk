@@ -27,7 +27,7 @@ describe Square::Customers::Groups::Client do
         }
       }
 
-      puts "create_request #{_create_request}" if verbose?
+      puts "create_request #{_create_request.to_h}" if verbose?
 
       response = create_test_customer_group
       refute_nil response.group
@@ -38,7 +38,7 @@ describe Square::Customers::Groups::Client do
       # list
       _list_request = {}
 
-      puts "list_request #{_list_request}" if verbose?
+      puts "list_request #{_list_request.to_h}" if verbose?
 
       list_response = client.customers.groups.list
       refute_nil list_response.data
@@ -58,7 +58,7 @@ describe Square::Customers::Groups::Client do
 
       _request = { group_id: create_response.group.id }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       get_response = client.customers.groups.get(group_id: create_response.group.id)
       assert_equal create_response.group.name, get_response.group.name
@@ -82,7 +82,7 @@ describe Square::Customers::Groups::Client do
         group: { name: new_name }
       }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       update_response = client.customers.groups.update(
         group_id: create_response.group.id,
@@ -104,7 +104,7 @@ describe Square::Customers::Groups::Client do
 
       _request = { group_id: create_response.group.id }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       delete_response = delete_test_customer_group(create_response.group.id)
       refute_nil delete_response
@@ -121,7 +121,7 @@ describe Square::Customers::Groups::Client do
 
       _request = { group_id: non_existent_id }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       assert_raises(Square::SquareError) do
         client.customers.groups.get(group_id: non_existent_id)
@@ -139,7 +139,7 @@ describe Square::Customers::Groups::Client do
         }
       }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       assert_raises(Square::SquareError) do
         client.customers.groups.create(

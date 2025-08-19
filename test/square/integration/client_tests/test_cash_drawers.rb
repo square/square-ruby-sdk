@@ -15,7 +15,7 @@ describe Square::CashDrawers::Shifts::Client do
         end_time: end_time.iso8601
       }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.cash_drawers.shifts.list(
         location_id: _request[:location_id],

@@ -14,7 +14,7 @@ describe Square::Merchants::Client do
       skip "Skipping for now."
       _request = {}
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.merchants.list
       refute_nil response.data
@@ -29,7 +29,7 @@ describe Square::Merchants::Client do
       skip "Skipping for now."
       _request = { merchant_id: @merchant_id }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.merchants.get(merchant_id: @merchant_id)
       refute_nil response.merchant

@@ -69,7 +69,6 @@ describe Square::Catalog::Client do
 
   describe "#batch_upsert" do
     it "creates multiple catalog objects" do
-      skip "Skipping for now."
       _request = Square::Catalog::Types::BatchUpsertCatalogObjectsRequest.new(
         idempotency_key: SecureRandom.uuid,
         batches: [
@@ -187,7 +186,7 @@ describe Square::Catalog::Client do
         ]
       }
 
-      puts "request #{_request.keys}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.catalog.batch_upsert(
         idempotency_key: _request[:idempotency_key],
@@ -231,7 +230,7 @@ describe Square::Catalog::Client do
         ]
       }
 
-      puts "request #{_request.keys}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       # Create the catalog objects in a bulk request
       create_catalog_objects_resp = client.catalog.batch_upsert(
@@ -384,7 +383,7 @@ describe Square::Catalog::Client do
       
       _request = {}
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.catalog.info
       assert response
@@ -400,7 +399,7 @@ describe Square::Catalog::Client do
       
       _request = {}
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.catalog.list
       assert response
@@ -416,7 +415,7 @@ describe Square::Catalog::Client do
       
       _request = { limit: 1 }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.catalog.search(limit: 1)
       assert response
@@ -432,7 +431,7 @@ describe Square::Catalog::Client do
       
       _request = { limit: 1 }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.catalog.search_items(limit: 1)
       assert response
@@ -451,7 +450,7 @@ describe Square::Catalog::Client do
         object_ids: [@catalog_modifier_id, @catalog_modifier_list_id, @catalog_tax_id]
       }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.catalog.batch_get(
         object_ids: _request[:object_ids]
@@ -485,7 +484,7 @@ describe Square::Catalog::Client do
         taxes_to_enable: [@catalog_tax_id]
       }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.catalog.update_item_taxes(
         item_ids: _request[:item_ids],
@@ -522,7 +521,7 @@ describe Square::Catalog::Client do
         modifier_lists_to_enable: [@catalog_modifier_list_id]
       }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.catalog.update_item_modifier_lists(
         item_ids: _request[:item_ids],
@@ -540,124 +539,122 @@ describe Square::Catalog::Client do
     end
   end
 
-  describe Square::Catalog::Object::Client do
-    describe "#upsert" do
-      it "upserts an object" do
-        skip "Skipping for now."
-        _request = {
-          idempotency_key: SecureRandom.uuid,
-          object: {
-            type: "ITEM",
-            id: "##{SecureRandom.uuid}",
-            present_at_all_locations: true,
-            item_data: {
-              name: "Coffee",
-              description: "Strong coffee",
-              abbreviation: "C",
-              variations: [
-                {
-                  type: "ITEM_VARIATION",
-                  id: "##{SecureRandom.uuid}",
-                  present_at_all_locations: true,
-                  item_variation_data: {
-                    name: "Kona Coffee",
-                    track_inventory: false,
-                    pricing_type: "FIXED_PRICING",
-                    price_money: {
-                      amount: 1000,
-                      currency: "USD"
-                    }
+  describe "#upsert" do
+    it "upserts an object" do
+      skip "Skipping for now."
+      _request = {
+        idempotency_key: SecureRandom.uuid,
+        object: {
+          type: "ITEM",
+          id: "##{SecureRandom.uuid}",
+          present_at_all_locations: true,
+          item_data: {
+            name: "Coffee",
+            description: "Strong coffee",
+            abbreviation: "C",
+            variations: [
+              {
+                type: "ITEM_VARIATION",
+                id: "##{SecureRandom.uuid}",
+                present_at_all_locations: true,
+                item_variation_data: {
+                  name: "Kona Coffee",
+                  track_inventory: false,
+                  pricing_type: "FIXED_PRICING",
+                  price_money: {
+                    amount: 1000,
+                    currency: "USD"
                   }
                 }
-              ]
-            }
+              }
+            ]
           }
         }
+      }
 
-        puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
-        response = client.catalog.object.upsert(request: _request)
-        refute_nil response
+      response = client.catalog.object.upsert(request: _request)
+      refute_nil response
 
-        puts "response #{response.to_h}" if verbose?
-      end
-
-      it "upsert catalog object with custom data" do
-        skip "Skipping for now."
-        coffee = create_test_catalog_item(
-          name: "Coffee",
-          description: "Strong coffee",
-          abbreviation: "C",
-          price: 100,
-          variation_name: "Colombian Fair Trade"
-        )
-
-        sleep(2) # Wait before upsert
-
-        _request = {
-          object: coffee,
-          idempotency_key: SecureRandom.uuid
-        }
-
-        puts "request #{_request.keys}" if verbose?
-
-        response = client.catalog.object.upsert(
-          object: _request[:object],
-          idempotency_key: _request[:idempotency_key]
-        )
-        
-        catalog_object = response.catalog_object
-
-        assert response
-        assert catalog_object
-        assert_equal "ITEM", catalog_object.type
-        assert_equal 1, catalog_object.item_data.variations.length
-
-        variation = catalog_object.item_data.variations.first
-        assert_equal "Colombian Fair Trade", variation.item_variation_data.name
-
-        puts "response object_id=#{catalog_object.id}" if verbose?
-      end
+      puts "response #{response.to_h}" if verbose?
     end
 
-    describe "#get" do
-      it "retrieve catalog object" do
-        skip "Skipping for now."
-        sleep(2) # Wait before test start
+    it "upsert catalog object with custom data" do
+      skip "Skipping for now."
+      coffee = create_test_catalog_item(
+        name: "Coffee",
+        description: "Strong coffee",
+        abbreviation: "C",
+        price: 100,
+        variation_name: "Colombian Fair Trade"
+      )
 
-        # First create a catalog object
-        coffee = create_test_catalog_item
-        
-        _create_request = {
-          object: coffee,
-          idempotency_key: SecureRandom.uuid
-        }
+      sleep(2) # Wait before upsert
 
-        puts "create_request #{_create_request.keys}" if verbose?
+      _request = {
+        object: coffee,
+        idempotency_key: SecureRandom.uuid
+      }
 
-        create_resp = client.catalog.object.upsert(
-          object: _create_request[:object],
-          idempotency_key: _create_request[:idempotency_key]
-        )
+      puts "request #{_request.to_h}" if verbose?
 
-        sleep(2) # Wait before retrieve
+      response = client.catalog.object.upsert(
+        object: _request[:object],
+        idempotency_key: _request[:idempotency_key]
+      )
+      
+      catalog_object = response.catalog_object
 
-        _request = { object_id: create_resp.catalog_object.id }
+      assert response
+      assert catalog_object
+      assert_equal "ITEM", catalog_object.type
+      assert_equal 1, catalog_object.item_data.variations.length
 
-        puts "request #{_request}" if verbose?
+      variation = catalog_object.item_data.variations.first
+      assert_equal "Colombian Fair Trade", variation.item_variation_data.name
 
-        # Then retrieve it
-        response = client.catalog.object.get(object_id: create_resp.catalog_object.id)
-        assert response.object
-        assert_equal create_resp.catalog_object.id, response.object.id
+      puts "response object_id=#{catalog_object.id}" if verbose?
+    end
+  end
 
-        puts "response object_id=#{response.object.id}" if verbose?
+  describe "#get" do
+    it "retrieve catalog object" do
+      skip "Skipping for now."
+      sleep(2) # Wait before test start
 
-        sleep(2) # Wait before cleanup
+      # First create a catalog object
+      coffee = create_test_catalog_item
+      
+      _create_request = {
+        object: coffee,
+        idempotency_key: SecureRandom.uuid
+      }
 
-        # Cleanup
-        client.catalog.object.delete(object_id: create_resp.catalog_object.id)
-      end
+      puts "create_request #{_create_request.keys}" if verbose?
+
+      create_resp = client.catalog.object.upsert(
+        object: _create_request[:object],
+        idempotency_key: _create_request[:idempotency_key]
+      )
+
+      sleep(2) # Wait before retrieve
+
+      _request = { object_id: create_resp.catalog_object.id }
+
+      puts "request #{_request.to_h}" if verbose?
+
+      # Then retrieve it
+      response = client.catalog.object.get(object_id: create_resp.catalog_object.id)
+      assert response.object
+      assert_equal create_resp.catalog_object.id, response.object.id
+
+      puts "response object_id=#{response.object.id}" if verbose?
+
+      sleep(2) # Wait before cleanup
+
+      # Cleanup
+      client.catalog.object.delete(object_id: create_resp.catalog_object.id)
     end
   end
 end

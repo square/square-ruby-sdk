@@ -8,7 +8,7 @@ describe Square::Locations::Client do
       skip "Skipping for now."
       _request = {}
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.locations.list
       refute_nil response.locations

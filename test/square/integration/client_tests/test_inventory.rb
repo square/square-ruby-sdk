@@ -11,7 +11,7 @@ describe Square::Inventory::Client do
         location_ids: ["C6W5YS5QM06F5"]
       }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.inventory.batch_get_changes(request: _request)
       refute_nil response

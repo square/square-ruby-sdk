@@ -8,7 +8,7 @@ describe Square::Customers::Segments::Client do
       skip "Skipping for now."
       _request = {}
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.customers.segments.list
       refute_nil response.data
@@ -26,7 +26,7 @@ describe Square::Customers::Segments::Client do
 
       _request = { segment_id: segment_id }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.customers.segments.get(segment_id: segment_id)
       refute_nil response.segment

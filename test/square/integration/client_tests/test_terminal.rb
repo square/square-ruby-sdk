@@ -57,7 +57,7 @@ describe Square::Terminal::Checkouts::Client do
       skip "Skipping for now."
       _request = { limit: 1 }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.terminal.checkouts.search(limit: 1)
       refute_nil response.checkouts
@@ -72,7 +72,7 @@ describe Square::Terminal::Checkouts::Client do
       skip "Skipping for now."
       _request = { checkout_id: @checkout_id }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.terminal.checkouts.get(checkout_id: @checkout_id)
       refute_nil response.checkout
@@ -87,7 +87,7 @@ describe Square::Terminal::Checkouts::Client do
       skip "Skipping for now."
       _request = { checkout_id: @checkout_id }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.terminal.checkouts.cancel(checkout_id: @checkout_id)
       refute_nil response.checkout

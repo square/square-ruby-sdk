@@ -18,7 +18,7 @@ describe Square::Devices::Codes::Client do
       skip "Skipping for now."
       _request = {}
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.devices.codes.list
       refute_nil response
@@ -57,7 +57,7 @@ describe Square::Devices::Codes::Client do
       skip "Skipping for now."
       _request = { id: @device_code_id }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.devices.codes.get(id: @device_code_id)
       refute_nil response.device_code

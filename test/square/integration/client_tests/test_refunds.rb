@@ -37,7 +37,7 @@ describe Square::Refunds::Client do
       skip "Skipping for now."
       _request = {}
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.refunds.list
       refute_nil response.data
@@ -93,7 +93,7 @@ describe Square::Refunds::Client do
       skip "Skipping for now."
       _request = { refund_id: @refund_id }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       response = client.refunds.get(refund_id: @refund_id)
       refute_nil response.refund
@@ -109,7 +109,7 @@ describe Square::Refunds::Client do
       skip "Skipping for now."
       _request = { refund_id: "invalid-id" }
 
-      puts "request #{_request}" if verbose?
+      puts "request #{_request.to_h}" if verbose?
 
       assert_raises(Square::SquareError) do
         client.refunds.get(refund_id: "invalid-id")
