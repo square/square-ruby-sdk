@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../../../test_helper"
+require_relative "../../test_helper"
 
 describe Square::Locations::Client do
   describe "#list" do

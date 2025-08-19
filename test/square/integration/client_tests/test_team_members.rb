@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../../../test_helper"
+require_relative "../../test_helper"
 
 describe Square::TeamMembers::Client do
   def create_test_team_member(location_ids)

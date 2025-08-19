@@ -68,6 +68,150 @@ describe Square::Catalog::Client do
     @catalog_tax_id = nil
   end
 
+  describe "#batch_upsert" do
+    it "creates multiple catalog objects" do
+      _request = Square::Catalog::Types::BatchUpsertCatalogObjectsRequest.new(
+        idempotency_key: SecureRandom.uuid,
+        batches: [
+          {
+            objects: [
+              {
+                type: "ITEM",
+                id: "##{SecureRandom.uuid}",
+                present_at_all_locations: true,
+                item_data: {
+                  name: "Coffee",
+                  description: "Strong coffee",
+                  abbreviation: "C",
+                  variations: [
+                    {
+                      type: "ITEM_VARIATION",
+                      id: "##{SecureRandom.uuid}",
+                      present_at_all_locations: true,
+                      item_variation_data: {
+                        name: "Kona Coffee",
+                        track_inventory: false,
+                        pricing_type: "FIXED_PRICING",
+                        price_money: {
+                          amount: 1000,
+                          currency: "USD"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                type: "ITEM",
+                id: "##{SecureRandom.uuid}",
+                present_at_all_locations: true,
+                item_data: {
+                  name: "Tea",
+                  description: "Strong tea",
+                  abbreviation: "T",
+                  variations: [
+                    {
+                      type: "ITEM_VARIATION",
+                      id: "##{SecureRandom.uuid}",
+                      present_at_all_locations: true,
+                      item_variation_data: {
+                        name: "Gunpowder Green",
+                        track_inventory: false,
+                        pricing_type: "FIXED_PRICING",
+                        price_money: {
+                          amount: 2000,
+                          currency: "USD"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      )
+
+      puts "request #{_request.to_h}" if verbose?
+
+      response = client.catalog.batch_upsert(request: _request.to_h)
+      refute_nil response
+
+      puts "response #{response.to_h}" if verbose?
+    end
+
+    it "batch upsert catalog objects with modifiers and taxes" do
+      sleep(2) # Wait before batch upsert
+
+      modifier = {
+        type: "MODIFIER",
+        id: "#temp-modifier-id",
+        modifier_data: {
+          name: "Limited Time Only Price",
+          price_money: {
+            amount: 200,
+            currency: "USD"
+          }
+        }
+      }
+
+      modifier_list = {
+        type: "MODIFIER_LIST",
+        id: "#temp-modifier-list-id",
+        modifier_list_data: {
+          name: "Special weekend deals",
+          modifiers: [modifier]
+        }
+      }
+
+      tax = {
+        type: "TAX",
+        id: "#temp-tax-id",
+        tax_data: {
+          name: "Online only Tax",
+          calculation_phase: "TAX_SUBTOTAL_PHASE",
+          inclusion_type: "ADDITIVE",
+          percentage: "5.0",
+          applies_to_custom_amounts: true,
+          enabled: true
+        }
+      }
+
+      _request = {
+        idempotency_key: SecureRandom.uuid,
+        batches: [
+          {
+            objects: [tax, modifier_list]
+          }
+        ]
+      }
+
+      puts "request #{_request.keys}" if verbose?
+
+      response = client.catalog.batch_upsert(
+        idempotency_key: _request[:idempotency_key],
+        batches: _request[:batches]
+      )
+
+      assert response
+      assert_equal 2, response.objects.length
+
+      # Store IDs for later use
+      response.id_mappings&.each do |mapping|
+        case mapping.client_object_id
+        when "#temp-tax-id"
+          @catalog_tax_id = mapping.object_id
+        when "#temp-modifier-id"
+          @catalog_modifier_id = mapping.object_id
+        when "#temp-modifier-list-id"
+          @catalog_modifier_list_id = mapping.object_id
+        end
+      end
+
+      puts "response objects_count=#{response.objects.length}" if verbose?
+    end
+  end
+
   describe "#bulk operations and pagination" do
     it "bulk create and iterate through paginated catalog objects" do
       delete_all_catalog_objects(client)
@@ -230,85 +374,6 @@ describe Square::Catalog::Client do
     end
   end
 
-  describe Square::Catalog::Object::Client do
-    describe "#upsert" do
-      it "upsert catalog object" do
-        coffee = create_test_catalog_item(
-          name: "Coffee",
-          description: "Strong coffee",
-          abbreviation: "C",
-          price: 100,
-          variation_name: "Colombian Fair Trade"
-        )
-
-        sleep(2) # Wait before upsert
-
-        _request = {
-          object: coffee,
-          idempotency_key: SecureRandom.uuid
-        }
-
-        puts "request #{_request.keys}" if verbose?
-
-        response = client.catalog.object.upsert(
-          object: _request[:object],
-          idempotency_key: _request[:idempotency_key]
-        )
-        
-        catalog_object = response.catalog_object
-
-        assert response
-        assert catalog_object
-        assert_equal "ITEM", catalog_object.type
-        assert_equal 1, catalog_object.item_data.variations.length
-
-        variation = catalog_object.item_data.variations.first
-        assert_equal "Colombian Fair Trade", variation.item_variation_data.name
-
-        puts "response object_id=#{catalog_object.id}" if verbose?
-      end
-    end
-
-    describe "#get" do
-      it "retrieve catalog object" do
-        sleep(2) # Wait before test start
-
-        # First create a catalog object
-        coffee = create_test_catalog_item
-        
-        _create_request = {
-          object: coffee,
-          idempotency_key: SecureRandom.uuid
-        }
-
-        puts "create_request #{_create_request.keys}" if verbose?
-
-        create_resp = client.catalog.object.upsert(
-          object: _create_request[:object],
-          idempotency_key: _create_request[:idempotency_key]
-        )
-
-        sleep(2) # Wait before retrieve
-
-        _request = { object_id: create_resp.catalog_object.id }
-
-        puts "request #{_request}" if verbose?
-
-        # Then retrieve it
-        response = client.catalog.object.get(object_id: create_resp.catalog_object.id)
-        assert response.object
-        assert_equal create_resp.catalog_object.id, response.object.id
-
-        puts "response object_id=#{response.object.id}" if verbose?
-
-        sleep(2) # Wait before cleanup
-
-        # Cleanup
-        client.catalog.object.delete(object_id: create_resp.catalog_object.id)
-      end
-    end
-  end
-
   describe "#info" do
     it "catalog info" do
       sleep(2) # Wait before info request
@@ -366,79 +431,6 @@ describe Square::Catalog::Client do
       assert response
 
       puts "response items_count=#{response.items&.length || 0}" if verbose?
-    end
-  end
-
-  describe "#batch_upsert" do
-    it "batch upsert catalog objects" do
-      sleep(2) # Wait before batch upsert
-
-      modifier = {
-        type: "MODIFIER",
-        id: "#temp-modifier-id",
-        modifier_data: {
-          name: "Limited Time Only Price",
-          price_money: {
-            amount: 200,
-            currency: "USD"
-          }
-        }
-      }
-
-      modifier_list = {
-        type: "MODIFIER_LIST",
-        id: "#temp-modifier-list-id",
-        modifier_list_data: {
-          name: "Special weekend deals",
-          modifiers: [modifier]
-        }
-      }
-
-      tax = {
-        type: "TAX",
-        id: "#temp-tax-id",
-        tax_data: {
-          name: "Online only Tax",
-          calculation_phase: "TAX_SUBTOTAL_PHASE",
-          inclusion_type: "ADDITIVE",
-          percentage: "5.0",
-          applies_to_custom_amounts: true,
-          enabled: true
-        }
-      }
-
-      _request = {
-        idempotency_key: SecureRandom.uuid,
-        batches: [
-          {
-            objects: [tax, modifier_list]
-          }
-        ]
-      }
-
-      puts "request #{_request.keys}" if verbose?
-
-      response = client.catalog.batch_upsert(
-        idempotency_key: _request[:idempotency_key],
-        batches: _request[:batches]
-      )
-
-      assert response
-      assert_equal 2, response.objects.length
-
-      # Store IDs for later use
-      response.id_mappings&.each do |mapping|
-        case mapping.client_object_id
-        when "#temp-tax-id"
-          @catalog_tax_id = mapping.object_id
-        when "#temp-modifier-id"
-          @catalog_modifier_id = mapping.object_id
-        when "#temp-modifier-list-id"
-          @catalog_modifier_list_id = mapping.object_id
-        end
-      end
-
-      puts "response objects_count=#{response.objects.length}" if verbose?
     end
   end
 
@@ -535,6 +527,124 @@ describe Square::Catalog::Client do
 
       # Cleanup
       client.catalog.object.delete(object_id: create_resp.catalog_object.id)
+    end
+  end
+
+  describe Square::Catalog::Object::Client do
+    describe "#upsert" do
+      it "upserts an object" do
+        _request = {
+          idempotency_key: SecureRandom.uuid,
+          object: {
+            type: "ITEM",
+            id: "##{SecureRandom.uuid}",
+            present_at_all_locations: true,
+            item_data: {
+              name: "Coffee",
+              description: "Strong coffee",
+              abbreviation: "C",
+              variations: [
+                {
+                  type: "ITEM_VARIATION",
+                  id: "##{SecureRandom.uuid}",
+                  present_at_all_locations: true,
+                  item_variation_data: {
+                    name: "Kona Coffee",
+                    track_inventory: false,
+                    pricing_type: "FIXED_PRICING",
+                    price_money: {
+                      amount: 1000,
+                      currency: "USD"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+
+        puts "request #{_request}" if verbose?
+
+        response = client.catalog.object.upsert(request: _request)
+        refute_nil response
+
+        puts "response #{response.to_h}" if verbose?
+      end
+
+      it "upsert catalog object with custom data" do
+        coffee = create_test_catalog_item(
+          name: "Coffee",
+          description: "Strong coffee",
+          abbreviation: "C",
+          price: 100,
+          variation_name: "Colombian Fair Trade"
+        )
+
+        sleep(2) # Wait before upsert
+
+        _request = {
+          object: coffee,
+          idempotency_key: SecureRandom.uuid
+        }
+
+        puts "request #{_request.keys}" if verbose?
+
+        response = client.catalog.object.upsert(
+          object: _request[:object],
+          idempotency_key: _request[:idempotency_key]
+        )
+        
+        catalog_object = response.catalog_object
+
+        assert response
+        assert catalog_object
+        assert_equal "ITEM", catalog_object.type
+        assert_equal 1, catalog_object.item_data.variations.length
+
+        variation = catalog_object.item_data.variations.first
+        assert_equal "Colombian Fair Trade", variation.item_variation_data.name
+
+        puts "response object_id=#{catalog_object.id}" if verbose?
+      end
+    end
+
+    describe "#get" do
+      it "retrieve catalog object" do
+        sleep(2) # Wait before test start
+
+        # First create a catalog object
+        coffee = create_test_catalog_item
+        
+        _create_request = {
+          object: coffee,
+          idempotency_key: SecureRandom.uuid
+        }
+
+        puts "create_request #{_create_request.keys}" if verbose?
+
+        create_resp = client.catalog.object.upsert(
+          object: _create_request[:object],
+          idempotency_key: _create_request[:idempotency_key]
+        )
+
+        sleep(2) # Wait before retrieve
+
+        _request = { object_id: create_resp.catalog_object.id }
+
+        puts "request #{_request}" if verbose?
+
+        # Then retrieve it
+        response = client.catalog.object.get(object_id: create_resp.catalog_object.id)
+        assert response.object
+        assert_equal create_resp.catalog_object.id, response.object.id
+
+        puts "response object_id=#{response.object.id}" if verbose?
+
+        sleep(2) # Wait before cleanup
+
+        # Cleanup
+        client.catalog.object.delete(object_id: create_resp.catalog_object.id)
+      end
     end
   end
 end
