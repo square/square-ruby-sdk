@@ -6,7 +6,7 @@ describe Square::Customers::Client do
   describe "#create and delete customer" do
     it "creates a customer" do
 
-      _request = Square::Customers::Types::CreateCustomerRequest.new(
+      _create_request = Square::Customers::Types::CreateCustomerRequest.new(
         given_name: "Amelia",
         family_name: "Earhart",
         email_address: "Amelia.Earhart@example.com",
@@ -23,23 +23,23 @@ describe Square::Customers::Client do
         note: "a customer"
       )
 
-      puts "create customer request #{_request.to_h}" if verbose?
+      puts "create customer request #{_create_request.to_h}" if verbose?
 
-      response = client.customers.create(request: _request.to_h)
+      response = client.customers.create(request: _create_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::CreateCustomerResponse
       refute_nil response.customer.id
       refute_nil response.customer.version
       puts "create customer response #{response.to_h}" if verbose?
 
-      _request = Square::Customers::Types::DeleteCustomerRequest.new(
+      _delete_request = Square::Customers::Types::DeleteCustomersRequest.new(
         customer_id: response.customer.id,
         version: response.customer.version
       )
 
-      puts "delete customer request #{_request.to_h}" if verbose?
+      puts "delete customer request #{_delete_request.to_h}" if verbose?
 
-      response = client.customers.delete(request: _request.to_h)
+      response = client.customers.delete(request: _delete_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::DeleteCustomerResponse
       puts "delete customer response #{response.to_h}" if verbose?

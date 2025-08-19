@@ -25,12 +25,14 @@ module Square
         def send(request)
           url = build_url(request)
 
+          puts "raw_client.send: url.inspect #{url.inspect}"
           http_request = build_http_request(
             url:,
             method: request.method,
             headers: request.encode_headers,
             body: request.encode_body
           )
+
 
           conn = connect(url)
           conn.open_timeout = @timeout
