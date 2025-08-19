@@ -4,45 +4,53 @@ require "test_helper"
 
 describe Square::Customers::Groups::Client do
   def create_test_customer_group
-    client.customers.groups.create(
+    _create_request = Square::Customers::Groups::Types::CreateCustomerGroupRequest.new(
       idempotency_key: SecureRandom.uuid,
       group: {
         name: "Default-#{SecureRandom.uuid}"
       }
     )
+    _create_resp = client.customers.groups.create(request: _create_request.to_h)
+    refute_nil _create_resp
+    assert_equal _create_resp.class, Square::Types::CreateCustomerGroupResponse
+    refute_nil _create_resp.group
   end
 
   def delete_test_customer_group(group_id)
-    client.customers.groups.delete(group_id: group_id)
+    _delete_request = Square::Customers::Groups::Types::DeleteGroupsRequest.new(
+      group_id: group_id
+    )
+    _delete_resp = client.customers.groups.delete(request: _delete_request.to_h)
+    refute_nil _delete_resp
+    assert_equal _delete_resp.class, Square::Types::DeleteCustomerGroupResponse
   end
 
   describe "#create and list" do
     it "should create and list a customer group" do
       skip "Skipping for now."
       # create
-      _create_request = {
+      _create_request = Square::Customers::Groups::Types::CreateCustomerGroupRequest.new(
         idempotency_key: SecureRandom.uuid,
         group: {
           name: "Default-#{SecureRandom.uuid}"
         }
-      }
+      )
 
       puts "create_request #{_create_request.to_h}" if verbose?
 
       response = create_test_customer_group
       refute_nil response.group
       refute_nil response.group.name
+      assert_equal response.class, Square::Types::CreateCustomerGroupResponse
 
       puts "create_response #{response.to_h}" if verbose?
 
       # list
-      _list_request = {}
-
-      puts "list_request #{_list_request.to_h}" if verbose?
-
       list_response = client.customers.groups.list
-      refute_nil list_response.data
-      assert list_response.data.length > 0
+      refute_nil list_response
+      assert_equal list_response.class, Square::Types::ListCustomerGroupsResponse
+      refute_nil list_response.groups
+      assert list_response.groups.length > 0
 
       puts "list_response #{list_response.to_h}" if verbose?
 
@@ -106,11 +114,7 @@ describe Square::Customers::Groups::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      delete_response = delete_test_customer_group(create_response.group.id)
-      refute_nil delete_response
-      assert_nil delete_response.errors
-
-      puts "response #{delete_response.to_h}" if verbose?
+      delete_test_customer_group(create_response.group.id)
     end
   end
 

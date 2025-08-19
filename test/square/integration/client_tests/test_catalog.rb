@@ -9,6 +9,8 @@ describe Square::Catalog::Client do
 
   def delete_all_catalog_objects(client)
     catalog_objects_resp = client.catalog.list
+    refute_nil catalog_objects_resp
+    assert_equal catalog_objects_resp.class, Square::Types::ListCatalogResponse
     object_ids = []
     
     catalog_objects_resp.data.each do |catalog_object|
@@ -24,7 +26,10 @@ describe Square::Catalog::Client do
       object_ids << variation.id
     end
     
-    client.catalog.batch_delete(object_ids: object_ids)
+    _batch_delete_request = Square::Catalog::Types::BatchDeleteCatalogObjectsRequest.new(
+      object_ids: object_ids
+    )
+    client.catalog.batch_delete(request: _batch_delete_request.to_h)
   end
 
   def create_test_catalog_item(name: "Test Item #{SecureRandom.uuid}", description: "Test Description", abbreviation: "TI", price: 100, variation_name: "Regular")
@@ -177,14 +182,14 @@ describe Square::Catalog::Client do
         }
       }
 
-      _request = {
+      _request = Square::Catalog::Types::BatchUpsertCatalogObjectsRequest.new(
         idempotency_key: SecureRandom.uuid,
         batches: [
           {
             objects: [tax, modifier_list]
           }
         ]
-      }
+      )
 
       puts "request #{_request.to_h}" if verbose?
 
@@ -192,6 +197,7 @@ describe Square::Catalog::Client do
 
       assert response
       assert_equal 2, response.objects.length
+      assert_equal response.class, Square::Types::BatchUpsertCatalogObjectsResponse
 
       # Store IDs for later use
       response.id_mappings&.each do |mapping|
@@ -232,6 +238,7 @@ describe Square::Catalog::Client do
       # Create the catalog objects in a bulk request
       create_catalog_objects_resp = client.catalog.batch_upsert(request: _request.to_h)
       assert_equal 200, create_catalog_objects_resp.objects.length
+      assert_equal create_catalog_objects_resp.class, Square::Types::BatchUpsertCatalogObjectsResponse
       sleep(2) # Wait after bulk creation
 
       puts "create_response objects_count=#{create_catalog_objects_resp.objects.length}" if verbose?
@@ -287,14 +294,14 @@ describe Square::Catalog::Client do
           sleep(3)
           puts 'Creating catalog object...' if verbose?
 
-          _create_request = {
+          _create_request = Square::Catalog::Types::BatchUpsertCatalogObjectsRequest.new(
             idempotency_key: SecureRandom.uuid,
             batches: [
               {
                 objects: [catalog_object]
               }
             ]
-          }
+          )
 
           puts "create_catalog_request #{_create_request.keys}" if verbose?
           
@@ -314,7 +321,7 @@ describe Square::Catalog::Client do
           # Create a new catalog image
           image_name = "Test Image #{SecureRandom.uuid}"
           
-          _image_request = {
+          _image_request = Square::Catalog::Types::UpsertCatalogImageRequest.new(
             image_file: image_file,
             request: {
               idempotency_key: SecureRandom.uuid,
@@ -327,7 +334,7 @@ describe Square::Catalog::Client do
                 }
               }
             }
-          }
+          )
 
           puts "image_upload_request #{_image_request[:request].to_h}" if verbose?
 
@@ -343,9 +350,12 @@ describe Square::Catalog::Client do
           puts 'Starting cleanup...' if verbose?
 
           # Cleanup: Delete the created catalog object and image
-          client.catalog.batch_delete(
+          _batch_delete_request = Square::Catalog::Types::BatchDeleteCatalogObjectsRequest.new(
             object_ids: [created_catalog_object.id, create_catalog_image_resp.image.id]
           )
+          _batch_delete_resp = client.catalog.batch_delete(request: _batch_delete_request.to_h)
+          refute_nil _batch_delete_resp
+          assert_equal _batch_delete_resp.class, Square::Types::BatchDeleteCatalogObjectsResponse
 
           puts 'Cleanup completed' if verbose?
           # If we get here, the test succeeded, so break out of retry loop
@@ -368,13 +378,10 @@ describe Square::Catalog::Client do
     it "catalog info" do
       skip "Skipping for now."
       sleep(2) # Wait before info request
-      
-      _request = {}
-
-      puts "request #{_request.to_h}" if verbose?
 
       response = client.catalog.info
-      assert response
+      refute_nil response
+      assert_equal response.class, Square::Types::CatalogInfoResponse
 
       puts "response #{response.to_h}" if verbose?
     end
@@ -384,13 +391,10 @@ describe Square::Catalog::Client do
     it "list catalog" do
       skip "Skipping for now."
       sleep(2) # Wait before list request
-      
-      _request = {}
-
-      puts "request #{_request.to_h}" if verbose?
 
       response = client.catalog.list
-      assert response
+      refute_nil response
+      assert_equal response.class, Square::Types::ListCatalogResponse
 
       puts "response items_count=#{response.data&.length || 0}" if verbose?
     end
@@ -401,12 +405,13 @@ describe Square::Catalog::Client do
       skip "Skipping for now."
       sleep(2) # Wait before search
       
-      _request = { limit: 1 }
+      _request = Square::Catalog::Types::SearchCatalogObjectsRequest.new(
+        limit: 1
+      )
 
-      puts "request #{_request.to_h}" if verbose?
-
-      response = client.catalog.search(limit: 1)
-      assert response
+      response = client.catalog.search(request: _request.to_h)
+      refute_nil response
+      assert_equal response.class, Square::Types::SearchCatalogObjectsResponse
 
       puts "response items_count=#{response.objects&.length || 0}" if verbose?
     end
@@ -434,15 +439,17 @@ describe Square::Catalog::Client do
       sleep(2) # Wait before batch retrieve
 
       # Use the IDs created in the batch upsert test
-      _request = {
+      _request = Square::Catalog::Types::BatchRetrieveCatalogObjectsRequest.new(
         object_ids: [@catalog_modifier_id, @catalog_modifier_list_id, @catalog_tax_id]
-      }
+      )
 
       puts "request #{_request.to_h}" if verbose?
 
       response = client.catalog.batch_get(request: _request.to_h)
 
-      assert response.objects
+      refute_nil response
+      assert_equal response.class, Square::Types::BatchRetrieveCatalogObjectsResponse
+      refute_nil response.objects
       assert_equal 3, response.objects.length
       assert_equal [@catalog_modifier_id, @catalog_modifier_list_id, @catalog_tax_id].sort,
                    response.objects.map(&:id).sort
@@ -465,23 +472,27 @@ describe Square::Catalog::Client do
 
       sleep(2) # Wait before update
 
-      _request = {
+      _request = Square::Catalog::Types::UpdateItemTaxesRequest.new(
         item_ids: [create_resp.catalog_object.id],
         taxes_to_enable: [@catalog_tax_id]
-      }
+      )
 
       puts "request #{_request.to_h}" if verbose?
 
       response = client.catalog.update_item_taxes(request: _request.to_h)
 
-      assert response.updated_at
+      refute_nil response
+      assert_equal response.class, Square::Types::UpdateItemTaxesResponse
+      refute_nil response.updated_at
 
       puts "response updated_at=#{response.updated_at}" if verbose?
 
       sleep(2) # Wait before cleanup
 
       # Cleanup
-      client.catalog.object.delete(object_id: create_resp.catalog_object.id)
+      _delete_resp = client.catalog.object.delete(object_id: create_resp.catalog_object.id)
+      refute_nil _delete_resp
+      assert_equal _delete_resp.class, Square::Types::DeleteCatalogObjectResponse
     end
   end
 
@@ -499,30 +510,34 @@ describe Square::Catalog::Client do
 
       sleep(2) # Wait before update
 
-      _request = {
+      _request = Square::Catalog::Types::UpdateItemModifierListsRequest.new(
         item_ids: [create_resp.catalog_object.id],
         modifier_lists_to_enable: [@catalog_modifier_list_id]
-      }
+      )
 
       puts "request #{_request.to_h}" if verbose?
 
       response = client.catalog.update_item_modifier_lists(request: _request.to_h)
 
-      assert response.updated_at
+      refute_nil response
+      assert_equal response.class, Square::Types::UpdateItemModifierListsResponse
+      refute_nil response.updated_at
 
       puts "response updated_at=#{response.updated_at}" if verbose?
 
       sleep(2) # Wait before cleanup
 
       # Cleanup
-      client.catalog.object.delete(object_id: create_resp.catalog_object.id)
+      _delete_resp = client.catalog.object.delete(object_id: create_resp.catalog_object.id)
+      refute_nil _delete_resp
+      assert_equal _delete_resp.class, Square::Types::DeleteCatalogObjectResponse
     end
   end
 
   describe "#upsert" do
     it "upserts an object" do
       skip "Skipping for now."
-      _request = {
+      _request = Square::Catalog::Types::UpsertCatalogObjectRequest.new(
         idempotency_key: SecureRandom.uuid,
         object: {
           type: "ITEM",
@@ -550,12 +565,14 @@ describe Square::Catalog::Client do
             ]
           }
         }
-      }
+      )
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.catalog.object.upsert(request: _request)
+      response = client.catalog.object.upsert(request: _request.to_h)
       refute_nil response
+      assert_equal response.class, Square::Types::UpsertCatalogObjectResponse
+      refute_nil response.catalog_object
 
       puts "response #{response.to_h}" if verbose?
     end
@@ -572,18 +589,20 @@ describe Square::Catalog::Client do
 
       sleep(2) # Wait before upsert
 
-      _request = {
+      _request = Square::Catalog::Types::UpsertCatalogObjectRequest.new(
         object: coffee,
         idempotency_key: SecureRandom.uuid
-      }
+      )
 
       puts "request #{_request.to_h}" if verbose?
 
       response = client.catalog.object.upsert(request: _request.to_h)
-      
+      refute_nil response
+      assert_equal response.class, Square::Types::UpsertCatalogObjectResponse
+      refute_nil response.catalog_object
+
       catalog_object = response.catalog_object
 
-      assert response
       assert catalog_object
       assert_equal "ITEM", catalog_object.type
       assert_equal 1, catalog_object.item_data.variations.length
@@ -603,10 +622,10 @@ describe Square::Catalog::Client do
       # First create a catalog object
       coffee = create_test_catalog_item
       
-      _create_request = {
+      _create_request = Square::Catalog::Types::UpsertCatalogObjectRequest.new(
         object: coffee,
         idempotency_key: SecureRandom.uuid
-      }
+      )
 
       puts "create_request #{_create_request.keys}" if verbose?
 
@@ -620,7 +639,9 @@ describe Square::Catalog::Client do
 
       # Then retrieve it
       response = client.catalog.object.get(object_id: create_resp.catalog_object.id)
-      assert response.object
+      refute_nil response
+      assert_equal response.class, Square::Types::GetCatalogObjectResponse
+      refute_nil response.object
       assert_equal create_resp.catalog_object.id, response.object.id
 
       puts "response object_id=#{response.object.id}" if verbose?
@@ -628,7 +649,9 @@ describe Square::Catalog::Client do
       sleep(2) # Wait before cleanup
 
       # Cleanup
-      client.catalog.object.delete(object_id: create_resp.catalog_object.id)
+      _delete_resp = client.catalog.object.delete(object_id: create_resp.catalog_object.id)
+      refute_nil _delete_resp
+      assert_equal _delete_resp.class, Square::Types::DeleteCatalogObjectResponse
     end
   end
 end

@@ -6,13 +6,11 @@ describe Square::Customers::Segments::Client do
   describe "#list" do
     it "should list customer segments" do
       skip "Skipping for now."
-      _request = {}
-
-      puts "request #{_request.to_h}" if verbose?
-
+      
       response = client.customers.segments.list
-      refute_nil response.data
-      assert response.data.length > 0
+      refute_nil response
+      assert_equal response.class, Square::Types::ListCustomerSegmentsResponse
+      refute_nil response.segments
 
       puts "response #{response.to_h}" if verbose?
     end
@@ -22,13 +20,15 @@ describe Square::Customers::Segments::Client do
     it "should retrieve a customer segment" do
       skip "Skipping for now."
       list_response = client.customers.segments.list
-      segment_id = list_response.data.first.id
+      segment_id = list_response.segments.first.id
 
-      _request = { segment_id: segment_id }
+      _request = Square::Customers::Segments::Types::GetCustomerSegmentRequest.new(
+        segment_id: segment_id
+      )
 
-      puts "request #{_request.to_h}" if verbose?
-
-      response = client.customers.segments.get(segment_id: segment_id)
+      response = client.customers.segments.get(request: _request.to_h)
+      refute_nil response
+      assert_equal response.class, Square::Types::GetCustomerSegmentResponse
       refute_nil response.segment
       refute_nil response.segment.name
 
