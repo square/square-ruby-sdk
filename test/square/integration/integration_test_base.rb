@@ -3,7 +3,7 @@ require 'minitest/autorun'
 require 'minitest/hell'
 require 'minitest/pride'
 require 'minitest/proveit'
-require_relative 'helpers'
+require_relative 'test_helper'
 
 class IntegrationTestBase < Minitest::Test
   parallelize_me!
