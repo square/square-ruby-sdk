@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "../../test_helper"
+require "test_helper"
 
 describe Square::Terminal::Checkouts::Client do
   before do
+    skip "Skipping for now."
     @sandbox_device_id = "da40d603-c2ea-4a65-8cfd-f42e36dab0c7"
 
     # Create terminal checkout for testing

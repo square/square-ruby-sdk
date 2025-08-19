@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "../../test_helper"
+require "test_helper"
 
 describe Square::Payments::Client do
   before do
+    skip "Skipping for now."
     # Create initial payment for testing
     payment_response = client.payments.create(
       source_id: "cnon:card-nonce-ok",

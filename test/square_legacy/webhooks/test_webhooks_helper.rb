@@ -1,4 +1,4 @@
-require_relative '../../lib/square_legacy/utilities/webhooks_helper.rb'
+require_relative '../../../lib/square_legacy/utilities/webhooks_helper.rb'
 require 'minitest/autorun'
 require 'minitest/hell'
 require 'minitest/pride'

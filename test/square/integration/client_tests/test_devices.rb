@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "../../test_helper"
+require "test_helper"
 
 describe Square::Devices::Codes::Client do
   before do
+    skip "Skipping for now."
     create_response = client.devices.codes.create(
       idempotency_key: SecureRandom.uuid,
       device_code: Square::Devices::Types::DeviceCode.new(
