@@ -57,9 +57,8 @@ describe Square::Catalog::Client do
   end
 
   def get_test_file
-    # This should return a test image file path - you'll need to implement this
-    # For now, returning a placeholder
-    "test/fixtures/test_image.jpg"
+    # Return the actual test image file path
+    "../testdata/image.jpeg"
   end
 
   before do
