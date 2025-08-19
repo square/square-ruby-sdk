@@ -2,10 +2,8 @@
 module Square
   module Employees
     class Client
-      # @option client [Square::Internal::Http::RawClient]
-      #
       # @return [Square::Employees::Client]
-      def initialize(client)
+      def initialize(client:)
         @client = client
       end
 

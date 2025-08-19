@@ -3,10 +3,8 @@ module Square
   module Loyalty
     module Accounts
       class Client
-        # @option client [Square::Internal::Http::RawClient]
-        #
         # @return [Square::Loyalty::Accounts::Client]
-        def initialize(client)
+        def initialize(client:)
           @client = client
         end
 

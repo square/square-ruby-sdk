@@ -3,10 +3,8 @@ module Square
   module Webhooks
     module Subscriptions
       class Client
-        # @option client [Square::Internal::Http::RawClient]
-        #
         # @return [Square::Webhooks::Subscriptions::Client]
-        def initialize(client)
+        def initialize(client:)
           @client = client
         end
 

@@ -2,10 +2,8 @@
 module Square
   module TeamMembers
     class Client
-      # @option client [Square::Internal::Http::RawClient]
-      #
       # @return [Square::TeamMembers::Client]
-      def initialize(client)
+      def initialize(client:)
         @client = client
       end
 
@@ -18,7 +16,7 @@ module Square
       #
       # @return [Square::Types::CreateTeamMemberResponse]
       def create(request_options: {}, **params)
-        _request = Square::Internal::Http::JSONRequest.new(
+        _request = Square::Internal::JSON::Request.new(
           method: POST,
           path: "v2/team-members",
           body: Square::Types::CreateTeamMemberRequest.new(params[:request]).to_h,

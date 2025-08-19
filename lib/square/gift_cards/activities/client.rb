@@ -3,10 +3,8 @@ module Square
   module GiftCards
     module Activities
       class Client
-        # @option client [Square::Internal::Http::RawClient]
-        #
         # @return [Square::GiftCards::Activities::Client]
-        def initialize(client)
+        def initialize(client:)
           @client = client
         end
 

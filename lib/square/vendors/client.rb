@@ -2,10 +2,8 @@
 module Square
   module Vendors
     class Client
-      # @option client [Square::Internal::Http::RawClient]
-      #
       # @return [Square::Vendors::Client]
-      def initialize(client)
+      def initialize(client:)
         @client = client
       end
 

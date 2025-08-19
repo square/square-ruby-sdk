@@ -170,7 +170,6 @@ module Square
 
             next if value.nil? && field.optional && !field.nullable
 
-            # # Recursively convert nested objects to hashes if they have a to_h method
             if value.is_a?(::Array)
               value = value.map { |item| item.respond_to?(:to_h) ? item.to_h : item }
             elsif value.respond_to?(:to_h)

@@ -2,10 +2,8 @@
 module Square
   module Inventory
     class Client
-      # @option client [Square::Internal::Http::RawClient]
-      #
       # @return [Square::Inventory::Client]
-      def initialize(client)
+      def initialize(client:)
         @client = client
       end
 
@@ -42,7 +40,7 @@ module Square
       #
       # @return [Square::Types::BatchChangeInventoryResponse]
       def deprecated_batch_change(request_options: {}, **params)
-        _request = Square::Internal::Http::JSONRequest.new(
+        _request = Square::Internal::JSON::Request.new(
           method: POST,
           path: "v2/inventory/batch-change",
           body: Square::Types::BatchChangeInventoryRequest.new(params[:request]).to_h,
@@ -60,7 +58,7 @@ module Square
       #
       # @return [Square::Types::BatchGetInventoryChangesResponse]
       def deprecated_batch_get_changes(request_options: {}, **params)
-        _request = Square::Internal::Http::JSONRequest.new(
+        _request = Square::Internal::JSON::Request.new(
           method: POST,
           path: "v2/inventory/batch-retrieve-changes",
           body: Square::Types::BatchRetrieveInventoryChangesRequest.new(params[:request]).to_h,
@@ -78,7 +76,7 @@ module Square
       #
       # @return [Square::Types::BatchGetInventoryCountsResponse]
       def deprecated_batch_get_counts(request_options: {}, **params)
-        _request = Square::Internal::Http::JSONRequest.new(
+        _request = Square::Internal::JSON::Request.new(
           method: POST,
           path: "v2/inventory/batch-retrieve-counts",
           body: Square::Types::BatchGetInventoryCountsRequest.new(params[:request]).to_h,
@@ -99,7 +97,7 @@ module Square
       #
       # @return [Square::Types::BatchChangeInventoryResponse]
       def batch_create_changes(request_options: {}, **params)
-        _request = Square::Internal::Http::JSONRequest.new(
+        _request = Square::Internal::JSON::Request.new(
           method: POST,
           path: "v2/inventory/changes/batch-create",
           body: Square::Types::BatchChangeInventoryRequest.new(params[:request]).to_h,
@@ -123,12 +121,10 @@ module Square
       #
       # @return [Square::Types::BatchGetInventoryChangesResponse]
       def batch_get_changes(request_options: {}, **params)
-        _body = Square::Types::BatchRetrieveInventoryChangesRequest.new(params[:request]).to_h
-        _request = Square::Internal::Multipart::Request.new(
-          base_url: Square::Environment::SANDBOX,
+        _request = Square::Internal::JSON::Request.new(
           method: "POST",
           path: "v2/inventory/changes/batch-retrieve",
-          body: _body,
+          body: Square::Types::BatchRetrieveInventoryChangesRequest.new(params[:request]).to_h,
           request_options: request_options
         )
         _response = @client[:client].send(_request)
@@ -153,7 +149,7 @@ module Square
       #
       # @return [Square::Types::BatchGetInventoryCountsResponse]
       def batch_get_counts(request_options: {}, **params)
-        _request = Square::Internal::Http::JSONRequest.new(
+        _request = Square::Internal::JSON::Request.new(
           method: POST,
           path: "v2/inventory/counts/batch-retrieve",
           body: Square::Types::BatchGetInventoryCountsRequest.new(params[:request]).to_h,

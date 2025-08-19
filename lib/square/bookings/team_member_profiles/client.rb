@@ -3,10 +3,8 @@ module Square
   module Bookings
     module TeamMemberProfiles
       class Client
-        # @option client [Square::Internal::Http::RawClient]
-        #
         # @return [Square::Bookings::TeamMemberProfiles::Client]
-        def initialize(client)
+        def initialize(client:)
           @client = client
         end
 

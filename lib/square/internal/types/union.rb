@@ -72,10 +72,6 @@ module Square
             raise Errors::TypeError, "could not resolve to member of union #{self}"
           end
 
-          # TODO: This check doesn't matter right now since undiscriminated unions are not supported
-          # In its current state, it breaks discriminated unions
-          # value = value.except(@discriminant) if type <= Model && value.is_a?(::Hash)
-
           Utils.coerce(type, value, strict: strict)
         end
       end
