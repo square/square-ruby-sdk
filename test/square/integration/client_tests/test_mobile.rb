@@ -10,7 +10,7 @@ describe Square::Mobile::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.mobile.authorization_code(location_id: _request[:location_id])
+      response = client.mobile.authorization_code(request: _request.to_h)
       refute_nil response.authorization_code
       refute_nil response.expires_at
 

@@ -41,10 +41,7 @@ describe Square::Devices::Codes::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.devices.codes.create(
-        idempotency_key: _request[:idempotency_key],
-        device_code: _request[:device_code]
-      )
+      response = client.devices.codes.create(request: _request.to_h)
       refute_nil response.device_code
       assert_equal "TERMINAL_API", response.device_code.product_type
 

@@ -76,11 +76,7 @@ describe Square::Refunds::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.refunds.refund_payment(
-        idempotency_key: _request[:idempotency_key],
-        payment_id: _request[:payment_id],
-        amount_money: _request[:amount_money]
-      )
+      response = client.refunds.refund_payment(request: _request.to_h)
       refute_nil response.refund
       assert_equal payment_response.payment.id, response.refund.payment_id
 

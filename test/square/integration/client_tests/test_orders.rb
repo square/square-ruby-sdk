@@ -49,10 +49,7 @@ describe Square::Orders::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.orders.create(
-        idempotency_key: _request[:idempotency_key],
-        order: _request[:order]
-      )
+      response = client.orders.create(request: _request.to_h)
       refute_nil response.order
       assert_equal @location_id, response.order.location_id
       assert_equal "New Item", response.order.line_items.first.name
@@ -123,12 +120,7 @@ describe Square::Orders::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.orders.update(
-        order_id: _request[:order_id],
-        idempotency_key: _request[:idempotency_key],
-        order: _request[:order],
-        fields_to_clear: _request[:fields_to_clear]
-      )
+      response = client.orders.update(request: _request.to_h)
       refute_nil response.order
       assert_equal @order_id, response.order.id
       assert_equal "Updated Item", response.order.line_items.first.name
@@ -149,12 +141,7 @@ describe Square::Orders::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.orders.pay(
-        order_id: _request[:order_id],
-        idempotency_key: _request[:idempotency_key],
-        order_version: _request[:order_version],
-        payment_ids: _request[:payment_ids]
-      )
+      response = client.orders.pay(request: _request.to_h)
       refute_nil response.order
       assert_equal @order_id, response.order.id
 
@@ -183,7 +170,7 @@ describe Square::Orders::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.orders.calculate(order: _request[:order])
+      response = client.orders.calculate(request: _request.to_h)
       refute_nil response.order
       refute_nil response.order.total_money
 

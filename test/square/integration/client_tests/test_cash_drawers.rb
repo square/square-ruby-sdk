@@ -17,11 +17,7 @@ describe Square::CashDrawers::Shifts::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.cash_drawers.shifts.list(
-        location_id: _request[:location_id],
-        begin_time: _request[:begin_time],
-        end_time: _request[:end_time]
-      )
+      response = client.cash_drawers.shifts.list(request: _request.to_h)
       refute_nil response
 
       puts "response #{response.to_h}" if verbose?

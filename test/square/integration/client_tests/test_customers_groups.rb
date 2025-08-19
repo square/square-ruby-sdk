@@ -142,10 +142,7 @@ describe Square::Customers::Groups::Client do
       puts "request #{_request.to_h}" if verbose?
 
       assert_raises(Square::SquareError) do
-        client.customers.groups.create(
-          idempotency_key: _request[:idempotency_key],
-          group: _request[:group]
-        )
+        client.customers.groups.create(request: _request.to_h)
       end
     end
   end

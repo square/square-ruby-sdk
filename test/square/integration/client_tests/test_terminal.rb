@@ -40,10 +40,7 @@ describe Square::Terminal::Checkouts::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.terminal.checkouts.create(
-        idempotency_key: _request[:idempotency_key],
-        checkout: _request[:checkout]
-      )
+      response = client.terminal.checkouts.create(request: _request.to_h)
       refute_nil response.checkout
       assert_equal @sandbox_device_id, response.checkout.device_options.device_id
       assert_equal 100, response.checkout.amount_money.amount

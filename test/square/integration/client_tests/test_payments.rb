@@ -55,13 +55,7 @@ describe Square::Payments::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.payments.create(
-        source_id: _request[:source_id],
-        idempotency_key: _request[:idempotency_key],
-        amount_money: _request[:amount_money],
-        app_fee_money: _request[:app_fee_money],
-        autocomplete: _request[:autocomplete]
-      )
+      response = client.payments.create(request: _request.to_h)
       refute_nil response.payment
       assert_equal 10, response.payment.app_fee_money.amount
       assert_equal "USD", response.payment.app_fee_money.currency

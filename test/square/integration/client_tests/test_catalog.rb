@@ -188,10 +188,7 @@ describe Square::Catalog::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.catalog.batch_upsert(
-        idempotency_key: _request[:idempotency_key],
-        batches: _request[:batches]
-      )
+      response = client.catalog.batch_upsert(request: _request.to_h)
 
       assert response
       assert_equal 2, response.objects.length
@@ -233,10 +230,7 @@ describe Square::Catalog::Client do
       puts "request #{_request.to_h}" if verbose?
 
       # Create the catalog objects in a bulk request
-      create_catalog_objects_resp = client.catalog.batch_upsert(
-        idempotency_key: _request[:idempotency_key],
-        batches: _request[:batches]
-      )
+      create_catalog_objects_resp = client.catalog.batch_upsert(request: _request.to_h)
       assert_equal 200, create_catalog_objects_resp.objects.length
       sleep(2) # Wait after bulk creation
 
@@ -304,10 +298,7 @@ describe Square::Catalog::Client do
 
           puts "create_catalog_request #{_create_request.keys}" if verbose?
           
-          create_catalog_resp = client.catalog.batch_upsert(
-            idempotency_key: _create_request[:idempotency_key],
-            batches: _create_request[:batches]
-          )
+          create_catalog_resp = client.catalog.batch_upsert(request: _create_request.to_h)
 
           puts 'Catalog object created' if verbose?
           assert_equal 1, create_catalog_resp.objects.length
@@ -338,12 +329,9 @@ describe Square::Catalog::Client do
             }
           }
 
-          puts "image_upload_request #{_image_request[:request]}" if verbose?
+          puts "image_upload_request #{_image_request[:request].to_h}" if verbose?
 
-          create_catalog_image_resp = client.catalog.images.create(
-            image_file: _image_request[:image_file],
-            request: _image_request[:request]
-          )
+          create_catalog_image_resp = client.catalog.images.create(request: _image_request.to_h)
 
           puts 'Image uploaded successfully' if verbose?
           assert create_catalog_image_resp.image
@@ -452,9 +440,7 @@ describe Square::Catalog::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.catalog.batch_get(
-        object_ids: _request[:object_ids]
-      )
+      response = client.catalog.batch_get(request: _request.to_h)
 
       assert response.objects
       assert_equal 3, response.objects.length
@@ -486,10 +472,7 @@ describe Square::Catalog::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.catalog.update_item_taxes(
-        item_ids: _request[:item_ids],
-        taxes_to_enable: _request[:taxes_to_enable]
-      )
+      response = client.catalog.update_item_taxes(request: _request.to_h)
 
       assert response.updated_at
 
@@ -523,10 +506,7 @@ describe Square::Catalog::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.catalog.update_item_modifier_lists(
-        item_ids: _request[:item_ids],
-        modifier_lists_to_enable: _request[:modifier_lists_to_enable]
-      )
+      response = client.catalog.update_item_modifier_lists(request: _request.to_h)
 
       assert response.updated_at
 
@@ -599,10 +579,7 @@ describe Square::Catalog::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.catalog.object.upsert(
-        object: _request[:object],
-        idempotency_key: _request[:idempotency_key]
-      )
+      response = client.catalog.object.upsert(request: _request.to_h)
       
       catalog_object = response.catalog_object
 
@@ -633,10 +610,7 @@ describe Square::Catalog::Client do
 
       puts "create_request #{_create_request.keys}" if verbose?
 
-      create_resp = client.catalog.object.upsert(
-        object: _create_request[:object],
-        idempotency_key: _create_request[:idempotency_key]
-      )
+      create_resp = client.catalog.object.upsert(request: _create_request.to_h)
 
       sleep(2) # Wait before retrieve
 
