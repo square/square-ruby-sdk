@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+require_relative "../../../test_helper"
+
+describe Square::Mobile::Client do
+  describe "#authorization_code" do
+    it "should create mobile authorization code" do
+      _request = { location_id: client.locations.list.locations.first.id }
+
+      puts "request #{_request}" if verbose?
+
+      response = client.mobile.authorization_code(location_id: _request[:location_id])
+      refute_nil response.authorization_code
+      refute_nil response.expires_at
+
+      puts "response #{response.to_h}" if verbose?
+    end
+  end
+end
