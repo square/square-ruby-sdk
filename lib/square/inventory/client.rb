@@ -122,12 +122,11 @@ module Square
       # @return [Square::Types::BatchGetInventoryChangesResponse]
       def batch_get_changes(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          method: "POST",
+          method: POST,
           path: "v2/inventory/changes/batch-retrieve",
           body: Square::Types::BatchRetrieveInventoryChangesRequest.new(params[:request]).to_h,
-          request_options: request_options
         )
-        _response = @client[:client].send(_request)
+        _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchGetInventoryChangesResponse.load(_response.body)
         else
