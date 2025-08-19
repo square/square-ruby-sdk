@@ -43,7 +43,7 @@ module Square
     end
     # @return [Square::Catalog::Client]
     def catalog
-      @catalog ||= Square::Catalog::Client.new(@raw_client)
+      @catalog ||= Square::Catalog::Client.new(client: @raw_client)
     end
     # @return [Square::Customers::Client]
     def customers

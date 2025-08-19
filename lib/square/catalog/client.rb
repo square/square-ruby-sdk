@@ -5,7 +5,7 @@ module Square
       # @option client [Square::Internal::Http::RawClient]
       #
       # @return [Square::Catalog::Client]
-      def initialize(client)
+      def initialize(client:)
         @client = client
       end
 
@@ -69,19 +69,18 @@ module Square
       #
       # @return [Square::Types::BatchUpsertCatalogObjectsResponse]
       def batch_upsert(request_options: {}, **params)
-        _body_content = Types::BatchUpsertCatalogObjectsRequest.new(params[:request])
-        _body = _body_content.to_h
-        _request = Internal::Multipart::Request.new(
+        _body = Types::BatchUpsertCatalogObjectsRequest.new(params[:request])
+        puts "batch_upsert._body.class: #{_body.class}"
+        _request = Internal::JSON::Request.new(
           base_url: Square::Environment::SANDBOX,
           path: "/v2/catalog/batch-upsert",
           method: "POST",
           body: _body,
           request_options: request_options
         )
-        puts "@client: #{@client}\n"
-        puts "@client.inspect: #{@client.inspect}\n"
-        puts "@client.methods: #{@client.methods}\n"
-        _response = @client.send_request(_request)
+        puts "batch_upsert._request.class: #{_request.class}"
+        _response = @client.send(_request)
+        puts "batch_upsert._response.class: #{_response.class}"
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchUpsertCatalogObjectsResponse.load(_response.body)
         else

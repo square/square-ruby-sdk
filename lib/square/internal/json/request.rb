@@ -2,7 +2,7 @@
 
 module Square
   module Internal
-    module Multipart
+    module JSON
       # @api private
       class Request < Square::Internal::Http::BaseRequest
         attr_reader :body
@@ -17,6 +17,7 @@ module Square
         def initialize(base_url:, path:, method:, headers: {}, query: {}, body: nil, request_options: {})
           super(base_url:, path:, method:, headers:, query:, request_options:)
 
+          puts "json.request: body.class: #{body.class}"
           @body = body
         end
 
