@@ -32,7 +32,6 @@ module Square
             body: request.encode_body
           )
 
-
           conn = connect(url)
           conn.open_timeout = @timeout
           conn.read_timeout = @timeout

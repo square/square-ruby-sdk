@@ -45,5 +45,23 @@ describe Square::Customers::Client do
       assert_nil response.errors
       puts "delete customer response #{response.to_h}" if verbose?
     end
+    it "validates hash behavior with optional fields" do
+      has_version = Square::Customers::Types::DeleteCustomersRequest.new(
+        customer_id: "123",
+        version: 1
+      ).to_h
+      missing_version = Square::Customers::Types::DeleteCustomersRequest.new(
+        customer_id: "123"
+      ).to_h
+
+      assert_equal has_version.keys.length, 2
+      assert_equal missing_version.keys.length, 1
+
+      has_version = has_version.except(:customer_id)
+      missing_version = missing_version.except(:customer_id)
+
+      assert_equal has_version.keys.length, 1
+      assert_equal missing_version.keys.length, 0
+    end
   end
 end

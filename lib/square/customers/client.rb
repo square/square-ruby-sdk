@@ -180,6 +180,7 @@ module Square
         _customer_id = _request[:customer_id]
         _request = _request.except(:customer_id)
 
+        
         _query_params = _request
         _response = @client.send(Internal::JSON::Request.new(
           base_url: request_options[:base_url] || Square::Environment::SANDBOX,
