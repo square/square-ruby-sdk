@@ -13,6 +13,21 @@ def client
   )
 end
 
+def verbose_mode?
+  @verbose_mode ||= ENV.fetch("VERBOSE", "false") == "true"
+end
+
+def minitest_verbose?
+  return false unless defined?(Minitest)
+  
+  # Check TESTOPTS environment variable for --verbose flag
+  ENV['TESTOPTS']&.include?('--verbose') || ARGV.include?('--verbose')
+end
+
+def verbose?
+  verbose_mode? || minitest_verbose?
+end
+
 require "minitest/autorun"
 require "minitest/rg"
 
