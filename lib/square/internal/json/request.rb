@@ -30,15 +30,7 @@ module Square
 
         # @return [String, nil] The encoded HTTP request body.
         def encode_body
-          if @body.nil?
-            nil
-          else
-            puts "json.request.encode_body: @body.to_h.class: #{@body.to_h.class}"
-            puts "json.request.encode_body: @body.to_h: #{@body.to_h}"
-            puts "----------------------------------------------------"
-            ::JSON.generate(@body.to_h)
-          end
-          # @body.nil? ? nil : ::JSON.generate(@body)
+          @body.nil? ? nil : ::JSON.generate(@body)
         end
       end
     end
