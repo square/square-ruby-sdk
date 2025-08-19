@@ -170,6 +170,26 @@ module Square
 
             next if value.nil? && field.optional && !field.nullable
 
+            # # Recursively convert nested objects to hashes if they have a to_h method
+            puts "model.to_h: value.class: #{value.class}"
+            puts "model.to_h: value: #{value}"
+            puts "----------------------------------------------------"
+            if value.is_a?(::Array)
+              puts "model.to_h: value is an array"
+              value = value.map { |item| item.respond_to?(:to_h) ? item.to_h : item }
+              puts "model.to_h: value after mapping from array"
+              puts "model.to_h: value.class: #{value.class}"
+              puts "model.to_h: value: #{value}"
+              puts "----------------------------------------------------"
+            elsif value.respond_to?(:to_h)
+              puts "model.to_h:converting value to hash"
+              value = value.to_h
+              puts "model.to_h: value after to_h"
+              puts "model.to_h: value.class: #{value.class}"
+              puts "model.to_h: value: #{value}"
+              puts "----------------------------------------------------"
+            end
+
             acc[field.api_name] = value
           end
         end
