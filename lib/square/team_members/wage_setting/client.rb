@@ -3,10 +3,8 @@ module Square
   module TeamMembers
     module WageSetting
       class Client
-        # @option client [Square::Internal::Http::RawClient]
-        #
         # @return [Square::TeamMembers::WageSetting::Client]
-        def initialize(client)
+        def initialize(client:)
           @client = client
         end
 

@@ -2,10 +2,8 @@
 module Square
   module ApplePay
     class Client
-      # @option client [Square::Internal::Http::RawClient]
-      #
       # @return [Square::ApplePay::Client]
-      def initialize(client)
+      def initialize(client:)
         @client = client
       end
 

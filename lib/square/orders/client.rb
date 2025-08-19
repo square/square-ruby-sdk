@@ -2,10 +2,8 @@
 module Square
   module Orders
     class Client
-      # @option client [Square::Internal::Http::RawClient]
-      #
       # @return [Square::Orders::Client]
-      def initialize(client)
+      def initialize(client:)
         @client = client
       end
 
@@ -19,7 +17,7 @@ module Square
       #
       # @return [Square::Types::CreateOrderResponse]
       def create(request_options: {}, **params)
-        _request = Square::Internal::Http::JSONRequest.new(
+        _request = Square::Internal::JSON::Request.new(
           method: POST,
           path: "v2/orders",
           body: Square::Types::CreateOrderRequest.new(params[:request]).to_h,

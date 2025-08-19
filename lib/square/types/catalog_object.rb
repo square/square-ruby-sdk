@@ -12,7 +12,7 @@ module Square
     # 
     # For a more detailed discussion of the Catalog data model, please see the
     # [Design a Catalog](https://developer.squareup.com/docs/catalog-api/design-a-catalog) guide.
-    class CatalogObject
+    class CatalogObject < Internal::Types::Model
       extend Square::Internal::Types::Union
 
       discriminant :type

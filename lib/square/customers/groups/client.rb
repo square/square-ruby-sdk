@@ -3,10 +3,8 @@ module Square
   module Customers
     module Groups
       class Client
-        # @option client [Square::Internal::Http::RawClient]
-        #
         # @return [Square::Customers::Groups::Client]
-        def initialize(client)
+        def initialize(client:)
           @client = client
         end
 

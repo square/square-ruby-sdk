@@ -2,10 +2,8 @@
 module Square
   module Payouts
     class Client
-      # @option client [Square::Internal::Http::RawClient]
-      #
       # @return [Square::Payouts::Client]
-      def initialize(client)
+      def initialize(client:)
         @client = client
       end
 

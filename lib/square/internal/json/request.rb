@@ -2,7 +2,7 @@
 
 module Square
   module Internal
-    module Multipart
+    module JSON
       # @api private
       class Request < Square::Internal::Http::BaseRequest
         attr_reader :body

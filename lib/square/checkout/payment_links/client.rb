@@ -3,10 +3,8 @@ module Square
   module Checkout
     module PaymentLinks
       class Client
-        # @option client [Square::Internal::Http::RawClient]
-        #
         # @return [Square::Checkout::PaymentLinks::Client]
-        def initialize(client)
+        def initialize(client:)
           @client = client
         end
 

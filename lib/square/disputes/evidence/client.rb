@@ -3,10 +3,8 @@ module Square
   module Disputes
     module Evidence
       class Client
-        # @option client [Square::Internal::Http::RawClient]
-        #
         # @return [Square::Disputes::Evidence::Client]
-        def initialize(client)
+        def initialize(client:)
           @client = client
         end
 

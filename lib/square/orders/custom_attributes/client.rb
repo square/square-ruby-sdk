@@ -3,10 +3,8 @@ module Square
   module Orders
     module CustomAttributes
       class Client
-        # @option client [Square::Internal::Http::RawClient]
-        #
         # @return [Square::Orders::CustomAttributes::Client]
-        def initialize(client)
+        def initialize(client:)
           @client = client
         end
 
