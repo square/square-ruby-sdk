@@ -68,7 +68,7 @@ module Square
       # @return [Square::Types::BatchUpsertCatalogObjectsResponse]
       def batch_upsert(request_options: {}, **params)
         _response = @client.send(Internal::JSON::Request.new(
-          base_url: Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
           path: "/v2/catalog/batch-upsert",
           method: "POST",
           body: Types::BatchUpsertCatalogObjectsRequest.new(params[:request]).to_h,
