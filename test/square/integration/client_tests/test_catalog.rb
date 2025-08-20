@@ -29,7 +29,7 @@ describe Square::Catalog::Client do
     _batch_delete_request = Square::Catalog::Types::BatchDeleteCatalogObjectsRequest.new(
       object_ids: object_ids
     )
-    client.catalog.batch_delete(request: _batch_delete_request.to_h)
+    client.catalog.batch_delete(**_batch_delete_request.to_h)
   end
 
   def create_test_catalog_item(name: "Test Item #{SecureRandom.uuid}", description: "Test Description", abbreviation: "TI", price: 100, variation_name: "Regular")
@@ -138,7 +138,7 @@ describe Square::Catalog::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.catalog.batch_upsert(request: _request.to_h)
+      response = client.catalog.batch_upsert(**_request.to_h)
       refute_nil response
 
       puts "response #{response.to_h}" if verbose?
@@ -193,7 +193,7 @@ describe Square::Catalog::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.catalog.batch_upsert(request: _request.to_h)
+      response = client.catalog.batch_upsert(**_request.to_h)
 
       assert response
       assert_equal 2, response.objects.length
@@ -236,7 +236,7 @@ describe Square::Catalog::Client do
       puts "request #{_request.to_h}" if verbose?
 
       # Create the catalog objects in a bulk request
-      create_catalog_objects_resp = client.catalog.batch_upsert(request: _request.to_h)
+      create_catalog_objects_resp = client.catalog.batch_upsert(**_request.to_h)
       assert_equal 200, create_catalog_objects_resp.objects.length
       assert_equal create_catalog_objects_resp.class, Square::Types::BatchUpsertCatalogObjectsResponse
       sleep(2) # Wait after bulk creation
@@ -305,7 +305,7 @@ describe Square::Catalog::Client do
 
           puts "create_catalog_request #{_create_request.keys}" if verbose?
           
-          create_catalog_resp = client.catalog.batch_upsert(request: _create_request.to_h)
+          create_catalog_resp = client.catalog.batch_upsert(**_create_request.to_h)
 
           puts 'Catalog object created' if verbose?
           assert_equal 1, create_catalog_resp.objects.length
@@ -338,7 +338,7 @@ describe Square::Catalog::Client do
 
           puts "image_upload_request #{_image_request[:request].to_h}" if verbose?
 
-          create_catalog_image_resp = client.catalog.images.create(request: _image_request.to_h)
+          create_catalog_image_resp = client.catalog.images.create(**_image_request.to_h)
 
           puts 'Image uploaded successfully' if verbose?
           assert create_catalog_image_resp.image
@@ -353,7 +353,7 @@ describe Square::Catalog::Client do
           _batch_delete_request = Square::Catalog::Types::BatchDeleteCatalogObjectsRequest.new(
             object_ids: [created_catalog_object.id, create_catalog_image_resp.image.id]
           )
-          _batch_delete_resp = client.catalog.batch_delete(request: _batch_delete_request.to_h)
+          _batch_delete_resp = client.catalog.batch_delete(**_batch_delete_request.to_h)
           refute_nil _batch_delete_resp
           assert_equal _batch_delete_resp.class, Square::Types::BatchDeleteCatalogObjectsResponse
 
@@ -409,7 +409,7 @@ describe Square::Catalog::Client do
         limit: 1
       )
 
-      response = client.catalog.search(request: _request.to_h)
+      response = client.catalog.search(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::SearchCatalogObjectsResponse
 
@@ -445,7 +445,7 @@ describe Square::Catalog::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.catalog.batch_get(request: _request.to_h)
+      response = client.catalog.batch_get(**_request.to_h)
 
       refute_nil response
       assert_equal response.class, Square::Types::BatchRetrieveCatalogObjectsResponse
@@ -479,7 +479,7 @@ describe Square::Catalog::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.catalog.update_item_taxes(request: _request.to_h)
+      response = client.catalog.update_item_taxes(**_request.to_h)
 
       refute_nil response
       assert_equal response.class, Square::Types::UpdateItemTaxesResponse
@@ -517,7 +517,7 @@ describe Square::Catalog::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.catalog.update_item_modifier_lists(request: _request.to_h)
+      response = client.catalog.update_item_modifier_lists(**_request.to_h)
 
       refute_nil response
       assert_equal response.class, Square::Types::UpdateItemModifierListsResponse
@@ -569,7 +569,7 @@ describe Square::Catalog::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.catalog.object.upsert(request: _request.to_h)
+      response = client.catalog.object.upsert(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::UpsertCatalogObjectResponse
       refute_nil response.catalog_object
@@ -596,7 +596,7 @@ describe Square::Catalog::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.catalog.object.upsert(request: _request.to_h)
+      response = client.catalog.object.upsert(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::UpsertCatalogObjectResponse
       refute_nil response.catalog_object
@@ -629,7 +629,7 @@ describe Square::Catalog::Client do
 
       puts "create_request #{_create_request.keys}" if verbose?
 
-      create_resp = client.catalog.object.upsert(request: _create_request.to_h)
+      create_resp = client.catalog.object.upsert(**_create_request.to_h)
 
       sleep(2) # Wait before retrieve
 

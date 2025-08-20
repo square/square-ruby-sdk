@@ -20,7 +20,7 @@ describe Square::Terminal::Checkouts::Client do
         )
       )
     )
-    checkout_response = client.terminal.checkouts.create(request: _create_response.to_h)
+    checkout_response = client.terminal.checkouts.create(**_create_response.to_h)
     refute_nil checkout_response
     assert_equal checkout_response.class, Square::Types::CreateTerminalCheckoutResponse
     @checkout_id = checkout_response.checkout.id
@@ -44,7 +44,7 @@ describe Square::Terminal::Checkouts::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.terminal.checkouts.create(request: _request.to_h)
+      response = client.terminal.checkouts.create(**_request.to_h)
       refute_nil response.checkout
       assert_equal @sandbox_device_id, response.checkout.device_options.device_id
       assert_equal 100, response.checkout.amount_money.amount
@@ -62,7 +62,7 @@ describe Square::Terminal::Checkouts::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.terminal.checkouts.search(request: _request.to_h)
+      response = client.terminal.checkouts.search(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::SearchTerminalCheckoutsResponse
       refute_nil response.checkouts
@@ -81,7 +81,7 @@ describe Square::Terminal::Checkouts::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.terminal.checkouts.get(request: _request.to_h)
+      response = client.terminal.checkouts.get(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::GetTerminalCheckoutResponse
       refute_nil response.checkout
@@ -100,7 +100,7 @@ describe Square::Terminal::Checkouts::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.terminal.checkouts.cancel(request: _request.to_h)
+      response = client.terminal.checkouts.cancel(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::CancelTerminalCheckoutResponse
       refute_nil response.checkout

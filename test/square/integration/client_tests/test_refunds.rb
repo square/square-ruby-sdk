@@ -14,7 +14,7 @@ describe Square::Refunds::Client do
         currency: "USD"
       )
     )
-    payment_response = client.payments.create(request: _create_request.to_h)
+    payment_response = client.payments.create(**_create_request.to_h)
     refute_nil payment_response
     assert_equal payment_response.class, Square::Types::CreatePaymentResponse
     refute_nil payment_response.payment
@@ -24,7 +24,7 @@ describe Square::Refunds::Client do
     @payment_id = payment_response.payment.id
 
     # Create initial refund for testing
-    refund_response = client.refunds.refund_payment(request: _refund_request.to_h)
+    refund_response = client.refunds.refund_payment(**_refund_request.to_h)
     refute_nil refund_response
     assert_equal refund_response.class, Square::Types::RefundPaymentResponse
     refute_nil refund_response.refund
@@ -66,7 +66,7 @@ describe Square::Refunds::Client do
         ),
         autocomplete: true
       )
-      payment_response = client.payments.create(request: _create_request.to_h)
+      payment_response = client.payments.create(**_create_request.to_h)
       refute_nil payment_response
       assert_equal payment_response.class, Square::Types::CreatePaymentResponse
       refute_nil payment_response.payment
@@ -84,7 +84,7 @@ describe Square::Refunds::Client do
         )
       )
 
-      response = client.refunds.refund_payment(request: _refund_request.to_h)
+      response = client.refunds.refund_payment(**_refund_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::RefundPaymentResponse
       refute_nil response.refund
@@ -105,7 +105,7 @@ describe Square::Refunds::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.refunds.get(request: _request.to_h)
+      response = client.refunds.get(**_request.to_h)
       refute_nil response.refund
       assert_equal response.class, Square::Types::GetRefundResponse
       assert_equal @refund_id, response.refund.id
@@ -125,7 +125,7 @@ describe Square::Refunds::Client do
       puts "request #{_request.to_h}" if verbose?
 
       assert_raises(Square::SquareError) do
-        client.refunds.get(request: _request.to_h)
+        client.refunds.get(**_request.to_h)
       end
     end
   end

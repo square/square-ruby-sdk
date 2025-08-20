@@ -10,7 +10,7 @@ describe Square::Customers::Groups::Client do
         name: "Default-#{SecureRandom.uuid}"
       }
     )
-    _create_resp = client.customers.groups.create(request: _create_request.to_h)
+    _create_resp = client.customers.groups.create(**_create_request.to_h)
     refute_nil _create_resp
     assert_equal _create_resp.class, Square::Types::CreateCustomerGroupResponse
     refute_nil _create_resp.group
@@ -20,7 +20,7 @@ describe Square::Customers::Groups::Client do
     _delete_request = Square::Customers::Groups::Types::DeleteGroupsRequest.new(
       group_id: group_id
     )
-    _delete_resp = client.customers.groups.delete(request: _delete_request.to_h)
+    _delete_resp = client.customers.groups.delete(**_delete_request.to_h)
     refute_nil _delete_resp
     assert_equal _delete_resp.class, Square::Types::DeleteCustomerGroupResponse
   end
@@ -146,7 +146,7 @@ describe Square::Customers::Groups::Client do
       puts "request #{_request.to_h}" if verbose?
 
       assert_raises(Square::SquareError) do
-        client.customers.groups.create(request: _request.to_h)
+        client.customers.groups.create(**_request.to_h)
       end
     end
   end

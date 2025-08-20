@@ -11,7 +11,7 @@ describe Square::Devices::Codes::Client do
         product_type: "TERMINAL_API"
       )
     )
-    create_response = client.devices.codes.create(request: _create_request.to_h)
+    create_response = client.devices.codes.create(**_create_request.to_h)
     @device_code_id = create_response.device_code.id
   end
 
@@ -41,7 +41,7 @@ describe Square::Devices::Codes::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.devices.codes.create(request: _request.to_h)
+      response = client.devices.codes.create(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::CreateDeviceCodeResponse
       refute_nil response.device_code
@@ -58,7 +58,7 @@ describe Square::Devices::Codes::Client do
         id: @device_code_id
       )
 
-      response = client.devices.codes.get(request: _request.to_h)
+      response = client.devices.codes.get(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::GetDeviceCodeResponse
       refute_nil response.device_code

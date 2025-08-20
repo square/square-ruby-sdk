@@ -25,7 +25,7 @@ describe Square::Customers::Client do
 
       puts "create customer request #{_create_request.to_h}" if verbose?
 
-      response = client.customers.create(request: _create_request.to_h)
+      response = client.customers.create(**_create_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::CreateCustomerResponse
       refute_nil response.customer.id
@@ -39,7 +39,7 @@ describe Square::Customers::Client do
 
       puts "delete customer request #{_delete_request.to_h}" if verbose?
 
-      response = client.customers.delete(request: _delete_request.to_h)
+      response = client.customers.delete(**_delete_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::DeleteCustomerResponse
       assert_nil response.errors

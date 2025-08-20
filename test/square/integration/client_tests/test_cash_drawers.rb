@@ -17,7 +17,7 @@ describe Square::CashDrawers::Shifts::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.cash_drawers.shifts.list(request: _request.to_h)
+      response = client.cash_drawers.shifts.list(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::ListCashDrawerShiftsResponse
 

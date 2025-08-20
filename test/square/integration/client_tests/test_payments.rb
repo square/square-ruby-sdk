@@ -14,7 +14,7 @@ describe Square::Payments::Client do
         currency: "USD"
       ),
     )
-    payment_response = client.payments.create(request: _create_request.to_h)
+    payment_response = client.payments.create(**_create_request.to_h)
     refute_nil payment_response
     assert_equal payment_response.class, Square::Types::CreatePaymentResponse
     refute_nil payment_response.payment
@@ -57,7 +57,7 @@ describe Square::Payments::Client do
         autocomplete: true
       )
 
-      response = client.payments.create(request: _request.to_h)
+      response = client.payments.create(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::CreatePaymentResponse
       refute_nil response.payment
@@ -77,7 +77,7 @@ describe Square::Payments::Client do
         payment_id: @payment_id
       )
 
-      response = client.payments.get(request: _request.to_h)
+      response = client.payments.get(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::GetPaymentResponse
       refute_nil response.payment
@@ -94,7 +94,7 @@ describe Square::Payments::Client do
         payment_id: @payment_id
       )
 
-      response = client.payments.cancel(request: _request.to_h)
+      response = client.payments.cancel(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::CancelPaymentResponse
       refute_nil response.payment
@@ -159,13 +159,13 @@ describe Square::Payments::Client do
         ),
         autocomplete: false
       )
-      create_response = client.payments.create(request: _create_request.to_h)
+      create_response = client.payments.create(**_create_request.to_h)
 
       _request = Square::Payments::Types::CompletePaymentRequest.new(
         payment_id: create_response.payment.id
       )
 
-      response = client.payments.complete(request: _request.to_h)
+      response = client.payments.complete(**_request.to_h)
       refute_nil response.payment
       assert_equal "COMPLETED", response.payment.status
 

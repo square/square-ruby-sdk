@@ -31,7 +31,7 @@ describe Square::Merchants::Client do
         merchant_id: @merchant_id
       )
 
-      response = client.merchants.get(request: _request.to_h)
+      response = client.merchants.get(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::GetMerchantResponse
       refute_nil response.merchant
