@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Bookings
@@ -10,7 +11,6 @@ module Square
         field :location_id, -> { String }, optional: true, nullable: false
         field :start_at_min, -> { String }, optional: true, nullable: false
         field :start_at_max, -> { String }, optional: true, nullable: false
-
       end
     end
   end

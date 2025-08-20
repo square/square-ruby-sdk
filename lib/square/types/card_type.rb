@@ -4,6 +4,7 @@ module Square
   module Types
     module CardType
       extend Square::Internal::Types::Enum
+
       UNKNOWN_CARD_TYPE = "UNKNOWN_CARD_TYPE"
       CREDIT = "CREDIT"
       DEBIT = "DEBIT"end

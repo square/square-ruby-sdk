@@ -12,7 +12,6 @@ module Square
       field :status, -> { Square::Types::MerchantStatus }, optional: true, nullable: false
       field :main_location_id, -> { String }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
-
     end
   end
 end

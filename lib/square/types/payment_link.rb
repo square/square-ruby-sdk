@@ -14,7 +14,6 @@ module Square
       field :created_at, -> { String }, optional: true, nullable: false
       field :updated_at, -> { String }, optional: true, nullable: false
       field :payment_note, -> { String }, optional: true, nullable: false
-
     end
   end
 end

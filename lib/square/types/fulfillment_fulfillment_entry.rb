@@ -10,7 +10,6 @@ module Square
       field :line_item_uid, -> { String }, optional: false, nullable: false
       field :quantity, -> { String }, optional: false, nullable: false
       field :metadata, -> { Internal::Types::Hash[String, String] }, optional: true, nullable: false
-
     end
   end
 end

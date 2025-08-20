@@ -17,11 +17,14 @@ module Square
       field :card_details, -> { Square::Types::TenderCardDetails }, optional: true, nullable: false
       field :cash_details, -> { Square::Types::TenderCashDetails }, optional: true, nullable: false
       field :bank_account_details, -> { Square::Types::TenderBankAccountDetails }, optional: true, nullable: false
-      field :buy_now_pay_later_details, -> { Square::Types::TenderBuyNowPayLaterDetails }, optional: true, nullable: false
+      field :buy_now_pay_later_details, lambda {
+        Square::Types::TenderBuyNowPayLaterDetails
+      }, optional: true, nullable: false
       field :square_account_details, -> { Square::Types::TenderSquareAccountDetails }, optional: true, nullable: false
-      field :additional_recipients, -> { Internal::Types::Array[Square::Types::AdditionalRecipient] }, optional: true, nullable: false
+      field :additional_recipients, lambda {
+        Internal::Types::Array[Square::Types::AdditionalRecipient]
+      }, optional: true, nullable: false
       field :payment_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

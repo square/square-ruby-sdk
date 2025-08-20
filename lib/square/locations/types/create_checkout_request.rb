@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Locations
@@ -11,9 +12,10 @@ module Square
         field :pre_populate_buyer_email, -> { String }, optional: true, nullable: false
         field :pre_populate_shipping_address, -> { Square::Types::Address }, optional: true, nullable: false
         field :redirect_url, -> { String }, optional: true, nullable: false
-        field :additional_recipients, -> { Internal::Types::Array[Square::Types::ChargeRequestAdditionalRecipient] }, optional: true, nullable: false
+        field :additional_recipients, lambda {
+          Internal::Types::Array[Square::Types::ChargeRequestAdditionalRecipient]
+        }, optional: true, nullable: false
         field :note, -> { String }, optional: true, nullable: false
-
       end
     end
   end

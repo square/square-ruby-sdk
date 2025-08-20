@@ -4,6 +4,7 @@ module Square
   module Types
     module RefundStatus
       extend Square::Internal::Types::Enum
+
       PENDING = "PENDING"
       APPROVED = "APPROVED"
       REJECTED = "REJECTED"

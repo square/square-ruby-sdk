@@ -10,7 +10,6 @@ module Square
     class TimeRange < Internal::Types::Model
       field :start_at, -> { String }, optional: true, nullable: false
       field :end_at, -> { String }, optional: true, nullable: false
-
     end
   end
 end

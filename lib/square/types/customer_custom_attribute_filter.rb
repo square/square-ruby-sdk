@@ -8,7 +8,6 @@ module Square
       field :key, -> { String }, optional: false, nullable: false
       field :filter, -> { Square::Types::CustomerCustomAttributeFilterValue }, optional: true, nullable: false
       field :updated_at, -> { Square::Types::TimeRange }, optional: true, nullable: false
-
     end
   end
 end

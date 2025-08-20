@@ -7,7 +7,6 @@ module Square
       field :type, -> { String }, optional: false, nullable: false
       field :source, -> { String }, optional: false, nullable: false
       field :source_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

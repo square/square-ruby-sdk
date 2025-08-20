@@ -25,11 +25,12 @@ module Square
       field :refunded_note, -> { String }, optional: true, nullable: false
       field :canceled_note, -> { String }, optional: true, nullable: false
       field :tender, -> { Square::Types::V1Tender }, optional: true, nullable: false
-      field :order_history, -> { Internal::Types::Array[Square::Types::V1OrderHistoryEntry] }, optional: true, nullable: false
+      field :order_history, lambda {
+        Internal::Types::Array[Square::Types::V1OrderHistoryEntry]
+      }, optional: true, nullable: false
       field :promo_code, -> { String }, optional: true, nullable: false
       field :btc_receive_address, -> { String }, optional: true, nullable: false
       field :btc_price_satoshi, -> { Integer }, optional: true, nullable: false
-
     end
   end
 end

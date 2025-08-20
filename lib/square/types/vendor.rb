@@ -14,7 +14,6 @@ module Square
       field :note, -> { String }, optional: true, nullable: false
       field :version, -> { Integer }, optional: true, nullable: false
       field :status, -> { Square::Types::VendorStatus }, optional: true, nullable: false
-
     end
   end
 end

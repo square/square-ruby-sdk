@@ -6,7 +6,6 @@ module Square
     class EventMetadata < Internal::Types::Model
       field :event_id, -> { String }, optional: true, nullable: false
       field :api_version, -> { String }, optional: true, nullable: false
-
     end
   end
 end

@@ -8,7 +8,6 @@ module Square
       field :jobs, -> { Internal::Types::Array[Square::Types::Job] }, optional: true, nullable: false
       field :cursor, -> { String }, optional: true, nullable: false
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
-
     end
   end
 end

@@ -7,7 +7,6 @@ module Square
       field :title, -> { String }, optional: false, nullable: false
       field :body, -> { String }, optional: false, nullable: false
       field :barcode_contents, -> { String }, optional: false, nullable: false
-
     end
   end
 end

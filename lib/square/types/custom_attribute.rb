@@ -12,7 +12,6 @@ module Square
       field :definition, -> { Square::Types::CustomAttributeDefinition }, optional: true, nullable: false
       field :updated_at, -> { String }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
-
     end
   end
 end

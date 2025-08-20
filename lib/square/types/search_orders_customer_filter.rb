@@ -7,7 +7,6 @@ module Square
     # [FulfillmentRecipient](entity:FulfillmentRecipient) `customer_id`.
     class SearchOrdersCustomerFilter < Internal::Types::Model
       field :customer_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-
     end
   end
 end

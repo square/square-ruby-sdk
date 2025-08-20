@@ -6,7 +6,6 @@ module Square
     class LoyaltyPromotionIncentivePointsMultiplierData < Internal::Types::Model
       field :points_multiplier, -> { Integer }, optional: true, nullable: false
       field :multiplier, -> { String }, optional: true, nullable: false
-
     end
   end
 end

@@ -5,7 +5,6 @@ module Square
     # Information about the change that triggered the event.
     class CustomerDeletedEventEventContext < Internal::Types::Model
       field :merge, -> { Square::Types::CustomerDeletedEventEventContextMerge }, optional: true, nullable: false
-
     end
   end
 end

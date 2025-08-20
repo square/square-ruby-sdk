@@ -15,10 +15,18 @@ module Square
       field :variation_name, -> { String }, optional: true, nullable: false
       field :item_type, -> { Square::Types::OrderLineItemItemType }, optional: true, nullable: false
       field :metadata, -> { Internal::Types::Hash[String, String] }, optional: true, nullable: false
-      field :modifiers, -> { Internal::Types::Array[Square::Types::OrderLineItemModifier] }, optional: true, nullable: false
-      field :applied_taxes, -> { Internal::Types::Array[Square::Types::OrderLineItemAppliedTax] }, optional: true, nullable: false
-      field :applied_discounts, -> { Internal::Types::Array[Square::Types::OrderLineItemAppliedDiscount] }, optional: true, nullable: false
-      field :applied_service_charges, -> { Internal::Types::Array[Square::Types::OrderLineItemAppliedServiceCharge] }, optional: true, nullable: false
+      field :modifiers, lambda {
+        Internal::Types::Array[Square::Types::OrderLineItemModifier]
+      }, optional: true, nullable: false
+      field :applied_taxes, lambda {
+        Internal::Types::Array[Square::Types::OrderLineItemAppliedTax]
+      }, optional: true, nullable: false
+      field :applied_discounts, lambda {
+        Internal::Types::Array[Square::Types::OrderLineItemAppliedDiscount]
+      }, optional: true, nullable: false
+      field :applied_service_charges, lambda {
+        Internal::Types::Array[Square::Types::OrderLineItemAppliedServiceCharge]
+      }, optional: true, nullable: false
       field :base_price_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :variation_total_price_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :gross_sales_money, -> { Square::Types::Money }, optional: true, nullable: false
@@ -27,7 +35,6 @@ module Square
       field :total_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :pricing_blocklists, -> { Square::Types::OrderLineItemPricingBlocklists }, optional: true, nullable: false
       field :total_service_charge_money, -> { Square::Types::Money }, optional: true, nullable: false
-
     end
   end
 end

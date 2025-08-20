@@ -4,6 +4,7 @@ module Square
   module Types
     module RiskEvaluationRiskLevel
       extend Square::Internal::Types::Enum
+
       PENDING = "PENDING"
       NORMAL = "NORMAL"
       MODERATE = "MODERATE"

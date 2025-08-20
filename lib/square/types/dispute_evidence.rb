@@ -10,7 +10,6 @@ module Square
       field :evidence_text, -> { String }, optional: true, nullable: false
       field :uploaded_at, -> { String }, optional: true, nullable: false
       field :evidence_type, -> { Square::Types::DisputeEvidenceType }, optional: true, nullable: false
-
     end
   end
 end

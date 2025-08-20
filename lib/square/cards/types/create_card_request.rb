@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Cards
@@ -7,7 +8,6 @@ module Square
         field :source_id, -> { String }, optional: false, nullable: false
         field :verification_token, -> { String }, optional: true, nullable: false
         field :card, -> { Square::Types::Card }, optional: false, nullable: false
-
       end
     end
   end

@@ -7,7 +7,6 @@ module Square
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
       field :payments, -> { Internal::Types::Array[Square::Types::Payment] }, optional: true, nullable: false
       field :cursor, -> { String }, optional: true, nullable: false
-
     end
   end
 end

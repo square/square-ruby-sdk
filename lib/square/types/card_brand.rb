@@ -4,6 +4,7 @@ module Square
   module Types
     module CardBrand
       extend Square::Internal::Types::Enum
+
       OTHER_BRAND = "OTHER_BRAND"
       VISA = "VISA"
       MASTERCARD = "MASTERCARD"

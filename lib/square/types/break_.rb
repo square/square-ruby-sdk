@@ -11,7 +11,6 @@ module Square
       field :name, -> { String }, optional: false, nullable: false
       field :expected_duration, -> { String }, optional: false, nullable: false
       field :is_paid, -> { Internal::Types::Boolean }, optional: false, nullable: false
-
     end
   end
 end

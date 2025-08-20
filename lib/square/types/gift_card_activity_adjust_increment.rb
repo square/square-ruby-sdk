@@ -6,7 +6,6 @@ module Square
     class GiftCardActivityAdjustIncrement < Internal::Types::Model
       field :amount_money, -> { Square::Types::Money }, optional: false, nullable: false
       field :reason, -> { Square::Types::GiftCardActivityAdjustIncrementReason }, optional: false, nullable: false
-
     end
   end
 end

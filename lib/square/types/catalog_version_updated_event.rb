@@ -9,7 +9,6 @@ module Square
       field :event_id, -> { String }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
       field :data, -> { Square::Types::CatalogVersionUpdatedEventData }, optional: true, nullable: false
-
     end
   end
 end

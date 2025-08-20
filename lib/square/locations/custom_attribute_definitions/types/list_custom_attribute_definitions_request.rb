@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Locations
@@ -7,7 +8,6 @@ module Square
           field :visibility_filter, -> { Square::Types::VisibilityFilter }, optional: true, nullable: false
           field :limit, -> { Integer }, optional: true, nullable: false
           field :cursor, -> { String }, optional: true, nullable: false
-
         end
       end
     end

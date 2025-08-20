@@ -7,7 +7,6 @@ module Square
     # see [Specify checkout options](https://developer.squareup.com/docs/checkout-api/optional-checkout-configurations#specify-checkout-options-1).
     class CustomField < Internal::Types::Model
       field :title, -> { String }, optional: false, nullable: false
-
     end
   end
 end

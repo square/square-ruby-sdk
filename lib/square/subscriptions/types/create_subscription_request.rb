@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Subscriptions
@@ -16,7 +17,6 @@ module Square
         field :source, -> { Square::Types::SubscriptionSource }, optional: true, nullable: false
         field :monthly_billing_anchor_date, -> { Integer }, optional: true, nullable: false
         field :phases, -> { Internal::Types::Array[Square::Types::Phase] }, optional: true, nullable: false
-
       end
     end
   end

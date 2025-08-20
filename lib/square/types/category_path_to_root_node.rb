@@ -6,7 +6,6 @@ module Square
     class CategoryPathToRootNode < Internal::Types::Model
       field :category_id, -> { String }, optional: true, nullable: false
       field :category_name, -> { String }, optional: true, nullable: false
-
     end
   end
 end

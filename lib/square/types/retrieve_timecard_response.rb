@@ -8,7 +8,6 @@ module Square
     class RetrieveTimecardResponse < Internal::Types::Model
       field :timecard, -> { Square::Types::Timecard }, optional: true, nullable: false
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
-
     end
   end
 end

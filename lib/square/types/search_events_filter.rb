@@ -8,7 +8,6 @@ module Square
       field :merchant_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :location_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :created_at, -> { Square::Types::TimeRange }, optional: true, nullable: false
-
     end
   end
 end

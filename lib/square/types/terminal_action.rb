@@ -24,7 +24,6 @@ module Square
       field :device_metadata, -> { Square::Types::DeviceMetadata }, optional: true, nullable: false
       field :await_next_action, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :await_next_action_duration, -> { String }, optional: true, nullable: false
-
     end
   end
 end

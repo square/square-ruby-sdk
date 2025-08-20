@@ -20,7 +20,6 @@ module Square
       field :card_payment_timeline, -> { Square::Types::CardPaymentTimeline }, optional: true, nullable: false
       field :refund_requires_card_presence, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
-
     end
   end
 end

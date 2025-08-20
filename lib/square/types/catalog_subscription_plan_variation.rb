@@ -11,7 +11,6 @@ module Square
       field :monthly_billing_anchor_date, -> { Integer }, optional: true, nullable: false
       field :can_prorate, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :successor_plan_variation_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

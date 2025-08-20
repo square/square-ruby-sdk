@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Loyalty
@@ -5,7 +6,6 @@ module Square
       module Types
         class GetProgramsRequest < Internal::Types::Model
           field :program_id, -> { String }, optional: false, nullable: false
-
         end
       end
     end

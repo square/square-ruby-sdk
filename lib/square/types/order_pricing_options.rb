@@ -8,7 +8,6 @@ module Square
     class OrderPricingOptions < Internal::Types::Model
       field :auto_apply_discounts, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :auto_apply_taxes, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
     end
   end
 end

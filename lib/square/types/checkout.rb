@@ -14,8 +14,9 @@ module Square
       field :redirect_url, -> { String }, optional: true, nullable: false
       field :order, -> { Square::Types::Order }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
-      field :additional_recipients, -> { Internal::Types::Array[Square::Types::AdditionalRecipient] }, optional: true, nullable: false
-
+      field :additional_recipients, lambda {
+        Internal::Types::Array[Square::Types::AdditionalRecipient]
+      }, optional: true, nullable: false
     end
   end
 end

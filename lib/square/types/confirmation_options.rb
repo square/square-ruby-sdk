@@ -8,7 +8,6 @@ module Square
       field :agree_button_text, -> { String }, optional: false, nullable: false
       field :disagree_button_text, -> { String }, optional: true, nullable: false
       field :decision, -> { Square::Types::ConfirmationDecision }, optional: true, nullable: false
-
     end
   end
 end

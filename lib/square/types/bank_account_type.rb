@@ -4,6 +4,7 @@ module Square
   module Types
     module BankAccountType
       extend Square::Internal::Types::Enum
+
       CHECKING = "CHECKING"
       SAVINGS = "SAVINGS"
       INVESTMENT = "INVESTMENT"

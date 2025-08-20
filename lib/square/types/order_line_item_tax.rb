@@ -3,7 +3,7 @@
 module Square
   module Types
     # Represents a tax that applies to one or more line item in the order.
-    # 
+    #
     # Fixed-amount, order-scoped taxes are distributed across all non-zero line item totals.
     # The amount distributed to each line item is relative to the amount the item
     # contributes to the order subtotal.
@@ -18,7 +18,6 @@ module Square
       field :applied_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :scope, -> { Square::Types::OrderLineItemTaxScope }, optional: true, nullable: false
       field :auto_applied, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
     end
   end
 end

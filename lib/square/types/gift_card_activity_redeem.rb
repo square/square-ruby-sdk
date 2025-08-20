@@ -8,7 +8,6 @@ module Square
       field :payment_id, -> { String }, optional: true, nullable: false
       field :reference_id, -> { String }, optional: true, nullable: false
       field :status, -> { Square::Types::GiftCardActivityRedeemStatus }, optional: true, nullable: false
-
     end
   end
 end

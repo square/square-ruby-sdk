@@ -14,8 +14,9 @@ module Square
       field :created_at, -> { String }, optional: true, nullable: false
       field :updated_at, -> { String }, optional: true, nullable: false
       field :mapping, -> { Square::Types::LoyaltyAccountMapping }, optional: true, nullable: false
-      field :expiring_point_deadlines, -> { Internal::Types::Array[Square::Types::LoyaltyAccountExpiringPointDeadline] }, optional: true, nullable: false
-
+      field :expiring_point_deadlines, lambda {
+        Internal::Types::Array[Square::Types::LoyaltyAccountExpiringPointDeadline]
+      }, optional: true, nullable: false
     end
   end
 end

@@ -10,7 +10,6 @@ module Square
       field :phone_number, -> { String }, optional: true, nullable: false
       field :removed, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :ordinal, -> { Integer }, optional: false, nullable: false
-
     end
   end
 end

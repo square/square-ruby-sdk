@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Refunds
@@ -14,7 +15,6 @@ module Square
         field :updated_at_begin_time, -> { String }, optional: true, nullable: false
         field :updated_at_end_time, -> { String }, optional: true, nullable: false
         field :sort_field, -> { Square::Types::ListPaymentRefundsRequestSortField }, optional: true, nullable: false
-
       end
     end
   end

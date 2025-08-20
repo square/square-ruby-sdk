@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Customers
@@ -5,7 +6,6 @@ module Square
       module Types
         class GetSegmentsRequest < Internal::Types::Model
           field :segment_id, -> { String }, optional: false, nullable: false
-
         end
       end
     end

@@ -12,7 +12,6 @@ module Square
       field :inventory_alert_threshold, -> { Integer }, optional: true, nullable: false
       field :sold_out, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :sold_out_valid_until, -> { String }, optional: true, nullable: false
-
     end
   end
 end

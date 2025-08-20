@@ -13,7 +13,6 @@ module Square
       field :quantity, -> { String }, optional: true, nullable: false
       field :calculated_at, -> { String }, optional: true, nullable: false
       field :is_estimated, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
     end
   end
 end

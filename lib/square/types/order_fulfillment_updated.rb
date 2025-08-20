@@ -9,8 +9,9 @@ module Square
       field :state, -> { Square::Types::OrderState }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
       field :updated_at, -> { String }, optional: true, nullable: false
-      field :fulfillment_update, -> { Internal::Types::Array[Square::Types::OrderFulfillmentUpdatedUpdate] }, optional: true, nullable: false
-
+      field :fulfillment_update, lambda {
+        Internal::Types::Array[Square::Types::OrderFulfillmentUpdatedUpdate]
+      }, optional: true, nullable: false
     end
   end
 end

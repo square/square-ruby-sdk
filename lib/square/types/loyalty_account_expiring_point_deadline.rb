@@ -6,7 +6,6 @@ module Square
     class LoyaltyAccountExpiringPointDeadline < Internal::Types::Model
       field :points, -> { Integer }, optional: false, nullable: false
       field :expires_at, -> { String }, optional: false, nullable: false
-
     end
   end
 end

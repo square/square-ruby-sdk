@@ -7,7 +7,6 @@ module Square
       field :option, -> { Square::Types::CatalogQuickAmountsSettingsOption }, optional: false, nullable: false
       field :eligible_for_auto_amounts, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :amounts, -> { Internal::Types::Array[Square::Types::CatalogQuickAmount] }, optional: true, nullable: false
-
     end
   end
 end

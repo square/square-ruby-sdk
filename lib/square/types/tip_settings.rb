@@ -8,7 +8,6 @@ module Square
       field :custom_tip_field, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :tip_percentages, -> { Internal::Types::Array[Integer] }, optional: true, nullable: false
       field :smart_tipping, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
     end
   end
 end

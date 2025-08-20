@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Customers
@@ -7,7 +8,6 @@ module Square
         field :limit, -> { Integer }, optional: true, nullable: false
         field :query, -> { Square::Types::CustomerQuery }, optional: true, nullable: false
         field :count, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
       end
     end
   end

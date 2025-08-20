@@ -15,7 +15,6 @@ module Square
       field :short_lived, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
       field :refresh_token_expires_at, -> { String }, optional: true, nullable: false
-
     end
   end
 end

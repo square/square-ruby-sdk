@@ -11,7 +11,6 @@ module Square
     class Money < Internal::Types::Model
       field :amount, -> { Integer }, optional: true, nullable: false
       field :currency, -> { Square::Types::Currency }, optional: true, nullable: false
-
     end
   end
 end

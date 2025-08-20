@@ -7,7 +7,6 @@ module Square
       field :custom_attribute, -> { Square::Types::CustomAttribute }, optional: false, nullable: false
       field :idempotency_key, -> { String }, optional: true, nullable: false
       field :order_id, -> { String }, optional: false, nullable: false
-
     end
   end
 end

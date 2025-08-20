@@ -7,7 +7,6 @@ module Square
     class CreateScheduledShiftResponse < Internal::Types::Model
       field :scheduled_shift, -> { Square::Types::ScheduledShift }, optional: true, nullable: false
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
-
     end
   end
 end

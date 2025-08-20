@@ -8,7 +8,6 @@ module Square
     class UpdateWorkweekConfigResponse < Internal::Types::Model
       field :workweek_config, -> { Square::Types::WorkweekConfig }, optional: true, nullable: false
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
-
     end
   end
 end

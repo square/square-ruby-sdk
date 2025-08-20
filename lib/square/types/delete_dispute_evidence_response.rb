@@ -5,7 +5,6 @@ module Square
     # Defines the fields in a `DeleteDisputeEvidence` response.
     class DeleteDisputeEvidenceResponse < Internal::Types::Model
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
-
     end
   end
 end

@@ -6,7 +6,6 @@ module Square
       field :idempotency_key, -> { String }, optional: false, nullable: false
       field :changes, -> { Internal::Types::Array[Square::Types::InventoryChange] }, optional: true, nullable: false
       field :ignore_unchanged_counts, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
     end
   end
 end

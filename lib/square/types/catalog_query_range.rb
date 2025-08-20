@@ -7,7 +7,6 @@ module Square
       field :attribute_name, -> { String }, optional: false, nullable: false
       field :attribute_min_value, -> { Integer }, optional: true, nullable: false
       field :attribute_max_value, -> { Integer }, optional: true, nullable: false
-
     end
   end
 end

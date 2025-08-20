@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Orders
@@ -7,7 +8,6 @@ module Square
         field :order, -> { Square::Types::Order }, optional: true, nullable: false
         field :fields_to_clear, -> { Internal::Types::Array[String] }, optional: true, nullable: false
         field :idempotency_key, -> { String }, optional: true, nullable: false
-
       end
     end
   end

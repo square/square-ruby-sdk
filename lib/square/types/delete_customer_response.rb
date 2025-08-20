@@ -6,7 +6,6 @@ module Square
     # a request to the `DeleteCustomer` endpoint.
     class DeleteCustomerResponse < Internal::Types::Model
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
-
     end
   end
 end

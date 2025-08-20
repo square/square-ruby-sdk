@@ -6,7 +6,6 @@ module Square
     class MeasurementUnitCustom < Internal::Types::Model
       field :name, -> { String }, optional: false, nullable: false
       field :abbreviation, -> { String }, optional: false, nullable: false
-
     end
   end
 end

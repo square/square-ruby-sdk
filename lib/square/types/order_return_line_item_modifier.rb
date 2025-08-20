@@ -12,7 +12,6 @@ module Square
       field :base_price_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :total_price_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :quantity, -> { String }, optional: true, nullable: false
-
     end
   end
 end

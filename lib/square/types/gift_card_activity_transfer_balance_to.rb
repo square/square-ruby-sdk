@@ -6,7 +6,6 @@ module Square
     class GiftCardActivityTransferBalanceTo < Internal::Types::Model
       field :transfer_from_gift_card_id, -> { String }, optional: false, nullable: false
       field :amount_money, -> { Square::Types::Money }, optional: false, nullable: false
-
     end
   end
 end

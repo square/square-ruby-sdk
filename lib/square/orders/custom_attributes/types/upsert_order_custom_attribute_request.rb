@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Orders
@@ -8,7 +9,6 @@ module Square
           field :custom_attribute_key, -> { String }, optional: false, nullable: false
           field :custom_attribute, -> { Square::Types::CustomAttribute }, optional: false, nullable: false
           field :idempotency_key, -> { String }, optional: true, nullable: false
-
         end
       end
     end

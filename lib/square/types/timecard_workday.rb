@@ -8,7 +8,6 @@ module Square
       field :date_range, -> { Square::Types::DateRange }, optional: true, nullable: false
       field :match_timecards_by, -> { Square::Types::TimecardWorkdayMatcher }, optional: true, nullable: false
       field :default_timezone, -> { String }, optional: true, nullable: false
-
     end
   end
 end

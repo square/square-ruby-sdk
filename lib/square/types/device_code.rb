@@ -14,7 +14,6 @@ module Square
       field :created_at, -> { String }, optional: true, nullable: false
       field :status_changed_at, -> { String }, optional: true, nullable: false
       field :paired_at, -> { String }, optional: true, nullable: false
-
     end
   end
 end

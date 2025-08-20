@@ -4,7 +4,7 @@ module Square
   module Types
     # Represents a promotion for a [loyalty program](entity:LoyaltyProgram). Loyalty promotions enable buyers
     # to earn extra points on top of those earned from the base program.
-    # 
+    #
     # A loyalty program can have a maximum of 10 loyalty promotions with an `ACTIVE` or `SCHEDULED` status.
     class LoyaltyPromotion < Internal::Types::Model
       field :id, -> { String }, optional: true, nullable: false
@@ -20,7 +20,6 @@ module Square
       field :minimum_spend_amount_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :qualifying_item_variation_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :qualifying_category_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-
     end
   end
 end

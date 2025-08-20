@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Events
@@ -11,13 +12,18 @@ module Square
       #
       # @return [Square::Types::SearchEventsResponse]
       def search_events(request_options: {}, **params)
-        _request = params
+        _request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          method: "POST",
+          path: "v2/events",
+          body: params
+        )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SearchEventsResponse.load(_response.body)
-        else
-          raise _response.body
         end
+
+        raise _response.body
       end
 
       # Disables events to prevent them from being searchable.
@@ -30,9 +36,9 @@ module Square
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::DisableEventsResponse.load(_response.body)
-        else
-          raise _response.body
         end
+
+        raise _response.body
       end
 
       # Enables events to make them searchable. Only events that occur while in the enabled state are searchable.
@@ -43,24 +49,32 @@ module Square
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::EnableEventsResponse.load(_response.body)
-        else
-          raise _response.body
         end
+
+        raise _response.body
       end
 
       # Lists all event types that you can subscribe to as webhooks or query using the Events API.
       #
       # @return [Square::Types::ListEventTypesResponse]
       def list_event_types(request_options: {}, **params)
-        _request = params
+        _query_param_names = ["api_version"]
+        _query = params.slice(*_query_param_names)
+        params.except(*_query_param_names)
+
+        _request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          method: "GET",
+          path: "v2/events/types",
+          query: _query
+        )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListEventTypesResponse.load(_response.body)
-        else
-          raise _response.body
         end
-      end
 
+        raise _response.body
+      end
     end
   end
 end

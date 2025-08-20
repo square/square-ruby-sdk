@@ -18,7 +18,6 @@ module Square
       field :exclude_strategy, -> { Square::Types::ExcludeStrategy }, optional: true, nullable: false
       field :minimum_order_subtotal_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :customer_group_ids_any, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-
     end
   end
 end

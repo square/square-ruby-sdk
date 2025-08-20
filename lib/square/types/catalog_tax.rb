@@ -11,7 +11,6 @@ module Square
       field :applies_to_custom_amounts, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :enabled, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :applies_to_product_set_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

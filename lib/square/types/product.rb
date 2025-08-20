@@ -4,6 +4,7 @@ module Square
   module Types
     module Product
       extend Square::Internal::Types::Enum
+
       SQUARE_POS = "SQUARE_POS"
       EXTERNAL_API = "EXTERNAL_API"
       BILLING = "BILLING"

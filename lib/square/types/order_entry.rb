@@ -8,7 +8,6 @@ module Square
       field :order_id, -> { String }, optional: true, nullable: false
       field :version, -> { Integer }, optional: true, nullable: false
       field :location_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

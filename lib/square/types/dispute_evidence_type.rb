@@ -4,6 +4,7 @@ module Square
   module Types
     module DisputeEvidenceType
       extend Square::Internal::Types::Enum
+
       GENERIC_EVIDENCE = "GENERIC_EVIDENCE"
       ONLINE_OR_APP_ACCESS_LOG = "ONLINE_OR_APP_ACCESS_LOG"
       AUTHORIZATION_DOCUMENTATION = "AUTHORIZATION_DOCUMENTATION"

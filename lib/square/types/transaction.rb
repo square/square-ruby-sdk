@@ -4,7 +4,7 @@ module Square
   module Types
     # Represents a transaction processed with Square, either with the
     # Connect API or with Square Point of Sale.
-    # 
+    #
     # The `tenders` field of this object lists all methods of payment used to pay in
     # the transaction.
     class Transaction < Internal::Types::Model
@@ -18,7 +18,6 @@ module Square
       field :client_id, -> { String }, optional: true, nullable: false
       field :shipping_address, -> { Square::Types::Address }, optional: true, nullable: false
       field :order_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

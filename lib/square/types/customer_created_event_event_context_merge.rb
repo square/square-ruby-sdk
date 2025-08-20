@@ -6,7 +6,6 @@ module Square
     class CustomerCreatedEventEventContextMerge < Internal::Types::Model
       field :from_customer_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :to_customer_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

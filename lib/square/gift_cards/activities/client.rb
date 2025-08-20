@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module GiftCards
@@ -15,13 +16,23 @@ module Square
         #
         # @return [Square::Types::ListGiftCardActivitiesResponse]
         def list(request_options: {}, **params)
-          _request = params
+          _query_param_names = %w[gift_card_id type location_id begin_time end_time limit cursor
+                                  sort_order]
+          _query = params.slice(*_query_param_names)
+          params.except(*_query_param_names)
+
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            method: "GET",
+            path: "v2/gift-cards/activities",
+            query: _query
+          )
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::ListGiftCardActivitiesResponse.load(_response.body)
-          else
-            raise _response.body
           end
+
+          raise _response.body
         end
 
         # Creates a gift card activity to manage the balance or state of a [gift card](entity:GiftCard).
@@ -29,15 +40,19 @@ module Square
         #
         # @return [Square::Types::CreateGiftCardActivityResponse]
         def create(request_options: {}, **params)
-          _request = params
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            method: "POST",
+            path: "v2/gift-cards/activities",
+            body: params
+          )
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::CreateGiftCardActivityResponse.load(_response.body)
-          else
-            raise _response.body
           end
-        end
 
+          raise _response.body
+        end
       end
     end
   end

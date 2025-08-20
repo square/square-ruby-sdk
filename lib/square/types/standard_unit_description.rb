@@ -7,7 +7,6 @@ module Square
       field :unit, -> { Square::Types::MeasurementUnit }, optional: true, nullable: false
       field :name, -> { String }, optional: true, nullable: false
       field :abbreviation, -> { String }, optional: true, nullable: false
-
     end
   end
 end

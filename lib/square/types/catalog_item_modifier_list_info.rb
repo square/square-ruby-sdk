@@ -6,15 +6,18 @@ module Square
     # and provides the ability to override global modifier list settings.
     class CatalogItemModifierListInfo < Internal::Types::Model
       field :modifier_list_id, -> { String }, optional: false, nullable: false
-      field :modifier_overrides, -> { Internal::Types::Array[Square::Types::CatalogModifierOverride] }, optional: true, nullable: false
+      field :modifier_overrides, lambda {
+        Internal::Types::Array[Square::Types::CatalogModifierOverride]
+      }, optional: true, nullable: false
       field :min_selected_modifiers, -> { Integer }, optional: true, nullable: false
       field :max_selected_modifiers, -> { Integer }, optional: true, nullable: false
       field :enabled, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :ordinal, -> { Integer }, optional: true, nullable: false
       field :allow_quantities, -> { Internal::Types::Hash[String, Object] }, optional: true, nullable: false
       field :is_conversational, -> { Internal::Types::Hash[String, Object] }, optional: true, nullable: false
-      field :hidden_from_customer_override, -> { Internal::Types::Hash[String, Object] }, optional: true, nullable: false
-
+      field :hidden_from_customer_override, lambda {
+        Internal::Types::Hash[String, Object]
+      }, optional: true, nullable: false
     end
   end
 end

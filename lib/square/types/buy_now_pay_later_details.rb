@@ -7,7 +7,6 @@ module Square
       field :brand, -> { String }, optional: true, nullable: false
       field :afterpay_details, -> { Square::Types::AfterpayDetails }, optional: true, nullable: false
       field :clearpay_details, -> { Square::Types::ClearpayDetails }, optional: true, nullable: false
-
     end
   end
 end

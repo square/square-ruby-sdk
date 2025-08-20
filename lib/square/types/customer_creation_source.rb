@@ -4,6 +4,7 @@ module Square
   module Types
     module CustomerCreationSource
       extend Square::Internal::Types::Enum
+
       OTHER = "OTHER"
       APPOINTMENTS = "APPOINTMENTS"
       COUPON = "COUPON"

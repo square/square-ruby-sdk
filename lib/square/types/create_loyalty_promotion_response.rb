@@ -7,7 +7,6 @@ module Square
     class CreateLoyaltyPromotionResponse < Internal::Types::Model
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
       field :loyalty_promotion, -> { Square::Types::LoyaltyPromotion }, optional: true, nullable: false
-
     end
   end
 end

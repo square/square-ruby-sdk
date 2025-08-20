@@ -4,6 +4,7 @@ module Square
   module Types
     module Currency
       extend Square::Internal::Types::Enum
+
       UNKNOWN_CURRENCY = "UNKNOWN_CURRENCY"
       AED = "AED"
       AFN = "AFN"

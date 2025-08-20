@@ -6,8 +6,9 @@ module Square
     class Availability < Internal::Types::Model
       field :start_at, -> { String }, optional: true, nullable: false
       field :location_id, -> { String }, optional: true, nullable: false
-      field :appointment_segments, -> { Internal::Types::Array[Square::Types::AppointmentSegment] }, optional: true, nullable: false
-
+      field :appointment_segments, lambda {
+        Internal::Types::Array[Square::Types::AppointmentSegment]
+      }, optional: true, nullable: false
     end
   end
 end

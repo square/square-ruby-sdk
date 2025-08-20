@@ -9,7 +9,6 @@ module Square
       field :content, -> { String }, optional: false, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
       field :updated_at, -> { String }, optional: true, nullable: false
-
     end
   end
 end

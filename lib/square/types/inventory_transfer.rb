@@ -18,7 +18,6 @@ module Square
       field :source, -> { Square::Types::SourceApplication }, optional: true, nullable: false
       field :employee_id, -> { String }, optional: true, nullable: false
       field :team_member_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

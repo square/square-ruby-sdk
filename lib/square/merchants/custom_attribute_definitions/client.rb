@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Merchants
@@ -15,13 +16,22 @@ module Square
         #
         # @return [Square::Types::ListMerchantCustomAttributeDefinitionsResponse]
         def list(request_options: {}, **params)
-          _request = params
+          _query_param_names = %w[visibility_filter limit cursor]
+          _query = params.slice(*_query_param_names)
+          params.except(*_query_param_names)
+
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            method: "GET",
+            path: "v2/merchants/custom-attribute-definitions",
+            query: _query
+          )
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::ListMerchantCustomAttributeDefinitionsResponse.load(_response.body)
-          else
-            raise _response.body
           end
+
+          raise _response.body
         end
 
         # Creates a merchant-related [custom attribute definition](entity:CustomAttributeDefinition) for a Square seller account.
@@ -34,13 +44,18 @@ module Square
         #
         # @return [Square::Types::CreateMerchantCustomAttributeDefinitionResponse]
         def create(request_options: {}, **params)
-          _request = params
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            method: "POST",
+            path: "v2/merchants/custom-attribute-definitions",
+            body: params
+          )
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::CreateMerchantCustomAttributeDefinitionResponse.load(_response.body)
-          else
-            raise _response.body
           end
+
+          raise _response.body
         end
 
         # Retrieves a merchant-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square seller account.
@@ -49,13 +64,22 @@ module Square
         #
         # @return [Square::Types::RetrieveMerchantCustomAttributeDefinitionResponse]
         def get(request_options: {}, **params)
-          _request = params
+          _query_param_names = ["version"]
+          _query = params.slice(*_query_param_names)
+          params = params.except(*_query_param_names)
+
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            method: "GET",
+            path: "v2/merchants/custom-attribute-definitions/#{params[:key]}",
+            query: _query
+          )
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::RetrieveMerchantCustomAttributeDefinitionResponse.load(_response.body)
-          else
-            raise _response.body
           end
+
+          raise _response.body
         end
 
         # Updates a merchant-related [custom attribute definition](entity:CustomAttributeDefinition) for a Square seller account.
@@ -65,13 +89,20 @@ module Square
         #
         # @return [Square::Types::UpdateMerchantCustomAttributeDefinitionResponse]
         def update(request_options: {}, **params)
-          _request = params
+          _path_param_names = ["key"]
+
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            method: "PUT",
+            path: "v2/merchants/custom-attribute-definitions/#{params[:key]}",
+            body: params.except(*_path_param_names)
+          )
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::UpdateMerchantCustomAttributeDefinitionResponse.load(_response.body)
-          else
-            raise _response.body
           end
+
+          raise _response.body
         end
 
         # Deletes a merchant-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square seller account.
@@ -81,15 +112,18 @@ module Square
         #
         # @return [Square::Types::DeleteMerchantCustomAttributeDefinitionResponse]
         def delete(request_options: {}, **params)
-          _request = params
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            method: "DELETE",
+            path: "v2/merchants/custom-attribute-definitions/#{params[:key]}"
+          )
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::DeleteMerchantCustomAttributeDefinitionResponse.load(_response.body)
-          else
-            raise _response.body
           end
-        end
 
+          raise _response.body
+        end
       end
     end
   end

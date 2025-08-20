@@ -3,7 +3,7 @@
 module Square
   module Types
     # Published when a location [custom attribute definition](entity:CustomAttributeDefinition)
-    # that is visible to the subscribing application is created. A notification is sent when your application 
+    # that is visible to the subscribing application is created. A notification is sent when your application
     # creates a custom attribute definition or another application creates a custom attribute definition whose
     # `visibility` is `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
     class LocationCustomAttributeDefinitionVisibleCreatedEvent < Internal::Types::Model
@@ -12,7 +12,6 @@ module Square
       field :event_id, -> { String }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
       field :data, -> { Square::Types::CustomAttributeDefinitionEventData }, optional: true, nullable: false
-
     end
   end
 end

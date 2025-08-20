@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module OAuth
@@ -13,7 +14,6 @@ module Square
         field :scopes, -> { Internal::Types::Array[String] }, optional: true, nullable: false
         field :short_lived, -> { Internal::Types::Boolean }, optional: true, nullable: false
         field :code_verifier, -> { String }, optional: true, nullable: false
-
       end
     end
   end

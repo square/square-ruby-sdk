@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Customers
@@ -6,7 +7,6 @@ module Square
         class ListGroupsRequest < Internal::Types::Model
           field :cursor, -> { String }, optional: true, nullable: false
           field :limit, -> { Integer }, optional: true, nullable: false
-
         end
       end
     end

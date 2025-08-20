@@ -7,7 +7,6 @@ module Square
       field :location_id, -> { String }, optional: true, nullable: false
       field :booking_site_url, -> { String }, optional: true, nullable: false
       field :online_booking_enabled, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
     end
   end
 end

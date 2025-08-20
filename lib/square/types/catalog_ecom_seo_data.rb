@@ -7,7 +7,6 @@ module Square
       field :page_title, -> { String }, optional: true, nullable: false
       field :page_description, -> { String }, optional: true, nullable: false
       field :permalink, -> { String }, optional: true, nullable: false
-
     end
   end
 end

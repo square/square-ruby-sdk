@@ -11,7 +11,6 @@ module Square
       field :annual_rate, -> { Square::Types::Money }, optional: true, nullable: false
       field :weekly_hours, -> { Integer }, optional: true, nullable: false
       field :job_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

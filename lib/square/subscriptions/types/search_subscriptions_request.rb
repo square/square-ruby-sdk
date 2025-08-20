@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Subscriptions
@@ -7,7 +8,6 @@ module Square
         field :limit, -> { Integer }, optional: true, nullable: false
         field :query, -> { Square::Types::SearchSubscriptionsQuery }, optional: true, nullable: false
         field :include, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-
       end
     end
   end

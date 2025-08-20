@@ -14,7 +14,6 @@ module Square
       field :group_ids, -> { Square::Types::FilterValue }, optional: true, nullable: false
       field :custom_attribute, -> { Square::Types::CustomerCustomAttributeFilters }, optional: true, nullable: false
       field :segment_ids, -> { Square::Types::FilterValue }, optional: true, nullable: false
-
     end
   end
 end

@@ -22,7 +22,6 @@ module Square
       field :min_selected_modifiers, -> { Integer }, optional: true, nullable: false
       field :max_selected_modifiers, -> { Integer }, optional: true, nullable: false
       field :hidden_from_customer, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
     end
   end
 end

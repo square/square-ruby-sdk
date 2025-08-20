@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Catalog
@@ -13,24 +14,29 @@ module Square
       # targeted object are also deleted. For example, deleting a CatalogItem will
       # also delete all of its [CatalogItemVariation](entity:CatalogItemVariation)
       # children.
-      # 
+      #
       # `BatchDeleteCatalogObjects` succeeds even if only a portion of the targeted
       # IDs can be deleted. The response will only include IDs that were
       # actually deleted.
-      # 
+      #
       # To ensure consistency, only one delete request is processed at a time per seller account.
       # While one (batch or non-batch) delete request is being processed, other (batched and non-batched)
       # delete requests are rejected with the `429` error code.
       #
       # @return [Square::Types::BatchDeleteCatalogObjectsResponse]
       def batch_delete(request_options: {}, **params)
-        _request = params
+        _request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          method: "POST",
+          path: "v2/catalog/batch-delete",
+          body: params
+        )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchDeleteCatalogObjectsResponse.load(_response.body)
-        else
-          raise _response.body
         end
+
+        raise _response.body
       end
 
       # Returns a set of objects based on the provided ID.
@@ -42,13 +48,18 @@ module Square
       #
       # @return [Square::Types::BatchGetCatalogObjectsResponse]
       def batch_get(request_options: {}, **params)
-        _request = params
+        _request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          method: "POST",
+          path: "v2/catalog/batch-retrieve",
+          body: params
+        )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchGetCatalogObjectsResponse.load(_response.body)
-        else
-          raise _response.body
         end
+
+        raise _response.body
       end
 
       # Creates or updates up to 10,000 target objects based on the provided
@@ -60,25 +71,25 @@ module Square
       # batches will be processed in order as long as the total object count for the
       # request (items, variations, modifier lists, discounts, and taxes) is no more
       # than 10,000.
-      # 
+      #
       # To ensure consistency, only one update request is processed at a time per seller account.
       # While one (batch or non-batch) update request is being processed, other (batched and non-batched)
       # update requests are rejected with the `429` error code.
       #
       # @return [Square::Types::BatchUpsertCatalogObjectsResponse]
       def batch_upsert(request_options: {}, **params)
-        _response = @client.send(Internal::JSON::Request.new(
+        _request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url] || Square::Environment::SANDBOX,
-          path: "/v2/catalog/batch-upsert",
           method: "POST",
-          body: Types::BatchUpsertCatalogObjectsRequest.new(params[:request]).to_h,
-          request_options: request_options
-        ))
+          path: "v2/catalog/batch-upsert",
+          body: params
+        )
+        _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::BatchUpsertCatalogObjectsResponse.load(_response.body)
-        else
-          raise _response.body
         end
+
+        raise _response.body
       end
 
       # Retrieves information about the Square Catalog API, such as batch size
@@ -90,37 +101,46 @@ module Square
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::CatalogInfoResponse.load(_response.body)
-        else
-          raise _response.body
         end
+
+        raise _response.body
       end
 
       # Returns a list of all [CatalogObject](entity:CatalogObject)s of the specified types in the catalog.
-      # 
+      #
       # The `types` parameter is specified as a comma-separated list of the [CatalogObjectType](entity:CatalogObjectType) values,
       # for example, "`ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`".
-      # 
+      #
       # __Important:__ ListCatalog does not return deleted catalog items. To retrieve
       # deleted catalog items, use [SearchCatalogObjects](api-endpoint:Catalog-SearchCatalogObjects)
       # and set the `include_deleted_objects` attribute value to `true`.
       #
       # @return [Square::Types::ListCatalogResponse]
       def list(request_options: {}, **params)
-        _request = params
+        _query_param_names = %w[cursor types catalog_version]
+        _query = params.slice(*_query_param_names)
+        params.except(*_query_param_names)
+
+        _request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          method: "GET",
+          path: "v2/catalog/list",
+          query: _query
+        )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListCatalogResponse.load(_response.body)
-        else
-          raise _response.body
         end
+
+        raise _response.body
       end
 
       # Searches for [CatalogObject](entity:CatalogObject) of any type by matching supported search attribute values,
       # excluding custom attribute values on items or item variations, against one or more of the specified query filters.
-      # 
+      #
       # This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](api-endpoint:Catalog-SearchCatalogItems)
       # endpoint in the following aspects:
-      # 
+      #
       # - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
       # - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
       # - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
@@ -128,21 +148,26 @@ module Square
       #
       # @return [Square::Types::SearchCatalogObjectsResponse]
       def search(request_options: {}, **params)
-        _request = params
+        _request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          method: "POST",
+          path: "v2/catalog/search",
+          body: params
+        )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SearchCatalogObjectsResponse.load(_response.body)
-        else
-          raise _response.body
         end
+
+        raise _response.body
       end
 
       # Searches for catalog items or item variations by matching supported search attribute values, including
       # custom attribute values, against one or more of the specified query filters.
-      # 
+      #
       # This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](api-endpoint:Catalog-SearchCatalogObjects)
       # endpoint in the following aspects:
-      # 
+      #
       # - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
       # - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
       # - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
@@ -150,13 +175,18 @@ module Square
       #
       # @return [Square::Types::SearchCatalogItemsResponse]
       def search_items(request_options: {}, **params)
-        _request = params
+        _request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          method: "POST",
+          path: "v2/catalog/search-catalog-items",
+          body: params
+        )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::SearchCatalogItemsResponse.load(_response.body)
-        else
-          raise _response.body
         end
+
+        raise _response.body
       end
 
       # Updates the [CatalogModifierList](entity:CatalogModifierList) objects
@@ -165,13 +195,18 @@ module Square
       #
       # @return [Square::Types::UpdateItemModifierListsResponse]
       def update_item_modifier_lists(request_options: {}, **params)
-        _request = params
+        _request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          method: "POST",
+          path: "v2/catalog/update-item-modifier-lists",
+          body: params
+        )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UpdateItemModifierListsResponse.load(_response.body)
-        else
-          raise _response.body
         end
+
+        raise _response.body
       end
 
       # Updates the [CatalogTax](entity:CatalogTax) objects that apply to the
@@ -180,15 +215,19 @@ module Square
       #
       # @return [Square::Types::UpdateItemTaxesResponse]
       def update_item_taxes(request_options: {}, **params)
-        _request = params
+        _request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          method: "POST",
+          path: "v2/catalog/update-item-taxes",
+          body: params
+        )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::UpdateItemTaxesResponse.load(_response.body)
-        else
-          raise _response.body
         end
-      end
 
+        raise _response.body
+      end
     end
   end
 end

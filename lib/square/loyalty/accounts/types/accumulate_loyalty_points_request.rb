@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Loyalty
@@ -8,7 +9,6 @@ module Square
           field :accumulate_points, -> { Square::Types::LoyaltyEventAccumulatePoints }, optional: false, nullable: false
           field :idempotency_key, -> { String }, optional: false, nullable: false
           field :location_id, -> { String }, optional: false, nullable: false
-
         end
       end
     end

@@ -6,7 +6,6 @@ module Square
     class Range < Internal::Types::Model
       field :min, -> { String }, optional: true, nullable: false
       field :max, -> { String }, optional: true, nullable: false
-
     end
   end
 end

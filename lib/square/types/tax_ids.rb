@@ -9,7 +9,6 @@ module Square
       field :fr_naf, -> { String }, optional: true, nullable: false
       field :es_nif, -> { String }, optional: true, nullable: false
       field :jp_qii, -> { String }, optional: true, nullable: false
-
     end
   end
 end

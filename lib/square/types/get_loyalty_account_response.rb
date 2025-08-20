@@ -6,7 +6,6 @@ module Square
     class GetLoyaltyAccountResponse < Internal::Types::Model
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
       field :loyalty_account, -> { Square::Types::LoyaltyAccount }, optional: true, nullable: false
-
     end
   end
 end

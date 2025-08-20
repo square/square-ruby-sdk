@@ -11,25 +11,32 @@ module Square
       field :is_taxable, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :category_id, -> { String }, optional: true, nullable: false
       field :tax_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-      field :modifier_list_info, -> { Internal::Types::Array[Square::Types::CatalogItemModifierListInfo] }, optional: true, nullable: false
+      field :modifier_list_info, lambda {
+        Internal::Types::Array[Square::Types::CatalogItemModifierListInfo]
+      }, optional: true, nullable: false
       field :variations, -> { Internal::Types::Array[Square::Types::CatalogObject] }, optional: true, nullable: false
       field :product_type, -> { Square::Types::CatalogItemProductType }, optional: true, nullable: false
       field :skip_modifier_screen, -> { Internal::Types::Boolean }, optional: true, nullable: false
-      field :item_options, -> { Internal::Types::Array[Square::Types::CatalogItemOptionForItem] }, optional: true, nullable: false
+      field :item_options, lambda {
+        Internal::Types::Array[Square::Types::CatalogItemOptionForItem]
+      }, optional: true, nullable: false
       field :ecom_uri, -> { String }, optional: true, nullable: false
       field :ecom_image_uris, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :image_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :sort_name, -> { String }, optional: true, nullable: false
-      field :categories, -> { Internal::Types::Array[Square::Types::CatalogObjectCategory] }, optional: true, nullable: false
+      field :categories, lambda {
+        Internal::Types::Array[Square::Types::CatalogObjectCategory]
+      }, optional: true, nullable: false
       field :description_html, -> { String }, optional: true, nullable: false
       field :description_plaintext, -> { String }, optional: true, nullable: false
       field :channels, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :is_archived, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :ecom_seo_data, -> { Square::Types::CatalogEcomSeoData }, optional: true, nullable: false
-      field :food_and_beverage_details, -> { Square::Types::CatalogItemFoodAndBeverageDetails }, optional: true, nullable: false
+      field :food_and_beverage_details, lambda {
+        Square::Types::CatalogItemFoodAndBeverageDetails
+      }, optional: true, nullable: false
       field :reporting_category, -> { Square::Types::CatalogObjectCategory }, optional: true, nullable: false
       field :is_alcoholic, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
     end
   end
 end

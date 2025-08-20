@@ -5,7 +5,6 @@ module Square
     # Filter events by date time range.
     class LoyaltyEventDateTimeFilter < Internal::Types::Model
       field :created_at, -> { Square::Types::TimeRange }, optional: false, nullable: false
-
     end
   end
 end

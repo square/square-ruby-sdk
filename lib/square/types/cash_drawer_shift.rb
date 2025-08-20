@@ -28,7 +28,6 @@ module Square
       field :opening_team_member_id, -> { String }, optional: true, nullable: false
       field :ending_team_member_id, -> { String }, optional: true, nullable: false
       field :closing_team_member_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

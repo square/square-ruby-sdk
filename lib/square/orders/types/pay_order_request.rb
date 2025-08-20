@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Orders
@@ -7,7 +8,6 @@ module Square
         field :idempotency_key, -> { String }, optional: false, nullable: false
         field :order_version, -> { Integer }, optional: true, nullable: false
         field :payment_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-
       end
     end
   end

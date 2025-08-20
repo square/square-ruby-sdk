@@ -11,7 +11,6 @@ module Square
       field :intermission_minutes, -> { Integer }, optional: true, nullable: false
       field :any_team_member, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :resource_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-
     end
   end
 end

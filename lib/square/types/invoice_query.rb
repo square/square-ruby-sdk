@@ -6,7 +6,6 @@ module Square
     class InvoiceQuery < Internal::Types::Model
       field :filter, -> { Square::Types::InvoiceFilter }, optional: false, nullable: false
       field :sort, -> { Square::Types::InvoiceSort }, optional: true, nullable: false
-
     end
   end
 end

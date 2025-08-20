@@ -5,7 +5,6 @@ module Square
     class CreateTerminalCheckoutResponse < Internal::Types::Model
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
       field :checkout, -> { Square::Types::TerminalCheckout }, optional: true, nullable: false
-
     end
   end
 end

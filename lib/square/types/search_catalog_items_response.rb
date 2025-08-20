@@ -8,7 +8,6 @@ module Square
       field :items, -> { Internal::Types::Array[Square::Types::CatalogObject] }, optional: true, nullable: false
       field :cursor, -> { String }, optional: true, nullable: false
       field :matched_variation_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-
     end
   end
 end

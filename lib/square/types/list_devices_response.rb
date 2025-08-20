@@ -6,7 +6,6 @@ module Square
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
       field :devices, -> { Internal::Types::Array[Square::Types::Device] }, optional: true, nullable: false
       field :cursor, -> { String }, optional: true, nullable: false
-
     end
   end
 end

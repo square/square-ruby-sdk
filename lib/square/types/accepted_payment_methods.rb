@@ -7,7 +7,6 @@ module Square
       field :google_pay, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :cash_app_pay, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :afterpay_clearpay, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
     end
   end
 end

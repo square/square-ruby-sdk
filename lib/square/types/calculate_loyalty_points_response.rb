@@ -7,7 +7,6 @@ module Square
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
       field :points, -> { Integer }, optional: true, nullable: false
       field :promotion_points, -> { Integer }, optional: true, nullable: false
-
     end
   end
 end

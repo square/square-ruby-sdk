@@ -7,7 +7,6 @@ module Square
     class CatalogMeasurementUnit < Internal::Types::Model
       field :measurement_unit, -> { Square::Types::MeasurementUnit }, optional: true, nullable: false
       field :precision, -> { Integer }, optional: true, nullable: false
-
     end
   end
 end

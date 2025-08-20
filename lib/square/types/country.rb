@@ -4,6 +4,7 @@ module Square
   module Types
     module Country
       extend Square::Internal::Types::Enum
+
       ZZ = "ZZ"
       AD = "AD"
       AE = "AE"

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Locations
@@ -15,13 +16,22 @@ module Square
         #
         # @return [Square::Types::ListLocationCustomAttributeDefinitionsResponse]
         def list(request_options: {}, **params)
-          _request = params
+          _query_param_names = %w[visibility_filter limit cursor]
+          _query = params.slice(*_query_param_names)
+          params.except(*_query_param_names)
+
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            method: "GET",
+            path: "v2/locations/custom-attribute-definitions",
+            query: _query
+          )
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::ListLocationCustomAttributeDefinitionsResponse.load(_response.body)
-          else
-            raise _response.body
           end
+
+          raise _response.body
         end
 
         # Creates a location-related [custom attribute definition](entity:CustomAttributeDefinition) for a Square seller account.
@@ -34,13 +44,18 @@ module Square
         #
         # @return [Square::Types::CreateLocationCustomAttributeDefinitionResponse]
         def create(request_options: {}, **params)
-          _request = params
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            method: "POST",
+            path: "v2/locations/custom-attribute-definitions",
+            body: params
+          )
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::CreateLocationCustomAttributeDefinitionResponse.load(_response.body)
-          else
-            raise _response.body
           end
+
+          raise _response.body
         end
 
         # Retrieves a location-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square seller account.
@@ -49,13 +64,22 @@ module Square
         #
         # @return [Square::Types::RetrieveLocationCustomAttributeDefinitionResponse]
         def get(request_options: {}, **params)
-          _request = params
+          _query_param_names = ["version"]
+          _query = params.slice(*_query_param_names)
+          params = params.except(*_query_param_names)
+
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            method: "GET",
+            path: "v2/locations/custom-attribute-definitions/#{params[:key]}",
+            query: _query
+          )
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::RetrieveLocationCustomAttributeDefinitionResponse.load(_response.body)
-          else
-            raise _response.body
           end
+
+          raise _response.body
         end
 
         # Updates a location-related [custom attribute definition](entity:CustomAttributeDefinition) for a Square seller account.
@@ -65,13 +89,20 @@ module Square
         #
         # @return [Square::Types::UpdateLocationCustomAttributeDefinitionResponse]
         def update(request_options: {}, **params)
-          _request = params
+          _path_param_names = ["key"]
+
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            method: "PUT",
+            path: "v2/locations/custom-attribute-definitions/#{params[:key]}",
+            body: params.except(*_path_param_names)
+          )
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::UpdateLocationCustomAttributeDefinitionResponse.load(_response.body)
-          else
-            raise _response.body
           end
+
+          raise _response.body
         end
 
         # Deletes a location-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square seller account.
@@ -81,15 +112,18 @@ module Square
         #
         # @return [Square::Types::DeleteLocationCustomAttributeDefinitionResponse]
         def delete(request_options: {}, **params)
-          _request = params
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            method: "DELETE",
+            path: "v2/locations/custom-attribute-definitions/#{params[:key]}"
+          )
           _response = @client.send(_request)
           if _response.code >= "200" && _response.code < "300"
             return Square::Types::DeleteLocationCustomAttributeDefinitionResponse.load(_response.body)
-          else
-            raise _response.body
           end
-        end
 
+          raise _response.body
+        end
       end
     end
   end

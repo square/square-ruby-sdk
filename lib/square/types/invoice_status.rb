@@ -4,6 +4,7 @@ module Square
   module Types
     module InvoiceStatus
       extend Square::Internal::Types::Enum
+
       DRAFT = "DRAFT"
       UNPAID = "UNPAID"
       SCHEDULED = "SCHEDULED"

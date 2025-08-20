@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module CashDrawers
@@ -6,7 +7,6 @@ module Square
       def initialize(client:)
         @client = client
       end
-
     end
   end
 end

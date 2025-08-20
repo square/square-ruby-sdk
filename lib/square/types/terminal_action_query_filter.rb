@@ -7,7 +7,6 @@ module Square
       field :created_at, -> { Square::Types::TimeRange }, optional: true, nullable: false
       field :status, -> { String }, optional: true, nullable: false
       field :type, -> { Square::Types::TerminalActionActionType }, optional: true, nullable: false
-
     end
   end
 end

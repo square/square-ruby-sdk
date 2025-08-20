@@ -11,7 +11,6 @@ module Square
       field :hash, -> { String }, optional: true, nullable: false
       field :mime_type, -> { String }, optional: true, nullable: false
       field :uploaded_at, -> { String }, optional: true, nullable: false
-
     end
   end
 end

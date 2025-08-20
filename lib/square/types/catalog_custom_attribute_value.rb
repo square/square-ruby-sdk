@@ -14,7 +14,6 @@ module Square
       field :boolean_value, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :selection_uid_values, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :key, -> { String }, optional: true, nullable: false
-
     end
   end
 end

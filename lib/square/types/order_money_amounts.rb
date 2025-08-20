@@ -9,7 +9,6 @@ module Square
       field :discount_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :tip_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :service_charge_money, -> { Square::Types::Money }, optional: true, nullable: false
-
     end
   end
 end

@@ -8,7 +8,6 @@ module Square
     class GetShiftResponse < Internal::Types::Model
       field :shift, -> { Square::Types::Shift }, optional: true, nullable: false
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
-
     end
   end
 end

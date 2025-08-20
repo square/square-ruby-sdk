@@ -14,7 +14,6 @@ module Square
       field :shipping_fee, -> { Square::Types::ShippingFee }, optional: true, nullable: false
       field :enable_coupon, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :enable_loyalty, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
     end
   end
 end

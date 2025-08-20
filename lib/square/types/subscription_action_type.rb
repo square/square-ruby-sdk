@@ -4,6 +4,7 @@ module Square
   module Types
     module SubscriptionActionType
       extend Square::Internal::Types::Enum
+
       CANCEL = "CANCEL"
       PAUSE = "PAUSE"
       RESUME = "RESUME"

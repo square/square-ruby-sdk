@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Subscriptions
@@ -5,7 +6,6 @@ module Square
       class UpdateSubscriptionRequest < Internal::Types::Model
         field :subscription_id, -> { String }, optional: false, nullable: false
         field :subscription, -> { Square::Types::Subscription }, optional: true, nullable: false
-
       end
     end
   end

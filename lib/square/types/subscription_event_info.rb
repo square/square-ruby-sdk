@@ -6,7 +6,6 @@ module Square
     class SubscriptionEventInfo < Internal::Types::Model
       field :detail, -> { String }, optional: true, nullable: false
       field :code, -> { Square::Types::SubscriptionEventInfoCode }, optional: true, nullable: false
-
     end
   end
 end

@@ -6,7 +6,6 @@ module Square
     class CheckoutMerchantSettingsPaymentMethodsAfterpayClearpayEligibilityRange < Internal::Types::Model
       field :min, -> { Square::Types::Money }, optional: false, nullable: false
       field :max, -> { Square::Types::Money }, optional: false, nullable: false
-
     end
   end
 end

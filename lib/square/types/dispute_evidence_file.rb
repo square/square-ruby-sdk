@@ -6,7 +6,6 @@ module Square
     class DisputeEvidenceFile < Internal::Types::Model
       field :filename, -> { String }, optional: true, nullable: false
       field :filetype, -> { String }, optional: true, nullable: false
-
     end
   end
 end

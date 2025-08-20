@@ -4,6 +4,7 @@ module Square
   module Types
     module EmployeeStatus
       extend Square::Internal::Types::Enum
+
       ACTIVE = "ACTIVE"
       INACTIVE = "INACTIVE"end
   end

@@ -14,8 +14,9 @@ module Square
       field :online_visibility, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :root_category, -> { String }, optional: true, nullable: false
       field :ecom_seo_data, -> { Square::Types::CatalogEcomSeoData }, optional: true, nullable: false
-      field :path_to_root, -> { Internal::Types::Array[Square::Types::CategoryPathToRootNode] }, optional: true, nullable: false
-
+      field :path_to_root, lambda {
+        Internal::Types::Array[Square::Types::CategoryPathToRootNode]
+      }, optional: true, nullable: false
     end
   end
 end

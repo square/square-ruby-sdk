@@ -8,7 +8,6 @@ module Square
     class CatalogObjectReference < Internal::Types::Model
       field :object_id, -> { String }, optional: true, nullable: false
       field :catalog_version, -> { Integer }, optional: true, nullable: false
-
     end
   end
 end

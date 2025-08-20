@@ -6,7 +6,6 @@ module Square
     class CatalogQueryExact < Internal::Types::Model
       field :attribute_name, -> { String }, optional: false, nullable: false
       field :attribute_value, -> { String }, optional: false, nullable: false
-
     end
   end
 end

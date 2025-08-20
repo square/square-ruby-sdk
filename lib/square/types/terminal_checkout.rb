@@ -25,7 +25,6 @@ module Square
       field :app_fee_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :statement_description_identifier, -> { String }, optional: true, nullable: false
       field :tip_money, -> { Square::Types::Money }, optional: true, nullable: false
-
     end
   end
 end

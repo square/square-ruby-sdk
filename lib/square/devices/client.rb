@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Devices
@@ -12,28 +13,40 @@ module Square
       #
       # @return [Square::Types::ListDevicesResponse]
       def list(request_options: {}, **params)
-        _request = params
+        _query_param_names = %w[cursor sort_order limit location_id]
+        _query = params.slice(*_query_param_names)
+        params.except(*_query_param_names)
+
+        _request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          method: "GET",
+          path: "v2/devices",
+          query: _query
+        )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::ListDevicesResponse.load(_response.body)
-        else
-          raise _response.body
         end
+
+        raise _response.body
       end
 
       # Retrieves Device with the associated `device_id`.
       #
       # @return [Square::Types::GetDeviceResponse]
       def get(request_options: {}, **params)
-        _request = params
+        _request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          method: "GET",
+          path: "v2/devices/#{params[:device_id]}"
+        )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
           return Square::Types::GetDeviceResponse.load(_response.body)
-        else
-          raise _response.body
         end
-      end
 
+        raise _response.body
+      end
     end
   end
 end

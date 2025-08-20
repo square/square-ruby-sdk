@@ -6,7 +6,6 @@ module Square
     # a request to the [DeleteWebhookSubscription](api-endpoint:WebhookSubscriptions-DeleteWebhookSubscription) endpoint.
     class DeleteWebhookSubscriptionResponse < Internal::Types::Model
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
-
     end
   end
 end

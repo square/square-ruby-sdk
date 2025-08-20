@@ -14,7 +14,6 @@ module Square
       field :generic_unit, -> { String }, optional: true, nullable: false
       field :time_unit, -> { Square::Types::MeasurementUnitTime }, optional: true, nullable: false
       field :type, -> { Square::Types::MeasurementUnitUnitType }, optional: true, nullable: false
-
     end
   end
 end

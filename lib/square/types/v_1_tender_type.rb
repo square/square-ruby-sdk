@@ -4,6 +4,7 @@ module Square
   module Types
     module V1TenderType
       extend Square::Internal::Types::Enum
+
       CREDIT_CARD = "CREDIT_CARD"
       CASH = "CASH"
       THIRD_PARTY_CARD = "THIRD_PARTY_CARD"

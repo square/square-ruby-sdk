@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Disputes
@@ -7,7 +8,6 @@ module Square
         field :idempotency_key, -> { String }, optional: false, nullable: false
         field :evidence_type, -> { Square::Types::DisputeEvidenceType }, optional: true, nullable: false
         field :evidence_text, -> { String }, optional: false, nullable: false
-
       end
     end
   end

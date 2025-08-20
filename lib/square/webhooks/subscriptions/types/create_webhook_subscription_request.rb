@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Webhooks
@@ -6,7 +7,6 @@ module Square
         class CreateWebhookSubscriptionRequest < Internal::Types::Model
           field :idempotency_key, -> { String }, optional: true, nullable: false
           field :subscription, -> { Square::Types::WebhookSubscription }, optional: false, nullable: false
-
         end
       end
     end

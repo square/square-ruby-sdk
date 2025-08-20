@@ -9,7 +9,6 @@ module Square
       field :email_address, -> { String }, optional: true, nullable: false
       field :phone_number, -> { String }, optional: true, nullable: false
       field :address, -> { Square::Types::Address }, optional: true, nullable: false
-
     end
   end
 end
