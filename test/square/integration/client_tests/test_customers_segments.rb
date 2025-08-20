@@ -26,7 +26,7 @@ describe Square::Customers::Segments::Client do
         segment_id: segment_id
       )
 
-      response = client.customers.segments.get(request: _request.to_h)
+      response = client.customers.segments.get(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::GetCustomerSegmentResponse
       refute_nil response.segment

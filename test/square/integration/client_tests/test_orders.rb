@@ -24,7 +24,7 @@ describe Square::Orders::Client do
       )
     )
     # Create initial order for testing
-    order_response = client.orders.create(request: _create_request.to_h)
+    order_response = client.orders.create(**_create_request.to_h)
     refute_nil order_response
     assert_equal order_response.class, Square::Types::CreateOrderResponse
     refute_nil order_response.order
@@ -57,7 +57,7 @@ describe Square::Orders::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.orders.create(request: _request.to_h)
+      response = client.orders.create(**_request.to_h)
       refute_nil response.order
       assert_equal response.class, Square::Types::CreateOrderResponse
       assert_equal @location_id, response.order.location_id
@@ -74,7 +74,7 @@ describe Square::Orders::Client do
         order_ids: [@order_id]
       )
 
-      response = client.orders.batch_get(request: _request.to_h)
+      response = client.orders.batch_get(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::BatchGetOrdersResponse
       refute_nil response.orders
@@ -92,7 +92,7 @@ describe Square::Orders::Client do
         location_ids: [@location_id]
       )
 
-      response = client.orders.search(request: _request.to_h)
+      response = client.orders.search(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::SearchOrdersResponse
       refute_nil response.orders
@@ -126,7 +126,7 @@ describe Square::Orders::Client do
         fields_to_clear: ["line_items[#{@line_item_uid}]"]
       )
 
-      response = client.orders.update(request: _request.to_h)
+      response = client.orders.update(**_request.to_h)
       refute_nil response.order
       assert_equal @order_id, response.order.id
       assert_equal "Updated Item", response.order.line_items.first.name
@@ -145,7 +145,7 @@ describe Square::Orders::Client do
         payment_ids: []
       )
 
-      response = client.orders.pay(request: _request.to_h)
+      response = client.orders.pay(**_request.to_h)
       refute_nil response.order
       assert_equal @order_id, response.order.id
 
@@ -172,7 +172,7 @@ describe Square::Orders::Client do
         )
       )
 
-      response = client.orders.calculate(request: _request.to_h)
+      response = client.orders.calculate(**_request.to_h)
       refute_nil response.order
       refute_nil response.order.total_money
       assert_equal response.class, Square::Types::CalculateOrderResponse

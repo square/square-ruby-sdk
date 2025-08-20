@@ -20,7 +20,7 @@ describe Square::Inventory::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.inventory.batch_get_changes(request: _request.to_h)
+      response = client.inventory.batch_get_changes(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::BatchGetInventoryChangesResponse
       refute_nil response.changes

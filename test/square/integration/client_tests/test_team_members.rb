@@ -41,7 +41,7 @@ describe Square::TeamMembers::Client do
 
       puts "create_request #{_create_request.to_h}" if verbose?
 
-      create_members_resp = client.team_members.batch_create(request: _create_request.to_h)
+      create_members_resp = client.team_members.batch_create(**_create_request.to_h)
       refute_nil create_members_resp.team_members
       assert_equal create_members_resp.class, Square::Types::BatchCreateTeamMembersResponse
 
@@ -74,7 +74,7 @@ describe Square::TeamMembers::Client do
 
       puts "update_request #{_update_request.to_h}" if verbose?
 
-      update_team_members_resp = client.team_members.batch_update(request: _update_request.to_h)
+      update_team_members_resp = client.team_members.batch_update(**_update_request.to_h)
       refute_nil update_team_members_resp
       assert_equal update_team_members_resp.class, Square::Types::BatchUpdateTeamMembersResponse
 

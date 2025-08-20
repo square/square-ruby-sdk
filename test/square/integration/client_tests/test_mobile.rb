@@ -10,7 +10,7 @@ describe Square::Mobile::Client do
         location_id: client.locations.list.locations.first.id
       )
 
-      response = client.mobile.authorization_code(request: _request.to_h)
+      response = client.mobile.authorization_code(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::AuthorizationCodeResponse
       refute_nil response.authorization_code
