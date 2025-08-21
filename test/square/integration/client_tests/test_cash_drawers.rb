@@ -5,7 +5,7 @@ require "test_helper"
 describe Square::CashDrawers::Shifts::Client do
   describe "#list" do
     it "list cash drawer shifts" do
-      skip "Skipping for now."
+      skip '{"errors": [{"code": "BAD_REQUEST","detail": "The location_id is missing.","category": "INVALID_REQUEST_ERROR"}]}'
       start_time = Time.now - 3600  # 1 hour ago
       end_time = Time.now
       
@@ -17,7 +17,7 @@ describe Square::CashDrawers::Shifts::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.cashDrawers.shifts.list(**_request.to_h)
+      response = client.cash_drawers.shifts.list(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::ListCashDrawerShiftsResponse
 
