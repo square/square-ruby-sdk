@@ -4,17 +4,17 @@ require "test_helper"
 
 describe Square::Terminal::Checkouts::Client do
   before do
-    skip "Skipping for now."
+    # skip "Skipping for now."
     @sandbox_device_id = "da40d603-c2ea-4a65-8cfd-f42e36dab0c7"
 
     # Create terminal checkout for testing
     _create_response = Square::Terminal::Checkouts::Types::CreateTerminalCheckoutRequest.new(
       idempotency_key: SecureRandom.uuid,
-      checkout: Square::Terminal::Types::TerminalCheckout.new(
-        device_options: Square::Terminal::Types::DeviceCheckoutOptions.new(
+      checkout: Square::Types::TerminalCheckout.new(
+        device_options: Square::Types::DeviceCheckoutOptions.new(
           device_id: @sandbox_device_id
         ),
-        amount_money: Square::Terminal::Types::Money.new(
+        amount_money: Square::Types::Money.new(
           amount: 100,
           currency: "USD"
         )
@@ -28,14 +28,14 @@ describe Square::Terminal::Checkouts::Client do
 
   describe "#create" do
     it "should create terminal checkout" do
-      skip "Skipping for now."
+      # skip "Skipping for now."
       _request = Square::Terminal::Checkouts::Types::CreateTerminalCheckoutRequest.new(
         idempotency_key: SecureRandom.uuid,
-        checkout: Square::Terminal::Types::TerminalCheckout.new(
-          device_options: Square::Terminal::Types::DeviceCheckoutOptions.new(
+        checkout: Square::Types::TerminalCheckout.new(
+          device_options: Square::Types::DeviceCheckoutOptions.new(
             device_id: @sandbox_device_id
           ),
-          amount_money: Square::Terminal::Types::Money.new(
+          amount_money: Square::Types::Money.new(
             amount: 100,
             currency: "USD"
           )
@@ -55,7 +55,7 @@ describe Square::Terminal::Checkouts::Client do
 
   describe "#search" do
     it "should search terminal checkouts" do
-      skip "Skipping for now."
+      # skip "Skipping for now."
       _request = Square::Terminal::Checkouts::Types::SearchTerminalCheckoutsRequest.new(
         limit: 1
       )
@@ -74,7 +74,7 @@ describe Square::Terminal::Checkouts::Client do
 
   describe "#get" do
     it "should get terminal checkout" do
-      skip "Skipping for now."
+      # skip "Skipping for now."
       _request = Square::Terminal::Checkouts::Types::GetTerminalCheckoutRequest.new(
         checkout_id: @checkout_id
       )
@@ -93,7 +93,7 @@ describe Square::Terminal::Checkouts::Client do
 
   describe "#cancel" do
     it "should cancel terminal checkout" do
-      skip "Skipping for now."
+      # skip "Skipping for now."
       _request = Square::Terminal::Checkouts::Types::CancelTerminalCheckoutRequest.new(
         checkout_id: @checkout_id
       )
