@@ -6,7 +6,6 @@ module Square
     class CatalogQueryPrefix < Internal::Types::Model
       field :attribute_name, -> { String }, optional: false, nullable: false
       field :attribute_prefix, -> { String }, optional: false, nullable: false
-
     end
   end
 end

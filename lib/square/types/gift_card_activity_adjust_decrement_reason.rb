@@ -4,6 +4,7 @@ module Square
   module Types
     module GiftCardActivityAdjustDecrementReason
       extend Square::Internal::Types::Enum
+
       SUSPICIOUS_ACTIVITY = "SUSPICIOUS_ACTIVITY"
       BALANCE_ACCIDENTALLY_INCREASED = "BALANCE_ACCIDENTALLY_INCREASED"
       SUPPORT_ISSUE = "SUPPORT_ISSUE"

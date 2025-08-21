@@ -16,7 +16,6 @@ module Square
       field :updated_at, -> { String }, optional: true, nullable: false
       field :assigned_locations, -> { Square::Types::TeamMemberAssignedLocations }, optional: true, nullable: false
       field :wage_setting, -> { Square::Types::WageSetting }, optional: true, nullable: false
-
     end
   end
 end

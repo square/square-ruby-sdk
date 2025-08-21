@@ -8,7 +8,6 @@ module Square
     class CreateBreakTypeResponse < Internal::Types::Model
       field :break_type, -> { Square::Types::BreakType }, optional: true, nullable: false
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
-
     end
   end
 end

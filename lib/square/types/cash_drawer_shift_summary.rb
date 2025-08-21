@@ -19,7 +19,6 @@ module Square
       field :created_at, -> { String }, optional: true, nullable: false
       field :updated_at, -> { String }, optional: true, nullable: false
       field :location_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

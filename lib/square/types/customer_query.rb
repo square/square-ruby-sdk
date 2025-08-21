@@ -6,7 +6,6 @@ module Square
     class CustomerQuery < Internal::Types::Model
       field :filter, -> { Square::Types::CustomerFilter }, optional: true, nullable: false
       field :sort, -> { Square::Types::CustomerSort }, optional: true, nullable: false
-
     end
   end
 end

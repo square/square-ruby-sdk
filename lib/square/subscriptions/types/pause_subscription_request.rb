@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Subscriptions
@@ -9,7 +10,6 @@ module Square
         field :resume_effective_date, -> { String }, optional: true, nullable: false
         field :resume_change_timing, -> { Square::Types::ChangeTiming }, optional: true, nullable: false
         field :pause_reason, -> { String }, optional: true, nullable: false
-
       end
     end
   end

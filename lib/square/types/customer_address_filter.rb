@@ -7,7 +7,6 @@ module Square
     class CustomerAddressFilter < Internal::Types::Model
       field :postal_code, -> { Square::Types::CustomerTextFilter }, optional: true, nullable: false
       field :country, -> { Square::Types::Country }, optional: true, nullable: false
-
     end
   end
 end

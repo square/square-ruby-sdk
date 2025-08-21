@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Customers
@@ -9,7 +10,6 @@ module Square
           field :billing_address, -> { Square::Types::Address }, optional: true, nullable: false
           field :cardholder_name, -> { String }, optional: true, nullable: false
           field :verification_token, -> { String }, optional: true, nullable: false
-
         end
       end
     end

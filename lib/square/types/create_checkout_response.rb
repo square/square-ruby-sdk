@@ -7,7 +7,6 @@ module Square
     class CreateCheckoutResponse < Internal::Types::Model
       field :checkout, -> { Square::Types::Checkout }, optional: true, nullable: false
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
-
     end
   end
 end

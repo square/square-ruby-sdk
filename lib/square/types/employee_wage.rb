@@ -8,7 +8,6 @@ module Square
       field :employee_id, -> { String }, optional: true, nullable: false
       field :title, -> { String }, optional: true, nullable: false
       field :hourly_rate, -> { Square::Types::Money }, optional: true, nullable: false
-
     end
   end
 end

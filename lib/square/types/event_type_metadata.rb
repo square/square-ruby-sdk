@@ -7,7 +7,6 @@ module Square
       field :event_type, -> { String }, optional: true, nullable: false
       field :api_version_introduced, -> { String }, optional: true, nullable: false
       field :release_status, -> { String }, optional: true, nullable: false
-
     end
   end
 end

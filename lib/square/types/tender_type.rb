@@ -4,6 +4,7 @@ module Square
   module Types
     module TenderType
       extend Square::Internal::Types::Enum
+
       CARD = "CARD"
       CASH = "CASH"
       THIRD_PARTY_CARD = "THIRD_PARTY_CARD"

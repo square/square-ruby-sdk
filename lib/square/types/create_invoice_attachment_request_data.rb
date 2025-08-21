@@ -6,7 +6,6 @@ module Square
     class CreateInvoiceAttachmentRequestData < Internal::Types::Model
       field :idempotency_key, -> { String }, optional: true, nullable: false
       field :description, -> { String }, optional: true, nullable: false
-
     end
   end
 end

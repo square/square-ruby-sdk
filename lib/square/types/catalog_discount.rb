@@ -12,7 +12,6 @@ module Square
       field :label_color, -> { String }, optional: true, nullable: false
       field :modify_tax_basis, -> { Square::Types::CatalogDiscountModifyTaxBasis }, optional: true, nullable: false
       field :maximum_amount_money, -> { Square::Types::Money }, optional: true, nullable: false
-
     end
   end
 end

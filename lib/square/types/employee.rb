@@ -3,7 +3,7 @@
 module Square
   module Types
     # An employee object that is used by the external API.
-    # 
+    #
     # DEPRECATED at version 2020-08-26. Replaced by [TeamMember](entity:TeamMember).
     class Employee < Internal::Types::Model
       field :id, -> { String }, optional: true, nullable: false
@@ -16,7 +16,6 @@ module Square
       field :is_owner, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
       field :updated_at, -> { String }, optional: true, nullable: false
-
     end
   end
 end

@@ -17,7 +17,6 @@ module Square
       field :birthday, -> { String }, optional: true, nullable: false
       field :tax_ids, -> { Square::Types::CustomerTaxIds }, optional: true, nullable: false
       field :version, -> { Integer }, optional: true, nullable: false
-
     end
   end
 end

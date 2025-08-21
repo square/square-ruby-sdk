@@ -7,7 +7,6 @@ module Square
       field :type, -> { String }, optional: true, nullable: false
       field :id, -> { String }, optional: true, nullable: false
       field :object, -> { Square::Types::GiftCardCustomerUnlinkedEventObject }, optional: true, nullable: false
-
     end
   end
 end

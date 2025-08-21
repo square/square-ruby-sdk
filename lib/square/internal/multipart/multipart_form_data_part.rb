@@ -48,4 +48,4 @@ module Square
       end
     end
   end
-end 
+end

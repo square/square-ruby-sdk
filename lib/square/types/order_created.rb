@@ -8,7 +8,6 @@ module Square
       field :location_id, -> { String }, optional: true, nullable: false
       field :state, -> { Square::Types::OrderState }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
-
     end
   end
 end

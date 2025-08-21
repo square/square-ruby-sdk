@@ -11,7 +11,6 @@ module Square
       field :end_, -> { Square::Types::TimeRange }, optional: true, nullable: false
       field :workday, -> { Square::Types::TimecardWorkday }, optional: true, nullable: false
       field :team_member_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-
     end
   end
 end

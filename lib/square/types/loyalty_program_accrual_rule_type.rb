@@ -4,6 +4,7 @@ module Square
   module Types
     module LoyaltyProgramAccrualRuleType
       extend Square::Internal::Types::Enum
+
       VISIT = "VISIT"
       SPEND = "SPEND"
       ITEM_VARIATION = "ITEM_VARIATION"

@@ -12,7 +12,6 @@ module Square
       field :number_filter, -> { Square::Types::Range }, optional: true, nullable: false
       field :selection_uids_filter, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :bool_filter, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
     end
   end
 end

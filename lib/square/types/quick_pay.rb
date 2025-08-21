@@ -9,7 +9,6 @@ module Square
       field :name, -> { String }, optional: false, nullable: false
       field :price_money, -> { Square::Types::Money }, optional: false, nullable: false
       field :location_id, -> { String }, optional: false, nullable: false
-
     end
   end
 end

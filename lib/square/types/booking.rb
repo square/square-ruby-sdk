@@ -15,14 +15,17 @@ module Square
       field :customer_id, -> { String }, optional: true, nullable: false
       field :customer_note, -> { String }, optional: true, nullable: false
       field :seller_note, -> { String }, optional: true, nullable: false
-      field :appointment_segments, -> { Internal::Types::Array[Square::Types::AppointmentSegment] }, optional: true, nullable: false
+      field :appointment_segments, lambda {
+        Internal::Types::Array[Square::Types::AppointmentSegment]
+      }, optional: true, nullable: false
       field :transition_time_minutes, -> { Integer }, optional: true, nullable: false
       field :all_day, -> { Internal::Types::Boolean }, optional: true, nullable: false
-      field :location_type, -> { Square::Types::BusinessAppointmentSettingsBookingLocationType }, optional: true, nullable: false
+      field :location_type, lambda {
+        Square::Types::BusinessAppointmentSettingsBookingLocationType
+      }, optional: true, nullable: false
       field :creator_details, -> { Square::Types::BookingCreatorDetails }, optional: true, nullable: false
       field :source, -> { Square::Types::BookingBookingSource }, optional: true, nullable: false
       field :address, -> { Square::Types::Address }, optional: true, nullable: false
-
     end
   end
 end

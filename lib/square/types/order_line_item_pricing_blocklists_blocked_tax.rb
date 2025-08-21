@@ -8,7 +8,6 @@ module Square
       field :uid, -> { String }, optional: true, nullable: false
       field :tax_uid, -> { String }, optional: true, nullable: false
       field :tax_catalog_object_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

@@ -7,7 +7,6 @@ module Square
     # operation, provided as the value in a key-value pair.
     class BulkPublishScheduledShiftsData < Internal::Types::Model
       field :version, -> { Integer }, optional: true, nullable: false
-
     end
   end
 end

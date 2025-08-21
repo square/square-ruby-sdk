@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module V1Transactions
@@ -7,7 +8,6 @@ module Square
         field :order, -> { Square::Types::SortOrder }, optional: true, nullable: false
         field :limit, -> { Integer }, optional: true, nullable: false
         field :batch_token, -> { String }, optional: true, nullable: false
-
       end
     end
   end

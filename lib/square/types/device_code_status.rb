@@ -4,6 +4,7 @@ module Square
   module Types
     module DeviceCodeStatus
       extend Square::Internal::Types::Enum
+
       UNKNOWN = "UNKNOWN"
       UNPAIRED = "UNPAIRED"
       PAIRED = "PAIRED"

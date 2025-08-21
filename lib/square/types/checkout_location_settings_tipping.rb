@@ -8,7 +8,6 @@ module Square
       field :default_percent, -> { Integer }, optional: true, nullable: false
       field :smart_tips, -> { Internal::Types::Array[Square::Types::Money] }, optional: true, nullable: false
       field :default_smart_tip, -> { Square::Types::Money }, optional: true, nullable: false
-
     end
   end
 end

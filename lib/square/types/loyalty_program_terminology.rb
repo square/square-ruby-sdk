@@ -6,7 +6,6 @@ module Square
     class LoyaltyProgramTerminology < Internal::Types::Model
       field :one, -> { String }, optional: false, nullable: false
       field :other, -> { String }, optional: false, nullable: false
-
     end
   end
 end

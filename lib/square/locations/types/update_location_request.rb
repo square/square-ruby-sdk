@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Locations
@@ -5,7 +6,6 @@ module Square
       class UpdateLocationRequest < Internal::Types::Model
         field :location_id, -> { String }, optional: false, nullable: false
         field :location, -> { Square::Types::Location }, optional: true, nullable: false
-
       end
     end
   end

@@ -11,7 +11,6 @@ module Square
       field :updated_at, -> { String }, optional: true, nullable: false
       field :version, -> { String }, optional: true, nullable: false
       field :merchant_token, -> { String }, optional: true, nullable: false
-
     end
   end
 end

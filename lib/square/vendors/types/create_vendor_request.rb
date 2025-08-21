@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Vendors
@@ -5,7 +6,6 @@ module Square
       class CreateVendorRequest < Internal::Types::Model
         field :idempotency_key, -> { String }, optional: false, nullable: false
         field :vendor, -> { Square::Types::Vendor }, optional: true, nullable: false
-
       end
     end
   end

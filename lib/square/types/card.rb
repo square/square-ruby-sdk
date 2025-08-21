@@ -25,7 +25,6 @@ module Square
       field :issuer_alert, -> { String }, optional: true, nullable: false
       field :issuer_alert_at, -> { String }, optional: true, nullable: false
       field :hsa_fsa, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
     end
   end
 end

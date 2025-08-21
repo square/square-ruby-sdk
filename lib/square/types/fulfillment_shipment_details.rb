@@ -19,7 +19,6 @@ module Square
       field :cancel_reason, -> { String }, optional: true, nullable: false
       field :failed_at, -> { String }, optional: true, nullable: false
       field :failure_reason, -> { String }, optional: true, nullable: false
-
     end
   end
 end

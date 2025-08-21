@@ -13,7 +13,6 @@ module Square
       field :notes, -> { String }, optional: true, nullable: false
       field :is_deleted, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :timezone, -> { String }, optional: true, nullable: false
-
     end
   end
 end

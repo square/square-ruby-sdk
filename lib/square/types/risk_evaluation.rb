@@ -3,7 +3,7 @@
 module Square
   module Types
     # Represents fraud risk information for the associated payment.
-    # 
+    #
     # When you take a payment through Square's Payments API (using the `CreatePayment`
     # endpoint), Square evaluates it and assigns a risk level to the payment. Sellers
     # can use this information to determine the course of action (for example,
@@ -11,7 +11,6 @@ module Square
     class RiskEvaluation < Internal::Types::Model
       field :created_at, -> { String }, optional: true, nullable: false
       field :risk_level, -> { Square::Types::RiskEvaluationRiskLevel }, optional: true, nullable: false
-
     end
   end
 end

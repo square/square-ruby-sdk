@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Payments
@@ -6,7 +7,6 @@ module Square
         field :payment_id, -> { String }, optional: false, nullable: false
         field :payment, -> { Square::Types::Payment }, optional: true, nullable: false
         field :idempotency_key, -> { String }, optional: false, nullable: false
-
       end
     end
   end

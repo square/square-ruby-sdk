@@ -4,7 +4,6 @@ module Square
   module Types
     class BankAccountVerifiedEventObject < Internal::Types::Model
       field :bank_account, -> { Square::Types::BankAccount }, optional: true, nullable: false
-
     end
   end
 end

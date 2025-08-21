@@ -15,7 +15,6 @@ module Square
       field :quantity_min, -> { Integer }, optional: true, nullable: false
       field :quantity_max, -> { Integer }, optional: true, nullable: false
       field :all_products, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
     end
   end
 end

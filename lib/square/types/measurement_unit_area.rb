@@ -4,6 +4,7 @@ module Square
   module Types
     module MeasurementUnitArea
       extend Square::Internal::Types::Enum
+
       IMPERIAL_ACRE = "IMPERIAL_ACRE"
       IMPERIAL_SQUARE_INCH = "IMPERIAL_SQUARE_INCH"
       IMPERIAL_SQUARE_FOOT = "IMPERIAL_SQUARE_FOOT"

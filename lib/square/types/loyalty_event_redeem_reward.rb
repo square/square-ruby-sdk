@@ -7,7 +7,6 @@ module Square
       field :loyalty_program_id, -> { String }, optional: true, nullable: false
       field :reward_id, -> { String }, optional: true, nullable: false
       field :order_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

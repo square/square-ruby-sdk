@@ -7,7 +7,6 @@ module Square
       field :amount_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :effective_at, -> { String }, optional: true, nullable: false
       field :type, -> { Square::Types::PayoutFeeType }, optional: true, nullable: false
-
     end
   end
 end

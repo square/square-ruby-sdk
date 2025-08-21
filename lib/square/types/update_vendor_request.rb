@@ -6,7 +6,6 @@ module Square
     class UpdateVendorRequest < Internal::Types::Model
       field :idempotency_key, -> { String }, optional: true, nullable: false
       field :vendor, -> { Square::Types::Vendor }, optional: false, nullable: false
-
     end
   end
 end

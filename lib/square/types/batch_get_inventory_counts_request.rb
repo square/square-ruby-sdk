@@ -9,7 +9,6 @@ module Square
       field :cursor, -> { String }, optional: true, nullable: false
       field :states, -> { Internal::Types::Array[Square::Types::InventoryState] }, optional: true, nullable: false
       field :limit, -> { Integer }, optional: true, nullable: false
-
     end
   end
 end

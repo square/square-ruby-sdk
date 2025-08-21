@@ -7,7 +7,6 @@ module Square
     class BulkDeleteLocationCustomAttributesResponseLocationCustomAttributeDeleteResponse < Internal::Types::Model
       field :location_id, -> { String }, optional: true, nullable: false
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
-
     end
   end
 end

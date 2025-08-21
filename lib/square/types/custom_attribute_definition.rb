@@ -6,14 +6,15 @@ module Square
     # specifies the key, visibility, schema, and other properties for a custom attribute.
     class CustomAttributeDefinition < Internal::Types::Model
       field :key, -> { String }, optional: true, nullable: false
-      field :schema, -> { Internal::Types::Hash[String, Internal::Types::Hash[String, Object]] }, optional: true, nullable: false
+      field :schema, lambda {
+        Internal::Types::Hash[String, Internal::Types::Hash[String, Object]]
+      }, optional: true, nullable: false
       field :name, -> { String }, optional: true, nullable: false
       field :description, -> { String }, optional: true, nullable: false
       field :visibility, -> { Square::Types::CustomAttributeDefinitionVisibility }, optional: true, nullable: false
       field :version, -> { Integer }, optional: true, nullable: false
       field :updated_at, -> { String }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
-
     end
   end
 end

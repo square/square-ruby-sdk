@@ -7,7 +7,6 @@ module Square
     class CreateGiftCardActivityResponse < Internal::Types::Model
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
       field :gift_card_activity, -> { Square::Types::GiftCardActivity }, optional: true, nullable: false
-
     end
   end
 end

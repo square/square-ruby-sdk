@@ -13,7 +13,6 @@ module Square
       field :url, -> { String }, optional: true, nullable: false
       field :caption, -> { String }, optional: true, nullable: false
       field :photo_studio_order_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

@@ -5,7 +5,6 @@ module Square
     # Represents the parameters in a search for `TeamMember` objects.
     class SearchTeamMembersQuery < Internal::Types::Model
       field :filter, -> { Square::Types::SearchTeamMembersFilter }, optional: true, nullable: false
-
     end
   end
 end

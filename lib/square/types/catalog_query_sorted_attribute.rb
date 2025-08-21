@@ -7,7 +7,6 @@ module Square
       field :attribute_name, -> { String }, optional: false, nullable: false
       field :initial_attribute_value, -> { String }, optional: true, nullable: false
       field :sort_order, -> { Square::Types::SortOrder }, optional: true, nullable: false
-
     end
   end
 end

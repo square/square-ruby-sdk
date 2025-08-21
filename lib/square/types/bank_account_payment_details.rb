@@ -12,7 +12,6 @@ module Square
       field :statement_description, -> { String }, optional: true, nullable: false
       field :ach_details, -> { Square::Types::AchDetails }, optional: true, nullable: false
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
-
     end
   end
 end

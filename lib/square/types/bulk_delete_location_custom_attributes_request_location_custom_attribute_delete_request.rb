@@ -7,7 +7,6 @@ module Square
     # and optional key of the associated custom attribute definition.
     class BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest < Internal::Types::Model
       field :key, -> { String }, optional: true, nullable: false
-
     end
   end
 end

@@ -12,7 +12,9 @@ module Square
       field :total_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :app_fee_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :approved_money, -> { Square::Types::Money }, optional: true, nullable: false
-      field :processing_fee, -> { Internal::Types::Array[Square::Types::ProcessingFee] }, optional: true, nullable: false
+      field :processing_fee, lambda {
+        Internal::Types::Array[Square::Types::ProcessingFee]
+      }, optional: true, nullable: false
       field :refunded_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :status, -> { String }, optional: true, nullable: false
       field :delay_duration, -> { String }, optional: true, nullable: false
@@ -48,7 +50,6 @@ module Square
       field :is_offline_payment, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :offline_payment_details, -> { Square::Types::OfflinePaymentDetails }, optional: true, nullable: false
       field :version_token, -> { String }, optional: true, nullable: false
-
     end
   end
 end

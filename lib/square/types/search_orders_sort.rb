@@ -7,7 +7,6 @@ module Square
     class SearchOrdersSort < Internal::Types::Model
       field :sort_field, -> { Square::Types::SearchOrdersSortField }, optional: false, nullable: false
       field :sort_order, -> { Square::Types::SortOrder }, optional: true, nullable: false
-
     end
   end
 end

@@ -6,7 +6,6 @@ module Square
     class CustomerCreatedEventObject < Internal::Types::Model
       field :customer, -> { Square::Types::Customer }, optional: true, nullable: false
       field :event_context, -> { Square::Types::CustomerCreatedEventEventContext }, optional: true, nullable: false
-
     end
   end
 end

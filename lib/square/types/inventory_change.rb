@@ -12,7 +12,6 @@ module Square
       field :transfer, -> { Square::Types::InventoryTransfer }, optional: true, nullable: false
       field :measurement_unit, -> { Square::Types::CatalogMeasurementUnit }, optional: true, nullable: false
       field :measurement_unit_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

@@ -3,7 +3,7 @@
 module Square
   module Types
     # Represents a subscription purchased by a customer.
-    # 
+    #
     # For more information, see
     # [Manage Subscriptions](https://developer.squareup.com/docs/subscriptions-api/manage-subscriptions).
     class Subscription < Internal::Types::Model
@@ -26,7 +26,6 @@ module Square
       field :actions, -> { Internal::Types::Array[Square::Types::SubscriptionAction] }, optional: true, nullable: false
       field :monthly_billing_anchor_date, -> { Integer }, optional: true, nullable: false
       field :phases, -> { Internal::Types::Array[Square::Types::Phase] }, optional: true, nullable: false
-
     end
   end
 end

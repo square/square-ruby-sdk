@@ -11,7 +11,6 @@ module Square
       field :description, -> { String }, optional: true, nullable: false
       field :color, -> { String }, optional: true, nullable: false
       field :ordinal, -> { Integer }, optional: true, nullable: false
-
     end
   end
 end

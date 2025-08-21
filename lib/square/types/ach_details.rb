@@ -7,7 +7,6 @@ module Square
       field :routing_number, -> { String }, optional: true, nullable: false
       field :account_number_suffix, -> { String }, optional: true, nullable: false
       field :account_type, -> { String }, optional: true, nullable: false
-
     end
   end
 end

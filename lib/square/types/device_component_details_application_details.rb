@@ -7,7 +7,6 @@ module Square
       field :version, -> { String }, optional: true, nullable: false
       field :session_location, -> { String }, optional: true, nullable: false
       field :device_code_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

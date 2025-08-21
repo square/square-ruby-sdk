@@ -4,7 +4,7 @@ module Square
   module Types
     # Represents a discount that applies to one or more line items in an
     # order.
-    # 
+    #
     # Fixed-amount, order-scoped discounts are distributed across all non-zero line item totals.
     # The amount distributed to each line item is relative to the
     # amount contributed by the item to the order subtotal.
@@ -21,7 +21,6 @@ module Square
       field :scope, -> { Square::Types::OrderLineItemDiscountScope }, optional: true, nullable: false
       field :reward_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :pricing_rule_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

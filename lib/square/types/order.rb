@@ -5,7 +5,7 @@ module Square
     # Contains all information related to a single order to process with Square,
     # including line items that specify the products to purchase. `Order` objects also
     # include information about any associated tenders, refunds, and returns.
-    # 
+    #
     # All Connect V2 Transactions have all been converted to Orders including all associated
     # itemization data.
     class Order < Internal::Types::Model
@@ -16,8 +16,12 @@ module Square
       field :customer_id, -> { String }, optional: true, nullable: false
       field :line_items, -> { Internal::Types::Array[Square::Types::OrderLineItem] }, optional: true, nullable: false
       field :taxes, -> { Internal::Types::Array[Square::Types::OrderLineItemTax] }, optional: true, nullable: false
-      field :discounts, -> { Internal::Types::Array[Square::Types::OrderLineItemDiscount] }, optional: true, nullable: false
-      field :service_charges, -> { Internal::Types::Array[Square::Types::OrderServiceCharge] }, optional: true, nullable: false
+      field :discounts, lambda {
+        Internal::Types::Array[Square::Types::OrderLineItemDiscount]
+      }, optional: true, nullable: false
+      field :service_charges, lambda {
+        Internal::Types::Array[Square::Types::OrderServiceCharge]
+      }, optional: true, nullable: false
       field :fulfillments, -> { Internal::Types::Array[Square::Types::Fulfillment] }, optional: true, nullable: false
       field :returns, -> { Internal::Types::Array[Square::Types::OrderReturn] }, optional: true, nullable: false
       field :return_amounts, -> { Square::Types::OrderMoneyAmounts }, optional: true, nullable: false
@@ -40,7 +44,6 @@ module Square
       field :pricing_options, -> { Square::Types::OrderPricingOptions }, optional: true, nullable: false
       field :rewards, -> { Internal::Types::Array[Square::Types::OrderReward] }, optional: true, nullable: false
       field :net_amount_due_money, -> { Square::Types::Money }, optional: true, nullable: false
-
     end
   end
 end

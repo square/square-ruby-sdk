@@ -12,7 +12,6 @@ module Square
       field :gan, -> { String }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
       field :customer_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-
     end
   end
 end

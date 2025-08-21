@@ -7,7 +7,6 @@ module Square
       field :authorized_at, -> { String }, optional: true, nullable: false
       field :captured_at, -> { String }, optional: true, nullable: false
       field :voided_at, -> { String }, optional: true, nullable: false
-
     end
   end
 end

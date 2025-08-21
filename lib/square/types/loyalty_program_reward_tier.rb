@@ -9,7 +9,6 @@ module Square
       field :name, -> { String }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
       field :pricing_rule_reference, -> { Square::Types::CatalogObjectReference }, optional: false, nullable: false
-
     end
   end
 end

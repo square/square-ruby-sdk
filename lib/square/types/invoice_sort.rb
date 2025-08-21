@@ -6,7 +6,6 @@ module Square
     class InvoiceSort < Internal::Types::Model
       field :field, -> { String }, optional: false, nullable: false
       field :order, -> { Square::Types::SortOrder }, optional: true, nullable: false
-
     end
   end
 end

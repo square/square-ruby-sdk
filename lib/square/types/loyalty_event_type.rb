@@ -4,6 +4,7 @@ module Square
   module Types
     module LoyaltyEventType
       extend Square::Internal::Types::Enum
+
       ACCUMULATE_POINTS = "ACCUMULATE_POINTS"
       CREATE_REWARD = "CREATE_REWARD"
       REDEEM_REWARD = "REDEEM_REWARD"

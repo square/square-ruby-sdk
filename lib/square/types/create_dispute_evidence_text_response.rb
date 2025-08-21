@@ -6,7 +6,6 @@ module Square
     class CreateDisputeEvidenceTextResponse < Internal::Types::Model
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
       field :evidence, -> { Square::Types::DisputeEvidence }, optional: true, nullable: false
-
     end
   end
 end

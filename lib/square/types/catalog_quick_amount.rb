@@ -8,7 +8,6 @@ module Square
       field :amount, -> { Square::Types::Money }, optional: false, nullable: false
       field :score, -> { Integer }, optional: true, nullable: false
       field :ordinal, -> { Integer }, optional: true, nullable: false
-
     end
   end
 end

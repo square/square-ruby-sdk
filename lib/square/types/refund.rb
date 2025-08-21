@@ -13,8 +13,9 @@ module Square
       field :amount_money, -> { Square::Types::Money }, optional: false, nullable: false
       field :status, -> { Square::Types::RefundStatus }, optional: false, nullable: false
       field :processing_fee_money, -> { Square::Types::Money }, optional: true, nullable: false
-      field :additional_recipients, -> { Internal::Types::Array[Square::Types::AdditionalRecipient] }, optional: true, nullable: false
-
+      field :additional_recipients, lambda {
+        Internal::Types::Array[Square::Types::AdditionalRecipient]
+      }, optional: true, nullable: false
     end
   end
 end

@@ -9,13 +9,16 @@ module Square
       field :uid, -> { String }, optional: true, nullable: false
       field :type, -> { Square::Types::FulfillmentType }, optional: true, nullable: false
       field :state, -> { Square::Types::FulfillmentState }, optional: true, nullable: false
-      field :line_item_application, -> { Square::Types::FulfillmentFulfillmentLineItemApplication }, optional: true, nullable: false
-      field :entries, -> { Internal::Types::Array[Square::Types::FulfillmentFulfillmentEntry] }, optional: true, nullable: false
+      field :line_item_application, lambda {
+        Square::Types::FulfillmentFulfillmentLineItemApplication
+      }, optional: true, nullable: false
+      field :entries, lambda {
+        Internal::Types::Array[Square::Types::FulfillmentFulfillmentEntry]
+      }, optional: true, nullable: false
       field :metadata, -> { Internal::Types::Hash[String, String] }, optional: true, nullable: false
       field :pickup_details, -> { Square::Types::FulfillmentPickupDetails }, optional: true, nullable: false
       field :shipment_details, -> { Square::Types::FulfillmentShipmentDetails }, optional: true, nullable: false
       field :delivery_details, -> { Square::Types::FulfillmentDeliveryDetails }, optional: true, nullable: false
-
     end
   end
 end

@@ -9,7 +9,6 @@ module Square
       field :description, -> { String }, optional: true, nullable: false
       field :show_colors, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :values, -> { Internal::Types::Array[Square::Types::CatalogObject] }, optional: true, nullable: false
-
     end
   end
 end

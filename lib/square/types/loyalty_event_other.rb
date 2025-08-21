@@ -6,7 +6,6 @@ module Square
     class LoyaltyEventOther < Internal::Types::Model
       field :loyalty_program_id, -> { String }, optional: true, nullable: false
       field :points, -> { Integer }, optional: false, nullable: false
-
     end
   end
 end

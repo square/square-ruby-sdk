@@ -9,7 +9,6 @@ module Square
       field :bank_account, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :buy_now_pay_later, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :cash_app_pay, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
     end
   end
 end

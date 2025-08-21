@@ -8,7 +8,6 @@ module Square
       field :excluded_category_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :excluded_item_variation_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :tax_mode, -> { Square::Types::LoyaltyProgramAccrualRuleTaxMode }, optional: false, nullable: false
-
     end
   end
 end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Customers
@@ -6,7 +7,6 @@ module Square
         class UpdateCustomerGroupRequest < Internal::Types::Model
           field :group_id, -> { String }, optional: false, nullable: false
           field :group, -> { Square::Types::CustomerGroup }, optional: false, nullable: false
-
         end
       end
     end

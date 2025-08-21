@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Cards
@@ -8,7 +9,6 @@ module Square
         field :include_disabled, -> { Internal::Types::Boolean }, optional: true, nullable: false
         field :reference_id, -> { String }, optional: true, nullable: false
         field :sort_order, -> { Square::Types::SortOrder }, optional: true, nullable: false
-
       end
     end
   end

@@ -14,7 +14,6 @@ module Square
       field :update_item_modifier_lists_max_item_ids, -> { Integer }, optional: true, nullable: false
       field :update_item_modifier_lists_max_modifier_lists_to_enable, -> { Integer }, optional: true, nullable: false
       field :update_item_modifier_lists_max_modifier_lists_to_disable, -> { Integer }, optional: true, nullable: false
-
     end
   end
 end

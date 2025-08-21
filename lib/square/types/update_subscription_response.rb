@@ -7,7 +7,6 @@ module Square
     class UpdateSubscriptionResponse < Internal::Types::Model
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
       field :subscription, -> { Square::Types::Subscription }, optional: true, nullable: false
-
     end
   end
 end

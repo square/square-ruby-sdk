@@ -7,7 +7,6 @@ module Square
       field :idempotency_key, -> { String }, optional: false, nullable: false
       field :evidence_type, -> { Square::Types::DisputeEvidenceType }, optional: true, nullable: false
       field :content_type, -> { String }, optional: true, nullable: false
-
     end
   end
 end

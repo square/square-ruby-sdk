@@ -8,7 +8,6 @@ module Square
       field :applied_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :source_tender_uid, -> { String }, optional: true, nullable: false
       field :source_tender_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

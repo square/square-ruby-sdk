@@ -6,7 +6,6 @@ module Square
     class GetTeamMemberResponse < Internal::Types::Model
       field :team_member, -> { Square::Types::TeamMember }, optional: true, nullable: false
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
-
     end
   end
 end

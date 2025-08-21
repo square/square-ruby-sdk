@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module CashDrawers
@@ -10,7 +11,6 @@ module Square
           field :end_time, -> { String }, optional: true, nullable: false
           field :limit, -> { Integer }, optional: true, nullable: false
           field :cursor, -> { String }, optional: true, nullable: false
-
         end
       end
     end

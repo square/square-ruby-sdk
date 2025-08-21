@@ -10,7 +10,6 @@ module Square
       field :recurring_price_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :ordinal, -> { Integer }, optional: true, nullable: false
       field :pricing, -> { Square::Types::SubscriptionPricing }, optional: true, nullable: false
-
     end
   end
 end

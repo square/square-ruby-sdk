@@ -4,6 +4,7 @@ module Square
   module Types
     module VisibilityFilter
       extend Square::Internal::Types::Enum
+
       ALL = "ALL"
       READ = "READ"
       READ_WRITE = "READ_WRITE"end

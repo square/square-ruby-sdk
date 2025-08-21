@@ -11,7 +11,6 @@ module Square
       field :message, -> { String }, optional: true, nullable: false
       field :status, -> { Square::Types::InvoicePaymentReminderStatus }, optional: true, nullable: false
       field :sent_at, -> { String }, optional: true, nullable: false
-
     end
   end
 end

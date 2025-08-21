@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Catalog
@@ -6,7 +7,6 @@ module Square
         field :item_ids, -> { Internal::Types::Array[String] }, optional: false, nullable: false
         field :modifier_lists_to_enable, -> { Internal::Types::Array[String] }, optional: true, nullable: false
         field :modifier_lists_to_disable, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-
       end
     end
   end

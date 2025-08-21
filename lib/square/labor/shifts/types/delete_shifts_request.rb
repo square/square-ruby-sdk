@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Labor
@@ -5,7 +6,6 @@ module Square
       module Types
         class DeleteShiftsRequest < Internal::Types::Model
           field :id, -> { String }, optional: false, nullable: false
-
         end
       end
     end

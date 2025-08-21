@@ -7,7 +7,6 @@ module Square
     class DateRange < Internal::Types::Model
       field :start_date, -> { String }, optional: true, nullable: false
       field :end_date, -> { String }, optional: true, nullable: false
-
     end
   end
 end

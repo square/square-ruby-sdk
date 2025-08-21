@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Catalog
@@ -6,7 +7,6 @@ module Square
         field :cursor, -> { String }, optional: true, nullable: false
         field :types, -> { String }, optional: true, nullable: false
         field :catalog_version, -> { Integer }, optional: true, nullable: false
-
       end
     end
   end

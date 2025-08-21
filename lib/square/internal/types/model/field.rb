@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Square
   module Internal
     module Types
@@ -24,4 +25,4 @@ module Square
       end
     end
   end
-end 
+end

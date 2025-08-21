@@ -7,7 +7,6 @@ module Square
     class CatalogQuerySet < Internal::Types::Model
       field :attribute_name, -> { String }, optional: false, nullable: false
       field :attribute_values, -> { Internal::Types::Array[String] }, optional: false, nullable: false
-
     end
   end
 end

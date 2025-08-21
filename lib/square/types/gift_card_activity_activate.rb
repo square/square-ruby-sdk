@@ -9,7 +9,6 @@ module Square
       field :line_item_uid, -> { String }, optional: true, nullable: false
       field :reference_id, -> { String }, optional: true, nullable: false
       field :buyer_payment_instrument_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-
     end
   end
 end

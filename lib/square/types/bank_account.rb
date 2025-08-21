@@ -2,8 +2,8 @@
 
 module Square
   module Types
-    # Represents a bank account. For more information about 
-    # linking a bank account to a Square account, see 
+    # Represents a bank account. For more information about
+    # linking a bank account to a Square account, see
     # [Bank Accounts API](https://developer.squareup.com/docs/bank-accounts-api).
     class BankAccount < Internal::Types::Model
       field :id, -> { String }, optional: false, nullable: false
@@ -23,7 +23,6 @@ module Square
       field :fingerprint, -> { String }, optional: true, nullable: false
       field :version, -> { Integer }, optional: true, nullable: false
       field :bank_name, -> { String }, optional: true, nullable: false
-
     end
   end
 end

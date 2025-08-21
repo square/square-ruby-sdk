@@ -9,7 +9,6 @@ module Square
       field :stockable_item_variation_id, -> { String }, optional: false, nullable: false
       field :stockable_quantity, -> { String }, optional: false, nullable: false
       field :nonstockable_quantity, -> { String }, optional: false, nullable: false
-
     end
   end
 end

@@ -7,7 +7,6 @@ module Square
     class OrderReward < Internal::Types::Model
       field :id, -> { String }, optional: false, nullable: false
       field :reward_tier_id, -> { String }, optional: false, nullable: false
-
     end
   end
 end

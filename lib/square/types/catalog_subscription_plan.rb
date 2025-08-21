@@ -7,11 +7,12 @@ module Square
     class CatalogSubscriptionPlan < Internal::Types::Model
       field :name, -> { String }, optional: false, nullable: false
       field :phases, -> { Internal::Types::Array[Square::Types::SubscriptionPhase] }, optional: true, nullable: false
-      field :subscription_plan_variations, -> { Internal::Types::Array[Square::Types::CatalogObject] }, optional: true, nullable: false
+      field :subscription_plan_variations, lambda {
+        Internal::Types::Array[Square::Types::CatalogObject]
+      }, optional: true, nullable: false
       field :eligible_item_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :eligible_category_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :all_items, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
     end
   end
 end

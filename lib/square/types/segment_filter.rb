@@ -6,7 +6,6 @@ module Square
     class SegmentFilter < Internal::Types::Model
       field :service_variation_id, -> { String }, optional: false, nullable: false
       field :team_member_id_filter, -> { Square::Types::FilterValue }, optional: true, nullable: false
-
     end
   end
 end

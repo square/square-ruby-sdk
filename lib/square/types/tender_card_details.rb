@@ -7,7 +7,6 @@ module Square
       field :status, -> { Square::Types::TenderCardDetailsStatus }, optional: true, nullable: false
       field :card, -> { Square::Types::Card }, optional: true, nullable: false
       field :entry_method, -> { Square::Types::TenderCardDetailsEntryMethod }, optional: true, nullable: false
-
     end
   end
 end

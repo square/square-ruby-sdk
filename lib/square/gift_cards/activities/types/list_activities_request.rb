@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module GiftCards
@@ -12,7 +13,6 @@ module Square
           field :limit, -> { Integer }, optional: true, nullable: false
           field :cursor, -> { String }, optional: true, nullable: false
           field :sort_order, -> { String }, optional: true, nullable: false
-
         end
       end
     end

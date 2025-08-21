@@ -4,6 +4,7 @@ module Square
   module Types
     module V1OrderHistoryEntryAction
       extend Square::Internal::Types::Enum
+
       ORDER_PLACED = "ORDER_PLACED"
       DECLINED = "DECLINED"
       PAYMENT_RECEIVED = "PAYMENT_RECEIVED"

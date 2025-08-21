@@ -6,10 +6,10 @@ module Square
     # `CLOSED_AT`, or `UPDATED_AT` timestamps fall within a specified time range.
     # You can specify the time range and which timestamp to filter for. You can filter
     # for only one time range at a time.
-    # 
+    #
     # For each time range, the start time and end time are inclusive. If the end time
     # is absent, it defaults to the time of the first request for the cursor.
-    # 
+    #
     # __Important:__ If you use the `DateTimeFilter` in a `SearchOrders` query,
     # you must set the `sort_field` in [OrdersSort](entity:SearchOrdersSort)
     # to the same field you filter for. For example, if you set the `CLOSED_AT` field
@@ -20,7 +20,6 @@ module Square
       field :created_at, -> { Square::Types::TimeRange }, optional: true, nullable: false
       field :updated_at, -> { Square::Types::TimeRange }, optional: true, nullable: false
       field :closed_at, -> { Square::Types::TimeRange }, optional: true, nullable: false
-
     end
   end
 end

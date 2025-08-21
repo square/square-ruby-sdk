@@ -4,6 +4,7 @@ module Square
   module Types
     module InventoryState
       extend Square::Internal::Types::Enum
+
       CUSTOM = "CUSTOM"
       IN_STOCK = "IN_STOCK"
       SOLD = "SOLD"

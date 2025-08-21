@@ -7,7 +7,6 @@ module Square
       field :status, -> { String }, optional: true, nullable: false
       field :brand, -> { String }, optional: true, nullable: false
       field :cash_app_details, -> { Square::Types::CashAppDetails }, optional: true, nullable: false
-
     end
   end
 end

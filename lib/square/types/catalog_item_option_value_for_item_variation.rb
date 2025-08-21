@@ -9,7 +9,6 @@ module Square
     class CatalogItemOptionValueForItemVariation < Internal::Types::Model
       field :item_option_id, -> { String }, optional: true, nullable: false
       field :item_option_value_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

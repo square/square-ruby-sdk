@@ -9,7 +9,6 @@ module Square
       field :precision, -> { Integer }, optional: true, nullable: false
       field :catalog_object_id, -> { String }, optional: true, nullable: false
       field :catalog_version, -> { Integer }, optional: true, nullable: false
-
     end
   end
 end

@@ -4,6 +4,7 @@ module Square
   module Types
     module ScheduledShiftFilterAssignmentStatus
       extend Square::Internal::Types::Enum
+
       ASSIGNED = "ASSIGNED"
       UNASSIGNED = "UNASSIGNED"end
   end

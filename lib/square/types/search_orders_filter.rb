@@ -10,7 +10,6 @@ module Square
       field :fulfillment_filter, -> { Square::Types::SearchOrdersFulfillmentFilter }, optional: true, nullable: false
       field :source_filter, -> { Square::Types::SearchOrdersSourceFilter }, optional: true, nullable: false
       field :customer_filter, -> { Square::Types::SearchOrdersCustomerFilter }, optional: true, nullable: false
-
     end
   end
 end

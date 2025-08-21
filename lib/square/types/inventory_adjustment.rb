@@ -24,7 +24,6 @@ module Square
       field :purchase_order_id, -> { String }, optional: true, nullable: false
       field :goods_receipt_id, -> { String }, optional: true, nullable: false
       field :adjustment_group, -> { Square::Types::InventoryAdjustmentGroup }, optional: true, nullable: false
-
     end
   end
 end

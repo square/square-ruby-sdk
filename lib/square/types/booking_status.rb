@@ -4,6 +4,7 @@ module Square
   module Types
     module BookingStatus
       extend Square::Internal::Types::Enum
+
       PENDING = "PENDING"
       CANCELLED_BY_CUSTOMER = "CANCELLED_BY_CUSTOMER"
       CANCELLED_BY_SELLER = "CANCELLED_BY_SELLER"

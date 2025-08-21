@@ -7,7 +7,6 @@ module Square
     class BulkSwapPlanResponse < Internal::Types::Model
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
       field :affected_subscriptions, -> { Integer }, optional: true, nullable: false
-
     end
   end
 end

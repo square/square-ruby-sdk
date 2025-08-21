@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Loyalty
@@ -8,7 +9,6 @@ module Square
           field :idempotency_key, -> { String }, optional: false, nullable: false
           field :adjust_points, -> { Square::Types::LoyaltyEventAdjustPoints }, optional: false, nullable: false
           field :allow_negative_balance, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
         end
       end
     end

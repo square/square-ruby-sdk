@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Checkout
@@ -11,7 +12,6 @@ module Square
           field :checkout_options, -> { Square::Types::CheckoutOptions }, optional: true, nullable: false
           field :pre_populated_data, -> { Square::Types::PrePopulatedData }, optional: true, nullable: false
           field :payment_note, -> { String }, optional: true, nullable: false
-
         end
       end
     end

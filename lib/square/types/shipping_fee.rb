@@ -5,7 +5,6 @@ module Square
     class ShippingFee < Internal::Types::Model
       field :name, -> { String }, optional: true, nullable: false
       field :charge, -> { Square::Types::Money }, optional: false, nullable: false
-
     end
   end
 end

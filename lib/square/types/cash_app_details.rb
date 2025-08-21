@@ -7,7 +7,6 @@ module Square
       field :buyer_full_name, -> { String }, optional: true, nullable: false
       field :buyer_country_code, -> { String }, optional: true, nullable: false
       field :buyer_cashtag, -> { String }, optional: true, nullable: false
-
     end
   end
 end

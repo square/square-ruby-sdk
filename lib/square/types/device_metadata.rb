@@ -15,7 +15,6 @@ module Square
       field :wifi_network_name, -> { String }, optional: true, nullable: false
       field :wifi_network_strength, -> { String }, optional: true, nullable: false
       field :ip_address, -> { String }, optional: true, nullable: false
-
     end
   end
 end

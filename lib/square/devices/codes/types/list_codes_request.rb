@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Devices
@@ -8,7 +9,6 @@ module Square
           field :location_id, -> { String }, optional: true, nullable: false
           field :product_type, -> { String }, optional: true, nullable: false
           field :status, -> { Square::Types::DeviceCodeStatus }, optional: true, nullable: false
-
         end
       end
     end

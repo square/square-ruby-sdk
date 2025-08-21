@@ -9,7 +9,6 @@ module Square
       field :display_name, -> { String }, optional: true, nullable: false
       field :is_bookable, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :profile_image_url, -> { String }, optional: true, nullable: false
-
     end
   end
 end

@@ -17,7 +17,6 @@ module Square
       field :payout_fee, -> { Internal::Types::Array[Square::Types::PayoutFee] }, optional: true, nullable: false
       field :arrival_date, -> { String }, optional: true, nullable: false
       field :end_to_end_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

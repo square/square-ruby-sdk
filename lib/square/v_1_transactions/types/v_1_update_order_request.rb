@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module V1Transactions
@@ -10,7 +11,6 @@ module Square
         field :completed_note, -> { String }, optional: true, nullable: false
         field :refunded_note, -> { String }, optional: true, nullable: false
         field :canceled_note, -> { String }, optional: true, nullable: false
-
       end
     end
   end

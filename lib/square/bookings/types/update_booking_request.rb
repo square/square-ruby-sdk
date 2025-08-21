@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Bookings
@@ -6,7 +7,6 @@ module Square
         field :booking_id, -> { String }, optional: false, nullable: false
         field :idempotency_key, -> { String }, optional: true, nullable: false
         field :booking, -> { Square::Types::Booking }, optional: false, nullable: false
-
       end
     end
   end

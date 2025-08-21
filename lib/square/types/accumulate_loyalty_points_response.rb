@@ -7,7 +7,6 @@ module Square
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
       field :event, -> { Square::Types::LoyaltyEvent }, optional: true, nullable: false
       field :events, -> { Internal::Types::Array[Square::Types::LoyaltyEvent] }, optional: true, nullable: false
-
     end
   end
 end

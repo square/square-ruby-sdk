@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Payments
@@ -28,7 +29,6 @@ module Square
         field :external_details, -> { Square::Types::ExternalPaymentDetails }, optional: true, nullable: false
         field :customer_details, -> { Square::Types::CustomerDetails }, optional: true, nullable: false
         field :offline_payment_details, -> { Square::Types::OfflinePaymentDetails }, optional: true, nullable: false
-
       end
     end
   end

@@ -10,7 +10,9 @@ module Square
       field :location_id, -> { String }, optional: true, nullable: false
       field :order_id, -> { String }, optional: true, nullable: false
       field :primary_recipient, -> { Square::Types::InvoiceRecipient }, optional: true, nullable: false
-      field :payment_requests, -> { Internal::Types::Array[Square::Types::InvoicePaymentRequest] }, optional: true, nullable: false
+      field :payment_requests, lambda {
+        Internal::Types::Array[Square::Types::InvoicePaymentRequest]
+      }, optional: true, nullable: false
       field :delivery_method, -> { Square::Types::InvoiceDeliveryMethod }, optional: true, nullable: false
       field :invoice_number, -> { String }, optional: true, nullable: false
       field :title, -> { String }, optional: true, nullable: false
@@ -22,15 +24,20 @@ module Square
       field :timezone, -> { String }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
       field :updated_at, -> { String }, optional: true, nullable: false
-      field :accepted_payment_methods, -> { Square::Types::InvoiceAcceptedPaymentMethods }, optional: true, nullable: false
-      field :custom_fields, -> { Internal::Types::Array[Square::Types::InvoiceCustomField] }, optional: true, nullable: false
+      field :accepted_payment_methods, lambda {
+        Square::Types::InvoiceAcceptedPaymentMethods
+      }, optional: true, nullable: false
+      field :custom_fields, lambda {
+        Internal::Types::Array[Square::Types::InvoiceCustomField]
+      }, optional: true, nullable: false
       field :subscription_id, -> { String }, optional: true, nullable: false
       field :sale_or_service_date, -> { String }, optional: true, nullable: false
       field :payment_conditions, -> { String }, optional: true, nullable: false
       field :store_payment_method_enabled, -> { Internal::Types::Boolean }, optional: true, nullable: false
-      field :attachments, -> { Internal::Types::Array[Square::Types::InvoiceAttachment] }, optional: true, nullable: false
+      field :attachments, lambda {
+        Internal::Types::Array[Square::Types::InvoiceAttachment]
+      }, optional: true, nullable: false
       field :creator_team_member_id, -> { String }, optional: true, nullable: false
-
     end
   end
 end

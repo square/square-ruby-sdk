@@ -6,7 +6,6 @@ module Square
     # request.
     class BulkDeleteMerchantCustomAttributesResponseMerchantCustomAttributeDeleteResponse < Internal::Types::Model
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
-
     end
   end
 end

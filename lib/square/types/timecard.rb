@@ -19,7 +19,6 @@ module Square
       field :updated_at, -> { String }, optional: true, nullable: false
       field :team_member_id, -> { String }, optional: false, nullable: false
       field :declared_cash_tip_money, -> { Square::Types::Money }, optional: true, nullable: false
-
     end
   end
 end

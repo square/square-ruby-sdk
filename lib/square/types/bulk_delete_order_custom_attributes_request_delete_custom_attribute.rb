@@ -6,7 +6,6 @@ module Square
     class BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute < Internal::Types::Model
       field :key, -> { String }, optional: true, nullable: false
       field :order_id, -> { String }, optional: false, nullable: false
-
     end
   end
 end

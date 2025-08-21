@@ -4,6 +4,7 @@ module Square
   module Types
     module CatalogObjectType
       extend Square::Internal::Types::Enum
+
       ITEM = "ITEM"
       IMAGE = "IMAGE"
       CATEGORY = "CATEGORY"

@@ -7,7 +7,6 @@ module Square
       field :fulfillment_uid, -> { String }, optional: true, nullable: false
       field :old_state, -> { Square::Types::FulfillmentState }, optional: true, nullable: false
       field :new_state, -> { Square::Types::FulfillmentState }, optional: true, nullable: false
-
     end
   end
 end

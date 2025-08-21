@@ -6,7 +6,6 @@ module Square
     class CustomerDetails < Internal::Types::Model
       field :customer_initiated, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :seller_keyed_in, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
     end
   end
 end

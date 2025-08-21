@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Terminal
@@ -6,7 +7,6 @@ module Square
         class CreateTerminalRefundRequest < Internal::Types::Model
           field :idempotency_key, -> { String }, optional: false, nullable: false
           field :refund, -> { Square::Types::TerminalRefund }, optional: true, nullable: false
-
         end
       end
     end

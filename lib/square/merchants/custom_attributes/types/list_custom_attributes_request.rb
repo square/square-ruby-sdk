@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Merchants
@@ -9,7 +10,6 @@ module Square
           field :limit, -> { Integer }, optional: true, nullable: false
           field :cursor, -> { String }, optional: true, nullable: false
           field :with_definitions, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
         end
       end
     end

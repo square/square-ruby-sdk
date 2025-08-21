@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Labor
@@ -6,7 +7,6 @@ module Square
         class CreateBreakTypeRequest < Internal::Types::Model
           field :idempotency_key, -> { String }, optional: true, nullable: false
           field :break_type, -> { Square::Types::BreakType }, optional: false, nullable: false
-
         end
       end
     end

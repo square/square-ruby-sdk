@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Orders
@@ -8,7 +9,6 @@ module Square
           field :custom_attribute_key, -> { String }, optional: false, nullable: false
           field :version, -> { Integer }, optional: true, nullable: false
           field :with_definition, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
         end
       end
     end

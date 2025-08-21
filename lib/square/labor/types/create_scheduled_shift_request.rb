@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Square
   module Labor
@@ -5,7 +6,6 @@ module Square
       class CreateScheduledShiftRequest < Internal::Types::Model
         field :idempotency_key, -> { String }, optional: true, nullable: false
         field :scheduled_shift, -> { Square::Types::ScheduledShift }, optional: false, nullable: false
-
       end
     end
   end
