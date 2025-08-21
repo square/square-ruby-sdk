@@ -1,0 +1,22 @@
+# frozen_string_literal: true
+
+module Square
+  module Types
+    module SubscriptionCadence
+      extend Square::Internal::Types::Enum
+
+      DAILY = "DAILY"
+      WEEKLY = "WEEKLY"
+      EVERY_TWO_WEEKS = "EVERY_TWO_WEEKS"
+      THIRTY_DAYS = "THIRTY_DAYS"
+      SIXTY_DAYS = "SIXTY_DAYS"
+      NINETY_DAYS = "NINETY_DAYS"
+      MONTHLY = "MONTHLY"
+      EVERY_TWO_MONTHS = "EVERY_TWO_MONTHS"
+      QUARTERLY = "QUARTERLY"
+      EVERY_FOUR_MONTHS = "EVERY_FOUR_MONTHS"
+      EVERY_SIX_MONTHS = "EVERY_SIX_MONTHS"
+      ANNUAL = "ANNUAL"
+      EVERY_TWO_YEARS = "EVERY_TWO_YEARS"end
+  end
+end

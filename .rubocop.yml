@@ -1,46 +1,39 @@
+plugins:
+  - rubocop-minitest
+
+AllCops:
+  TargetRubyVersion: 3.1
+  NewCops: enable
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Style/AccessModifierDeclarations:
+  Enabled: false
+
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
 Metrics/ClassLength:
   Enabled: false
 
 Metrics/MethodLength:
   Enabled: false
 
-Metrics/BlockLength:
-  Enabled: false  
-
 Metrics/ParameterLists:
-  Enabled: false
-
-Metrics/AbcSize:
-  Enabled: false
-
-Metrics/CyclomaticComplexity:
   Enabled: false
 
 Metrics/PerceivedComplexity:
   Enabled: false
 
-Metrics/LineLength:
+Style/Documentation:
   Enabled: false
-
-Lint/UnderscorePrefixedVariableName:
-  Enabled: false
-
-Naming/AccessorMethodName:
-  Enabled: false
-
-Naming/UncommunicativeMethodParamName:
-  Enabled: false
-
-Style/AsciiComments:
-  Enabled: false
-
-Style/StringLiterals:
-  Enabled: false
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
-AllCops:
-  Exclude:
-    - './test/**/*'
-    - './*'

@@ -1,0 +1,40 @@
+# frozen_string_literal: true
+
+require "test_helper"
+
+describe Square::Merchants::Client do
+  before do
+    # Get first merchant ID
+    merchant_response = client.merchants.list
+    @merchant_id = merchant_response.merchant.first.id
+  end
+
+  describe "#list" do
+    it "should list merchants" do
+
+      response = client.merchants.list
+      refute_nil response
+      assert_equal response.class, Square::Types::ListMerchantsResponse
+      refute_nil response.merchant
+      assert response.merchant.length > 0
+
+      puts "response #{response.to_h}" if verbose?
+    end
+  end
+
+  describe "#get" do
+    it "should retrieve merchant" do
+      _request = Square::Merchants::Types::GetMerchantsRequest.new(
+        merchant_id: @merchant_id
+      )
+
+      response = client.merchants.get(**_request.to_h)
+      refute_nil response
+      assert_equal response.class, Square::Types::GetMerchantResponse
+      refute_nil response.merchant
+      assert_equal @merchant_id, response.merchant.id
+
+      puts "response #{response.to_h}" if verbose?
+    end
+  end
+end

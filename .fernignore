@@ -6,3 +6,4 @@ Rakefile
 square.gemspec
 .gitignore
 test/
+.github/workflows

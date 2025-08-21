@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+module Square
+  module Types
+    module CashDrawerEventType
+      extend Square::Internal::Types::Enum
+
+      NO_SALE = "NO_SALE"
+      CASH_TENDER_PAYMENT = "CASH_TENDER_PAYMENT"
+      OTHER_TENDER_PAYMENT = "OTHER_TENDER_PAYMENT"
+      CASH_TENDER_CANCELLED_PAYMENT = "CASH_TENDER_CANCELLED_PAYMENT"
+      OTHER_TENDER_CANCELLED_PAYMENT = "OTHER_TENDER_CANCELLED_PAYMENT"
+      CASH_TENDER_REFUND = "CASH_TENDER_REFUND"
+      OTHER_TENDER_REFUND = "OTHER_TENDER_REFUND"
+      PAID_IN = "PAID_IN"
+      PAID_OUT = "PAID_OUT"end
+  end
+end

@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+module Square
+  module Types
+    # Represents a [CreateLoyaltyPromotion](api-endpoint:Loyalty-CreateLoyaltyPromotion) response.
+    # Either `loyalty_promotion` or `errors` is present in the response.
+    class CreateLoyaltyPromotionResponse < Internal::Types::Model
+      field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
+      field :loyalty_promotion, -> { Square::Types::LoyaltyPromotion }, optional: true, nullable: false
+    end
+  end
+end
