@@ -75,7 +75,7 @@ describe Square::Terminal::Checkouts::Client do
   describe "#get" do
     it "should get terminal checkout" do
       # skip "Skipping for now."
-      _request = Square::Terminal::Checkouts::Types::GetTerminalCheckoutRequest.new(
+      _request = Square::Terminal::Checkouts::Types::GetCheckoutsRequest.new(
         checkout_id: @checkout_id
       )
 
@@ -94,7 +94,7 @@ describe Square::Terminal::Checkouts::Client do
   describe "#cancel" do
     it "should cancel terminal checkout" do
       # skip "Skipping for now."
-      _request = Square::Terminal::Checkouts::Types::CancelTerminalCheckoutRequest.new(
+      _request = Square::Terminal::Checkouts::Types::CancelCheckoutsRequest.new(
         checkout_id: @checkout_id
       )
 
