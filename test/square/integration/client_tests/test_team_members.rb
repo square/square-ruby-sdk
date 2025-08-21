@@ -4,8 +4,8 @@ require "test_helper"
 
 describe Square::TeamMembers::Client do
   def create_test_team_member(location_ids)
-    Square::TeamMembers::Types::TeamMember.new(
-      assigned_locations: Square::TeamMembers::Types::TeamMemberAssignedLocations.new(
+    Square::Types::TeamMember.new(
+      assigned_locations: Square::Types::TeamMemberAssignedLocations.new(
         assignment_type: "EXPLICIT_LOCATIONS",
         location_ids: location_ids
       ),
@@ -27,13 +27,13 @@ describe Square::TeamMembers::Client do
       # SETUP: Create 3 team members (should always be successful)
       _create_request = Square::TeamMembers::Types::BatchCreateTeamMembersRequest.new(
         team_members: {
-          SecureRandom.uuid => Square::TeamMembers::Types::CreateTeamMemberRequest.new(
+          SecureRandom.uuid => Square::Types::CreateTeamMemberRequest.new(
             team_member: create_test_team_member([location_id])
           ),
-          SecureRandom.uuid => Square::TeamMembers::Types::CreateTeamMemberRequest.new(
+          SecureRandom.uuid => Square::Types::CreateTeamMemberRequest.new(
             team_member: create_test_team_member([location_id])
           ),
-          SecureRandom.uuid => Square::TeamMembers::Types::CreateTeamMemberRequest.new(
+          SecureRandom.uuid => Square::Types::CreateTeamMemberRequest.new(
             team_member: create_test_team_member([location_id])
           )
         }
