@@ -4,19 +4,19 @@ require "test_helper"
 
 describe Square::Orders::Client do
   before do
-    skip "Skipping for now."
+    # skip "Skipping for now."
     @location_id = client.locations.list.locations.first.id
 
-    _create_request = Square::Orders::Types::CreateOrderRequest.new(
+    _create_request = Square::Types::CreateOrderRequest.new(
       idempotency_key: SecureRandom.uuid,
-      order: Square::Orders::Types::Order.new(
+      order: Square::Types::Order.new(
         location_id: @location_id,
         line_items: [
-          Square::Orders::Types::OrderLineItem.new(
+          Square::Types::OrderLineItem.new(
             name: "New Item",
             quantity: "1",
-            base_price_money: Square::Orders::Types::Money.new(
-              amount: 100,
+            base_price_money: Square::Types::Money.new(
+              amount: 0,
               currency: "USD"
             )
           )
@@ -32,21 +32,22 @@ describe Square::Orders::Client do
     assert_equal "New Item", order_response.order.line_items.first.name
 
     @order_id = order_response.order.id
+    @order = order_response.order
     @line_item_uid = order_response.order.line_items.first.uid
   end
 
   describe "#create" do
     it "should create order" do
-      skip "Skipping for now."
-      _request = Square::Orders::Types::CreateOrderRequest.new(
+      # skip "Skipping for now."
+      _request = Square::Types::CreateOrderRequest.new(
         idempotency_key: SecureRandom.uuid,
-        order: Square::Orders::Types::Order.new(
+        order: Square::Types::Order.new(
           location_id: @location_id,
           line_items: [
-            Square::Orders::Types::OrderLineItem.new(
+            Square::Types::OrderLineItem.new(
               name: "New Item",
               quantity: "1",
-              base_price_money: Square::Orders::Types::Money.new(
+              base_price_money: Square::Types::Money.new(
                 amount: 100,
                 currency: "USD"
               )
@@ -69,7 +70,7 @@ describe Square::Orders::Client do
 
   describe "#batch_get" do
     it "should batch retrieve orders" do
-      skip "Skipping for now."
+      # skip "Skipping for now."
       _request = Square::Orders::Types::BatchGetOrdersRequest.new(
         order_ids: [@order_id]
       )
@@ -86,7 +87,7 @@ describe Square::Orders::Client do
 
   describe "#search" do
     it "should search orders" do
-      skip "Skipping for now."
+      # skip "Skipping for now."
       _request = Square::Orders::Types::SearchOrdersRequest.new(
         limit: 1,
         location_ids: [@location_id]
@@ -104,18 +105,18 @@ describe Square::Orders::Client do
 
   describe "#update" do
     it "should update order" do
-      skip "Skipping for now."
+      # skip "Skipping for now."
       _request = Square::Orders::Types::UpdateOrderRequest.new(
         order_id: @order_id,
         idempotency_key: SecureRandom.uuid,
-        order: Square::Orders::Types::Order.new(
+        order: Square::Types::Order.new(
           version: 1,
           location_id: @location_id,
           line_items: [
-            Square::Orders::Types::OrderLineItem.new(
+            Square::Types::OrderLineItem.new(
               name: "Updated Item",
               quantity: "1",
-              base_price_money: Square::Orders::Types::Money.new(
+              base_price_money: Square::Types::Money.new(
                 amount: 0,
                 currency: "USD"
               ),
@@ -137,11 +138,11 @@ describe Square::Orders::Client do
 
   describe "#pay" do
     it "should pay order" do
-      skip "Skipping for now."
+      # skip "Skipping for now."
       _request = Square::Orders::Types::PayOrderRequest.new(
         order_id: @order_id,
         idempotency_key: SecureRandom.uuid,
-        order_version: 2,
+        order_version: @order.version,
         payment_ids: []
       )
 
@@ -155,15 +156,15 @@ describe Square::Orders::Client do
 
   describe "#calculate" do
     it "should calculate order" do
-      skip "Skipping for now."
+      # skip "Skipping for now."
       _request = Square::Orders::Types::CalculateOrderRequest.new(
-        order: Square::Orders::Types::Order.new(
+        order: Square::Types::Order.new(
           location_id: @location_id,
           line_items: [
-            Square::Orders::Types::OrderLineItem.new(
+            Square::Types::OrderLineItem.new(
               name: "New Item",
               quantity: "1",
-              base_price_money: Square::Orders::Types::Money.new(
+              base_price_money: Square::Types::Money.new(
                 amount: 100,
                 currency: "USD"
               )
