@@ -63,17 +63,17 @@ module Square
 
       # @return [Square::Actions::Client]
       def actions
-        @actions ||= Square::Actions::Client.new(client: @raw_client)
+        @actions ||= Square::Terminal::Actions::Client.new(client: @client)
       end
 
       # @return [Square::Checkouts::Client]
       def checkouts
-        @checkouts ||= Square::Checkouts::Client.new(client: @raw_client)
+        @checkouts ||= Square::Terminal::Checkouts::Client.new(client: @client)
       end
 
       # @return [Square::Refunds::Client]
       def refunds
-        @refunds ||= Square::Refunds::Client.new(client: @raw_client)
+        @refunds ||= Square::Terminal::Refunds::Client.new(client: @client)
       end
     end
   end

@@ -20,23 +20,23 @@ module Square
     end
 
     # @return [Square::OAuth::Client]
-    def oAuth
-      @oAuth ||= Square::OAuth::Client.new(client: @raw_client)
+    def o_auth
+      @o_auth ||= Square::OAuth::Client.new(client: @raw_client)
     end
 
     # @return [Square::V1Transactions::Client]
-    def v1Transactions
-      @v1Transactions ||= Square::V1Transactions::Client.new(client: @raw_client)
+    def v_1_transactions
+      @v_1_transactions ||= Square::V1Transactions::Client.new(client: @raw_client)
     end
 
     # @return [Square::ApplePay::Client]
-    def applePay
-      @applePay ||= Square::ApplePay::Client.new(client: @raw_client)
+    def apple_pay
+      @apple_pay ||= Square::ApplePay::Client.new(client: @raw_client)
     end
 
     # @return [Square::BankAccounts::Client]
-    def bankAccounts
-      @bankAccounts ||= Square::BankAccounts::Client.new(client: @raw_client)
+    def bank_accounts
+      @bank_accounts ||= Square::BankAccounts::Client.new(client: @raw_client)
     end
 
     # @return [Square::Bookings::Client]
@@ -80,8 +80,8 @@ module Square
     end
 
     # @return [Square::GiftCards::Client]
-    def giftCards
-      @giftCards ||= Square::GiftCards::Client.new(client: @raw_client)
+    def gift_cards
+      @gift_cards ||= Square::GiftCards::Client.new(client: @raw_client)
     end
 
     # @return [Square::Inventory::Client]
@@ -155,8 +155,8 @@ module Square
     end
 
     # @return [Square::TeamMembers::Client]
-    def teamMembers
-      @teamMembers ||= Square::TeamMembers::Client.new(client: @raw_client)
+    def team_members
+      @team_members ||= Square::TeamMembers::Client.new(client: @raw_client)
     end
 
     # @return [Square::Team::Client]
@@ -175,8 +175,8 @@ module Square
     end
 
     # @return [Square::CashDrawers::Client]
-    def cashDrawers
-      @cashDrawers ||= Square::CashDrawers::Client.new(client: @raw_client)
+    def cash_drawers
+      @cash_drawers ||= Square::CashDrawers::Client.new(client: @raw_client)
     end
 
     # @return [Square::Webhooks::Client]

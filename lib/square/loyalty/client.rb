@@ -35,17 +35,17 @@ module Square
 
       # @return [Square::Accounts::Client]
       def accounts
-        @accounts ||= Square::Accounts::Client.new(client: @raw_client)
+        @accounts ||= Square::Loyalty::Accounts::Client.new(client: @client)
       end
 
       # @return [Square::Programs::Client]
       def programs
-        @programs ||= Square::Programs::Client.new(client: @raw_client)
+        @programs ||= Square::Loyalty::Programs::Client.new(client: @client)
       end
 
       # @return [Square::Rewards::Client]
       def rewards
-        @rewards ||= Square::Rewards::Client.new(client: @raw_client)
+        @rewards ||= Square::Loyalty::Rewards::Client.new(client: @client)
       end
     end
   end

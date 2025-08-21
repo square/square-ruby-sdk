@@ -10,7 +10,7 @@ module Square
 
       # @return [Square::Shifts::Client]
       def shifts
-        @shifts ||= Square::Shifts::Client.new(client: @raw_client)
+        @shifts ||= Square::CashDrawers::Shifts::Client.new(client: @client)
       end
     end
   end

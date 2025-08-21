@@ -240,28 +240,28 @@ module Square
       end
 
       # @return [Square::CustomAttributeDefinitions::Client]
-      def customAttributeDefinitions
-        @customAttributeDefinitions ||= Square::CustomAttributeDefinitions::Client.new(client: @raw_client)
+      def custom_attribute_definitions
+        @custom_attribute_definitions ||= Square::Customers::CustomAttributeDefinitions::Client.new(client: @client)
       end
 
       # @return [Square::Groups::Client]
       def groups
-        @groups ||= Square::Groups::Client.new(client: @raw_client)
+        @groups ||= Square::Customers::Groups::Client.new(client: @client)
       end
 
       # @return [Square::Segments::Client]
       def segments
-        @segments ||= Square::Segments::Client.new(client: @raw_client)
+        @segments ||= Square::Customers::Segments::Client.new(client: @client)
       end
 
       # @return [Square::Cards::Client]
       def cards
-        @cards ||= Square::Cards::Client.new(client: @raw_client)
+        @cards ||= Square::Customers::Cards::Client.new(client: @client)
       end
 
       # @return [Square::CustomAttributes::Client]
-      def customAttributes
-        @customAttributes ||= Square::CustomAttributes::Client.new(client: @raw_client)
+      def custom_attributes
+        @custom_attributes ||= Square::Customers::CustomAttributes::Client.new(client: @client)
       end
     end
   end

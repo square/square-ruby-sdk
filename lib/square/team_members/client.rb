@@ -21,7 +21,7 @@ module Square
           base_url: request_options[:base_url] || Square::Environment::SANDBOX,
           method: "POST",
           path: "v2/team-members",
-          body: Square::Types::CreateTeamMemberRequest.new(params[:request]).to_h
+          body: Square::Types::CreateTeamMemberRequest.new(params).to_h
         )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
@@ -136,8 +136,8 @@ module Square
       end
 
       # @return [Square::WageSetting::Client]
-      def wageSetting
-        @wageSetting ||= Square::WageSetting::Client.new(client: @raw_client)
+      def wage_setting
+        @wage_setting ||= Square::TeamMembers::WageSetting::Client.new(client: @client)
       end
     end
   end

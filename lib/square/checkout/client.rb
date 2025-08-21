@@ -81,8 +81,8 @@ module Square
       end
 
       # @return [Square::PaymentLinks::Client]
-      def paymentLinks
-        @paymentLinks ||= Square::PaymentLinks::Client.new(client: @raw_client)
+      def payment_links
+        @payment_links ||= Square::Checkout::PaymentLinks::Client.new(client: @client)
       end
     end
   end

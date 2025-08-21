@@ -22,7 +22,7 @@ module Square
           base_url: request_options[:base_url] || Square::Environment::SANDBOX,
           method: "POST",
           path: "v2/orders",
-          body: Square::Types::CreateOrderRequest.new(params[:request]).to_h
+          body: Square::Types::CreateOrderRequest.new(params).to_h
         )
         _response = @client.send(_request)
         if _response.code >= "200" && _response.code < "300"
@@ -204,13 +204,13 @@ module Square
       end
 
       # @return [Square::CustomAttributeDefinitions::Client]
-      def customAttributeDefinitions
-        @customAttributeDefinitions ||= Square::CustomAttributeDefinitions::Client.new(client: @raw_client)
+      def custom_attribute_definitions
+        @custom_attribute_definitions ||= Square::Orders::CustomAttributeDefinitions::Client.new(client: @client)
       end
 
       # @return [Square::CustomAttributes::Client]
-      def customAttributes
-        @customAttributes ||= Square::CustomAttributes::Client.new(client: @raw_client)
+      def custom_attributes
+        @custom_attributes ||= Square::Orders::CustomAttributes::Client.new(client: @client)
       end
     end
   end

@@ -142,7 +142,7 @@ module Square
 
       # @return [Square::Evidence::Client]
       def evidence
-        @evidence ||= Square::Evidence::Client.new(client: @raw_client)
+        @evidence ||= Square::Disputes::Evidence::Client.new(client: @client)
       end
     end
   end

@@ -85,7 +85,7 @@ module Square
 
         # @return [Square::Promotions::Client]
         def promotions
-          @promotions ||= Square::Promotions::Client.new(client: @raw_client)
+          @promotions ||= Square::Loyalty::Programs::Promotions::Client.new(client: @client)
         end
       end
     end

@@ -9,13 +9,13 @@ module Square
       end
 
       # @return [Square::EventTypes::Client]
-      def eventTypes
-        @eventTypes ||= Square::EventTypes::Client.new(client: @raw_client)
+      def event_types
+        @event_types ||= Square::Webhooks::EventTypes::Client.new(client: @client)
       end
 
       # @return [Square::Subscriptions::Client]
       def subscriptions
-        @subscriptions ||= Square::Subscriptions::Client.new(client: @raw_client)
+        @subscriptions ||= Square::Webhooks::Subscriptions::Client.new(client: @client)
       end
     end
   end

@@ -57,13 +57,13 @@ module Square
       end
 
       # @return [Square::CustomAttributeDefinitions::Client]
-      def customAttributeDefinitions
-        @customAttributeDefinitions ||= Square::CustomAttributeDefinitions::Client.new(client: @raw_client)
+      def custom_attribute_definitions
+        @custom_attribute_definitions ||= Square::Merchants::CustomAttributeDefinitions::Client.new(client: @client)
       end
 
       # @return [Square::CustomAttributes::Client]
-      def customAttributes
-        @customAttributes ||= Square::CustomAttributes::Client.new(client: @raw_client)
+      def custom_attributes
+        @custom_attributes ||= Square::Merchants::CustomAttributes::Client.new(client: @client)
       end
     end
   end

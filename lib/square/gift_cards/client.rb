@@ -148,7 +148,7 @@ module Square
 
       # @return [Square::Activities::Client]
       def activities
-        @activities ||= Square::Activities::Client.new(client: @raw_client)
+        @activities ||= Square::GiftCards::Activities::Client.new(client: @client)
       end
     end
   end

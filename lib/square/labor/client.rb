@@ -269,28 +269,28 @@ module Square
       end
 
       # @return [Square::BreakTypes::Client]
-      def breakTypes
-        @breakTypes ||= Square::BreakTypes::Client.new(client: @raw_client)
+      def break_types
+        @break_types ||= Square::Labor::BreakTypes::Client.new(client: @client)
       end
 
       # @return [Square::EmployeeWages::Client]
-      def employeeWages
-        @employeeWages ||= Square::EmployeeWages::Client.new(client: @raw_client)
+      def employee_wages
+        @employee_wages ||= Square::Labor::EmployeeWages::Client.new(client: @client)
       end
 
       # @return [Square::Shifts::Client]
       def shifts
-        @shifts ||= Square::Shifts::Client.new(client: @raw_client)
+        @shifts ||= Square::Labor::Shifts::Client.new(client: @client)
       end
 
       # @return [Square::TeamMemberWages::Client]
-      def teamMemberWages
-        @teamMemberWages ||= Square::TeamMemberWages::Client.new(client: @raw_client)
+      def team_member_wages
+        @team_member_wages ||= Square::Labor::TeamMemberWages::Client.new(client: @client)
       end
 
       # @return [Square::WorkweekConfigs::Client]
-      def workweekConfigs
-        @workweekConfigs ||= Square::WorkweekConfigs::Client.new(client: @raw_client)
+      def workweek_configs
+        @workweek_configs ||= Square::Labor::WorkweekConfigs::Client.new(client: @client)
       end
     end
   end

@@ -235,12 +235,12 @@ module Square
 
       # @return [Square::Images::Client]
       def images
-        @images ||= Square::Images::Client.new(client: @raw_client)
+        @images ||= Square::Catalog::Images::Client.new(client: @client)
       end
 
       # @return [Square::Object_::Client]
       def object
-        @object ||= Square::Object_::Client.new(client: @raw_client)
+        @object ||= Square::Catalog::Object_::Client.new(client: @client)
       end
     end
   end

@@ -50,7 +50,7 @@ module Square
 
       # @return [Square::Codes::Client]
       def codes
-        @codes ||= Square::Codes::Client.new(client: @raw_client)
+        @codes ||= Square::Devices::Codes::Client.new(client: @client)
       end
     end
   end

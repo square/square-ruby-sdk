@@ -232,23 +232,23 @@ module Square
       end
 
       # @return [Square::CustomAttributeDefinitions::Client]
-      def customAttributeDefinitions
-        @customAttributeDefinitions ||= Square::CustomAttributeDefinitions::Client.new(client: @raw_client)
+      def custom_attribute_definitions
+        @custom_attribute_definitions ||= Square::Bookings::CustomAttributeDefinitions::Client.new(client: @client)
       end
 
       # @return [Square::CustomAttributes::Client]
-      def customAttributes
-        @customAttributes ||= Square::CustomAttributes::Client.new(client: @raw_client)
+      def custom_attributes
+        @custom_attributes ||= Square::Bookings::CustomAttributes::Client.new(client: @client)
       end
 
       # @return [Square::LocationProfiles::Client]
-      def locationProfiles
-        @locationProfiles ||= Square::LocationProfiles::Client.new(client: @raw_client)
+      def location_profiles
+        @location_profiles ||= Square::Bookings::LocationProfiles::Client.new(client: @client)
       end
 
       # @return [Square::TeamMemberProfiles::Client]
-      def teamMemberProfiles
-        @teamMemberProfiles ||= Square::TeamMemberProfiles::Client.new(client: @raw_client)
+      def team_member_profiles
+        @team_member_profiles ||= Square::Bookings::TeamMemberProfiles::Client.new(client: @client)
       end
     end
   end
