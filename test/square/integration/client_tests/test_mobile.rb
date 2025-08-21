@@ -5,14 +5,13 @@ require "test_helper"
 describe Square::Mobile::Client do
   describe "#authorization_code" do
     it "should create mobile authorization code" do
-      skip "Skipping for now."
-      _request = Square::Mobile::Types::AuthorizationCodeRequest.new(
+      _request = Square::Mobile::Types::CreateMobileAuthorizationCodeRequest.new(
         location_id: client.locations.list.locations.first.id
       )
 
       response = client.mobile.authorization_code(**_request.to_h)
       refute_nil response
-      assert_equal response.class, Square::Types::AuthorizationCodeResponse
+      assert_equal response.class, Square::Types::CreateMobileAuthorizationCodeResponse
       refute_nil response.authorization_code
       refute_nil response.expires_at
 

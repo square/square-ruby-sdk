@@ -4,10 +4,9 @@ require "test_helper"
 
 describe Square::Devices::Codes::Client do
   before do
-    skip "Skipping for now."
     _create_request = Square::Devices::Codes::Types::CreateDeviceCodeRequest.new(
       idempotency_key: SecureRandom.uuid,
-      device_code: Square::Devices::Types::DeviceCode.new(
+      device_code: Square::Types::DeviceCode.new(
         product_type: "TERMINAL_API"
       )
     )
@@ -17,7 +16,6 @@ describe Square::Devices::Codes::Client do
 
   describe "#list" do
     it "should list device codes" do
-      skip "Skipping for now."
 
       response = client.devices.codes.list
       refute_nil response
@@ -31,10 +29,9 @@ describe Square::Devices::Codes::Client do
 
   describe "#create" do
     it "should create device code" do
-      skip "Skipping for now."
       _request = Square::Devices::Codes::Types::CreateDeviceCodeRequest.new(
         idempotency_key: SecureRandom.uuid,
-        device_code: Square::Devices::Types::DeviceCode.new(
+        device_code: Square::Types::DeviceCode.new(
           product_type: "TERMINAL_API"
         )
       )
@@ -53,8 +50,7 @@ describe Square::Devices::Codes::Client do
 
   describe "#get" do
     it "should get device code" do
-      skip "Skipping for now."
-      _request = Square::Devices::Codes::Types::GetDeviceCodeRequest.new(
+      _request = Square::Devices::Codes::Types::GetCodesRequest.new(
         id: @device_code_id
       )
 
