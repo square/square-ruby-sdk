@@ -21,7 +21,6 @@ end
 
 class MultipartTest < Minitest::Test
   def test_empty_form_data
-    skip "Skipping for now."
     form_data = Square::Internal::Multipart::FormData.new
     body = form_data.encode
 
@@ -29,7 +28,6 @@ class MultipartTest < Minitest::Test
   end
 
   def test_write_field
-    skip "Skipping for now."
     [
       {
         desc: "empty field",
@@ -74,7 +72,6 @@ class MultipartTest < Minitest::Test
   end
 
   def test_write_file_param
-    skip "Skipping for now."
     [
       {
         desc: "file param with content type",
@@ -126,7 +123,6 @@ class MultipartTest < Minitest::Test
   end
 
   def test_write_json
-    skip "Skipping for now."
     [
       {
         desc: "struct",
@@ -162,7 +158,6 @@ class MultipartTest < Minitest::Test
   end
 
   def test_complex_form
-    skip "Skipping for now."
     form_data = Square::Internal::Multipart::FormData.new
 
     # Add multiple fields and files
@@ -199,7 +194,6 @@ class MultipartTest < Minitest::Test
   end
 
   def test_file_param_from_filepath
-    skip "Skipping for now."
     # Create a temporary file for testing
     file_content = "Test file content"
     temp_file = Tempfile.new(["test", ".txt"])
@@ -236,7 +230,6 @@ class MultipartTest < Minitest::Test
   end
 
   def test_file_param_from_string
-    skip "Skipping for now."
     file_content = "Test string content"
     filename = "string.txt"
     content_type = "text/plain"
@@ -265,7 +258,6 @@ class MultipartTest < Minitest::Test
   end
 
   def test_encoder_file_reading_in_chunks
-    skip "Skipping for now."
     file_size = 1024 * 100 # 100KB
     large_content = "x" * file_size
 
@@ -312,7 +304,6 @@ class MultipartTest < Minitest::Test
   end
 
   def test_error_handling_for_missing_file
-    skip "Skipping for now."
     assert_raises(StandardError) do
       Square::FileParam.from_filepath(filepath: "nonexistent_file.txt")
     end

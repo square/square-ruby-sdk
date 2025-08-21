@@ -4,7 +4,6 @@ require "test_helper"
 
 describe Square::Orders::Client do
   before do
-    # skip "Skipping for now."
     @location_id = client.locations.list.locations.first.id
 
     _create_request = Square::Types::CreateOrderRequest.new(
@@ -38,7 +37,6 @@ describe Square::Orders::Client do
 
   describe "#create" do
     it "should create order" do
-      # skip "Skipping for now."
       _request = Square::Types::CreateOrderRequest.new(
         idempotency_key: SecureRandom.uuid,
         order: Square::Types::Order.new(
@@ -70,7 +68,6 @@ describe Square::Orders::Client do
 
   describe "#batch_get" do
     it "should batch retrieve orders" do
-      # skip "Skipping for now."
       _request = Square::Orders::Types::BatchGetOrdersRequest.new(
         order_ids: [@order_id]
       )
@@ -87,7 +84,6 @@ describe Square::Orders::Client do
 
   describe "#search" do
     it "should search orders" do
-      # skip "Skipping for now."
       _request = Square::Orders::Types::SearchOrdersRequest.new(
         limit: 1,
         location_ids: [@location_id]
@@ -105,7 +101,6 @@ describe Square::Orders::Client do
 
   describe "#update" do
     it "should update order" do
-      # skip "Skipping for now."
       _request = Square::Orders::Types::UpdateOrderRequest.new(
         order_id: @order_id,
         idempotency_key: SecureRandom.uuid,
@@ -138,7 +133,6 @@ describe Square::Orders::Client do
 
   describe "#pay" do
     it "should pay order" do
-      # skip "Skipping for now."
       _request = Square::Orders::Types::PayOrderRequest.new(
         order_id: @order_id,
         idempotency_key: SecureRandom.uuid,
@@ -156,7 +150,6 @@ describe Square::Orders::Client do
 
   describe "#calculate" do
     it "should calculate order" do
-      # skip "Skipping for now."
       _request = Square::Orders::Types::CalculateOrderRequest.new(
         order: Square::Types::Order.new(
           location_id: @location_id,

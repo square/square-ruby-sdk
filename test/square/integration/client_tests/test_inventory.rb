@@ -5,7 +5,6 @@ require "test_helper"
 describe Square::Inventory::Client do
   describe "#batch_get_changes" do
     it "gets inventory changes" do
-      # skip "Skipping for now."
       _time_yesterday = (Time.now.utc - 86400).iso8601
       _time_now = Time.now.utc.iso8601
 

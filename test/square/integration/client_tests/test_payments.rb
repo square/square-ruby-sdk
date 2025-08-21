@@ -4,7 +4,6 @@ require "test_helper"
 
 describe Square::Payments::Client do
   before do
-    # skip "Skipping for now."
     # Create initial payment for testing
     @payment = create_sample_payment
     @payment_id = @payment.id
@@ -29,7 +28,6 @@ describe Square::Payments::Client do
 
   describe "#list" do
     it "should list payments" do
-      # skip "Skipping for now."
 
       response = client.payments.list
       refute_nil response
@@ -43,7 +41,6 @@ describe Square::Payments::Client do
 
   describe "#create" do
     it "should create payment" do
-      # skip "Skipping for now."
       _request = Square::Payments::Types::CreatePaymentRequest.new(
         source_id: "cnon:card-nonce-ok",
         idempotency_key: SecureRandom.uuid,
@@ -73,7 +70,6 @@ describe Square::Payments::Client do
 
   describe "#get" do
     it "should get payment" do
-      # skip "Skipping for now."
       _request = Square::Payments::Types::GetPaymentsRequest.new(
         payment_id: @payment_id
       )
@@ -123,7 +119,6 @@ describe Square::Payments::Client do
 
   describe "#cancel_by_idempotency_key" do
     it "should cancel payment by idempotency key" do
-      # skip "Skipping for now."
       idempotency_key = SecureRandom.uuid
       @payment = create_sample_payment
       _request = Square::Payments::Types::CancelPaymentByIdempotencyKeyRequest.new(
@@ -142,7 +137,6 @@ describe Square::Payments::Client do
 
   describe "#complete" do
     it "should complete payment" do
-      # skip "Skipping for now."
       # Create payment to complete
       _create_request = Square::Payments::Types::CreatePaymentRequest.new(
         source_id: "cnon:card-nonce-ok",

@@ -5,7 +5,6 @@ require "test_helper"
 describe Square::Locations::Client do
   describe "#list" do
     it "should list locations" do
-      # skip "Skipping for now."
 
       response = client.locations.list
       refute_nil response

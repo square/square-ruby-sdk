@@ -4,7 +4,6 @@ require "test_helper"
 
 describe Square::Merchants::Client do
   before do
-    # skip "Skipping for now."
     # Get first merchant ID
     merchant_response = client.merchants.list
     @merchant_id = merchant_response.merchant.first.id
@@ -12,7 +11,6 @@ describe Square::Merchants::Client do
 
   describe "#list" do
     it "should list merchants" do
-      # skip "Skipping for now."
 
       response = client.merchants.list
       refute_nil response
@@ -26,7 +24,6 @@ describe Square::Merchants::Client do
 
   describe "#get" do
     it "should retrieve merchant" do
-      # skip "Skipping for now."
       _request = Square::Merchants::Types::GetMerchantsRequest.new(
         merchant_id: @merchant_id
       )

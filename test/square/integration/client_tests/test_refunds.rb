@@ -4,7 +4,6 @@ require "test_helper"
 
 describe Square::Refunds::Client do
   before do
-    # skip "Skipping for now."
     # Create payment for testing refunds
     _create_request = Square::Payments::Types::CreatePaymentRequest.new(  
       source_id: "cnon:card-nonce-ok",
@@ -43,7 +42,6 @@ describe Square::Refunds::Client do
 
   describe "#list" do
     it "should list payment refunds" do
-      # skip "Skipping for now."
       _request = {}
 
       puts "request #{_request.to_h}" if verbose?
@@ -58,7 +56,6 @@ describe Square::Refunds::Client do
 
   describe "#refund_payment" do
     it "should refund payment" do
-      # skip "Skipping for now."
       # Create new payment to refund
       _create_request = Square::Payments::Types::CreatePaymentRequest.new(
         source_id: "cnon:card-nonce-ok",
@@ -104,7 +101,6 @@ describe Square::Refunds::Client do
 
   describe "#get" do
     it "should get payment refund" do
-      # skip "Skipping for now."
       _request = Square::Refunds::Types::GetRefundsRequest.new(
         refund_id: @refund_id
       )
@@ -123,7 +119,6 @@ describe Square::Refunds::Client do
 
   describe "#get with invalid id" do
     it "should handle invalid refund id" do
-      # skip "Skipping for now."
       _request = Square::Refunds::Types::GetRefundsRequest.new(
         refund_id: "invalid-id"
       )
