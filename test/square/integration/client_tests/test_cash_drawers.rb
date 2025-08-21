@@ -9,7 +9,7 @@ describe Square::CashDrawers::Shifts::Client do
       start_time = Time.now - 3600  # 1 hour ago
       end_time = Time.now
       
-      _request = Square::CashDrawers::Types::ListCashDrawerShiftsRequest.new(
+      _request = Square::CashDrawers::Shifts::Types::ListShiftsRequest.new(
         location_id: client.locations.list.locations.first.id,
         begin_time: start_time.iso8601,
         end_time: end_time.iso8601
@@ -17,7 +17,7 @@ describe Square::CashDrawers::Shifts::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      response = client.cash_drawers.shifts.list(**_request.to_h)
+      response = client.cashDrawers.shifts.list(**_request.to_h)
       refute_nil response
       assert_equal response.class, Square::Types::ListCashDrawerShiftsResponse
 
