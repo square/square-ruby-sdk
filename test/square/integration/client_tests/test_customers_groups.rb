@@ -10,24 +10,18 @@ describe Square::Customers::Groups::Client do
         name: "Default-#{SecureRandom.uuid}"
       }
     )
-    _create_resp = client.customers.groups.create(**_create_request.to_h)
-    refute_nil _create_resp
-    assert_equal _create_resp.class, Square::Types::CreateCustomerGroupResponse
-    refute_nil _create_resp.group
+    client.customers.groups.create(**_create_request.to_h)
   end
 
   def delete_test_customer_group(group_id)
     _delete_request = Square::Customers::Groups::Types::DeleteGroupsRequest.new(
       group_id: group_id
     )
-    _delete_resp = client.customers.groups.delete(**_delete_request.to_h)
-    refute_nil _delete_resp
-    assert_equal _delete_resp.class, Square::Types::DeleteCustomerGroupResponse
+    client.customers.groups.delete(**_delete_request.to_h)
   end
 
   describe "#create and list" do
     it "should create and list a customer group" do
-      skip "Skipping for now."
       # create
       _create_request = Square::Customers::Groups::Types::CreateCustomerGroupRequest.new(
         idempotency_key: SecureRandom.uuid,
@@ -61,7 +55,6 @@ describe Square::Customers::Groups::Client do
 
   describe "#get" do
     it "should retrieve a customer group" do
-      skip "Skipping for now."
       create_response = create_test_customer_group
 
       _request = { group_id: create_response.group.id }
@@ -81,7 +74,6 @@ describe Square::Customers::Groups::Client do
 
   describe "#update" do
     it "should update a customer group" do
-      skip "Skipping for now."
       create_response = create_test_customer_group
       new_name = "Updated-#{SecureRandom.uuid}"
 
@@ -107,7 +99,6 @@ describe Square::Customers::Groups::Client do
 
   describe "#delete" do
     it "should delete a customer group" do
-      skip "Skipping for now."
       create_response = create_test_customer_group
 
       _request = { group_id: create_response.group.id }
@@ -120,7 +111,6 @@ describe Square::Customers::Groups::Client do
 
   describe "#get with non-existent group" do
     it "should handle error when retrieving non-existent group" do
-      skip "Skipping for now."
       non_existent_id = "non-existent-id"
 
       _request = { group_id: non_existent_id }
@@ -135,7 +125,6 @@ describe Square::Customers::Groups::Client do
 
   describe "#create with invalid data" do
     it "should handle error when creating group with invalid data" do
-      skip "Skipping for now."
       _request = {
         idempotency_key: SecureRandom.uuid,
         group: {

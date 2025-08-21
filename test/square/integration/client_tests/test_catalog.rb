@@ -3,7 +3,6 @@
 require "test_helper"
 
 describe Square::Catalog::Client do
-  skip "Getting rate limited. Skipping for now."
   MAX_CATALOG_PAGE_SIZE = 100
   MAX_RETRIES_CATALOG = 5
   MAX_TIMEOUT = 120
@@ -261,10 +260,8 @@ describe Square::Catalog::Client do
           @catalog_tax_id = mapping.object_id
         when "#temp-modifier-id"
           @catalog_modifier_id = mapping.object_id
-          puts "catalog_modifier_id.class #{@catalog_modifier_id.class}"
         when "#temp-modifier-list-id"
           @catalog_modifier_list_id = mapping.object_id
-          puts "catalog_modifier_list_id.class #{@catalog_modifier_list_id.class}"
         end
       end
 
