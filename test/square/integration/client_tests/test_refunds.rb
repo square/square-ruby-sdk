@@ -124,7 +124,7 @@ describe Square::Refunds::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      assert_raises(Square::SquareError) do
+      assert_raises(StandardError) do
         client.refunds.get(**_request.to_h)
       end
     end

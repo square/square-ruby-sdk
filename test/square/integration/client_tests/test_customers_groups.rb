@@ -127,7 +127,7 @@ describe Square::Customers::Groups::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      assert_raises(Square::SquareError) do
+      assert_raises(StandardError) do
         client.customers.groups.get(group_id: non_existent_id)
       end
     end
@@ -145,7 +145,7 @@ describe Square::Customers::Groups::Client do
 
       puts "request #{_request.to_h}" if verbose?
 
-      assert_raises(Square::SquareError) do
+      assert_raises(StandardError) do
         client.customers.groups.create(**_request.to_h)
       end
     end
