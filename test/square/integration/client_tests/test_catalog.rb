@@ -67,7 +67,7 @@ describe Square::Catalog::Client do
   end
 
   before do
-    
+    sleep(2)
     modifier = {
       type: "MODIFIER",
       id: "#temp-modifier-id",
