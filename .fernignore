@@ -9,3 +9,4 @@ test/
 .github/workflows
 README.md
 Gemfile.lock
+lib/square/file_param.rb
