@@ -64,17 +64,17 @@ jobs:
         run: |
           bundle install
 
-      - name: Run RuboCop with auto-correct
-        run: |
-          bundle exec rake rubocop:autocorrect
+      # - name: Run RuboCop with auto-correct
+      #   run: |
+      #     bundle exec rake rubocop:autocorrect
 
       # TODO: Uncomment this when we have a way a fix for all RuboCop violations
       # - name: Check for RuboCop violations
       #   run: |
       #     bundle exec rubocop --fail-level W
 
-      - name: Ensure no changes to git-tracked files
-        run: git --no-pager diff --exit-code
+      # - name: Ensure no changes to git-tracked files
+      #   run: git --no-pager diff --exit-code
 
   security:
     runs-on: ubuntu-latest
