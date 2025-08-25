@@ -22,7 +22,7 @@ jobs:
     strategy:
       matrix:
         ruby-version: ['3.2', '3.3', '3.4']
-        bundler-version: ${{ env.BUNDLER_VERSION }}
+        bundler-version: '2.7'
 
     steps:
       - name: Checkout repository
