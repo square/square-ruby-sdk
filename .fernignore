@@ -7,3 +7,4 @@ square.gemspec
 .gitignore
 test/
 .github/workflows
+README.md
