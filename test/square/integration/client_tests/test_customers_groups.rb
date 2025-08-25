@@ -54,7 +54,7 @@ describe Square::Customers::Groups::Client do
   end
 
   describe "#get" do
-    it "should retrieve a customer group", :skip do
+    it "should retrieve a customer group" do
       skip "Test skipped"
       create_response = create_test_customer_group
 
