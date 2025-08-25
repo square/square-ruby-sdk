@@ -96,6 +96,14 @@ jobs:
         run: |
           bundle exec bundle audit check --update
 
+      - name: Run bundle outdated
+        run: |
+          bundle install bundler-audit
+
+      - name: Run bundle audit
+        run: |
+          bundle exec bundle audit check --update
+
   gem-publish:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
