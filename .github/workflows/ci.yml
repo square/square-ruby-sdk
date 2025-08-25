@@ -95,6 +95,6 @@ jobs:
 
       - name: Publish to RubyGems
         run: |
-          gem push pkg/*.gem
+          gem push pkg/*.gem --host https://rubygems.org/
         env:
-          RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+          GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
