@@ -30,7 +30,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: true
 
       - name: Install dependencies
         run: |
@@ -54,7 +53,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
-          bundler-cache: true
 
       - name: Install dependencies
         run: |
@@ -83,7 +81,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
-          bundler-cache: true
 
       - name: Install dependencies
         run: |
