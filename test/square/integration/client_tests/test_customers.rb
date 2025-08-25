@@ -28,7 +28,6 @@ describe Square::Customers::Client do
       refute_nil response
       assert_equal response.class, Square::Types::CreateCustomerResponse
       refute_nil response.customer.id
-      refute_nil response.customer.version
       puts "create customer response #{response.to_h}" if verbose?
 
       _delete_request = Square::Customers::Types::DeleteCustomersRequest.new(

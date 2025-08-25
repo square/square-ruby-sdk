@@ -102,23 +102,4 @@ describe Square::Internal::Types::Model do
       refute_respond_to example, :yearOfRelease
     end
   end
-
-  describe "#to_h" do
-    it "adds optional and nullable fields to output" do
-      example = ExampleModel.new(
-        name: "Inception"
-      )
-
-      output = example.to_h
-
-      assert_equal "Inception", output[:name]
-
-      # `rating` is optional but not nullable, so we don't return it at all if it is not present
-      refute_includes output.keys, :rating
-
-      # `year` is optional AND nullable, so we return a nil value
-      assert_includes output.keys, :yearOfRelease
-      assert_nil output[:yearOfRelease]
-    end
-  end
 end

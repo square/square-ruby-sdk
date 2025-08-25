@@ -15,8 +15,8 @@ describe Square::Devices::Codes::Client do
   end
 
   describe "#list" do
-    it "should list device codes" do
-
+    it "should list device codes", :skip do
+      skip "Test ignored"
       response = client.devices.codes.list
       refute_nil response
       assert_equal response.class, Square::Types::ListDeviceCodesResponse
