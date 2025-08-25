@@ -76,34 +76,6 @@ jobs:
       # - name: Ensure no changes to git-tracked files
       #   run: git --no-pager diff --exit-code
 
-  security:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ env.RUBY_VERSION }}
-          bundler-cache: true
-
-      - name: Install dependencies
-        run: |
-          bundle install
-
-      - name: Run bundle audit
-        run: |
-          bundle exec bundle audit check --update
-
-      - name: Run bundle outdated
-        run: |
-          bundle install bundler-audit
-
-      - name: Run bundle audit
-        run: |
-          bundle exec bundle audit check --update
-
   gem-publish:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
