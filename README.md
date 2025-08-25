@@ -9,22 +9,14 @@ The Square Ruby library provides convenient access to the Square API from Ruby.
 
 Use of the Square Ruby SDK requires:
 
-* Ruby 2.7+
+* Ruby 3.2+
 
 ## Installation
-
-For more information, see [Set Up Your Square SDK for a Ruby Project](https://developer.squareup.com/docs/sdks/ruby/setup-project).
-
-## Reference
-
-For more information, see [Full Ruby Guide](https://developer.squareup.com/docs/sdks/ruby).
-
-## Versioning
 
 The Square Ruby SDK version is managed through the gem version. To use a specific version:
 
 ```bash
-gem install square.rb -v 44.0.0
+gem install square.rb
 ```
 
 Or in your Gemfile:
