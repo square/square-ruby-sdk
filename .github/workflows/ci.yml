@@ -19,6 +19,8 @@ env:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      SQUARE_SANDBOX_TOKEN: ${{ secrets.SQUARE_SANDBOX_TOKEN }}
     strategy:
       matrix:
         ruby-version: ['3.2', '3.3', '3.4']
@@ -32,7 +34,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
-          bundler-version: ${{ matrix.bundler-version }}
           bundler-cache: true
 
       - name: Install dependencies
@@ -57,7 +58,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
-          bundler-version: ${{ env.BUNDLER_VERSION }}
           bundler-cache: true
 
       - name: Install dependencies
@@ -86,7 +86,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
-          bundler-version: ${{ env.BUNDLER_VERSION }}
           bundler-cache: true
 
       - name: Install dependencies
@@ -110,7 +109,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
-          bundler-version: ${{ env.BUNDLER_VERSION }}
           bundler-cache: true
 
       - name: Install dependencies
