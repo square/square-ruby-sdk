@@ -11,6 +11,7 @@ group :test, :development do
   gem "minitest-rg"
 
   gem 'mutex_m'
+  gem 'base64'
 
   gem "rubocop", "~> 1.21"
   gem "rubocop-minitest"
