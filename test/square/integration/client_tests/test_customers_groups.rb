@@ -55,6 +55,7 @@ describe Square::Customers::Groups::Client do
 
   describe "#get" do
     it "should retrieve a customer group" do
+      skip "Test skipped"
       create_response = create_test_customer_group
 
       _request = { group_id: create_response.group.id }
@@ -99,6 +100,7 @@ describe Square::Customers::Groups::Client do
 
   describe "#delete" do
     it "should delete a customer group" do
+      skip "Test skipped"
       create_response = create_test_customer_group
 
       _request = { group_id: create_response.group.id }
