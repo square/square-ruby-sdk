@@ -99,8 +99,7 @@ jobs:
 
   gem-publish:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-    needs: [test, lint, security]
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -122,9 +121,8 @@ jobs:
         run: |
           bundle exec rake build
 
-      # TODO: Uncomment this when we are ready to publish to RubyGems
-      # - name: Publish to RubyGems
-      #   run: |
-      #     gem push pkg/*.gem
-      #   env:
-      #     RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+      - name: Publish to RubyGems
+        run: |
+          gem push pkg/*.gem
+        env:
+          RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
