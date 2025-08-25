@@ -1,6 +1,6 @@
 # Square Ruby Library
 
-[![Build](https://github.com/square/square-ruby-sdk/actions/workflows/ruby.yml/badge.svg)](https://github.com/square/square-ruby-sdk/actions/workflows/ruby.yml)
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fsquare%2Fsquare-ruby-sdk)
 [![Gem version](https://badge.fury.io/rb/square.rb.svg?new)](https://badge.fury.io/rb/square.rb)
 
 The Square Ruby library provides convenient access to the Square API from Ruby.
