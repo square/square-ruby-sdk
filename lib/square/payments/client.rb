@@ -29,7 +29,8 @@ module Square
           query: _query
         )
         _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
+        code = _response.code.to_i
+        if code.between?(200, 299)
           return Square::Types::ListPaymentsResponse.load(_response.body)
         end
 
@@ -54,7 +55,8 @@ module Square
           body: params
         )
         _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
+        code = _response.code.to_i
+        if code.between?(200, 299)
           return Square::Types::CreatePaymentResponse.load(_response.body)
         end
 
@@ -82,7 +84,8 @@ module Square
           body: params
         )
         _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
+        code = _response.code.to_i
+        if code.between?(200, 299)
           return Square::Types::CancelPaymentByIdempotencyKeyResponse.load(_response.body)
         end
 
@@ -99,7 +102,8 @@ module Square
           path: "v2/payments/#{params[:payment_id]}"
         )
         _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
+        code = _response.code.to_i
+        if code.between?(200, 299)
           return Square::Types::GetPaymentResponse.load(_response.body)
         end
 
@@ -120,7 +124,8 @@ module Square
           body: params.except(*_path_param_names)
         )
         _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
+        code = _response.code.to_i
+        if code.between?(200, 299)
           return Square::Types::UpdatePaymentResponse.load(_response.body)
         end
 
@@ -138,7 +143,8 @@ module Square
           path: "v2/payments/#{params[:payment_id]}/cancel"
         )
         _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
+        code = _response.code.to_i
+        if code.between?(200, 299)
           return Square::Types::CancelPaymentResponse.load(_response.body)
         end
 
@@ -161,7 +167,8 @@ module Square
           body: params.except(*_path_param_names)
         )
         _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
+        code = _response.code.to_i
+        if code.between?(200, 299)
           return Square::Types::CompletePaymentResponse.load(_response.body)
         end
 
