@@ -28,6 +28,28 @@ gem 'square.rb', '~> 44.0.0'
 
 For more information, see [Using the Square Ruby SDK](https://developer.squareup.com/docs/sdks/ruby/using-ruby-sdk).
 
+```ruby
+require "square"
+
+square = Square::Client.new(
+  token: 'YOUR_API_KEY'
+)
+
+image_file = Square::FileParam.from_filepath(
+  filepath: fixture_path("small.png"),
+  content_type: "image/png"
+)
+
+response = square.invoices.create_invoice_attachment(
+  invoice_id: "inv:0-ChA4-3sU9GPd-uOC3HgvFjMWEL4N",
+  request: {
+    idempotency_key: SecureRandom.uuid,
+    description: "A test invoice attachment"
+  },
+  image_file: image_file
+)
+```
+
 ## Legacy SDK
 
 While the new SDK has a lot of improvements, we at Square understand that it takes time to upgrade when there are breaking changes.
