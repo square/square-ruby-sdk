@@ -13,6 +13,9 @@ module Square
       #
       # @return [Square::Types::ListGiftCardsResponse]
       def list(request_options: {}, **params)
+        # Old way
+        # _query_param_names = %w[type state limit cursor customer_id]
+        # New way
         _query_param_names = %w[type state limit cursor customer_id] + %i[type state limit cursor customer_id]
         _query = params.slice(*_query_param_names)
         params.except(*_query_param_names)
