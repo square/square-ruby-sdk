@@ -7,6 +7,7 @@ describe Square::Locations::Client do
     it "should list locations" do
 
       response = client.locations.list
+      puts "response #{response.inspect}"
       refute_nil response
       assert_equal response.class, Square::Types::ListLocationsResponse
       refute_nil response.locations

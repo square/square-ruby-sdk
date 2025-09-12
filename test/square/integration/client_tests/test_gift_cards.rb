@@ -74,7 +74,7 @@ describe Square::GiftCards::Client do
 
     it "should list filter with json args" do
       puts "list filter with json args"
-      response = client.gift_cards.list({"state": "ACTIVE", "limit": 200})
+      response = client.gift_cards.list(**{"state": "ACTIVE", "limit": 200})
       refute_nil response
       assert_equal response.class, Square::Types::ListGiftCardsResponse
       refute_nil response.gift_cards
