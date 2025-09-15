@@ -24,11 +24,12 @@ module Square
           query: _query
         )
         _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::ListCardsResponse.load(_response.body)
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::ListCardsResponse.load(_response.body)
+        else
+          raise Square::Errors::ApiError.subclass_for_code(code, _response.body)
         end
-
-        raise _response.body
       end
 
       # Adds a card on file to an existing merchant.
