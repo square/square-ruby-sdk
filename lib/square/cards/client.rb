@@ -28,7 +28,8 @@ module Square
         if code.between?(200, 299)
           Square::Types::ListCardsResponse.load(_response.body)
         else
-          raise Square::Errors::ApiError.subclass_for_code(code, _response.body)
+          subclass = Square::Errors::ApiError.subclass_for_code(code)
+          raise subclass.new(_response.body, code: code)
         end
       end
 
