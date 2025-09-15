@@ -1,6 +1,6 @@
 module Square
   module Errors
-    class RedirectError < ApiError
+    class RedirectError < ResponseError
     end
   end
 end

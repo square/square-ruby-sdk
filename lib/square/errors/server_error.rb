@@ -1,6 +1,6 @@
 module Square
   module Errors
-    class ServerError < ApiError
+    class ServerError < ResponseError
     end
 
     class ServiceUnavailableError < ApiError

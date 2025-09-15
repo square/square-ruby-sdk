@@ -1,6 +1,6 @@
 module Square
   module Errors
-    class ClientError < ApiError
+    class ClientError < ResponseError
     end
 
     class UnauthorizedError < ClientError

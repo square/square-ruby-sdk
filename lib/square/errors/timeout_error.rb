@@ -1,6 +1,6 @@
 module Square
   module Errors
-    class TimeoutError < StandardError
+    class TimeoutError < ApiError
     end
   end
 end
