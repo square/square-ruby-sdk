@@ -23,7 +23,12 @@ module Square
           path: "v2/cards",
           query: _query
         )
-        _response = @client.send(_request)
+
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
+        end
         code = _response.code.to_i
         if code.between?(200, 299)
           Square::Types::ListCardsResponse.load(_response.body)
