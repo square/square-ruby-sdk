@@ -1670,4 +1670,3 @@ require_relative "square/webhooks/subscriptions/types/delete_subscriptions_reque
 require_relative "square/webhooks/subscriptions/types/update_webhook_subscription_signature_key_request"
 require_relative "square/webhooks/subscriptions/types/test_webhook_subscription_request"
 require_relative "square/environment"
-require_relative "../README.md"
