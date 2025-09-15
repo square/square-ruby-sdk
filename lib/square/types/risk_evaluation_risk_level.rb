@@ -8,6 +8,7 @@ module Square
       PENDING = "PENDING"
       NORMAL = "NORMAL"
       MODERATE = "MODERATE"
-      HIGH = "HIGH"end
+      HIGH = "HIGH"
+    end
   end
 end

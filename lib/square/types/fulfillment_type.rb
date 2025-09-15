@@ -7,6 +7,7 @@ module Square
 
       PICKUP = "PICKUP"
       SHIPMENT = "SHIPMENT"
-      DELIVERY = "DELIVERY"end
+      DELIVERY = "DELIVERY"
+    end
   end
 end

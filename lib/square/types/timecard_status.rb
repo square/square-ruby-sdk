@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       OPEN = "OPEN"
-      CLOSED = "CLOSED"end
+      CLOSED = "CLOSED"
+    end
   end
 end

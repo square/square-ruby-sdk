@@ -7,6 +7,7 @@ module Square
 
       PHYSICAL_COUNT = "PHYSICAL_COUNT"
       ADJUSTMENT = "ADJUSTMENT"
-      TRANSFER = "TRANSFER"end
+      TRANSFER = "TRANSFER"
+    end
   end
 end

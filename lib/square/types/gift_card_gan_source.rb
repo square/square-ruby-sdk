@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       SQUARE = "SQUARE"
-      OTHER = "OTHER"end
+      OTHER = "OTHER"
+    end
   end
 end

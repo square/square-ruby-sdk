@@ -7,6 +7,7 @@ module Square
 
       EMAIL = "EMAIL"
       SHARE_MANUALLY = "SHARE_MANUALLY"
-      SMS = "SMS"end
+      SMS = "SMS"
+    end
   end
 end

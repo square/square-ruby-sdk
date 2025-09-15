@@ -7,6 +7,7 @@ module Square
 
       OTHER_SERVICE_CHARGE_SCOPE = "OTHER_SERVICE_CHARGE_SCOPE"
       LINE_ITEM = "LINE_ITEM"
-      ORDER = "ORDER"end
+      ORDER = "ORDER"
+    end
   end
 end

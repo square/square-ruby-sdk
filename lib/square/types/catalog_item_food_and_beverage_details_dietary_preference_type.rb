@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       STANDARD = "STANDARD"
-      CUSTOM = "CUSTOM"end
+      CUSTOM = "CUSTOM"
+    end
   end
 end

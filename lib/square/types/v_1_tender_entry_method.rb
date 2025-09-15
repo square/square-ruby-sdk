@@ -11,6 +11,7 @@ module Square
       SQUARE_WALLET = "SQUARE_WALLET"
       SWIPED = "SWIPED"
       WEB_FORM = "WEB_FORM"
-      OTHER = "OTHER"end
+      OTHER = "OTHER"
+    end
   end
 end

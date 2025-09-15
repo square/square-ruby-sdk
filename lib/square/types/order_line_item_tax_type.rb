@@ -7,6 +7,7 @@ module Square
 
       UNKNOWN_TAX = "UNKNOWN_TAX"
       ADDITIVE = "ADDITIVE"
-      INCLUSIVE = "INCLUSIVE"end
+      INCLUSIVE = "INCLUSIVE"
+    end
   end
 end

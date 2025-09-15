@@ -11,6 +11,7 @@ module Square
       CANCELED = "CANCELED"
       COMPLETED = "COMPLETED"
       REFUNDED = "REFUNDED"
-      EXPIRED = "EXPIRED"end
+      EXPIRED = "EXPIRED"
+    end
   end
 end

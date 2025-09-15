@@ -13,7 +13,10 @@ module Square
         #
         # @return [Square::Types::ListWebhookSubscriptionsResponse]
         def list(request_options: {}, **params)
-          _query_param_names = %w[cursor include_disabled sort_order limit]
+          _query_param_names = [
+            %w[cursor include_disabled sort_order limit],
+            %i[cursor include_disabled sort_order limit]
+          ].flatten
           _query = params.slice(*_query_param_names)
           params.except(*_query_param_names)
 

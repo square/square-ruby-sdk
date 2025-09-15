@@ -12,7 +12,10 @@ module Square
       #
       # @return [Square::Types::ListBankAccountsResponse]
       def list(request_options: {}, **params)
-        _query_param_names = %w[cursor limit location_id]
+        _query_param_names = [
+          %w[cursor limit location_id],
+          %i[cursor limit location_id]
+        ].flatten
         _query = params.slice(*_query_param_names)
         params.except(*_query_param_names)
 

@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       DRAFT = "DRAFT"
-      PUBLISHED = "PUBLISHED"end
+      PUBLISHED = "PUBLISHED"
+    end
   end
 end

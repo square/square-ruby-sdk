@@ -18,6 +18,7 @@ module Square
       INTERAC = "INTERAC"
       EFTPOS = "EFTPOS"
       FELICA = "FELICA"
-      EBT = "EBT"end
+      EBT = "EBT"
+    end
   end
 end

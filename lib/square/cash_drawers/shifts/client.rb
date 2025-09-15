@@ -14,7 +14,10 @@ module Square
         #
         # @return [Square::Types::ListCashDrawerShiftsResponse]
         def list(request_options: {}, **params)
-          _query_param_names = %w[location_id sort_order begin_time end_time limit cursor]
+          _query_param_names = [
+            %w[location_id sort_order begin_time end_time limit cursor],
+            %i[location_id sort_order begin_time end_time limit cursor]
+          ].flatten
           _query = params.slice(*_query_param_names)
           params.except(*_query_param_names)
 
@@ -37,7 +40,10 @@ module Square
         #
         # @return [Square::Types::GetCashDrawerShiftResponse]
         def get(request_options: {}, **params)
-          _query_param_names = ["location_id"]
+          _query_param_names = [
+            ["location_id"],
+            %i[location_id]
+          ].flatten
           _query = params.slice(*_query_param_names)
           params = params.except(*_query_param_names)
 
@@ -59,7 +65,10 @@ module Square
         #
         # @return [Square::Types::ListCashDrawerShiftEventsResponse]
         def list_events(request_options: {}, **params)
-          _query_param_names = %w[location_id limit cursor]
+          _query_param_names = [
+            %w[location_id limit cursor],
+            %i[location_id limit cursor]
+          ].flatten
           _query = params.slice(*_query_param_names)
           params = params.except(*_query_param_names)
 

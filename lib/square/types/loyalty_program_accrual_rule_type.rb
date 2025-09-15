@@ -8,6 +8,7 @@ module Square
       VISIT = "VISIT"
       SPEND = "SPEND"
       ITEM_VARIATION = "ITEM_VARIATION"
-      CATEGORY = "CATEGORY"end
+      CATEGORY = "CATEGORY"
+    end
   end
 end

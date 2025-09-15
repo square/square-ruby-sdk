@@ -7,6 +7,7 @@ module Square
 
       PENDING = "PENDING"
       COMPLETED = "COMPLETED"
-      FAILED = "FAILED"end
+      FAILED = "FAILED"
+    end
   end
 end

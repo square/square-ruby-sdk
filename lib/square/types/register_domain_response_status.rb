@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       PENDING = "PENDING"
-      VERIFIED = "VERIFIED"end
+      VERIFIED = "VERIFIED"
+    end
   end
 end

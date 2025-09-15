@@ -9,6 +9,7 @@ module Square
       SAVINGS = "SAVINGS"
       INVESTMENT = "INVESTMENT"
       OTHER = "OTHER"
-      BUSINESS_CHECKING = "BUSINESS_CHECKING"end
+      BUSINESS_CHECKING = "BUSINESS_CHECKING"
+    end
   end
 end

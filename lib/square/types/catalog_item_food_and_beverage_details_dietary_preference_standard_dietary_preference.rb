@@ -11,6 +11,7 @@ module Square
       KOSHER = "KOSHER"
       NUT_FREE = "NUT_FREE"
       VEGAN = "VEGAN"
-      VEGETARIAN = "VEGETARIAN"end
+      VEGETARIAN = "VEGETARIAN"
+    end
   end
 end

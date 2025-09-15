@@ -12,6 +12,7 @@ module Square
       INVOICES = "INVOICES"
       ONLINE_STORE = "ONLINE_STORE"
       PAYROLL = "PAYROLL"
-      OTHER = "OTHER"end
+      OTHER = "OTHER"
+    end
   end
 end

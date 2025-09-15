@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       STATIC = "STATIC"
-      RELATIVE = "RELATIVE"end
+      RELATIVE = "RELATIVE"
+    end
   end
 end

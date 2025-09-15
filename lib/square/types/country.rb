@@ -254,6 +254,7 @@ module Square
       YT = "YT"
       ZA = "ZA"
       ZM = "ZM"
-      ZW = "ZW"end
+      ZW = "ZW"
+    end
   end
 end

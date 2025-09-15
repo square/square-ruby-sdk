@@ -8,6 +8,7 @@ module Square
       UNINDEXED = "UNINDEXED"
       UNAVAILABLE = "UNAVAILABLE"
       HIDDEN = "HIDDEN"
-      VISIBLE = "VISIBLE"end
+      VISIBLE = "VISIBLE"
+    end
   end
 end

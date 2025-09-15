@@ -87,7 +87,10 @@ module Square
       #
       # @return [Square::Types::GetSubscriptionResponse]
       def get(request_options: {}, **params)
-        _query_param_names = ["include"]
+        _query_param_names = [
+          ["include"],
+          %i[include]
+        ].flatten
         _query = params.slice(*_query_param_names)
         params = params.except(*_query_param_names)
 
@@ -187,7 +190,10 @@ module Square
       #
       # @return [Square::Types::ListSubscriptionEventsResponse]
       def list_events(request_options: {}, **params)
-        _query_param_names = %w[cursor limit]
+        _query_param_names = [
+          %w[cursor limit],
+          %i[cursor limit]
+        ].flatten
         _query = params.slice(*_query_param_names)
         params = params.except(*_query_param_names)
 

@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       SINGLE = "SINGLE"
-      MULTIPLE = "MULTIPLE"end
+      MULTIPLE = "MULTIPLE"
+    end
   end
 end

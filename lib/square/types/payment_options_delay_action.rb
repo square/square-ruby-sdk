@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       CANCEL = "CANCEL"
-      COMPLETE = "COMPLETE"end
+      COMPLETE = "COMPLETE"
+    end
   end
 end

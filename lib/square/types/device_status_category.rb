@@ -7,6 +7,7 @@ module Square
 
       AVAILABLE = "AVAILABLE"
       NEEDS_ATTENTION = "NEEDS_ATTENTION"
-      OFFLINE = "OFFLINE"end
+      OFFLINE = "OFFLINE"
+    end
   end
 end

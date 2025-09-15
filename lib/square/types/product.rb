@@ -14,6 +14,7 @@ module Square
       PAYROLL = "PAYROLL"
       DASHBOARD = "DASHBOARD"
       ITEM_LIBRARY_IMPORT = "ITEM_LIBRARY_IMPORT"
-      OTHER = "OTHER"end
+      OTHER = "OTHER"
+    end
   end
 end

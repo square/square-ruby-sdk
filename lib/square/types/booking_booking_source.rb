@@ -8,6 +8,7 @@ module Square
       FIRST_PARTY_MERCHANT = "FIRST_PARTY_MERCHANT"
       FIRST_PARTY_BUYER = "FIRST_PARTY_BUYER"
       THIRD_PARTY_BUYER = "THIRD_PARTY_BUYER"
-      API = "API"end
+      API = "API"
+    end
   end
 end

@@ -14,7 +14,10 @@ module Square
       #
       # @return [Square::Types::ListPayoutsResponse]
       def list(request_options: {}, **params)
-        _query_param_names = %w[location_id status begin_time end_time sort_order cursor limit]
+        _query_param_names = [
+          %w[location_id status begin_time end_time sort_order cursor limit],
+          %i[location_id status begin_time end_time sort_order cursor limit]
+        ].flatten
         _query = params.slice(*_query_param_names)
         params.except(*_query_param_names)
 
@@ -55,7 +58,10 @@ module Square
       #
       # @return [Square::Types::ListPayoutEntriesResponse]
       def list_entries(request_options: {}, **params)
-        _query_param_names = %w[sort_order cursor limit]
+        _query_param_names = [
+          %w[sort_order cursor limit],
+          %i[sort_order cursor limit]
+        ].flatten
         _query = params.slice(*_query_param_names)
         params = params.except(*_query_param_names)
 

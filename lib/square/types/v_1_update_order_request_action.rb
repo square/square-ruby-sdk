@@ -7,6 +7,7 @@ module Square
 
       COMPLETE = "COMPLETE"
       CANCEL = "CANCEL"
-      REFUND = "REFUND"end
+      REFUND = "REFUND"
+    end
   end
 end

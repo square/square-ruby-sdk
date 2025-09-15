@@ -16,8 +16,10 @@ module Square
         #
         # @return [Square::Types::ListGiftCardActivitiesResponse]
         def list(request_options: {}, **params)
-          _query_param_names = %w[gift_card_id type location_id begin_time end_time limit cursor
-                                  sort_order]
+          _query_param_names = [
+            %w[gift_card_id type location_id begin_time end_time limit cursor sort_order],
+            %i[gift_card_id type location_id begin_time end_time limit cursor sort_order]
+          ].flatten
           _query = params.slice(*_query_param_names)
           params.except(*_query_param_names)
 

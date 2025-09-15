@@ -64,7 +64,10 @@ module Square
         #
         # @return [Square::Types::ListBookingCustomAttributesResponse]
         def list(request_options: {}, **params)
-          _query_param_names = %w[limit cursor with_definitions]
+          _query_param_names = [
+            %w[limit cursor with_definitions],
+            %i[limit cursor with_definitions]
+          ].flatten
           _query = params.slice(*_query_param_names)
           params = params.except(*_query_param_names)
 
@@ -89,7 +92,10 @@ module Square
         #
         # @return [Square::Types::RetrieveBookingCustomAttributeResponse]
         def get(request_options: {}, **params)
-          _query_param_names = %w[with_definition version]
+          _query_param_names = [
+            %w[with_definition version],
+            %i[with_definition version]
+          ].flatten
           _query = params.slice(*_query_param_names)
           params = params.except(*_query_param_names)
 

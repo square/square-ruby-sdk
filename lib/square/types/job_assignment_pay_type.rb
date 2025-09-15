@@ -7,6 +7,7 @@ module Square
 
       NONE = "NONE"
       HOURLY = "HOURLY"
-      SALARY = "SALARY"end
+      SALARY = "SALARY"
+    end
   end
 end

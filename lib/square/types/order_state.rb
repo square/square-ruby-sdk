@@ -8,6 +8,7 @@ module Square
       OPEN = "OPEN"
       COMPLETED = "COMPLETED"
       CANCELED = "CANCELED"
-      DRAFT = "DRAFT"end
+      DRAFT = "DRAFT"
+    end
   end
 end

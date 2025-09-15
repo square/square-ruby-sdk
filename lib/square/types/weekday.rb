@@ -11,6 +11,7 @@ module Square
       THU = "THU"
       FRI = "FRI"
       SAT = "SAT"
-      SUN = "SUN"end
+      SUN = "SUN"
+    end
   end
 end

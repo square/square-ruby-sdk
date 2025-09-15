@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       ADDITIVE = "ADDITIVE"
-      INCLUSIVE = "INCLUSIVE"end
+      INCLUSIVE = "INCLUSIVE"
+    end
   end
 end

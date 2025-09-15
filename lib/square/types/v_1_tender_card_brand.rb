@@ -13,6 +13,7 @@ module Square
       DISCOVER_DINERS = "DISCOVER_DINERS"
       JCB = "JCB"
       CHINA_UNIONPAY = "CHINA_UNIONPAY"
-      SQUARE_GIFT_CARD = "SQUARE_GIFT_CARD"end
+      SQUARE_GIFT_CARD = "SQUARE_GIFT_CARD"
+    end
   end
 end

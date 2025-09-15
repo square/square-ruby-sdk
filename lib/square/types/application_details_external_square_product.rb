@@ -14,6 +14,7 @@ module Square
       RETAIL = "RETAIL"
       SQUARE_POS = "SQUARE_POS"
       TERMINAL_API = "TERMINAL_API"
-      VIRTUAL_TERMINAL = "VIRTUAL_TERMINAL"end
+      VIRTUAL_TERMINAL = "VIRTUAL_TERMINAL"
+    end
   end
 end

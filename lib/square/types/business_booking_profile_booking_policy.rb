@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       ACCEPT_ALL = "ACCEPT_ALL"
-      REQUIRES_ACCEPTANCE = "REQUIRES_ACCEPTANCE"end
+      REQUIRES_ACCEPTANCE = "REQUIRES_ACCEPTANCE"
+    end
   end
 end

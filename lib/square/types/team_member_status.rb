@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       ACTIVE = "ACTIVE"
-      INACTIVE = "INACTIVE"end
+      INACTIVE = "INACTIVE"
+    end
   end
 end

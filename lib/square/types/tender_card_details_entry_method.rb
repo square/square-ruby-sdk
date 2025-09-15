@@ -9,6 +9,7 @@ module Square
       KEYED = "KEYED"
       EMV = "EMV"
       ON_FILE = "ON_FILE"
-      CONTACTLESS = "CONTACTLESS"end
+      CONTACTLESS = "CONTACTLESS"
+    end
   end
 end

@@ -10,6 +10,7 @@ module Square
       TYPE_LENGTH = "TYPE_LENGTH"
       TYPE_VOLUME = "TYPE_VOLUME"
       TYPE_WEIGHT = "TYPE_WEIGHT"
-      TYPE_GENERIC = "TYPE_GENERIC"end
+      TYPE_GENERIC = "TYPE_GENERIC"
+    end
   end
 end

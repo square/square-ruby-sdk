@@ -10,6 +10,7 @@ module Square
       BATTERY = "BATTERY"
       WIFI = "WIFI"
       ETHERNET = "ETHERNET"
-      PRINTER = "PRINTER"end
+      PRINTER = "PRINTER"
+    end
   end
 end

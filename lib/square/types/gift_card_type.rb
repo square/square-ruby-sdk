@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       PHYSICAL = "PHYSICAL"
-      DIGITAL = "DIGITAL"end
+      DIGITAL = "DIGITAL"
+    end
   end
 end

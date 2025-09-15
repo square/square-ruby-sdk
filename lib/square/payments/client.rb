@@ -17,8 +17,12 @@ module Square
       #
       # @return [Square::Types::ListPaymentsResponse]
       def list(request_options: {}, **params)
-        _query_param_names = %w[begin_time end_time sort_order cursor location_id total last_4
-                                card_brand limit is_offline_payment offline_begin_time offline_end_time updated_at_begin_time updated_at_end_time sort_field]
+        _query_param_names = [
+          %w[begin_time end_time sort_order cursor location_id total last_4 card_brand limit
+             is_offline_payment offline_begin_time offline_end_time updated_at_begin_time updated_at_end_time sort_field],
+          %i[begin_time end_time sort_order cursor location_id total last_4 card_brand limit is_offline_payment
+             offline_begin_time offline_end_time updated_at_begin_time updated_at_end_time sort_field]
+        ].flatten
         _query = params.slice(*_query_param_names)
         params.except(*_query_param_names)
 

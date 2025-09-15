@@ -13,7 +13,10 @@ module Square
         #
         # @return [Square::Types::ListTeamMemberBookingProfilesResponse]
         def list(request_options: {}, **params)
-          _query_param_names = %w[bookable_only limit cursor location_id]
+          _query_param_names = [
+            %w[bookable_only limit cursor location_id],
+            %i[bookable_only limit cursor location_id]
+          ].flatten
           _query = params.slice(*_query_param_names)
           params.except(*_query_param_names)
 

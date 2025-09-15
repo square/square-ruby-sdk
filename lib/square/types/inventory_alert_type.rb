@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       NONE = "NONE"
-      LOW_QUANTITY = "LOW_QUANTITY"end
+      LOW_QUANTITY = "LOW_QUANTITY"
+    end
   end
 end

@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       CANCELLATION_TREATED_AS_NO_SHOW = "CANCELLATION_TREATED_AS_NO_SHOW"
-      CUSTOM_POLICY = "CUSTOM_POLICY"end
+      CUSTOM_POLICY = "CUSTOM_POLICY"
+    end
   end
 end

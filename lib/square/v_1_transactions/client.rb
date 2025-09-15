@@ -12,7 +12,10 @@ module Square
       #
       # @return [Array[Square::Types::V1Order]]
       def v_1_list_orders(request_options: {}, **params)
-        _query_param_names = %w[order limit batch_token]
+        _query_param_names = [
+          %w[order limit batch_token],
+          %i[order limit batch_token]
+        ].flatten
         _query = params.slice(*_query_param_names)
         params = params.except(*_query_param_names)
 

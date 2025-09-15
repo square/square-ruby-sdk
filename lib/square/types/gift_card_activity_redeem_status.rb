@@ -7,6 +7,7 @@ module Square
 
       PENDING = "PENDING"
       COMPLETED = "COMPLETED"
-      CANCELED = "CANCELED"end
+      CANCELED = "CANCELED"
+    end
   end
 end

@@ -18,7 +18,10 @@ module Square
         #
         # @return [Square::Types::ListTransactionsResponse]
         def list(request_options: {}, **params)
-          _query_param_names = %w[begin_time end_time sort_order cursor]
+          _query_param_names = [
+            %w[begin_time end_time sort_order cursor],
+            %i[begin_time end_time sort_order cursor]
+          ].flatten
           _query = params.slice(*_query_param_names)
           params = params.except(*_query_param_names)
 

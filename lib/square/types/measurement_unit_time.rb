@@ -9,6 +9,7 @@ module Square
       GENERIC_SECOND = "GENERIC_SECOND"
       GENERIC_MINUTE = "GENERIC_MINUTE"
       GENERIC_HOUR = "GENERIC_HOUR"
-      GENERIC_DAY = "GENERIC_DAY"end
+      GENERIC_DAY = "GENERIC_DAY"
+    end
   end
 end

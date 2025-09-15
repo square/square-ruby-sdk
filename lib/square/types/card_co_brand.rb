@@ -7,6 +7,7 @@ module Square
 
       UNKNOWN = "UNKNOWN"
       AFTERPAY = "AFTERPAY"
-      CLEARPAY = "CLEARPAY"end
+      CLEARPAY = "CLEARPAY"
+    end
   end
 end
