@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       BATCH = "BATCH"
-      SIMPLE = "SIMPLE"end
+      SIMPLE = "SIMPLE"
+    end
   end
 end

@@ -7,6 +7,7 @@ module Square
 
       SQUARED = "SQUARED"
       ROUNDED = "ROUNDED"
-      PILL = "PILL"end
+      PILL = "PILL"
+    end
   end
 end

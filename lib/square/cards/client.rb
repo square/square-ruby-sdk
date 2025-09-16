@@ -13,7 +13,10 @@ module Square
       #
       # @return [Square::Types::ListCardsResponse]
       def list(request_options: {}, **params)
-        _query_param_names = %w[cursor customer_id include_disabled reference_id sort_order]
+        _query_param_names = [
+          %w[cursor customer_id include_disabled reference_id sort_order],
+          %i[cursor customer_id include_disabled reference_id sort_order]
+        ].flatten
         _query = params.slice(*_query_param_names)
         params.except(*_query_param_names)
 

@@ -10,6 +10,7 @@ module Square
       COMPLETED = "COMPLETED"
       CANCELED = "CANCELED"
       REFUNDED = "REFUNDED"
-      REJECTED = "REJECTED"end
+      REJECTED = "REJECTED"
+    end
   end
 end

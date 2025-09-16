@@ -7,6 +7,7 @@ module Square
 
       UNKNOWN_CARD_TYPE = "UNKNOWN_CARD_TYPE"
       CREDIT = "CREDIT"
-      DEBIT = "DEBIT"end
+      DEBIT = "DEBIT"
+    end
   end
 end

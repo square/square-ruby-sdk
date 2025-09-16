@@ -7,6 +7,7 @@ module Square
 
       ALL = "ALL"
       READ = "READ"
-      READ_WRITE = "READ_WRITE"end
+      READ_WRITE = "READ_WRITE"
+    end
   end
 end

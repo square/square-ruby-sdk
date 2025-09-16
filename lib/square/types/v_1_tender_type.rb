@@ -12,6 +12,7 @@ module Square
       SQUARE_WALLET = "SQUARE_WALLET"
       SQUARE_GIFT_CARD = "SQUARE_GIFT_CARD"
       UNKNOWN = "UNKNOWN"
-      OTHER = "OTHER"end
+      OTHER = "OTHER"
+    end
   end
 end

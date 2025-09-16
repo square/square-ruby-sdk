@@ -7,6 +7,7 @@ module Square
 
       BALANCE = "BALANCE"
       DEPOSIT = "DEPOSIT"
-      INSTALLMENT = "INSTALLMENT"end
+      INSTALLMENT = "INSTALLMENT"
+    end
   end
 end

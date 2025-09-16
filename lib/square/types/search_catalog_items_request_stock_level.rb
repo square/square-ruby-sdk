@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       OUT = "OUT"
-      LOW = "LOW"end
+      LOW = "LOW"
+    end
   end
 end

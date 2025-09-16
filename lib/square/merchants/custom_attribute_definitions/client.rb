@@ -16,7 +16,10 @@ module Square
         #
         # @return [Square::Types::ListMerchantCustomAttributeDefinitionsResponse]
         def list(request_options: {}, **params)
-          _query_param_names = %w[visibility_filter limit cursor]
+          _query_param_names = [
+            %w[visibility_filter limit cursor],
+            %i[visibility_filter limit cursor]
+          ].flatten
           _query = params.slice(*_query_param_names)
           params.except(*_query_param_names)
 
@@ -64,7 +67,10 @@ module Square
         #
         # @return [Square::Types::RetrieveMerchantCustomAttributeDefinitionResponse]
         def get(request_options: {}, **params)
-          _query_param_names = ["version"]
+          _query_param_names = [
+            ["version"],
+            %i[version]
+          ].flatten
           _query = params.slice(*_query_param_names)
           params = params.except(*_query_param_names)
 

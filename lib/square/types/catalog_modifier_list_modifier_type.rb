@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       LIST = "LIST"
-      TEXT = "TEXT"end
+      TEXT = "TEXT"
+    end
   end
 end

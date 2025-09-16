@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       ALL_TIME = "ALL_TIME"
-      DAY = "DAY"end
+      DAY = "DAY"
+    end
   end
 end

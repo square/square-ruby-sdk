@@ -82,7 +82,10 @@ module Square
         #
         # @return [Square::Types::ListOrderCustomAttributesResponse]
         def list(request_options: {}, **params)
-          _query_param_names = %w[visibility_filter cursor limit with_definitions]
+          _query_param_names = [
+            %w[visibility_filter cursor limit with_definitions],
+            %i[visibility_filter cursor limit with_definitions]
+          ].flatten
           _query = params.slice(*_query_param_names)
           params = params.except(*_query_param_names)
 
@@ -111,7 +114,10 @@ module Square
         #
         # @return [Square::Types::RetrieveOrderCustomAttributeResponse]
         def get(request_options: {}, **params)
-          _query_param_names = %w[version with_definition]
+          _query_param_names = [
+            %w[version with_definition],
+            %i[version with_definition]
+          ].flatten
           _query = params.slice(*_query_param_names)
           params = params.except(*_query_param_names)
 

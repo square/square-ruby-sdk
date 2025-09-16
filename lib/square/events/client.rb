@@ -66,7 +66,10 @@ module Square
       #
       # @return [Square::Types::ListEventTypesResponse]
       def list_event_types(request_options: {}, **params)
-        _query_param_names = ["api_version"]
+        _query_param_names = [
+          ["api_version"],
+          %i[api_version]
+        ].flatten
         _query = params.slice(*_query_param_names)
         params.except(*_query_param_names)
 

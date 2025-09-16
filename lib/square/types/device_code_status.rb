@@ -8,6 +8,7 @@ module Square
       UNKNOWN = "UNKNOWN"
       UNPAIRED = "UNPAIRED"
       PAIRED = "PAIRED"
-      EXPIRED = "EXPIRED"end
+      EXPIRED = "EXPIRED"
+    end
   end
 end

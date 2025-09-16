@@ -7,6 +7,7 @@ module Square
 
       OTHER_TAX_SCOPE = "OTHER_TAX_SCOPE"
       LINE_ITEM = "LINE_ITEM"
-      ORDER = "ORDER"end
+      ORDER = "ORDER"
+    end
   end
 end

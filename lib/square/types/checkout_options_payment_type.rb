@@ -12,6 +12,7 @@ module Square
       FELICA_TRANSPORTATION_GROUP = "FELICA_TRANSPORTATION_GROUP"
       FELICA_ALL = "FELICA_ALL"
       PAYPAY = "PAYPAY"
-      QR_CODE = "QR_CODE"end
+      QR_CODE = "QR_CODE"
+    end
   end
 end

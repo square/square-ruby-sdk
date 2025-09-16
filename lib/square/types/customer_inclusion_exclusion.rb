@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       INCLUDE = "INCLUDE"
-      EXCLUDE = "EXCLUDE"end
+      EXCLUDE = "EXCLUDE"
+    end
   end
 end

@@ -13,7 +13,10 @@ module Square
         #
         # @return [Square::Types::ListBreakTypesResponse]
         def list(request_options: {}, **params)
-          _query_param_names = %w[location_id limit cursor]
+          _query_param_names = [
+            %w[location_id limit cursor],
+            %i[location_id limit cursor]
+          ].flatten
           _query = params.slice(*_query_param_names)
           params.except(*_query_param_names)
 

@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       DEBIT = "DEBIT"
-      CREDIT = "CREDIT"end
+      CREDIT = "CREDIT"
+    end
   end
 end

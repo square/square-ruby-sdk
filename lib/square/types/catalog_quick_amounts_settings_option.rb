@@ -7,6 +7,7 @@ module Square
 
       DISABLED = "DISABLED"
       MANUAL = "MANUAL"
-      AUTO = "AUTO"end
+      AUTO = "AUTO"
+    end
   end
 end

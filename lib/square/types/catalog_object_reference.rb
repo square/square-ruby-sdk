@@ -6,7 +6,7 @@ module Square
     # used as an entry point into a graph of catalog objects, where the objects exist
     # at a specific version.
     class CatalogObjectReference < Internal::Types::Model
-      field :object_id, -> { String }, optional: true, nullable: false
+      field :object_id_, -> { String }, optional: true, nullable: false
       field :catalog_version, -> { Integer }, optional: true, nullable: false
     end
   end

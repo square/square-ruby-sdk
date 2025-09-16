@@ -7,6 +7,7 @@ module Square
 
       ISSUED = "ISSUED"
       REDEEMED = "REDEEMED"
-      DELETED = "DELETED"end
+      DELETED = "DELETED"
+    end
   end
 end

@@ -13,7 +13,10 @@ module Square
         #
         # @return [Square::Types::ListDeviceCodesResponse]
         def list(request_options: {}, **params)
-          _query_param_names = %w[cursor location_id product_type status]
+          _query_param_names = [
+            %w[cursor location_id product_type status],
+            %i[cursor location_id product_type status]
+          ].flatten
           _query = params.slice(*_query_param_names)
           params.except(*_query_param_names)
 

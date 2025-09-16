@@ -14,6 +14,7 @@ module Square
       WALLET = "WALLET"
       BUY_NOW_PAY_LATER = "BUY_NOW_PAY_LATER"
       SQUARE_ACCOUNT = "SQUARE_ACCOUNT"
-      OTHER = "OTHER"end
+      OTHER = "OTHER"
+    end
   end
 end

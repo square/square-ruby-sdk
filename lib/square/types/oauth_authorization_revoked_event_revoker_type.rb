@@ -7,6 +7,7 @@ module Square
 
       APPLICATION = "APPLICATION"
       MERCHANT = "MERCHANT"
-      SQUARE = "SQUARE"end
+      SQUARE = "SQUARE"
+    end
   end
 end

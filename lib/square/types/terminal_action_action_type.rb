@@ -12,6 +12,7 @@ module Square
       CONFIRMATION = "CONFIRMATION"
       RECEIPT = "RECEIPT"
       DATA_COLLECTION = "DATA_COLLECTION"
-      SELECT = "SELECT"end
+      SELECT = "SELECT"
+    end
   end
 end

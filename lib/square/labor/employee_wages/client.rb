@@ -13,7 +13,10 @@ module Square
         #
         # @return [Square::Types::ListEmployeeWagesResponse]
         def list(request_options: {}, **params)
-          _query_param_names = %w[employee_id limit cursor]
+          _query_param_names = [
+            %w[employee_id limit cursor],
+            %i[employee_id limit cursor]
+          ].flatten
           _query = params.slice(*_query_param_names)
           params.except(*_query_param_names)
 

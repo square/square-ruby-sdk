@@ -8,6 +8,7 @@ module Square
       STRING = "STRING"
       BOOLEAN = "BOOLEAN"
       NUMBER = "NUMBER"
-      SELECTION = "SELECTION"end
+      SELECTION = "SELECTION"
+    end
   end
 end

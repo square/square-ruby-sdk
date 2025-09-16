@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       SCHEDULED = "SCHEDULED"
-      ASAP = "ASAP"end
+      ASAP = "ASAP"
+    end
   end
 end

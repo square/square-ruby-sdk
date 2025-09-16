@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       DESC = "DESC"
-      ASC = "ASC"end
+      ASC = "ASC"
+    end
   end
 end

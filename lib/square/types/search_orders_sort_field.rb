@@ -7,6 +7,7 @@ module Square
 
       CREATED_AT = "CREATED_AT"
       UPDATED_AT = "UPDATED_AT"
-      CLOSED_AT = "CLOSED_AT"end
+      CLOSED_AT = "CLOSED_AT"
+    end
   end
 end

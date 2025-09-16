@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       TEAM_MEMBER = "TEAM_MEMBER"
-      CUSTOMER = "CUSTOMER"end
+      CUSTOMER = "CUSTOMER"
+    end
   end
 end

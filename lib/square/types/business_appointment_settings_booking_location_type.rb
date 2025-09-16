@@ -7,6 +7,7 @@ module Square
 
       BUSINESS_LOCATION = "BUSINESS_LOCATION"
       CUSTOMER_LOCATION = "CUSTOMER_LOCATION"
-      PHONE = "PHONE"end
+      PHONE = "PHONE"
+    end
   end
 end

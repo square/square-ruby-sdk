@@ -13,7 +13,10 @@ module Square
       #
       # @return [Square::Types::ListDevicesResponse]
       def list(request_options: {}, **params)
-        _query_param_names = %w[cursor sort_order limit location_id]
+        _query_param_names = [
+          %w[cursor sort_order limit location_id],
+          %i[cursor sort_order limit location_id]
+        ].flatten
         _query = params.slice(*_query_param_names)
         params.except(*_query_param_names)
 

@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       CREATED_AT = "CREATED_AT"
-      UPDATED_AT = "UPDATED_AT"end
+      UPDATED_AT = "UPDATED_AT"
+    end
   end
 end

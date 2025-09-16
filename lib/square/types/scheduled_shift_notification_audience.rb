@@ -7,6 +7,7 @@ module Square
 
       ALL = "ALL"
       AFFECTED = "AFFECTED"
-      NONE = "NONE"end
+      NONE = "NONE"
+    end
   end
 end

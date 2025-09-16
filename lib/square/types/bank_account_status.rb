@@ -7,6 +7,7 @@ module Square
 
       VERIFICATION_IN_PROGRESS = "VERIFICATION_IN_PROGRESS"
       VERIFIED = "VERIFIED"
-      DISABLED = "DISABLED"end
+      DISABLED = "DISABLED"
+    end
   end
 end

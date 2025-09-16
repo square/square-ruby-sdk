@@ -237,7 +237,10 @@ module Square
       #
       # @return [Square::Types::GetInventoryCountResponse]
       def get(request_options: {}, **params)
-        _query_param_names = %w[location_ids cursor]
+        _query_param_names = [
+          %w[location_ids cursor],
+          %i[location_ids cursor]
+        ].flatten
         _query = params.slice(*_query_param_names)
         params = params.except(*_query_param_names)
 
@@ -271,7 +274,10 @@ module Square
       #
       # @return [Square::Types::GetInventoryChangesResponse]
       def changes(request_options: {}, **params)
-        _query_param_names = %w[location_ids cursor]
+        _query_param_names = [
+          %w[location_ids cursor],
+          %i[location_ids cursor]
+        ].flatten
         _query = params.slice(*_query_param_names)
         params = params.except(*_query_param_names)
 

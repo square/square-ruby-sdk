@@ -8,6 +8,7 @@ module Square
       PENDING = "PENDING"
       APPROVED = "APPROVED"
       REJECTED = "REJECTED"
-      FAILED = "FAILED"end
+      FAILED = "FAILED"
+    end
   end
 end

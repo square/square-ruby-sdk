@@ -12,6 +12,7 @@ module Square
       PROCESSING = "PROCESSING"
       WON = "WON"
       LOST = "LOST"
-      ACCEPTED = "ACCEPTED"end
+      ACCEPTED = "ACCEPTED"
+    end
   end
 end

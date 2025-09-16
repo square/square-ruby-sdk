@@ -8,6 +8,7 @@ module Square
       ACTIVE = "ACTIVE"
       ENDED = "ENDED"
       CANCELED = "CANCELED"
-      SCHEDULED = "SCHEDULED"end
+      SCHEDULED = "SCHEDULED"
+    end
   end
 end

@@ -11,6 +11,7 @@ module Square
       WED = "WED"
       THU = "THU"
       FRI = "FRI"
-      SAT = "SAT"end
+      SAT = "SAT"
+    end
   end
 end

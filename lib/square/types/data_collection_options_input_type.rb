@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       EMAIL = "EMAIL"
-      PHONE_NUMBER = "PHONE_NUMBER"end
+      PHONE_NUMBER = "PHONE_NUMBER"
+    end
   end
 end

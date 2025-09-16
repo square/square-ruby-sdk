@@ -15,7 +15,10 @@ module Square
           #
           # @return [Square::Types::ListLoyaltyPromotionsResponse]
           def list(request_options: {}, **params)
-            _query_param_names = %w[status cursor limit]
+            _query_param_names = [
+              %w[status cursor limit],
+              %i[status cursor limit]
+            ].flatten
             _query = params.slice(*_query_param_names)
             params = params.except(*_query_param_names)
 

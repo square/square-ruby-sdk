@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       PER_TEAM_MEMBER = "PER_TEAM_MEMBER"
-      PER_LOCATION = "PER_LOCATION"end
+      PER_LOCATION = "PER_LOCATION"
+    end
   end
 end

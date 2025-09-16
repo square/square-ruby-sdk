@@ -18,6 +18,7 @@ module Square
       SESAME = "SESAME"
       SOY = "SOY"
       SULPHITES = "SULPHITES"
-      TREE_NUTS = "TREE_NUTS"end
+      TREE_NUTS = "TREE_NUTS"
+    end
   end
 end

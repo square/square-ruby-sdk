@@ -13,6 +13,7 @@ module Square
       CASH_TENDER_REFUND = "CASH_TENDER_REFUND"
       OTHER_TENDER_REFUND = "OTHER_TENDER_REFUND"
       PAID_IN = "PAID_IN"
-      PAID_OUT = "PAID_OUT"end
+      PAID_OUT = "PAID_OUT"
+    end
   end
 end

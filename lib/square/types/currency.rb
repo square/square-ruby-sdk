@@ -187,6 +187,7 @@ module Square
       ZMK = "ZMK"
       ZMW = "ZMW"
       BTC = "BTC"
-      XUS = "XUS"end
+      XUS = "XUS"
+    end
   end
 end

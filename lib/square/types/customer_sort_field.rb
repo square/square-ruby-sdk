@@ -6,6 +6,7 @@ module Square
       extend Square::Internal::Types::Enum
 
       DEFAULT = "DEFAULT"
-      CREATED_AT = "CREATED_AT"end
+      CREATED_AT = "CREATED_AT"
+    end
   end
 end

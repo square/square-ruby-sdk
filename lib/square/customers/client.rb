@@ -16,7 +16,10 @@ module Square
       #
       # @return [Square::Types::ListCustomersResponse]
       def list(request_options: {}, **params)
-        _query_param_names = %w[cursor limit sort_field sort_order count]
+        _query_param_names = [
+          %w[cursor limit sort_field sort_order count],
+          %i[cursor limit sort_field sort_order count]
+        ].flatten
         _query = params.slice(*_query_param_names)
         params.except(*_query_param_names)
 
@@ -221,7 +224,10 @@ module Square
       #
       # @return [Square::Types::DeleteCustomerResponse]
       def delete(request_options: {}, **params)
-        _query_param_names = ["version"]
+        _query_param_names = [
+          ["version"],
+          %i[version]
+        ].flatten
         _query = params.slice(*_query_param_names)
         params = params.except(*_query_param_names)
 

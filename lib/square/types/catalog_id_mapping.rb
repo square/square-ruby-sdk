@@ -15,7 +15,7 @@ module Square
     # to the new object. The permanent ID is unique across the Square catalog.
     class CatalogIdMapping < Internal::Types::Model
       field :client_object_id, -> { String }, optional: true, nullable: false
-      field :object_id, -> { String }, optional: true, nullable: false
+      field :object_id_, -> { String }, optional: true, nullable: false
     end
   end
 end

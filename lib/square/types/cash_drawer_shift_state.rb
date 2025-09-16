@@ -7,6 +7,7 @@ module Square
 
       OPEN = "OPEN"
       ENDED = "ENDED"
-      CLOSED = "CLOSED"end
+      CLOSED = "CLOSED"
+    end
   end
 end

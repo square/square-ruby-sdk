@@ -8,6 +8,7 @@ module Square
       AUTHORIZED = "AUTHORIZED"
       CAPTURED = "CAPTURED"
       VOIDED = "VOIDED"
-      FAILED = "FAILED"end
+      FAILED = "FAILED"
+    end
   end
 end

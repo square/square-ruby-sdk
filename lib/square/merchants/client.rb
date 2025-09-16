@@ -21,7 +21,10 @@ module Square
       #
       # @return [Square::Types::ListMerchantsResponse]
       def list(request_options: {}, **params)
-        _query_param_names = ["cursor"]
+        _query_param_names = [
+          ["cursor"],
+          %i[cursor]
+        ].flatten
         _query = params.slice(*_query_param_names)
         params.except(*_query_param_names)
 

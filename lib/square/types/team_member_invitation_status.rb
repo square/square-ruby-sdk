@@ -7,6 +7,7 @@ module Square
 
       UNINVITED = "UNINVITED"
       PENDING = "PENDING"
-      ACCEPTED = "ACCEPTED"end
+      ACCEPTED = "ACCEPTED"
+    end
   end
 end

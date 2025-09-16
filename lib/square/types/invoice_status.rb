@@ -14,6 +14,7 @@ module Square
       REFUNDED = "REFUNDED"
       CANCELED = "CANCELED"
       FAILED = "FAILED"
-      PAYMENT_PENDING = "PAYMENT_PENDING"end
+      PAYMENT_PENDING = "PAYMENT_PENDING"
+    end
   end
 end
