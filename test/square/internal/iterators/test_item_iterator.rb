@@ -110,6 +110,22 @@ class ItemIteratorTest < Minitest::Test
     end
   end
 
+  def test_pages_iterator_can_be_advanced_manually
+    iterator = make_iterator(initial_cursor: 0).pages
+    assert_equal 0, @times_called
+
+    lengths = []
+    expected_times_called = 0
+    while page = iterator.get_next_page do
+      expected_times_called += 1
+      assert_equal expected_times_called, @times_called
+      lengths.push(page.cards.length)
+    end
+
+    assert_equal 7, @times_called
+    assert_equal [10, 10, 10, 10, 10, 10, 5], lengths
+  end
+
   def test_pages_iterator_implements_enumerable
     iterator = make_iterator(initial_cursor: 0).pages
     assert_equal 0, @times_called

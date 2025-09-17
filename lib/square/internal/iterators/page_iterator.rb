@@ -10,14 +10,19 @@ module Square
 
       def each(&block)
         while @cursor do
-          next_page = @get_next_page.call(@cursor)
-          @cursor = next_page.cursor
-          block.call(next_page)
+          block.call(get_next_page)
         end
       end
 
       def has_next_page?
         !@cursor.nil?
+      end
+
+      def get_next_page
+        return if @cursor.nil?
+        next_page = @get_next_page.call(@cursor)
+        @cursor = next_page.cursor
+        next_page
       end
     end
   end
