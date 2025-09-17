@@ -60,6 +60,22 @@ class ItemIteratorTest < Minitest::Test
     assert_equal NUMBERS.length, doubled.length
   end
 
+  def test_items_iterator_can_be_advanced_manually
+    iterator = make_iterator(initial_cursor: 0)
+    assert_equal 0, @times_called
+
+    items = []
+    expected_times_called = 0
+    while item = iterator.get_next do
+      expected_times_called += 1 if (item % 10) == 1
+      assert_equal expected_times_called, @times_called
+      items.push(item)
+    end
+
+    assert_equal 7, @times_called
+    assert_equal NUMBERS, items
+  end
+
   def test_pages_iterator
     iterator = make_iterator(initial_cursor: 0).pages
     assert_equal(
@@ -116,7 +132,7 @@ class ItemIteratorTest < Minitest::Test
 
     lengths = []
     expected_times_called = 0
-    while page = iterator.get_next_page do
+    while page = iterator.get_next do
       expected_times_called += 1
       assert_equal expected_times_called, @times_called
       lengths.push(page.cards.length)

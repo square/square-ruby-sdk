@@ -10,7 +10,7 @@ module Square
 
       def each(&block)
         while @cursor do
-          block.call(get_next_page)
+          block.call(get_next)
         end
       end
 
@@ -18,7 +18,7 @@ module Square
         !@cursor.nil?
       end
 
-      def get_next_page
+      def get_next
         return if @cursor.nil?
         next_page = @get_next_page.call(@cursor)
         @cursor = next_page.cursor
