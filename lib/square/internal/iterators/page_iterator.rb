@@ -8,6 +8,7 @@ module Square
       # @param initial_cursor [String] The initial cursor to use when iterating.
       # @return [Square::Internal::PageIterator]
       def initialize(initial_cursor:, &block)
+        @need_initial_load = initial_cursor.nil?
         @cursor = initial_cursor
         @get_next_page = block
       end
@@ -17,8 +18,8 @@ module Square
       # @param block [Proc] The block which is passed every page as it is received.
       # @return [nil]
       def each(&block)
-        while @cursor do
-          block.call(get_next)
+        while page = get_next do
+          block.call(page)
         end
       end
 
@@ -26,14 +27,15 @@ module Square
       #
       # @return [Boolean]
       def has_next?
-        !@cursor.nil?
+        @need_initial_load || !@cursor.nil?
       end
 
       # Retrieves the next page from the API.
       #
       # @return [Boolean]
       def get_next
-        return if @cursor.nil?
+        return if !@need_initial_load && @cursor.nil?
+        @need_initial_load = false
         next_page = @get_next_page.call(@cursor)
         @cursor = next_page.cursor
         next_page

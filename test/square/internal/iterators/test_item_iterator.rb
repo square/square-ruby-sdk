@@ -14,6 +14,7 @@ class ItemIteratorTest < Minitest::Test
 
     Square::Internal::ItemIterator.new(initial_cursor:, item_field: :cards) do |cursor|
       @times_called += 1
+      cursor ||= 0
       next_cursor = cursor + 10
       OpenStruct.new(
         cards: NUMBERS[cursor...next_cursor],
@@ -29,6 +30,12 @@ class ItemIteratorTest < Minitest::Test
 
     iterator = make_iterator(initial_cursor: 10)
     assert_equal (11..65).to_a, iterator.to_a
+  end
+
+  def test_item_iterator_can_work_without_an_initial_cursor
+    iterator = make_iterator(initial_cursor: nil)
+    assert_equal NUMBERS, iterator.to_a
+    assert_equal 7, @times_called
   end
 
   def test_items_iterator_iterates_lazily
@@ -104,6 +111,12 @@ class ItemIteratorTest < Minitest::Test
       ],
       iterator.to_a.map{|p| p.cards}
     )
+  end
+
+  def test_pages_iterator_can_work_without_an_initial_cursor
+    iterator = make_iterator(initial_cursor: nil).pages
+    assert_equal 7, iterator.to_a.length
+    assert_equal 7, @times_called
   end
 
   def test_pages_iterator_iterates_lazily
