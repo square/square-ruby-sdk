@@ -8,23 +8,25 @@ require "ostruct"
 
 NUMBERS = (1..65).to_a
 
-def get_iterator(initial_cursor:)
-  Square::Internal::ItemIterator.new(initial_cursor:, item_field: :cards) do |cursor|
-    next_cursor = cursor + 10
-    OpenStruct.new(
-      cards: NUMBERS[cursor...next_cursor],
-      cursor: next_cursor < NUMBERS.length ? next_cursor : nil
-    )
-  end
-end
-
 class ItemIteratorTest < Minitest::Test
-  def test_basic_iterator
+  def test_item_iterator_can_iterate_to_exhaustion
     iterator = get_iterator(initial_cursor: 0)
     assert_equal NUMBERS, iterator.to_a
 
     iterator = get_iterator(initial_cursor: 10)
     assert_equal (11..65).to_a, iterator.to_a
+  end
+
+  def test_items_iterator_iterates_lazily
+    iterator = get_iterator(initial_cursor: 0)
+    assert_equal 0, @times_called
+    assert_equal 1, iterator.first
+    assert_equal 1, @times_called
+
+    iterator = get_iterator(initial_cursor: 0)
+    assert_equal 0, @times_called
+    assert_equal (1..15).to_a, iterator.first(15)
+    assert_equal 2, @times_called
   end
 
   def test_pages_iterator
@@ -54,5 +56,18 @@ class ItemIteratorTest < Minitest::Test
       ],
       iterator.to_a.map{|p| p.cards}
     )
+  end
+
+  def get_iterator(initial_cursor:)
+    @times_called = 0
+
+    Square::Internal::ItemIterator.new(initial_cursor:, item_field: :cards) do |cursor|
+      @times_called += 1
+      next_cursor = cursor + 10
+      OpenStruct.new(
+        cards: NUMBERS[cursor...next_cursor],
+        cursor: next_cursor < NUMBERS.length ? next_cursor : nil
+      )
+    end
   end
 end
