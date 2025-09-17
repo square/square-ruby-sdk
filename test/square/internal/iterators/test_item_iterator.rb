@@ -52,6 +52,14 @@ class ItemIteratorTest < Minitest::Test
     assert_equal 2, @times_called
   end
 
+  def test_items_iterator_implements_enumerable
+    iterator = make_iterator(initial_cursor: 0)
+    assert_equal 0, @times_called
+    doubled = iterator.map{|card| card * 2}
+    assert_equal 7, @times_called
+    assert_equal NUMBERS.length, doubled.length
+  end
+
   def test_pages_iterator
     iterator = make_iterator(initial_cursor: 0).pages
     assert_equal(
@@ -100,5 +108,13 @@ class ItemIteratorTest < Minitest::Test
       assert_equal index + 1, @times_called
       assert_equal index < 6, iterator.has_next_page?
     end
+  end
+
+  def test_pages_iterator_implements_enumerable
+    iterator = make_iterator(initial_cursor: 0).pages
+    assert_equal 0, @times_called
+    lengths = iterator.map{|page| page.cards.length}
+    assert_equal 7, @times_called
+    assert_equal [10, 10, 10, 10, 10, 10, 5], lengths
   end
 end
