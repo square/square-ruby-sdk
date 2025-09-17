@@ -14,7 +14,7 @@ module Square
         end
       end
 
-      def has_next_page?
+      def has_next?
         !@cursor.nil?
       end
 

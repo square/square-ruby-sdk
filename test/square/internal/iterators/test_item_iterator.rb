@@ -69,6 +69,7 @@ class ItemIteratorTest < Minitest::Test
     while item = iterator.get_next do
       expected_times_called += 1 if (item % 10) == 1
       assert_equal expected_times_called, @times_called
+      assert_equal item != NUMBERS.last, iterator.has_next?, "#{item} #{iterator}"
       items.push(item)
     end
 
@@ -122,7 +123,7 @@ class ItemIteratorTest < Minitest::Test
 
     iterator.each_with_index do |page, index|
       assert_equal index + 1, @times_called
-      assert_equal index < 6, iterator.has_next_page?
+      assert_equal index < 6, iterator.has_next?
     end
   end
 

@@ -19,18 +19,36 @@ module Square
         end
       end
 
+      def has_next?
+        load_next_page if @page.nil?
+        return false if @page.nil?
+
+        return true if any_items_in_cached_page
+        load_next_page
+        any_items_in_cached_page
+      end
+
       def get_next
-        item = try_get_next
+        item = next_item_from_cached_page
         return item if item
-        @page = @page_iterator.get_next
-        try_get_next
+        load_next_page
+        next_item_from_cached_page
       end
 
       private
 
-      def try_get_next
+      def next_item_from_cached_page
         return if !@page
         @page.send(@item_field).shift
+      end
+
+      def any_items_in_cached_page
+        return false if !@page
+        !@page.send(@item_field).empty?
+      end
+
+      def load_next_page
+        @page = @page_iterator.get_next
       end
     end
   end
