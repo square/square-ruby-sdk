@@ -1,5 +1,3 @@
-require 'enumerable'
-
 module Square
   module Internal
     class ItemIterator

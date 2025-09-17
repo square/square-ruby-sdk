@@ -25,6 +25,8 @@ require_relative "square/internal/types/boolean"
 require_relative "square/internal/types/enum"
 require_relative "square/internal/types/hash"
 require_relative "square/internal/types/unknown"
+require_relative "square/internal/iterators/item_iterator"
+require_relative "square/internal/iterators/page_iterator"
 
 # API Types
 require_relative "square/file_param"

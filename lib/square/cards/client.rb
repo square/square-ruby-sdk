@@ -15,7 +15,7 @@ module Square
         _query_param_names = %w[cursor customer_id include_disabled reference_id sort_order]
         _query = params.slice(*_query_param_names)
 
-        Square::Internal::ItemIterator.new(item_field: :cards, cursor: params[:cursor]) do |cursor|
+        Square::Internal::ItemIterator.new(item_field: :cards, initial_cursor: params[:cursor]) do |cursor|
           _request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url] || Square::Environment::SANDBOX,
             method: "GET",
