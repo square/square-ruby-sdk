@@ -15,6 +15,10 @@ module Square
           block.call(next_page)
         end
       end
+
+      def has_next_page?
+        !@cursor.nil?
+      end
     end
   end
 end

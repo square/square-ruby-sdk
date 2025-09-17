@@ -92,4 +92,13 @@ class ItemIteratorTest < Minitest::Test
     assert_equal 2, iterator.first(2).length
     assert_equal 2, @times_called
   end
+
+  def test_pages_iterator_knows_whether_another_page_is_upcoming
+    iterator = make_iterator(initial_cursor: 0).pages
+
+    iterator.each_with_index do |page, index|
+      assert_equal index + 1, @times_called
+      assert_equal index < 6, iterator.has_next_page?
+    end
+  end
 end
