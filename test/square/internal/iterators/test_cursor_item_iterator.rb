@@ -8,11 +8,11 @@ require "ostruct"
 
 NUMBERS = (1..65).to_a
 
-class ItemIteratorTest < Minitest::Test
+class CursorItemIteratorTest < Minitest::Test
   def make_iterator(initial_cursor:)
     @times_called = 0
 
-    Square::Internal::ItemIterator.new(initial_cursor:, cursor_field: :next_cursor, item_field: :cards) do |cursor|
+    Square::Internal::CursorItemIterator.new(initial_cursor:, cursor_field: :next_cursor, item_field: :cards) do |cursor|
       @times_called += 1
       cursor ||= 0
       next_cursor = cursor + 10

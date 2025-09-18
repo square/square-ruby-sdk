@@ -1,30 +1,29 @@
 module Square
   module Internal
-    class ItemIterator
+    class CursorItemIterator
       include Enumerable
 
-      # Instantiates a ItemIterator, an Enumerable class which wraps calls to a paginated API and yields the individual items from the API.
+      # Instantiates a CursorItemIterator, an Enumerable class which wraps calls to a cursor-based paginated API and yields individual items from it.
       #
-      # @param initial_cursor [String] The initial cursor to use when iterating.
-      # @param cursor_field [String] The name of the field in API responses to extract the next cursor from.
-      # @param item_field [String] The name of the field in API responses to extract the items to iterate over.
-      # @return [Square::Internal::ItemIterator]
+      # @param initial_cursor [String] The initial cursor to use when iterating, if any.
+      # @param cursor_field [Symbol] The field in API responses to extract the next cursor from.
+      # @param item_field [Symbol] The field in API responses to extract the items to iterate over.
       def initialize(initial_cursor:, cursor_field:, item_field:, &block)
         @item_field = item_field
-        @page_iterator = PageIterator.new(initial_cursor:, cursor_field:, &block)
+        @page_iterator = CursorPageIterator.new(initial_cursor:, cursor_field:, &block)
         @page = nil
       end
 
-      # Returns the PageIterator mediating access to the underlying API.
+      # Returns the CursorPageIterator mediating access to the underlying API.
       #
-      # @return [Square::Internal::PageIterator]
+      # @return [Square::Internal::CursorPageIterator]
       def pages
         @page_iterator
       end
 
       # Iterates over each item returned by the API.
       #
-      # @param block [Proc] The block which is passed every page as it is received.
+      # @param block [Proc] The block which each retrieved item is yielded to.
       # @return [nil]
       def each(&block)
         while item = get_next do

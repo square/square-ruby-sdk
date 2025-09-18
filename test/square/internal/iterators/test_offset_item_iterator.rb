@@ -8,7 +8,7 @@ require "ostruct"
 
 NUMBERS = (1..65).to_a
 
-class ItemIteratorTest < Minitest::Test
+class OffsetItemIteratorTest < Minitest::Test
   def make_iterator(initial_page:)
     @times_called = 0
 

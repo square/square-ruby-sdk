@@ -1,13 +1,13 @@
 module Square
   module Internal
-    class PageIterator
+    class CursorPageIterator
       include Enumerable
 
-      # Instantiates a PageIterator, an Enumerable class which wraps calls to a paginated API and yields pages of items.
+      # Instantiates a CursorPageIterator, an Enumerable class which wraps calls to a paginated API and yields pages of items.
       #
       # @param initial_cursor [String] The initial cursor to use when iterating.
       # @param cursor_field [String] The name of the field in API responses to extract the next cursor from.
-      # @return [Square::Internal::PageIterator]
+      # @return [Square::Internal::CursorPageIterator]
       def initialize(initial_cursor:, cursor_field:, &block)
         @need_initial_load = initial_cursor.nil?
         @cursor = initial_cursor
@@ -17,7 +17,7 @@ module Square
 
       # Iterates over each page returned by the API.
       #
-      # @param block [Proc] The block which is passed every page as it is received.
+      # @param block [Proc] The block which each retrieved page is yielded to.
       # @return [nil]
       def each(&block)
         while page = get_next do
