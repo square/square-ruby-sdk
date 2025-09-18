@@ -27,6 +27,8 @@ require_relative "square/internal/types/hash"
 require_relative "square/internal/types/unknown"
 require_relative "square/internal/iterators/item_iterator"
 require_relative "square/internal/iterators/page_iterator"
+require_relative "square/internal/iterators/offset_item_iterator"
+require_relative "square/internal/iterators/offset_page_iterator"
 
 # API Types
 require_relative "square/file_param"
