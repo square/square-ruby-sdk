@@ -12,13 +12,13 @@ class ItemIteratorTest < Minitest::Test
   def make_iterator(initial_cursor:)
     @times_called = 0
 
-    Square::Internal::ItemIterator.new(initial_cursor:, item_field: :cards) do |cursor|
+    Square::Internal::ItemIterator.new(initial_cursor:, cursor_field: :next_cursor, item_field: :cards) do |cursor|
       @times_called += 1
       cursor ||= 0
       next_cursor = cursor + 10
       OpenStruct.new(
         cards: NUMBERS[cursor...next_cursor],
-        cursor: next_cursor < NUMBERS.length ? next_cursor : nil
+        next_cursor: next_cursor < NUMBERS.length ? next_cursor : nil
       )
     end
   end

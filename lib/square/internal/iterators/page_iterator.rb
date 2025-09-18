@@ -6,10 +6,12 @@ module Square
       # Instantiates a PageIterator, an Enumerable class which wraps calls to a paginated API and yields pages of items.
       #
       # @param initial_cursor [String] The initial cursor to use when iterating.
+      # @param cursor_field [String] The name of the field in API responses to extract the next cursor from.
       # @return [Square::Internal::PageIterator]
-      def initialize(initial_cursor:, &block)
+      def initialize(initial_cursor:, cursor_field:, &block)
         @need_initial_load = initial_cursor.nil?
         @cursor = initial_cursor
+        @cursor_field = cursor_field
         @get_next_page = block
       end
 
@@ -37,7 +39,7 @@ module Square
         return if !@need_initial_load && @cursor.nil?
         @need_initial_load = false
         next_page = @get_next_page.call(@cursor)
-        @cursor = next_page.cursor
+        @cursor = next_page.send(@cursor_field)
         next_page
       end
     end
