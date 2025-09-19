@@ -8,30 +8,37 @@ module Square
         @client = client
       end
 
-      # Retrieves a list of cards owned by the account making the request.
-      # A max of 25 cards will be returned.
+      # Retrieves an ItemIterator of cards owned by the account making the request.
       #
-      # @return [Square::Types::ListCardsResponse]
+      # @return Square::Internal::ItemIterator
       def list(request_options: {}, **params)
         _query_param_names = [
           %w[cursor customer_id include_disabled reference_id sort_order],
           %i[cursor customer_id include_disabled reference_id sort_order]
         ].flatten
         _query = params.slice(*_query_param_names)
-        params.except(*_query_param_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
-          method: "GET",
-          path: "v2/cards",
-          query: _query
-        )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::ListCardsResponse.load(_response.body)
+        Square::Internal::ItemIterator.new(item_field: :cards, initial_cursor: params[:cursor]) do |cursor|
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            method: "GET",
+            path: "v2/cards",
+            query: _query.merge(cursor: cursor)
+          )
+
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
+          end
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::ListCardsResponse.load(_response.body)
+          else
+            subclass = Square::Errors::ResponseError.subclass_for_code(code)
+            raise subclass.new(_response.body, code: code)
+          end
         end
-
-        raise _response.body
       end
 
       # Adds a card on file to an existing merchant.
