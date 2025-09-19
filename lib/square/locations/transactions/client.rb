@@ -26,17 +26,23 @@ module Square
           params = params.except(*_query_param_names)
 
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "GET",
             path: "v2/locations/#{params[:location_id]}/transactions",
             query: _query
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::ListTransactionsResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::ListTransactionsResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Retrieves details for a single transaction.
@@ -44,16 +50,22 @@ module Square
         # @return [Square::Types::GetTransactionResponse]
         def get(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "GET",
             path: "v2/locations/#{params[:location_id]}/transactions/#{params[:transaction_id]}"
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::GetTransactionResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::GetTransactionResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Captures a transaction that was created with the [Charge](api-endpoint:Transactions-Charge)
@@ -66,16 +78,22 @@ module Square
         # @return [Square::Types::CaptureTransactionResponse]
         def capture(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "POST",
             path: "v2/locations/#{params[:location_id]}/transactions/#{params[:transaction_id]}/capture"
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::CaptureTransactionResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::CaptureTransactionResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Cancels a transaction that was created with the [Charge](api-endpoint:Transactions-Charge)
@@ -88,16 +106,22 @@ module Square
         # @return [Square::Types::VoidTransactionResponse]
         def void(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "POST",
             path: "v2/locations/#{params[:location_id]}/transactions/#{params[:transaction_id]}/void"
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::VoidTransactionResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::VoidTransactionResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
       end
     end

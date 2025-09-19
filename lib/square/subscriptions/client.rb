@@ -20,17 +20,23 @@ module Square
       # @return [Square::Types::CreateSubscriptionResponse]
       def create(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/subscriptions",
           body: params
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::CreateSubscriptionResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::CreateSubscriptionResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Schedules a plan variation change for all active subscriptions under a given plan
@@ -39,17 +45,23 @@ module Square
       # @return [Square::Types::BulkSwapPlanResponse]
       def bulk_swap_plan(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/subscriptions/bulk-swap-plan",
           body: params
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::BulkSwapPlanResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::BulkSwapPlanResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Searches for subscriptions.
@@ -70,17 +82,23 @@ module Square
       # @return [Square::Types::SearchSubscriptionsResponse]
       def search(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/subscriptions/search",
           body: params
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::SearchSubscriptionsResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::SearchSubscriptionsResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Retrieves a specific subscription.
@@ -95,17 +113,23 @@ module Square
         params = params.except(*_query_param_names)
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "GET",
           path: "v2/subscriptions/#{params[:subscription_id]}",
           query: _query
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::GetSubscriptionResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::GetSubscriptionResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Updates a subscription by modifying or clearing `subscription` field values.
@@ -116,17 +140,23 @@ module Square
         _path_param_names = ["subscription_id"]
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "PUT",
           path: "v2/subscriptions/#{params[:subscription_id]}",
           body: params.except(*_path_param_names)
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::UpdateSubscriptionResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::UpdateSubscriptionResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Deletes a scheduled action for a subscription.
@@ -134,16 +164,22 @@ module Square
       # @return [Square::Types::DeleteSubscriptionActionResponse]
       def delete_action(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "DELETE",
           path: "v2/subscriptions/#{params[:subscription_id]}/actions/#{params[:action_id]}"
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::DeleteSubscriptionActionResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::DeleteSubscriptionActionResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Changes the [billing anchor date](https://developer.squareup.com/docs/subscriptions-api/subscription-billing#billing-dates)
@@ -154,17 +190,23 @@ module Square
         _path_param_names = ["subscription_id"]
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/subscriptions/#{params[:subscription_id]}/billing-anchor",
           body: params.except(*_path_param_names)
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::ChangeBillingAnchorDateResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::ChangeBillingAnchorDateResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Schedules a `CANCEL` action to cancel an active subscription. This
@@ -174,16 +216,22 @@ module Square
       # @return [Square::Types::CancelSubscriptionResponse]
       def cancel(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/subscriptions/#{params[:subscription_id]}/cancel"
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::CancelSubscriptionResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::CancelSubscriptionResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Lists all [events](https://developer.squareup.com/docs/subscriptions-api/actions-events) for a specific subscription.
@@ -198,17 +246,23 @@ module Square
         params = params.except(*_query_param_names)
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "GET",
           path: "v2/subscriptions/#{params[:subscription_id]}/events",
           query: _query
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::ListSubscriptionEventsResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::ListSubscriptionEventsResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Schedules a `PAUSE` action to pause an active subscription.
@@ -218,17 +272,23 @@ module Square
         _path_param_names = ["subscription_id"]
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/subscriptions/#{params[:subscription_id]}/pause",
           body: params.except(*_path_param_names)
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::PauseSubscriptionResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::PauseSubscriptionResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Schedules a `RESUME` action to resume a paused or a deactivated subscription.
@@ -238,17 +298,23 @@ module Square
         _path_param_names = ["subscription_id"]
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/subscriptions/#{params[:subscription_id]}/resume",
           body: params.except(*_path_param_names)
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::ResumeSubscriptionResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::ResumeSubscriptionResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Schedules a `SWAP_PLAN` action to swap a subscription plan variation in an existing subscription.
@@ -259,15 +325,23 @@ module Square
         _path_param_names = ["subscription_id"]
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/subscriptions/#{params[:subscription_id]}/swap-plan",
           body: params.except(*_path_param_names)
         )
-        _response = @client.send(_request)
-        return Square::Types::SwapPlanResponse.load(_response.body) if _response.code >= "200" && _response.code < "300"
-
-        raise _response.body
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
+        end
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::SwapPlanResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
     end
   end

@@ -200,6 +200,7 @@ describe Square::Catalog::Client do
     end
 
     it "batch upsert catalog objects with modifiers and taxes" do
+      skip "Getting rate limited. Skipping for now."
       sleep(2) # Wait before batch upsert
 
       modifier = {
@@ -546,6 +547,7 @@ describe Square::Catalog::Client do
 
   describe "#update_item_modifier_lists" do
     it "update item modifier lists" do
+      skip "Getting rate limited. Skipping for now."
       sleep(2) # Wait before test start
 
       # First create a test item
@@ -624,6 +626,7 @@ describe Square::Catalog::Client do
     end
 
     it "upsert catalog object with custom data" do
+      skip "Getting rate limited. Skipping for now."
       coffee = create_test_catalog_item(
         name: "Coffee",
         description: "Strong coffee",

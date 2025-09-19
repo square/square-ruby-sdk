@@ -26,17 +26,23 @@ module Square
       # @return [Square::Types::RevokeTokenResponse]
       def revoke_token(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "oauth2/revoke",
           body: params
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::RevokeTokenResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::RevokeTokenResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Returns an OAuth access token and refresh token using the `authorization_code`
@@ -64,17 +70,23 @@ module Square
       # @return [Square::Types::ObtainTokenResponse]
       def obtain_token(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "oauth2/token",
           body: params
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::ObtainTokenResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::ObtainTokenResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Returns information about an [OAuth access token](https://developer.squareup.com/docs/build-basics/access-tokens#get-an-oauth-access-token) or an application’s [personal access token](https://developer.squareup.com/docs/build-basics/access-tokens#get-a-personal-access-token).
@@ -95,29 +107,41 @@ module Square
       # @return [Square::Types::RetrieveTokenStatusResponse]
       def retrieve_token_status(request_options: {}, **_params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "oauth2/token/status"
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::RetrieveTokenStatusResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::RetrieveTokenStatusResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # @return [untyped]
       def authorize(request_options: {}, **_params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "GET",
           path: "oauth2/authorize"
         )
-        _response = @client.send(_request)
-        return if _response.code >= "200" && _response.code < "300"
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
+        end
+        code = _response.code.to_i
+        return if code.between?(200, 299)
 
-        raise _response.body
+        error_class = Square::Errors::ResponseError.subclass_for_code(code)
+        raise error_class.new(_response.body, code: code)
       end
     end
   end

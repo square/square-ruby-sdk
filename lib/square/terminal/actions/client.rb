@@ -14,17 +14,23 @@ module Square
         # @return [Square::Types::CreateTerminalActionResponse]
         def create(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "POST",
             path: "v2/terminals/actions",
             body: params
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::CreateTerminalActionResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::CreateTerminalActionResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Retrieves a filtered list of Terminal action requests created by the account making the request. Terminal action requests are available for 30 days.
@@ -32,17 +38,23 @@ module Square
         # @return [Square::Types::SearchTerminalActionsResponse]
         def search(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "POST",
             path: "v2/terminals/actions/search",
             body: params
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::SearchTerminalActionsResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::SearchTerminalActionsResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Retrieves a Terminal action request by `action_id`. Terminal action requests are available for 30 days.
@@ -50,16 +62,22 @@ module Square
         # @return [Square::Types::GetTerminalActionResponse]
         def get(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "GET",
             path: "v2/terminals/actions/#{params[:action_id]}"
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::GetTerminalActionResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::GetTerminalActionResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Cancels a Terminal action request if the status of the request permits it.
@@ -67,16 +85,22 @@ module Square
         # @return [Square::Types::CancelTerminalActionResponse]
         def cancel(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "POST",
             path: "v2/terminals/actions/#{params[:action_id]}/cancel"
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::CancelTerminalActionResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::CancelTerminalActionResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
       end
     end

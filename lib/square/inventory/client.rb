@@ -14,16 +14,22 @@ module Square
       # @return [Square::Types::GetInventoryAdjustmentResponse]
       def deprecated_get_adjustment(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "GET",
           path: "v2/inventory/adjustment/#{params[:adjustment_id]}"
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::GetInventoryAdjustmentResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::GetInventoryAdjustmentResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Returns the [InventoryAdjustment](entity:InventoryAdjustment) object
@@ -32,16 +38,22 @@ module Square
       # @return [Square::Types::GetInventoryAdjustmentResponse]
       def get_adjustment(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "GET",
           path: "v2/inventory/adjustments/#{params[:adjustment_id]}"
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::GetInventoryAdjustmentResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::GetInventoryAdjustmentResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Deprecated version of [BatchChangeInventory](api-endpoint:Inventory-BatchChangeInventory) after the endpoint URL
@@ -50,17 +62,23 @@ module Square
       # @return [Square::Types::BatchChangeInventoryResponse]
       def deprecated_batch_change(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/inventory/batch-change",
           body: Square::Types::BatchChangeInventoryRequest.new(params).to_h
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::BatchChangeInventoryResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::BatchChangeInventoryResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Deprecated version of [BatchRetrieveInventoryChanges](api-endpoint:Inventory-BatchRetrieveInventoryChanges) after the endpoint URL
@@ -69,17 +87,23 @@ module Square
       # @return [Square::Types::BatchGetInventoryChangesResponse]
       def deprecated_batch_get_changes(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/inventory/batch-retrieve-changes",
           body: Square::Types::BatchRetrieveInventoryChangesRequest.new(params).to_h
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::BatchGetInventoryChangesResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::BatchGetInventoryChangesResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Deprecated version of [BatchRetrieveInventoryCounts](api-endpoint:Inventory-BatchRetrieveInventoryCounts) after the endpoint URL
@@ -88,17 +112,23 @@ module Square
       # @return [Square::Types::BatchGetInventoryCountsResponse]
       def deprecated_batch_get_counts(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/inventory/batch-retrieve-counts",
           body: Square::Types::BatchGetInventoryCountsRequest.new(params).to_h
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::BatchGetInventoryCountsResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::BatchGetInventoryCountsResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Applies adjustments and counts to the provided item quantities.
@@ -110,17 +140,23 @@ module Square
       # @return [Square::Types::BatchChangeInventoryResponse]
       def batch_create_changes(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/inventory/changes/batch-create",
           body: Square::Types::BatchChangeInventoryRequest.new(params).to_h
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::BatchChangeInventoryResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::BatchChangeInventoryResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Returns historical physical counts and adjustments based on the
@@ -135,17 +171,23 @@ module Square
       # @return [Square::Types::BatchGetInventoryChangesResponse]
       def batch_get_changes(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/inventory/changes/batch-retrieve",
           body: Square::Types::BatchRetrieveInventoryChangesRequest.new(params).to_h
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::BatchGetInventoryChangesResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::BatchGetInventoryChangesResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Returns current counts for the provided
@@ -163,17 +205,23 @@ module Square
       # @return [Square::Types::BatchGetInventoryCountsResponse]
       def batch_get_counts(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/inventory/counts/batch-retrieve",
           body: Square::Types::BatchGetInventoryCountsRequest.new(params).to_h
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::BatchGetInventoryCountsResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::BatchGetInventoryCountsResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Deprecated version of [RetrieveInventoryPhysicalCount](api-endpoint:Inventory-RetrieveInventoryPhysicalCount) after the endpoint URL
@@ -182,16 +230,22 @@ module Square
       # @return [Square::Types::GetInventoryPhysicalCountResponse]
       def deprecated_get_physical_count(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "GET",
           path: "v2/inventory/physical-count/#{params[:physical_count_id]}"
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::GetInventoryPhysicalCountResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::GetInventoryPhysicalCountResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Returns the [InventoryPhysicalCount](entity:InventoryPhysicalCount)
@@ -200,16 +254,22 @@ module Square
       # @return [Square::Types::GetInventoryPhysicalCountResponse]
       def get_physical_count(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "GET",
           path: "v2/inventory/physical-counts/#{params[:physical_count_id]}"
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::GetInventoryPhysicalCountResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::GetInventoryPhysicalCountResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Returns the [InventoryTransfer](entity:InventoryTransfer) object
@@ -218,16 +278,22 @@ module Square
       # @return [Square::Types::GetInventoryTransferResponse]
       def get_transfer(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "GET",
           path: "v2/inventory/transfers/#{params[:transfer_id]}"
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::GetInventoryTransferResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::GetInventoryTransferResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Retrieves the current calculated stock count for a given
@@ -245,17 +311,23 @@ module Square
         params = params.except(*_query_param_names)
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "GET",
           path: "v2/inventory/#{params[:catalog_object_id]}",
           query: _query
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::GetInventoryCountResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::GetInventoryCountResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Returns a set of physical counts and inventory adjustments for the
@@ -282,17 +354,23 @@ module Square
         params = params.except(*_query_param_names)
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "GET",
           path: "v2/inventory/#{params[:catalog_object_id]}/changes",
           query: _query
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::GetInventoryChangesResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::GetInventoryChangesResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
     end
   end

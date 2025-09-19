@@ -21,17 +21,23 @@ module Square
         # @return [Square::Types::CreateLoyaltyRewardResponse]
         def create(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "POST",
             path: "v2/loyalty/rewards",
             body: params
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::CreateLoyaltyRewardResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::CreateLoyaltyRewardResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Searches for loyalty rewards. This endpoint accepts a request with no query filters and returns results for all loyalty accounts.
@@ -45,17 +51,23 @@ module Square
         # @return [Square::Types::SearchLoyaltyRewardsResponse]
         def search(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "POST",
             path: "v2/loyalty/rewards/search",
             body: params
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::SearchLoyaltyRewardsResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::SearchLoyaltyRewardsResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Retrieves a loyalty reward.
@@ -63,16 +75,22 @@ module Square
         # @return [Square::Types::GetLoyaltyRewardResponse]
         def get(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "GET",
             path: "v2/loyalty/rewards/#{params[:reward_id]}"
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::GetLoyaltyRewardResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::GetLoyaltyRewardResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Deletes a loyalty reward by doing the following:
@@ -88,16 +106,22 @@ module Square
         # @return [Square::Types::DeleteLoyaltyRewardResponse]
         def delete(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "DELETE",
             path: "v2/loyalty/rewards/#{params[:reward_id]}"
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::DeleteLoyaltyRewardResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::DeleteLoyaltyRewardResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Redeems a loyalty reward.
@@ -117,17 +141,23 @@ module Square
           _path_param_names = ["reward_id"]
 
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "POST",
             path: "v2/loyalty/rewards/#{params[:reward_id]}/redeem",
             body: params.except(*_path_param_names)
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::RedeemLoyaltyRewardResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::RedeemLoyaltyRewardResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
       end
     end

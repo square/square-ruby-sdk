@@ -19,17 +19,23 @@ module Square
       # @return [Square::Types::CreateOrderResponse]
       def create(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/orders",
           body: Square::Types::CreateOrderRequest.new(params).to_h
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::CreateOrderResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::CreateOrderResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Retrieves a set of [orders](entity:Order) by their IDs.
@@ -39,17 +45,23 @@ module Square
       # @return [Square::Types::BatchGetOrdersResponse]
       def batch_get(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/orders/batch-retrieve",
           body: params
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::BatchGetOrdersResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::BatchGetOrdersResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Enables applications to preview order pricing without creating an order.
@@ -57,17 +69,23 @@ module Square
       # @return [Square::Types::CalculateOrderResponse]
       def calculate(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/orders/calculate",
           body: params
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::CalculateOrderResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::CalculateOrderResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Creates a new order, in the `DRAFT` state, by duplicating an existing order. The newly created order has
@@ -76,17 +94,23 @@ module Square
       # @return [Square::Types::CloneOrderResponse]
       def clone(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/orders/clone",
           body: params
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::CloneOrderResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::CloneOrderResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Search all orders for one or more locations. Orders include all sales,
@@ -110,17 +134,23 @@ module Square
       # @return [Square::Types::SearchOrdersResponse]
       def search(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/orders/search",
           body: params
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::SearchOrdersResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::SearchOrdersResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Retrieves an [Order](entity:Order) by ID.
@@ -128,14 +158,22 @@ module Square
       # @return [Square::Types::GetOrderResponse]
       def get(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "GET",
           path: "v2/orders/#{params[:order_id]}"
         )
-        _response = @client.send(_request)
-        return Square::Types::GetOrderResponse.load(_response.body) if _response.code >= "200" && _response.code < "300"
-
-        raise _response.body
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
+        end
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::GetOrderResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Updates an open [order](entity:Order) by adding, replacing, or deleting
@@ -159,17 +197,23 @@ module Square
         _path_param_names = ["order_id"]
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "PUT",
           path: "v2/orders/#{params[:order_id]}",
           body: params.except(*_path_param_names)
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::UpdateOrderResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::UpdateOrderResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Pay for an [order](entity:Order) using one or more approved [payments](entity:Payment)
@@ -192,15 +236,23 @@ module Square
         _path_param_names = ["order_id"]
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/orders/#{params[:order_id]}/pay",
           body: params.except(*_path_param_names)
         )
-        _response = @client.send(_request)
-        return Square::Types::PayOrderResponse.load(_response.body) if _response.code >= "200" && _response.code < "300"
-
-        raise _response.body
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
+        end
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::PayOrderResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # @return [Square::CustomAttributeDefinitions::Client]

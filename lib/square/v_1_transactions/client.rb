@@ -20,15 +20,21 @@ module Square
         params = params.except(*_query_param_names)
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "GET",
           path: "v1/#{params[:location_id]}/orders",
           query: _query
         )
-        _response = @client.send(_request)
-        return if _response.code >= "200" && _response.code < "300"
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
+        end
+        code = _response.code.to_i
+        return if code.between?(200, 299)
 
-        raise _response.body
+        error_class = Square::Errors::ResponseError.subclass_for_code(code)
+        raise error_class.new(_response.body, code: code)
       end
 
       # Provides comprehensive information for a single online store order, including the order's history.
@@ -36,14 +42,22 @@ module Square
       # @return [Square::Types::V1Order]
       def v_1_retrieve_order(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "GET",
           path: "v1/#{params[:location_id]}/orders/#{params[:order_id]}"
         )
-        _response = @client.send(_request)
-        return Square::Types::V1Order.load(_response.body) if _response.code >= "200" && _response.code < "300"
-
-        raise _response.body
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
+        end
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::V1Order.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Updates the details of an online store order. Every update you perform on an order corresponds to one of three actions:
@@ -53,15 +67,23 @@ module Square
         _path_param_names = %w[location_id order_id]
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "PUT",
           path: "v1/#{params[:location_id]}/orders/#{params[:order_id]}",
           body: params.except(*_path_param_names)
         )
-        _response = @client.send(_request)
-        return Square::Types::V1Order.load(_response.body) if _response.code >= "200" && _response.code < "300"
-
-        raise _response.body
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
+        end
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::V1Order.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
     end
   end

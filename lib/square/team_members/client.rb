@@ -18,17 +18,23 @@ module Square
       # @return [Square::Types::CreateTeamMemberResponse]
       def create(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/team-members",
           body: Square::Types::CreateTeamMemberRequest.new(params).to_h
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::CreateTeamMemberResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::CreateTeamMemberResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Creates multiple `TeamMember` objects. The created `TeamMember` objects are returned on successful creates.
@@ -41,17 +47,23 @@ module Square
       # @return [Square::Types::BatchCreateTeamMembersResponse]
       def batch_create(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/team-members/bulk-create",
           body: params
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::BatchCreateTeamMembersResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::BatchCreateTeamMembersResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Updates multiple `TeamMember` objects. The updated `TeamMember` objects are returned on successful updates.
@@ -63,17 +75,23 @@ module Square
       # @return [Square::Types::BatchUpdateTeamMembersResponse]
       def batch_update(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/team-members/bulk-update",
           body: params
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::BatchUpdateTeamMembersResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::BatchUpdateTeamMembersResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Returns a paginated list of `TeamMember` objects for a business.
@@ -83,17 +101,23 @@ module Square
       # @return [Square::Types::SearchTeamMembersResponse]
       def search(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "POST",
           path: "v2/team-members/search",
           body: params
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::SearchTeamMembersResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::SearchTeamMembersResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Retrieves a `TeamMember` object for the given `TeamMember.id`.
@@ -102,16 +126,22 @@ module Square
       # @return [Square::Types::GetTeamMemberResponse]
       def get(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "GET",
           path: "v2/team-members/#{params[:team_member_id]}"
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::GetTeamMemberResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::GetTeamMemberResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # Updates a single `TeamMember` object. The `TeamMember` object is returned on successful updates.
@@ -122,17 +152,23 @@ module Square
         _path_param_names = ["team_member_id"]
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
           method: "PUT",
           path: "v2/team-members/#{params[:team_member_id]}",
           body: params.except(*_path_param_names)
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Square::Types::UpdateTeamMemberResponse.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Square::Errors::TimeoutError
         end
-
-        raise _response.body
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Square::Types::UpdateTeamMemberResponse.load(_response.body)
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
+        end
       end
 
       # @return [Square::WageSetting::Client]

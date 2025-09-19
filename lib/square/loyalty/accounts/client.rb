@@ -14,17 +14,23 @@ module Square
         # @return [Square::Types::CreateLoyaltyAccountResponse]
         def create(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "POST",
             path: "v2/loyalty/accounts",
             body: params
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::CreateLoyaltyAccountResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::CreateLoyaltyAccountResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Searches for loyalty accounts in a loyalty program.
@@ -36,17 +42,23 @@ module Square
         # @return [Square::Types::SearchLoyaltyAccountsResponse]
         def search(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "POST",
             path: "v2/loyalty/accounts/search",
             body: params
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::SearchLoyaltyAccountsResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::SearchLoyaltyAccountsResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Retrieves a loyalty account.
@@ -54,16 +66,22 @@ module Square
         # @return [Square::Types::GetLoyaltyAccountResponse]
         def get(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "GET",
             path: "v2/loyalty/accounts/#{params[:account_id]}"
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::GetLoyaltyAccountResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::GetLoyaltyAccountResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Adds points earned from a purchase to a [loyalty account](entity:LoyaltyAccount).
@@ -86,17 +104,23 @@ module Square
           _path_param_names = ["account_id"]
 
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "POST",
             path: "v2/loyalty/accounts/#{params[:account_id]}/accumulate",
             body: params.except(*_path_param_names)
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::AccumulateLoyaltyPointsResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::AccumulateLoyaltyPointsResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Adds points to or subtracts points from a buyer's account.
@@ -110,17 +134,23 @@ module Square
           _path_param_names = ["account_id"]
 
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "POST",
             path: "v2/loyalty/accounts/#{params[:account_id]}/adjust",
             body: params.except(*_path_param_names)
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::AdjustLoyaltyPointsResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::AdjustLoyaltyPointsResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
       end
     end

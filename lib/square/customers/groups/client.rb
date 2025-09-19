@@ -21,17 +21,23 @@ module Square
           params.except(*_query_param_names)
 
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "GET",
             path: "v2/customers/groups",
             query: _query
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::ListCustomerGroupsResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::ListCustomerGroupsResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Creates a new customer group for a business.
@@ -41,17 +47,23 @@ module Square
         # @return [Square::Types::CreateCustomerGroupResponse]
         def create(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "POST",
             path: "v2/customers/groups",
             body: params
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::CreateCustomerGroupResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::CreateCustomerGroupResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Retrieves a specific customer group as identified by the `group_id` value.
@@ -59,16 +71,22 @@ module Square
         # @return [Square::Types::GetCustomerGroupResponse]
         def get(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "GET",
             path: "v2/customers/groups/#{params[:group_id]}"
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::GetCustomerGroupResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::GetCustomerGroupResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Updates a customer group as identified by the `group_id` value.
@@ -78,17 +96,23 @@ module Square
           _path_param_names = ["group_id"]
 
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "PUT",
             path: "v2/customers/groups/#{params[:group_id]}",
             body: params.except(*_path_param_names)
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::UpdateCustomerGroupResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::UpdateCustomerGroupResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Deletes a customer group as identified by the `group_id` value.
@@ -96,16 +120,22 @@ module Square
         # @return [Square::Types::DeleteCustomerGroupResponse]
         def delete(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "DELETE",
             path: "v2/customers/groups/#{params[:group_id]}"
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::DeleteCustomerGroupResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::DeleteCustomerGroupResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Adds a group membership to a customer.
@@ -116,16 +146,22 @@ module Square
         # @return [Square::Types::AddGroupToCustomerResponse]
         def add(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "PUT",
             path: "v2/customers/#{params[:customer_id]}/groups/#{params[:group_id]}"
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::AddGroupToCustomerResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::AddGroupToCustomerResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
 
         # Removes a group membership from a customer.
@@ -136,16 +172,22 @@ module Square
         # @return [Square::Types::RemoveGroupFromCustomerResponse]
         def remove(request_options: {}, **params)
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::SANDBOX,
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "DELETE",
             path: "v2/customers/#{params[:customer_id]}/groups/#{params[:group_id]}"
           )
-          _response = @client.send(_request)
-          if _response.code >= "200" && _response.code < "300"
-            return Square::Types::RemoveGroupFromCustomerResponse.load(_response.body)
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
           end
-
-          raise _response.body
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::RemoveGroupFromCustomerResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
       end
     end
