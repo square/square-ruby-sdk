@@ -9,7 +9,7 @@ module Square
       # @param item_field [Symbol] The field to pull the list of items to iterate over.
       # @param has_next_field [Symbol] The field to pull the boolean of whether a next page exists from, if any.
       # @param step [Boolean] If true, treats the page number as a true offset (i.e. increments the page number by the number of items returned from each call rather than just 1)
-      # @return [Square::Internal::PageIterator]
+      # @return [Square::Internal::OffsetPageIterator]
       def initialize(initial_page:, item_field:, has_next_field:, step:, &block)
         @page_number = initial_page || (step ? 0 : 1)
         @item_field = item_field
@@ -77,11 +77,6 @@ module Square
         end
 
         this_page
-      end
-
-      private
-
-      def load_next_page
       end
     end
   end
