@@ -6,49 +6,124 @@ require "json"
 require "test_helper"
 require "ostruct"
 
-NUMBERS = (1..65).to_a
+TestIteratorConfig = Struct.new(
+  :step,
+  :has_next_field,
+  :total_item_count,
+  :per_page,
+  :initial_page,
+) do
+  def first_item_returned
+    if step
+      (initial_page || 0) + 1
+    else
+      (((initial_page || 1) - 1) * per_page) + 1
+    end
+  end
+end
+
+LAZY_TEST_ITERATOR_CONFIG = TestIteratorConfig.new(initial_page: 1, step: false, has_next_field: :has_next, total_item_count: 65, per_page: 10)
+ALL_TEST_ITERATOR_CONFIGS = []
+
+for step in [true, false]
+  for has_next_field in [:has_next, nil]
+    for total_item_count in [0, 5, 10, 60, 63]
+      for per_page in [5, 10]
+        initial_pages = [nil, 3, 100]
+        initial_pages << (step ? 0 : 1)
+
+        for initial_page in initial_pages
+          ALL_TEST_ITERATOR_CONFIGS << TestIteratorConfig.new(
+            step: step,
+            has_next_field: has_next_field,
+            total_item_count: total_item_count,
+            per_page: per_page,
+            initial_page: initial_page,
+          )
+        end
+      end
+    end
+  end
+end
 
 class OffsetItemIteratorTest < Minitest::Test
-  def make_iterator(initial_page:)
+  def make_iterator(config)
     @times_called = 0
 
-    Square::Internal::OffsetItemIterator.new(initial_page:, page_field: :next_page, item_field: :cards) do |page|
+    items = (1..config.total_item_count).to_a
+
+    Square::Internal::OffsetItemIterator.new(
+      initial_page: config.initial_page,
+      item_field: :items,
+      has_next_field: config.has_next_field,
+      step: config.step,
+    ) do |page|
       @times_called += 1
-      next_page = page + 1
-      OpenStruct.new(
-        cards: NUMBERS[((page - 1) * 10)...((next_page - 1) * 10)],
-        next_page: NUMBERS.length > page * 10 ? next_page : nil
-      )
+
+      slice_start = config.step ? page : (page - 1) * config.per_page
+      slice_end = slice_start + config.per_page
+
+      output = {
+        items: items[slice_start...slice_end],
+      }
+      if config.has_next_field
+        output[config.has_next_field] = slice_end < items.length
+      end
+
+      OpenStruct.new(output)
     end
   end
 
   def test_item_iterator_can_iterate_to_exhaustion
-    iterator = make_iterator(initial_page: 1)
-    assert_equal NUMBERS, iterator.to_a
-    assert_equal 7, @times_called
-
-    iterator = make_iterator(initial_page: 2)
-    assert_equal (11..65).to_a, iterator.to_a
+    for config in ALL_TEST_ITERATOR_CONFIGS
+      iterator = make_iterator(config)
+      assert_equal (config.first_item_returned..config.total_item_count).to_a, iterator.to_a
+    end
   end
 
-  def test_item_iterator_can_work_without_an_initial_page
-    iterator = make_iterator(initial_page: nil)
-    assert_equal NUMBERS, iterator.to_a
-    assert_equal 7, @times_called
+  def test_items_iterator_can_be_advanced_manually_and_has_accurate_has_next
+    for config in ALL_TEST_ITERATOR_CONFIGS
+      iterator = make_iterator(config)
+      items = []
+
+      while item = iterator.get_next do
+        assert_equal(item != config.total_item_count, iterator.has_next?, "#{item} #{iterator}")
+        items.push(item)
+      end
+
+      assert_equal (config.first_item_returned..config.total_item_count).to_a, items
+    end
+  end
+
+  def test_pages_iterator_can_be_advanced_manually_and_has_accurate_has_next
+    for config in ALL_TEST_ITERATOR_CONFIGS
+      iterator = make_iterator(config).pages
+      pages = []
+
+      loop do
+        has_next_output = iterator.has_next?
+        page = iterator.get_next
+        assert_equal(has_next_output, !page.nil?, "has_next was inaccurate: #{config} #{iterator.inspect}")
+        break if page.nil?
+        pages.push(page)
+      end
+
+      assert_equal pages, make_iterator(config).pages.to_a
+    end
   end
 
   def test_items_iterator_iterates_lazily
-    iterator = make_iterator(initial_page: 1)
+    iterator = make_iterator(LAZY_TEST_ITERATOR_CONFIG)
     assert_equal 0, @times_called
     assert_equal 1, iterator.first
     assert_equal 1, @times_called
 
-    iterator = make_iterator(initial_page: 1)
+    iterator = make_iterator(LAZY_TEST_ITERATOR_CONFIG)
     assert_equal 0, @times_called
     assert_equal (1..15).to_a, iterator.first(15)
     assert_equal 2, @times_called
 
-    iterator = make_iterator(initial_page: 1)
+    iterator = make_iterator(LAZY_TEST_ITERATOR_CONFIG)
     assert_equal 0, @times_called
     iterator.each do |card|
       if card >= 15
@@ -58,108 +133,15 @@ class OffsetItemIteratorTest < Minitest::Test
     assert_equal 2, @times_called
   end
 
-  def test_items_iterator_implements_enumerable
-    iterator = make_iterator(initial_page: 1)
-    assert_equal 0, @times_called
-    doubled = iterator.map{|card| card * 2}
-    assert_equal 7, @times_called
-    assert_equal NUMBERS.length, doubled.length
-  end
-
-  def test_items_iterator_can_be_advanced_manually
-    iterator = make_iterator(initial_page: 1)
-    assert_equal 0, @times_called
-
-    items = []
-    expected_times_called = 0
-    while item = iterator.get_next do
-      expected_times_called += 1 if (item % 10) == 1
-      assert_equal expected_times_called, @times_called
-      assert_equal item != NUMBERS.last, iterator.has_next?, "#{item} #{iterator}"
-      items.push(item)
-    end
-
-    assert_equal 7, @times_called
-    assert_equal NUMBERS, items
-  end
-
-  def test_pages_iterator
-    iterator = make_iterator(initial_page: 1).pages
-    assert_equal(
-      [
-        (1..10).to_a,
-        (11..20).to_a,
-        (21..30).to_a,
-        (31..40).to_a,
-        (41..50).to_a,
-        (51..60).to_a,
-        (61..65).to_a,
-      ],
-      iterator.to_a.map{|p| p.cards}
-    )
-
-    iterator = make_iterator(initial_page: 2).pages
-    assert_equal(
-      [
-        (11..20).to_a,
-        (21..30).to_a,
-        (31..40).to_a,
-        (41..50).to_a,
-        (51..60).to_a,
-        (61..65).to_a,
-      ],
-      iterator.to_a.map{|p| p.cards}
-    )
-  end
-
-  def test_pages_iterator_can_work_without_an_initial_page
-    iterator = make_iterator(initial_page: nil).pages
-    assert_equal 7, iterator.to_a.length
-    assert_equal 7, @times_called
-  end
-
   def test_pages_iterator_iterates_lazily
-    iterator = make_iterator(initial_page: 1).pages
+    iterator = make_iterator(LAZY_TEST_ITERATOR_CONFIG).pages
     assert_equal 0, @times_called
     iterator.first
     assert_equal 1, @times_called
 
-    iterator = make_iterator(initial_page: 1).pages
+    iterator = make_iterator(LAZY_TEST_ITERATOR_CONFIG).pages
     assert_equal 0, @times_called
-    assert_equal 2, iterator.first(2).length
-    assert_equal 2, @times_called
-  end
-
-  def test_pages_iterator_knows_whether_another_page_is_upcoming
-    iterator = make_iterator(initial_page: 1).pages
-
-    iterator.each_with_index do |page, index|
-      assert_equal index + 1, @times_called
-      assert_equal index < 6, iterator.has_next?
-    end
-  end
-
-  def test_pages_iterator_can_be_advanced_manually
-    iterator = make_iterator(initial_page: 1).pages
-    assert_equal 0, @times_called
-
-    lengths = []
-    expected_times_called = 0
-    while page = iterator.get_next do
-      expected_times_called += 1
-      assert_equal expected_times_called, @times_called
-      lengths.push(page.cards.length)
-    end
-
-    assert_equal 7, @times_called
-    assert_equal [10, 10, 10, 10, 10, 10, 5], lengths
-  end
-
-  def test_pages_iterator_implements_enumerable
-    iterator = make_iterator(initial_page: 1).pages
-    assert_equal 0, @times_called
-    lengths = iterator.map{|page| page.cards.length}
-    assert_equal 7, @times_called
-    assert_equal [10, 10, 10, 10, 10, 10, 5], lengths
+    assert_equal 3, iterator.first(3).length
+    assert_equal 3, @times_called
   end
 end

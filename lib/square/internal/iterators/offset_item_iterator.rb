@@ -3,12 +3,12 @@ module Square
     class OffsetItemIterator < ItemIterator
       # Instantiates an OffsetItemIterator, an Enumerable class which wraps calls to an offset-based paginated API and yields the individual items from it.
       #
-      # @param initial_cursor [String] The initial cursor to use when iterating.
-      # @param cursor_field [String] The name of the field in API responses to extract the next cursor from.
-      # @param item_field [String] The name of the field in API responses to extract the items to iterate over.
-      def initialize(initial_page:, page_field:, item_field:, &block)
+      # @param initial_page [Integer] The initial cursor to use when iterating.
+      # @param item_field [Symbol] The name of the field in API responses to extract the items to iterate over.
+      # @param has_next_field [Symbol] The name of the field in API responses containing a boolean of whether another page exists.
+      def initialize(initial_page:, item_field:, has_next_field:, step:, &block)
         @item_field = item_field
-        @page_iterator = OffsetPageIterator.new(initial_page:, page_field:, &block)
+        @page_iterator = OffsetPageIterator.new(initial_page:, item_field:, has_next_field:, step:, &block)
         @page = nil
       end
 

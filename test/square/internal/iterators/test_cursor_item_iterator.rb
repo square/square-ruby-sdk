@@ -30,6 +30,9 @@ class CursorItemIteratorTest < Minitest::Test
 
     iterator = make_iterator(initial_cursor: 10)
     assert_equal (11..65).to_a, iterator.to_a
+
+    iterator = make_iterator(initial_cursor: 5)
+    assert_equal (6..65).to_a, iterator.to_a
   end
 
   def test_item_iterator_can_work_without_an_initial_cursor

@@ -22,6 +22,7 @@ module Square
 
         return true if any_items_in_cached_page
         load_next_page
+        return false if @page.nil?
         any_items_in_cached_page
       end
 
@@ -39,12 +40,14 @@ module Square
 
       def next_item_from_cached_page
         return if !@page
-        @page.send(@item_field).shift
+        @page.send(@item_field)&.shift
       end
 
       def any_items_in_cached_page
         return false if !@page
-        !@page.send(@item_field).empty?
+        items = @page.send(@item_field)
+        return false if items.nil?
+        !items.empty?
       end
 
       def load_next_page
