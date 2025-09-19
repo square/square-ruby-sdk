@@ -4,7 +4,6 @@ require "json"
 require "net/http"
 require "securerandom"
 
-# Internal Types
 require_relative "square/internal/json/serializable"
 require_relative "square/internal/types/type"
 require_relative "square/internal/types/utils"
@@ -25,8 +24,12 @@ require_relative "square/internal/types/boolean"
 require_relative "square/internal/types/enum"
 require_relative "square/internal/types/hash"
 require_relative "square/internal/types/unknown"
-
-# API Types
+require_relative "square/errors/api_error"
+require_relative "square/errors/response_error"
+require_relative "square/errors/client_error"
+require_relative "square/errors/redirect_error"
+require_relative "square/errors/server_error"
+require_relative "square/errors/timeout_error"
 require_relative "square/types/ach_details"
 require_relative "square/types/card_brand"
 require_relative "square/types/currency"
@@ -1295,8 +1298,6 @@ require_relative "square/types/vendor_updated_event_data"
 require_relative "square/types/vendor_updated_event"
 require_relative "square/types/visibility_filter"
 require_relative "square/types/void_transaction_response"
-
-# Client Types
 require_relative "square/client"
 require_relative "square/mobile/client"
 require_relative "square/mobile/types/create_mobile_authorization_code_request"
