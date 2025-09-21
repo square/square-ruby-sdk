@@ -105,6 +105,28 @@ client = SquareLegacy::Client.new(
 ```
 4. Gradually migrate over to the new SDK by importing it from the `'square'` import.
 
+## Environments
+
+This SDK allows you to configure different environments or custom URLs for API requests. You can either use the predefined environments or specify your own custom URL.
+
+### Environments
+```ruby
+require "square"
+
+client = Square::Client.new(
+    base_url: Square::Environment::PRODUCTION
+)
+```
+
+### Custom URL
+```ruby
+require "square"
+
+client = Square::Client.new(
+    base_url: "https://custom-staging.com"
+)
+```
+
 ## Request And Response Types
 
 The SDK exports all request and response types as Ruby classes. Simply require them with the
@@ -119,20 +141,29 @@ request = Square::CreateMobileAuthorizationCodeRequest.new(
 )
 ```
 
-## Exception Handling
+## Errors
 
-When the API returns a non-success status code (4xx or 5xx response), a subclass of the following error
-will be raised.
+Failed API calls will raise errors that can be rescued from granularly.
 
 ```ruby
-require 'square'
+require "square"
+
+client = Square::Client.new(
+  base_url: Square::Environment::PRODUCTION
+)
 
 begin
-  response = client.payments.create(...)
-rescue Square::ApiError => e
-  puts "Status Code: #{e.status_code}"
-  puts "Message: #{e.message}"
-  puts "Body: #{e.body}"
+    result = client.payments.create
+rescue Square::Errors::TimeoutError
+    puts "API didn't respond before our timeout elapsed"
+rescue Square::Errors::ServiceUnavailableError
+    puts "API returned status 503, is probably overloaded, try again later"
+rescue Square::Errors::ServerError
+    puts "API returned some other 5xx status, this is probably a bug"
+rescue Square::Errors::ResponseError => e
+    puts "API returned an unexpected status other than 5xx: #{e.code} {e.message}"
+rescue Square::Errors::ApiError => e
+    puts "Some other error occurred when calling the API: {e.message}"
 end
 ```
 
