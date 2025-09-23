@@ -10,6 +10,7 @@ module Square
       RESUME = "RESUME"
       SWAP_PLAN = "SWAP_PLAN"
       CHANGE_BILLING_ANCHOR_DATE = "CHANGE_BILLING_ANCHOR_DATE"
+      COMPLETE = "COMPLETE"
     end
   end
 end

@@ -10,6 +10,7 @@ module Square
       CANCELED = "CANCELED"
       DEACTIVATED = "DEACTIVATED"
       PAUSED = "PAUSED"
+      COMPLETED = "COMPLETED"
     end
   end
 end
