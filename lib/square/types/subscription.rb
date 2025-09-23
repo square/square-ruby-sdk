@@ -26,6 +26,7 @@ module Square
       field :actions, -> { Internal::Types::Array[Square::Types::SubscriptionAction] }, optional: true, nullable: false
       field :monthly_billing_anchor_date, -> { Integer }, optional: true, nullable: false
       field :phases, -> { Internal::Types::Array[Square::Types::Phase] }, optional: true, nullable: false
+      field :completed_date, -> { String }, optional: true, nullable: false
     end
   end
 end
