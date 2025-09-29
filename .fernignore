@@ -3,7 +3,6 @@ lib/square_legacy.rb
 Gemfile
 Rakefile
 .rubocop.yml
-square.gemspec
 .gitignore
 test/
 .github/workflows
