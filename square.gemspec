@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative "lib/square/version"
-require_relative "custom.gemspec"
 
 Gem::Specification.new do |s|
   s.name = 'square.rb'
