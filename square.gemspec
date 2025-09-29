@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
+require_relative "lib/square/version"
+
 Gem::Specification.new do |s|
   s.name = 'square.rb'
-  s.version = '44.0.1.20250820'
+  s.version = Square::VERSION
   s.summary = 'square'
   s.description = ''
   s.authors = ['Square Developer Platform']
