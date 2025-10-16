@@ -7,7 +7,7 @@ module Square
       @raw_client = Square::Internal::Http::RawClient.new(
         base_url: base_url,
         headers: {
-          "User-Agent": "square.rb/44.1.0.20250924",
+          "User-Agent": "square.rb/44.2.0.20251016",
           "X-Fern-Language": "Ruby",
           Authorization: "Bearer #{token}"
         }
@@ -52,6 +52,11 @@ module Square
     # @return [Square::Catalog::Client]
     def catalog
       @catalog ||= Square::Catalog::Client.new(client: @raw_client)
+    end
+
+    # @return [Square::Channels::Client]
+    def channels
+      @channels ||= Square::Channels::Client.new(client: @raw_client)
     end
 
     # @return [Square::Customers::Client]
@@ -167,6 +172,11 @@ module Square
     # @return [Square::Terminal::Client]
     def terminal
       @terminal ||= Square::Terminal::Client.new(client: @raw_client)
+    end
+
+    # @return [Square::TransferOrders::Client]
+    def transfer_orders
+      @transfer_orders ||= Square::TransferOrders::Client.new(client: @raw_client)
     end
 
     # @return [Square::Vendors::Client]
