@@ -61,23 +61,30 @@ module Square
       #
       # @return [Square::Types::SearchTransferOrdersResponse]
       def search(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
-          method: "POST",
-          path: "v2/transfer-orders/search",
-          body: params
-        )
-        begin
-          _response = @client.send(_request)
-        rescue Net::HTTPRequestTimeout
-          raise Square::Errors::TimeoutError
-        end
-        code = _response.code.to_i
-        if code.between?(200, 299)
-          Square::Types::SearchTransferOrdersResponse.load(_response.body)
-        else
-          error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+        Square::Internal::CursorItemIterator.new(
+          cursor_field: :cursor,
+          item_field: :transfer_orders,
+          initial_cursor: _query[:cursor]
+        ) do |next_cursor|
+          _query[:cursor] = next_cursor
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+            method: "POST",
+            path: "v2/transfer-orders/search",
+            body: params
+          )
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
+          end
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::SearchTransferOrdersResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
       end
 
@@ -147,10 +154,8 @@ module Square
       #
       # @return [Square::Types::DeleteTransferOrderResponse]
       def delete(request_options: {}, **params)
-        _query_param_names = [
-          ["version"],
-          %i[version]
-        ].flatten
+        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        _query_param_names = %i[version]
         _query = params.slice(*_query_param_names)
         params = params.except(*_query_param_names)
 

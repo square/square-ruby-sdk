@@ -12,10 +12,8 @@ module Square
       #
       # @return [Square::Types::ListJobsResponse]
       def list_jobs(request_options: {}, **params)
-        _query_param_names = [
-          ["cursor"],
-          %i[cursor]
-        ].flatten
+        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        _query_param_names = %i[cursor]
         _query = params.slice(*_query_param_names)
         params.except(*_query_param_names)
 
