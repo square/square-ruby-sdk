@@ -12,3 +12,7 @@ custom.gemfile.rb
 # Manually fixed pagination bugs in:
 lib/square/inventory/client.rb
 lib/square/transfer_orders/client.rb
+
+# Iterator does not handle nil item fields (when API returns nil instead of empty array for no items)
+# Manually added nil checks to avoid calling .shift/.empty? on nil
+lib/square/internal/iterators/item_iterator.rb

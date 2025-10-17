@@ -42,13 +42,19 @@ module Square
       def next_item_from_cached_page
         return unless @page
 
-        @page.send(@item_field).shift
+        items = @page.send(@item_field)
+        return nil if items.nil?
+
+        items.shift
       end
 
       def any_items_in_cached_page
         return false unless @page
 
-        !@page.send(@item_field).empty?
+        items = @page.send(@item_field)
+        return false if items.nil?
+
+        !items.empty?
       end
 
       def load_next_page
