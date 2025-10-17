@@ -47,10 +47,11 @@ describe Square::Refunds::Client do
       puts "request #{_request.to_h}" if verbose?
 
       response = client.refunds.list
-      refute_nil response.refunds
-      assert response.refunds.length > 0
+      refunds = response.to_a
+      refute_nil refunds
+      assert refunds.length > 0
 
-      puts "response #{response.to_h}" if verbose?
+      puts "response #{refunds}" if verbose?
     end
   end
 

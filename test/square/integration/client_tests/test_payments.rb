@@ -31,11 +31,12 @@ describe Square::Payments::Client do
 
       response = client.payments.list
       refute_nil response
-      assert_equal response.class, Square::Types::ListPaymentsResponse
-      refute_nil response.payments
-      assert response.payments.length > 0
+      assert_equal Square::Internal::CursorItemIterator, response.class
+      payments = response.to_a
+      refute_nil payments
+      assert payments.length > 0
 
-      puts "response #{response.to_h}" if verbose?
+      puts "response #{payments}" if verbose?
     end
   end
 

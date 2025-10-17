@@ -6,7 +6,8 @@ describe Square::Merchants::Client do
   before do
     # Get first merchant ID
     merchant_response = client.merchants.list
-    @merchant_id = merchant_response.merchant.first.id
+    merchants = merchant_response.to_a
+    @merchant_id = merchants.first.id
   end
 
   describe "#list" do
@@ -14,11 +15,12 @@ describe Square::Merchants::Client do
 
       response = client.merchants.list
       refute_nil response
-      assert_equal response.class, Square::Types::ListMerchantsResponse
-      refute_nil response.merchant
-      assert response.merchant.length > 0
+      assert_equal Square::Internal::CursorItemIterator, response.class
+      merchants = response.to_a
+      refute_nil merchants
+      assert merchants.length > 0
 
-      puts "response #{response.to_h}" if verbose?
+      puts "response #{merchants}" if verbose?
     end
   end
 

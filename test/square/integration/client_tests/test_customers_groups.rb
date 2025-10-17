@@ -42,11 +42,12 @@ describe Square::Customers::Groups::Client do
       # list
       list_response = client.customers.groups.list
       refute_nil list_response
-      assert_equal list_response.class, Square::Types::ListCustomerGroupsResponse
-      refute_nil list_response.groups
-      assert list_response.groups.length > 0
+      assert_equal Square::Internal::CursorItemIterator, list_response.class
+      groups = list_response.to_a
+      refute_nil groups
+      assert groups.length > 0
 
-      puts "list_response #{list_response.to_h}" if verbose?
+      puts "list_response #{groups}" if verbose?
 
       # Cleanup
       delete_test_customer_group(response.group.id)

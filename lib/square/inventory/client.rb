@@ -170,6 +170,11 @@ module Square
       #
       # @return [Square::Types::BatchGetInventoryChangesResponse]
       def batch_get_changes(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        _query_param_names = %i[cursor]
+        _query = params.slice(*_query_param_names)
+        params = params.except(*_query_param_names)
+
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :changes,
@@ -211,6 +216,11 @@ module Square
       #
       # @return [Square::Types::BatchGetInventoryCountsResponse]
       def batch_get_counts(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        _query_param_names = %i[cursor]
+        _query = params.slice(*_query_param_names)
+        params = params.except(*_query_param_names)
+
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :counts,
