@@ -47,11 +47,16 @@ describe Square::Refunds::Client do
       puts "request #{_request.to_h}" if verbose?
 
       response = client.refunds.list
-      refunds = response.to_a
+
+      # Iterate using the iterator pattern
+      refunds = []
+      response.each do |refund|
+        refunds << refund
+      end
       refute_nil refunds
       assert refunds.length > 0
 
-      puts "response #{refunds}" if verbose?
+      puts "response refunds_count=#{refunds.length}" if verbose?
     end
   end
 

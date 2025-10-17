@@ -43,11 +43,16 @@ describe Square::Customers::Groups::Client do
       list_response = client.customers.groups.list
       refute_nil list_response
       assert_equal Square::Internal::CursorItemIterator, list_response.class
-      groups = list_response.to_a
+
+      # Iterate using the iterator pattern
+      groups = []
+      list_response.each do |group|
+        groups << group
+      end
       refute_nil groups
       assert groups.length > 0
 
-      puts "list_response #{groups}" if verbose?
+      puts "list_response groups_count=#{groups.length}" if verbose?
 
       # Cleanup
       delete_test_customer_group(response.group.id)

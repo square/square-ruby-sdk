@@ -32,11 +32,16 @@ describe Square::Payments::Client do
       response = client.payments.list
       refute_nil response
       assert_equal Square::Internal::CursorItemIterator, response.class
-      payments = response.to_a
+
+      # Iterate using the iterator pattern
+      payments = []
+      response.each do |payment|
+        payments << payment
+      end
       refute_nil payments
       assert payments.length > 0
 
-      puts "response #{payments}" if verbose?
+      puts "response payments_count=#{payments.length}" if verbose?
     end
   end
 

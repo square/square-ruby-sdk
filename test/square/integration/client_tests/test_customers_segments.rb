@@ -9,18 +9,31 @@ describe Square::Customers::Segments::Client do
       response = client.customers.segments.list
       refute_nil response
       assert_equal Square::Internal::CursorItemIterator, response.class
-      # Iterator wraps the response, we need to access the first page to get segments
-      refute_nil response.to_a
 
-      puts "response #{response.to_a}" if verbose?
+      # Iterate using the iterator pattern
+      segments = []
+      response.each do |segment|
+        segments << segment
+      end
+
+      puts "response segments_count=#{segments.length}" if verbose?
     end
   end
 
   describe "#get" do
     it "should retrieve a customer segment" do
+
       list_response = client.customers.segments.list
-      segments = list_response.to_a
-      segment_id = segments.first.id
+      # Get first segment using iterator
+      first_segment = nil
+      list_response.each do |segment|
+        first_segment = segment
+        break
+      end
+
+      skip "No segments available to test" if first_segment.nil?
+
+      segment_id = first_segment.id
 
       _request = Square::Customers::Segments::Types::GetSegmentsRequest.new(
         segment_id: segment_id
