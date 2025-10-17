@@ -21,8 +21,15 @@ describe Square::Inventory::Client do
 
       response = client.inventory.batch_get_changes(**_request.to_h)
       refute_nil response
-      assert_equal response.class, Square::Types::BatchGetInventoryChangesResponse
-      puts "response #{response.to_h}" if verbose?
+      assert_equal Square::Internal::CursorItemIterator, response.class
+
+      # Iterate using the iterator pattern
+      changes = []
+      response.each do |change|
+        changes << change
+      end
+
+      puts "response changes_count=#{changes.length}" if verbose?
     end
   end
 end

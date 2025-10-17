@@ -7,11 +7,8 @@ gemspec
 group :test, :development do
   gem "rake", "~> 13.0"
 
-  gem 'minitest', '~> 5.20'
+  gem "minitest", "~> 5.16"
   gem "minitest-rg"
-
-  gem 'mutex_m'
-  gem 'base64'
 
   gem "rubocop", "~> 1.21"
   gem "rubocop-minitest"
@@ -20,3 +17,7 @@ group :test, :development do
 
   gem "webmock"
 end
+
+# Load custom Gemfile configuration if it exists
+custom_gemfile = File.join(__dir__, "custom.gemfile.rb")
+eval_gemfile(custom_gemfile) if File.exist?(custom_gemfile)

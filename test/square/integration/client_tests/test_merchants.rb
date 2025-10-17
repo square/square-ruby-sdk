@@ -6,7 +6,12 @@ describe Square::Merchants::Client do
   before do
     # Get first merchant ID
     merchant_response = client.merchants.list
-    @merchant_id = merchant_response.merchant.first.id
+    first_merchant = nil
+    merchant_response.each do |merchant|
+      first_merchant = merchant
+      break
+    end
+    @merchant_id = first_merchant.id
   end
 
   describe "#list" do
@@ -14,11 +19,17 @@ describe Square::Merchants::Client do
 
       response = client.merchants.list
       refute_nil response
-      assert_equal response.class, Square::Types::ListMerchantsResponse
-      refute_nil response.merchant
-      assert response.merchant.length > 0
+      assert_equal Square::Internal::CursorItemIterator, response.class
 
-      puts "response #{response.to_h}" if verbose?
+      # Iterate using the iterator pattern
+      merchants = []
+      response.each do |merchant|
+        merchants << merchant
+      end
+      refute_nil merchants
+      assert merchants.length > 0
+
+      puts "response merchants_count=#{merchants.length}" if verbose?
     end
   end
 

@@ -21,7 +21,7 @@ jobs:
       SQUARE_SANDBOX_TOKEN: ${{ secrets.SQUARE_SANDBOX_TOKEN }}
     strategy:
       matrix:
-        ruby-version: ['3.2', '3.3', '3.4']
+        ruby-version: ['3.3', '3.4']
         bundler-version: ['2.7']
 
     steps:

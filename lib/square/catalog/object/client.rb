@@ -47,10 +47,8 @@ module Square
         #
         # @return [Square::Types::GetCatalogObjectResponse]
         def get(request_options: {}, **params)
-          _query_param_names = [
-            %w[include_related_objects catalog_version include_category_path_to_root],
-            %i[include_related_objects catalog_version include_category_path_to_root]
-          ].flatten
+          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          _query_param_names = %i[include_related_objects catalog_version include_category_path_to_root]
           _query = params.slice(*_query_param_names)
           params = params.except(*_query_param_names)
 
