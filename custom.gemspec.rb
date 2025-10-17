@@ -7,10 +7,13 @@
 # need to add it to the .fernignore file to prevent your changes from being overwritten.
 
 def add_custom_gemspec_data(spec)
-  # Example custom configurations (uncomment and modify as needed)
-
-  # spec.authors = ["Your name"]
-  # spec.email = ["your.email@example.com"]
-  # spec.homepage = "https://github.com/your-org/square-ruby"
-  # spec.license = "Your license"
+  spec.authors = ['Square Developer Platform']
+  spec.email = ['developers@squareup.com']
+  spec.homepage = 'https://squareup.com/developers'
+  spec.licenses = ['MIT']
+  spec.add_dependency('apimatic_core_interfaces', '~> 0.2.1')
+  spec.add_dependency('apimatic_core', '~> 0.3.11')
+  spec.add_dependency('apimatic_faraday_client_adapter', '~> 0.1.4')
+  spec.add_development_dependency('minitest', '~> 5.20')
+  spec.add_development_dependency('minitest-proveit', '~> 1.0')
 end

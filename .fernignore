@@ -2,11 +2,8 @@ lib/square_legacy/
 lib/square_legacy.rb
 Gemfile
 Rakefile
-.rubocop.yml
 .gitignore
 test/
 .github/workflows
 README.md
-Gemfile.lock
-square.gemspec
 lib/square/file_param.rb
