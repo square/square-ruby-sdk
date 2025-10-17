@@ -1,9 +1,9 @@
 lib/square_legacy/
 lib/square_legacy.rb
-Gemfile
 Rakefile
 .gitignore
 test/
 .github/workflows
 README.md
 lib/square/file_param.rb
+custom.gemfile.rb

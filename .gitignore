@@ -1,3 +1,5 @@
 ﻿pkg
 *.gem
 CLAUDE.md
+vendor/
+.bundle/
