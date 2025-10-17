@@ -7,3 +7,8 @@ test/
 README.md
 lib/square/file_param.rb
 custom.gemfile.rb
+
+# Pagination is currently broken for endpoints where the page token is not submitted via a query param
+# Manually fixed pagination bugs in:
+lib/square/inventory/client.rb
+lib/square/transfer_orders/client.rb

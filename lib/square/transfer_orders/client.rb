@@ -64,9 +64,9 @@ module Square
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :transfer_orders,
-          initial_cursor: _query[:cursor]
+          initial_cursor: params[:cursor]
         ) do |next_cursor|
-          _query[:cursor] = next_cursor
+          params[:cursor] = next_cursor
           _request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "POST",

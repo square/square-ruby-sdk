@@ -173,9 +173,9 @@ module Square
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :changes,
-          initial_cursor: _query[:cursor]
+          initial_cursor: params[:cursor]
         ) do |next_cursor|
-          _query[:cursor] = next_cursor
+          params[:cursor] = next_cursor
           _request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "POST",
@@ -214,9 +214,9 @@ module Square
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :counts,
-          initial_cursor: _query[:cursor]
+          initial_cursor: params[:cursor]
         ) do |next_cursor|
-          _query[:cursor] = next_cursor
+          params[:cursor] = next_cursor
           _request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
             method: "POST",
