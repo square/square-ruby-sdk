@@ -10,22 +10,23 @@ describe Square::Catalog::Client do
   def delete_all_catalog_objects(client)
     catalog_objects_resp = client.catalog.list
     refute_nil catalog_objects_resp
-    assert_equal catalog_objects_resp.class, Square::Types::ListCatalogResponse
+    assert_equal Square::Internal::CursorItemIterator, catalog_objects_resp.class
     object_ids = []
-    
-    catalog_objects_resp.data.each do |catalog_object|
+
+    # Iterate using the iterator pattern
+    catalog_objects_resp.each do |catalog_object|
       next unless catalog_object.id
-      
+
       object_ids << catalog_object.id
-      
+
       next unless catalog_object.respond_to?(:item_data)
-      
+
       variation = catalog_object.item_data&.variations&.first
       next unless variation&.id
-      
+
       object_ids << variation.id
     end
-    
+
     _batch_delete_request = Square::Catalog::Types::BatchDeleteCatalogObjectsRequest.new(
       object_ids: object_ids
     )
@@ -302,7 +303,14 @@ describe Square::Catalog::Client do
       number_of_pages = 0
       catalog_objects_resp = client.catalog.list
       number_of_pages += 1
-      assert_equal MAX_CATALOG_PAGE_SIZE, catalog_objects_resp.data.length
+
+      # Count items in first page using iterator
+      items = []
+      catalog_objects_resp.each do |item|
+        items << item
+        break if items.length >= MAX_CATALOG_PAGE_SIZE
+      end
+      assert_equal MAX_CATALOG_PAGE_SIZE, items.length
 
       while catalog_objects_resp.has_next_page?
         sleep(1) # Wait between page requests
@@ -447,9 +455,15 @@ describe Square::Catalog::Client do
 
       response = client.catalog.list
       refute_nil response
-      assert_equal response.class, Square::Types::ListCatalogResponse
+      assert_equal Square::Internal::CursorItemIterator, response.class
 
-      puts "response items_count=#{response.data&.length || 0}" if verbose?
+      # Count items using iterator
+      count = 0
+      response.each do |_item|
+        count += 1
+      end
+
+      puts "response items_count=#{count}" if verbose?
     end
   end
 

@@ -170,23 +170,30 @@ module Square
       #
       # @return [Square::Types::BatchGetInventoryChangesResponse]
       def batch_get_changes(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
-          method: "POST",
-          path: "v2/inventory/changes/batch-retrieve",
-          body: Square::Types::BatchRetrieveInventoryChangesRequest.new(params).to_h
-        )
-        begin
-          _response = @client.send(_request)
-        rescue Net::HTTPRequestTimeout
-          raise Square::Errors::TimeoutError
-        end
-        code = _response.code.to_i
-        if code.between?(200, 299)
-          Square::Types::BatchGetInventoryChangesResponse.load(_response.body)
-        else
-          error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+        Square::Internal::CursorItemIterator.new(
+          cursor_field: :cursor,
+          item_field: :changes,
+          initial_cursor: params[:cursor]
+        ) do |next_cursor|
+          params[:cursor] = next_cursor
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+            method: "POST",
+            path: "v2/inventory/changes/batch-retrieve",
+            body: Square::Types::BatchRetrieveInventoryChangesRequest.new(params).to_h
+          )
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
+          end
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::BatchGetInventoryChangesResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
       end
 
@@ -204,23 +211,30 @@ module Square
       #
       # @return [Square::Types::BatchGetInventoryCountsResponse]
       def batch_get_counts(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
-          method: "POST",
-          path: "v2/inventory/counts/batch-retrieve",
-          body: Square::Types::BatchGetInventoryCountsRequest.new(params).to_h
-        )
-        begin
-          _response = @client.send(_request)
-        rescue Net::HTTPRequestTimeout
-          raise Square::Errors::TimeoutError
-        end
-        code = _response.code.to_i
-        if code.between?(200, 299)
-          Square::Types::BatchGetInventoryCountsResponse.load(_response.body)
-        else
-          error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+        Square::Internal::CursorItemIterator.new(
+          cursor_field: :cursor,
+          item_field: :counts,
+          initial_cursor: params[:cursor]
+        ) do |next_cursor|
+          params[:cursor] = next_cursor
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+            method: "POST",
+            path: "v2/inventory/counts/batch-retrieve",
+            body: Square::Types::BatchGetInventoryCountsRequest.new(params).to_h
+          )
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
+          end
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::BatchGetInventoryCountsResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
       end
 
@@ -303,30 +317,35 @@ module Square
       #
       # @return [Square::Types::GetInventoryCountResponse]
       def get(request_options: {}, **params)
-        _query_param_names = [
-          %w[location_ids cursor],
-          %i[location_ids cursor]
-        ].flatten
+        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        _query_param_names = %i[location_ids cursor]
         _query = params.slice(*_query_param_names)
         params = params.except(*_query_param_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
-          method: "GET",
-          path: "v2/inventory/#{params[:catalog_object_id]}",
-          query: _query
-        )
-        begin
-          _response = @client.send(_request)
-        rescue Net::HTTPRequestTimeout
-          raise Square::Errors::TimeoutError
-        end
-        code = _response.code.to_i
-        if code.between?(200, 299)
-          Square::Types::GetInventoryCountResponse.load(_response.body)
-        else
-          error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+        Square::Internal::CursorItemIterator.new(
+          cursor_field: :cursor,
+          item_field: :counts,
+          initial_cursor: _query[:cursor]
+        ) do |next_cursor|
+          _query[:cursor] = next_cursor
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+            method: "GET",
+            path: "v2/inventory/#{params[:catalog_object_id]}",
+            query: _query
+          )
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
+          end
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::GetInventoryCountResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
       end
 
@@ -346,30 +365,35 @@ module Square
       #
       # @return [Square::Types::GetInventoryChangesResponse]
       def changes(request_options: {}, **params)
-        _query_param_names = [
-          %w[location_ids cursor],
-          %i[location_ids cursor]
-        ].flatten
+        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        _query_param_names = %i[location_ids cursor]
         _query = params.slice(*_query_param_names)
         params = params.except(*_query_param_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
-          method: "GET",
-          path: "v2/inventory/#{params[:catalog_object_id]}/changes",
-          query: _query
-        )
-        begin
-          _response = @client.send(_request)
-        rescue Net::HTTPRequestTimeout
-          raise Square::Errors::TimeoutError
-        end
-        code = _response.code.to_i
-        if code.between?(200, 299)
-          Square::Types::GetInventoryChangesResponse.load(_response.body)
-        else
-          error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+        Square::Internal::CursorItemIterator.new(
+          cursor_field: :cursor,
+          item_field: :changes,
+          initial_cursor: _query[:cursor]
+        ) do |next_cursor|
+          _query[:cursor] = next_cursor
+          _request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+            method: "GET",
+            path: "v2/inventory/#{params[:catalog_object_id]}/changes",
+            query: _query
+          )
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Square::Errors::TimeoutError
+          end
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Square::Types::GetInventoryChangesResponse.load(_response.body)
+          else
+            error_class = Square::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
         end
       end
     end

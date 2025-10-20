@@ -4,6 +4,7 @@ require "minitest/autorun"
 require "stringio"
 require "json"
 require "test_helper"
+require "square/file_param"
 
 class MockFile
   attr_reader :name, :content, :content_type
