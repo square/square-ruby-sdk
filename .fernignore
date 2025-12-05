@@ -2,7 +2,8 @@ lib/square_legacy/
 lib/square_legacy.rb
 Rakefile
 .gitignore
-test/
+test/square_legacy
+test/square/integration
 .github/workflows
 README.md
 lib/square/file_param.rb
