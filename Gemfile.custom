@@ -7,10 +7,8 @@
 # overwritten by the generator.
 
 # Example usage:
-# gem 'custom-gem', '~> 1.0'
-# 
-# group :development do
-#   gem 'debug-gem', '~> 2.0'
+# group :test, :development do
+#   gem 'custom-gem', '~> 2.0'
 # end
 
 # Add your custom gem dependencies here
