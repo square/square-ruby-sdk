@@ -21,7 +21,7 @@ end
 
 # Integration tests
 task :integration_test do
-  integration_test_files = Dir.glob("test/square/integration/**/*.rb").sort
+  integration_test_files = Dir.glob("test/custom/integration/**/*.rb").sort
   cmd = "ruby -Ilib:test:. -w -e 'require \"minitest/autorun\"; "
   cmd += integration_test_files.map { |f| "require \"#{f}\"" }.join("; ")
   cmd += "'"

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "test_helper"
+require "custom/test_helper"
 describe Square::Internal::Types::Union do
   class Rectangle < Square::Internal::Types::Model
     literal :type, "square"
