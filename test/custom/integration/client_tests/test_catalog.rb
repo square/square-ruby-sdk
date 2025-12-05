@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "test_helper"
+require "custom/test_helper"
 
 describe Square::Catalog::Client do
   MAX_CATALOG_PAGE_SIZE = 100

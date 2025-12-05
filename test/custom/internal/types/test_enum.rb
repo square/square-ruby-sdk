@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "test_helper"
+require "custom/test_helper"
 
 describe Square::Internal::Types::Enum do
   module EnumTest

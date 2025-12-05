@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "test_helper"
+require "custom/test_helper"
 
 describe Square::TeamMembers::Client do
   def create_test_team_member(location_ids)

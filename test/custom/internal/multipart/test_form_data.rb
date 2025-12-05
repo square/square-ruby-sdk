@@ -3,7 +3,7 @@
 require "minitest/autorun"
 require "stringio"
 require "json"
-require "test_helper"
+require "custom/test_helper"
 require "square/file_param"
 
 class MockFile
