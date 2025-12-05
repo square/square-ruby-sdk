@@ -12,3 +12,8 @@
 # end
 
 # Add your custom gem dependencies here
+
+group :test, :development do
+  gem 'mutex_m'
+  gem 'base64'
+end
