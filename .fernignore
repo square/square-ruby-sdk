@@ -6,7 +6,8 @@ test/
 .github/workflows
 README.md
 lib/square/file_param.rb
-custom.gemfile.rb
+Gemfile.custom
+custom.gemspec.rb
 
 # Pagination is currently broken for endpoints where the page token is not submitted via a query param
 # Manually fixed pagination bugs in:
