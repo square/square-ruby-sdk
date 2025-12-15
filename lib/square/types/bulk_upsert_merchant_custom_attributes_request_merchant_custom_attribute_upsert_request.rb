@@ -2,7 +2,8 @@
 
 module Square
   module Types
-    # Represents an individual upsert request in a [BulkUpsertMerchantCustomAttributes](api-endpoint:MerchantCustomAttributes-BulkUpsertMerchantCustomAttributes)
+    # Represents an individual upsert request in a
+    # [BulkUpsertMerchantCustomAttributes](api-endpoint:MerchantCustomAttributes-BulkUpsertMerchantCustomAttributes)
     # request. An individual request contains a merchant ID, the custom attribute to create or update,
     # and an optional idempotency key.
     class BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest < Internal::Types::Model

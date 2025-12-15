@@ -3,7 +3,9 @@
 module Square
   module Invoices
     class Client
-      # @return [Square::Invoices::Client]
+      # @param client [Square::Internal::Http::RawClient]
+      #
+      # @return [void]
       def initialize(client:)
         @client = client
       end
@@ -12,36 +14,51 @@ module Square
       # is paginated. If truncated, the response includes a `cursor` that you
       # use in a subsequent request to retrieve the next set of invoices.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :location_id
+      # @option params [String, nil] :cursor
+      # @option params [Integer, nil] :limit
+      #
       # @return [Square::Types::ListInvoicesResponse]
       def list(request_options: {}, **params)
         params = Square::Internal::Types::Utils.symbolize_keys(params)
-        _query_param_names = %i[location_id cursor limit]
-        _query = params.slice(*_query_param_names)
-        params.except(*_query_param_names)
+        query_param_names = %i[location_id cursor limit]
+        query_params = {}
+        query_params["location_id"] = params[:location_id] if params.key?(:location_id)
+        query_params["cursor"] = params[:cursor] if params.key?(:cursor)
+        query_params["limit"] = params[:limit] if params.key?(:limit)
+        params.except(*query_param_names)
 
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :invoices,
-          initial_cursor: _query[:cursor]
+          initial_cursor: query_params[:cursor]
         ) do |next_cursor|
-          _query[:cursor] = next_cursor
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          query_params[:cursor] = next_cursor
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "GET",
             path: "v2/invoices",
-            query: _query
+            query: query_params,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::ListInvoicesResponse.load(_response.body)
+            Square::Types::ListInvoicesResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
       end
@@ -50,27 +67,40 @@ module Square
       # for an order created using the Orders API.
       #
       # A draft invoice remains in your account and no action is taken.
-      # You must publish the invoice before Square can process it (send it to the customer's email address or charge the customer’s card on file).
+      # You must publish the invoice before Square can process it (send it to the customer's email address or charge the
+      # customer’s card on file).
+      #
+      # @param request_options [Hash]
+      # @param params [Square::Invoices::Types::CreateInvoiceRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
       #
       # @return [Square::Types::CreateInvoiceResponse]
       def create(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[invoice idempotency_key]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/invoices",
-          body: params
+          body: Square::Invoices::Types::CreateInvoiceRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreateInvoiceResponse.load(_response.body)
+          Square::Types::CreateInvoiceResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -82,48 +112,70 @@ module Square
       # The response is paginated. If truncated, the response includes a `cursor`
       # that you use in a subsequent request to retrieve the next set of invoices.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Invoices::Types::SearchInvoicesRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::SearchInvoicesResponse]
       def search(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[query limit cursor]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/invoices/search",
-          body: params
+          body: Square::Invoices::Types::SearchInvoicesRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchInvoicesResponse.load(_response.body)
+          Square::Types::SearchInvoicesResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Retrieves an invoice by invoice ID.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :invoice_id
+      #
       # @return [Square::Types::GetInvoiceResponse]
       def get(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/invoices/#{params[:invoice_id]}"
+          path: "v2/invoices/#{params[:invoice_id]}",
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::GetInvoiceResponse.load(_response.body)
+          Square::Types::GetInvoiceResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -132,27 +184,40 @@ module Square
       # Some restrictions apply to updating invoices. For example, you cannot change the
       # `order_id` or `location_id` field.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Invoices::Types::UpdateInvoiceRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :invoice_id
+      #
       # @return [Square::Types::UpdateInvoiceResponse]
       def update(request_options: {}, **params)
-        _path_param_names = ["invoice_id"]
+        path_param_names = %i[invoice_id]
+        body_params = params.except(*path_param_names)
+        body_prop_names = %i[invoice idempotency_key fields_to_clear]
+        body_bag = body_params.slice(*body_prop_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/invoices/#{params[:invoice_id]}",
-          body: params.except(*_path_param_names)
+          body: Square::Invoices::Types::UpdateInvoiceRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdateInvoiceResponse.load(_response.body)
+          Square::Types::UpdateInvoiceResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -160,30 +225,42 @@ module Square
       # associated order status changes to CANCELED. You can only delete a draft
       # invoice (you cannot delete a published invoice, including one that is scheduled for processing).
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :invoice_id
+      # @option params [Integer, nil] :version
+      #
       # @return [Square::Types::DeleteInvoiceResponse]
       def delete(request_options: {}, **params)
         params = Square::Internal::Types::Utils.symbolize_keys(params)
-        _query_param_names = %i[version]
-        _query = params.slice(*_query_param_names)
-        params = params.except(*_query_param_names)
+        query_param_names = %i[version]
+        query_params = {}
+        query_params["version"] = params[:version] if params.key?(:version)
+        params = params.except(*query_param_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "DELETE",
           path: "v2/invoices/#{params[:invoice_id]}",
-          query: _query
+          query: query_params,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::DeleteInvoiceResponse.load(_response.body)
+          Square::Types::DeleteInvoiceResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -191,10 +268,20 @@ module Square
       # with a JSON `request` part and a `file` part. The `file` part must be a `readable stream` that contains a file
       # in a supported format: GIF, JPEG, PNG, TIFF, BMP, or PDF.
       #
-      # Invoices can have up to 10 attachments with a total file size of 25 MB. Attachments can be added only to invoices
+      # Invoices can have up to 10 attachments with a total file size of 25 MB. Attachments can be added only to
+      # invoices
       # in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
       #
       # __NOTE:__ When testing in the Sandbox environment, the total file size is limited to 1 KB.
+      #
+      # @param request_options [Hash]
+      # @param params [void]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :invoice_id
       #
       # @return [Square::Types::CreateInvoiceAttachmentResponse]
       def create_invoice_attachment(request_options: {}, **params)
@@ -209,75 +296,102 @@ module Square
         end
         body.add_part(params[:image_file].to_form_data_part(name: "image_file")) if params[:image_file]
 
-        _request = Square::Internal::Multipart::Request.new(
-          method: POST,
+        request = Square::Internal::Multipart::Request.new(
+          base_url: request_options[:base_url],
+          method: "POST",
           path: "v2/invoices/#{params[:invoice_id]}/attachments",
-          body: body
+          body: body,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreateInvoiceAttachmentResponse.load(_response.body)
+          Square::Types::CreateInvoiceAttachmentResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Removes an attachment from an invoice and permanently deletes the file. Attachments can be removed only
       # from invoices in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :invoice_id
+      # @option params [String] :attachment_id
+      #
       # @return [Square::Types::DeleteInvoiceAttachmentResponse]
       def delete_invoice_attachment(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "DELETE",
-          path: "v2/invoices/#{params[:invoice_id]}/attachments/#{params[:attachment_id]}"
+          path: "v2/invoices/#{params[:invoice_id]}/attachments/#{params[:attachment_id]}",
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::DeleteInvoiceAttachmentResponse.load(_response.body)
+          Square::Types::DeleteInvoiceAttachmentResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Cancels an invoice. The seller cannot collect payments for
       # the canceled invoice.
       #
-      # You cannot cancel an invoice in the `DRAFT` state or in a terminal state: `PAID`, `REFUNDED`, `CANCELED`, or `FAILED`.
+      # You cannot cancel an invoice in the `DRAFT` state or in a terminal state: `PAID`, `REFUNDED`, `CANCELED`, or
+      # `FAILED`.
+      #
+      # @param request_options [Hash]
+      # @param params [Square::Invoices::Types::CancelInvoiceRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :invoice_id
       #
       # @return [Square::Types::CancelInvoiceResponse]
       def cancel(request_options: {}, **params)
-        _path_param_names = ["invoice_id"]
+        path_param_names = %i[invoice_id]
+        body_params = params.except(*path_param_names)
+        body_prop_names = %i[version]
+        body_bag = body_params.slice(*body_prop_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/invoices/#{params[:invoice_id]}/cancel",
-          body: params.except(*_path_param_names)
+          body: Square::Invoices::Types::CancelInvoiceRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CancelInvoiceResponse.load(_response.body)
+          Square::Types::CancelInvoiceResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -296,27 +410,40 @@ module Square
       # In addition to the required `ORDERS_WRITE` and `INVOICES_WRITE` permissions, `CUSTOMERS_READ`
       # and `PAYMENTS_WRITE` are required when publishing invoices configured for card-on-file payments.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Invoices::Types::PublishInvoiceRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :invoice_id
+      #
       # @return [Square::Types::PublishInvoiceResponse]
       def publish(request_options: {}, **params)
-        _path_param_names = ["invoice_id"]
+        path_param_names = %i[invoice_id]
+        body_params = params.except(*path_param_names)
+        body_prop_names = %i[version idempotency_key]
+        body_bag = body_params.slice(*body_prop_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/invoices/#{params[:invoice_id]}/publish",
-          body: params.except(*_path_param_names)
+          body: Square::Invoices::Types::PublishInvoiceRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::PublishInvoiceResponse.load(_response.body)
+          Square::Types::PublishInvoiceResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
     end

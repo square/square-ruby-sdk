@@ -2,7 +2,8 @@
 
 module Square
   module Types
-    # Defines the response body returned from the [SearchCatalogItems](api-endpoint:Catalog-SearchCatalogItems) endpoint.
+    # Defines the response body returned from the [SearchCatalogItems](api-endpoint:Catalog-SearchCatalogItems)
+    # endpoint.
     class SearchCatalogItemsResponse < Internal::Types::Model
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
       field :items, -> { Internal::Types::Array[Square::Types::CatalogObject] }, optional: true, nullable: false

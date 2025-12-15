@@ -2,7 +2,8 @@
 
 module Square
   module Types
-    # Published when an order [custom attribute definition](entity:CustomAttributeDefinition) that is visible to the subscribing app is updated.
+    # Published when an order [custom attribute definition](entity:CustomAttributeDefinition) that is visible to the
+    # subscribing app is updated.
     class OrderCustomAttributeDefinitionVisibleUpdatedEvent < Internal::Types::Model
       field :merchant_id, -> { String }, optional: true, nullable: false
       field :type, -> { String }, optional: true, nullable: false

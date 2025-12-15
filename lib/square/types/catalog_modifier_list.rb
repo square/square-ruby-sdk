@@ -3,8 +3,10 @@
 module Square
   module Types
     # A container for a list of modifiers, or a text-based modifier.
-    # For text-based modifiers, this represents text configuration for an item. (For example, custom text to print on a t-shirt).
-    # For non text-based modifiers, this represents a list of modifiers that can be applied to items at the time of sale.
+    # For text-based modifiers, this represents text configuration for an item. (For example, custom text to print on a
+    # t-shirt).
+    # For non text-based modifiers, this represents a list of modifiers that can be applied to items at the time of
+    # sale.
     # (For example, a list of condiments for a hot dog, or a list of ice cream flavors).
     # Each element of the modifier list is a `CatalogObject` instance of the `MODIFIER` type.
     class CatalogModifierList < Internal::Types::Model

@@ -6,9 +6,7 @@ module Square
     # [BulkRetrieveChannels](api-endpoint:Channels-BulkRetrieveChannels) endpoint.
     class BulkRetrieveChannelsResponse < Internal::Types::Model
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
-      field :responses, lambda {
-        Internal::Types::Hash[String, Square::Types::RetrieveChannelResponse]
-      }, optional: true, nullable: false
+      field :responses, -> { Internal::Types::Hash[String, Square::Types::RetrieveChannelResponse] }, optional: true, nullable: false
     end
   end
 end

@@ -2,7 +2,8 @@
 
 module Square
   module Types
-    # Represents a [RetrieveLocationCustomAttribute](api-endpoint:LocationCustomAttributes-RetrieveLocationCustomAttribute) response.
+    # Represents a
+    # [RetrieveLocationCustomAttribute](api-endpoint:LocationCustomAttributes-RetrieveLocationCustomAttribute) response.
     # Either `custom_attribute_definition` or `errors` is present in the response.
     class RetrieveLocationCustomAttributeResponse < Internal::Types::Model
       field :custom_attribute, -> { Square::Types::CustomAttribute }, optional: true, nullable: false

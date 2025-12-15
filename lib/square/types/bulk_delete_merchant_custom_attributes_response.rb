@@ -2,12 +2,12 @@
 
 module Square
   module Types
-    # Represents a [BulkDeleteMerchantCustomAttributes](api-endpoint:MerchantCustomAttributes-BulkDeleteMerchantCustomAttributes) response,
+    # Represents a
+    # [BulkDeleteMerchantCustomAttributes](api-endpoint:MerchantCustomAttributes-BulkDeleteMerchantCustomAttributes)
+    # response,
     # which contains a map of responses that each corresponds to an individual delete request.
     class BulkDeleteMerchantCustomAttributesResponse < Internal::Types::Model
-      field :values, lambda {
-        Internal::Types::Hash[String, Square::Types::BulkDeleteMerchantCustomAttributesResponseMerchantCustomAttributeDeleteResponse]
-      }, optional: false, nullable: false
+      field :values, -> { Internal::Types::Hash[String, Square::Types::BulkDeleteMerchantCustomAttributesResponseMerchantCustomAttributeDeleteResponse] }, optional: false, nullable: false
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
     end
   end

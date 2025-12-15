@@ -3,7 +3,8 @@
 module Square
   module Types
     # Provides information about a loyalty event.
-    # For more information, see [Search for Balance-Changing Loyalty Events](https://developer.squareup.com/docs/loyalty-api/loyalty-events).
+    # For more information, see [Search for Balance-Changing Loyalty
+    # Events](https://developer.squareup.com/docs/loyalty-api/loyalty-events).
     class LoyaltyEvent < Internal::Types::Model
       field :id, -> { String }, optional: true, nullable: false
       field :type, -> { Square::Types::LoyaltyEventType }, optional: false, nullable: false
@@ -18,9 +19,7 @@ module Square
       field :source, -> { Square::Types::LoyaltyEventSource }, optional: false, nullable: false
       field :expire_points, -> { Square::Types::LoyaltyEventExpirePoints }, optional: true, nullable: false
       field :other_event, -> { Square::Types::LoyaltyEventOther }, optional: true, nullable: false
-      field :accumulate_promotion_points, lambda {
-        Square::Types::LoyaltyEventAccumulatePromotionPoints
-      }, optional: true, nullable: false
+      field :accumulate_promotion_points, -> { Square::Types::LoyaltyEventAccumulatePromotionPoints }, optional: true, nullable: false
     end
   end
 end

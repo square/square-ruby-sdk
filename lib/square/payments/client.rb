@@ -3,7 +3,9 @@
 module Square
   module Payments
     class Client
-      # @return [Square::Payments::Client]
+      # @param client [Square::Internal::Http::RawClient]
+      #
+      # @return [void]
       def initialize(client:)
         @client = client
       end
@@ -15,37 +17,75 @@ module Square
       #
       # The maximum results per page is 100.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String, nil] :begin_time
+      # @option params [String, nil] :end_time
+      # @option params [String, nil] :sort_order
+      # @option params [String, nil] :cursor
+      # @option params [String, nil] :location_id
+      # @option params [Integer, nil] :total
+      # @option params [String, nil] :last_4
+      # @option params [String, nil] :card_brand
+      # @option params [Integer, nil] :limit
+      # @option params [Boolean, nil] :is_offline_payment
+      # @option params [String, nil] :offline_begin_time
+      # @option params [String, nil] :offline_end_time
+      # @option params [String, nil] :updated_at_begin_time
+      # @option params [String, nil] :updated_at_end_time
+      # @option params [Square::Types::ListPaymentsRequestSortField, nil] :sort_field
+      #
       # @return [Square::Types::ListPaymentsResponse]
       def list(request_options: {}, **params)
         params = Square::Internal::Types::Utils.symbolize_keys(params)
-        _query_param_names = %i[begin_time end_time sort_order cursor location_id total last_4 card_brand limit
-                                is_offline_payment offline_begin_time offline_end_time updated_at_begin_time updated_at_end_time sort_field]
-        _query = params.slice(*_query_param_names)
-        params.except(*_query_param_names)
+        query_param_names = %i[begin_time end_time sort_order cursor location_id total last_4 card_brand limit is_offline_payment offline_begin_time offline_end_time updated_at_begin_time updated_at_end_time sort_field]
+        query_params = {}
+        query_params["begin_time"] = params[:begin_time] if params.key?(:begin_time)
+        query_params["end_time"] = params[:end_time] if params.key?(:end_time)
+        query_params["sort_order"] = params[:sort_order] if params.key?(:sort_order)
+        query_params["cursor"] = params[:cursor] if params.key?(:cursor)
+        query_params["location_id"] = params[:location_id] if params.key?(:location_id)
+        query_params["total"] = params[:total] if params.key?(:total)
+        query_params["last_4"] = params[:last_4] if params.key?(:last_4)
+        query_params["card_brand"] = params[:card_brand] if params.key?(:card_brand)
+        query_params["limit"] = params[:limit] if params.key?(:limit)
+        query_params["is_offline_payment"] = params[:is_offline_payment] if params.key?(:is_offline_payment)
+        query_params["offline_begin_time"] = params[:offline_begin_time] if params.key?(:offline_begin_time)
+        query_params["offline_end_time"] = params[:offline_end_time] if params.key?(:offline_end_time)
+        query_params["updated_at_begin_time"] = params[:updated_at_begin_time] if params.key?(:updated_at_begin_time)
+        query_params["updated_at_end_time"] = params[:updated_at_end_time] if params.key?(:updated_at_end_time)
+        query_params["sort_field"] = params[:sort_field] if params.key?(:sort_field)
+        params.except(*query_param_names)
 
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :payments,
-          initial_cursor: _query[:cursor]
+          initial_cursor: query_params[:cursor]
         ) do |next_cursor|
-          _query[:cursor] = next_cursor
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          query_params[:cursor] = next_cursor
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "GET",
             path: "v2/payments",
-            query: _query
+            query: query_params,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::ListPaymentsResponse.load(_response.body)
+            Square::Types::ListPaymentsResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
       end
@@ -59,25 +99,37 @@ module Square
       # The endpoint creates a
       # `Payment` object and returns it in the response.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Payments::Types::CreatePaymentRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::CreatePaymentResponse]
       def create(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[source_id idempotency_key amount_money tip_money app_fee_money delay_duration delay_action autocomplete order_id customer_id location_id team_member_id reference_id verification_token accept_partial_authorization buyer_email_address buyer_phone_number billing_address shipping_address note statement_description_identifier cash_details external_details customer_details offline_payment_details]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/payments",
-          body: params
+          body: Square::Payments::Types::CreatePaymentRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreatePaymentResponse.load(_response.body)
+          Square::Types::CreatePaymentResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -93,99 +145,144 @@ module Square
       # Note that if no payment with the specified idempotency key is found, no action is taken and the endpoint
       # returns successfully.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Payments::Types::CancelPaymentByIdempotencyKeyRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::CancelPaymentByIdempotencyKeyResponse]
       def cancel_by_idempotency_key(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[idempotency_key]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/payments/cancel",
-          body: params
+          body: Square::Payments::Types::CancelPaymentByIdempotencyKeyRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CancelPaymentByIdempotencyKeyResponse.load(_response.body)
+          Square::Types::CancelPaymentByIdempotencyKeyResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Retrieves details for a specific payment.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :payment_id
+      #
       # @return [Square::Types::GetPaymentResponse]
       def get(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/payments/#{params[:payment_id]}"
+          path: "v2/payments/#{params[:payment_id]}",
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::GetPaymentResponse.load(_response.body)
+          Square::Types::GetPaymentResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Updates a payment with the APPROVED status.
       # You can update the `amount_money` and `tip_money` using this endpoint.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Payments::Types::UpdatePaymentRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :payment_id
+      #
       # @return [Square::Types::UpdatePaymentResponse]
       def update(request_options: {}, **params)
-        _path_param_names = ["payment_id"]
+        path_param_names = %i[payment_id]
+        body_params = params.except(*path_param_names)
+        body_prop_names = %i[payment idempotency_key]
+        body_bag = body_params.slice(*body_prop_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/payments/#{params[:payment_id]}",
-          body: params.except(*_path_param_names)
+          body: Square::Payments::Types::UpdatePaymentRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdatePaymentResponse.load(_response.body)
+          Square::Types::UpdatePaymentResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Cancels (voids) a payment. You can use this endpoint to cancel a payment with
       # the APPROVED `status`.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :payment_id
+      #
       # @return [Square::Types::CancelPaymentResponse]
       def cancel(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
-          path: "v2/payments/#{params[:payment_id]}/cancel"
+          path: "v2/payments/#{params[:payment_id]}/cancel",
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CancelPaymentResponse.load(_response.body)
+          Square::Types::CancelPaymentResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -194,27 +291,40 @@ module Square
       #
       # You can use this endpoint to complete a payment with the APPROVED `status`.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Payments::Types::CompletePaymentRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :payment_id
+      #
       # @return [Square::Types::CompletePaymentResponse]
       def complete(request_options: {}, **params)
-        _path_param_names = ["payment_id"]
+        path_param_names = %i[payment_id]
+        body_params = params.except(*path_param_names)
+        body_prop_names = %i[version_token]
+        body_bag = body_params.slice(*body_prop_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/payments/#{params[:payment_id]}/complete",
-          body: params.except(*_path_param_names)
+          body: Square::Payments::Types::CompletePaymentRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CompletePaymentResponse.load(_response.body)
+          Square::Types::CompletePaymentResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
     end

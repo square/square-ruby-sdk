@@ -2,13 +2,16 @@
 
 module Square
   class Client
-    # @return [Square::Client]
+    # @param base_url [String, nil]
+    # @param token [String]
+    #
+    # @return [void]
     def initialize(base_url:, token: ENV.fetch("SQUARE_TOKEN", nil))
       @raw_client = Square::Internal::Http::RawClient.new(
-        base_url: base_url,
+        base_url: base_url || Square::Environment::PRODUCTION,
         headers: {
-          "User-Agent": "square.rb/44.2.1.20251016",
-          "X-Fern-Language": "Ruby",
+          "User-Agent" => "square.rb/44.3.0.20251016",
+          "X-Fern-Language" => "Ruby",
           Authorization: "Bearer #{token}"
         }
       )
