@@ -7,14 +7,10 @@ module Square
       field :seller_id, -> { String }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
       field :booking_enabled, -> { Internal::Types::Boolean }, optional: true, nullable: false
-      field :customer_timezone_choice, lambda {
-        Square::Types::BusinessBookingProfileCustomerTimezoneChoice
-      }, optional: true, nullable: false
+      field :customer_timezone_choice, -> { Square::Types::BusinessBookingProfileCustomerTimezoneChoice }, optional: true, nullable: false
       field :booking_policy, -> { Square::Types::BusinessBookingProfileBookingPolicy }, optional: true, nullable: false
       field :allow_user_cancel, -> { Internal::Types::Boolean }, optional: true, nullable: false
-      field :business_appointment_settings, lambda {
-        Square::Types::BusinessAppointmentSettings
-      }, optional: true, nullable: false
+      field :business_appointment_settings, -> { Square::Types::BusinessAppointmentSettings }, optional: true, nullable: false
       field :support_seller_level_writes, -> { Internal::Types::Boolean }, optional: true, nullable: false
     end
   end

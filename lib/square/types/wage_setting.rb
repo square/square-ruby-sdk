@@ -6,9 +6,7 @@ module Square
     # for a [team member](entity:TeamMember).
     class WageSetting < Internal::Types::Model
       field :team_member_id, -> { String }, optional: true, nullable: false
-      field :job_assignments, lambda {
-        Internal::Types::Array[Square::Types::JobAssignment]
-      }, optional: true, nullable: false
+      field :job_assignments, -> { Internal::Types::Array[Square::Types::JobAssignment] }, optional: true, nullable: false
       field :is_overtime_exempt, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :version, -> { Integer }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false

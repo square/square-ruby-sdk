@@ -4,7 +4,8 @@ module Square
   module Types
     # The hourly wage rate used to compensate an employee for this shift.
     #
-    # Deprecated at Square API version 2025-05-21. See the [migration notes](https://developer.squareup.com/docs/labor-api/what-it-does#migration-notes).
+    # Deprecated at Square API version 2025-05-21. See the [migration
+    # notes](https://developer.squareup.com/docs/labor-api/what-it-does#migration-notes).
     class ShiftWage < Internal::Types::Model
       field :title, -> { String }, optional: true, nullable: false
       field :hourly_rate, -> { Square::Types::Money }, optional: true, nullable: false

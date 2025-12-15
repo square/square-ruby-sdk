@@ -5,7 +5,9 @@ module Square
     module Programs
       module Promotions
         class Client
-          # @return [Square::Loyalty::Programs::Promotions::Client]
+          # @param client [Square::Internal::Http::RawClient]
+          #
+          # @return [void]
           def initialize(client:)
             @client = client
           end
@@ -13,36 +15,52 @@ module Square
           # Lists the loyalty promotions associated with a [loyalty program](entity:LoyaltyProgram).
           # Results are sorted by the `created_at` date in descending order (newest to oldest).
           #
+          # @param request_options [Hash]
+          # @param params [Hash]
+          # @option request_options [String] :base_url
+          # @option request_options [Hash{String => Object}] :additional_headers
+          # @option request_options [Hash{String => Object}] :additional_query_parameters
+          # @option request_options [Hash{String => Object}] :additional_body_parameters
+          # @option request_options [Integer] :timeout_in_seconds
+          # @option params [String] :program_id
+          # @option params [Square::Types::LoyaltyPromotionStatus, nil] :status
+          # @option params [String, nil] :cursor
+          # @option params [Integer, nil] :limit
+          #
           # @return [Square::Types::ListLoyaltyPromotionsResponse]
           def list(request_options: {}, **params)
             params = Square::Internal::Types::Utils.symbolize_keys(params)
-            _query_param_names = %i[status cursor limit]
-            _query = params.slice(*_query_param_names)
-            params = params.except(*_query_param_names)
+            query_param_names = %i[status cursor limit]
+            query_params = {}
+            query_params["status"] = params[:status] if params.key?(:status)
+            query_params["cursor"] = params[:cursor] if params.key?(:cursor)
+            query_params["limit"] = params[:limit] if params.key?(:limit)
+            params = params.except(*query_param_names)
 
             Square::Internal::CursorItemIterator.new(
               cursor_field: :cursor,
               item_field: :loyalty_promotions,
-              initial_cursor: _query[:cursor]
+              initial_cursor: query_params[:cursor]
             ) do |next_cursor|
-              _query[:cursor] = next_cursor
-              _request = Square::Internal::JSON::Request.new(
-                base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+              query_params[:cursor] = next_cursor
+              request = Square::Internal::JSON::Request.new(
+                base_url: request_options[:base_url],
                 method: "GET",
                 path: "v2/loyalty/programs/#{params[:program_id]}/promotions",
-                query: _query
+                query: query_params,
+                request_options: request_options
               )
               begin
-                _response = @client.send(_request)
+                response = @client.send(request)
               rescue Net::HTTPRequestTimeout
                 raise Square::Errors::TimeoutError
               end
-              code = _response.code.to_i
+              code = response.code.to_i
               if code.between?(200, 299)
-                Square::Types::ListLoyaltyPromotionsResponse.load(_response.body)
+                Square::Types::ListLoyaltyPromotionsResponse.load(response.body)
               else
                 error_class = Square::Errors::ResponseError.subclass_for_code(code)
-                raise error_class.new(_response.body, code: code)
+                raise error_class.new(response.body, code: code)
               end
             end
           end
@@ -54,50 +72,74 @@ module Square
           # `available_time` setting. A loyalty program can have a maximum of 10 loyalty promotions with an
           # `ACTIVE` or `SCHEDULED` status.
           #
+          # @param request_options [Hash]
+          # @param params [Square::Loyalty::Programs::Promotions::Types::CreateLoyaltyPromotionRequest]
+          # @option request_options [String] :base_url
+          # @option request_options [Hash{String => Object}] :additional_headers
+          # @option request_options [Hash{String => Object}] :additional_query_parameters
+          # @option request_options [Hash{String => Object}] :additional_body_parameters
+          # @option request_options [Integer] :timeout_in_seconds
+          # @option params [String] :program_id
+          #
           # @return [Square::Types::CreateLoyaltyPromotionResponse]
           def create(request_options: {}, **params)
-            _path_param_names = ["program_id"]
+            path_param_names = %i[program_id]
+            body_params = params.except(*path_param_names)
+            body_prop_names = %i[loyalty_promotion idempotency_key]
+            body_bag = body_params.slice(*body_prop_names)
 
-            _request = Square::Internal::JSON::Request.new(
-              base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+            request = Square::Internal::JSON::Request.new(
+              base_url: request_options[:base_url],
               method: "POST",
               path: "v2/loyalty/programs/#{params[:program_id]}/promotions",
-              body: params.except(*_path_param_names)
+              body: Square::Loyalty::Programs::Promotions::Types::CreateLoyaltyPromotionRequest.new(body_bag).to_h,
+              request_options: request_options
             )
             begin
-              _response = @client.send(_request)
+              response = @client.send(request)
             rescue Net::HTTPRequestTimeout
               raise Square::Errors::TimeoutError
             end
-            code = _response.code.to_i
+            code = response.code.to_i
             if code.between?(200, 299)
-              Square::Types::CreateLoyaltyPromotionResponse.load(_response.body)
+              Square::Types::CreateLoyaltyPromotionResponse.load(response.body)
             else
               error_class = Square::Errors::ResponseError.subclass_for_code(code)
-              raise error_class.new(_response.body, code: code)
+              raise error_class.new(response.body, code: code)
             end
           end
 
           # Retrieves a loyalty promotion.
           #
+          # @param request_options [Hash]
+          # @param params [Hash]
+          # @option request_options [String] :base_url
+          # @option request_options [Hash{String => Object}] :additional_headers
+          # @option request_options [Hash{String => Object}] :additional_query_parameters
+          # @option request_options [Hash{String => Object}] :additional_body_parameters
+          # @option request_options [Integer] :timeout_in_seconds
+          # @option params [String] :program_id
+          # @option params [String] :promotion_id
+          #
           # @return [Square::Types::GetLoyaltyPromotionResponse]
           def get(request_options: {}, **params)
-            _request = Square::Internal::JSON::Request.new(
-              base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+            request = Square::Internal::JSON::Request.new(
+              base_url: request_options[:base_url],
               method: "GET",
-              path: "v2/loyalty/programs/#{params[:program_id]}/promotions/#{params[:promotion_id]}"
+              path: "v2/loyalty/programs/#{params[:program_id]}/promotions/#{params[:promotion_id]}",
+              request_options: request_options
             )
             begin
-              _response = @client.send(_request)
+              response = @client.send(request)
             rescue Net::HTTPRequestTimeout
               raise Square::Errors::TimeoutError
             end
-            code = _response.code.to_i
+            code = response.code.to_i
             if code.between?(200, 299)
-              Square::Types::GetLoyaltyPromotionResponse.load(_response.body)
+              Square::Types::GetLoyaltyPromotionResponse.load(response.body)
             else
               error_class = Square::Errors::ResponseError.subclass_for_code(code)
-              raise error_class.new(_response.body, code: code)
+              raise error_class.new(response.body, code: code)
             end
           end
 
@@ -108,24 +150,35 @@ module Square
           #
           # This endpoint sets the loyalty promotion to the `CANCELED` state
           #
+          # @param request_options [Hash]
+          # @param params [Hash]
+          # @option request_options [String] :base_url
+          # @option request_options [Hash{String => Object}] :additional_headers
+          # @option request_options [Hash{String => Object}] :additional_query_parameters
+          # @option request_options [Hash{String => Object}] :additional_body_parameters
+          # @option request_options [Integer] :timeout_in_seconds
+          # @option params [String] :program_id
+          # @option params [String] :promotion_id
+          #
           # @return [Square::Types::CancelLoyaltyPromotionResponse]
           def cancel(request_options: {}, **params)
-            _request = Square::Internal::JSON::Request.new(
-              base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+            request = Square::Internal::JSON::Request.new(
+              base_url: request_options[:base_url],
               method: "POST",
-              path: "v2/loyalty/programs/#{params[:program_id]}/promotions/#{params[:promotion_id]}/cancel"
+              path: "v2/loyalty/programs/#{params[:program_id]}/promotions/#{params[:promotion_id]}/cancel",
+              request_options: request_options
             )
             begin
-              _response = @client.send(_request)
+              response = @client.send(request)
             rescue Net::HTTPRequestTimeout
               raise Square::Errors::TimeoutError
             end
-            code = _response.code.to_i
+            code = response.code.to_i
             if code.between?(200, 299)
-              Square::Types::CancelLoyaltyPromotionResponse.load(_response.body)
+              Square::Types::CancelLoyaltyPromotionResponse.load(response.body)
             else
               error_class = Square::Errors::ResponseError.subclass_for_code(code)
-              raise error_class.new(_response.body, code: code)
+              raise error_class.new(response.body, code: code)
             end
           end
         end

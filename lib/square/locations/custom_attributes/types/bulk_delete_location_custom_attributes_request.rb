@@ -5,9 +5,7 @@ module Square
     module CustomAttributes
       module Types
         class BulkDeleteLocationCustomAttributesRequest < Internal::Types::Model
-          field :values, lambda {
-            Internal::Types::Hash[String, Square::Types::BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest]
-          }, optional: false, nullable: false
+          field :values, -> { Internal::Types::Hash[String, Square::Types::BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest] }, optional: false, nullable: false
         end
       end
     end

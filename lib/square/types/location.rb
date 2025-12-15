@@ -8,9 +8,7 @@ module Square
       field :name, -> { String }, optional: true, nullable: false
       field :address, -> { Square::Types::Address }, optional: true, nullable: false
       field :timezone, -> { String }, optional: true, nullable: false
-      field :capabilities, lambda {
-        Internal::Types::Array[Square::Types::LocationCapability]
-      }, optional: true, nullable: false
+      field :capabilities, -> { Internal::Types::Array[Square::Types::LocationCapability] }, optional: true, nullable: false
       field :status, -> { Square::Types::LocationStatus }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
       field :merchant_id, -> { String }, optional: true, nullable: false

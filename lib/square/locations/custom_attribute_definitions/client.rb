@@ -4,51 +4,70 @@ module Square
   module Locations
     module CustomAttributeDefinitions
       class Client
-        # @return [Square::Locations::CustomAttributeDefinitions::Client]
+        # @param client [Square::Internal::Http::RawClient]
+        #
+        # @return [void]
         def initialize(client:)
           @client = client
         end
 
-        # Lists the location-related [custom attribute definitions](entity:CustomAttributeDefinition) that belong to a Square seller account.
+        # Lists the location-related [custom attribute definitions](entity:CustomAttributeDefinition) that belong to a
+        # Square seller account.
         # When all response pages are retrieved, the results include all custom attribute definitions
         # that are visible to the requesting application, including those that are created by other
         # applications and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
         #
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [Square::Types::VisibilityFilter, nil] :visibility_filter
+        # @option params [Integer, nil] :limit
+        # @option params [String, nil] :cursor
+        #
         # @return [Square::Types::ListLocationCustomAttributeDefinitionsResponse]
         def list(request_options: {}, **params)
           params = Square::Internal::Types::Utils.symbolize_keys(params)
-          _query_param_names = %i[visibility_filter limit cursor]
-          _query = params.slice(*_query_param_names)
-          params.except(*_query_param_names)
+          query_param_names = %i[visibility_filter limit cursor]
+          query_params = {}
+          query_params["visibility_filter"] = params[:visibility_filter] if params.key?(:visibility_filter)
+          query_params["limit"] = params[:limit] if params.key?(:limit)
+          query_params["cursor"] = params[:cursor] if params.key?(:cursor)
+          params.except(*query_param_names)
 
           Square::Internal::CursorItemIterator.new(
             cursor_field: :cursor,
             item_field: :custom_attribute_definitions,
-            initial_cursor: _query[:cursor]
+            initial_cursor: query_params[:cursor]
           ) do |next_cursor|
-            _query[:cursor] = next_cursor
-            _request = Square::Internal::JSON::Request.new(
-              base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+            query_params[:cursor] = next_cursor
+            request = Square::Internal::JSON::Request.new(
+              base_url: request_options[:base_url],
               method: "GET",
               path: "v2/locations/custom-attribute-definitions",
-              query: _query
+              query: query_params,
+              request_options: request_options
             )
             begin
-              _response = @client.send(_request)
+              response = @client.send(request)
             rescue Net::HTTPRequestTimeout
               raise Square::Errors::TimeoutError
             end
-            code = _response.code.to_i
+            code = response.code.to_i
             if code.between?(200, 299)
-              Square::Types::ListLocationCustomAttributeDefinitionsResponse.load(_response.body)
+              Square::Types::ListLocationCustomAttributeDefinitionsResponse.load(response.body)
             else
               error_class = Square::Errors::ResponseError.subclass_for_code(code)
-              raise error_class.new(_response.body, code: code)
+              raise error_class.new(response.body, code: code)
             end
           end
         end
 
-        # Creates a location-related [custom attribute definition](entity:CustomAttributeDefinition) for a Square seller account.
+        # Creates a location-related [custom attribute definition](entity:CustomAttributeDefinition) for a Square seller
+        # account.
         # Use this endpoint to define a custom attribute that can be associated with locations.
         # A custom attribute definition specifies the `key`, `visibility`, `schema`, and other properties
         # for a custom attribute. After the definition is created, you can call
@@ -56,111 +75,161 @@ module Square
         # [BulkUpsertLocationCustomAttributes](api-endpoint:LocationCustomAttributes-BulkUpsertLocationCustomAttributes)
         # to set the custom attribute for locations.
         #
+        # @param request_options [Hash]
+        # @param params [Square::Locations::CustomAttributeDefinitions::Types::CreateLocationCustomAttributeDefinitionRequest]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        #
         # @return [Square::Types::CreateLocationCustomAttributeDefinitionResponse]
         def create(request_options: {}, **params)
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          body_prop_names = %i[custom_attribute_definition idempotency_key]
+          body_bag = params.slice(*body_prop_names)
+
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "POST",
             path: "v2/locations/custom-attribute-definitions",
-            body: params
+            body: Square::Locations::CustomAttributeDefinitions::Types::CreateLocationCustomAttributeDefinitionRequest.new(body_bag).to_h,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::CreateLocationCustomAttributeDefinitionResponse.load(_response.body)
+            Square::Types::CreateLocationCustomAttributeDefinitionResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
 
-        # Retrieves a location-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square seller account.
+        # Retrieves a location-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square
+        # seller account.
         # To retrieve a custom attribute definition created by another application, the `visibility`
         # setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
+        #
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String] :key
+        # @option params [Integer, nil] :version
         #
         # @return [Square::Types::RetrieveLocationCustomAttributeDefinitionResponse]
         def get(request_options: {}, **params)
           params = Square::Internal::Types::Utils.symbolize_keys(params)
-          _query_param_names = %i[version]
-          _query = params.slice(*_query_param_names)
-          params = params.except(*_query_param_names)
+          query_param_names = %i[version]
+          query_params = {}
+          query_params["version"] = params[:version] if params.key?(:version)
+          params = params.except(*query_param_names)
 
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "GET",
             path: "v2/locations/custom-attribute-definitions/#{params[:key]}",
-            query: _query
+            query: query_params,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::RetrieveLocationCustomAttributeDefinitionResponse.load(_response.body)
+            Square::Types::RetrieveLocationCustomAttributeDefinitionResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
 
-        # Updates a location-related [custom attribute definition](entity:CustomAttributeDefinition) for a Square seller account.
+        # Updates a location-related [custom attribute definition](entity:CustomAttributeDefinition) for a Square seller
+        # account.
         # Use this endpoint to update the following fields: `name`, `description`, `visibility`, or the
         # `schema` for a `Selection` data type.
         # Only the definition owner can update a custom attribute definition.
         #
+        # @param request_options [Hash]
+        # @param params [Square::Locations::CustomAttributeDefinitions::Types::UpdateLocationCustomAttributeDefinitionRequest]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String] :key
+        #
         # @return [Square::Types::UpdateLocationCustomAttributeDefinitionResponse]
         def update(request_options: {}, **params)
-          _path_param_names = ["key"]
+          path_param_names = %i[key]
+          body_params = params.except(*path_param_names)
+          body_prop_names = %i[custom_attribute_definition idempotency_key]
+          body_bag = body_params.slice(*body_prop_names)
 
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "PUT",
             path: "v2/locations/custom-attribute-definitions/#{params[:key]}",
-            body: params.except(*_path_param_names)
+            body: Square::Locations::CustomAttributeDefinitions::Types::UpdateLocationCustomAttributeDefinitionRequest.new(body_bag).to_h,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::UpdateLocationCustomAttributeDefinitionResponse.load(_response.body)
+            Square::Types::UpdateLocationCustomAttributeDefinitionResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
 
-        # Deletes a location-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square seller account.
+        # Deletes a location-related [custom attribute definition](entity:CustomAttributeDefinition) from a Square
+        # seller account.
         # Deleting a custom attribute definition also deletes the corresponding custom attribute from
         # all locations.
         # Only the definition owner can delete a custom attribute definition.
         #
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String] :key
+        #
         # @return [Square::Types::DeleteLocationCustomAttributeDefinitionResponse]
         def delete(request_options: {}, **params)
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "DELETE",
-            path: "v2/locations/custom-attribute-definitions/#{params[:key]}"
+            path: "v2/locations/custom-attribute-definitions/#{params[:key]}",
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::DeleteLocationCustomAttributeDefinitionResponse.load(_response.body)
+            Square::Types::DeleteLocationCustomAttributeDefinitionResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
       end

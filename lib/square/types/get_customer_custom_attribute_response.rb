@@ -2,7 +2,8 @@
 
 module Square
   module Types
-    # Represents a [RetrieveCustomerCustomAttribute](api-endpoint:CustomerCustomAttributes-RetrieveCustomerCustomAttribute) response.
+    # Represents a
+    # [RetrieveCustomerCustomAttribute](api-endpoint:CustomerCustomAttributes-RetrieveCustomerCustomAttribute) response.
     # Either `custom_attribute_definition` or `errors` is present in the response.
     class GetCustomerCustomAttributeResponse < Internal::Types::Model
       field :custom_attribute, -> { Square::Types::CustomAttribute }, optional: true, nullable: false

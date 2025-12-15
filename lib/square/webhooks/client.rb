@@ -3,7 +3,9 @@
 module Square
   module Webhooks
     class Client
-      # @return [Square::Webhooks::Client]
+      # @param client [Square::Internal::Http::RawClient]
+      #
+      # @return [void]
       def initialize(client:)
         @client = client
       end

@@ -4,37 +4,50 @@ module Square
   module Webhooks
     module EventTypes
       class Client
-        # @return [Square::Webhooks::EventTypes::Client]
+        # @param client [Square::Internal::Http::RawClient]
+        #
+        # @return [void]
         def initialize(client:)
           @client = client
         end
 
         # Lists all webhook event types that can be subscribed to.
         #
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String, nil] :api_version
+        #
         # @return [Square::Types::ListWebhookEventTypesResponse]
         def list(request_options: {}, **params)
           params = Square::Internal::Types::Utils.symbolize_keys(params)
-          _query_param_names = %i[api_version]
-          _query = params.slice(*_query_param_names)
-          params.except(*_query_param_names)
+          query_param_names = %i[api_version]
+          query_params = {}
+          query_params["api_version"] = params[:api_version] if params.key?(:api_version)
+          params.except(*query_param_names)
 
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "GET",
             path: "v2/webhooks/event-types",
-            query: _query
+            query: query_params,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::ListWebhookEventTypesResponse.load(_response.body)
+            Square::Types::ListWebhookEventTypesResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
       end

@@ -3,7 +3,8 @@
 module Square
   module Types
     # Represents a postal address in a country.
-    # For more information, see [Working with Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses).
+    # For more information, see [Working with
+    # Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses).
     class Address < Internal::Types::Model
       field :address_line_1, -> { String }, optional: true, nullable: false
       field :address_line_2, -> { String }, optional: true, nullable: false

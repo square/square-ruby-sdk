@@ -3,7 +3,9 @@
 module Square
   module Orders
     class Client
-      # @return [Square::Orders::Client]
+      # @param client [Square::Internal::Http::RawClient]
+      #
+      # @return [void]
       def initialize(client:)
         @client = client
       end
@@ -16,25 +18,34 @@ module Square
       #
       # You can modify open orders using the [UpdateOrder](api-endpoint:Orders-UpdateOrder) endpoint.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Types::CreateOrderRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::CreateOrderResponse]
       def create(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/orders",
-          body: Square::Types::CreateOrderRequest.new(params).to_h
+          body: Square::Types::CreateOrderRequest.new(params).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreateOrderResponse.load(_response.body)
+          Square::Types::CreateOrderResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -42,74 +53,110 @@ module Square
       #
       # If a given order ID does not exist, the ID is ignored instead of generating an error.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Orders::Types::BatchGetOrdersRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::BatchGetOrdersResponse]
       def batch_get(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[location_id order_ids]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/orders/batch-retrieve",
-          body: params
+          body: Square::Orders::Types::BatchGetOrdersRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BatchGetOrdersResponse.load(_response.body)
+          Square::Types::BatchGetOrdersResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Enables applications to preview order pricing without creating an order.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Orders::Types::CalculateOrderRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::CalculateOrderResponse]
       def calculate(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[order proposed_rewards]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/orders/calculate",
-          body: params
+          body: Square::Orders::Types::CalculateOrderRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CalculateOrderResponse.load(_response.body)
+          Square::Types::CalculateOrderResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Creates a new order, in the `DRAFT` state, by duplicating an existing order. The newly created order has
       # only the core fields (such as line items, taxes, and discounts) copied from the original order.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Orders::Types::CloneOrderRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::CloneOrderResponse]
       def clone(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[order_id version idempotency_key]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/orders/clone",
-          body: params
+          body: Square::Orders::Types::CloneOrderRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CloneOrderResponse.load(_response.body)
+          Square::Types::CloneOrderResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -131,48 +178,70 @@ module Square
       # orders have a `created_at` value that reflects the time the order was created,
       # not the time it was subsequently transmitted to Square.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Orders::Types::SearchOrdersRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::SearchOrdersResponse]
       def search(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[location_ids cursor query limit return_entries]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/orders/search",
-          body: params
+          body: Square::Orders::Types::SearchOrdersRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchOrdersResponse.load(_response.body)
+          Square::Types::SearchOrdersResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Retrieves an [Order](entity:Order) by ID.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :order_id
+      #
       # @return [Square::Types::GetOrderResponse]
       def get(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/orders/#{params[:order_id]}"
+          path: "v2/orders/#{params[:order_id]}",
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::GetOrderResponse.load(_response.body)
+          Square::Types::GetOrderResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -183,36 +252,51 @@ module Square
       #
       # - The `order_id` in the endpoint path, identifying the order to update.
       # - The latest `version` of the order to update.
-      # - The [sparse order](https://developer.squareup.com/docs/orders-api/manage-orders/update-orders#sparse-order-objects)
+      # - The [sparse
+      # order](https://developer.squareup.com/docs/orders-api/manage-orders/update-orders#sparse-order-objects)
       # containing only the fields to update and the version to which the update is
       # being applied.
-      # - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders/update-orders#identifying-fields-to-delete)
+      # - If deleting fields, the [dot notation
+      # paths](https://developer.squareup.com/docs/orders-api/manage-orders/update-orders#identifying-fields-to-delete)
       # identifying the fields to clear.
       #
       # To pay for an order, see
       # [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders).
       #
+      # @param request_options [Hash]
+      # @param params [Square::Orders::Types::UpdateOrderRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :order_id
+      #
       # @return [Square::Types::UpdateOrderResponse]
       def update(request_options: {}, **params)
-        _path_param_names = ["order_id"]
+        path_param_names = %i[order_id]
+        body_params = params.except(*path_param_names)
+        body_prop_names = %i[order fields_to_clear idempotency_key]
+        body_bag = body_params.slice(*body_prop_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/orders/#{params[:order_id]}",
-          body: params.except(*_path_param_names)
+          body: Square::Orders::Types::UpdateOrderRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdateOrderResponse.load(_response.body)
+          Square::Types::UpdateOrderResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -225,33 +309,48 @@ module Square
       #
       # To be used with `PayOrder`, a payment must:
       #
-      # - Reference the order by specifying the `order_id` when [creating the payment](api-endpoint:Payments-CreatePayment).
+      # - Reference the order by specifying the `order_id` when [creating the
+      # payment](api-endpoint:Payments-CreatePayment).
       # Any approved payments that reference the same `order_id` not specified in the
       # `payment_ids` is canceled.
-      # - Be approved with [delayed capture](https://developer.squareup.com/docs/payments-api/take-payments/card-payments/delayed-capture).
+      # - Be approved with [delayed
+      # capture](https://developer.squareup.com/docs/payments-api/take-payments/card-payments/delayed-capture).
       # Using a delayed capture payment with `PayOrder` completes the approved payment.
+      #
+      # @param request_options [Hash]
+      # @param params [Square::Orders::Types::PayOrderRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :order_id
       #
       # @return [Square::Types::PayOrderResponse]
       def pay(request_options: {}, **params)
-        _path_param_names = ["order_id"]
+        path_param_names = %i[order_id]
+        body_params = params.except(*path_param_names)
+        body_prop_names = %i[idempotency_key order_version payment_ids]
+        body_bag = body_params.slice(*body_prop_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/orders/#{params[:order_id]}/pay",
-          body: params.except(*_path_param_names)
+          body: Square::Orders::Types::PayOrderRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::PayOrderResponse.load(_response.body)
+          Square::Types::PayOrderResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 

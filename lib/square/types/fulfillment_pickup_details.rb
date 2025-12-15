@@ -21,9 +21,7 @@ module Square
       field :canceled_at, -> { String }, optional: true, nullable: false
       field :cancel_reason, -> { String }, optional: true, nullable: false
       field :is_curbside_pickup, -> { Internal::Types::Boolean }, optional: true, nullable: false
-      field :curbside_pickup_details, lambda {
-        Square::Types::FulfillmentPickupDetailsCurbsidePickupDetails
-      }, optional: true, nullable: false
+      field :curbside_pickup_details, -> { Square::Types::FulfillmentPickupDetailsCurbsidePickupDetails }, optional: true, nullable: false
     end
   end
 end

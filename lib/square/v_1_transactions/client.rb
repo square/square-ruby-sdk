@@ -3,84 +3,128 @@
 module Square
   module V1Transactions
     class Client
-      # @return [Square::V1Transactions::Client]
+      # @param client [Square::Internal::Http::RawClient]
+      #
+      # @return [void]
       def initialize(client:)
         @client = client
       end
 
       # Provides summary information for a merchant's online store orders.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :location_id
+      # @option params [Square::Types::SortOrder, nil] :order
+      # @option params [Integer, nil] :limit
+      # @option params [String, nil] :batch_token
+      #
       # @return [Array[Square::Types::V1Order]]
       def v_1_list_orders(request_options: {}, **params)
         params = Square::Internal::Types::Utils.symbolize_keys(params)
-        _query_param_names = %i[order limit batch_token]
-        _query = params.slice(*_query_param_names)
-        params = params.except(*_query_param_names)
+        query_param_names = %i[order limit batch_token]
+        query_params = {}
+        query_params["order"] = params[:order] if params.key?(:order)
+        query_params["limit"] = params[:limit] if params.key?(:limit)
+        query_params["batch_token"] = params[:batch_token] if params.key?(:batch_token)
+        params = params.except(*query_param_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "GET",
           path: "v1/#{params[:location_id]}/orders",
-          query: _query
+          query: query_params,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         return if code.between?(200, 299)
 
         error_class = Square::Errors::ResponseError.subclass_for_code(code)
-        raise error_class.new(_response.body, code: code)
+        raise error_class.new(response.body, code: code)
       end
 
       # Provides comprehensive information for a single online store order, including the order's history.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :location_id
+      # @option params [String] :order_id
+      #
       # @return [Square::Types::V1Order]
       def v_1_retrieve_order(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "GET",
-          path: "v1/#{params[:location_id]}/orders/#{params[:order_id]}"
+          path: "v1/#{params[:location_id]}/orders/#{params[:order_id]}",
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::V1Order.load(_response.body)
+          Square::Types::V1Order.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
-      # Updates the details of an online store order. Every update you perform on an order corresponds to one of three actions:
+      # Updates the details of an online store order. Every update you perform on an order corresponds to one of three
+      # actions:
+      #
+      # @param request_options [Hash]
+      # @param params [Square::V1Transactions::Types::V1UpdateOrderRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :location_id
+      # @option params [String] :order_id
       #
       # @return [Square::Types::V1Order]
       def v_1_update_order(request_options: {}, **params)
-        _path_param_names = %w[location_id order_id]
+        path_param_names = %i[location_id order_id]
+        body_params = params.except(*path_param_names)
+        body_prop_names = %i[action shipped_tracking_number completed_note refunded_note canceled_note]
+        body_bag = body_params.slice(*body_prop_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "PUT",
           path: "v1/#{params[:location_id]}/orders/#{params[:order_id]}",
-          body: params.except(*_path_param_names)
+          body: Square::V1Transactions::Types::V1UpdateOrderRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::V1Order.load(_response.body)
+          Square::Types::V1Order.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
     end

@@ -112,7 +112,7 @@ module Square
             end
           end
 
-          def coerce(value, strict: (respond_to?(:strict?) ? strict? : false))
+          def coerce(value, strict: (respond_to?(:strict?) ? strict? : false)) # rubocop:disable Lint/UnusedMethodArgument
             return value if value.is_a?(self)
 
             return value unless value.is_a?(::Hash)
@@ -141,7 +141,7 @@ module Square
           values = Utils.symbolize_keys(values.dup)
 
           self.class.fields.each do |field_name, field|
-            value = values.delete(field.api_name)
+            value = values.delete(field.api_name.to_sym) || values.delete(field.api_name) || values.delete(field_name)
 
             field_value = value || (if field.literal?
                                       field.value
@@ -187,7 +187,9 @@ module Square
         # @return [String]
         def inspect
           attrs = @data.map do |name, value|
-            "#{name}=#{value.inspect}"
+            field = self.class.fields[name] || self.class.extra_fields[name]
+            display_value = field&.sensitive? ? "[REDACTED]" : value.inspect
+            "#{name}=#{display_value}"
           end
 
           "#<#{self.class.name}:0x#{object_id&.to_s(16)} #{attrs.join(" ")}>"
