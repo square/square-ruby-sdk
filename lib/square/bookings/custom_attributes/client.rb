@@ -4,7 +4,9 @@ module Square
   module Bookings
     module CustomAttributes
       class Client
-        # @return [Square::Bookings::CustomAttributes::Client]
+        # @param client [Square::Internal::Http::RawClient]
+        #
+        # @return [void]
         def initialize(client:)
           @client = client
         end
@@ -12,98 +14,143 @@ module Square
         # Bulk deletes bookings custom attributes.
         #
         # To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.
-        # To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
+        # To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for
+        # the OAuth scope.
         #
-        # For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*
+        # For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to
+        # *Appointments Plus*
         # or *Appointments Premium*.
+        #
+        # @param request_options [Hash]
+        # @param params [Square::Bookings::CustomAttributes::Types::BulkDeleteBookingCustomAttributesRequest]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
         #
         # @return [Square::Types::BulkDeleteBookingCustomAttributesResponse]
         def batch_delete(request_options: {}, **params)
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          body_prop_names = %i[values]
+          body_bag = params.slice(*body_prop_names)
+
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "POST",
             path: "v2/bookings/custom-attributes/bulk-delete",
-            body: params
+            body: Square::Bookings::CustomAttributes::Types::BulkDeleteBookingCustomAttributesRequest.new(body_bag).to_h,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::BulkDeleteBookingCustomAttributesResponse.load(_response.body)
+            Square::Types::BulkDeleteBookingCustomAttributesResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
 
         # Bulk upserts bookings custom attributes.
         #
         # To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.
-        # To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
+        # To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for
+        # the OAuth scope.
         #
-        # For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*
+        # For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to
+        # *Appointments Plus*
         # or *Appointments Premium*.
+        #
+        # @param request_options [Hash]
+        # @param params [Square::Bookings::CustomAttributes::Types::BulkUpsertBookingCustomAttributesRequest]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
         #
         # @return [Square::Types::BulkUpsertBookingCustomAttributesResponse]
         def batch_upsert(request_options: {}, **params)
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          body_prop_names = %i[values]
+          body_bag = params.slice(*body_prop_names)
+
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "POST",
             path: "v2/bookings/custom-attributes/bulk-upsert",
-            body: params
+            body: Square::Bookings::CustomAttributes::Types::BulkUpsertBookingCustomAttributesRequest.new(body_bag).to_h,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::BulkUpsertBookingCustomAttributesResponse.load(_response.body)
+            Square::Types::BulkUpsertBookingCustomAttributesResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
 
         # Lists a booking's custom attributes.
         #
         # To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.
-        # To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
+        # To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for
+        # the OAuth scope.
+        #
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String] :booking_id
+        # @option params [Integer, nil] :limit
+        # @option params [String, nil] :cursor
+        # @option params [Boolean, nil] :with_definitions
         #
         # @return [Square::Types::ListBookingCustomAttributesResponse]
         def list(request_options: {}, **params)
           params = Square::Internal::Types::Utils.symbolize_keys(params)
-          _query_param_names = %i[limit cursor with_definitions]
-          _query = params.slice(*_query_param_names)
-          params = params.except(*_query_param_names)
+          query_param_names = %i[limit cursor with_definitions]
+          query_params = {}
+          query_params["limit"] = params[:limit] if params.key?(:limit)
+          query_params["cursor"] = params[:cursor] if params.key?(:cursor)
+          query_params["with_definitions"] = params[:with_definitions] if params.key?(:with_definitions)
+          params = params.except(*query_param_names)
 
           Square::Internal::CursorItemIterator.new(
             cursor_field: :cursor,
             item_field: :custom_attributes,
-            initial_cursor: _query[:cursor]
+            initial_cursor: query_params[:cursor]
           ) do |next_cursor|
-            _query[:cursor] = next_cursor
-            _request = Square::Internal::JSON::Request.new(
-              base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+            query_params[:cursor] = next_cursor
+            request = Square::Internal::JSON::Request.new(
+              base_url: request_options[:base_url],
               method: "GET",
               path: "v2/bookings/#{params[:booking_id]}/custom-attributes",
-              query: _query
+              query: query_params,
+              request_options: request_options
             )
             begin
-              _response = @client.send(_request)
+              response = @client.send(request)
             rescue Net::HTTPRequestTimeout
               raise Square::Errors::TimeoutError
             end
-            code = _response.code.to_i
+            code = response.code.to_i
             if code.between?(200, 299)
-              Square::Types::ListBookingCustomAttributesResponse.load(_response.body)
+              Square::Types::ListBookingCustomAttributesResponse.load(response.body)
             else
               error_class = Square::Errors::ResponseError.subclass_for_code(code)
-              raise error_class.new(_response.body, code: code)
+              raise error_class.new(response.body, code: code)
             end
           end
         end
@@ -111,93 +158,138 @@ module Square
         # Retrieves a bookings custom attribute.
         #
         # To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.
-        # To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
+        # To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for
+        # the OAuth scope.
+        #
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String] :booking_id
+        # @option params [String] :key
+        # @option params [Boolean, nil] :with_definition
+        # @option params [Integer, nil] :version
         #
         # @return [Square::Types::RetrieveBookingCustomAttributeResponse]
         def get(request_options: {}, **params)
           params = Square::Internal::Types::Utils.symbolize_keys(params)
-          _query_param_names = %i[with_definition version]
-          _query = params.slice(*_query_param_names)
-          params = params.except(*_query_param_names)
+          query_param_names = %i[with_definition version]
+          query_params = {}
+          query_params["with_definition"] = params[:with_definition] if params.key?(:with_definition)
+          query_params["version"] = params[:version] if params.key?(:version)
+          params = params.except(*query_param_names)
 
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "GET",
             path: "v2/bookings/#{params[:booking_id]}/custom-attributes/#{params[:key]}",
-            query: _query
+            query: query_params,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::RetrieveBookingCustomAttributeResponse.load(_response.body)
+            Square::Types::RetrieveBookingCustomAttributeResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
 
         # Upserts a bookings custom attribute.
         #
         # To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.
-        # To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
+        # To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for
+        # the OAuth scope.
         #
-        # For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*
+        # For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to
+        # *Appointments Plus*
         # or *Appointments Premium*.
+        #
+        # @param request_options [Hash]
+        # @param params [Square::Bookings::CustomAttributes::Types::UpsertBookingCustomAttributeRequest]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String] :booking_id
+        # @option params [String] :key
         #
         # @return [Square::Types::UpsertBookingCustomAttributeResponse]
         def upsert(request_options: {}, **params)
-          _path_param_names = %w[booking_id key]
+          path_param_names = %i[booking_id key]
+          body_params = params.except(*path_param_names)
+          body_prop_names = %i[custom_attribute idempotency_key]
+          body_bag = body_params.slice(*body_prop_names)
 
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "PUT",
             path: "v2/bookings/#{params[:booking_id]}/custom-attributes/#{params[:key]}",
-            body: params.except(*_path_param_names)
+            body: Square::Bookings::CustomAttributes::Types::UpsertBookingCustomAttributeRequest.new(body_bag).to_h,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::UpsertBookingCustomAttributeResponse.load(_response.body)
+            Square::Types::UpsertBookingCustomAttributeResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
 
         # Deletes a bookings custom attribute.
         #
         # To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.
-        # To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.
+        # To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for
+        # the OAuth scope.
         #
-        # For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*
+        # For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to
+        # *Appointments Plus*
         # or *Appointments Premium*.
+        #
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String] :booking_id
+        # @option params [String] :key
         #
         # @return [Square::Types::DeleteBookingCustomAttributeResponse]
         def delete(request_options: {}, **params)
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "DELETE",
-            path: "v2/bookings/#{params[:booking_id]}/custom-attributes/#{params[:key]}"
+            path: "v2/bookings/#{params[:booking_id]}/custom-attributes/#{params[:key]}",
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::DeleteBookingCustomAttributeResponse.load(_response.body)
+            Square::Types::DeleteBookingCustomAttributeResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
       end

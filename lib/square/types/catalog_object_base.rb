@@ -7,10 +7,8 @@ module Square
       field :updated_at, -> { String }, optional: true, nullable: false
       field :version, -> { Integer }, optional: true, nullable: false
       field :is_deleted, -> { Internal::Types::Boolean }, optional: true, nullable: false
-      field :custom_attribute_values, lambda {
-        Internal::Types::Hash[String, Square::Types::CatalogCustomAttributeValue]
-      }, optional: true, nullable: false
-      field :catalog_v_1_ids, -> { Internal::Types::Array[Square::Types::CatalogV1Id] }, optional: true, nullable: false
+      field :custom_attribute_values, -> { Internal::Types::Hash[String, Square::Types::CatalogCustomAttributeValue] }, optional: true, nullable: false
+      field :catalog_v_1_ids, -> { Internal::Types::Array[Square::Types::CatalogV1Id] }, optional: true, nullable: false, api_name: "catalog_v1_ids"
       field :present_at_all_locations, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :present_at_location_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :absent_at_location_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false

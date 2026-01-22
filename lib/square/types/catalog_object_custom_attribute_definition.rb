@@ -3,9 +3,7 @@
 module Square
   module Types
     class CatalogObjectCustomAttributeDefinition < Internal::Types::Model
-      field :custom_attribute_definition_data, lambda {
-        Square::Types::CatalogCustomAttributeDefinition
-      }, optional: true, nullable: false
+      field :custom_attribute_definition_data, -> { Square::Types::CatalogCustomAttributeDefinition }, optional: true, nullable: false
     end
   end
 end

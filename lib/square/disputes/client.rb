@@ -3,67 +3,94 @@
 module Square
   module Disputes
     class Client
-      # @return [Square::Disputes::Client]
+      # @param client [Square::Internal::Http::RawClient]
+      #
+      # @return [void]
       def initialize(client:)
         @client = client
       end
 
       # Returns a list of disputes associated with a particular account.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String, nil] :cursor
+      # @option params [Square::Types::DisputeState, nil] :states
+      # @option params [String, nil] :location_id
+      #
       # @return [Square::Types::ListDisputesResponse]
       def list(request_options: {}, **params)
         params = Square::Internal::Types::Utils.symbolize_keys(params)
-        _query_param_names = %i[cursor states location_id]
-        _query = params.slice(*_query_param_names)
-        params.except(*_query_param_names)
+        query_param_names = %i[cursor states location_id]
+        query_params = {}
+        query_params["cursor"] = params[:cursor] if params.key?(:cursor)
+        query_params["states"] = params[:states] if params.key?(:states)
+        query_params["location_id"] = params[:location_id] if params.key?(:location_id)
+        params.except(*query_param_names)
 
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :disputes,
-          initial_cursor: _query[:cursor]
+          initial_cursor: query_params[:cursor]
         ) do |next_cursor|
-          _query[:cursor] = next_cursor
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          query_params[:cursor] = next_cursor
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "GET",
             path: "v2/disputes",
-            query: _query
+            query: query_params,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::ListDisputesResponse.load(_response.body)
+            Square::Types::ListDisputesResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
       end
 
       # Returns details about a specific dispute.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :dispute_id
+      #
       # @return [Square::Types::GetDisputeResponse]
       def get(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/disputes/#{params[:dispute_id]}"
+          path: "v2/disputes/#{params[:dispute_id]}",
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::GetDisputeResponse.load(_response.body)
+          Square::Types::GetDisputeResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -73,29 +100,48 @@ module Square
       # Square debits the disputed amount from the seller’s Square account. If the Square account
       # does not have sufficient funds, Square debits the associated bank account.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :dispute_id
+      #
       # @return [Square::Types::AcceptDisputeResponse]
       def accept(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
-          path: "v2/disputes/#{params[:dispute_id]}/accept"
+          path: "v2/disputes/#{params[:dispute_id]}/accept",
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::AcceptDisputeResponse.load(_response.body)
+          Square::Types::AcceptDisputeResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Uploads a file to use as evidence in a dispute challenge. The endpoint accepts HTTP
       # multipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG, and TIFF formats.
+      #
+      # @param request_options [Hash]
+      # @param params [void]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :dispute_id
       #
       # @return [Square::Types::CreateDisputeEvidenceFileResponse]
       def create_evidence_file(request_options: {}, **params)
@@ -110,48 +156,63 @@ module Square
         end
         body.add_part(params[:image_file].to_form_data_part(name: "image_file")) if params[:image_file]
 
-        _request = Square::Internal::Multipart::Request.new(
-          method: POST,
+        request = Square::Internal::Multipart::Request.new(
+          base_url: request_options[:base_url],
+          method: "POST",
           path: "v2/disputes/#{params[:dispute_id]}/evidence-files",
-          body: body
+          body: body,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreateDisputeEvidenceFileResponse.load(_response.body)
+          Square::Types::CreateDisputeEvidenceFileResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Uploads text to use as evidence for a dispute challenge.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Disputes::Types::CreateDisputeEvidenceTextRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :dispute_id
+      #
       # @return [Square::Types::CreateDisputeEvidenceTextResponse]
       def create_evidence_text(request_options: {}, **params)
-        _path_param_names = ["dispute_id"]
+        path_param_names = %i[dispute_id]
+        body_params = params.except(*path_param_names)
+        body_prop_names = %i[idempotency_key evidence_type evidence_text]
+        body_bag = body_params.slice(*body_prop_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/disputes/#{params[:dispute_id]}/evidence-text",
-          body: params.except(*_path_param_names)
+          body: Square::Disputes::Types::CreateDisputeEvidenceTextRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreateDisputeEvidenceTextResponse.load(_response.body)
+          Square::Types::CreateDisputeEvidenceTextResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -163,24 +224,34 @@ module Square
       # evidence automatically provided by Square, when available. Evidence cannot be removed from
       # a dispute after submission.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :dispute_id
+      #
       # @return [Square::Types::SubmitEvidenceResponse]
       def submit_evidence(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
-          path: "v2/disputes/#{params[:dispute_id]}/submit-evidence"
+          path: "v2/disputes/#{params[:dispute_id]}/submit-evidence",
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SubmitEvidenceResponse.load(_response.body)
+          Square::Types::SubmitEvidenceResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 

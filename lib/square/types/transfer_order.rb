@@ -28,9 +28,7 @@ module Square
       field :notes, -> { String }, optional: true, nullable: false
       field :tracking_number, -> { String }, optional: true, nullable: false
       field :created_by_team_member_id, -> { String }, optional: true, nullable: false
-      field :line_items, lambda {
-        Internal::Types::Array[Square::Types::TransferOrderLine]
-      }, optional: true, nullable: false
+      field :line_items, -> { Internal::Types::Array[Square::Types::TransferOrderLine] }, optional: true, nullable: false
       field :version, -> { Integer }, optional: true, nullable: false
     end
   end

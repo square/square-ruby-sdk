@@ -3,7 +3,8 @@
 module Square
   module Types
     # Defines the fields that are included in the response body of
-    # a request to the [RetrieveWebhookSubscription](api-endpoint:WebhookSubscriptions-RetrieveWebhookSubscription) endpoint.
+    # a request to the [RetrieveWebhookSubscription](api-endpoint:WebhookSubscriptions-RetrieveWebhookSubscription)
+    # endpoint.
     #
     # Note: if there are errors processing the request, the [Subscription](entity:WebhookSubscription) will not be
     # present.

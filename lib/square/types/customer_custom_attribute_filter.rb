@@ -2,7 +2,8 @@
 
 module Square
   module Types
-    # The custom attribute filter. Use this filter in a set of [custom attribute filters](entity:CustomerCustomAttributeFilters) to search
+    # The custom attribute filter. Use this filter in a set of [custom attribute
+    # filters](entity:CustomerCustomAttributeFilters) to search
     # based on the value or last updated date of a customer-related [custom attribute](entity:CustomAttribute).
     class CustomerCustomAttributeFilter < Internal::Types::Model
       field :key, -> { String }, optional: false, nullable: false

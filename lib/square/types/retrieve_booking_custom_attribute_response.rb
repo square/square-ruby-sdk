@@ -2,7 +2,8 @@
 
 module Square
   module Types
-    # Represents a [RetrieveBookingCustomAttribute](api-endpoint:BookingCustomAttributes-RetrieveBookingCustomAttribute) response.
+    # Represents a [RetrieveBookingCustomAttribute](api-endpoint:BookingCustomAttributes-RetrieveBookingCustomAttribute)
+    # response.
     # Either `custom_attribute_definition` or `errors` is present in the response.
     class RetrieveBookingCustomAttributeResponse < Internal::Types::Model
       field :custom_attribute, -> { Square::Types::CustomAttribute }, optional: true, nullable: false

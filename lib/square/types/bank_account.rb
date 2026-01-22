@@ -23,6 +23,7 @@ module Square
       field :fingerprint, -> { String }, optional: true, nullable: false
       field :version, -> { Integer }, optional: true, nullable: false
       field :bank_name, -> { String }, optional: true, nullable: false
+      field :customer_id, -> { String }, optional: true, nullable: false
     end
   end
 end

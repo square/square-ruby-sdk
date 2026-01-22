@@ -2,8 +2,10 @@
 
 module Square
   module Types
-    # Published when a [customer](entity:Customer) is created. Subscribe to this event to track customer profiles affected by a merge operation.
-    # For more information, see [Use Customer Webhooks](https://developer.squareup.com/docs/customers-api/use-the-api/customer-webhooks).
+    # Published when a [customer](entity:Customer) is created. Subscribe to this event to track customer profiles
+    # affected by a merge operation.
+    # For more information, see [Use Customer
+    # Webhooks](https://developer.squareup.com/docs/customers-api/use-the-api/customer-webhooks).
     #
     # The `customer` object in the event notification does not include the `segment_ids` field.
     class CustomerCreatedEvent < Internal::Types::Model

@@ -16,9 +16,7 @@ module Square
         field :payment_version_token, -> { String }, optional: true, nullable: false
         field :team_member_id, -> { String }, optional: true, nullable: false
         field :cash_details, -> { Square::Types::DestinationDetailsCashRefundDetails }, optional: true, nullable: false
-        field :external_details, lambda {
-          Square::Types::DestinationDetailsExternalRefundDetails
-        }, optional: true, nullable: false
+        field :external_details, -> { Square::Types::DestinationDetailsExternalRefundDetails }, optional: true, nullable: false
       end
     end
   end

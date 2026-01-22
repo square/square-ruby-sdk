@@ -8,7 +8,7 @@ module Square
       field :location_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :status, -> { Square::Types::TimecardFilterStatus }, optional: true, nullable: false
       field :start, -> { Square::Types::TimeRange }, optional: true, nullable: false
-      field :end_, -> { Square::Types::TimeRange }, optional: true, nullable: false
+      field :end_, -> { Square::Types::TimeRange }, optional: true, nullable: false, api_name: "end"
       field :workday, -> { Square::Types::TimecardWorkday }, optional: true, nullable: false
       field :team_member_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
     end

@@ -20,6 +20,8 @@ module Square
       field :card_type, -> { Square::Types::CardType }, optional: true, nullable: false
       field :prepaid_type, -> { Square::Types::CardPrepaidType }, optional: true, nullable: false
       field :bin, -> { String }, optional: true, nullable: false
+      field :created_at, -> { String }, optional: true, nullable: false
+      field :disabled_at, -> { String }, optional: true, nullable: false
       field :version, -> { Integer }, optional: true, nullable: false
       field :card_co_brand, -> { Square::Types::CardCoBrand }, optional: true, nullable: false
       field :issuer_alert, -> { String }, optional: true, nullable: false

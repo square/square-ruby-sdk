@@ -8,6 +8,7 @@ module Square
       field :collect_signature, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :tip_settings, -> { Square::Types::TipSettings }, optional: true, nullable: false
       field :show_itemized_cart, -> { Internal::Types::Boolean }, optional: true, nullable: false
+      field :allow_auto_card_surcharge, -> { Internal::Types::Boolean }, optional: true, nullable: false
     end
   end
 end

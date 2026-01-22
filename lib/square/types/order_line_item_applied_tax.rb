@@ -12,6 +12,7 @@ module Square
       field :uid, -> { String }, optional: true, nullable: false
       field :tax_uid, -> { String }, optional: false, nullable: false
       field :applied_money, -> { Square::Types::Money }, optional: true, nullable: false
+      field :auto_applied, -> { Internal::Types::Boolean }, optional: true, nullable: false
     end
   end
 end

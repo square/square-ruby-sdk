@@ -2,7 +2,9 @@
 
 module Square
   module Types
-    # Represents a response for an individual upsert request in a [BulkUpsertCustomerCustomAttributes](api-endpoint:CustomerCustomAttributes-BulkUpsertCustomerCustomAttributes) operation.
+    # Represents a response for an individual upsert request in a
+    # [BulkUpsertCustomerCustomAttributes](api-endpoint:CustomerCustomAttributes-BulkUpsertCustomerCustomAttributes)
+    # operation.
     class BatchUpsertCustomerCustomAttributesResponseCustomerCustomAttributeUpsertResponse < Internal::Types::Model
       field :customer_id, -> { String }, optional: true, nullable: false
       field :custom_attribute, -> { Square::Types::CustomAttribute }, optional: true, nullable: false
