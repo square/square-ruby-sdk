@@ -182,11 +182,6 @@ module Square
       @vendors ||= Square::Vendors::Client.new(client: @raw_client)
     end
 
-    # @return [Square::Mobile::Client]
-    def mobile
-      @mobile ||= Square::Mobile::Client.new(client: @raw_client)
-    end
-
     # @return [Square::CashDrawers::Client]
     def cash_drawers
       @cash_drawers ||= Square::CashDrawers::Client.new(client: @raw_client)
