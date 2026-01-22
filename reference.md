@@ -16777,47 +16777,6 @@ client.vendors.update(
 </dl>
 </details>
 
-## Mobile
-<details><summary><code>client.mobile.<a href="/lib/square/mobile/client.rb">authorization_code</a>() -> </code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```ruby
-client.mobile.authorization_code();
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request_options:** `Square::Mobile::RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Bookings CustomAttributeDefinitions
 <details><summary><code>client.bookings.custom_attribute_definitions.<a href="/lib/square/bookings/custom_attribute_definitions/client.rb">list</a>() -> Square::Types::ListBookingCustomAttributeDefinitionsResponse</code></summary>
 <dl>
