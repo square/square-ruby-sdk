@@ -1,77 +1,6 @@
 # Reference
-## Mobile
-<details><summary><code>client.Mobile.AuthorizationCode(request) -> Square::Types::CreateMobileAuthorizationCodeResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-__Note:__ This endpoint is used by the deprecated Reader SDK. 
-Developers should update their integration to use the [Mobile Payments SDK](https://developer.squareup.com/docs/mobile-payments-sdk), which includes its own authorization methods. 
-
-Generates code to authorize a mobile application to connect to a Square card reader.
-
-Authorization codes are one-time-use codes and expire 60 minutes after being issued.
-
-The `Authorization` header you provide to this endpoint must have the following format:
-
-```
-Authorization: Bearer ACCESS_TOKEN
-```
-
-Replace `ACCESS_TOKEN` with a
-[valid production authorization credential](https://developer.squareup.com/docs/build-basics/access-tokens).
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```ruby
-client.mobile.authorization_code({
-  locationId:'YOUR_LOCATION_ID'
-});
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**locationId:** `String` — The Square location ID that the authorization code should be tied to.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## OAuth
-<details><summary><code>client.OAuth.RevokeToken(request) -> Square::Types::RevokeTokenResponse</code></summary>
+<details><summary><code>client.o_auth.<a href="/lib/square/o_auth/client.rb">revoke_token</a>(request) -> Square::Types::RevokeTokenResponse</code></summary>
 <dl>
 <dd>
 
@@ -111,10 +40,10 @@ page for your application in the Developer Dashboard.
 <dd>
 
 ```ruby
-client.o_auth.revoke_token({
-  clientId:'CLIENT_ID',
-  accessToken:'ACCESS_TOKEN'
-});
+client.o_auth.revoke_token(
+  client_id: 'CLIENT_ID',
+  access_token: 'ACCESS_TOKEN'
+);
 ```
 </dd>
 </dl>
@@ -129,7 +58,7 @@ client.o_auth.revoke_token({
 <dl>
 <dd>
 
-**clientId:** `String` 
+**client_id:** `String` 
 
 The Square-issued ID for your application, which is available on the **OAuth** page in the
 [Developer Dashboard](https://developer.squareup.com/apps).
@@ -140,7 +69,7 @@ The Square-issued ID for your application, which is available on the **OAuth** p
 <dl>
 <dd>
 
-**accessToken:** `String` 
+**access_token:** `String` 
 
 The access token of the merchant whose token you want to revoke.
 Do not provide a value for `merchant_id` if you provide this parameter.
@@ -151,7 +80,7 @@ Do not provide a value for `merchant_id` if you provide this parameter.
 <dl>
 <dd>
 
-**merchantId:** `String` 
+**merchant_id:** `String` 
 
 The ID of the merchant whose token you want to revoke.
 Do not provide a value for `access_token` if you provide this parameter.
@@ -162,11 +91,19 @@ Do not provide a value for `access_token` if you provide this parameter.
 <dl>
 <dd>
 
-**revokeOnlyAccessToken:** `Internal::Types::Boolean` 
+**revoke_only_access_token:** `Internal::Types::Boolean` 
 
 If `true`, terminate the given single access token, but do not
 terminate the entire authorization.
 Default: `false`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::OAuth::RequestOptions` 
     
 </dd>
 </dl>
@@ -178,7 +115,7 @@ Default: `false`
 </dl>
 </details>
 
-<details><summary><code>client.OAuth.ObtainToken(request) -> Square::Types::ObtainTokenResponse</code></summary>
+<details><summary><code>client.o_auth.<a href="/lib/square/o_auth/client.rb">obtain_token</a>(request) -> Square::Types::ObtainTokenResponse</code></summary>
 <dl>
 <dd>
 
@@ -225,12 +162,12 @@ Application clients should never interact directly with OAuth tokens.
 <dd>
 
 ```ruby
-client.o_auth.obtain_token({
-  clientId:'sq0idp-uaPHILoPzWZk3tlJqlML0g',
-  clientSecret:'sq0csp-30a-4C_tVOnTh14Piza2BfTPBXyLafLPWSzY1qAjeBfM',
-  code:'sq0cgb-l0SBqxs4uwxErTVyYOdemg',
-  grantType:'authorization_code'
-});
+client.o_auth.obtain_token(
+  client_id: 'sq0idp-uaPHILoPzWZk3tlJqlML0g',
+  client_secret: 'sq0csp-30a-4C_tVOnTh14Piza2BfTPBXyLafLPWSzY1qAjeBfM',
+  code: 'sq0cgb-l0SBqxs4uwxErTVyYOdemg',
+  grant_type: 'authorization_code'
+);
 ```
 </dd>
 </dl>
@@ -245,7 +182,7 @@ client.o_auth.obtain_token({
 <dl>
 <dd>
 
-**clientId:** `String` 
+**client_id:** `String` 
 
 The Square-issued ID of your application, which is available as the **Application ID**
 on the **OAuth** page in the [Developer Console](https://developer.squareup.com/apps).
@@ -258,7 +195,7 @@ Required for the code flow and PKCE flow for any grant type.
 <dl>
 <dd>
 
-**clientSecret:** `String` 
+**client_secret:** `String` 
 
 The secret key for your application, which is available as the **Application secret**
 on the **OAuth** page in the [Developer Console](https://developer.squareup.com/apps).
@@ -285,7 +222,7 @@ Required for the code flow and PKCE flow if `grant_type` is `authorization_code`
 <dl>
 <dd>
 
-**redirectUri:** `String` 
+**redirect_uri:** `String` 
 
 The redirect URL for your application, which you registered as the **Redirect URL**
 on the **OAuth** page in the [Developer Console](https://developer.squareup.com/apps).
@@ -299,7 +236,7 @@ you provided the `redirect_uri` parameter in your authorization URL.
 <dl>
 <dd>
 
-**grantType:** `String` 
+**grant_type:** `String` 
 
 The method used to obtain an OAuth access token. The request must include the
 credential that corresponds to the specified grant type. Valid values are:
@@ -314,7 +251,7 @@ to 2019-03-13. Requires the `migration_token` field.
 <dl>
 <dd>
 
-**refreshToken:** `String` 
+**refresh_token:** `String` 
 
 A valid refresh token used to generate a new OAuth access token. This is a
 refresh token that was returned in a previous `ObtainToken` response.
@@ -327,7 +264,7 @@ Required for the code flow and PKCE flow if `grant_type` is `refresh_token`.
 <dl>
 <dd>
 
-**migrationToken:** `String` 
+**migration_token:** `String` 
 
 __LEGACY__ A valid access token (obtained using a Square API version prior to 2019-03-13)
 used to generate a new OAuth access token.
@@ -357,7 +294,7 @@ Optional for the code flow and PKCE flow if `grant_type` is `refresh_token`.
 <dl>
 <dd>
 
-**shortLived:** `Internal::Types::Boolean` 
+**short_lived:** `Internal::Types::Boolean` 
 
 Indicates whether the returned access token should expire in 24 hours.
 
@@ -369,13 +306,33 @@ Optional for the code flow and PKCE flow for any grant type. The default value i
 <dl>
 <dd>
 
-**codeVerifier:** `String` 
+**code_verifier:** `String` 
 
 The secret your application generated for the authorization request used to
 obtain the authorization code. This is the source of the `code_challenge` hash you
 provided in your authorization URL.
 
 Required for the PKCE flow if `grant_type` is `authorization_code`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**use_jwt:** `Internal::Types::Boolean` 
+
+Indicates whether to use a JWT (JSON Web Token) as the OAuth access token.
+When set to `true`, the OAuth flow returns a JWT to your application, used in the
+same way as a regular token. The default value is `false`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::OAuth::RequestOptions` 
     
 </dd>
 </dl>
@@ -387,7 +344,7 @@ Required for the PKCE flow if `grant_type` is `authorization_code`.
 </dl>
 </details>
 
-<details><summary><code>client.OAuth.RetrieveTokenStatus() -> Square::Types::RetrieveTokenStatusResponse</code></summary>
+<details><summary><code>client.o_auth.<a href="/lib/square/o_auth/client.rb">retrieve_token_status</a>() -> Square::Types::RetrieveTokenStatusResponse</code></summary>
 <dl>
 <dd>
 
@@ -434,12 +391,27 @@ client.o_auth.retrieve_token_status();
 </dd>
 </dl>
 
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Square::OAuth::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.OAuth.Authorize() -> </code></summary>
+<details><summary><code>client.o_auth.<a href="/lib/square/o_auth/client.rb">authorize</a>() -> </code></summary>
 <dl>
 <dd>
 
@@ -459,13 +431,28 @@ client.o_auth.authorize();
 </dd>
 </dl>
 
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Square::OAuth::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
 
 </dd>
 </dl>
 </details>
 
 ## V1Transactions
-<details><summary><code>client.V1Transactions.V1ListOrders(LocationId) -> Internal::Types::Array[Square::Types::V1Order]</code></summary>
+<details><summary><code>client.v_1_transactions.<a href="/lib/square/v_1_transactions/client.rb">v_1_list_orders</a>(location_id) -> Internal::Types::Array[Square::Types::V1Order]</code></summary>
 <dl>
 <dd>
 
@@ -492,11 +479,12 @@ Provides summary information for a merchant's online store orders.
 <dd>
 
 ```ruby
-client.v_1_transactions.v_1_list_orders({
-  locationId:'location_id',
-  limit:1,
-  batchToken:'batch_token'
-});
+client.v_1_transactions.v_1_list_orders(
+  location_id: 'location_id',
+  order: 'DESC',
+  limit: 1,
+  batch_token: 'batch_token'
+);
 ```
 </dd>
 </dl>
@@ -511,7 +499,7 @@ client.v_1_transactions.v_1_list_orders({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the location to list online store orders for.
+**location_id:** `String` — The ID of the location to list online store orders for.
     
 </dd>
 </dl>
@@ -535,10 +523,18 @@ client.v_1_transactions.v_1_list_orders({
 <dl>
 <dd>
 
-**batchToken:** `String` 
+**batch_token:** `String` 
 
 A pagination cursor to retrieve the next set of results for your
 original query to the endpoint.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::V1Transactions::RequestOptions` 
     
 </dd>
 </dl>
@@ -550,7 +546,7 @@ original query to the endpoint.
 </dl>
 </details>
 
-<details><summary><code>client.V1Transactions.V1RetrieveOrder(LocationId, OrderId) -> Square::Types::V1Order</code></summary>
+<details><summary><code>client.v_1_transactions.<a href="/lib/square/v_1_transactions/client.rb">v_1_retrieve_order</a>(location_id, order_id) -> Square::Types::V1Order</code></summary>
 <dl>
 <dd>
 
@@ -577,10 +573,10 @@ Provides comprehensive information for a single online store order, including th
 <dd>
 
 ```ruby
-client.v_1_transactions.v_1_retrieve_order({
-  locationId:'location_id',
-  orderId:'order_id'
-});
+client.v_1_transactions.v_1_retrieve_order(
+  location_id: 'location_id',
+  order_id: 'order_id'
+);
 ```
 </dd>
 </dl>
@@ -595,7 +591,7 @@ client.v_1_transactions.v_1_retrieve_order({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the order's associated location.
+**location_id:** `String` — The ID of the order's associated location.
     
 </dd>
 </dl>
@@ -603,7 +599,15 @@ client.v_1_transactions.v_1_retrieve_order({
 <dl>
 <dd>
 
-**orderId:** `String` — The order's Square-issued ID. You obtain this value from Order objects returned by the List Orders endpoint
+**order_id:** `String` — The order's Square-issued ID. You obtain this value from Order objects returned by the List Orders endpoint
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::V1Transactions::RequestOptions` 
     
 </dd>
 </dl>
@@ -615,7 +619,7 @@ client.v_1_transactions.v_1_retrieve_order({
 </dl>
 </details>
 
-<details><summary><code>client.V1Transactions.V1UpdateOrder(LocationId, OrderId, request) -> Square::Types::V1Order</code></summary>
+<details><summary><code>client.v_1_transactions.<a href="/lib/square/v_1_transactions/client.rb">v_1_update_order</a>(location_id, order_id, request) -> Square::Types::V1Order</code></summary>
 <dl>
 <dd>
 
@@ -642,10 +646,11 @@ Updates the details of an online store order. Every update you perform on an ord
 <dd>
 
 ```ruby
-client.v_1_transactions.v_1_update_order({
-  locationId:'location_id',
-  orderId:'order_id'
-});
+client.v_1_transactions.v_1_update_order(
+  location_id: 'location_id',
+  order_id: 'order_id',
+  action: 'COMPLETE'
+);
 ```
 </dd>
 </dl>
@@ -660,7 +665,7 @@ client.v_1_transactions.v_1_update_order({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the order's associated location.
+**location_id:** `String` — The ID of the order's associated location.
     
 </dd>
 </dl>
@@ -668,7 +673,7 @@ client.v_1_transactions.v_1_update_order({
 <dl>
 <dd>
 
-**orderId:** `String` — The order's Square-issued ID. You obtain this value from Order objects returned by the List Orders endpoint
+**order_id:** `String` — The order's Square-issued ID. You obtain this value from Order objects returned by the List Orders endpoint
     
 </dd>
 </dl>
@@ -687,7 +692,7 @@ See [V1UpdateOrderRequestAction](#type-v1updateorderrequestaction) for possible 
 <dl>
 <dd>
 
-**shippedTrackingNumber:** `String` — The tracking number of the shipment associated with the order. Only valid if action is COMPLETE.
+**shipped_tracking_number:** `String` — The tracking number of the shipment associated with the order. Only valid if action is COMPLETE.
     
 </dd>
 </dl>
@@ -695,7 +700,7 @@ See [V1UpdateOrderRequestAction](#type-v1updateorderrequestaction) for possible 
 <dl>
 <dd>
 
-**completedNote:** `String` — A merchant-specified note about the completion of the order. Only valid if action is COMPLETE.
+**completed_note:** `String` — A merchant-specified note about the completion of the order. Only valid if action is COMPLETE.
     
 </dd>
 </dl>
@@ -703,7 +708,7 @@ See [V1UpdateOrderRequestAction](#type-v1updateorderrequestaction) for possible 
 <dl>
 <dd>
 
-**refundedNote:** `String` — A merchant-specified note about the refunding of the order. Only valid if action is REFUND.
+**refunded_note:** `String` — A merchant-specified note about the refunding of the order. Only valid if action is REFUND.
     
 </dd>
 </dl>
@@ -711,7 +716,15 @@ See [V1UpdateOrderRequestAction](#type-v1updateorderrequestaction) for possible 
 <dl>
 <dd>
 
-**canceledNote:** `String` — A merchant-specified note about the canceling of the order. Only valid if action is CANCEL.
+**canceled_note:** `String` — A merchant-specified note about the canceling of the order. Only valid if action is CANCEL.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::V1Transactions::RequestOptions` 
     
 </dd>
 </dl>
@@ -724,7 +737,7 @@ See [V1UpdateOrderRequestAction](#type-v1updateorderrequestaction) for possible 
 </details>
 
 ## ApplePay
-<details><summary><code>client.ApplePay.RegisterDomain(request) -> Square::Types::RegisterDomainResponse</code></summary>
+<details><summary><code>client.apple_pay.<a href="/lib/square/apple_pay/client.rb">register_domain</a>(request) -> Square::Types::RegisterDomainResponse</code></summary>
 <dl>
 <dd>
 
@@ -764,9 +777,7 @@ To learn more about the Web Payments SDK and how to add Apple Pay, see [Take an 
 <dd>
 
 ```ruby
-client.apple_pay.register_domain({
-  domainName:'example.com'
-});
+client.apple_pay.register_domain(domain_name: 'example.com');
 ```
 </dd>
 </dl>
@@ -781,7 +792,15 @@ client.apple_pay.register_domain({
 <dl>
 <dd>
 
-**domainName:** `String` — A domain name as described in RFC-1034 that will be registered with ApplePay.
+**domain_name:** `String` — A domain name as described in RFC-1034 that will be registered with ApplePay.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::ApplePay::RequestOptions` 
     
 </dd>
 </dl>
@@ -794,7 +813,7 @@ client.apple_pay.register_domain({
 </details>
 
 ## BankAccounts
-<details><summary><code>client.BankAccounts.List() -> Square::Types::ListBankAccountsResponse</code></summary>
+<details><summary><code>client.bank_accounts.<a href="/lib/square/bank_accounts/client.rb">list</a>() -> Square::Types::ListBankAccountsResponse</code></summary>
 <dl>
 <dd>
 
@@ -821,11 +840,12 @@ Returns a list of [BankAccount](entity:BankAccount) objects linked to a Square a
 <dd>
 
 ```ruby
-client.bank_accounts.list({
-  cursor:'cursor',
-  limit:1,
-  locationId:'location_id'
-});
+client.bank_accounts.list(
+  cursor: 'cursor',
+  limit: 1,
+  location_id: 'location_id',
+  customer_id: 'customer_id'
+);
 ```
 </dd>
 </dl>
@@ -843,7 +863,7 @@ client.bank_accounts.list({
 **cursor:** `String` 
 
 The pagination cursor returned by a previous call to this endpoint.
-Use it in the next `ListBankAccounts` request to retrieve the next set 
+Use it in the next `ListBankAccounts` request to retrieve the next set
 of results.
 
 See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information.
@@ -856,8 +876,8 @@ See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagin
 
 **limit:** `Integer` 
 
-Upper limit on the number of bank accounts to return in the response. 
-Currently, 1000 is the largest supported limit. You can specify a limit 
+Upper limit on the number of bank accounts to return in the response.
+Currently, 1000 is the largest supported limit. You can specify a limit
 of up to 1000 bank accounts. This is also the default limit.
     
 </dd>
@@ -866,10 +886,29 @@ of up to 1000 bank accounts. This is also the default limit.
 <dl>
 <dd>
 
-**locationId:** `String` 
+**location_id:** `String` 
 
-Location ID. You can specify this optional filter 
+Location ID. You can specify this optional filter
 to retrieve only the linked bank accounts belonging to a specific location.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**customer_id:** `String` 
+
+Customer ID. You can specify this optional filter
+to retrieve only the linked bank accounts belonging to a specific customer.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::BankAccounts::RequestOptions` 
     
 </dd>
 </dl>
@@ -881,7 +920,95 @@ to retrieve only the linked bank accounts belonging to a specific location.
 </dl>
 </details>
 
-<details><summary><code>client.BankAccounts.GetByV1Id(V1BankAccountId) -> Square::Types::GetBankAccountByV1IdResponse</code></summary>
+<details><summary><code>client.bank_accounts.<a href="/lib/square/bank_accounts/client.rb">create_bank_account</a>(request) -> Square::Types::CreateBankAccountResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Store a bank account on file for a square account
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.bank_accounts.create_bank_account(
+  idempotency_key: '4e43559a-f0fd-47d3-9da2-7ea1f97d94be',
+  source_id: 'bnon:CA4SEHsQwr0rx6DbWLD5BQaqMnoYAQ',
+  customer_id: 'HM3B2D5JKGZ69359BTEHXM2V8M'
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` 
+
+Unique ID. For more information, see the
+[Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**source_id:** `String` 
+
+The ID of the source that represents the bank account information to be stored. This field
+accepts the payment token created by WebSDK
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**customer_id:** `String` — The ID of the customer associated with the bank account to be stored.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::BankAccounts::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.bank_accounts.<a href="/lib/square/bank_accounts/client.rb">get_by_v_1_id</a>(v_1_bank_account_id) -> Square::Types::GetBankAccountByV1IdResponse</code></summary>
 <dl>
 <dd>
 
@@ -908,9 +1035,7 @@ Returns details of a [BankAccount](entity:BankAccount) identified by V1 bank acc
 <dd>
 
 ```ruby
-client.bank_accounts.get_by_v_1_id({
-  v1BankAccountId:'v1_bank_account_id'
-});
+client.bank_accounts.get_by_v_1_id(v_1_bank_account_id: 'v1_bank_account_id');
 ```
 </dd>
 </dl>
@@ -925,10 +1050,18 @@ client.bank_accounts.get_by_v_1_id({
 <dl>
 <dd>
 
-**v1BankAccountId:** `String` 
+**v_1_bank_account_id:** `String` 
 
 Connect V1 ID of the desired `BankAccount`. For more information, see 
 [Retrieve a bank account by using an ID issued by V1 Bank Accounts API](https://developer.squareup.com/docs/bank-accounts-api#retrieve-a-bank-account-by-using-an-id-issued-by-v1-bank-accounts-api).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::BankAccounts::RequestOptions` 
     
 </dd>
 </dl>
@@ -940,7 +1073,7 @@ Connect V1 ID of the desired `BankAccount`. For more information, see
 </dl>
 </details>
 
-<details><summary><code>client.BankAccounts.Get(BankAccountId) -> Square::Types::GetBankAccountResponse</code></summary>
+<details><summary><code>client.bank_accounts.<a href="/lib/square/bank_accounts/client.rb">get</a>(bank_account_id) -> Square::Types::GetBankAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -952,8 +1085,7 @@ Connect V1 ID of the desired `BankAccount`. For more information, see
 <dl>
 <dd>
 
-Returns details of a [BankAccount](entity:BankAccount)
-linked to a Square account.
+Retrieve details of a [BankAccount](entity:BankAccount) bank account linked to a Square account.
 </dd>
 </dl>
 </dd>
@@ -968,9 +1100,7 @@ linked to a Square account.
 <dd>
 
 ```ruby
-client.bank_accounts.get({
-  bankAccountId:'bank_account_id'
-});
+client.bank_accounts.get(bank_account_id: 'bank_account_id');
 ```
 </dd>
 </dl>
@@ -985,7 +1115,77 @@ client.bank_accounts.get({
 <dl>
 <dd>
 
-**bankAccountId:** `String` — Square-issued ID of the desired `BankAccount`.
+**bank_account_id:** `String` — Square-issued ID of the desired `BankAccount`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::BankAccounts::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.bank_accounts.<a href="/lib/square/bank_accounts/client.rb">disable_bank_account</a>(bank_account_id) -> Square::Types::DisableBankAccountResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Disable a bank account.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.bank_accounts.disable_bank_account(bank_account_id: 'bank_account_id');
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**bank_account_id:** `String` — The ID of the bank account to disable.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::BankAccounts::RequestOptions` 
     
 </dd>
 </dl>
@@ -998,7 +1198,7 @@ client.bank_accounts.get({
 </details>
 
 ## Bookings
-<details><summary><code>client.Bookings.List() -> Square::Types::ListBookingsResponse</code></summary>
+<details><summary><code>client.bookings.<a href="/lib/square/bookings/client.rb">list</a>() -> Square::Types::ListBookingsResponse</code></summary>
 <dl>
 <dd>
 
@@ -1028,15 +1228,15 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 <dd>
 
 ```ruby
-client.bookings.list({
-  limit:1,
-  cursor:'cursor',
-  customerId:'customer_id',
-  teamMemberId:'team_member_id',
-  locationId:'location_id',
-  startAtMin:'start_at_min',
-  startAtMax:'start_at_max'
-});
+client.bookings.list(
+  limit: 1,
+  cursor: 'cursor',
+  customer_id: 'customer_id',
+  team_member_id: 'team_member_id',
+  location_id: 'location_id',
+  start_at_min: 'start_at_min',
+  start_at_max: 'start_at_max'
+);
 ```
 </dd>
 </dl>
@@ -1067,7 +1267,7 @@ client.bookings.list({
 <dl>
 <dd>
 
-**customerId:** `String` — The [customer](entity:Customer) for whom to retrieve bookings. If this is not set, bookings for all customers are retrieved.
+**customer_id:** `String` — The [customer](entity:Customer) for whom to retrieve bookings. If this is not set, bookings for all customers are retrieved.
     
 </dd>
 </dl>
@@ -1075,7 +1275,7 @@ client.bookings.list({
 <dl>
 <dd>
 
-**teamMemberId:** `String` — The team member for whom to retrieve bookings. If this is not set, bookings of all members are retrieved.
+**team_member_id:** `String` — The team member for whom to retrieve bookings. If this is not set, bookings of all members are retrieved.
     
 </dd>
 </dl>
@@ -1083,7 +1283,7 @@ client.bookings.list({
 <dl>
 <dd>
 
-**locationId:** `String` — The location for which to retrieve bookings. If this is not set, all locations' bookings are retrieved.
+**location_id:** `String` — The location for which to retrieve bookings. If this is not set, all locations' bookings are retrieved.
     
 </dd>
 </dl>
@@ -1091,7 +1291,7 @@ client.bookings.list({
 <dl>
 <dd>
 
-**startAtMin:** `String` — The RFC 3339 timestamp specifying the earliest of the start time. If this is not set, the current time is used.
+**start_at_min:** `String` — The RFC 3339 timestamp specifying the earliest of the start time. If this is not set, the current time is used.
     
 </dd>
 </dl>
@@ -1099,7 +1299,15 @@ client.bookings.list({
 <dl>
 <dd>
 
-**startAtMax:** `String` — The RFC 3339 timestamp specifying the latest of the start time. If this is not set, the time of 31 days after `start_at_min` is used.
+**start_at_max:** `String` — The RFC 3339 timestamp specifying the latest of the start time. If this is not set, the time of 31 days after `start_at_min` is used.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::RequestOptions` 
     
 </dd>
 </dl>
@@ -1111,7 +1319,7 @@ client.bookings.list({
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.Create(request) -> Square::Types::CreateBookingResponse</code></summary>
+<details><summary><code>client.bookings.<a href="/lib/square/bookings/client.rb">create</a>(request) -> Square::Types::CreateBookingResponse</code></summary>
 <dl>
 <dd>
 
@@ -1151,9 +1359,7 @@ or *Appointments Premium*.
 <dd>
 
 ```ruby
-client.bookings.create({
-  booking:{}
-});
+client.bookings.create(booking: {});
 ```
 </dd>
 </dl>
@@ -1168,7 +1374,7 @@ client.bookings.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` — A unique key to make this request an idempotent operation.
+**idempotency_key:** `String` — A unique key to make this request an idempotent operation.
     
 </dd>
 </dl>
@@ -1180,6 +1386,14 @@ client.bookings.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1188,7 +1402,7 @@ client.bookings.create({
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.SearchAvailability(request) -> Square::Types::SearchAvailabilityResponse</code></summary>
+<details><summary><code>client.bookings.<a href="/lib/square/bookings/client.rb">search_availability</a>(request) -> Square::Types::SearchAvailabilityResponse</code></summary>
 <dl>
 <dd>
 
@@ -1218,11 +1432,9 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 <dd>
 
 ```ruby
-client.bookings.search_availability({
-  query:{
-    filter:{
-      start_at_range:{}
-    }
+client.bookings.search_availability(query: {
+  filter: {
+    start_at_range: {}
   }
 });
 ```
@@ -1243,6 +1455,14 @@ client.bookings.search_availability({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1251,7 +1471,7 @@ client.bookings.search_availability({
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.BulkRetrieveBookings(request) -> Square::Types::BulkRetrieveBookingsResponse</code></summary>
+<details><summary><code>client.bookings.<a href="/lib/square/bookings/client.rb">bulk_retrieve_bookings</a>(request) -> Square::Types::BulkRetrieveBookingsResponse</code></summary>
 <dl>
 <dd>
 
@@ -1281,9 +1501,7 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 <dd>
 
 ```ruby
-client.bookings.bulk_retrieve_bookings({
-  bookingIds:['booking_ids']
-});
+client.bookings.bulk_retrieve_bookings(booking_ids: ['booking_ids']);
 ```
 </dd>
 </dl>
@@ -1298,7 +1516,15 @@ client.bookings.bulk_retrieve_bookings({
 <dl>
 <dd>
 
-**bookingIds:** `Internal::Types::Array[String]` — A non-empty list of [Booking](entity:Booking) IDs specifying bookings to retrieve.
+**booking_ids:** `Internal::Types::Array[String]` — A non-empty list of [Booking](entity:Booking) IDs specifying bookings to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::RequestOptions` 
     
 </dd>
 </dl>
@@ -1310,7 +1536,7 @@ client.bookings.bulk_retrieve_bookings({
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.GetBusinessProfile() -> Square::Types::GetBusinessBookingProfileResponse</code></summary>
+<details><summary><code>client.bookings.<a href="/lib/square/bookings/client.rb">get_business_profile</a>() -> Square::Types::GetBusinessBookingProfileResponse</code></summary>
 <dl>
 <dd>
 
@@ -1344,12 +1570,27 @@ client.bookings.get_business_profile();
 </dd>
 </dl>
 
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.RetrieveLocationBookingProfile(LocationId) -> Square::Types::RetrieveLocationBookingProfileResponse</code></summary>
+<details><summary><code>client.bookings.<a href="/lib/square/bookings/client.rb">retrieve_location_booking_profile</a>(location_id) -> Square::Types::RetrieveLocationBookingProfileResponse</code></summary>
 <dl>
 <dd>
 
@@ -1376,9 +1617,7 @@ Retrieves a seller's location booking profile.
 <dd>
 
 ```ruby
-client.bookings.retrieve_location_booking_profile({
-  locationId:'location_id'
-});
+client.bookings.retrieve_location_booking_profile(location_id: 'location_id');
 ```
 </dd>
 </dl>
@@ -1393,7 +1632,15 @@ client.bookings.retrieve_location_booking_profile({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the location to retrieve the booking profile.
+**location_id:** `String` — The ID of the location to retrieve the booking profile.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::RequestOptions` 
     
 </dd>
 </dl>
@@ -1405,7 +1652,7 @@ client.bookings.retrieve_location_booking_profile({
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.BulkRetrieveTeamMemberBookingProfiles(request) -> Square::Types::BulkRetrieveTeamMemberBookingProfilesResponse</code></summary>
+<details><summary><code>client.bookings.<a href="/lib/square/bookings/client.rb">bulk_retrieve_team_member_booking_profiles</a>(request) -> Square::Types::BulkRetrieveTeamMemberBookingProfilesResponse</code></summary>
 <dl>
 <dd>
 
@@ -1432,9 +1679,7 @@ Retrieves one or more team members' booking profiles.
 <dd>
 
 ```ruby
-client.bookings.bulk_retrieve_team_member_booking_profiles({
-  teamMemberIds:['team_member_ids']
-});
+client.bookings.bulk_retrieve_team_member_booking_profiles(team_member_ids: ['team_member_ids']);
 ```
 </dd>
 </dl>
@@ -1449,7 +1694,15 @@ client.bookings.bulk_retrieve_team_member_booking_profiles({
 <dl>
 <dd>
 
-**teamMemberIds:** `Internal::Types::Array[String]` — A non-empty list of IDs of team members whose booking profiles you want to retrieve.
+**team_member_ids:** `Internal::Types::Array[String]` — A non-empty list of IDs of team members whose booking profiles you want to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::RequestOptions` 
     
 </dd>
 </dl>
@@ -1461,7 +1714,7 @@ client.bookings.bulk_retrieve_team_member_booking_profiles({
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.Get(BookingId) -> Square::Types::GetBookingResponse</code></summary>
+<details><summary><code>client.bookings.<a href="/lib/square/bookings/client.rb">get</a>(booking_id) -> Square::Types::GetBookingResponse</code></summary>
 <dl>
 <dd>
 
@@ -1491,9 +1744,7 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 <dd>
 
 ```ruby
-client.bookings.get({
-  bookingId:'booking_id'
-});
+client.bookings.get(booking_id: 'booking_id');
 ```
 </dd>
 </dl>
@@ -1508,7 +1759,15 @@ client.bookings.get({
 <dl>
 <dd>
 
-**bookingId:** `String` — The ID of the [Booking](entity:Booking) object representing the to-be-retrieved booking.
+**booking_id:** `String` — The ID of the [Booking](entity:Booking) object representing the to-be-retrieved booking.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::RequestOptions` 
     
 </dd>
 </dl>
@@ -1520,7 +1779,7 @@ client.bookings.get({
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.Update(BookingId, request) -> Square::Types::UpdateBookingResponse</code></summary>
+<details><summary><code>client.bookings.<a href="/lib/square/bookings/client.rb">update</a>(booking_id, request) -> Square::Types::UpdateBookingResponse</code></summary>
 <dl>
 <dd>
 
@@ -1553,10 +1812,10 @@ or *Appointments Premium*.
 <dd>
 
 ```ruby
-client.bookings.update({
-  bookingId:'booking_id',
-  booking:{}
-});
+client.bookings.update(
+  booking_id: 'booking_id',
+  booking: {}
+);
 ```
 </dd>
 </dl>
@@ -1571,7 +1830,7 @@ client.bookings.update({
 <dl>
 <dd>
 
-**bookingId:** `String` — The ID of the [Booking](entity:Booking) object representing the to-be-updated booking.
+**booking_id:** `String` — The ID of the [Booking](entity:Booking) object representing the to-be-updated booking.
     
 </dd>
 </dl>
@@ -1579,7 +1838,7 @@ client.bookings.update({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` — A unique key to make this request an idempotent operation.
+**idempotency_key:** `String` — A unique key to make this request an idempotent operation.
     
 </dd>
 </dl>
@@ -1591,6 +1850,14 @@ client.bookings.update({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1599,7 +1866,7 @@ client.bookings.update({
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.Cancel(BookingId, request) -> Square::Types::CancelBookingResponse</code></summary>
+<details><summary><code>client.bookings.<a href="/lib/square/bookings/client.rb">cancel</a>(booking_id, request) -> Square::Types::CancelBookingResponse</code></summary>
 <dl>
 <dd>
 
@@ -1632,9 +1899,7 @@ or *Appointments Premium*.
 <dd>
 
 ```ruby
-client.bookings.cancel({
-  bookingId:'booking_id'
-});
+client.bookings.cancel(booking_id: 'booking_id');
 ```
 </dd>
 </dl>
@@ -1649,7 +1914,7 @@ client.bookings.cancel({
 <dl>
 <dd>
 
-**bookingId:** `String` — The ID of the [Booking](entity:Booking) object representing the to-be-cancelled booking.
+**booking_id:** `String` — The ID of the [Booking](entity:Booking) object representing the to-be-cancelled booking.
     
 </dd>
 </dl>
@@ -1657,7 +1922,7 @@ client.bookings.cancel({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` — A unique key to make this request an idempotent operation.
+**idempotency_key:** `String` — A unique key to make this request an idempotent operation.
     
 </dd>
 </dl>
@@ -1665,7 +1930,15 @@ client.bookings.cancel({
 <dl>
 <dd>
 
-**bookingVersion:** `Integer` — The revision number for the booking used for optimistic concurrency.
+**booking_version:** `Integer` — The revision number for the booking used for optimistic concurrency.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::RequestOptions` 
     
 </dd>
 </dl>
@@ -1678,7 +1951,7 @@ client.bookings.cancel({
 </details>
 
 ## Cards
-<details><summary><code>client.Cards.List() -> Square::Types::ListCardsResponse</code></summary>
+<details><summary><code>client.cards.<a href="/lib/square/cards/client.rb">list</a>() -> Square::Types::ListCardsResponse</code></summary>
 <dl>
 <dd>
 
@@ -1706,12 +1979,13 @@ A max of 25 cards will be returned.
 <dd>
 
 ```ruby
-client.cards.list({
-  cursor:'cursor',
-  customerId:'customer_id',
-  includeDisabled:true,
-  referenceId:'reference_id'
-});
+client.cards.list(
+  cursor: 'cursor',
+  customer_id: 'customer_id',
+  include_disabled: true,
+  reference_id: 'reference_id',
+  sort_order: 'DESC'
+);
 ```
 </dd>
 </dl>
@@ -1739,7 +2013,7 @@ See [Pagination](https://developer.squareup.com/docs/build-basics/common-api-pat
 <dl>
 <dd>
 
-**customerId:** `String` 
+**customer_id:** `String` 
 
 Limit results to cards associated with the customer supplied.
 By default, all cards owned by the merchant are returned.
@@ -1750,7 +2024,7 @@ By default, all cards owned by the merchant are returned.
 <dl>
 <dd>
 
-**includeDisabled:** `Internal::Types::Boolean` 
+**include_disabled:** `Internal::Types::Boolean` 
 
 Includes disabled cards.
 By default, all enabled cards owned by the merchant are returned.
@@ -1761,7 +2035,7 @@ By default, all enabled cards owned by the merchant are returned.
 <dl>
 <dd>
 
-**referenceId:** `String` — Limit results to cards associated with the reference_id supplied.
+**reference_id:** `String` — Limit results to cards associated with the reference_id supplied.
     
 </dd>
 </dl>
@@ -1769,10 +2043,18 @@ By default, all enabled cards owned by the merchant are returned.
 <dl>
 <dd>
 
-**sortOrder:** `Square::Types::SortOrder` 
+**sort_order:** `Square::Types::SortOrder` 
 
 Sorts the returned list by when the card was created with the specified order.
 This field defaults to ASC.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Cards::RequestOptions` 
     
 </dd>
 </dl>
@@ -1784,7 +2066,7 @@ This field defaults to ASC.
 </dl>
 </details>
 
-<details><summary><code>client.Cards.Create(request) -> Square::Types::CreateCardResponse</code></summary>
+<details><summary><code>client.cards.<a href="/lib/square/cards/client.rb">create</a>(request) -> Square::Types::CreateCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -1811,22 +2093,23 @@ Adds a card on file to an existing merchant.
 <dd>
 
 ```ruby
-client.cards.create({
-  idempotencyKey:'4935a656-a929-4792-b97c-8848be85c27c',
-  sourceId:'cnon:uIbfJXhXETSP197M3GB',
-  card:{
-    cardholder_name:'Amelia Earhart',
-    billing_address:{
-      address_line_1:'500 Electric Ave',
-      address_line_2:'Suite 600',
-      locality:'New York',
-      administrative_district_level_1:'NY',
-      postal_code:'10003'
+client.cards.create(
+  idempotency_key: '4935a656-a929-4792-b97c-8848be85c27c',
+  source_id: 'cnon:uIbfJXhXETSP197M3GB',
+  card: {
+    cardholder_name: 'Amelia Earhart',
+    billing_address: {
+      address_line_1: '500 Electric Ave',
+      address_line_2: 'Suite 600',
+      locality: 'New York',
+      administrative_district_level_1: 'NY',
+      postal_code: '10003',
+      country: 'US'
     },
-    customer_id:'VDKXEEKPJN48QDG3BGGFAK05P8',
-    reference_id:'user-id-1'
+    customer_id: 'VDKXEEKPJN48QDG3BGGFAK05P8',
+    reference_id: 'user-id-1'
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -1841,7 +2124,7 @@ client.cards.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this CreateCard request. Keys can be
 any valid string and must be unique for every request.
@@ -1856,7 +2139,7 @@ See [Idempotency keys](https://developer.squareup.com/docs/build-basics/common-a
 <dl>
 <dd>
 
-**sourceId:** `String` — The ID of the source which represents the card information to be stored. This can be a card nonce or a payment id.
+**source_id:** `String` — The ID of the source which represents the card information to be stored. This can be a card nonce or a payment id.
     
 </dd>
 </dl>
@@ -1864,7 +2147,7 @@ See [Idempotency keys](https://developer.squareup.com/docs/build-basics/common-a
 <dl>
 <dd>
 
-**verificationToken:** `String` 
+**verification_token:** `String` 
 
 An identifying token generated by [Payments.verifyBuyer()](https://developer.squareup.com/reference/sdks/web/payments/objects/Payments#Payments.verifyBuyer).
 Verification tokens encapsulate customer device information and 3-D Secure
@@ -1882,6 +2165,14 @@ See the [SCA Overview](https://developer.squareup.com/docs/sca-overview).
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Cards::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1890,7 +2181,7 @@ See the [SCA Overview](https://developer.squareup.com/docs/sca-overview).
 </dl>
 </details>
 
-<details><summary><code>client.Cards.Get(CardId) -> Square::Types::GetCardResponse</code></summary>
+<details><summary><code>client.cards.<a href="/lib/square/cards/client.rb">get</a>(card_id) -> Square::Types::GetCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -1917,9 +2208,7 @@ Retrieves details for a specific Card.
 <dd>
 
 ```ruby
-client.cards.get({
-  cardId:'card_id'
-});
+client.cards.get(card_id: 'card_id');
 ```
 </dd>
 </dl>
@@ -1934,7 +2223,15 @@ client.cards.get({
 <dl>
 <dd>
 
-**cardId:** `String` — Unique ID for the desired Card.
+**card_id:** `String` — Unique ID for the desired Card.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Cards::RequestOptions` 
     
 </dd>
 </dl>
@@ -1946,7 +2243,7 @@ client.cards.get({
 </dl>
 </details>
 
-<details><summary><code>client.Cards.Disable(CardId) -> Square::Types::DisableCardResponse</code></summary>
+<details><summary><code>client.cards.<a href="/lib/square/cards/client.rb">disable</a>(card_id) -> Square::Types::DisableCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -1974,9 +2271,7 @@ Disabling an already disabled card is allowed but has no effect.
 <dd>
 
 ```ruby
-client.cards.disable({
-  cardId:'card_id'
-});
+client.cards.disable(card_id: 'card_id');
 ```
 </dd>
 </dl>
@@ -1991,7 +2286,15 @@ client.cards.disable({
 <dl>
 <dd>
 
-**cardId:** `String` — Unique ID for the desired Card.
+**card_id:** `String` — Unique ID for the desired Card.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Cards::RequestOptions` 
     
 </dd>
 </dl>
@@ -2004,7 +2307,7 @@ client.cards.disable({
 </details>
 
 ## Catalog
-<details><summary><code>client.Catalog.BatchDelete(request) -> Square::Types::BatchDeleteCatalogObjectsResponse</code></summary>
+<details><summary><code>client.catalog.<a href="/lib/square/catalog/client.rb">batch_delete</a>(request) -> Square::Types::BatchDeleteCatalogObjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -2044,9 +2347,7 @@ delete requests are rejected with the `429` error code.
 <dd>
 
 ```ruby
-client.catalog.batch_delete({
-  objectIds:['W62UWFY35CWMYGVWK6TWJDNI', 'AA27W3M2GGTF3H6AVPNB77CK']
-});
+client.catalog.batch_delete(object_ids: ['W62UWFY35CWMYGVWK6TWJDNI', 'AA27W3M2GGTF3H6AVPNB77CK']);
 ```
 </dd>
 </dl>
@@ -2061,11 +2362,19 @@ client.catalog.batch_delete({
 <dl>
 <dd>
 
-**objectIds:** `Internal::Types::Array[String]` 
+**object_ids:** `Internal::Types::Array[String]` 
 
 The IDs of the CatalogObjects to be deleted. When an object is deleted, other objects
 in the graph that depend on that object will be deleted as well (for example, deleting a
 CatalogItem will delete its CatalogItemVariation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Catalog::RequestOptions` 
     
 </dd>
 </dl>
@@ -2077,7 +2386,7 @@ CatalogItem will delete its CatalogItemVariation.
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.BatchGet(request) -> Square::Types::BatchGetCatalogObjectsResponse</code></summary>
+<details><summary><code>client.catalog.<a href="/lib/square/catalog/client.rb">batch_get</a>(request) -> Square::Types::BatchGetCatalogObjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -2109,10 +2418,10 @@ any [CatalogTax](entity:CatalogTax) objects that apply to it.
 <dd>
 
 ```ruby
-client.catalog.batch_get({
-  objectIds:['W62UWFY35CWMYGVWK6TWJDNI', 'AA27W3M2GGTF3H6AVPNB77CK'],
-  includeRelatedObjects:true
-});
+client.catalog.batch_get(
+  object_ids: ['W62UWFY35CWMYGVWK6TWJDNI', 'AA27W3M2GGTF3H6AVPNB77CK'],
+  include_related_objects: true
+);
 ```
 </dd>
 </dl>
@@ -2127,7 +2436,7 @@ client.catalog.batch_get({
 <dl>
 <dd>
 
-**objectIds:** `Internal::Types::Array[String]` — The IDs of the CatalogObjects to be retrieved.
+**object_ids:** `Internal::Types::Array[String]` — The IDs of the CatalogObjects to be retrieved.
     
 </dd>
 </dl>
@@ -2135,7 +2444,7 @@ client.catalog.batch_get({
 <dl>
 <dd>
 
-**includeRelatedObjects:** `Internal::Types::Boolean` 
+**include_related_objects:** `Internal::Types::Boolean` 
 
 If `true`, the response will include additional objects that are related to the
 requested objects. Related objects are defined as any objects referenced by ID by the results in the `objects` field
@@ -2158,7 +2467,7 @@ Default value: `false`
 <dl>
 <dd>
 
-**catalogVersion:** `Integer` 
+**catalog_version:** `Integer` 
 
 The specific version of the catalog objects to be included in the response. 
 This allows you to retrieve historical versions of objects. The specified version value is matched against
@@ -2171,7 +2480,7 @@ be from the current version of the catalog.
 <dl>
 <dd>
 
-**includeDeletedObjects:** `Internal::Types::Boolean` — Indicates whether to include (`true`) or not (`false`) in the response deleted objects, namely, those with the `is_deleted` attribute set to `true`.
+**include_deleted_objects:** `Internal::Types::Boolean` — Indicates whether to include (`true`) or not (`false`) in the response deleted objects, namely, those with the `is_deleted` attribute set to `true`.
     
 </dd>
 </dl>
@@ -2179,12 +2488,20 @@ be from the current version of the catalog.
 <dl>
 <dd>
 
-**includeCategoryPathToRoot:** `Internal::Types::Boolean` 
+**include_category_path_to_root:** `Internal::Types::Boolean` 
 
 Specifies whether or not to include the `path_to_root` list for each returned category instance. The `path_to_root` list consists
 of `CategoryPathToRootNode` objects and specifies the path that starts with the immediate parent category of the returned category
 and ends with its root category. If the returned category is a top-level category, the `path_to_root` list is empty and is not returned
 in the response payload.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Catalog::RequestOptions` 
     
 </dd>
 </dl>
@@ -2196,7 +2513,7 @@ in the response payload.
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.BatchUpsert(request) -> Square::Types::BatchUpsertCatalogObjectsResponse</code></summary>
+<details><summary><code>client.catalog.<a href="/lib/square/catalog/client.rb">batch_upsert</a>(request) -> Square::Types::BatchUpsertCatalogObjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -2235,12 +2552,12 @@ update requests are rejected with the `429` error code.
 <dd>
 
 ```ruby
-client.catalog.batch_upsert({
-  idempotencyKey:'789ff020-f723-43a9-b4b5-43b5dc1fa3dc',
-  batches:[{
-    objects:[]
+client.catalog.batch_upsert(
+  idempotency_key: '789ff020-f723-43a9-b4b5-43b5dc1fa3dc',
+  batches: [{
+    objects: []
   }]
-});
+);
 ```
 </dd>
 </dl>
@@ -2255,7 +2572,7 @@ client.catalog.batch_upsert({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A value you specify that uniquely identifies this
 request among all your requests. A common way to create
@@ -2299,6 +2616,14 @@ be inserted or updated.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Catalog::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2307,7 +2632,7 @@ be inserted or updated.
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.Info() -> Square::Types::CatalogInfoResponse</code></summary>
+<details><summary><code>client.catalog.<a href="/lib/square/catalog/client.rb">info</a>() -> Square::Types::CatalogInfoResponse</code></summary>
 <dl>
 <dd>
 
@@ -2342,12 +2667,27 @@ client.catalog.info();
 </dd>
 </dl>
 
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Catalog::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.List() -> Square::Types::ListCatalogResponse</code></summary>
+<details><summary><code>client.catalog.<a href="/lib/square/catalog/client.rb">list</a>() -> Square::Types::ListCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -2381,11 +2721,11 @@ and set the `include_deleted_objects` attribute value to `true`.
 <dd>
 
 ```ruby
-client.catalog.list({
-  cursor:'cursor',
-  types:'types',
-  catalogVersion:1000000
-});
+client.catalog.list(
+  cursor: 'cursor',
+  types: 'types',
+  catalog_version: 1000000
+);
 ```
 </dd>
 </dl>
@@ -2435,12 +2775,20 @@ SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTIN
 <dl>
 <dd>
 
-**catalogVersion:** `Integer` 
+**catalog_version:** `Integer` 
 
 The specific version of the catalog objects to be included in the response.
 This allows you to retrieve historical versions of objects. The specified version value is matched against
 the [CatalogObject](entity:CatalogObject)s' `version` attribute.  If not included, results will be from the
 current version of the catalog.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Catalog::RequestOptions` 
     
 </dd>
 </dl>
@@ -2452,7 +2800,7 @@ current version of the catalog.
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.Search(request) -> Square::Types::SearchCatalogObjectsResponse</code></summary>
+<details><summary><code>client.catalog.<a href="/lib/square/catalog/client.rb">search</a>(request) -> Square::Types::SearchCatalogObjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -2488,16 +2836,16 @@ endpoint in the following aspects:
 <dd>
 
 ```ruby
-client.catalog.search({
-  objectTypes:[],
-  query:{
-    prefix_query:{
-      attribute_name:'name',
-      attribute_prefix:'tea'
+client.catalog.search(
+  object_types: ['ITEM'],
+  query: {
+    prefix_query: {
+      attribute_name: 'name',
+      attribute_prefix: 'tea'
     }
   },
-  limit:100
-});
+  limit: 100
+);
 ```
 </dd>
 </dl>
@@ -2523,7 +2871,7 @@ See [Pagination](https://developer.squareup.com/docs/build-basics/common-api-pat
 <dl>
 <dd>
 
-**objectTypes:** `Internal::Types::Array[Square::Types::CatalogObjectType]` 
+**object_types:** `Internal::Types::Array[Square::Types::CatalogObjectType]` 
 
 The desired set of object types to appear in the search results.
 
@@ -2546,7 +2894,7 @@ in this field.
 <dl>
 <dd>
 
-**includeDeletedObjects:** `Internal::Types::Boolean` — If `true`, deleted objects will be included in the results. Defaults to `false`. Deleted objects will have their `is_deleted` field set to `true`. If `include_deleted_objects` is `true`, then the `include_category_path_to_root` request parameter must be `false`. Both properties cannot be `true` at the same time.
+**include_deleted_objects:** `Internal::Types::Boolean` — If `true`, deleted objects will be included in the results. Defaults to `false`. Deleted objects will have their `is_deleted` field set to `true`. If `include_deleted_objects` is `true`, then the `include_category_path_to_root` request parameter must be `false`. Both properties cannot be `true` at the same time.
     
 </dd>
 </dl>
@@ -2554,7 +2902,7 @@ in this field.
 <dl>
 <dd>
 
-**includeRelatedObjects:** `Internal::Types::Boolean` 
+**include_related_objects:** `Internal::Types::Boolean` 
 
 If `true`, the response will include additional objects that are related to the
 requested objects. Related objects are objects that are referenced by object ID by the objects
@@ -2577,7 +2925,7 @@ Default value: `false`
 <dl>
 <dd>
 
-**beginTime:** `String` 
+**begin_time:** `String` 
 
 Return objects modified after this [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates), in RFC 3339
 format, e.g., `2016-09-04T23:59:33.123Z`. The timestamp is exclusive - objects with a
@@ -2609,7 +2957,15 @@ is higher than the maximum limit of 1,000, it will be ignored.
 <dl>
 <dd>
 
-**includeCategoryPathToRoot:** `Internal::Types::Boolean` — Specifies whether or not to include the `path_to_root` list for each returned category instance. The `path_to_root` list consists of `CategoryPathToRootNode` objects and specifies the path that starts with the immediate parent category of the returned category and ends with its root category. If the returned category is a top-level category, the `path_to_root` list is empty and is not returned in the response payload. If `include_category_path_to_root` is `true`, then the `include_deleted_objects` request parameter must be `false`. Both properties cannot be `true` at the same time.
+**include_category_path_to_root:** `Internal::Types::Boolean` — Specifies whether or not to include the `path_to_root` list for each returned category instance. The `path_to_root` list consists of `CategoryPathToRootNode` objects and specifies the path that starts with the immediate parent category of the returned category and ends with its root category. If the returned category is a top-level category, the `path_to_root` list is empty and is not returned in the response payload. If `include_category_path_to_root` is `true`, then the `include_deleted_objects` request parameter must be `false`. Both properties cannot be `true` at the same time.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Catalog::RequestOptions` 
     
 </dd>
 </dl>
@@ -2621,7 +2977,7 @@ is higher than the maximum limit of 1,000, it will be ignored.
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.SearchItems(request) -> Square::Types::SearchCatalogItemsResponse</code></summary>
+<details><summary><code>client.catalog.<a href="/lib/square/catalog/client.rb">search_items</a>(request) -> Square::Types::SearchCatalogItemsResponse</code></summary>
 <dl>
 <dd>
 
@@ -2657,29 +3013,30 @@ endpoint in the following aspects:
 <dd>
 
 ```ruby
-client.catalog.search_items({
-  textFilter:'red',
-  categoryIds:['WINE_CATEGORY_ID'],
-  stockLevels:[],
-  enabledLocationIds:['ATL_LOCATION_ID'],
-  limit:100,
-  productTypes:[],
-  customAttributeFilters:[{
-    custom_attribute_definition_id:'VEGAN_DEFINITION_ID',
-    bool_filter:true
+client.catalog.search_items(
+  text_filter: 'red',
+  category_ids: ['WINE_CATEGORY_ID'],
+  stock_levels: ['OUT', 'LOW'],
+  enabled_location_ids: ['ATL_LOCATION_ID'],
+  limit: 100,
+  sort_order: 'ASC',
+  product_types: ['REGULAR'],
+  custom_attribute_filters: [{
+    custom_attribute_definition_id: 'VEGAN_DEFINITION_ID',
+    bool_filter: true
   }, {
-    custom_attribute_definition_id:'BRAND_DEFINITION_ID',
-    string_filter:'Dark Horse'
+    custom_attribute_definition_id: 'BRAND_DEFINITION_ID',
+    string_filter: 'Dark Horse'
   }, {
-    key:'VINTAGE',
-    number_filter:{
-      min:'min',
-      max:'max'
+    key: 'VINTAGE',
+    number_filter: {
+      min: 'min',
+      max: 'max'
     }
   }, {
-    custom_attribute_definition_id:'VARIETAL_DEFINITION_ID'
+    custom_attribute_definition_id: 'VARIETAL_DEFINITION_ID'
   }]
-});
+);
 ```
 </dd>
 </dl>
@@ -2694,7 +3051,7 @@ client.catalog.search_items({
 <dl>
 <dd>
 
-**textFilter:** `String` 
+**text_filter:** `String` 
 
 The text filter expression to return items or item variations containing specified text in
 the `name`, `description`, or `abbreviation` attribute value of an item, or in
@@ -2706,7 +3063,7 @@ the `name`, `sku`, or `upc` attribute value of an item variation.
 <dl>
 <dd>
 
-**categoryIds:** `Internal::Types::Array[String]` — The category id query expression to return items containing the specified category IDs.
+**category_ids:** `Internal::Types::Array[String]` — The category id query expression to return items containing the specified category IDs.
     
 </dd>
 </dl>
@@ -2714,7 +3071,7 @@ the `name`, `sku`, or `upc` attribute value of an item variation.
 <dl>
 <dd>
 
-**stockLevels:** `Internal::Types::Array[Square::Types::SearchCatalogItemsRequestStockLevel]` 
+**stock_levels:** `Internal::Types::Array[Square::Types::SearchCatalogItemsRequestStockLevel]` 
 
 The stock-level query expression to return item variations with the specified stock levels.
 See [SearchCatalogItemsRequestStockLevel](#type-searchcatalogitemsrequeststocklevel) for possible values
@@ -2725,7 +3082,7 @@ See [SearchCatalogItemsRequestStockLevel](#type-searchcatalogitemsrequeststockle
 <dl>
 <dd>
 
-**enabledLocationIds:** `Internal::Types::Array[String]` — The enabled-location query expression to return items and item variations having specified enabled locations.
+**enabled_location_ids:** `Internal::Types::Array[String]` — The enabled-location query expression to return items and item variations having specified enabled locations.
     
 </dd>
 </dl>
@@ -2749,7 +3106,7 @@ See [SearchCatalogItemsRequestStockLevel](#type-searchcatalogitemsrequeststockle
 <dl>
 <dd>
 
-**sortOrder:** `Square::Types::SortOrder` 
+**sort_order:** `Square::Types::SortOrder` 
 
 The order to sort the results by item names. The default sort order is ascending (`ASC`).
 See [SortOrder](#type-sortorder) for possible values
@@ -2760,7 +3117,7 @@ See [SortOrder](#type-sortorder) for possible values
 <dl>
 <dd>
 
-**productTypes:** `Internal::Types::Array[Square::Types::CatalogItemProductType]` — The product types query expression to return items or item variations having the specified product types.
+**product_types:** `Internal::Types::Array[Square::Types::CatalogItemProductType]` — The product types query expression to return items or item variations having the specified product types.
     
 </dd>
 </dl>
@@ -2768,7 +3125,7 @@ See [SortOrder](#type-sortorder) for possible values
 <dl>
 <dd>
 
-**customAttributeFilters:** `Internal::Types::Array[Square::Types::CustomAttributeFilter]` 
+**custom_attribute_filters:** `Internal::Types::Array[Square::Types::CustomAttributeFilter]` 
 
 The customer-attribute filter to return items or item variations matching the specified
 custom attribute expressions. A maximum number of 10 custom attribute expressions are supported in
@@ -2780,7 +3137,15 @@ a single call to the [SearchCatalogItems](api-endpoint:Catalog-SearchCatalogItem
 <dl>
 <dd>
 
-**archivedState:** `Square::Types::ArchivedState` — The query filter to return not archived (`ARCHIVED_STATE_NOT_ARCHIVED`), archived (`ARCHIVED_STATE_ARCHIVED`), or either type (`ARCHIVED_STATE_ALL`) of items.
+**archived_state:** `Square::Types::ArchivedState` — The query filter to return not archived (`ARCHIVED_STATE_NOT_ARCHIVED`), archived (`ARCHIVED_STATE_ARCHIVED`), or either type (`ARCHIVED_STATE_ALL`) of items.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Catalog::RequestOptions` 
     
 </dd>
 </dl>
@@ -2792,7 +3157,7 @@ a single call to the [SearchCatalogItems](api-endpoint:Catalog-SearchCatalogItem
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.UpdateItemModifierLists(request) -> Square::Types::UpdateItemModifierListsResponse</code></summary>
+<details><summary><code>client.catalog.<a href="/lib/square/catalog/client.rb">update_item_modifier_lists</a>(request) -> Square::Types::UpdateItemModifierListsResponse</code></summary>
 <dl>
 <dd>
 
@@ -2821,11 +3186,11 @@ to perform an upsert on the entire item.
 <dd>
 
 ```ruby
-client.catalog.update_item_modifier_lists({
-  itemIds:['H42BRLUJ5KTZTTMPVSLFAACQ', '2JXOBJIHCWBQ4NZ3RIXQGJA6'],
-  modifierListsToEnable:['H42BRLUJ5KTZTTMPVSLFAACQ', '2JXOBJIHCWBQ4NZ3RIXQGJA6'],
-  modifierListsToDisable:['7WRC16CJZDVLSNDQ35PP6YAD']
-});
+client.catalog.update_item_modifier_lists(
+  item_ids: ['H42BRLUJ5KTZTTMPVSLFAACQ', '2JXOBJIHCWBQ4NZ3RIXQGJA6'],
+  modifier_lists_to_enable: ['H42BRLUJ5KTZTTMPVSLFAACQ', '2JXOBJIHCWBQ4NZ3RIXQGJA6'],
+  modifier_lists_to_disable: ['7WRC16CJZDVLSNDQ35PP6YAD']
+);
 ```
 </dd>
 </dl>
@@ -2840,7 +3205,7 @@ client.catalog.update_item_modifier_lists({
 <dl>
 <dd>
 
-**itemIds:** `Internal::Types::Array[String]` — The IDs of the catalog items associated with the CatalogModifierList objects being updated.
+**item_ids:** `Internal::Types::Array[String]` — The IDs of the catalog items associated with the CatalogModifierList objects being updated.
     
 </dd>
 </dl>
@@ -2848,7 +3213,7 @@ client.catalog.update_item_modifier_lists({
 <dl>
 <dd>
 
-**modifierListsToEnable:** `Internal::Types::Array[String]` 
+**modifier_lists_to_enable:** `Internal::Types::Array[String]` 
 
 The IDs of the CatalogModifierList objects to enable for the CatalogItem.
 At least one of `modifier_lists_to_enable` or `modifier_lists_to_disable` must be specified.
@@ -2859,10 +3224,18 @@ At least one of `modifier_lists_to_enable` or `modifier_lists_to_disable` must b
 <dl>
 <dd>
 
-**modifierListsToDisable:** `Internal::Types::Array[String]` 
+**modifier_lists_to_disable:** `Internal::Types::Array[String]` 
 
 The IDs of the CatalogModifierList objects to disable for the CatalogItem.
 At least one of `modifier_lists_to_enable` or `modifier_lists_to_disable` must be specified.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Catalog::RequestOptions` 
     
 </dd>
 </dl>
@@ -2874,7 +3247,7 @@ At least one of `modifier_lists_to_enable` or `modifier_lists_to_disable` must b
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.UpdateItemTaxes(request) -> Square::Types::UpdateItemTaxesResponse</code></summary>
+<details><summary><code>client.catalog.<a href="/lib/square/catalog/client.rb">update_item_taxes</a>(request) -> Square::Types::UpdateItemTaxesResponse</code></summary>
 <dl>
 <dd>
 
@@ -2903,11 +3276,11 @@ upsert on the entire item.
 <dd>
 
 ```ruby
-client.catalog.update_item_taxes({
-  itemIds:['H42BRLUJ5KTZTTMPVSLFAACQ', '2JXOBJIHCWBQ4NZ3RIXQGJA6'],
-  taxesToEnable:['4WRCNHCJZDVLSNDQ35PP6YAD'],
-  taxesToDisable:['AQCEGCEBBQONINDOHRGZISEX']
-});
+client.catalog.update_item_taxes(
+  item_ids: ['H42BRLUJ5KTZTTMPVSLFAACQ', '2JXOBJIHCWBQ4NZ3RIXQGJA6'],
+  taxes_to_enable: ['4WRCNHCJZDVLSNDQ35PP6YAD'],
+  taxes_to_disable: ['AQCEGCEBBQONINDOHRGZISEX']
+);
 ```
 </dd>
 </dl>
@@ -2922,7 +3295,7 @@ client.catalog.update_item_taxes({
 <dl>
 <dd>
 
-**itemIds:** `Internal::Types::Array[String]` 
+**item_ids:** `Internal::Types::Array[String]` 
 
 IDs for the CatalogItems associated with the CatalogTax objects being updated.
 No more than 1,000 IDs may be provided.
@@ -2933,7 +3306,7 @@ No more than 1,000 IDs may be provided.
 <dl>
 <dd>
 
-**taxesToEnable:** `Internal::Types::Array[String]` 
+**taxes_to_enable:** `Internal::Types::Array[String]` 
 
 IDs of the CatalogTax objects to enable.
 At least one of `taxes_to_enable` or `taxes_to_disable` must be specified.
@@ -2944,10 +3317,18 @@ At least one of `taxes_to_enable` or `taxes_to_disable` must be specified.
 <dl>
 <dd>
 
-**taxesToDisable:** `Internal::Types::Array[String]` 
+**taxes_to_disable:** `Internal::Types::Array[String]` 
 
 IDs of the CatalogTax objects to disable.
 At least one of `taxes_to_enable` or `taxes_to_disable` must be specified.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Catalog::RequestOptions` 
     
 </dd>
 </dl>
@@ -2960,7 +3341,7 @@ At least one of `taxes_to_enable` or `taxes_to_disable` must be specified.
 </details>
 
 ## Channels
-<details><summary><code>client.Channels.List() -> Square::Types::ListChannelsResponse</code></summary>
+<details><summary><code>client.channels.<a href="/lib/square/channels/client.rb">list</a>() -> Square::Types::ListChannelsResponse</code></summary>
 <dl>
 <dd>
 
@@ -2987,11 +3368,13 @@ At least one of `taxes_to_enable` or `taxes_to_disable` must be specified.
 <dd>
 
 ```ruby
-client.channels.list({
-  referenceId:'reference_id',
-  cursor:'cursor',
-  limit:1
-});
+client.channels.list(
+  reference_type: 'UNKNOWN_TYPE',
+  reference_id: 'reference_id',
+  status: 'ACTIVE',
+  cursor: 'cursor',
+  limit: 1
+);
 ```
 </dd>
 </dl>
@@ -3006,7 +3389,7 @@ client.channels.list({
 <dl>
 <dd>
 
-**referenceType:** `Square::Types::ReferenceType` — Type of reference associated to channel
+**reference_type:** `Square::Types::ReferenceType` — Type of reference associated to channel
     
 </dd>
 </dl>
@@ -3014,7 +3397,7 @@ client.channels.list({
 <dl>
 <dd>
 
-**referenceId:** `String` — id of reference associated to channel
+**reference_id:** `String` — id of reference associated to channel
     
 </dd>
 </dl>
@@ -3045,59 +3428,11 @@ When not provided the returned results will be cap at 100 channels.
     
 </dd>
 </dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.Channels.BulkRetrieve(request) -> Square::Types::BulkRetrieveChannelsResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
 
 <dl>
 <dd>
 
-<dl>
-<dd>
-
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```ruby
-client.channels.bulk_retrieve({
-  channelIds:['CH_9C03D0B59', 'CH_6X139B5MN', 'NOT_EXISTING']
-});
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**channelIds:** `Internal::Types::Array[String]` 
+**request_options:** `Square::Channels::RequestOptions` 
     
 </dd>
 </dl>
@@ -3109,7 +3444,7 @@ client.channels.bulk_retrieve({
 </dl>
 </details>
 
-<details><summary><code>client.Channels.Get(ChannelId) -> Square::Types::RetrieveChannelResponse</code></summary>
+<details><summary><code>client.channels.<a href="/lib/square/channels/client.rb">bulk_retrieve</a>(request) -> Square::Types::BulkRetrieveChannelsResponse</code></summary>
 <dl>
 <dd>
 
@@ -3136,9 +3471,7 @@ client.channels.bulk_retrieve({
 <dd>
 
 ```ruby
-client.channels.get({
-  channelId:'channel_id'
-});
+client.channels.bulk_retrieve(channel_ids: ['CH_9C03D0B59', 'CH_6X139B5MN', 'NOT_EXISTING']);
 ```
 </dd>
 </dl>
@@ -3153,7 +3486,77 @@ client.channels.get({
 <dl>
 <dd>
 
-**channelId:** `String` — A channel id
+**channel_ids:** `Internal::Types::Array[String]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Channels::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/lib/square/channels/client.rb">get</a>(channel_id) -> Square::Types::RetrieveChannelResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.channels.get(channel_id: 'channel_id');
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**channel_id:** `String` — A channel id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Channels::RequestOptions` 
     
 </dd>
 </dl>
@@ -3166,7 +3569,7 @@ client.channels.get({
 </details>
 
 ## Customers
-<details><summary><code>client.Customers.List() -> Square::Types::ListCustomersResponse</code></summary>
+<details><summary><code>client.customers.<a href="/lib/square/customers/client.rb">list</a>() -> Square::Types::ListCustomersResponse</code></summary>
 <dl>
 <dd>
 
@@ -3197,11 +3600,13 @@ profiles can take closer to one minute or longer, especially during network inci
 <dd>
 
 ```ruby
-client.customers.list({
-  cursor:'cursor',
-  limit:1,
-  count:true
-});
+client.customers.list(
+  cursor: 'cursor',
+  limit: 1,
+  sort_field: 'DEFAULT',
+  sort_order: 'DESC',
+  count: true
+);
 ```
 </dd>
 </dl>
@@ -3242,7 +3647,7 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
 <dl>
 <dd>
 
-**sortField:** `Square::Types::CustomerSortField` 
+**sort_field:** `Square::Types::CustomerSortField` 
 
 Indicates how customers should be sorted.
 
@@ -3254,7 +3659,7 @@ The default value is `DEFAULT`.
 <dl>
 <dd>
 
-**sortOrder:** `Square::Types::SortOrder` 
+**sort_order:** `Square::Types::SortOrder` 
 
 Indicates whether customers should be sorted in ascending (`ASC`) or
 descending (`DESC`) order.
@@ -3275,6 +3680,14 @@ The default value is `false`.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3283,7 +3696,7 @@ The default value is `false`.
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Create(request) -> Square::Types::CreateCustomerResponse</code></summary>
+<details><summary><code>client.customers.<a href="/lib/square/customers/client.rb">create</a>(request) -> Square::Types::CreateCustomerResponse</code></summary>
 <dl>
 <dd>
 
@@ -3319,21 +3732,22 @@ endpoint:
 <dd>
 
 ```ruby
-client.customers.create({
-  givenName:'Amelia',
-  familyName:'Earhart',
-  emailAddress:'Amelia.Earhart@example.com',
-  address:{
-    address_line_1:'500 Electric Ave',
-    address_line_2:'Suite 600',
-    locality:'New York',
-    administrative_district_level_1:'NY',
-    postal_code:'10003'
+client.customers.create(
+  given_name: 'Amelia',
+  family_name: 'Earhart',
+  email_address: 'Amelia.Earhart@example.com',
+  address: {
+    address_line_1: '500 Electric Ave',
+    address_line_2: 'Suite 600',
+    locality: 'New York',
+    administrative_district_level_1: 'NY',
+    postal_code: '10003',
+    country: 'US'
   },
-  phoneNumber:'+1-212-555-4240',
-  referenceId:'YOUR_REFERENCE_ID',
-  note:'a customer'
-});
+  phone_number: '+1-212-555-4240',
+  reference_id: 'YOUR_REFERENCE_ID',
+  note: 'a customer'
+);
 ```
 </dd>
 </dl>
@@ -3348,7 +3762,7 @@ client.customers.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 The idempotency key for the request.	For more information, see
 [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
@@ -3359,7 +3773,7 @@ The idempotency key for the request.	For more information, see
 <dl>
 <dd>
 
-**givenName:** `String` 
+**given_name:** `String` 
 
 The given name (that is, the first name) associated with the customer profile.
 
@@ -3371,7 +3785,7 @@ The maximum length for this value is 300 characters.
 <dl>
 <dd>
 
-**familyName:** `String` 
+**family_name:** `String` 
 
 The family name (that is, the last name) associated with the customer profile.
 
@@ -3383,7 +3797,7 @@ The maximum length for this value is 300 characters.
 <dl>
 <dd>
 
-**companyName:** `String` 
+**company_name:** `String` 
 
 A business name associated with the customer profile.
 
@@ -3407,7 +3821,7 @@ The maximum length for this value is 100 characters.
 <dl>
 <dd>
 
-**emailAddress:** `String` 
+**email_address:** `String` 
 
 The email address associated with the customer profile.
 
@@ -3431,7 +3845,7 @@ The `first_name` and `last_name` fields are ignored if they are present in the r
 <dl>
 <dd>
 
-**phoneNumber:** `String` 
+**phone_number:** `String` 
 
 The phone number associated with the customer profile. The phone number must be valid and can contain
 9–16 digits, with an optional `+` prefix and country code. For more information, see
@@ -3443,7 +3857,7 @@ The phone number associated with the customer profile. The phone number must be 
 <dl>
 <dd>
 
-**referenceId:** `String` 
+**reference_id:** `String` 
 
 An optional second ID used to associate the customer profile with an
 entity in another system.
@@ -3476,11 +3890,19 @@ format, where `YYYY` is the specified birth year or `0000` if a birth year is no
 <dl>
 <dd>
 
-**taxIds:** `Square::Types::CustomerTaxIds` 
+**tax_ids:** `Square::Types::CustomerTaxIds` 
 
 The tax ID associated with the customer profile. This field is available only for customers of sellers
 in EU countries or the United Kingdom. For more information,
 see [Customer tax IDs](https://developer.squareup.com/docs/customers-api/what-it-does#customer-tax-ids).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::RequestOptions` 
     
 </dd>
 </dl>
@@ -3492,7 +3914,7 @@ see [Customer tax IDs](https://developer.squareup.com/docs/customers-api/what-it
 </dl>
 </details>
 
-<details><summary><code>client.Customers.BatchCreate(request) -> Square::Types::BulkCreateCustomersResponse</code></summary>
+<details><summary><code>client.customers.<a href="/lib/square/customers/client.rb">batch_create</a>(request) -> Square::Types::BulkCreateCustomersResponse</code></summary>
 <dl>
 <dd>
 
@@ -3529,38 +3951,38 @@ You must provide at least one of the following values in each create request:
 <dd>
 
 ```ruby
-client.customers.batch_create({
-  customers:{
-    '8bb76c4f-e35d-4c5b-90de-1194cd9179f0':{
-      given_name:'Amelia',
-      family_name:'Earhart',
-      email_address:'Amelia.Earhart@example.com',
-      address:{
-        address_line_1:'500 Electric Ave',
-        address_line_2:'Suite 600',
-        locality:'New York',
-        administrative_district_level_1:'NY',
-        postal_code:'10003'
-      },
-      phone_number:'+1-212-555-4240',
-      reference_id:'YOUR_REFERENCE_ID',
-      note:'a customer'
+client.customers.batch_create(customers: {
+  '8bb76c4f-e35d-4c5b-90de-1194cd9179f0' => {
+    given_name: 'Amelia',
+    family_name: 'Earhart',
+    email_address: 'Amelia.Earhart@example.com',
+    address: {
+      address_line_1: '500 Electric Ave',
+      address_line_2: 'Suite 600',
+      locality: 'New York',
+      administrative_district_level_1: 'NY',
+      postal_code: '10003',
+      country: 'US'
     },
-    'd1689f23-b25d-4932-b2f0-aed00f5e2029':{
-      given_name:'Marie',
-      family_name:'Curie',
-      email_address:'Marie.Curie@example.com',
-      address:{
-        address_line_1:'500 Electric Ave',
-        address_line_2:'Suite 601',
-        locality:'New York',
-        administrative_district_level_1:'NY',
-        postal_code:'10003'
-      },
-      phone_number:'+1-212-444-4240',
-      reference_id:'YOUR_REFERENCE_ID',
-      note:'another customer'
-    }
+    phone_number: '+1-212-555-4240',
+    reference_id: 'YOUR_REFERENCE_ID',
+    note: 'a customer'
+  },
+  'd1689f23-b25d-4932-b2f0-aed00f5e2029' => {
+    given_name: 'Marie',
+    family_name: 'Curie',
+    email_address: 'Marie.Curie@example.com',
+    address: {
+      address_line_1: '500 Electric Ave',
+      address_line_2: 'Suite 601',
+      locality: 'New York',
+      administrative_district_level_1: 'NY',
+      postal_code: '10003',
+      country: 'US'
+    },
+    phone_number: '+1-212-444-4240',
+    reference_id: 'YOUR_REFERENCE_ID',
+    note: 'another customer'
   }
 });
 ```
@@ -3588,6 +4010,14 @@ customer profile.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3596,7 +4026,7 @@ customer profile.
 </dl>
 </details>
 
-<details><summary><code>client.Customers.BulkDeleteCustomers(request) -> Square::Types::BulkDeleteCustomersResponse</code></summary>
+<details><summary><code>client.customers.<a href="/lib/square/customers/client.rb">bulk_delete_customers</a>(request) -> Square::Types::BulkDeleteCustomersResponse</code></summary>
 <dl>
 <dd>
 
@@ -3625,9 +4055,7 @@ The endpoint takes a list of customer IDs and returns a map of responses.
 <dd>
 
 ```ruby
-client.customers.bulk_delete_customers({
-  customerIds:['8DDA5NZVBZFGAX0V3HPF81HHE0', 'N18CPRVXR5214XPBBA6BZQWF3C', '2GYD7WNXF7BJZW1PMGNXZ3Y8M8']
-});
+client.customers.bulk_delete_customers(customer_ids: ['8DDA5NZVBZFGAX0V3HPF81HHE0', 'N18CPRVXR5214XPBBA6BZQWF3C', '2GYD7WNXF7BJZW1PMGNXZ3Y8M8']);
 ```
 </dd>
 </dl>
@@ -3642,7 +4070,15 @@ client.customers.bulk_delete_customers({
 <dl>
 <dd>
 
-**customerIds:** `Internal::Types::Array[String]` — The IDs of the [customer profiles](entity:Customer) to delete.
+**customer_ids:** `Internal::Types::Array[String]` — The IDs of the [customer profiles](entity:Customer) to delete.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::RequestOptions` 
     
 </dd>
 </dl>
@@ -3654,7 +4090,7 @@ client.customers.bulk_delete_customers({
 </dl>
 </details>
 
-<details><summary><code>client.Customers.BulkRetrieveCustomers(request) -> Square::Types::BulkRetrieveCustomersResponse</code></summary>
+<details><summary><code>client.customers.<a href="/lib/square/customers/client.rb">bulk_retrieve_customers</a>(request) -> Square::Types::BulkRetrieveCustomersResponse</code></summary>
 <dl>
 <dd>
 
@@ -3683,9 +4119,7 @@ This endpoint takes a list of customer IDs and returns a map of responses.
 <dd>
 
 ```ruby
-client.customers.bulk_retrieve_customers({
-  customerIds:['8DDA5NZVBZFGAX0V3HPF81HHE0', 'N18CPRVXR5214XPBBA6BZQWF3C', '2GYD7WNXF7BJZW1PMGNXZ3Y8M8']
-});
+client.customers.bulk_retrieve_customers(customer_ids: ['8DDA5NZVBZFGAX0V3HPF81HHE0', 'N18CPRVXR5214XPBBA6BZQWF3C', '2GYD7WNXF7BJZW1PMGNXZ3Y8M8']);
 ```
 </dd>
 </dl>
@@ -3700,7 +4134,15 @@ client.customers.bulk_retrieve_customers({
 <dl>
 <dd>
 
-**customerIds:** `Internal::Types::Array[String]` — The IDs of the [customer profiles](entity:Customer) to retrieve.
+**customer_ids:** `Internal::Types::Array[String]` — The IDs of the [customer profiles](entity:Customer) to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::RequestOptions` 
     
 </dd>
 </dl>
@@ -3712,7 +4154,7 @@ client.customers.bulk_retrieve_customers({
 </dl>
 </details>
 
-<details><summary><code>client.Customers.BulkUpdateCustomers(request) -> Square::Types::BulkUpdateCustomersResponse</code></summary>
+<details><summary><code>client.customers.<a href="/lib/square/customers/client.rb">bulk_update_customers</a>(request) -> Square::Types::BulkUpdateCustomersResponse</code></summary>
 <dl>
 <dd>
 
@@ -3741,18 +4183,16 @@ This endpoint takes a map of individual update requests and returns a map of res
 <dd>
 
 ```ruby
-client.customers.bulk_update_customers({
-  customers:{
-    '8DDA5NZVBZFGAX0V3HPF81HHE0':{
-      email_address:'New.Amelia.Earhart@example.com',
-      note:'updated customer note',
-      version:2
-    },
-    N18CPRVXR5214XPBBA6BZQWF3C:{
-      given_name:'Marie',
-      family_name:'Curie',
-      version:0
-    }
+client.customers.bulk_update_customers(customers: {
+  '8DDA5NZVBZFGAX0V3HPF81HHE0' => {
+    email_address: 'New.Amelia.Earhart@example.com',
+    note: 'updated customer note',
+    version: 2
+  },
+  N18CPRVXR5214XPBBA6BZQWF3C: {
+    given_name: 'Marie',
+    family_name: 'Curie',
+    version: 0
   }
 });
 ```
@@ -3782,6 +4222,14 @@ update a field, specify the new value. To remove a field, specify `null`.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3790,7 +4238,7 @@ update a field, specify the new value. To remove a field, specify `null`.
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Search(request) -> Square::Types::SearchCustomersResponse</code></summary>
+<details><summary><code>client.customers.<a href="/lib/square/customers/client.rb">search</a>(request) -> Square::Types::SearchCustomersResponse</code></summary>
 <dl>
 <dd>
 
@@ -3825,27 +4273,31 @@ profiles can take closer to one minute or longer, especially during network inci
 <dd>
 
 ```ruby
-client.customers.search({
-  limit:2,
-  query:{
-    filter:{
-      creation_source:{
-        values:[]
+client.customers.search(
+  limit: 2,
+  query: {
+    filter: {
+      creation_source: {
+        values: ['THIRD_PARTY'],
+        rule: 'INCLUDE'
       },
-      created_at:{
-        start_at:'2018-01-01T00:00:00-00:00',
-        end_at:'2018-02-01T00:00:00-00:00'
+      created_at: {
+        start_at: '2018-01-01T00:00:00-00:00',
+        end_at: '2018-02-01T00:00:00-00:00'
       },
-      email_address:{
-        fuzzy:'example.com'
+      email_address: {
+        fuzzy: 'example.com'
       },
-      group_ids:{
-        all:['545AXB44B4XXWMVQ4W8SBT3HHF']
+      group_ids: {
+        all: ['545AXB44B4XXWMVQ4W8SBT3HHF']
       }
     },
-    sort:{}
+    sort: {
+      field: 'CREATED_AT',
+      order: 'ASC'
+    }
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -3905,6 +4357,14 @@ The default value is `false`.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3913,7 +4373,7 @@ The default value is `false`.
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Get(CustomerId) -> Square::Types::GetCustomerResponse</code></summary>
+<details><summary><code>client.customers.<a href="/lib/square/customers/client.rb">get</a>(customer_id) -> Square::Types::GetCustomerResponse</code></summary>
 <dl>
 <dd>
 
@@ -3940,9 +4400,7 @@ Returns details for a single customer.
 <dd>
 
 ```ruby
-client.customers.get({
-  customerId:'customer_id'
-});
+client.customers.get(customer_id: 'customer_id');
 ```
 </dd>
 </dl>
@@ -3957,7 +4415,15 @@ client.customers.get({
 <dl>
 <dd>
 
-**customerId:** `String` — The ID of the customer to retrieve.
+**customer_id:** `String` — The ID of the customer to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::RequestOptions` 
     
 </dd>
 </dl>
@@ -3969,7 +4435,7 @@ client.customers.get({
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Update(CustomerId, request) -> Square::Types::UpdateCustomerResponse</code></summary>
+<details><summary><code>client.customers.<a href="/lib/square/customers/client.rb">update</a>(customer_id, request) -> Square::Types::UpdateCustomerResponse</code></summary>
 <dl>
 <dd>
 
@@ -3999,12 +4465,12 @@ To update a customer profile that was created by merging existing profiles, you 
 <dd>
 
 ```ruby
-client.customers.update({
-  customerId:'customer_id',
-  emailAddress:'New.Amelia.Earhart@example.com',
-  note:'updated customer note',
-  version:2
-});
+client.customers.update(
+  customer_id: 'customer_id',
+  email_address: 'New.Amelia.Earhart@example.com',
+  note: 'updated customer note',
+  version: 2
+);
 ```
 </dd>
 </dl>
@@ -4019,7 +4485,7 @@ client.customers.update({
 <dl>
 <dd>
 
-**customerId:** `String` — The ID of the customer to update.
+**customer_id:** `String` — The ID of the customer to update.
     
 </dd>
 </dl>
@@ -4027,7 +4493,7 @@ client.customers.update({
 <dl>
 <dd>
 
-**givenName:** `String` 
+**given_name:** `String` 
 
 The given name (that is, the first name) associated with the customer profile.
 
@@ -4039,7 +4505,7 @@ The maximum length for this value is 300 characters.
 <dl>
 <dd>
 
-**familyName:** `String` 
+**family_name:** `String` 
 
 The family name (that is, the last name) associated with the customer profile.
 
@@ -4051,7 +4517,7 @@ The maximum length for this value is 300 characters.
 <dl>
 <dd>
 
-**companyName:** `String` 
+**company_name:** `String` 
 
 A business name associated with the customer profile.
 
@@ -4075,7 +4541,7 @@ The maximum length for this value is 100 characters.
 <dl>
 <dd>
 
-**emailAddress:** `String` 
+**email_address:** `String` 
 
 The email address associated with the customer profile.
 
@@ -4100,7 +4566,7 @@ The `first_name` and `last_name` fields are ignored if they are present in the r
 <dl>
 <dd>
 
-**phoneNumber:** `String` 
+**phone_number:** `String` 
 
 The phone number associated with the customer profile. The phone number must be valid and can contain
 9–16 digits, with an optional `+` prefix and country code. For more information, see
@@ -4112,7 +4578,7 @@ The phone number associated with the customer profile. The phone number must be 
 <dl>
 <dd>
 
-**referenceId:** `String` 
+**reference_id:** `String` 
 
 An optional second ID used to associate the customer profile with an
 entity in another system.
@@ -4157,11 +4623,19 @@ As a best practice, you should include this field to enable [optimistic concurre
 <dl>
 <dd>
 
-**taxIds:** `Square::Types::CustomerTaxIds` 
+**tax_ids:** `Square::Types::CustomerTaxIds` 
 
 The tax ID associated with the customer profile. This field is available only for customers of sellers
 in EU countries or the United Kingdom. For more information,
 see [Customer tax IDs](https://developer.squareup.com/docs/customers-api/what-it-does#customer-tax-ids).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::RequestOptions` 
     
 </dd>
 </dl>
@@ -4173,7 +4647,7 @@ see [Customer tax IDs](https://developer.squareup.com/docs/customers-api/what-it
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Delete(CustomerId) -> Square::Types::DeleteCustomerResponse</code></summary>
+<details><summary><code>client.customers.<a href="/lib/square/customers/client.rb">delete</a>(customer_id) -> Square::Types::DeleteCustomerResponse</code></summary>
 <dl>
 <dd>
 
@@ -4202,10 +4676,10 @@ To delete a customer profile that was created by merging existing profiles, you 
 <dd>
 
 ```ruby
-client.customers.delete({
-  customerId:'customer_id',
-  version:1000000
-});
+client.customers.delete(
+  customer_id: 'customer_id',
+  version: 1000000
+);
 ```
 </dd>
 </dl>
@@ -4220,7 +4694,7 @@ client.customers.delete({
 <dl>
 <dd>
 
-**customerId:** `String` — The ID of the customer to delete.
+**customer_id:** `String` — The ID of the customer to delete.
     
 </dd>
 </dl>
@@ -4236,6 +4710,14 @@ As a best practice, you should include this parameter to enable [optimistic conc
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4245,7 +4727,7 @@ As a best practice, you should include this parameter to enable [optimistic conc
 </details>
 
 ## Devices
-<details><summary><code>client.Devices.List() -> Square::Types::ListDevicesResponse</code></summary>
+<details><summary><code>client.devices.<a href="/lib/square/devices/client.rb">list</a>() -> Square::Types::ListDevicesResponse</code></summary>
 <dl>
 <dd>
 
@@ -4273,11 +4755,12 @@ devices are supported.
 <dd>
 
 ```ruby
-client.devices.list({
-  cursor:'cursor',
-  limit:1,
-  locationId:'location_id'
-});
+client.devices.list(
+  cursor: 'cursor',
+  sort_order: 'DESC',
+  limit: 1,
+  location_id: 'location_id'
+);
 ```
 </dd>
 </dl>
@@ -4304,7 +4787,7 @@ See [Pagination](https://developer.squareup.com/docs/build-basics/common-api-pat
 <dl>
 <dd>
 
-**sortOrder:** `Square::Types::SortOrder` 
+**sort_order:** `Square::Types::SortOrder` 
 
 The order in which results are listed.
 - `ASC` - Oldest to newest.
@@ -4324,7 +4807,15 @@ The order in which results are listed.
 <dl>
 <dd>
 
-**locationId:** `String` — If present, only returns devices at the target location.
+**location_id:** `String` — If present, only returns devices at the target location.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Devices::RequestOptions` 
     
 </dd>
 </dl>
@@ -4336,7 +4827,7 @@ The order in which results are listed.
 </dl>
 </details>
 
-<details><summary><code>client.Devices.Get(DeviceId) -> Square::Types::GetDeviceResponse</code></summary>
+<details><summary><code>client.devices.<a href="/lib/square/devices/client.rb">get</a>(device_id) -> Square::Types::GetDeviceResponse</code></summary>
 <dl>
 <dd>
 
@@ -4363,9 +4854,7 @@ Retrieves Device with the associated `device_id`.
 <dd>
 
 ```ruby
-client.devices.get({
-  deviceId:'device_id'
-});
+client.devices.get(device_id: 'device_id');
 ```
 </dd>
 </dl>
@@ -4380,7 +4869,15 @@ client.devices.get({
 <dl>
 <dd>
 
-**deviceId:** `String` — The unique ID for the desired `Device`.
+**device_id:** `String` — The unique ID for the desired `Device`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Devices::RequestOptions` 
     
 </dd>
 </dl>
@@ -4393,7 +4890,7 @@ client.devices.get({
 </details>
 
 ## Disputes
-<details><summary><code>client.Disputes.List() -> Square::Types::ListDisputesResponse</code></summary>
+<details><summary><code>client.disputes.<a href="/lib/square/disputes/client.rb">list</a>() -> Square::Types::ListDisputesResponse</code></summary>
 <dl>
 <dd>
 
@@ -4420,10 +4917,11 @@ Returns a list of disputes associated with a particular account.
 <dd>
 
 ```ruby
-client.disputes.list({
-  cursor:'cursor',
-  locationId:'location_id'
-});
+client.disputes.list(
+  cursor: 'cursor',
+  states: 'INQUIRY_EVIDENCE_REQUIRED',
+  location_id: 'location_id'
+);
 ```
 </dd>
 </dl>
@@ -4458,10 +4956,18 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
 <dl>
 <dd>
 
-**locationId:** `String` 
+**location_id:** `String` 
 
 The ID of the location for which to return a list of disputes.
 If not specified, the endpoint returns disputes associated with all locations.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Disputes::RequestOptions` 
     
 </dd>
 </dl>
@@ -4473,7 +4979,7 @@ If not specified, the endpoint returns disputes associated with all locations.
 </dl>
 </details>
 
-<details><summary><code>client.Disputes.Get(DisputeId) -> Square::Types::GetDisputeResponse</code></summary>
+<details><summary><code>client.disputes.<a href="/lib/square/disputes/client.rb">get</a>(dispute_id) -> Square::Types::GetDisputeResponse</code></summary>
 <dl>
 <dd>
 
@@ -4500,9 +5006,7 @@ Returns details about a specific dispute.
 <dd>
 
 ```ruby
-client.disputes.get({
-  disputeId:'dispute_id'
-});
+client.disputes.get(dispute_id: 'dispute_id');
 ```
 </dd>
 </dl>
@@ -4517,7 +5021,15 @@ client.disputes.get({
 <dl>
 <dd>
 
-**disputeId:** `String` — The ID of the dispute you want more details about.
+**dispute_id:** `String` — The ID of the dispute you want more details about.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Disputes::RequestOptions` 
     
 </dd>
 </dl>
@@ -4529,7 +5041,7 @@ client.disputes.get({
 </dl>
 </details>
 
-<details><summary><code>client.Disputes.Accept(DisputeId) -> Square::Types::AcceptDisputeResponse</code></summary>
+<details><summary><code>client.disputes.<a href="/lib/square/disputes/client.rb">accept</a>(dispute_id) -> Square::Types::AcceptDisputeResponse</code></summary>
 <dl>
 <dd>
 
@@ -4560,9 +5072,7 @@ does not have sufficient funds, Square debits the associated bank account.
 <dd>
 
 ```ruby
-client.disputes.accept({
-  disputeId:'dispute_id'
-});
+client.disputes.accept(dispute_id: 'dispute_id');
 ```
 </dd>
 </dl>
@@ -4577,7 +5087,15 @@ client.disputes.accept({
 <dl>
 <dd>
 
-**disputeId:** `String` — The ID of the dispute you want to accept.
+**dispute_id:** `String` — The ID of the dispute you want to accept.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Disputes::RequestOptions` 
     
 </dd>
 </dl>
@@ -4589,7 +5107,7 @@ client.disputes.accept({
 </dl>
 </details>
 
-<details><summary><code>client.Disputes.CreateEvidenceFile(DisputeId, request) -> Square::Types::CreateDisputeEvidenceFileResponse</code></summary>
+<details><summary><code>client.disputes.<a href="/lib/square/disputes/client.rb">create_evidence_file</a>(dispute_id, request) -> Square::Types::CreateDisputeEvidenceFileResponse</code></summary>
 <dl>
 <dd>
 
@@ -4617,9 +5135,7 @@ multipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG, and TIFF formats
 <dd>
 
 ```ruby
-client.disputes.create_evidence_file({
-  disputeId:'dispute_id'
-});
+client.disputes.create_evidence_file(dispute_id: 'dispute_id');
 ```
 </dd>
 </dl>
@@ -4634,7 +5150,15 @@ client.disputes.create_evidence_file({
 <dl>
 <dd>
 
-**disputeId:** `String` — The ID of the dispute for which you want to upload evidence.
+**dispute_id:** `String` — The ID of the dispute for which you want to upload evidence.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Disputes::RequestOptions` 
     
 </dd>
 </dl>
@@ -4646,7 +5170,7 @@ client.disputes.create_evidence_file({
 </dl>
 </details>
 
-<details><summary><code>client.Disputes.CreateEvidenceText(DisputeId, request) -> Square::Types::CreateDisputeEvidenceTextResponse</code></summary>
+<details><summary><code>client.disputes.<a href="/lib/square/disputes/client.rb">create_evidence_text</a>(dispute_id, request) -> Square::Types::CreateDisputeEvidenceTextResponse</code></summary>
 <dl>
 <dd>
 
@@ -4673,11 +5197,12 @@ Uploads text to use as evidence for a dispute challenge.
 <dd>
 
 ```ruby
-client.disputes.create_evidence_text({
-  disputeId:'dispute_id',
-  idempotencyKey:'ed3ee3933d946f1514d505d173c82648',
-  evidenceText:'1Z8888888888888888'
-});
+client.disputes.create_evidence_text(
+  dispute_id: 'dispute_id',
+  idempotency_key: 'ed3ee3933d946f1514d505d173c82648',
+  evidence_type: 'TRACKING_NUMBER',
+  evidence_text: '1Z8888888888888888'
+);
 ```
 </dd>
 </dl>
@@ -4692,7 +5217,7 @@ client.disputes.create_evidence_text({
 <dl>
 <dd>
 
-**disputeId:** `String` — The ID of the dispute for which you want to upload evidence.
+**dispute_id:** `String` — The ID of the dispute for which you want to upload evidence.
     
 </dd>
 </dl>
@@ -4700,7 +5225,7 @@ client.disputes.create_evidence_text({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` — A unique key identifying the request. For more information, see [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
+**idempotency_key:** `String` — A unique key identifying the request. For more information, see [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
     
 </dd>
 </dl>
@@ -4708,7 +5233,7 @@ client.disputes.create_evidence_text({
 <dl>
 <dd>
 
-**evidenceType:** `Square::Types::DisputeEvidenceType` 
+**evidence_type:** `Square::Types::DisputeEvidenceType` 
 
 The type of evidence you are uploading.
 See [DisputeEvidenceType](#type-disputeevidencetype) for possible values
@@ -4719,7 +5244,15 @@ See [DisputeEvidenceType](#type-disputeevidencetype) for possible values
 <dl>
 <dd>
 
-**evidenceText:** `String` — The evidence string.
+**evidence_text:** `String` — The evidence string.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Disputes::RequestOptions` 
     
 </dd>
 </dl>
@@ -4731,7 +5264,7 @@ See [DisputeEvidenceType](#type-disputeevidencetype) for possible values
 </dl>
 </details>
 
-<details><summary><code>client.Disputes.SubmitEvidence(DisputeId) -> Square::Types::SubmitEvidenceResponse</code></summary>
+<details><summary><code>client.disputes.<a href="/lib/square/disputes/client.rb">submit_evidence</a>(dispute_id) -> Square::Types::SubmitEvidenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -4764,9 +5297,7 @@ a dispute after submission.
 <dd>
 
 ```ruby
-client.disputes.submit_evidence({
-  disputeId:'dispute_id'
-});
+client.disputes.submit_evidence(dispute_id: 'dispute_id');
 ```
 </dd>
 </dl>
@@ -4781,7 +5312,15 @@ client.disputes.submit_evidence({
 <dl>
 <dd>
 
-**disputeId:** `String` — The ID of the dispute for which you want to submit evidence.
+**dispute_id:** `String` — The ID of the dispute for which you want to submit evidence.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Disputes::RequestOptions` 
     
 </dd>
 </dl>
@@ -4794,7 +5333,7 @@ client.disputes.submit_evidence({
 </details>
 
 ## Employees
-<details><summary><code>client.Employees.List() -> Square::Types::ListEmployeesResponse</code></summary>
+<details><summary><code>client.employees.<a href="/lib/square/employees/client.rb">list</a>() -> Square::Types::ListEmployeesResponse</code></summary>
 <dl>
 <dd>
 
@@ -4821,11 +5360,12 @@ client.disputes.submit_evidence({
 <dd>
 
 ```ruby
-client.employees.list({
-  locationId:'location_id',
-  limit:1,
-  cursor:'cursor'
-});
+client.employees.list(
+  location_id: 'location_id',
+  status: 'ACTIVE',
+  limit: 1,
+  cursor: 'cursor'
+);
 ```
 </dd>
 </dl>
@@ -4840,7 +5380,7 @@ client.employees.list({
 <dl>
 <dd>
 
-**locationId:** `String` — 
+**location_id:** `String` — 
     
 </dd>
 </dl>
@@ -4868,6 +5408,14 @@ client.employees.list({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Employees::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4876,7 +5424,7 @@ client.employees.list({
 </dl>
 </details>
 
-<details><summary><code>client.Employees.Get(Id) -> Square::Types::GetEmployeeResponse</code></summary>
+<details><summary><code>client.employees.<a href="/lib/square/employees/client.rb">get</a>(id) -> Square::Types::GetEmployeeResponse</code></summary>
 <dl>
 <dd>
 
@@ -4903,9 +5451,7 @@ client.employees.list({
 <dd>
 
 ```ruby
-client.employees.get({
-  id:'id'
-});
+client.employees.get(id: 'id');
 ```
 </dd>
 </dl>
@@ -4924,6 +5470,14 @@ client.employees.get({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Employees::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4933,7 +5487,7 @@ client.employees.get({
 </details>
 
 ## Events
-<details><summary><code>client.Events.SearchEvents(request) -> Square::Types::SearchEventsResponse</code></summary>
+<details><summary><code>client.events.<a href="/lib/square/events/client.rb">search_events</a>(request) -> Square::Types::SearchEventsResponse</code></summary>
 <dl>
 <dd>
 
@@ -4960,7 +5514,7 @@ Search for Square API events that occur within a 28-day timeframe.
 <dd>
 
 ```ruby
-client.events.search_events({});
+client.events.search_events();
 ```
 </dd>
 </dl>
@@ -5005,6 +5559,14 @@ Default: 100
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Events::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5013,7 +5575,7 @@ Default: 100
 </dl>
 </details>
 
-<details><summary><code>client.Events.DisableEvents() -> Square::Types::DisableEventsResponse</code></summary>
+<details><summary><code>client.events.<a href="/lib/square/events/client.rb">disable_events</a>() -> Square::Types::DisableEventsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5049,12 +5611,27 @@ client.events.disable_events();
 </dd>
 </dl>
 
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Events::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.Events.EnableEvents() -> Square::Types::EnableEventsResponse</code></summary>
+<details><summary><code>client.events.<a href="/lib/square/events/client.rb">enable_events</a>() -> Square::Types::EnableEventsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5088,12 +5665,27 @@ client.events.enable_events();
 </dd>
 </dl>
 
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Events::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.Events.ListEventTypes() -> Square::Types::ListEventTypesResponse</code></summary>
+<details><summary><code>client.events.<a href="/lib/square/events/client.rb">list_event_types</a>() -> Square::Types::ListEventTypesResponse</code></summary>
 <dl>
 <dd>
 
@@ -5120,9 +5712,7 @@ Lists all event types that you can subscribe to as webhooks or query using the E
 <dd>
 
 ```ruby
-client.events.list_event_types({
-  apiVersion:'api_version'
-});
+client.events.list_event_types(api_version: 'api_version');
 ```
 </dd>
 </dl>
@@ -5137,7 +5727,15 @@ client.events.list_event_types({
 <dl>
 <dd>
 
-**apiVersion:** `String` — The API version for which to list event types. Setting this field overrides the default version used by the application.
+**api_version:** `String` — The API version for which to list event types. Setting this field overrides the default version used by the application.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Events::RequestOptions` 
     
 </dd>
 </dl>
@@ -5150,7 +5748,7 @@ client.events.list_event_types({
 </details>
 
 ## GiftCards
-<details><summary><code>client.GiftCards.List() -> Square::Types::ListGiftCardsResponse</code></summary>
+<details><summary><code>client.gift_cards.<a href="/lib/square/gift_cards/client.rb">list</a>() -> Square::Types::ListGiftCardsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5178,13 +5776,13 @@ a subset of the gift cards. Results are sorted by `created_at` in ascending orde
 <dd>
 
 ```ruby
-client.gift_cards.list({
-  type:'type',
-  state:'state',
-  limit:1,
-  cursor:'cursor',
-  customerId:'customer_id'
-});
+client.gift_cards.list(
+  type: 'type',
+  state: 'state',
+  limit: 1,
+  cursor: 'cursor',
+  customer_id: 'customer_id'
+);
 ```
 </dd>
 </dl>
@@ -5246,7 +5844,15 @@ For more information, see [Pagination](https://developer.squareup.com/docs/worki
 <dl>
 <dd>
 
-**customerId:** `String` — If a customer ID is provided, the endpoint returns only the gift cards linked to the specified customer.
+**customer_id:** `String` — If a customer ID is provided, the endpoint returns only the gift cards linked to the specified customer.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::GiftCards::RequestOptions` 
     
 </dd>
 </dl>
@@ -5258,7 +5864,7 @@ For more information, see [Pagination](https://developer.squareup.com/docs/worki
 </dl>
 </details>
 
-<details><summary><code>client.GiftCards.Create(request) -> Square::Types::CreateGiftCardResponse</code></summary>
+<details><summary><code>client.gift_cards.<a href="/lib/square/gift_cards/client.rb">create</a>(request) -> Square::Types::CreateGiftCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -5289,11 +5895,13 @@ to refund a payment to the new gift card.
 <dd>
 
 ```ruby
-client.gift_cards.create({
-  idempotencyKey:'NC9Tm69EjbjtConu',
-  locationId:'81FN9BNFZTKS4',
-  giftCard:{}
-});
+client.gift_cards.create(
+  idempotency_key: 'NC9Tm69EjbjtConu',
+  location_id: '81FN9BNFZTKS4',
+  gift_card: {
+    type: 'DIGITAL'
+  }
+);
 ```
 </dd>
 </dl>
@@ -5308,7 +5916,7 @@ client.gift_cards.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, used to ensure idempotency. For more information, 
 see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
@@ -5319,7 +5927,7 @@ see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-pa
 <dl>
 <dd>
 
-**locationId:** `String` 
+**location_id:** `String` 
 
 The ID of the [location](entity:Location) where the gift card should be registered for 
 reporting purposes. Gift cards can be redeemed at any of the seller's locations.
@@ -5330,7 +5938,7 @@ reporting purposes. Gift cards can be redeemed at any of the seller's locations.
 <dl>
 <dd>
 
-**giftCard:** `Square::Types::GiftCard` 
+**gift_card:** `Square::Types::GiftCard` 
 
 The gift card to create. The `type` field is required for this request. The `gan_source` 
 and `gan` fields are included as follows: 
@@ -5351,6 +5959,14 @@ include `gan` and provide the GAN that is printed on the gift card.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::GiftCards::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5359,7 +5975,7 @@ include `gan` and provide the GAN that is printed on the gift card.
 </dl>
 </details>
 
-<details><summary><code>client.GiftCards.GetFromGan(request) -> Square::Types::GetGiftCardFromGanResponse</code></summary>
+<details><summary><code>client.gift_cards.<a href="/lib/square/gift_cards/client.rb">get_from_gan</a>(request) -> Square::Types::GetGiftCardFromGanResponse</code></summary>
 <dl>
 <dd>
 
@@ -5386,9 +6002,7 @@ Retrieves a gift card using the gift card account number (GAN).
 <dd>
 
 ```ruby
-client.gift_cards.get_from_gan({
-  gan:'7783320001001635'
-});
+client.gift_cards.get_from_gan(gan: '7783320001001635');
 ```
 </dd>
 </dl>
@@ -5411,6 +6025,14 @@ Square-issued gift cards have 16-digit GANs.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::GiftCards::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5419,7 +6041,7 @@ Square-issued gift cards have 16-digit GANs.
 </dl>
 </details>
 
-<details><summary><code>client.GiftCards.GetFromNonce(request) -> Square::Types::GetGiftCardFromNonceResponse</code></summary>
+<details><summary><code>client.gift_cards.<a href="/lib/square/gift_cards/client.rb">get_from_nonce</a>(request) -> Square::Types::GetGiftCardFromNonceResponse</code></summary>
 <dl>
 <dd>
 
@@ -5446,9 +6068,7 @@ Retrieves a gift card using a secure payment token that represents the gift card
 <dd>
 
 ```ruby
-client.gift_cards.get_from_nonce({
-  nonce:'cnon:7783322135245171'
-});
+client.gift_cards.get_from_nonce(nonce: 'cnon:7783322135245171');
 ```
 </dd>
 </dl>
@@ -5470,6 +6090,14 @@ Web Payments SDK or In-App Payments SDK.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::GiftCards::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5478,7 +6106,7 @@ Web Payments SDK or In-App Payments SDK.
 </dl>
 </details>
 
-<details><summary><code>client.GiftCards.LinkCustomer(GiftCardId, request) -> Square::Types::LinkCustomerToGiftCardResponse</code></summary>
+<details><summary><code>client.gift_cards.<a href="/lib/square/gift_cards/client.rb">link_customer</a>(gift_card_id, request) -> Square::Types::LinkCustomerToGiftCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -5505,10 +6133,10 @@ Links a customer to a gift card, which is also referred to as adding a card on f
 <dd>
 
 ```ruby
-client.gift_cards.link_customer({
-  giftCardId:'gift_card_id',
-  customerId:'GKY0FZ3V717AH8Q2D821PNT2ZW'
-});
+client.gift_cards.link_customer(
+  gift_card_id: 'gift_card_id',
+  customer_id: 'GKY0FZ3V717AH8Q2D821PNT2ZW'
+);
 ```
 </dd>
 </dl>
@@ -5523,7 +6151,7 @@ client.gift_cards.link_customer({
 <dl>
 <dd>
 
-**giftCardId:** `String` — The ID of the gift card to be linked.
+**gift_card_id:** `String` — The ID of the gift card to be linked.
     
 </dd>
 </dl>
@@ -5531,7 +6159,15 @@ client.gift_cards.link_customer({
 <dl>
 <dd>
 
-**customerId:** `String` — The ID of the customer to link to the gift card.
+**customer_id:** `String` — The ID of the customer to link to the gift card.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::GiftCards::RequestOptions` 
     
 </dd>
 </dl>
@@ -5543,7 +6179,7 @@ client.gift_cards.link_customer({
 </dl>
 </details>
 
-<details><summary><code>client.GiftCards.UnlinkCustomer(GiftCardId, request) -> Square::Types::UnlinkCustomerFromGiftCardResponse</code></summary>
+<details><summary><code>client.gift_cards.<a href="/lib/square/gift_cards/client.rb">unlink_customer</a>(gift_card_id, request) -> Square::Types::UnlinkCustomerFromGiftCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -5570,10 +6206,10 @@ Unlinks a customer from a gift card, which is also referred to as removing a car
 <dd>
 
 ```ruby
-client.gift_cards.unlink_customer({
-  giftCardId:'gift_card_id',
-  customerId:'GKY0FZ3V717AH8Q2D821PNT2ZW'
-});
+client.gift_cards.unlink_customer(
+  gift_card_id: 'gift_card_id',
+  customer_id: 'GKY0FZ3V717AH8Q2D821PNT2ZW'
+);
 ```
 </dd>
 </dl>
@@ -5588,7 +6224,7 @@ client.gift_cards.unlink_customer({
 <dl>
 <dd>
 
-**giftCardId:** `String` — The ID of the gift card to be unlinked.
+**gift_card_id:** `String` — The ID of the gift card to be unlinked.
     
 </dd>
 </dl>
@@ -5596,7 +6232,15 @@ client.gift_cards.unlink_customer({
 <dl>
 <dd>
 
-**customerId:** `String` — The ID of the customer to unlink from the gift card.
+**customer_id:** `String` — The ID of the customer to unlink from the gift card.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::GiftCards::RequestOptions` 
     
 </dd>
 </dl>
@@ -5608,7 +6252,7 @@ client.gift_cards.unlink_customer({
 </dl>
 </details>
 
-<details><summary><code>client.GiftCards.Get(Id) -> Square::Types::GetGiftCardResponse</code></summary>
+<details><summary><code>client.gift_cards.<a href="/lib/square/gift_cards/client.rb">get</a>(id) -> Square::Types::GetGiftCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -5635,9 +6279,7 @@ Retrieves a gift card using the gift card ID.
 <dd>
 
 ```ruby
-client.gift_cards.get({
-  id:'id'
-});
+client.gift_cards.get(id: 'id');
 ```
 </dd>
 </dl>
@@ -5656,6 +6298,14 @@ client.gift_cards.get({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::GiftCards::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5665,7 +6315,7 @@ client.gift_cards.get({
 </details>
 
 ## Inventory
-<details><summary><code>client.Inventory.DeprecatedGetAdjustment(AdjustmentId) -> Square::Types::GetInventoryAdjustmentResponse</code></summary>
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">deprecated_get_adjustment</a>(adjustment_id) -> Square::Types::GetInventoryAdjustmentResponse</code></summary>
 <dl>
 <dd>
 
@@ -5693,9 +6343,7 @@ is updated to conform to the standard convention.
 <dd>
 
 ```ruby
-client.inventory.deprecated_get_adjustment({
-  adjustmentId:'adjustment_id'
-});
+client.inventory.deprecated_get_adjustment(adjustment_id: 'adjustment_id');
 ```
 </dd>
 </dl>
@@ -5710,7 +6358,15 @@ client.inventory.deprecated_get_adjustment({
 <dl>
 <dd>
 
-**adjustmentId:** `String` — ID of the [InventoryAdjustment](entity:InventoryAdjustment) to retrieve.
+**adjustment_id:** `String` — ID of the [InventoryAdjustment](entity:InventoryAdjustment) to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
     
 </dd>
 </dl>
@@ -5722,7 +6378,7 @@ client.inventory.deprecated_get_adjustment({
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.GetAdjustment(AdjustmentId) -> Square::Types::GetInventoryAdjustmentResponse</code></summary>
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">get_adjustment</a>(adjustment_id) -> Square::Types::GetInventoryAdjustmentResponse</code></summary>
 <dl>
 <dd>
 
@@ -5750,9 +6406,7 @@ with the provided `adjustment_id`.
 <dd>
 
 ```ruby
-client.inventory.get_adjustment({
-  adjustmentId:'adjustment_id'
-});
+client.inventory.get_adjustment(adjustment_id: 'adjustment_id');
 ```
 </dd>
 </dl>
@@ -5767,7 +6421,15 @@ client.inventory.get_adjustment({
 <dl>
 <dd>
 
-**adjustmentId:** `String` — ID of the [InventoryAdjustment](entity:InventoryAdjustment) to retrieve.
+**adjustment_id:** `String` — ID of the [InventoryAdjustment](entity:InventoryAdjustment) to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
     
 </dd>
 </dl>
@@ -5779,7 +6441,7 @@ client.inventory.get_adjustment({
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.DeprecatedBatchChange(request) -> Square::Types::BatchChangeInventoryResponse</code></summary>
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">deprecated_batch_change</a>(request) -> Square::Types::BatchChangeInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -5807,20 +6469,22 @@ is updated to conform to the standard convention.
 <dd>
 
 ```ruby
-client.inventory.deprecated_batch_change({
-  idempotency_key:'8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe',
-  changes:[{
-    physical_count:{
-      reference_id:'1536bfbf-efed-48bf-b17d-a197141b2a92',
-      catalog_object_id:'W62UWFY35CWMYGVWK6TWJDNI',
-      location_id:'C6W5YS5QM06F5',
-      quantity:'53',
-      team_member_id:'LRK57NSQ5X7PUD05',
-      occurred_at:'2016-11-16T22:25:24.878Z'
+client.inventory.deprecated_batch_change(
+  idempotency_key: '8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe',
+  changes: [{
+    type: 'PHYSICAL_COUNT',
+    physical_count: {
+      reference_id: '1536bfbf-efed-48bf-b17d-a197141b2a92',
+      catalog_object_id: 'W62UWFY35CWMYGVWK6TWJDNI',
+      state: 'IN_STOCK',
+      location_id: 'C6W5YS5QM06F5',
+      quantity: '53',
+      team_member_id: 'LRK57NSQ5X7PUD05',
+      occurred_at: '2016-11-16T22:25:24.878Z'
     }
   }],
-  ignore_unchanged_counts:true
-});
+  ignore_unchanged_counts: true
+);
 ```
 </dd>
 </dl>
@@ -5839,6 +6503,14 @@ client.inventory.deprecated_batch_change({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5847,7 +6519,7 @@ client.inventory.deprecated_batch_change({
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.DeprecatedBatchGetChanges(request) -> Square::Types::BatchGetInventoryChangesResponse</code></summary>
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">deprecated_batch_get_changes</a>(request) -> Square::Types::BatchGetInventoryChangesResponse</code></summary>
 <dl>
 <dd>
 
@@ -5875,14 +6547,14 @@ is updated to conform to the standard convention.
 <dd>
 
 ```ruby
-client.inventory.deprecated_batch_get_changes({
-  catalog_object_ids:['W62UWFY35CWMYGVWK6TWJDNI'],
-  location_ids:['C6W5YS5QM06F5'],
-  types:[],
-  states:[],
-  updated_after:'2016-11-01T00:00:00.000Z',
-  updated_before:'2016-12-01T00:00:00.000Z'
-});
+client.inventory.deprecated_batch_get_changes(
+  catalog_object_ids: ['W62UWFY35CWMYGVWK6TWJDNI'],
+  location_ids: ['C6W5YS5QM06F5'],
+  types: ['PHYSICAL_COUNT'],
+  states: ['IN_STOCK'],
+  updated_after: '2016-11-01T00:00:00.000Z',
+  updated_before: '2016-12-01T00:00:00.000Z'
+);
 ```
 </dd>
 </dl>
@@ -5901,6 +6573,14 @@ client.inventory.deprecated_batch_get_changes({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5909,7 +6589,7 @@ client.inventory.deprecated_batch_get_changes({
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.DeprecatedBatchGetCounts(request) -> Square::Types::BatchGetInventoryCountsResponse</code></summary>
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">deprecated_batch_get_counts</a>(request) -> Square::Types::BatchGetInventoryCountsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5937,11 +6617,11 @@ is updated to conform to the standard convention.
 <dd>
 
 ```ruby
-client.inventory.deprecated_batch_get_counts({
-  catalog_object_ids:['W62UWFY35CWMYGVWK6TWJDNI'],
-  location_ids:['59TNP9SA8VGDA'],
-  updated_after:'2016-11-16T00:00:00.000Z'
-});
+client.inventory.deprecated_batch_get_counts(
+  catalog_object_ids: ['W62UWFY35CWMYGVWK6TWJDNI'],
+  location_ids: ['59TNP9SA8VGDA'],
+  updated_after: '2016-11-16T00:00:00.000Z'
+);
 ```
 </dd>
 </dl>
@@ -5960,6 +6640,14 @@ client.inventory.deprecated_batch_get_counts({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5968,7 +6656,7 @@ client.inventory.deprecated_batch_get_counts({
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.BatchCreateChanges(request) -> Square::Types::BatchChangeInventoryResponse</code></summary>
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">batch_create_changes</a>(request) -> Square::Types::BatchChangeInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -5999,20 +6687,22 @@ On failure: returns a list of related errors.
 <dd>
 
 ```ruby
-client.inventory.batch_create_changes({
-  idempotency_key:'8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe',
-  changes:[{
-    physical_count:{
-      reference_id:'1536bfbf-efed-48bf-b17d-a197141b2a92',
-      catalog_object_id:'W62UWFY35CWMYGVWK6TWJDNI',
-      location_id:'C6W5YS5QM06F5',
-      quantity:'53',
-      team_member_id:'LRK57NSQ5X7PUD05',
-      occurred_at:'2016-11-16T22:25:24.878Z'
+client.inventory.batch_create_changes(
+  idempotency_key: '8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe',
+  changes: [{
+    type: 'PHYSICAL_COUNT',
+    physical_count: {
+      reference_id: '1536bfbf-efed-48bf-b17d-a197141b2a92',
+      catalog_object_id: 'W62UWFY35CWMYGVWK6TWJDNI',
+      state: 'IN_STOCK',
+      location_id: 'C6W5YS5QM06F5',
+      quantity: '53',
+      team_member_id: 'LRK57NSQ5X7PUD05',
+      occurred_at: '2016-11-16T22:25:24.878Z'
     }
   }],
-  ignore_unchanged_counts:true
-});
+  ignore_unchanged_counts: true
+);
 ```
 </dd>
 </dl>
@@ -6031,6 +6721,14 @@ client.inventory.batch_create_changes({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6039,7 +6737,7 @@ client.inventory.batch_create_changes({
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.BatchGetChanges(request) -> Square::Types::BatchGetInventoryChangesResponse</code></summary>
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">batch_get_changes</a>(request) -> Square::Types::BatchGetInventoryChangesResponse</code></summary>
 <dl>
 <dd>
 
@@ -6073,14 +6771,14 @@ that cannot be handled by other, simpler endpoints.
 <dd>
 
 ```ruby
-client.inventory.batch_get_changes({
-  catalog_object_ids:['W62UWFY35CWMYGVWK6TWJDNI'],
-  location_ids:['C6W5YS5QM06F5'],
-  types:[],
-  states:[],
-  updated_after:'2016-11-01T00:00:00.000Z',
-  updated_before:'2016-12-01T00:00:00.000Z'
-});
+client.inventory.batch_get_changes(
+  catalog_object_ids: ['W62UWFY35CWMYGVWK6TWJDNI'],
+  location_ids: ['C6W5YS5QM06F5'],
+  types: ['PHYSICAL_COUNT'],
+  states: ['IN_STOCK'],
+  updated_after: '2016-11-01T00:00:00.000Z',
+  updated_before: '2016-12-01T00:00:00.000Z'
+);
 ```
 </dd>
 </dl>
@@ -6099,6 +6797,14 @@ client.inventory.batch_get_changes({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6107,7 +6813,7 @@ client.inventory.batch_get_changes({
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.BatchGetCounts(request) -> Square::Types::BatchGetInventoryCountsResponse</code></summary>
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">batch_get_counts</a>(request) -> Square::Types::BatchGetInventoryCountsResponse</code></summary>
 <dl>
 <dd>
 
@@ -6144,11 +6850,11 @@ in response to receiving a Webhook notification.
 <dd>
 
 ```ruby
-client.inventory.batch_get_counts({
-  catalog_object_ids:['W62UWFY35CWMYGVWK6TWJDNI'],
-  location_ids:['59TNP9SA8VGDA'],
-  updated_after:'2016-11-16T00:00:00.000Z'
-});
+client.inventory.batch_get_counts(
+  catalog_object_ids: ['W62UWFY35CWMYGVWK6TWJDNI'],
+  location_ids: ['59TNP9SA8VGDA'],
+  updated_after: '2016-11-16T00:00:00.000Z'
+);
 ```
 </dd>
 </dl>
@@ -6167,6 +6873,14 @@ client.inventory.batch_get_counts({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6175,7 +6889,7 @@ client.inventory.batch_get_counts({
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.DeprecatedGetPhysicalCount(PhysicalCountId) -> Square::Types::GetInventoryPhysicalCountResponse</code></summary>
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">deprecated_get_physical_count</a>(physical_count_id) -> Square::Types::GetInventoryPhysicalCountResponse</code></summary>
 <dl>
 <dd>
 
@@ -6203,9 +6917,7 @@ is updated to conform to the standard convention.
 <dd>
 
 ```ruby
-client.inventory.deprecated_get_physical_count({
-  physicalCountId:'physical_count_id'
-});
+client.inventory.deprecated_get_physical_count(physical_count_id: 'physical_count_id');
 ```
 </dd>
 </dl>
@@ -6220,10 +6932,18 @@ client.inventory.deprecated_get_physical_count({
 <dl>
 <dd>
 
-**physicalCountId:** `String` 
+**physical_count_id:** `String` 
 
 ID of the
 [InventoryPhysicalCount](entity:InventoryPhysicalCount) to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
     
 </dd>
 </dl>
@@ -6235,7 +6955,7 @@ ID of the
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.GetPhysicalCount(PhysicalCountId) -> Square::Types::GetInventoryPhysicalCountResponse</code></summary>
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">get_physical_count</a>(physical_count_id) -> Square::Types::GetInventoryPhysicalCountResponse</code></summary>
 <dl>
 <dd>
 
@@ -6263,9 +6983,7 @@ object with the provided `physical_count_id`.
 <dd>
 
 ```ruby
-client.inventory.get_physical_count({
-  physicalCountId:'physical_count_id'
-});
+client.inventory.get_physical_count(physical_count_id: 'physical_count_id');
 ```
 </dd>
 </dl>
@@ -6280,10 +6998,18 @@ client.inventory.get_physical_count({
 <dl>
 <dd>
 
-**physicalCountId:** `String` 
+**physical_count_id:** `String` 
 
 ID of the
 [InventoryPhysicalCount](entity:InventoryPhysicalCount) to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
     
 </dd>
 </dl>
@@ -6295,7 +7021,7 @@ ID of the
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.GetTransfer(TransferId) -> Square::Types::GetInventoryTransferResponse</code></summary>
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">get_transfer</a>(transfer_id) -> Square::Types::GetInventoryTransferResponse</code></summary>
 <dl>
 <dd>
 
@@ -6323,9 +7049,7 @@ with the provided `transfer_id`.
 <dd>
 
 ```ruby
-client.inventory.get_transfer({
-  transferId:'transfer_id'
-});
+client.inventory.get_transfer(transfer_id: 'transfer_id');
 ```
 </dd>
 </dl>
@@ -6340,7 +7064,15 @@ client.inventory.get_transfer({
 <dl>
 <dd>
 
-**transferId:** `String` — ID of the [InventoryTransfer](entity:InventoryTransfer) to retrieve.
+**transfer_id:** `String` — ID of the [InventoryTransfer](entity:InventoryTransfer) to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
     
 </dd>
 </dl>
@@ -6352,7 +7084,7 @@ client.inventory.get_transfer({
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.Get(CatalogObjectId) -> Square::Types::GetInventoryCountResponse</code></summary>
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">get</a>(catalog_object_id) -> Square::Types::GetInventoryCountResponse</code></summary>
 <dl>
 <dd>
 
@@ -6382,11 +7114,11 @@ For more sophisticated queries, use a batch endpoint.
 <dd>
 
 ```ruby
-client.inventory.get({
-  catalogObjectId:'catalog_object_id',
-  locationIds:'location_ids',
-  cursor:'cursor'
-});
+client.inventory.get(
+  catalog_object_id: 'catalog_object_id',
+  location_ids: 'location_ids',
+  cursor: 'cursor'
+);
 ```
 </dd>
 </dl>
@@ -6401,7 +7133,7 @@ client.inventory.get({
 <dl>
 <dd>
 
-**catalogObjectId:** `String` — ID of the [CatalogObject](entity:CatalogObject) to retrieve.
+**catalog_object_id:** `String` — ID of the [CatalogObject](entity:CatalogObject) to retrieve.
     
 </dd>
 </dl>
@@ -6409,7 +7141,7 @@ client.inventory.get({
 <dl>
 <dd>
 
-**locationIds:** `String` 
+**location_ids:** `String` 
 
 The [Location](entity:Location) IDs to look up as a comma-separated
 list. An empty list queries all locations.
@@ -6429,6 +7161,14 @@ See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagin
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6437,7 +7177,7 @@ See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagin
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.Changes(CatalogObjectId) -> Square::Types::GetInventoryChangesResponse</code></summary>
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">changes</a>(catalog_object_id) -> Square::Types::GetInventoryChangesResponse</code></summary>
 <dl>
 <dd>
 
@@ -6476,11 +7216,11 @@ sophisticated queries, use a batch endpoint.
 <dd>
 
 ```ruby
-client.inventory.changes({
-  catalogObjectId:'catalog_object_id',
-  locationIds:'location_ids',
-  cursor:'cursor'
-});
+client.inventory.changes(
+  catalog_object_id: 'catalog_object_id',
+  location_ids: 'location_ids',
+  cursor: 'cursor'
+);
 ```
 </dd>
 </dl>
@@ -6495,7 +7235,7 @@ client.inventory.changes({
 <dl>
 <dd>
 
-**catalogObjectId:** `String` — ID of the [CatalogObject](entity:CatalogObject) to retrieve.
+**catalog_object_id:** `String` — ID of the [CatalogObject](entity:CatalogObject) to retrieve.
     
 </dd>
 </dl>
@@ -6503,7 +7243,7 @@ client.inventory.changes({
 <dl>
 <dd>
 
-**locationIds:** `String` 
+**location_ids:** `String` 
 
 The [Location](entity:Location) IDs to look up as a comma-separated
 list. An empty list queries all locations.
@@ -6523,6 +7263,14 @@ See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagin
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6532,7 +7280,7 @@ See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagin
 </details>
 
 ## Invoices
-<details><summary><code>client.Invoices.List() -> Square::Types::ListInvoicesResponse</code></summary>
+<details><summary><code>client.invoices.<a href="/lib/square/invoices/client.rb">list</a>() -> Square::Types::ListInvoicesResponse</code></summary>
 <dl>
 <dd>
 
@@ -6561,11 +7309,11 @@ use in a subsequent request to retrieve the next set of invoices.
 <dd>
 
 ```ruby
-client.invoices.list({
-  locationId:'location_id',
-  cursor:'cursor',
-  limit:1
-});
+client.invoices.list(
+  location_id: 'location_id',
+  cursor: 'cursor',
+  limit: 1
+);
 ```
 </dd>
 </dl>
@@ -6580,7 +7328,7 @@ client.invoices.list({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the location for which to list invoices.
+**location_id:** `String` — The ID of the location for which to list invoices.
     
 </dd>
 </dl>
@@ -6608,6 +7356,14 @@ If not provided, the server uses a default limit of 100 invoices.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Invoices::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6616,7 +7372,7 @@ If not provided, the server uses a default limit of 100 invoices.
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.Create(request) -> Square::Types::CreateInvoiceResponse</code></summary>
+<details><summary><code>client.invoices.<a href="/lib/square/invoices/client.rb">create</a>(request) -> Square::Types::CreateInvoiceResponse</code></summary>
 <dl>
 <dd>
 
@@ -6647,44 +7403,49 @@ You must publish the invoice before Square can process it (send it to the custom
 <dd>
 
 ```ruby
-client.invoices.create({
-  invoice:{
-    location_id:'ES0RJRZYEC39A',
-    order_id:'CAISENgvlJ6jLWAzERDzjyHVybY',
-    primary_recipient:{
-      customer_id:'JDKYHBWT1D4F8MFH63DBMEN8Y4'
+client.invoices.create(
+  invoice: {
+    location_id: 'ES0RJRZYEC39A',
+    order_id: 'CAISENgvlJ6jLWAzERDzjyHVybY',
+    primary_recipient: {
+      customer_id: 'JDKYHBWT1D4F8MFH63DBMEN8Y4'
     },
-    payment_requests:[{
-      due_date:'2030-01-24',
-      tipping_enabled:true,
-      reminders:[{
-        relative_scheduled_days:-1,
-        message:'Your invoice is due tomorrow'
+    payment_requests: [{
+      request_type: 'BALANCE',
+      due_date: '2030-01-24',
+      tipping_enabled: true,
+      automatic_payment_source: 'NONE',
+      reminders: [{
+        relative_scheduled_days: -1,
+        message: 'Your invoice is due tomorrow'
       }]
     }],
-    invoice_number:'inv-100',
-    title:'Event Planning Services',
-    description:'We appreciate your business!',
-    scheduled_at:'2030-01-13T10:00:00Z',
-    accepted_payment_methods:{
-      card:true,
-      square_gift_card:false,
-      bank_account:false,
-      buy_now_pay_later:false,
-      cash_app_pay:false
+    delivery_method: 'EMAIL',
+    invoice_number: 'inv-100',
+    title: 'Event Planning Services',
+    description: 'We appreciate your business!',
+    scheduled_at: '2030-01-13T10:00:00Z',
+    accepted_payment_methods: {
+      card: true,
+      square_gift_card: false,
+      bank_account: false,
+      buy_now_pay_later: false,
+      cash_app_pay: false
     },
-    custom_fields:[{
-      label:'Event Reference Number',
-      value:"Ref. #1234"
+    custom_fields: [{
+      label: 'Event Reference Number',
+      value: "Ref. #1234",
+      placement: 'ABOVE_LINE_ITEMS'
     }, {
-      label:'Terms of Service',
-      value:'The terms of service are...'
+      label: 'Terms of Service',
+      value: 'The terms of service are...',
+      placement: 'BELOW_LINE_ITEMS'
     }],
-    sale_or_service_date:'2030-01-24',
-    store_payment_method_enabled:false
+    sale_or_service_date: '2030-01-24',
+    store_payment_method_enabled: false
   },
-  idempotencyKey:'ce3748f9-5fc1-4762-aa12-aae5e843f1f4'
-});
+  idempotency_key: 'ce3748f9-5fc1-4762-aa12-aae5e843f1f4'
+);
 ```
 </dd>
 </dl>
@@ -6707,13 +7468,21 @@ client.invoices.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies the `CreateInvoice` request. If you do not 
 provide `idempotency_key` (or provide an empty string as the value), the endpoint 
 treats each request as independent.
 
 For more information, see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Invoices::RequestOptions` 
     
 </dd>
 </dl>
@@ -6725,7 +7494,7 @@ For more information, see [Idempotency](https://developer.squareup.com/docs/buil
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.Search(request) -> Square::Types::SearchInvoicesResponse</code></summary>
+<details><summary><code>client.invoices.<a href="/lib/square/invoices/client.rb">search</a>(request) -> Square::Types::SearchInvoicesResponse</code></summary>
 <dl>
 <dd>
 
@@ -6758,18 +7527,19 @@ that you use in a subsequent request to retrieve the next set of invoices.
 <dd>
 
 ```ruby
-client.invoices.search({
-  query:{
-    filter:{
-      location_ids:['ES0RJRZYEC39A'],
-      customer_ids:['JDKYHBWT1D4F8MFH63DBMEN8Y4']
+client.invoices.search(
+  query: {
+    filter: {
+      location_ids: ['ES0RJRZYEC39A'],
+      customer_ids: ['JDKYHBWT1D4F8MFH63DBMEN8Y4']
     },
-    sort:{
-      field:'INVOICE_SORT_DATE'
+    sort: {
+      field: 'INVOICE_SORT_DATE',
+      order: 'DESC'
     }
   },
-  limit:100
-});
+  limit: 100
+);
 ```
 </dd>
 </dl>
@@ -6812,6 +7582,14 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Invoices::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6820,7 +7598,7 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.Get(InvoiceId) -> Square::Types::GetInvoiceResponse</code></summary>
+<details><summary><code>client.invoices.<a href="/lib/square/invoices/client.rb">get</a>(invoice_id) -> Square::Types::GetInvoiceResponse</code></summary>
 <dl>
 <dd>
 
@@ -6847,9 +7625,7 @@ Retrieves an invoice by invoice ID.
 <dd>
 
 ```ruby
-client.invoices.get({
-  invoiceId:'invoice_id'
-});
+client.invoices.get(invoice_id: 'invoice_id');
 ```
 </dd>
 </dl>
@@ -6864,7 +7640,15 @@ client.invoices.get({
 <dl>
 <dd>
 
-**invoiceId:** `String` — The ID of the invoice to retrieve.
+**invoice_id:** `String` — The ID of the invoice to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Invoices::RequestOptions` 
     
 </dd>
 </dl>
@@ -6876,7 +7660,7 @@ client.invoices.get({
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.Update(InvoiceId, request) -> Square::Types::UpdateInvoiceResponse</code></summary>
+<details><summary><code>client.invoices.<a href="/lib/square/invoices/client.rb">update</a>(invoice_id, request) -> Square::Types::UpdateInvoiceResponse</code></summary>
 <dl>
 <dd>
 
@@ -6906,17 +7690,17 @@ Some restrictions apply to updating invoices. For example, you cannot change the
 <dd>
 
 ```ruby
-client.invoices.update({
-  invoiceId:'invoice_id',
-  invoice:{
-    version:1,
-    payment_requests:[{
-      uid:'2da7964f-f3d2-4f43-81e8-5aa220bf3355',
-      tipping_enabled:false
+client.invoices.update(
+  invoice_id: 'invoice_id',
+  invoice: {
+    version: 1,
+    payment_requests: [{
+      uid: '2da7964f-f3d2-4f43-81e8-5aa220bf3355',
+      tipping_enabled: false
     }]
   },
-  idempotencyKey:'4ee82288-0910-499e-ab4c-5d0071dad1be'
-});
+  idempotency_key: '4ee82288-0910-499e-ab4c-5d0071dad1be'
+);
 ```
 </dd>
 </dl>
@@ -6931,7 +7715,7 @@ client.invoices.update({
 <dl>
 <dd>
 
-**invoiceId:** `String` — The ID of the invoice to update.
+**invoice_id:** `String` — The ID of the invoice to update.
     
 </dd>
 </dl>
@@ -6952,7 +7736,7 @@ limitations, and more examples, see [Update an Invoice](https://developer.square
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies the `UpdateInvoice` request. If you do not
 provide `idempotency_key` (or provide an empty string as the value), the endpoint
@@ -6966,11 +7750,19 @@ For more information, see [Idempotency](https://developer.squareup.com/docs/buil
 <dl>
 <dd>
 
-**fieldsToClear:** `Internal::Types::Array[String]` 
+**fields_to_clear:** `Internal::Types::Array[String]` 
 
 The list of fields to clear. Although this field is currently supported, we
 recommend using null values or the `remove` field when possible. For examples, see
 [Update an Invoice](https://developer.squareup.com/docs/invoices-api/update-invoices).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Invoices::RequestOptions` 
     
 </dd>
 </dl>
@@ -6982,7 +7774,7 @@ recommend using null values or the `remove` field when possible. For examples, s
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.Delete(InvoiceId) -> Square::Types::DeleteInvoiceResponse</code></summary>
+<details><summary><code>client.invoices.<a href="/lib/square/invoices/client.rb">delete</a>(invoice_id) -> Square::Types::DeleteInvoiceResponse</code></summary>
 <dl>
 <dd>
 
@@ -7011,10 +7803,10 @@ invoice (you cannot delete a published invoice, including one that is scheduled 
 <dd>
 
 ```ruby
-client.invoices.delete({
-  invoiceId:'invoice_id',
-  version:1
-});
+client.invoices.delete(
+  invoice_id: 'invoice_id',
+  version: 1
+);
 ```
 </dd>
 </dl>
@@ -7029,7 +7821,7 @@ client.invoices.delete({
 <dl>
 <dd>
 
-**invoiceId:** `String` — The ID of the invoice to delete.
+**invoice_id:** `String` — The ID of the invoice to delete.
     
 </dd>
 </dl>
@@ -7045,6 +7837,14 @@ If you do not know the version, you can call [GetInvoice](api-endpoint:Invoices-
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Invoices::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7053,7 +7853,7 @@ If you do not know the version, you can call [GetInvoice](api-endpoint:Invoices-
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.CreateInvoiceAttachment(InvoiceId, request) -> Square::Types::CreateInvoiceAttachmentResponse</code></summary>
+<details><summary><code>client.invoices.<a href="/lib/square/invoices/client.rb">create_invoice_attachment</a>(invoice_id, request) -> Square::Types::CreateInvoiceAttachmentResponse</code></summary>
 <dl>
 <dd>
 
@@ -7087,9 +7887,7 @@ __NOTE:__ When testing in the Sandbox environment, the total file size is limite
 <dd>
 
 ```ruby
-client.invoices.create_invoice_attachment({
-  invoiceId:'invoice_id'
-});
+client.invoices.create_invoice_attachment(invoice_id: 'invoice_id');
 ```
 </dd>
 </dl>
@@ -7104,7 +7902,15 @@ client.invoices.create_invoice_attachment({
 <dl>
 <dd>
 
-**invoiceId:** `String` — The ID of the [invoice](entity:Invoice) to attach the file to.
+**invoice_id:** `String` — The ID of the [invoice](entity:Invoice) to attach the file to.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Invoices::RequestOptions` 
     
 </dd>
 </dl>
@@ -7116,7 +7922,7 @@ client.invoices.create_invoice_attachment({
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.DeleteInvoiceAttachment(InvoiceId, AttachmentId) -> Square::Types::DeleteInvoiceAttachmentResponse</code></summary>
+<details><summary><code>client.invoices.<a href="/lib/square/invoices/client.rb">delete_invoice_attachment</a>(invoice_id, attachment_id) -> Square::Types::DeleteInvoiceAttachmentResponse</code></summary>
 <dl>
 <dd>
 
@@ -7144,10 +7950,10 @@ from invoices in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
 <dd>
 
 ```ruby
-client.invoices.delete_invoice_attachment({
-  invoiceId:'invoice_id',
-  attachmentId:'attachment_id'
-});
+client.invoices.delete_invoice_attachment(
+  invoice_id: 'invoice_id',
+  attachment_id: 'attachment_id'
+);
 ```
 </dd>
 </dl>
@@ -7162,7 +7968,7 @@ client.invoices.delete_invoice_attachment({
 <dl>
 <dd>
 
-**invoiceId:** `String` — The ID of the [invoice](entity:Invoice) to delete the attachment from.
+**invoice_id:** `String` — The ID of the [invoice](entity:Invoice) to delete the attachment from.
     
 </dd>
 </dl>
@@ -7170,7 +7976,15 @@ client.invoices.delete_invoice_attachment({
 <dl>
 <dd>
 
-**attachmentId:** `String` — The ID of the [attachment](entity:InvoiceAttachment) to delete.
+**attachment_id:** `String` — The ID of the [attachment](entity:InvoiceAttachment) to delete.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Invoices::RequestOptions` 
     
 </dd>
 </dl>
@@ -7182,7 +7996,7 @@ client.invoices.delete_invoice_attachment({
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.Cancel(InvoiceId, request) -> Square::Types::CancelInvoiceResponse</code></summary>
+<details><summary><code>client.invoices.<a href="/lib/square/invoices/client.rb">cancel</a>(invoice_id, request) -> Square::Types::CancelInvoiceResponse</code></summary>
 <dl>
 <dd>
 
@@ -7212,10 +8026,10 @@ You cannot cancel an invoice in the `DRAFT` state or in a terminal state: `PAID`
 <dd>
 
 ```ruby
-client.invoices.cancel({
-  invoiceId:'invoice_id',
-  version:0
-});
+client.invoices.cancel(
+  invoice_id: 'invoice_id',
+  version: 0
+);
 ```
 </dd>
 </dl>
@@ -7230,7 +8044,7 @@ client.invoices.cancel({
 <dl>
 <dd>
 
-**invoiceId:** `String` — The ID of the [invoice](entity:Invoice) to cancel.
+**invoice_id:** `String` — The ID of the [invoice](entity:Invoice) to cancel.
     
 </dd>
 </dl>
@@ -7246,6 +8060,14 @@ If you do not know the version, you can call
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Invoices::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7254,7 +8076,7 @@ If you do not know the version, you can call
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.Publish(InvoiceId, request) -> Square::Types::PublishInvoiceResponse</code></summary>
+<details><summary><code>client.invoices.<a href="/lib/square/invoices/client.rb">publish</a>(invoice_id, request) -> Square::Types::PublishInvoiceResponse</code></summary>
 <dl>
 <dd>
 
@@ -7294,11 +8116,11 @@ and `PAYMENTS_WRITE` are required when publishing invoices configured for card-o
 <dd>
 
 ```ruby
-client.invoices.publish({
-  invoiceId:'invoice_id',
-  version:1,
-  idempotencyKey:'32da42d0-1997-41b0-826b-f09464fc2c2e'
-});
+client.invoices.publish(
+  invoice_id: 'invoice_id',
+  version: 1,
+  idempotency_key: '32da42d0-1997-41b0-826b-f09464fc2c2e'
+);
 ```
 </dd>
 </dl>
@@ -7313,7 +8135,7 @@ client.invoices.publish({
 <dl>
 <dd>
 
-**invoiceId:** `String` — The ID of the invoice to publish.
+**invoice_id:** `String` — The ID of the invoice to publish.
     
 </dd>
 </dl>
@@ -7332,13 +8154,21 @@ This must match the current version of the invoice; otherwise, the request is re
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies the `PublishInvoice` request. If you do not 
 provide `idempotency_key` (or provide an empty string as the value), the endpoint 
 treats each request as independent.
 
 For more information, see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Invoices::RequestOptions` 
     
 </dd>
 </dl>
@@ -7351,7 +8181,7 @@ For more information, see [Idempotency](https://developer.squareup.com/docs/buil
 </details>
 
 ## Labor
-<details><summary><code>client.Labor.CreateScheduledShift(request) -> Square::Types::CreateScheduledShiftResponse</code></summary>
+<details><summary><code>client.labor.<a href="/lib/square/labor/client.rb">create_scheduled_shift</a>(request) -> Square::Types::CreateScheduledShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -7385,20 +8215,20 @@ The following `draft_shift_details` fields are required:
 <dd>
 
 ```ruby
-client.labor.create_scheduled_shift({
-  idempotencyKey:'HIDSNG5KS478L',
-  scheduledShift:{
-    draft_shift_details:{
-      team_member_id:'ormj0jJJZ5OZIzxrZYJI',
-      location_id:'PAA1RJZZKXBFG',
-      job_id:'FzbJAtt9qEWncK1BWgVCxQ6M',
-      start_at:'2019-01-25T03:11:00-05:00',
-      end_at:'2019-01-25T13:11:00-05:00',
-      notes:'Dont forget to prep the vegetables',
-      is_deleted:false
+client.labor.create_scheduled_shift(
+  idempotency_key: 'HIDSNG5KS478L',
+  scheduled_shift: {
+    draft_shift_details: {
+      team_member_id: 'ormj0jJJZ5OZIzxrZYJI',
+      location_id: 'PAA1RJZZKXBFG',
+      job_id: 'FzbJAtt9qEWncK1BWgVCxQ6M',
+      start_at: '2019-01-25T03:11:00-05:00',
+      end_at: '2019-01-25T13:11:00-05:00',
+      notes: 'Dont forget to prep the vegetables',
+      is_deleted: false
     }
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -7413,7 +8243,7 @@ client.labor.create_scheduled_shift({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for the `CreateScheduledShift` request, used to ensure the
 [idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency)
@@ -7425,7 +8255,7 @@ of the operation.
 <dl>
 <dd>
 
-**scheduledShift:** `Square::Types::ScheduledShift` 
+**scheduled_shift:** `Square::Types::ScheduledShift` 
 
 The scheduled shift with `draft_shift_details`.
 If needed, call [ListLocations](api-endpoint:Locations-ListLocations) to get location IDs,
@@ -7437,6 +8267,14 @@ shift location specified in `location_id`. Example for Pacific Standard Time: 20
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7445,7 +8283,7 @@ shift location specified in `location_id`. Example for Pacific Standard Time: 20
 </dl>
 </details>
 
-<details><summary><code>client.Labor.BulkPublishScheduledShifts(request) -> Square::Types::BulkPublishScheduledShiftsResponse</code></summary>
+<details><summary><code>client.labor.<a href="/lib/square/labor/client.rb">bulk_publish_scheduled_shifts</a>(request) -> Square::Types::BulkPublishScheduledShiftsResponse</code></summary>
 <dl>
 <dd>
 
@@ -7477,11 +8315,12 @@ The minimum `start_at` and maximum `end_at` timestamps of all shifts in a
 <dd>
 
 ```ruby
-client.labor.bulk_publish_scheduled_shifts({
-  scheduledShifts:{
-    key:{}
-  }
-});
+client.labor.bulk_publish_scheduled_shifts(
+  scheduled_shifts: {
+    key: {}
+  },
+  scheduled_shift_notification_audience: 'AFFECTED'
+);
 ```
 </dd>
 </dl>
@@ -7496,7 +8335,7 @@ client.labor.bulk_publish_scheduled_shifts({
 <dl>
 <dd>
 
-**scheduledShifts:** `Internal::Types::Hash[String, Square::Types::BulkPublishScheduledShiftsData]` 
+**scheduled_shifts:** `Internal::Types::Hash[String, Square::Types::BulkPublishScheduledShiftsData]` 
 
 A map of 1 to 100 key-value pairs that represent individual publish requests.
 
@@ -7510,12 +8349,20 @@ A map of 1 to 100 key-value pairs that represent individual publish requests.
 <dl>
 <dd>
 
-**scheduledShiftNotificationAudience:** `Square::Types::ScheduledShiftNotificationAudience` 
+**scheduled_shift_notification_audience:** `Square::Types::ScheduledShiftNotificationAudience` 
 
 Indicates whether Square should send email notifications to team members and
 which team members should receive the notifications. This setting applies to all shifts
 specified in the bulk operation. The default value is `AFFECTED`.
 See [ScheduledShiftNotificationAudience](#type-scheduledshiftnotificationaudience) for possible values
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::RequestOptions` 
     
 </dd>
 </dl>
@@ -7527,7 +8374,7 @@ See [ScheduledShiftNotificationAudience](#type-scheduledshiftnotificationaudienc
 </dl>
 </details>
 
-<details><summary><code>client.Labor.SearchScheduledShifts(request) -> Square::Types::SearchScheduledShiftsResponse</code></summary>
+<details><summary><code>client.labor.<a href="/lib/square/labor/client.rb">search_scheduled_shifts</a>(request) -> Square::Types::SearchScheduledShiftsResponse</code></summary>
 <dl>
 <dd>
 
@@ -7555,14 +8402,19 @@ By default, results are sorted by `start_at` in ascending order.
 <dd>
 
 ```ruby
-client.labor.search_scheduled_shifts({
-  query:{
-    filter:{},
-    sort:{}
+client.labor.search_scheduled_shifts(
+  query: {
+    filter: {
+      assignment_status: 'ASSIGNED'
+    },
+    sort: {
+      field: 'CREATED_AT',
+      order: 'ASC'
+    }
   },
-  limit:2,
-  cursor:'xoxp-1234-5678-90123'
-});
+  limit: 2,
+  cursor: 'xoxp-1234-5678-90123'
+);
 ```
 </dd>
 </dl>
@@ -7601,6 +8453,14 @@ information, see [Pagination](https://developer.squareup.com/docs/build-basics/c
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7609,7 +8469,7 @@ information, see [Pagination](https://developer.squareup.com/docs/build-basics/c
 </dl>
 </details>
 
-<details><summary><code>client.Labor.RetrieveScheduledShift(Id) -> Square::Types::RetrieveScheduledShiftResponse</code></summary>
+<details><summary><code>client.labor.<a href="/lib/square/labor/client.rb">retrieve_scheduled_shift</a>(id) -> Square::Types::RetrieveScheduledShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -7636,9 +8496,7 @@ Retrieves a scheduled shift by ID.
 <dd>
 
 ```ruby
-client.labor.retrieve_scheduled_shift({
-  id:'id'
-});
+client.labor.retrieve_scheduled_shift(id: 'id');
 ```
 </dd>
 </dl>
@@ -7657,6 +8515,14 @@ client.labor.retrieve_scheduled_shift({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7665,7 +8531,7 @@ client.labor.retrieve_scheduled_shift({
 </dl>
 </details>
 
-<details><summary><code>client.Labor.UpdateScheduledShift(Id, request) -> Square::Types::UpdateScheduledShiftResponse</code></summary>
+<details><summary><code>client.labor.<a href="/lib/square/labor/client.rb">update_scheduled_shift</a>(id, request) -> Square::Types::UpdateScheduledShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -7701,21 +8567,21 @@ and then publish the shift.
 <dd>
 
 ```ruby
-client.labor.update_scheduled_shift({
-  id:'id',
-  scheduledShift:{
-    draft_shift_details:{
-      team_member_id:'ormj0jJJZ5OZIzxrZYJI',
-      location_id:'PAA1RJZZKXBFG',
-      job_id:'FzbJAtt9qEWncK1BWgVCxQ6M',
-      start_at:'2019-03-25T03:11:00-05:00',
-      end_at:'2019-03-25T13:18:00-05:00',
-      notes:'Dont forget to prep the vegetables',
-      is_deleted:false
+client.labor.update_scheduled_shift(
+  id: 'id',
+  scheduled_shift: {
+    draft_shift_details: {
+      team_member_id: 'ormj0jJJZ5OZIzxrZYJI',
+      location_id: 'PAA1RJZZKXBFG',
+      job_id: 'FzbJAtt9qEWncK1BWgVCxQ6M',
+      start_at: '2019-03-25T03:11:00-05:00',
+      end_at: '2019-03-25T13:18:00-05:00',
+      notes: 'Dont forget to prep the vegetables',
+      is_deleted: false
     },
-    version:1
+    version: 1
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -7738,7 +8604,7 @@ client.labor.update_scheduled_shift({
 <dl>
 <dd>
 
-**scheduledShift:** `Square::Types::ScheduledShift` 
+**scheduled_shift:** `Square::Types::ScheduledShift` 
 
 The scheduled shift with any updates in the `draft_shift_details` field.
 If needed, call [ListLocations](api-endpoint:Locations-ListLocations) to get location IDs,
@@ -7756,6 +8622,14 @@ omitted, Square executes a blind write, potentially overwriting data from anothe
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7764,7 +8638,7 @@ omitted, Square executes a blind write, potentially overwriting data from anothe
 </dl>
 </details>
 
-<details><summary><code>client.Labor.PublishScheduledShift(Id, request) -> Square::Types::PublishScheduledShiftResponse</code></summary>
+<details><summary><code>client.labor.<a href="/lib/square/labor/client.rb">publish_scheduled_shift</a>(id, request) -> Square::Types::PublishScheduledShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -7792,11 +8666,12 @@ Publishes a scheduled shift. When a scheduled shift is published, Square keeps t
 <dd>
 
 ```ruby
-client.labor.publish_scheduled_shift({
-  id:'id',
-  idempotencyKey:'HIDSNG5KS478L',
-  version:2
-});
+client.labor.publish_scheduled_shift(
+  id: 'id',
+  idempotency_key: 'HIDSNG5KS478L',
+  version: 2,
+  scheduled_shift_notification_audience: 'ALL'
+);
 ```
 </dd>
 </dl>
@@ -7819,7 +8694,7 @@ client.labor.publish_scheduled_shift({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for the `PublishScheduledShift` request, used to ensure the
 [idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency)
@@ -7843,11 +8718,19 @@ If omitted, Square executes a blind write, potentially overwriting data from ano
 <dl>
 <dd>
 
-**scheduledShiftNotificationAudience:** `Square::Types::ScheduledShiftNotificationAudience` 
+**scheduled_shift_notification_audience:** `Square::Types::ScheduledShiftNotificationAudience` 
 
 Indicates whether Square should send an email notification to team members and
 which team members should receive the notification. The default value is `AFFECTED`.
 See [ScheduledShiftNotificationAudience](#type-scheduledshiftnotificationaudience) for possible values
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::RequestOptions` 
     
 </dd>
 </dl>
@@ -7859,7 +8742,7 @@ See [ScheduledShiftNotificationAudience](#type-scheduledshiftnotificationaudienc
 </dl>
 </details>
 
-<details><summary><code>client.Labor.CreateTimecard(request) -> Square::Types::CreateTimecardResponse</code></summary>
+<details><summary><code>client.labor.<a href="/lib/square/labor/client.rb">create_timecard</a>(request) -> Square::Types::CreateTimecardResponse</code></summary>
 <dl>
 <dd>
 
@@ -7903,33 +8786,35 @@ the `Timecard.end_at`, or both.
 <dd>
 
 ```ruby
-client.labor.create_timecard({
-  idempotencyKey:'HIDSNG5KS478L',
-  timecard:{
-    location_id:'PAA1RJZZKXBFG',
-    start_at:'2019-01-25T03:11:00-05:00',
-    end_at:'2019-01-25T13:11:00-05:00',
-    wage:{
-      title:'Barista',
-      hourly_rate:{
-        amount:1100
+client.labor.create_timecard(
+  idempotency_key: 'HIDSNG5KS478L',
+  timecard: {
+    location_id: 'PAA1RJZZKXBFG',
+    start_at: '2019-01-25T03:11:00-05:00',
+    end_at: '2019-01-25T13:11:00-05:00',
+    wage: {
+      title: 'Barista',
+      hourly_rate: {
+        amount: 1100,
+        currency: 'USD'
       },
-      tip_eligible:true
+      tip_eligible: true
     },
-    breaks:[{
-      start_at:'2019-01-25T06:11:00-05:00',
-      end_at:'2019-01-25T06:16:00-05:00',
-      break_type_id:'REGS1EQR1TPZ5',
-      name:'Tea Break',
-      expected_duration:'PT5M',
-      is_paid:true
+    breaks: [{
+      start_at: '2019-01-25T06:11:00-05:00',
+      end_at: '2019-01-25T06:16:00-05:00',
+      break_type_id: 'REGS1EQR1TPZ5',
+      name: 'Tea Break',
+      expected_duration: 'PT5M',
+      is_paid: true
     }],
-    team_member_id:'ormj0jJJZ5OZIzxrZYJI',
-    declared_cash_tip_money:{
-      amount:500
+    team_member_id: 'ormj0jJJZ5OZIzxrZYJI',
+    declared_cash_tip_money: {
+      amount: 500,
+      currency: 'USD'
     }
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -7944,7 +8829,7 @@ client.labor.create_timecard({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` — A unique string value to ensure the idempotency of the operation.
+**idempotency_key:** `String` — A unique string value to ensure the idempotency of the operation.
     
 </dd>
 </dl>
@@ -7956,6 +8841,14 @@ client.labor.create_timecard({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7964,7 +8857,7 @@ client.labor.create_timecard({
 </dl>
 </details>
 
-<details><summary><code>client.Labor.SearchTimecards(request) -> Square::Types::SearchTimecardsResponse</code></summary>
+<details><summary><code>client.labor.<a href="/lib/square/labor/client.rb">search_timecards</a>(request) -> Square::Types::SearchTimecardsResponse</code></summary>
 <dl>
 <dd>
 
@@ -8004,20 +8897,21 @@ The list can be sorted by:
 <dd>
 
 ```ruby
-client.labor.search_timecards({
-  query:{
-    filter:{
-      workday:{
-        date_range:{
-          start_date:'2019-01-20',
-          end_date:'2019-02-03'
+client.labor.search_timecards(
+  query: {
+    filter: {
+      workday: {
+        date_range: {
+          start_date: '2019-01-20',
+          end_date: '2019-02-03'
         },
-        default_timezone:'America/Los_Angeles'
+        match_timecards_by: 'START_AT',
+        default_timezone: 'America/Los_Angeles'
       }
     }
   },
-  limit:100
-});
+  limit: 100
+);
 ```
 </dd>
 </dl>
@@ -8052,6 +8946,14 @@ client.labor.search_timecards({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8060,7 +8962,7 @@ client.labor.search_timecards({
 </dl>
 </details>
 
-<details><summary><code>client.Labor.RetrieveTimecard(Id) -> Square::Types::RetrieveTimecardResponse</code></summary>
+<details><summary><code>client.labor.<a href="/lib/square/labor/client.rb">retrieve_timecard</a>(id) -> Square::Types::RetrieveTimecardResponse</code></summary>
 <dl>
 <dd>
 
@@ -8087,9 +8989,7 @@ Returns a single `Timecard` specified by `id`.
 <dd>
 
 ```ruby
-client.labor.retrieve_timecard({
-  id:'id'
-});
+client.labor.retrieve_timecard(id: 'id');
 ```
 </dd>
 </dl>
@@ -8108,6 +9008,14 @@ client.labor.retrieve_timecard({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8116,7 +9024,7 @@ client.labor.retrieve_timecard({
 </dl>
 </details>
 
-<details><summary><code>client.Labor.UpdateTimecard(Id, request) -> Square::Types::UpdateTimecardResponse</code></summary>
+<details><summary><code>client.labor.<a href="/lib/square/labor/client.rb">update_timecard</a>(id, request) -> Square::Types::UpdateTimecardResponse</code></summary>
 <dl>
 <dd>
 
@@ -8149,35 +9057,38 @@ set on each `Break`.
 <dd>
 
 ```ruby
-client.labor.update_timecard({
-  id:'id',
-  timecard:{
-    location_id:'PAA1RJZZKXBFG',
-    start_at:'2019-01-25T03:11:00-05:00',
-    end_at:'2019-01-25T13:11:00-05:00',
-    wage:{
-      title:'Bartender',
-      hourly_rate:{
-        amount:1500
+client.labor.update_timecard(
+  id: 'id',
+  timecard: {
+    location_id: 'PAA1RJZZKXBFG',
+    start_at: '2019-01-25T03:11:00-05:00',
+    end_at: '2019-01-25T13:11:00-05:00',
+    wage: {
+      title: 'Bartender',
+      hourly_rate: {
+        amount: 1500,
+        currency: 'USD'
       },
-      tip_eligible:true
+      tip_eligible: true
     },
-    breaks:[{
-      id:'X7GAQYVVRRG6P',
-      start_at:'2019-01-25T06:11:00-05:00',
-      end_at:'2019-01-25T06:16:00-05:00',
-      break_type_id:'REGS1EQR1TPZ5',
-      name:'Tea Break',
-      expected_duration:'PT5M',
-      is_paid:true
+    breaks: [{
+      id: 'X7GAQYVVRRG6P',
+      start_at: '2019-01-25T06:11:00-05:00',
+      end_at: '2019-01-25T06:16:00-05:00',
+      break_type_id: 'REGS1EQR1TPZ5',
+      name: 'Tea Break',
+      expected_duration: 'PT5M',
+      is_paid: true
     }],
-    version:1,
-    team_member_id:'ormj0jJJZ5OZIzxrZYJI',
-    declared_cash_tip_money:{
-      amount:500
+    status: 'CLOSED',
+    version: 1,
+    team_member_id: 'ormj0jJJZ5OZIzxrZYJI',
+    declared_cash_tip_money: {
+      amount: 500,
+      currency: 'USD'
     }
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -8204,6 +9115,14 @@ client.labor.update_timecard({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8212,7 +9131,7 @@ client.labor.update_timecard({
 </dl>
 </details>
 
-<details><summary><code>client.Labor.DeleteTimecard(Id) -> Square::Types::DeleteTimecardResponse</code></summary>
+<details><summary><code>client.labor.<a href="/lib/square/labor/client.rb">delete_timecard</a>(id) -> Square::Types::DeleteTimecardResponse</code></summary>
 <dl>
 <dd>
 
@@ -8239,9 +9158,7 @@ Deletes a `Timecard`.
 <dd>
 
 ```ruby
-client.labor.delete_timecard({
-  id:'id'
-});
+client.labor.delete_timecard(id: 'id');
 ```
 </dd>
 </dl>
@@ -8260,6 +9177,14 @@ client.labor.delete_timecard({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8269,7 +9194,7 @@ client.labor.delete_timecard({
 </details>
 
 ## Locations
-<details><summary><code>client.Locations.List() -> Square::Types::ListLocationsResponse</code></summary>
+<details><summary><code>client.locations.<a href="/lib/square/locations/client.rb">list</a>() -> Square::Types::ListLocationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -8304,12 +9229,27 @@ client.locations.list();
 </dd>
 </dl>
 
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.Locations.Create(request) -> Square::Types::CreateLocationResponse</code></summary>
+<details><summary><code>client.locations.<a href="/lib/square/locations/client.rb">create</a>(request) -> Square::Types::CreateLocationResponse</code></summary>
 <dl>
 <dd>
 
@@ -8342,17 +9282,15 @@ each location has a sensible and unique name.
 <dd>
 
 ```ruby
-client.locations.create({
-  location:{
-    name:'Midtown',
-    address:{
-      address_line_1:'1234 Peachtree St. NE',
-      locality:'Atlanta',
-      administrative_district_level_1:'GA',
-      postal_code:'30309'
-    },
-    description:'Midtown Atlanta store'
-  }
+client.locations.create(location: {
+  name: 'Midtown',
+  address: {
+    address_line_1: '1234 Peachtree St. NE',
+    locality: 'Atlanta',
+    administrative_district_level_1: 'GA',
+    postal_code: '30309'
+  },
+  description: 'Midtown Atlanta store'
 });
 ```
 </dd>
@@ -8376,6 +9314,14 @@ The remaining fields are automatically added based on the data from the [main lo
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8384,7 +9330,7 @@ The remaining fields are automatically added based on the data from the [main lo
 </dl>
 </details>
 
-<details><summary><code>client.Locations.Get(LocationId) -> Square::Types::GetLocationResponse</code></summary>
+<details><summary><code>client.locations.<a href="/lib/square/locations/client.rb">get</a>(location_id) -> Square::Types::GetLocationResponse</code></summary>
 <dl>
 <dd>
 
@@ -8412,9 +9358,7 @@ as the location ID to retrieve details of the [main location](https://developer.
 <dd>
 
 ```ruby
-client.locations.get({
-  locationId:'location_id'
-});
+client.locations.get(location_id: 'location_id');
 ```
 </dd>
 </dl>
@@ -8429,10 +9373,18 @@ client.locations.get({
 <dl>
 <dd>
 
-**locationId:** `String` 
+**location_id:** `String` 
 
 The ID of the location to retrieve. Specify the string
 "main" to return the main location.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::RequestOptions` 
     
 </dd>
 </dl>
@@ -8444,7 +9396,7 @@ The ID of the location to retrieve. Specify the string
 </dl>
 </details>
 
-<details><summary><code>client.Locations.Update(LocationId, request) -> Square::Types::UpdateLocationResponse</code></summary>
+<details><summary><code>client.locations.<a href="/lib/square/locations/client.rb">update</a>(location_id, request) -> Square::Types::UpdateLocationResponse</code></summary>
 <dl>
 <dd>
 
@@ -8471,24 +9423,27 @@ Updates a [location](https://developer.squareup.com/docs/locations-api).
 <dd>
 
 ```ruby
-client.locations.update({
-  locationId:'location_id',
-  location:{
-    business_hours:{
-      periods:[{
-        start_local_time:'07:00',
-        end_local_time:'18:00'
+client.locations.update(
+  location_id: 'location_id',
+  location: {
+    business_hours: {
+      periods: [{
+        day_of_week: 'FRI',
+        start_local_time: '07:00',
+        end_local_time: '18:00'
       }, {
-        start_local_time:'07:00',
-        end_local_time:'18:00'
+        day_of_week: 'SAT',
+        start_local_time: '07:00',
+        end_local_time: '18:00'
       }, {
-        start_local_time:'09:00',
-        end_local_time:'15:00'
+        day_of_week: 'SUN',
+        start_local_time: '09:00',
+        end_local_time: '15:00'
       }]
     },
-    description:'Midtown Atlanta store - Open weekends'
+    description: 'Midtown Atlanta store - Open weekends'
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -8503,7 +9458,7 @@ client.locations.update({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the location to update.
+**location_id:** `String` — The ID of the location to update.
     
 </dd>
 </dl>
@@ -8515,6 +9470,14 @@ client.locations.update({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8523,7 +9486,7 @@ client.locations.update({
 </dl>
 </details>
 
-<details><summary><code>client.Locations.Checkouts(LocationId, request) -> Square::Types::CreateCheckoutResponse</code></summary>
+<details><summary><code>client.locations.<a href="/lib/square/locations/client.rb">checkouts</a>(location_id, request) -> Square::Types::CreateCheckoutResponse</code></summary>
 <dl>
 <dd>
 
@@ -8556,73 +9519,83 @@ For more information, see [Checkout API highlights](https://developer.squareup.c
 <dd>
 
 ```ruby
-client.locations.checkouts({
-  locationId:'location_id',
-  idempotencyKey:'86ae1696-b1e3-4328-af6d-f1e04d947ad6',
-  order:{
-    order:{
-      location_id:'location_id',
-      reference_id:'reference_id',
-      customer_id:'customer_id',
-      line_items:[{
-        name:'Printed T Shirt',
-        quantity:'2',
-        applied_taxes:[{
-          tax_uid:'38ze1696-z1e3-5628-af6d-f1e04d947fg3'
+client.locations.checkouts(
+  location_id: 'location_id',
+  idempotency_key: '86ae1696-b1e3-4328-af6d-f1e04d947ad6',
+  order: {
+    order: {
+      location_id: 'location_id',
+      reference_id: 'reference_id',
+      customer_id: 'customer_id',
+      line_items: [{
+        name: 'Printed T Shirt',
+        quantity: '2',
+        applied_taxes: [{
+          tax_uid: '38ze1696-z1e3-5628-af6d-f1e04d947fg3'
         }],
-        applied_discounts:[{
-          discount_uid:'56ae1696-z1e3-9328-af6d-f1e04d947gd4'
+        applied_discounts: [{
+          discount_uid: '56ae1696-z1e3-9328-af6d-f1e04d947gd4'
         }],
-        base_price_money:{
-          amount:1500
+        base_price_money: {
+          amount: 1500,
+          currency: 'USD'
         }
       }, {
-        name:'Slim Jeans',
-        quantity:'1',
-        base_price_money:{
-          amount:2500
+        name: 'Slim Jeans',
+        quantity: '1',
+        base_price_money: {
+          amount: 2500,
+          currency: 'USD'
         }
       }, {
-        name:'Woven Sweater',
-        quantity:'3',
-        base_price_money:{
-          amount:3500
+        name: 'Woven Sweater',
+        quantity: '3',
+        base_price_money: {
+          amount: 3500,
+          currency: 'USD'
         }
       }],
-      taxes:[{
-        uid:'38ze1696-z1e3-5628-af6d-f1e04d947fg3',
-        percentage:'7.75'
+      taxes: [{
+        uid: '38ze1696-z1e3-5628-af6d-f1e04d947fg3',
+        type: 'INCLUSIVE',
+        percentage: '7.75',
+        scope: 'LINE_ITEM'
       }],
-      discounts:[{
-        uid:'56ae1696-z1e3-9328-af6d-f1e04d947gd4',
-        amount_money:{
-          amount:100
-        }
+      discounts: [{
+        uid: '56ae1696-z1e3-9328-af6d-f1e04d947gd4',
+        type: 'FIXED_AMOUNT',
+        amount_money: {
+          amount: 100,
+          currency: 'USD'
+        },
+        scope: 'LINE_ITEM'
       }]
     },
-    idempotency_key:'12ae1696-z1e3-4328-af6d-f1e04d947gd4'
+    idempotency_key: '12ae1696-z1e3-4328-af6d-f1e04d947gd4'
   },
-  askForShippingAddress:true,
-  merchantSupportEmail:'merchant+support@website.com',
-  prePopulateBuyerEmail:'example@email.com',
-  prePopulateShippingAddress:{
-    address_line_1:'1455 Market St.',
-    address_line_2:'Suite 600',
-    locality:'San Francisco',
-    administrative_district_level_1:'CA',
-    postal_code:'94103',
-    first_name:'Jane',
-    last_name:'Doe'
+  ask_for_shipping_address: true,
+  merchant_support_email: 'merchant+support@website.com',
+  pre_populate_buyer_email: 'example@email.com',
+  pre_populate_shipping_address: {
+    address_line_1: '1455 Market St.',
+    address_line_2: 'Suite 600',
+    locality: 'San Francisco',
+    administrative_district_level_1: 'CA',
+    postal_code: '94103',
+    country: 'US',
+    first_name: 'Jane',
+    last_name: 'Doe'
   },
-  redirectUrl:'https://merchant.website.com/order-confirm',
-  additionalRecipients:[{
-    location_id:'057P5VYJ4A5X1',
-    description:'Application fees',
-    amount_money:{
-      amount:60
+  redirect_url: 'https://merchant.website.com/order-confirm',
+  additional_recipients: [{
+    location_id: '057P5VYJ4A5X1',
+    description: 'Application fees',
+    amount_money: {
+      amount: 60,
+      currency: 'USD'
     }
   }]
-});
+);
 ```
 </dd>
 </dl>
@@ -8637,7 +9610,7 @@ client.locations.checkouts({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the business location to associate the checkout with.
+**location_id:** `String` — The ID of the business location to associate the checkout with.
     
 </dd>
 </dl>
@@ -8645,7 +9618,7 @@ client.locations.checkouts({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this checkout among others you have created. It can be
 any valid string but must be unique for every order sent to Square Checkout for a given location ID.
@@ -8673,7 +9646,7 @@ For more information, see [Idempotency](https://developer.squareup.com/docs/work
 <dl>
 <dd>
 
-**askForShippingAddress:** `Internal::Types::Boolean` 
+**ask_for_shipping_address:** `Internal::Types::Boolean` 
 
 If `true`, Square Checkout collects shipping information on your behalf and stores 
 that information with the transaction information in the Square Seller Dashboard.
@@ -8686,7 +9659,7 @@ Default: `false`.
 <dl>
 <dd>
 
-**merchantSupportEmail:** `String` 
+**merchant_support_email:** `String` 
 
 The email address to display on the Square Checkout confirmation page
 and confirmation email that the buyer can use to contact the seller.
@@ -8702,7 +9675,7 @@ Default: none; only exists if explicitly set.
 <dl>
 <dd>
 
-**prePopulateBuyerEmail:** `String` 
+**pre_populate_buyer_email:** `String` 
 
 If provided, the buyer's email is prepopulated on the checkout page
 as an editable text field.
@@ -8715,7 +9688,7 @@ Default: none; only exists if explicitly set.
 <dl>
 <dd>
 
-**prePopulateShippingAddress:** `Square::Types::Address` 
+**pre_populate_shipping_address:** `Square::Types::Address` 
 
 If provided, the buyer's shipping information is prepopulated on the
 checkout page as editable text fields.
@@ -8728,7 +9701,7 @@ Default: none; only exists if explicitly set.
 <dl>
 <dd>
 
-**redirectUrl:** `String` 
+**redirect_url:** `String` 
 
 The URL to redirect to after the checkout is completed with `checkoutId`,
 `transactionId`, and `referenceId` appended as URL parameters. For example,
@@ -8750,7 +9723,7 @@ Default: none; only exists if explicitly set.
 <dl>
 <dd>
 
-**additionalRecipients:** `Internal::Types::Array[Square::Types::ChargeRequestAdditionalRecipient]` 
+**additional_recipients:** `Internal::Types::Array[Square::Types::ChargeRequestAdditionalRecipient]` 
 
 The basic primitive of a multi-party transaction. The value is optional.
 The transaction facilitated by you can be split from here.
@@ -8777,6 +9750,14 @@ This value cannot exceed 60 characters.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8786,7 +9767,7 @@ This value cannot exceed 60 characters.
 </details>
 
 ## Loyalty
-<details><summary><code>client.Loyalty.SearchEvents(request) -> Square::Types::SearchLoyaltyEventsResponse</code></summary>
+<details><summary><code>client.loyalty.<a href="/lib/square/loyalty/client.rb">search_events</a>(request) -> Square::Types::SearchLoyaltyEventsResponse</code></summary>
 <dl>
 <dd>
 
@@ -8820,16 +9801,16 @@ Search results are sorted by `created_at` in descending order.
 <dd>
 
 ```ruby
-client.loyalty.search_events({
-  query:{
-    filter:{
-      order_filter:{
-        order_id:'PyATxhYLfsMqpVkcKJITPydgEYfZY'
+client.loyalty.search_events(
+  query: {
+    filter: {
+      order_filter: {
+        order_id: 'PyATxhYLfsMqpVkcKJITPydgEYfZY'
       }
     }
   },
-  limit:30
-});
+  limit: 30
+);
 ```
 </dd>
 </dl>
@@ -8877,6 +9858,14 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8886,7 +9875,7 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
 </details>
 
 ## Merchants
-<details><summary><code>client.Merchants.List() -> Square::Types::ListMerchantsResponse</code></summary>
+<details><summary><code>client.merchants.<a href="/lib/square/merchants/client.rb">list</a>() -> Square::Types::ListMerchantsResponse</code></summary>
 <dl>
 <dd>
 
@@ -8922,9 +9911,7 @@ endpoint to retrieve the merchant information.
 <dd>
 
 ```ruby
-client.merchants.list({
-  cursor:1
-});
+client.merchants.list(cursor: 1);
 ```
 </dd>
 </dl>
@@ -8943,6 +9930,14 @@ client.merchants.list({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Merchants::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8951,7 +9946,7 @@ client.merchants.list({
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.Get(MerchantId) -> Square::Types::GetMerchantResponse</code></summary>
+<details><summary><code>client.merchants.<a href="/lib/square/merchants/client.rb">get</a>(merchant_id) -> Square::Types::GetMerchantResponse</code></summary>
 <dl>
 <dd>
 
@@ -8978,9 +9973,7 @@ Retrieves the `Merchant` object for the given `merchant_id`.
 <dd>
 
 ```ruby
-client.merchants.get({
-  merchantId:'merchant_id'
-});
+client.merchants.get(merchant_id: 'merchant_id');
 ```
 </dd>
 </dl>
@@ -8995,10 +9988,18 @@ client.merchants.get({
 <dl>
 <dd>
 
-**merchantId:** `String` 
+**merchant_id:** `String` 
 
 The ID of the merchant to retrieve. If the string "me" is supplied as the ID,
 then retrieve the merchant that is currently accessible to this call.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Merchants::RequestOptions` 
     
 </dd>
 </dl>
@@ -9011,7 +10012,7 @@ then retrieve the merchant that is currently accessible to this call.
 </details>
 
 ## Checkout
-<details><summary><code>client.Checkout.RetrieveLocationSettings(LocationId) -> Square::Types::RetrieveLocationSettingsResponse</code></summary>
+<details><summary><code>client.checkout.<a href="/lib/square/checkout/client.rb">retrieve_location_settings</a>(location_id) -> Square::Types::RetrieveLocationSettingsResponse</code></summary>
 <dl>
 <dd>
 
@@ -9038,9 +10039,7 @@ Retrieves the location-level settings for a Square-hosted checkout page.
 <dd>
 
 ```ruby
-client.checkout.retrieve_location_settings({
-  locationId:'location_id'
-});
+client.checkout.retrieve_location_settings(location_id: 'location_id');
 ```
 </dd>
 </dl>
@@ -9055,7 +10054,15 @@ client.checkout.retrieve_location_settings({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the location for which to retrieve settings.
+**location_id:** `String` — The ID of the location for which to retrieve settings.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Checkout::RequestOptions` 
     
 </dd>
 </dl>
@@ -9067,7 +10074,7 @@ client.checkout.retrieve_location_settings({
 </dl>
 </details>
 
-<details><summary><code>client.Checkout.UpdateLocationSettings(LocationId, request) -> Square::Types::UpdateLocationSettingsResponse</code></summary>
+<details><summary><code>client.checkout.<a href="/lib/square/checkout/client.rb">update_location_settings</a>(location_id, request) -> Square::Types::UpdateLocationSettingsResponse</code></summary>
 <dl>
 <dd>
 
@@ -9094,10 +10101,10 @@ Updates the location-level settings for a Square-hosted checkout page.
 <dd>
 
 ```ruby
-client.checkout.update_location_settings({
-  locationId:'location_id',
-  locationSettings:{}
-});
+client.checkout.update_location_settings(
+  location_id: 'location_id',
+  location_settings: {}
+);
 ```
 </dd>
 </dl>
@@ -9112,7 +10119,7 @@ client.checkout.update_location_settings({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the location for which to retrieve settings.
+**location_id:** `String` — The ID of the location for which to retrieve settings.
     
 </dd>
 </dl>
@@ -9120,7 +10127,15 @@ client.checkout.update_location_settings({
 <dl>
 <dd>
 
-**locationSettings:** `Square::Types::CheckoutLocationSettings` — Describe your updates using the `location_settings` object. Make sure it contains only the fields that have changed.
+**location_settings:** `Square::Types::CheckoutLocationSettings` — Describe your updates using the `location_settings` object. Make sure it contains only the fields that have changed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Checkout::RequestOptions` 
     
 </dd>
 </dl>
@@ -9132,7 +10147,7 @@ client.checkout.update_location_settings({
 </dl>
 </details>
 
-<details><summary><code>client.Checkout.RetrieveMerchantSettings() -> Square::Types::RetrieveMerchantSettingsResponse</code></summary>
+<details><summary><code>client.checkout.<a href="/lib/square/checkout/client.rb">retrieve_merchant_settings</a>() -> Square::Types::RetrieveMerchantSettingsResponse</code></summary>
 <dl>
 <dd>
 
@@ -9166,12 +10181,27 @@ client.checkout.retrieve_merchant_settings();
 </dd>
 </dl>
 
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Checkout::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.Checkout.UpdateMerchantSettings(request) -> Square::Types::UpdateMerchantSettingsResponse</code></summary>
+<details><summary><code>client.checkout.<a href="/lib/square/checkout/client.rb">update_merchant_settings</a>(request) -> Square::Types::UpdateMerchantSettingsResponse</code></summary>
 <dl>
 <dd>
 
@@ -9198,9 +10228,7 @@ Updates the merchant-level settings for a Square-hosted checkout page.
 <dd>
 
 ```ruby
-client.checkout.update_merchant_settings({
-  merchantSettings:{}
-});
+client.checkout.update_merchant_settings(merchant_settings: {});
 ```
 </dd>
 </dl>
@@ -9215,7 +10243,15 @@ client.checkout.update_merchant_settings({
 <dl>
 <dd>
 
-**merchantSettings:** `Square::Types::CheckoutMerchantSettings` — Describe your updates using the `merchant_settings` object. Make sure it contains only the fields that have changed.
+**merchant_settings:** `Square::Types::CheckoutMerchantSettings` — Describe your updates using the `merchant_settings` object. Make sure it contains only the fields that have changed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Checkout::RequestOptions` 
     
 </dd>
 </dl>
@@ -9228,7 +10264,7 @@ client.checkout.update_merchant_settings({
 </details>
 
 ## Orders
-<details><summary><code>client.Orders.Create(request) -> Square::Types::CreateOrderResponse</code></summary>
+<details><summary><code>client.orders.<a href="/lib/square/orders/client.rb">create</a>(request) -> Square::Types::CreateOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -9261,48 +10297,54 @@ You can modify open orders using the [UpdateOrder](api-endpoint:Orders-UpdateOrd
 <dd>
 
 ```ruby
-client.orders.create({
-  order:{
-    location_id:'057P5VYJ4A5X1',
-    reference_id:'my-order-001',
-    line_items:[{
-      name:'New York Strip Steak',
-      quantity:'1',
-      base_price_money:{
-        amount:1599
+client.orders.create(
+  order: {
+    location_id: '057P5VYJ4A5X1',
+    reference_id: 'my-order-001',
+    line_items: [{
+      name: 'New York Strip Steak',
+      quantity: '1',
+      base_price_money: {
+        amount: 1599,
+        currency: 'USD'
       }
     }, {
-      quantity:'2',
-      catalog_object_id:'BEMYCSMIJL46OCDV4KYIKXIB',
-      modifiers:[{
-        catalog_object_id:'CHQX7Y4KY6N5KINJKZCFURPZ'
+      quantity: '2',
+      catalog_object_id: 'BEMYCSMIJL46OCDV4KYIKXIB',
+      modifiers: [{
+        catalog_object_id: 'CHQX7Y4KY6N5KINJKZCFURPZ'
       }],
-      applied_discounts:[{
-        discount_uid:'one-dollar-off'
+      applied_discounts: [{
+        discount_uid: 'one-dollar-off'
       }]
     }],
-    taxes:[{
-      uid:'state-sales-tax',
-      name:'State Sales Tax',
-      percentage:'9'
+    taxes: [{
+      uid: 'state-sales-tax',
+      name: 'State Sales Tax',
+      percentage: '9',
+      scope: 'ORDER'
     }],
-    discounts:[{
-      uid:'labor-day-sale',
-      name:'Labor Day Sale',
-      percentage:'5'
+    discounts: [{
+      uid: 'labor-day-sale',
+      name: 'Labor Day Sale',
+      percentage: '5',
+      scope: 'ORDER'
     }, {
-      uid:'membership-discount',
-      catalog_object_id:'DB7L55ZH2BGWI4H23ULIWOQ7'
+      uid: 'membership-discount',
+      catalog_object_id: 'DB7L55ZH2BGWI4H23ULIWOQ7',
+      scope: 'ORDER'
     }, {
-      uid:'one-dollar-off',
-      name:'Sale - $1.00 off',
-      amount_money:{
-        amount:100
-      }
+      uid: 'one-dollar-off',
+      name: 'Sale - $1.00 off',
+      amount_money: {
+        amount: 100,
+        currency: 'USD'
+      },
+      scope: 'LINE_ITEM'
     }]
   },
-  idempotency_key:'8193148c-9586-11e6-99f9-28cfe92138cf'
-});
+  idempotency_key: '8193148c-9586-11e6-99f9-28cfe92138cf'
+);
 ```
 </dd>
 </dl>
@@ -9321,6 +10363,14 @@ client.orders.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9329,7 +10379,7 @@ client.orders.create({
 </dl>
 </details>
 
-<details><summary><code>client.Orders.BatchGet(request) -> Square::Types::BatchGetOrdersResponse</code></summary>
+<details><summary><code>client.orders.<a href="/lib/square/orders/client.rb">batch_get</a>(request) -> Square::Types::BatchGetOrdersResponse</code></summary>
 <dl>
 <dd>
 
@@ -9358,10 +10408,10 @@ If a given order ID does not exist, the ID is ignored instead of generating an e
 <dd>
 
 ```ruby
-client.orders.batch_get({
-  locationId:'057P5VYJ4A5X1',
-  orderIds:['CAISEM82RcpmcFBM0TfOyiHV3es', 'CAISENgvlJ6jLWAzERDzjyHVybY']
-});
+client.orders.batch_get(
+  location_id: '057P5VYJ4A5X1',
+  order_ids: ['CAISEM82RcpmcFBM0TfOyiHV3es', 'CAISENgvlJ6jLWAzERDzjyHVybY']
+);
 ```
 </dd>
 </dl>
@@ -9376,7 +10426,7 @@ client.orders.batch_get({
 <dl>
 <dd>
 
-**locationId:** `String` 
+**location_id:** `String` 
 
 The ID of the location for these orders. This field is optional: omit it to retrieve
 orders within the scope of the current authorization's merchant ID.
@@ -9387,7 +10437,15 @@ orders within the scope of the current authorization's merchant ID.
 <dl>
 <dd>
 
-**orderIds:** `Internal::Types::Array[String]` — The IDs of the orders to retrieve. A maximum of 100 orders can be retrieved per request.
+**order_ids:** `Internal::Types::Array[String]` — The IDs of the orders to retrieve. A maximum of 100 orders can be retrieved per request.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::RequestOptions` 
     
 </dd>
 </dl>
@@ -9399,7 +10457,7 @@ orders within the scope of the current authorization's merchant ID.
 </dl>
 </details>
 
-<details><summary><code>client.Orders.Calculate(request) -> Square::Types::CalculateOrderResponse</code></summary>
+<details><summary><code>client.orders.<a href="/lib/square/orders/client.rb">calculate</a>(request) -> Square::Types::CalculateOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -9426,27 +10484,28 @@ Enables applications to preview order pricing without creating an order.
 <dd>
 
 ```ruby
-client.orders.calculate({
-  order:{
-    location_id:'D7AVYMEAPJ3A3',
-    line_items:[{
-      name:'Item 1',
-      quantity:'1',
-      base_price_money:{
-        amount:500
-      }
-    }, {
-      name:'Item 2',
-      quantity:'2',
-      base_price_money:{
-        amount:300
-      }
-    }],
-    discounts:[{
-      name:'50% Off',
-      percentage:'50'
-    }]
-  }
+client.orders.calculate(order: {
+  location_id: 'D7AVYMEAPJ3A3',
+  line_items: [{
+    name: 'Item 1',
+    quantity: '1',
+    base_price_money: {
+      amount: 500,
+      currency: 'USD'
+    }
+  }, {
+    name: 'Item 2',
+    quantity: '2',
+    base_price_money: {
+      amount: 300,
+      currency: 'USD'
+    }
+  }],
+  discounts: [{
+    name: '50% Off',
+    percentage: '50',
+    scope: 'ORDER'
+  }]
 });
 ```
 </dd>
@@ -9470,13 +10529,21 @@ client.orders.calculate({
 <dl>
 <dd>
 
-**proposedRewards:** `Internal::Types::Array[Square::Types::OrderReward]` 
+**proposed_rewards:** `Internal::Types::Array[Square::Types::OrderReward]` 
 
 Identifies one or more loyalty reward tiers to apply during the order calculation.
 The discounts defined by the reward tiers are added to the order only to preview the
 effect of applying the specified rewards. The rewards do not correspond to actual
 redemptions; that is, no `reward`s are created. Therefore, the reward `id`s are
 random strings used only to reference the reward tier.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::RequestOptions` 
     
 </dd>
 </dl>
@@ -9488,7 +10555,7 @@ random strings used only to reference the reward tier.
 </dl>
 </details>
 
-<details><summary><code>client.Orders.Clone(request) -> Square::Types::CloneOrderResponse</code></summary>
+<details><summary><code>client.orders.<a href="/lib/square/orders/client.rb">clone</a>(request) -> Square::Types::CloneOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -9516,11 +10583,11 @@ only the core fields (such as line items, taxes, and discounts) copied from the 
 <dd>
 
 ```ruby
-client.orders.clone({
-  orderId:'ZAISEM52YcpmcWAzERDOyiWS123',
-  version:3,
-  idempotencyKey:'UNIQUE_STRING'
-});
+client.orders.clone(
+  order_id: 'ZAISEM52YcpmcWAzERDOyiWS123',
+  version: 3,
+  idempotency_key: 'UNIQUE_STRING'
+);
 ```
 </dd>
 </dl>
@@ -9535,7 +10602,7 @@ client.orders.clone({
 <dl>
 <dd>
 
-**orderId:** `String` — The ID of the order to clone.
+**order_id:** `String` — The ID of the order to clone.
     
 </dd>
 </dl>
@@ -9556,7 +10623,7 @@ If a version is not provided, the API clones the latest version.
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A value you specify that uniquely identifies this clone request.
 
@@ -9569,6 +10636,14 @@ For more information, see [Idempotency](https://developer.squareup.com/docs/buil
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9577,7 +10652,7 @@ For more information, see [Idempotency](https://developer.squareup.com/docs/buil
 </dl>
 </details>
 
-<details><summary><code>client.Orders.Search(request) -> Square::Types::SearchOrdersResponse</code></summary>
+<details><summary><code>client.orders.<a href="/lib/square/orders/client.rb">search</a>(request) -> Square::Types::SearchOrdersResponse</code></summary>
 <dl>
 <dd>
 
@@ -9620,25 +10695,28 @@ not the time it was subsequently transmitted to Square.
 <dd>
 
 ```ruby
-client.orders.search({
-  locationIds:['057P5VYJ4A5X1', '18YC4JDH91E1H'],
-  query:{
-    filter:{
-      state_filter:{
-        states:[]
+client.orders.search(
+  location_ids: ['057P5VYJ4A5X1', '18YC4JDH91E1H'],
+  query: {
+    filter: {
+      state_filter: {
+        states: ['COMPLETED']
       },
-      date_time_filter:{
-        closed_at:{
-          start_at:'2018-03-03T20:00:00+00:00',
-          end_at:'2019-03-04T21:54:45+00:00'
+      date_time_filter: {
+        closed_at: {
+          start_at: '2018-03-03T20:00:00+00:00',
+          end_at: '2019-03-04T21:54:45+00:00'
         }
       }
     },
-    sort:{}
+    sort: {
+      sort_field: 'CLOSED_AT',
+      sort_order: 'DESC'
+    }
   },
-  limit:3,
-  returnEntries:true
-});
+  limit: 3,
+  return_entries: true
+);
 ```
 </dd>
 </dl>
@@ -9653,7 +10731,7 @@ client.orders.search({
 <dl>
 <dd>
 
-**locationIds:** `Internal::Types::Array[String]` 
+**location_ids:** `Internal::Types::Array[String]` 
 
 The location IDs for the orders to query. All locations must belong to
 the same merchant.
@@ -9702,13 +10780,21 @@ Max: `1000`
 <dl>
 <dd>
 
-**returnEntries:** `Internal::Types::Boolean` 
+**return_entries:** `Internal::Types::Boolean` 
 
 A Boolean that controls the format of the search results. If `true`,
 `SearchOrders` returns [OrderEntry](entity:OrderEntry) objects. If `false`, `SearchOrders`
 returns complete order objects.
 
 Default: `false`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::RequestOptions` 
     
 </dd>
 </dl>
@@ -9720,7 +10806,7 @@ Default: `false`.
 </dl>
 </details>
 
-<details><summary><code>client.Orders.Get(OrderId) -> Square::Types::GetOrderResponse</code></summary>
+<details><summary><code>client.orders.<a href="/lib/square/orders/client.rb">get</a>(order_id) -> Square::Types::GetOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -9747,9 +10833,7 @@ Retrieves an [Order](entity:Order) by ID.
 <dd>
 
 ```ruby
-client.orders.get({
-  orderId:'order_id'
-});
+client.orders.get(order_id: 'order_id');
 ```
 </dd>
 </dl>
@@ -9764,7 +10848,15 @@ client.orders.get({
 <dl>
 <dd>
 
-**orderId:** `String` — The ID of the order to retrieve.
+**order_id:** `String` — The ID of the order to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::RequestOptions` 
     
 </dd>
 </dl>
@@ -9776,7 +10868,7 @@ client.orders.get({
 </dl>
 </details>
 
-<details><summary><code>client.Orders.Update(OrderId, request) -> Square::Types::UpdateOrderResponse</code></summary>
+<details><summary><code>client.orders.<a href="/lib/square/orders/client.rb">update</a>(order_id, request) -> Square::Types::UpdateOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -9817,23 +10909,24 @@ To pay for an order, see
 <dd>
 
 ```ruby
-client.orders.update({
-  orderId:'order_id',
-  order:{
-    location_id:'location_id',
-    line_items:[{
-      uid:'cookie_uid',
-      name:'COOKIE',
-      quantity:'2',
-      base_price_money:{
-        amount:200
+client.orders.update(
+  order_id: 'order_id',
+  order: {
+    location_id: 'location_id',
+    line_items: [{
+      uid: 'cookie_uid',
+      name: 'COOKIE',
+      quantity: '2',
+      base_price_money: {
+        amount: 200,
+        currency: 'USD'
       }
     }],
-    version:1
+    version: 1
   },
-  fieldsToClear:['discounts'],
-  idempotencyKey:'UNIQUE_STRING'
-});
+  fields_to_clear: ['discounts'],
+  idempotency_key: 'UNIQUE_STRING'
+);
 ```
 </dd>
 </dl>
@@ -9848,7 +10941,7 @@ client.orders.update({
 <dl>
 <dd>
 
-**orderId:** `String` — The ID of the order to update.
+**order_id:** `String` — The ID of the order to update.
     
 </dd>
 </dl>
@@ -9868,7 +10961,7 @@ being applied.
 <dl>
 <dd>
 
-**fieldsToClear:** `Internal::Types::Array[String]` 
+**fields_to_clear:** `Internal::Types::Array[String]` 
 
 The [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders/update-orders#identifying-fields-to-delete)
 fields to clear. For example, `line_items[uid].note`.
@@ -9880,7 +10973,7 @@ For more information, see [Deleting fields](https://developer.squareup.com/docs/
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A value you specify that uniquely identifies this update request.
 
@@ -9893,6 +10986,14 @@ For more information, see [Idempotency](https://developer.squareup.com/docs/buil
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9901,7 +11002,7 @@ For more information, see [Idempotency](https://developer.squareup.com/docs/buil
 </dl>
 </details>
 
-<details><summary><code>client.Orders.Pay(OrderId, request) -> Square::Types::PayOrderResponse</code></summary>
+<details><summary><code>client.orders.<a href="/lib/square/orders/client.rb">pay</a>(order_id, request) -> Square::Types::PayOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -9941,11 +11042,11 @@ Using a delayed capture payment with `PayOrder` completes the approved payment.
 <dd>
 
 ```ruby
-client.orders.pay({
-  orderId:'order_id',
-  idempotencyKey:'c043a359-7ad9-4136-82a9-c3f1d66dcbff',
-  paymentIds:['EnZdNAlWCmfh6Mt5FMNST1o7taB', '0LRiVlbXVwe8ozu4KbZxd12mvaB']
-});
+client.orders.pay(
+  order_id: 'order_id',
+  idempotency_key: 'c043a359-7ad9-4136-82a9-c3f1d66dcbff',
+  payment_ids: ['EnZdNAlWCmfh6Mt5FMNST1o7taB', '0LRiVlbXVwe8ozu4KbZxd12mvaB']
+);
 ```
 </dd>
 </dl>
@@ -9960,7 +11061,7 @@ client.orders.pay({
 <dl>
 <dd>
 
-**orderId:** `String` — The ID of the order being paid.
+**order_id:** `String` — The ID of the order being paid.
     
 </dd>
 </dl>
@@ -9968,7 +11069,7 @@ client.orders.pay({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A value you specify that uniquely identifies this request among requests you have sent. If
 you are unsure whether a particular payment request was completed successfully, you can reattempt
@@ -9982,7 +11083,7 @@ For more information, see [Idempotency](https://developer.squareup.com/docs/work
 <dl>
 <dd>
 
-**orderVersion:** `Integer` — The version of the order being paid. If not supplied, the latest version will be paid.
+**order_version:** `Integer` — The version of the order being paid. If not supplied, the latest version will be paid.
     
 </dd>
 </dl>
@@ -9990,10 +11091,18 @@ For more information, see [Idempotency](https://developer.squareup.com/docs/work
 <dl>
 <dd>
 
-**paymentIds:** `Internal::Types::Array[String]` 
+**payment_ids:** `Internal::Types::Array[String]` 
 
 The IDs of the [payments](entity:Payment) to collect.
 The payment total must match the order total.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::RequestOptions` 
     
 </dd>
 </dl>
@@ -10006,7 +11115,7 @@ The payment total must match the order total.
 </details>
 
 ## Payments
-<details><summary><code>client.Payments.List() -> Square::Types::ListPaymentsResponse</code></summary>
+<details><summary><code>client.payments.<a href="/lib/square/payments/client.rb">list</a>() -> Square::Types::ListPaymentsResponse</code></summary>
 <dl>
 <dd>
 
@@ -10038,22 +11147,23 @@ The maximum results per page is 100.
 <dd>
 
 ```ruby
-client.payments.list({
-  beginTime:'begin_time',
-  endTime:'end_time',
-  sortOrder:'sort_order',
-  cursor:'cursor',
-  locationId:'location_id',
-  total:1000000,
-  last4:'last_4',
-  cardBrand:'card_brand',
-  limit:1,
-  isOfflinePayment:true,
-  offlineBeginTime:'offline_begin_time',
-  offlineEndTime:'offline_end_time',
-  updatedAtBeginTime:'updated_at_begin_time',
-  updatedAtEndTime:'updated_at_end_time'
-});
+client.payments.list(
+  begin_time: 'begin_time',
+  end_time: 'end_time',
+  sort_order: 'sort_order',
+  cursor: 'cursor',
+  location_id: 'location_id',
+  total: 1000000,
+  last_4: 'last_4',
+  card_brand: 'card_brand',
+  limit: 1,
+  is_offline_payment: true,
+  offline_begin_time: 'offline_begin_time',
+  offline_end_time: 'offline_end_time',
+  updated_at_begin_time: 'updated_at_begin_time',
+  updated_at_end_time: 'updated_at_end_time',
+  sort_field: 'CREATED_AT'
+);
 ```
 </dd>
 </dl>
@@ -10068,7 +11178,7 @@ client.payments.list({
 <dl>
 <dd>
 
-**beginTime:** `String` 
+**begin_time:** `String` 
 
 Indicates the start of the time range to retrieve payments for, in RFC 3339 format.
 The range is determined using the `created_at` field for each Payment.
@@ -10080,7 +11190,7 @@ Inclusive. Default: The current time minus one year.
 <dl>
 <dd>
 
-**endTime:** `String` 
+**end_time:** `String` 
 
 Indicates the end of the time range to retrieve payments for, in RFC 3339 format.  The
 range is determined using the `created_at` field for each Payment.
@@ -10093,7 +11203,7 @@ Default: The current time.
 <dl>
 <dd>
 
-**sortOrder:** `String` 
+**sort_order:** `String` 
 
 The order in which results are listed by `ListPaymentsRequest.sort_field`:
 - `ASC` - Oldest to newest.
@@ -10118,7 +11228,7 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
 <dl>
 <dd>
 
-**locationId:** `String` 
+**location_id:** `String` 
 
 Limit results to the location supplied. By default, results are returned
 for the default (main) location associated with the seller.
@@ -10137,7 +11247,7 @@ for the default (main) location associated with the seller.
 <dl>
 <dd>
 
-**last4:** `String` — The last four digits of a payment card.
+**last_4:** `String` — The last four digits of a payment card.
     
 </dd>
 </dl>
@@ -10145,7 +11255,7 @@ for the default (main) location associated with the seller.
 <dl>
 <dd>
 
-**cardBrand:** `String` — The brand of the payment card (for example, VISA).
+**card_brand:** `String` — The brand of the payment card (for example, VISA).
     
 </dd>
 </dl>
@@ -10169,7 +11279,7 @@ Default: `100`
 <dl>
 <dd>
 
-**isOfflinePayment:** `Internal::Types::Boolean` — Whether the payment was taken offline or not.
+**is_offline_payment:** `Internal::Types::Boolean` — Whether the payment was taken offline or not.
     
 </dd>
 </dl>
@@ -10177,7 +11287,7 @@ Default: `100`
 <dl>
 <dd>
 
-**offlineBeginTime:** `String` 
+**offline_begin_time:** `String` 
 
 Indicates the start of the time range for which to retrieve offline payments, in RFC 3339
 format for timestamps. The range is determined using the
@@ -10192,7 +11302,7 @@ Default: The current time.
 <dl>
 <dd>
 
-**offlineEndTime:** `String` 
+**offline_end_time:** `String` 
 
 Indicates the end of the time range for which to retrieve offline payments, in RFC 3339
 format for timestamps. The range is determined using the
@@ -10207,7 +11317,7 @@ Default: The current time.
 <dl>
 <dd>
 
-**updatedAtBeginTime:** `String` 
+**updated_at_begin_time:** `String` 
 
 Indicates the start of the time range to retrieve payments for, in RFC 3339 format.  The
 range is determined using the `updated_at` field for each Payment.
@@ -10218,7 +11328,7 @@ range is determined using the `updated_at` field for each Payment.
 <dl>
 <dd>
 
-**updatedAtEndTime:** `String` 
+**updated_at_end_time:** `String` 
 
 Indicates the end of the time range to retrieve payments for, in RFC 3339 format.  The
 range is determined using the `updated_at` field for each Payment.
@@ -10229,7 +11339,15 @@ range is determined using the `updated_at` field for each Payment.
 <dl>
 <dd>
 
-**sortField:** `Square::Types::ListPaymentsRequestSortField` — The field used to sort results by. The default is `CREATED_AT`.
+**sort_field:** `Square::Types::ListPaymentsRequestSortField` — The field used to sort results by. The default is `CREATED_AT`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Payments::RequestOptions` 
     
 </dd>
 </dl>
@@ -10241,7 +11359,7 @@ range is determined using the `updated_at` field for each Payment.
 </dl>
 </details>
 
-<details><summary><code>client.Payments.Create(request) -> Square::Types::CreatePaymentResponse</code></summary>
+<details><summary><code>client.payments.<a href="/lib/square/payments/client.rb">create</a>(request) -> Square::Types::CreatePaymentResponse</code></summary>
 <dl>
 <dd>
 
@@ -10275,21 +11393,23 @@ The endpoint creates a
 <dd>
 
 ```ruby
-client.payments.create({
-  sourceId:'ccof:GaJGNaZa8x4OgDJn4GB',
-  idempotencyKey:'7b0f3ec5-086a-4871-8f13-3c81b3875218',
-  amountMoney:{
-    amount:1000
+client.payments.create(
+  source_id: 'ccof:GaJGNaZa8x4OgDJn4GB',
+  idempotency_key: '7b0f3ec5-086a-4871-8f13-3c81b3875218',
+  amount_money: {
+    amount: 1000,
+    currency: 'USD'
   },
-  appFeeMoney:{
-    amount:10
+  app_fee_money: {
+    amount: 10,
+    currency: 'USD'
   },
-  autocomplete:true,
-  customerId:'W92WH6P11H4Z77CTET0RNTGFW8',
-  locationId:'L88917AVBK2S5',
-  referenceId:'123456',
-  note:'Brief description'
-});
+  autocomplete: true,
+  customer_id: 'W92WH6P11H4Z77CTET0RNTGFW8',
+  location_id: 'L88917AVBK2S5',
+  reference_id: '123456',
+  note: 'Brief description'
+);
 ```
 </dd>
 </dl>
@@ -10304,7 +11424,7 @@ client.payments.create({
 <dl>
 <dd>
 
-**sourceId:** `String` 
+**source_id:** `String` 
 
 The ID for the source of funds for this payment.
 This could be a payment token generated by the Web Payments SDK for any of its
@@ -10320,7 +11440,7 @@ For more information, see
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this `CreatePayment` request. Keys can be any valid string
 but must be unique for every `CreatePayment` request.
@@ -10336,7 +11456,7 @@ For more information, see [Idempotency](https://developer.squareup.com/docs/work
 <dl>
 <dd>
 
-**amountMoney:** `Square::Types::Money` 
+**amount_money:** `Square::Types::Money` 
 
 The amount of money to accept for this payment, not including `tip_money`.
 
@@ -10353,13 +11473,15 @@ that is accepting the payment.
 <dl>
 <dd>
 
-**tipMoney:** `Square::Types::Money` 
+**tip_money:** `Square::Types::Money` 
 
 The amount designated as a tip, in addition to `amount_money`.
 
 The amount must be specified in the smallest denomination of the applicable currency
 (for example, US dollar amounts are specified in cents). For more information, see
 [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts).
+
+Tips for external vendors such as a 3rd party delivery courier must be recorded using Order.service_charges.
 
 The currency code must match the currency associated with the business
 that is accepting the payment.
@@ -10370,7 +11492,7 @@ that is accepting the payment.
 <dl>
 <dd>
 
-**appFeeMoney:** `Square::Types::Money` 
+**app_fee_money:** `Square::Types::Money` 
 
 The amount of money that the developer is taking as a fee
 for facilitating the payment on behalf of the seller.
@@ -10397,7 +11519,7 @@ For more information, see [Permissions](https://developer.squareup.com/docs/paym
 <dl>
 <dd>
 
-**delayDuration:** `String` 
+**delay_duration:** `String` 
 
 The duration of time after the payment's creation when Square automatically
 either completes or cancels the payment depending on the `delay_action` field value.
@@ -10420,7 +11542,7 @@ Default:
 <dl>
 <dd>
 
-**delayAction:** `String` 
+**delay_action:** `String` 
 
 The action to be applied to the payment when the `delay_duration` has elapsed. The action must be
 CANCEL or COMPLETE. For more information, see
@@ -10449,7 +11571,7 @@ Default: true
 <dl>
 <dd>
 
-**orderId:** `String` — Associates a previously created order with this payment.
+**order_id:** `String` — Associates a previously created order with this payment.
     
 </dd>
 </dl>
@@ -10457,7 +11579,7 @@ Default: true
 <dl>
 <dd>
 
-**customerId:** `String` 
+**customer_id:** `String` 
 
 The [Customer](entity:Customer) ID of the customer associated with the payment.
 
@@ -10469,7 +11591,7 @@ This is required if the `source_id` refers to a card on file created using the C
 <dl>
 <dd>
 
-**locationId:** `String` 
+**location_id:** `String` 
 
 The location ID to associate with the payment. If not specified, the [main location](https://developer.squareup.com/docs/locations-api#about-the-main-location) is
 used.
@@ -10480,7 +11602,7 @@ used.
 <dl>
 <dd>
 
-**teamMemberId:** `String` 
+**team_member_id:** `String` 
 
 An optional [TeamMember](entity:TeamMember) ID to associate with
 this payment.
@@ -10491,7 +11613,7 @@ this payment.
 <dl>
 <dd>
 
-**referenceId:** `String` 
+**reference_id:** `String` 
 
 A user-defined ID to associate with the payment.
 
@@ -10504,7 +11626,7 @@ You can use this field to associate the payment to an entity in an external syst
 <dl>
 <dd>
 
-**verificationToken:** `String` 
+**verification_token:** `String` 
 
 An identifying token generated by [payments.verifyBuyer()](https://developer.squareup.com/reference/sdks/web/payments/objects/Payments#Payments.verifyBuyer).
 Verification tokens encapsulate customer device information and 3-D Secure
@@ -10518,7 +11640,7 @@ For more information, see [SCA Overview](https://developer.squareup.com/docs/sca
 <dl>
 <dd>
 
-**acceptPartialAuthorization:** `Internal::Types::Boolean` 
+**accept_partial_authorization:** `Internal::Types::Boolean` 
 
 If set to `true` and charging a Square Gift Card, a payment might be returned with
 `amount_money` equal to less than what was requested. For example, a request for $20 when charging
@@ -10537,7 +11659,7 @@ Default: false
 <dl>
 <dd>
 
-**buyerEmailAddress:** `String` — The buyer's email address.
+**buyer_email_address:** `String` — The buyer's email address.
     
 </dd>
 </dl>
@@ -10545,7 +11667,7 @@ Default: false
 <dl>
 <dd>
 
-**buyerPhoneNumber:** `String` 
+**buyer_phone_number:** `String` 
 
 The buyer's phone number.
 Must follow the following format:
@@ -10560,7 +11682,7 @@ Alphabetical characters aren't allowed.
 <dl>
 <dd>
 
-**billingAddress:** `Square::Types::Address` — The buyer's billing address.
+**billing_address:** `Square::Types::Address` — The buyer's billing address.
     
 </dd>
 </dl>
@@ -10568,7 +11690,7 @@ Alphabetical characters aren't allowed.
 <dl>
 <dd>
 
-**shippingAddress:** `Square::Types::Address` — The buyer's shipping address.
+**shipping_address:** `Square::Types::Address` — The buyer's shipping address.
     
 </dd>
 </dl>
@@ -10584,7 +11706,7 @@ Alphabetical characters aren't allowed.
 <dl>
 <dd>
 
-**statementDescriptionIdentifier:** `String` 
+**statement_description_identifier:** `String` 
 
 Optional additional payment information to include on the customer's card statement
 as part of the statement description. This can be, for example, an invoice number, ticket number,
@@ -10600,7 +11722,7 @@ seller taking the payment.
 <dl>
 <dd>
 
-**cashDetails:** `Square::Types::CashPaymentDetails` — Additional details required when recording a cash payment (`source_id` is CASH).
+**cash_details:** `Square::Types::CashPaymentDetails` — Additional details required when recording a cash payment (`source_id` is CASH).
     
 </dd>
 </dl>
@@ -10608,7 +11730,7 @@ seller taking the payment.
 <dl>
 <dd>
 
-**externalDetails:** `Square::Types::ExternalPaymentDetails` — Additional details required when recording an external payment (`source_id` is EXTERNAL).
+**external_details:** `Square::Types::ExternalPaymentDetails` — Additional details required when recording an external payment (`source_id` is EXTERNAL).
     
 </dd>
 </dl>
@@ -10616,7 +11738,7 @@ seller taking the payment.
 <dl>
 <dd>
 
-**customerDetails:** `Square::Types::CustomerDetails` — Details about the customer making the payment.
+**customer_details:** `Square::Types::CustomerDetails` — Details about the customer making the payment.
     
 </dd>
 </dl>
@@ -10624,10 +11746,18 @@ seller taking the payment.
 <dl>
 <dd>
 
-**offlinePaymentDetails:** `Square::Types::OfflinePaymentDetails` 
+**offline_payment_details:** `Square::Types::OfflinePaymentDetails` 
 
 An optional field for specifying the offline payment details. This is intended for
 internal 1st-party callers only.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Payments::RequestOptions` 
     
 </dd>
 </dl>
@@ -10639,7 +11769,7 @@ internal 1st-party callers only.
 </dl>
 </details>
 
-<details><summary><code>client.Payments.CancelByIdempotencyKey(request) -> Square::Types::CancelPaymentByIdempotencyKeyResponse</code></summary>
+<details><summary><code>client.payments.<a href="/lib/square/payments/client.rb">cancel_by_idempotency_key</a>(request) -> Square::Types::CancelPaymentByIdempotencyKeyResponse</code></summary>
 <dl>
 <dd>
 
@@ -10676,9 +11806,7 @@ returns successfully.
 <dd>
 
 ```ruby
-client.payments.cancel_by_idempotency_key({
-  idempotencyKey:'a7e36d40-d24b-11e8-b568-0800200c9a66'
-});
+client.payments.cancel_by_idempotency_key(idempotency_key: 'a7e36d40-d24b-11e8-b568-0800200c9a66');
 ```
 </dd>
 </dl>
@@ -10693,7 +11821,15 @@ client.payments.cancel_by_idempotency_key({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` — The `idempotency_key` identifying the payment to be canceled.
+**idempotency_key:** `String` — The `idempotency_key` identifying the payment to be canceled.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Payments::RequestOptions` 
     
 </dd>
 </dl>
@@ -10705,7 +11841,7 @@ client.payments.cancel_by_idempotency_key({
 </dl>
 </details>
 
-<details><summary><code>client.Payments.Get(PaymentId) -> Square::Types::GetPaymentResponse</code></summary>
+<details><summary><code>client.payments.<a href="/lib/square/payments/client.rb">get</a>(payment_id) -> Square::Types::GetPaymentResponse</code></summary>
 <dl>
 <dd>
 
@@ -10732,9 +11868,7 @@ Retrieves details for a specific payment.
 <dd>
 
 ```ruby
-client.payments.get({
-  paymentId:'payment_id'
-});
+client.payments.get(payment_id: 'payment_id');
 ```
 </dd>
 </dl>
@@ -10749,7 +11883,15 @@ client.payments.get({
 <dl>
 <dd>
 
-**paymentId:** `String` — A unique ID for the desired payment.
+**payment_id:** `String` — A unique ID for the desired payment.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Payments::RequestOptions` 
     
 </dd>
 </dl>
@@ -10761,7 +11903,7 @@ client.payments.get({
 </dl>
 </details>
 
-<details><summary><code>client.Payments.Update(PaymentId, request) -> Square::Types::UpdatePaymentResponse</code></summary>
+<details><summary><code>client.payments.<a href="/lib/square/payments/client.rb">update</a>(payment_id, request) -> Square::Types::UpdatePaymentResponse</code></summary>
 <dl>
 <dd>
 
@@ -10789,19 +11931,21 @@ You can update the `amount_money` and `tip_money` using this endpoint.
 <dd>
 
 ```ruby
-client.payments.update({
-  paymentId:'payment_id',
-  payment:{
-    amount_money:{
-      amount:1000
+client.payments.update(
+  payment_id: 'payment_id',
+  payment: {
+    amount_money: {
+      amount: 1000,
+      currency: 'USD'
     },
-    tip_money:{
-      amount:100
+    tip_money: {
+      amount: 100,
+      currency: 'USD'
     },
-    version_token:'ODhwVQ35xwlzRuoZEwKXucfu7583sPTzK48c5zoGd0g6o'
+    version_token: 'ODhwVQ35xwlzRuoZEwKXucfu7583sPTzK48c5zoGd0g6o'
   },
-  idempotencyKey:'956f8b13-e4ec-45d6-85e8-d1d95ef0c5de'
-});
+  idempotency_key: '956f8b13-e4ec-45d6-85e8-d1d95ef0c5de'
+);
 ```
 </dd>
 </dl>
@@ -10816,7 +11960,7 @@ client.payments.update({
 <dl>
 <dd>
 
-**paymentId:** `String` — The ID of the payment to update.
+**payment_id:** `String` — The ID of the payment to update.
     
 </dd>
 </dl>
@@ -10832,12 +11976,20 @@ client.payments.update({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this `UpdatePayment` request. Keys can be any valid string
 but must be unique for every `UpdatePayment` request.
 
 For more information, see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Payments::RequestOptions` 
     
 </dd>
 </dl>
@@ -10849,7 +12001,7 @@ For more information, see [Idempotency](https://developer.squareup.com/docs/buil
 </dl>
 </details>
 
-<details><summary><code>client.Payments.Cancel(PaymentId) -> Square::Types::CancelPaymentResponse</code></summary>
+<details><summary><code>client.payments.<a href="/lib/square/payments/client.rb">cancel</a>(payment_id) -> Square::Types::CancelPaymentResponse</code></summary>
 <dl>
 <dd>
 
@@ -10877,9 +12029,7 @@ the APPROVED `status`.
 <dd>
 
 ```ruby
-client.payments.cancel({
-  paymentId:'payment_id'
-});
+client.payments.cancel(payment_id: 'payment_id');
 ```
 </dd>
 </dl>
@@ -10894,7 +12044,15 @@ client.payments.cancel({
 <dl>
 <dd>
 
-**paymentId:** `String` — The ID of the payment to cancel.
+**payment_id:** `String` — The ID of the payment to cancel.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Payments::RequestOptions` 
     
 </dd>
 </dl>
@@ -10906,7 +12064,7 @@ client.payments.cancel({
 </dl>
 </details>
 
-<details><summary><code>client.Payments.Complete(PaymentId, request) -> Square::Types::CompletePaymentResponse</code></summary>
+<details><summary><code>client.payments.<a href="/lib/square/payments/client.rb">complete</a>(payment_id, request) -> Square::Types::CompletePaymentResponse</code></summary>
 <dl>
 <dd>
 
@@ -10936,9 +12094,7 @@ You can use this endpoint to complete a payment with the APPROVED `status`.
 <dd>
 
 ```ruby
-client.payments.complete({
-  paymentId:'payment_id'
-});
+client.payments.complete(payment_id: 'payment_id');
 ```
 </dd>
 </dl>
@@ -10953,7 +12109,7 @@ client.payments.complete({
 <dl>
 <dd>
 
-**paymentId:** `String` — The unique ID identifying the payment to be completed.
+**payment_id:** `String` — The unique ID identifying the payment to be completed.
     
 </dd>
 </dl>
@@ -10961,11 +12117,19 @@ client.payments.complete({
 <dl>
 <dd>
 
-**versionToken:** `String` 
+**version_token:** `String` 
 
 Used for optimistic concurrency. This opaque token identifies the current `Payment`
 version that the caller expects. If the server has a different version of the Payment,
 the update fails and a response with a VERSION_MISMATCH error is returned.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Payments::RequestOptions` 
     
 </dd>
 </dl>
@@ -10978,7 +12142,7 @@ the update fails and a response with a VERSION_MISMATCH error is returned.
 </details>
 
 ## Payouts
-<details><summary><code>client.Payouts.List() -> Square::Types::ListPayoutsResponse</code></summary>
+<details><summary><code>client.payouts.<a href="/lib/square/payouts/client.rb">list</a>() -> Square::Types::ListPayoutsResponse</code></summary>
 <dl>
 <dd>
 
@@ -11007,13 +12171,15 @@ To call this endpoint, set `PAYOUTS_READ` for the OAuth scope.
 <dd>
 
 ```ruby
-client.payouts.list({
-  locationId:'location_id',
-  beginTime:'begin_time',
-  endTime:'end_time',
-  cursor:'cursor',
-  limit:1
-});
+client.payouts.list(
+  location_id: 'location_id',
+  status: 'SENT',
+  begin_time: 'begin_time',
+  end_time: 'end_time',
+  sort_order: 'DESC',
+  cursor: 'cursor',
+  limit: 1
+);
 ```
 </dd>
 </dl>
@@ -11028,7 +12194,7 @@ client.payouts.list({
 <dl>
 <dd>
 
-**locationId:** `String` 
+**location_id:** `String` 
 
 The ID of the location for which to list the payouts.
 By default, payouts are returned for the default (main) location associated with the seller.
@@ -11047,7 +12213,7 @@ By default, payouts are returned for the default (main) location associated with
 <dl>
 <dd>
 
-**beginTime:** `String` 
+**begin_time:** `String` 
 
 The timestamp for the beginning of the payout creation time, in RFC 3339 format.
 Inclusive. Default: The current time minus one year.
@@ -11058,7 +12224,7 @@ Inclusive. Default: The current time minus one year.
 <dl>
 <dd>
 
-**endTime:** `String` 
+**end_time:** `String` 
 
 The timestamp for the end of the payout creation time, in RFC 3339 format.
 Default: The current time.
@@ -11069,7 +12235,7 @@ Default: The current time.
 <dl>
 <dd>
 
-**sortOrder:** `Square::Types::SortOrder` — The order in which payouts are listed.
+**sort_order:** `Square::Types::SortOrder` — The order in which payouts are listed.
     
 </dd>
 </dl>
@@ -11100,6 +12266,14 @@ Default: `100`
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Payouts::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11108,7 +12282,7 @@ Default: `100`
 </dl>
 </details>
 
-<details><summary><code>client.Payouts.Get(PayoutId) -> Square::Types::GetPayoutResponse</code></summary>
+<details><summary><code>client.payouts.<a href="/lib/square/payouts/client.rb">get</a>(payout_id) -> Square::Types::GetPayoutResponse</code></summary>
 <dl>
 <dd>
 
@@ -11136,9 +12310,7 @@ To call this endpoint, set `PAYOUTS_READ` for the OAuth scope.
 <dd>
 
 ```ruby
-client.payouts.get({
-  payoutId:'payout_id'
-});
+client.payouts.get(payout_id: 'payout_id');
 ```
 </dd>
 </dl>
@@ -11153,7 +12325,15 @@ client.payouts.get({
 <dl>
 <dd>
 
-**payoutId:** `String` — The ID of the payout to retrieve the information for.
+**payout_id:** `String` — The ID of the payout to retrieve the information for.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Payouts::RequestOptions` 
     
 </dd>
 </dl>
@@ -11165,7 +12345,7 @@ client.payouts.get({
 </dl>
 </details>
 
-<details><summary><code>client.Payouts.ListEntries(PayoutId) -> Square::Types::ListPayoutEntriesResponse</code></summary>
+<details><summary><code>client.payouts.<a href="/lib/square/payouts/client.rb">list_entries</a>(payout_id) -> Square::Types::ListPayoutEntriesResponse</code></summary>
 <dl>
 <dd>
 
@@ -11193,11 +12373,12 @@ To call this endpoint, set `PAYOUTS_READ` for the OAuth scope.
 <dd>
 
 ```ruby
-client.payouts.list_entries({
-  payoutId:'payout_id',
-  cursor:'cursor',
-  limit:1
-});
+client.payouts.list_entries(
+  payout_id: 'payout_id',
+  sort_order: 'DESC',
+  cursor: 'cursor',
+  limit: 1
+);
 ```
 </dd>
 </dl>
@@ -11212,7 +12393,7 @@ client.payouts.list_entries({
 <dl>
 <dd>
 
-**payoutId:** `String` — The ID of the payout to retrieve the information for.
+**payout_id:** `String` — The ID of the payout to retrieve the information for.
     
 </dd>
 </dl>
@@ -11220,7 +12401,7 @@ client.payouts.list_entries({
 <dl>
 <dd>
 
-**sortOrder:** `Square::Types::SortOrder` — The order in which payout entries are listed.
+**sort_order:** `Square::Types::SortOrder` — The order in which payout entries are listed.
     
 </dd>
 </dl>
@@ -11251,6 +12432,14 @@ Default: `100`
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Payouts::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11260,7 +12449,7 @@ Default: `100`
 </details>
 
 ## Refunds
-<details><summary><code>client.Refunds.List() -> Square::Types::ListPaymentRefundsResponse</code></summary>
+<details><summary><code>client.refunds.<a href="/lib/square/refunds/client.rb">list</a>() -> Square::Types::ListPaymentRefundsResponse</code></summary>
 <dl>
 <dd>
 
@@ -11292,18 +12481,19 @@ The maximum results per page is 100.
 <dd>
 
 ```ruby
-client.refunds.list({
-  beginTime:'begin_time',
-  endTime:'end_time',
-  sortOrder:'sort_order',
-  cursor:'cursor',
-  locationId:'location_id',
-  status:'status',
-  sourceType:'source_type',
-  limit:1,
-  updatedAtBeginTime:'updated_at_begin_time',
-  updatedAtEndTime:'updated_at_end_time'
-});
+client.refunds.list(
+  begin_time: 'begin_time',
+  end_time: 'end_time',
+  sort_order: 'sort_order',
+  cursor: 'cursor',
+  location_id: 'location_id',
+  status: 'status',
+  source_type: 'source_type',
+  limit: 1,
+  updated_at_begin_time: 'updated_at_begin_time',
+  updated_at_end_time: 'updated_at_end_time',
+  sort_field: 'CREATED_AT'
+);
 ```
 </dd>
 </dl>
@@ -11318,7 +12508,7 @@ client.refunds.list({
 <dl>
 <dd>
 
-**beginTime:** `String` 
+**begin_time:** `String` 
 
 Indicates the start of the time range to retrieve each `PaymentRefund` for, in RFC 3339 
 format.  The range is determined using the `created_at` field for each `PaymentRefund`. 
@@ -11331,7 +12521,7 @@ Default: The current time minus one year.
 <dl>
 <dd>
 
-**endTime:** `String` 
+**end_time:** `String` 
 
 Indicates the end of the time range to retrieve each `PaymentRefund` for, in RFC 3339 
 format.  The range is determined using the `created_at` field for each `PaymentRefund`.
@@ -11344,7 +12534,7 @@ Default: The current time.
 <dl>
 <dd>
 
-**sortOrder:** `String` 
+**sort_order:** `String` 
 
 The order in which results are listed by `PaymentRefund.created_at`:
 - `ASC` - Oldest to newest.
@@ -11369,7 +12559,7 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
 <dl>
 <dd>
 
-**locationId:** `String` 
+**location_id:** `String` 
 
 Limit results to the location supplied. By default, results are returned
 for all locations associated with the seller.
@@ -11393,7 +12583,7 @@ Default: If omitted, refunds are returned regardless of their status.
 <dl>
 <dd>
 
-**sourceType:** `String` 
+**source_type:** `String` 
 
 If provided, only returns refunds whose payments have the indicated source type.
 Current values include `CARD`, `BANK_ACCOUNT`, `WALLET`, `CASH`, and `EXTERNAL`.
@@ -11424,7 +12614,7 @@ Default: 100
 <dl>
 <dd>
 
-**updatedAtBeginTime:** `String` 
+**updated_at_begin_time:** `String` 
 
 Indicates the start of the time range to retrieve each `PaymentRefund` for, in RFC 3339
 format.  The range is determined using the `updated_at` field for each `PaymentRefund`.
@@ -11437,7 +12627,7 @@ Default: If omitted, the time range starts at `begin_time`.
 <dl>
 <dd>
 
-**updatedAtEndTime:** `String` 
+**updated_at_end_time:** `String` 
 
 Indicates the end of the time range to retrieve each `PaymentRefund` for, in RFC 3339
 format.  The range is determined using the `updated_at` field for each `PaymentRefund`.
@@ -11450,7 +12640,15 @@ Default: The current time.
 <dl>
 <dd>
 
-**sortField:** `Square::Types::ListPaymentRefundsRequestSortField` — The field used to sort results by. The default is `CREATED_AT`.
+**sort_field:** `Square::Types::ListPaymentRefundsRequestSortField` — The field used to sort results by. The default is `CREATED_AT`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Refunds::RequestOptions` 
     
 </dd>
 </dl>
@@ -11462,7 +12660,7 @@ Default: The current time.
 </dl>
 </details>
 
-<details><summary><code>client.Refunds.RefundPayment(request) -> Square::Types::RefundPaymentResponse</code></summary>
+<details><summary><code>client.refunds.<a href="/lib/square/refunds/client.rb">refund_payment</a>(request) -> Square::Types::RefundPaymentResponse</code></summary>
 <dl>
 <dd>
 
@@ -11492,17 +12690,19 @@ refund of a cash or external payment. For more information, see
 <dd>
 
 ```ruby
-client.refunds.refund_payment({
-  idempotencyKey:'9b7f2dcf-49da-4411-b23e-a2d6af21333a',
-  amountMoney:{
-    amount:1000
+client.refunds.refund_payment(
+  idempotency_key: '9b7f2dcf-49da-4411-b23e-a2d6af21333a',
+  amount_money: {
+    amount: 1000,
+    currency: 'USD'
   },
-  appFeeMoney:{
-    amount:10
+  app_fee_money: {
+    amount: 10,
+    currency: 'USD'
   },
-  paymentId:'R2B3Z8WMVt3EAmzYWLZvz7Y69EbZY',
-  reason:'Example'
-});
+  payment_id: 'R2B3Z8WMVt3EAmzYWLZvz7Y69EbZY',
+  reason: 'Example'
+);
 ```
 </dd>
 </dl>
@@ -11517,7 +12717,7 @@ client.refunds.refund_payment({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
  A unique string that identifies this `RefundPayment` request. The key can be any valid string
 but must be unique for every `RefundPayment` request.
@@ -11533,7 +12733,7 @@ For more information, see [Idempotency](https://developer.squareup.com/docs/work
 <dl>
 <dd>
 
-**amountMoney:** `Square::Types::Money` 
+**amount_money:** `Square::Types::Money` 
 
 The amount of money to refund.
 
@@ -11553,7 +12753,7 @@ that is charging the card.
 <dl>
 <dd>
 
-**appFeeMoney:** `Square::Types::Money` 
+**app_fee_money:** `Square::Types::Money` 
 
 The amount of money the developer contributes to help cover the refunded amount.
 This amount is specified in the smallest denomination of the applicable currency (for example,
@@ -11574,7 +12774,7 @@ For more information, see [Permissions](https://developer.squareup.com/docs/paym
 <dl>
 <dd>
 
-**paymentId:** `String` 
+**payment_id:** `String` 
 
 The unique ID of the payment being refunded.
 Required when unlinked=false, otherwise must not be set.
@@ -11585,7 +12785,7 @@ Required when unlinked=false, otherwise must not be set.
 <dl>
 <dd>
 
-**destinationId:** `String` 
+**destination_id:** `String` 
 
 The ID indicating where funds will be refunded to. Required for unlinked refunds. For more
 information, see [Process an Unlinked Refund](https://developer.squareup.com/docs/refunds-api/unlinked-refunds).
@@ -11613,7 +12813,7 @@ be provided.
 <dl>
 <dd>
 
-**locationId:** `String` 
+**location_id:** `String` 
 
 The location ID associated with the unlinked refund.
 Required for requests specifying `unlinked=true`.
@@ -11625,7 +12825,7 @@ Otherwise, if included when `unlinked=false`, will throw an error.
 <dl>
 <dd>
 
-**customerId:** `String` 
+**customer_id:** `String` 
 
 The [Customer](entity:Customer) ID of the customer associated with the refund.
 This is required if the `destination_id` refers to a card on file created using the Cards
@@ -11645,7 +12845,7 @@ API. Only allowed when `unlinked=true`.
 <dl>
 <dd>
 
-**paymentVersionToken:** `String` 
+**payment_version_token:** `String` 
 
  Used for optimistic concurrency. This opaque token identifies the current `Payment`
 version that the caller expects. If the server has a different version of the Payment,
@@ -11658,7 +12858,7 @@ If the versions match, or the field is not provided, the refund proceeds as norm
 <dl>
 <dd>
 
-**teamMemberId:** `String` — An optional [TeamMember](entity:TeamMember) ID to associate with this refund.
+**team_member_id:** `String` — An optional [TeamMember](entity:TeamMember) ID to associate with this refund.
     
 </dd>
 </dl>
@@ -11666,7 +12866,7 @@ If the versions match, or the field is not provided, the refund proceeds as norm
 <dl>
 <dd>
 
-**cashDetails:** `Square::Types::DestinationDetailsCashRefundDetails` — Additional details required when recording an unlinked cash refund (`destination_id` is CASH).
+**cash_details:** `Square::Types::DestinationDetailsCashRefundDetails` — Additional details required when recording an unlinked cash refund (`destination_id` is CASH).
     
 </dd>
 </dl>
@@ -11674,10 +12874,18 @@ If the versions match, or the field is not provided, the refund proceeds as norm
 <dl>
 <dd>
 
-**externalDetails:** `Square::Types::DestinationDetailsExternalRefundDetails` 
+**external_details:** `Square::Types::DestinationDetailsExternalRefundDetails` 
 
 Additional details required when recording an unlinked external refund
 (`destination_id` is EXTERNAL).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Refunds::RequestOptions` 
     
 </dd>
 </dl>
@@ -11689,7 +12897,7 @@ Additional details required when recording an unlinked external refund
 </dl>
 </details>
 
-<details><summary><code>client.Refunds.Get(RefundId) -> Square::Types::GetPaymentRefundResponse</code></summary>
+<details><summary><code>client.refunds.<a href="/lib/square/refunds/client.rb">get</a>(refund_id) -> Square::Types::GetPaymentRefundResponse</code></summary>
 <dl>
 <dd>
 
@@ -11716,9 +12924,7 @@ Retrieves a specific refund using the `refund_id`.
 <dd>
 
 ```ruby
-client.refunds.get({
-  refundId:'refund_id'
-});
+client.refunds.get(refund_id: 'refund_id');
 ```
 </dd>
 </dl>
@@ -11733,7 +12939,15 @@ client.refunds.get({
 <dl>
 <dd>
 
-**refundId:** `String` — The unique ID for the desired `PaymentRefund`.
+**refund_id:** `String` — The unique ID for the desired `PaymentRefund`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Refunds::RequestOptions` 
     
 </dd>
 </dl>
@@ -11746,7 +12960,7 @@ client.refunds.get({
 </details>
 
 ## Sites
-<details><summary><code>client.Sites.List() -> Square::Types::ListSitesResponse</code></summary>
+<details><summary><code>client.sites.<a href="/lib/square/sites/client.rb">list</a>() -> Square::Types::ListSitesResponse</code></summary>
 <dl>
 <dd>
 
@@ -11783,13 +12997,28 @@ client.sites.list();
 </dd>
 </dl>
 
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Sites::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
 
 </dd>
 </dl>
 </details>
 
 ## Snippets
-<details><summary><code>client.Snippets.Get(SiteId) -> Square::Types::GetSnippetResponse</code></summary>
+<details><summary><code>client.snippets.<a href="/lib/square/snippets/client.rb">get</a>(site_id) -> Square::Types::GetSnippetResponse</code></summary>
 <dl>
 <dd>
 
@@ -11821,9 +13050,7 @@ __Note:__ Square Online APIs are publicly available as part of an early access p
 <dd>
 
 ```ruby
-client.snippets.get({
-  siteId:'site_id'
-});
+client.snippets.get(site_id: 'site_id');
 ```
 </dd>
 </dl>
@@ -11838,7 +13065,15 @@ client.snippets.get({
 <dl>
 <dd>
 
-**siteId:** `String` — The ID of the site that contains the snippet.
+**site_id:** `String` — The ID of the site that contains the snippet.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Snippets::RequestOptions` 
     
 </dd>
 </dl>
@@ -11850,7 +13085,7 @@ client.snippets.get({
 </dl>
 </details>
 
-<details><summary><code>client.Snippets.Upsert(SiteId, request) -> Square::Types::UpsertSnippetResponse</code></summary>
+<details><summary><code>client.snippets.<a href="/lib/square/snippets/client.rb">upsert</a>(site_id, request) -> Square::Types::UpsertSnippetResponse</code></summary>
 <dl>
 <dd>
 
@@ -11883,12 +13118,12 @@ __Note:__ Square Online APIs are publicly available as part of an early access p
 <dd>
 
 ```ruby
-client.snippets.upsert({
-  siteId:'site_id',
-  snippet:{
-    content:'<script>var js = 1;</script>'
+client.snippets.upsert(
+  site_id: 'site_id',
+  snippet: {
+    content: '<script>var js = 1;</script>'
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -11903,7 +13138,7 @@ client.snippets.upsert({
 <dl>
 <dd>
 
-**siteId:** `String` — The ID of the site where you want to add or update the snippet.
+**site_id:** `String` — The ID of the site where you want to add or update the snippet.
     
 </dd>
 </dl>
@@ -11915,6 +13150,14 @@ client.snippets.upsert({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Snippets::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11923,7 +13166,7 @@ client.snippets.upsert({
 </dl>
 </details>
 
-<details><summary><code>client.Snippets.Delete(SiteId) -> Square::Types::DeleteSnippetResponse</code></summary>
+<details><summary><code>client.snippets.<a href="/lib/square/snippets/client.rb">delete</a>(site_id) -> Square::Types::DeleteSnippetResponse</code></summary>
 <dl>
 <dd>
 
@@ -11955,9 +13198,7 @@ __Note:__ Square Online APIs are publicly available as part of an early access p
 <dd>
 
 ```ruby
-client.snippets.delete({
-  siteId:'site_id'
-});
+client.snippets.delete(site_id: 'site_id');
 ```
 </dd>
 </dl>
@@ -11972,7 +13213,15 @@ client.snippets.delete({
 <dl>
 <dd>
 
-**siteId:** `String` — The ID of the site that contains the snippet.
+**site_id:** `String` — The ID of the site that contains the snippet.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Snippets::RequestOptions` 
     
 </dd>
 </dl>
@@ -11985,7 +13234,7 @@ client.snippets.delete({
 </details>
 
 ## Subscriptions
-<details><summary><code>client.Subscriptions.Create(request) -> Square::Types::CreateSubscriptionResponse</code></summary>
+<details><summary><code>client.subscriptions.<a href="/lib/square/subscriptions/client.rb">create</a>(request) -> Square::Types::CreateSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -12019,22 +13268,22 @@ For more information, see [Create a subscription](https://developer.squareup.com
 <dd>
 
 ```ruby
-client.subscriptions.create({
-  idempotencyKey:'8193148c-9586-11e6-99f9-28cfe92138cf',
-  locationId:'S8GWD5R9QB376',
-  planVariationId:'6JHXF3B2CW3YKHDV4XEM674H',
-  customerId:'CHFGVKYY8RSV93M5KCYTG4PN0G',
-  startDate:'2023-06-20',
-  cardId:'ccof:qy5x8hHGYsgLrp4Q4GB',
-  timezone:'America/Los_Angeles',
-  source:{
-    name:'My Application'
+client.subscriptions.create(
+  idempotency_key: '8193148c-9586-11e6-99f9-28cfe92138cf',
+  location_id: 'S8GWD5R9QB376',
+  plan_variation_id: '6JHXF3B2CW3YKHDV4XEM674H',
+  customer_id: 'CHFGVKYY8RSV93M5KCYTG4PN0G',
+  start_date: '2023-06-20',
+  card_id: 'ccof:qy5x8hHGYsgLrp4Q4GB',
+  timezone: 'America/Los_Angeles',
+  source: {
+    name: 'My Application'
   },
-  phases:[{
-    ordinal:0,
-    order_template_id:'U2NaowWxzXwpsZU697x7ZHOAnCNZY'
+  phases: [{
+    ordinal: 0,
+    order_template_id: 'U2NaowWxzXwpsZU697x7ZHOAnCNZY'
   }]
-});
+);
 ```
 </dd>
 </dl>
@@ -12049,7 +13298,7 @@ client.subscriptions.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this `CreateSubscription` request.
 If you do not provide a unique string (or provide an empty string as the value),
@@ -12063,7 +13312,7 @@ For more information, see [Idempotency keys](https://developer.squareup.com/docs
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the location the subscription is associated with.
+**location_id:** `String` — The ID of the location the subscription is associated with.
     
 </dd>
 </dl>
@@ -12071,7 +13320,7 @@ For more information, see [Idempotency keys](https://developer.squareup.com/docs
 <dl>
 <dd>
 
-**planVariationId:** `String` — The ID of the [subscription plan variation](https://developer.squareup.com/docs/subscriptions-api/plans-and-variations#plan-variations) created using the Catalog API.
+**plan_variation_id:** `String` — The ID of the [subscription plan variation](https://developer.squareup.com/docs/subscriptions-api/plans-and-variations#plan-variations) created using the Catalog API.
     
 </dd>
 </dl>
@@ -12079,7 +13328,7 @@ For more information, see [Idempotency keys](https://developer.squareup.com/docs
 <dl>
 <dd>
 
-**customerId:** `String` — The ID of the [customer](entity:Customer) subscribing to the subscription plan variation.
+**customer_id:** `String` — The ID of the [customer](entity:Customer) subscribing to the subscription plan variation.
     
 </dd>
 </dl>
@@ -12087,7 +13336,7 @@ For more information, see [Idempotency keys](https://developer.squareup.com/docs
 <dl>
 <dd>
 
-**startDate:** `String` 
+**start_date:** `String` 
 
 The `YYYY-MM-DD`-formatted date to start the subscription. 
 If it is unspecified, the subscription starts immediately.
@@ -12098,7 +13347,7 @@ If it is unspecified, the subscription starts immediately.
 <dl>
 <dd>
 
-**canceledDate:** `String` 
+**canceled_date:** `String` 
 
 The `YYYY-MM-DD`-formatted date when the newly created subscription is scheduled for cancellation. 
 
@@ -12116,7 +13365,7 @@ stops through the end of the last cycle.
 <dl>
 <dd>
 
-**taxPercentage:** `String` 
+**tax_percentage:** `String` 
 
 The tax to add when billing the subscription.
 The percentage is expressed in decimal form, using a `'.'` as the decimal
@@ -12129,7 +13378,7 @@ corresponds to 7.5%.
 <dl>
 <dd>
 
-**priceOverrideMoney:** `Square::Types::Money` 
+**price_override_money:** `Square::Types::Money` 
 
 A custom price which overrides the cost of a subscription plan variation with `STATIC` pricing.
 This field does not affect itemized subscriptions with `RELATIVE` pricing. Instead, 
@@ -12141,7 +13390,7 @@ you should edit the Subscription's [order template](https://developer.squareup.c
 <dl>
 <dd>
 
-**cardId:** `String` 
+**card_id:** `String` 
 
 The ID of the [subscriber's](entity:Customer) [card](entity:Card) to charge.
 If it is not specified, the subscriber receives an invoice via email with a link to pay for their subscription.
@@ -12173,7 +13422,7 @@ a list of time zones, see [List of tz database time zones](https://en.wikipedia.
 <dl>
 <dd>
 
-**monthlyBillingAnchorDate:** `Integer` — The day-of-the-month to change the billing date to.
+**monthly_billing_anchor_date:** `Integer` — The day-of-the-month to change the billing date to.
     
 </dd>
 </dl>
@@ -12185,6 +13434,14 @@ a list of time zones, see [List of tz database time zones](https://en.wikipedia.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Subscriptions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12193,7 +13450,7 @@ a list of time zones, see [List of tz database time zones](https://en.wikipedia.
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.BulkSwapPlan(request) -> Square::Types::BulkSwapPlanResponse</code></summary>
+<details><summary><code>client.subscriptions.<a href="/lib/square/subscriptions/client.rb">bulk_swap_plan</a>(request) -> Square::Types::BulkSwapPlanResponse</code></summary>
 <dl>
 <dd>
 
@@ -12221,11 +13478,11 @@ variation. For more information, see [Swap Subscription Plan Variations](https:/
 <dd>
 
 ```ruby
-client.subscriptions.bulk_swap_plan({
-  newPlanVariationId:'FQ7CDXXWSLUJRPM3GFJSJGZ7',
-  oldPlanVariationId:'6JHXF3B2CW3YKHDV4XEM674H',
-  locationId:'S8GWD5R9QB376'
-});
+client.subscriptions.bulk_swap_plan(
+  new_plan_variation_id: 'FQ7CDXXWSLUJRPM3GFJSJGZ7',
+  old_plan_variation_id: '6JHXF3B2CW3YKHDV4XEM674H',
+  location_id: 'S8GWD5R9QB376'
+);
 ```
 </dd>
 </dl>
@@ -12240,7 +13497,7 @@ client.subscriptions.bulk_swap_plan({
 <dl>
 <dd>
 
-**newPlanVariationId:** `String` 
+**new_plan_variation_id:** `String` 
 
 The ID of the new subscription plan variation.
 
@@ -12252,7 +13509,7 @@ This field is required.
 <dl>
 <dd>
 
-**oldPlanVariationId:** `String` 
+**old_plan_variation_id:** `String` 
 
 The ID of the plan variation whose subscriptions should be swapped. Active subscriptions
 using this plan variation will be subscribed to the new plan variation on their next billing
@@ -12264,7 +13521,15 @@ day.
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the location to associate with the swapped subscriptions.
+**location_id:** `String` — The ID of the location to associate with the swapped subscriptions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Subscriptions::RequestOptions` 
     
 </dd>
 </dl>
@@ -12276,7 +13541,7 @@ day.
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.Search(request) -> Square::Types::SearchSubscriptionsResponse</code></summary>
+<details><summary><code>client.subscriptions.<a href="/lib/square/subscriptions/client.rb">search</a>(request) -> Square::Types::SearchSubscriptionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -12316,13 +13581,11 @@ customer by subscription creation date.
 <dd>
 
 ```ruby
-client.subscriptions.search({
-  query:{
-    filter:{
-      customer_ids:['CHFGVKYY8RSV93M5KCYTG4PN0G'],
-      location_ids:['S8GWD5R9QB376'],
-      source_names:['My App']
-    }
+client.subscriptions.search(query: {
+  filter: {
+    customer_ids: ['CHFGVKYY8RSV93M5KCYTG4PN0G'],
+    location_ids: ['S8GWD5R9QB376'],
+    source_names: ['My App']
   }
 });
 ```
@@ -12386,6 +13649,14 @@ The supported values are:
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Subscriptions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12394,7 +13665,7 @@ The supported values are:
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.Get(SubscriptionId) -> Square::Types::GetSubscriptionResponse</code></summary>
+<details><summary><code>client.subscriptions.<a href="/lib/square/subscriptions/client.rb">get</a>(subscription_id) -> Square::Types::GetSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -12421,10 +13692,10 @@ Retrieves a specific subscription.
 <dd>
 
 ```ruby
-client.subscriptions.get({
-  subscriptionId:'subscription_id',
-  include:'include'
-});
+client.subscriptions.get(
+  subscription_id: 'subscription_id',
+  include: 'include'
+);
 ```
 </dd>
 </dl>
@@ -12439,7 +13710,7 @@ client.subscriptions.get({
 <dl>
 <dd>
 
-**subscriptionId:** `String` — The ID of the subscription to retrieve.
+**subscription_id:** `String` — The ID of the subscription to retrieve.
     
 </dd>
 </dl>
@@ -12457,6 +13728,14 @@ The supported query parameter values are:
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Subscriptions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12465,7 +13744,7 @@ The supported query parameter values are:
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.Update(SubscriptionId, request) -> Square::Types::UpdateSubscriptionResponse</code></summary>
+<details><summary><code>client.subscriptions.<a href="/lib/square/subscriptions/client.rb">update</a>(subscription_id, request) -> Square::Types::UpdateSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -12493,12 +13772,12 @@ To clear a field, set its value to `null`.
 <dd>
 
 ```ruby
-client.subscriptions.update({
-  subscriptionId:'subscription_id',
-  subscription:{
-    card_id:'{NEW CARD ID}'
+client.subscriptions.update(
+  subscription_id: 'subscription_id',
+  subscription: {
+    card_id: '{NEW CARD ID}'
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -12513,7 +13792,7 @@ client.subscriptions.update({
 <dl>
 <dd>
 
-**subscriptionId:** `String` — The ID of the subscription to update.
+**subscription_id:** `String` — The ID of the subscription to update.
     
 </dd>
 </dl>
@@ -12529,6 +13808,14 @@ be treated as a request to clear the relevant data.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Subscriptions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12537,7 +13824,7 @@ be treated as a request to clear the relevant data.
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.DeleteAction(SubscriptionId, ActionId) -> Square::Types::DeleteSubscriptionActionResponse</code></summary>
+<details><summary><code>client.subscriptions.<a href="/lib/square/subscriptions/client.rb">delete_action</a>(subscription_id, action_id) -> Square::Types::DeleteSubscriptionActionResponse</code></summary>
 <dl>
 <dd>
 
@@ -12564,10 +13851,10 @@ Deletes a scheduled action for a subscription.
 <dd>
 
 ```ruby
-client.subscriptions.delete_action({
-  subscriptionId:'subscription_id',
-  actionId:'action_id'
-});
+client.subscriptions.delete_action(
+  subscription_id: 'subscription_id',
+  action_id: 'action_id'
+);
 ```
 </dd>
 </dl>
@@ -12582,7 +13869,7 @@ client.subscriptions.delete_action({
 <dl>
 <dd>
 
-**subscriptionId:** `String` — The ID of the subscription the targeted action is to act upon.
+**subscription_id:** `String` — The ID of the subscription the targeted action is to act upon.
     
 </dd>
 </dl>
@@ -12590,7 +13877,15 @@ client.subscriptions.delete_action({
 <dl>
 <dd>
 
-**actionId:** `String` — The ID of the targeted action to be deleted.
+**action_id:** `String` — The ID of the targeted action to be deleted.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Subscriptions::RequestOptions` 
     
 </dd>
 </dl>
@@ -12602,7 +13897,7 @@ client.subscriptions.delete_action({
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.ChangeBillingAnchorDate(SubscriptionId, request) -> Square::Types::ChangeBillingAnchorDateResponse</code></summary>
+<details><summary><code>client.subscriptions.<a href="/lib/square/subscriptions/client.rb">change_billing_anchor_date</a>(subscription_id, request) -> Square::Types::ChangeBillingAnchorDateResponse</code></summary>
 <dl>
 <dd>
 
@@ -12630,10 +13925,10 @@ for a subscription.
 <dd>
 
 ```ruby
-client.subscriptions.change_billing_anchor_date({
-  subscriptionId:'subscription_id',
-  monthlyBillingAnchorDate:1
-});
+client.subscriptions.change_billing_anchor_date(
+  subscription_id: 'subscription_id',
+  monthly_billing_anchor_date: 1
+);
 ```
 </dd>
 </dl>
@@ -12648,7 +13943,7 @@ client.subscriptions.change_billing_anchor_date({
 <dl>
 <dd>
 
-**subscriptionId:** `String` — The ID of the subscription to update the billing anchor date.
+**subscription_id:** `String` — The ID of the subscription to update the billing anchor date.
     
 </dd>
 </dl>
@@ -12656,7 +13951,7 @@ client.subscriptions.change_billing_anchor_date({
 <dl>
 <dd>
 
-**monthlyBillingAnchorDate:** `Integer` — The anchor day for the billing cycle.
+**monthly_billing_anchor_date:** `Integer` — The anchor day for the billing cycle.
     
 </dd>
 </dl>
@@ -12664,13 +13959,21 @@ client.subscriptions.change_billing_anchor_date({
 <dl>
 <dd>
 
-**effectiveDate:** `String` 
+**effective_date:** `String` 
 
 The `YYYY-MM-DD`-formatted date when the scheduled `BILLING_ANCHOR_CHANGE` action takes
 place on the subscription.
 
 When this date is unspecified or falls within the current billing cycle, the billing anchor date
 is changed immediately.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Subscriptions::RequestOptions` 
     
 </dd>
 </dl>
@@ -12682,7 +13985,7 @@ is changed immediately.
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.Cancel(SubscriptionId) -> Square::Types::CancelSubscriptionResponse</code></summary>
+<details><summary><code>client.subscriptions.<a href="/lib/square/subscriptions/client.rb">cancel</a>(subscription_id) -> Square::Types::CancelSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -12711,9 +14014,7 @@ the subscription status changes from ACTIVE to CANCELED.
 <dd>
 
 ```ruby
-client.subscriptions.cancel({
-  subscriptionId:'subscription_id'
-});
+client.subscriptions.cancel(subscription_id: 'subscription_id');
 ```
 </dd>
 </dl>
@@ -12728,7 +14029,15 @@ client.subscriptions.cancel({
 <dl>
 <dd>
 
-**subscriptionId:** `String` — The ID of the subscription to cancel.
+**subscription_id:** `String` — The ID of the subscription to cancel.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Subscriptions::RequestOptions` 
     
 </dd>
 </dl>
@@ -12740,7 +14049,7 @@ client.subscriptions.cancel({
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.ListEvents(SubscriptionId) -> Square::Types::ListSubscriptionEventsResponse</code></summary>
+<details><summary><code>client.subscriptions.<a href="/lib/square/subscriptions/client.rb">list_events</a>(subscription_id) -> Square::Types::ListSubscriptionEventsResponse</code></summary>
 <dl>
 <dd>
 
@@ -12767,11 +14076,11 @@ Lists all [events](https://developer.squareup.com/docs/subscriptions-api/actions
 <dd>
 
 ```ruby
-client.subscriptions.list_events({
-  subscriptionId:'subscription_id',
-  cursor:'cursor',
-  limit:1
-});
+client.subscriptions.list_events(
+  subscription_id: 'subscription_id',
+  cursor: 'cursor',
+  limit: 1
+);
 ```
 </dd>
 </dl>
@@ -12786,7 +14095,7 @@ client.subscriptions.list_events({
 <dl>
 <dd>
 
-**subscriptionId:** `String` — The ID of the subscription to retrieve the events for.
+**subscription_id:** `String` — The ID of the subscription to retrieve the events for.
     
 </dd>
 </dl>
@@ -12815,6 +14124,14 @@ in a paged response.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Subscriptions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12823,7 +14140,7 @@ in a paged response.
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.Pause(SubscriptionId, request) -> Square::Types::PauseSubscriptionResponse</code></summary>
+<details><summary><code>client.subscriptions.<a href="/lib/square/subscriptions/client.rb">pause</a>(subscription_id, request) -> Square::Types::PauseSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -12850,9 +14167,7 @@ Schedules a `PAUSE` action to pause an active subscription.
 <dd>
 
 ```ruby
-client.subscriptions.pause({
-  subscriptionId:'subscription_id'
-});
+client.subscriptions.pause(subscription_id: 'subscription_id');
 ```
 </dd>
 </dl>
@@ -12867,7 +14182,7 @@ client.subscriptions.pause({
 <dl>
 <dd>
 
-**subscriptionId:** `String` — The ID of the subscription to pause.
+**subscription_id:** `String` — The ID of the subscription to pause.
     
 </dd>
 </dl>
@@ -12875,7 +14190,7 @@ client.subscriptions.pause({
 <dl>
 <dd>
 
-**pauseEffectiveDate:** `String` 
+**pause_effective_date:** `String` 
 
 The `YYYY-MM-DD`-formatted date when the scheduled `PAUSE` action takes place on the subscription.
 
@@ -12888,7 +14203,7 @@ on the starting date of the next billing cycle.
 <dl>
 <dd>
 
-**pauseCycleDuration:** `Integer` 
+**pause_cycle_duration:** `Integer` 
 
 The number of billing cycles the subscription will be paused before it is reactivated. 
 
@@ -12902,7 +14217,7 @@ nor `resume_change_timing` may be specified.
 <dl>
 <dd>
 
-**resumeEffectiveDate:** `String` 
+**resume_effective_date:** `String` 
 
 The date when the subscription is reactivated by a scheduled `RESUME` action. 
 This date must be at least one billing cycle ahead of `pause_effective_date`.
@@ -12913,7 +14228,7 @@ This date must be at least one billing cycle ahead of `pause_effective_date`.
 <dl>
 <dd>
 
-**resumeChangeTiming:** `Square::Types::ChangeTiming` 
+**resume_change_timing:** `Square::Types::ChangeTiming` 
 
 The timing whether the subscription is reactivated immediately or at the end of the billing cycle, relative to 
 `resume_effective_date`.
@@ -12925,7 +14240,15 @@ See [ChangeTiming](#type-changetiming) for possible values
 <dl>
 <dd>
 
-**pauseReason:** `String` — The user-provided reason to pause the subscription.
+**pause_reason:** `String` — The user-provided reason to pause the subscription.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Subscriptions::RequestOptions` 
     
 </dd>
 </dl>
@@ -12937,7 +14260,7 @@ See [ChangeTiming](#type-changetiming) for possible values
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.Resume(SubscriptionId, request) -> Square::Types::ResumeSubscriptionResponse</code></summary>
+<details><summary><code>client.subscriptions.<a href="/lib/square/subscriptions/client.rb">resume</a>(subscription_id, request) -> Square::Types::ResumeSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -12964,9 +14287,7 @@ Schedules a `RESUME` action to resume a paused or a deactivated subscription.
 <dd>
 
 ```ruby
-client.subscriptions.resume({
-  subscriptionId:'subscription_id'
-});
+client.subscriptions.resume(subscription_id: 'subscription_id');
 ```
 </dd>
 </dl>
@@ -12981,7 +14302,7 @@ client.subscriptions.resume({
 <dl>
 <dd>
 
-**subscriptionId:** `String` — The ID of the subscription to resume.
+**subscription_id:** `String` — The ID of the subscription to resume.
     
 </dd>
 </dl>
@@ -12989,7 +14310,7 @@ client.subscriptions.resume({
 <dl>
 <dd>
 
-**resumeEffectiveDate:** `String` — The `YYYY-MM-DD`-formatted date when the subscription reactivated.
+**resume_effective_date:** `String` — The `YYYY-MM-DD`-formatted date when the subscription reactivated.
     
 </dd>
 </dl>
@@ -12997,11 +14318,19 @@ client.subscriptions.resume({
 <dl>
 <dd>
 
-**resumeChangeTiming:** `Square::Types::ChangeTiming` 
+**resume_change_timing:** `Square::Types::ChangeTiming` 
 
 The timing to resume a subscription, relative to the specified
 `resume_effective_date` attribute value.
 See [ChangeTiming](#type-changetiming) for possible values
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Subscriptions::RequestOptions` 
     
 </dd>
 </dl>
@@ -13013,7 +14342,7 @@ See [ChangeTiming](#type-changetiming) for possible values
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.SwapPlan(SubscriptionId, request) -> Square::Types::SwapPlanResponse</code></summary>
+<details><summary><code>client.subscriptions.<a href="/lib/square/subscriptions/client.rb">swap_plan</a>(subscription_id, request) -> Square::Types::SwapPlanResponse</code></summary>
 <dl>
 <dd>
 
@@ -13041,14 +14370,14 @@ For more information, see [Swap Subscription Plan Variations](https://developer.
 <dd>
 
 ```ruby
-client.subscriptions.swap_plan({
-  subscriptionId:'subscription_id',
-  newPlanVariationId:'FQ7CDXXWSLUJRPM3GFJSJGZ7',
-  phases:[{
-    ordinal:0,
-    order_template_id:'uhhnjH9osVv3shUADwaC0b3hNxQZY'
+client.subscriptions.swap_plan(
+  subscription_id: 'subscription_id',
+  new_plan_variation_id: 'FQ7CDXXWSLUJRPM3GFJSJGZ7',
+  phases: [{
+    ordinal: 0,
+    order_template_id: 'uhhnjH9osVv3shUADwaC0b3hNxQZY'
   }]
-});
+);
 ```
 </dd>
 </dl>
@@ -13063,7 +14392,7 @@ client.subscriptions.swap_plan({
 <dl>
 <dd>
 
-**subscriptionId:** `String` — The ID of the subscription to swap the subscription plan for.
+**subscription_id:** `String` — The ID of the subscription to swap the subscription plan for.
     
 </dd>
 </dl>
@@ -13071,7 +14400,7 @@ client.subscriptions.swap_plan({
 <dl>
 <dd>
 
-**newPlanVariationId:** `String` 
+**new_plan_variation_id:** `String` 
 
 The ID of the new subscription plan variation.
 
@@ -13087,6 +14416,14 @@ This field is required.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Subscriptions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13096,7 +14433,7 @@ This field is required.
 </details>
 
 ## TeamMembers
-<details><summary><code>client.TeamMembers.Create(request) -> Square::Types::CreateTeamMemberResponse</code></summary>
+<details><summary><code>client.team_members.<a href="/lib/square/team_members/client.rb">create</a>(request) -> Square::Types::CreateTeamMemberResponse</code></summary>
 <dl>
 <dd>
 
@@ -13128,34 +14465,40 @@ Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/t
 <dd>
 
 ```ruby
-client.team_members.create({
-  idempotency_key:'idempotency-key-0',
-  team_member:{
-    reference_id:'reference_id_1',
-    given_name:'Joe',
-    family_name:'Doe',
-    email_address:'joe_doe@gmail.com',
-    phone_number:'+14159283333',
-    assigned_locations:{
-      location_ids:['YSGH2WBKG94QZ', 'GA2Y9HSJ8KRYT']
+client.team_members.create(
+  idempotency_key: 'idempotency-key-0',
+  team_member: {
+    reference_id: 'reference_id_1',
+    status: 'ACTIVE',
+    given_name: 'Joe',
+    family_name: 'Doe',
+    email_address: 'joe_doe@gmail.com',
+    phone_number: '+14159283333',
+    assigned_locations: {
+      assignment_type: 'EXPLICIT_LOCATIONS',
+      location_ids: ['YSGH2WBKG94QZ', 'GA2Y9HSJ8KRYT']
     },
-    wage_setting:{
-      job_assignments:[{
-        annual_rate:{
-          amount:3000000
+    wage_setting: {
+      job_assignments: [{
+        pay_type: 'SALARY',
+        annual_rate: {
+          amount: 3000000,
+          currency: 'USD'
         },
-        weekly_hours:40,
-        job_id:'FjS8x95cqHiMenw4f1NAUH4P'
+        weekly_hours: 40,
+        job_id: 'FjS8x95cqHiMenw4f1NAUH4P'
       }, {
-        hourly_rate:{
-          amount:2000
+        pay_type: 'HOURLY',
+        hourly_rate: {
+          amount: 2000,
+          currency: 'USD'
         },
-        job_id:'VDNpRv8da51NU8qZFC5zDWpF'
+        job_id: 'VDNpRv8da51NU8qZFC5zDWpF'
       }],
-      is_overtime_exempt:true
+      is_overtime_exempt: true
     }
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -13174,6 +14517,14 @@ client.team_members.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::TeamMembers::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13182,7 +14533,7 @@ client.team_members.create({
 </dl>
 </details>
 
-<details><summary><code>client.TeamMembers.BatchCreate(request) -> Square::Types::BatchCreateTeamMembersResponse</code></summary>
+<details><summary><code>client.team_members.<a href="/lib/square/team_members/client.rb">batch_create</a>(request) -> Square::Types::BatchCreateTeamMembersResponse</code></summary>
 <dl>
 <dd>
 
@@ -13214,28 +14565,29 @@ Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/t
 <dd>
 
 ```ruby
-client.team_members.batch_create({
-  teamMembers:{
-    'idempotency-key-1':{
-      team_member:{
-        reference_id:'reference_id_1',
-        given_name:'Joe',
-        family_name:'Doe',
-        email_address:'joe_doe@gmail.com',
-        phone_number:'+14159283333',
-        assigned_locations:{
-          location_ids:['YSGH2WBKG94QZ', 'GA2Y9HSJ8KRYT']
-        }
+client.team_members.batch_create(team_members: {
+  'idempotency-key-1' => {
+    team_member: {
+      reference_id: 'reference_id_1',
+      given_name: 'Joe',
+      family_name: 'Doe',
+      email_address: 'joe_doe@gmail.com',
+      phone_number: '+14159283333',
+      assigned_locations: {
+        assignment_type: 'EXPLICIT_LOCATIONS',
+        location_ids: ['YSGH2WBKG94QZ', 'GA2Y9HSJ8KRYT']
       }
-    },
-    'idempotency-key-2':{
-      team_member:{
-        reference_id:'reference_id_2',
-        given_name:'Jane',
-        family_name:'Smith',
-        email_address:'jane_smith@gmail.com',
-        phone_number:'+14159223334',
-        assigned_locations:{}
+    }
+  },
+  'idempotency-key-2' => {
+    team_member: {
+      reference_id: 'reference_id_2',
+      given_name: 'Jane',
+      family_name: 'Smith',
+      email_address: 'jane_smith@gmail.com',
+      phone_number: '+14159223334',
+      assigned_locations: {
+        assignment_type: 'ALL_CURRENT_AND_FUTURE_LOCATIONS'
       }
     }
   }
@@ -13254,13 +14606,21 @@ client.team_members.batch_create({
 <dl>
 <dd>
 
-**teamMembers:** `Internal::Types::Hash[String, Square::Types::CreateTeamMemberRequest]` 
+**team_members:** `Internal::Types::Hash[String, Square::Types::CreateTeamMemberRequest]` 
 
 The data used to create the `TeamMember` objects. Each key is the `idempotency_key` that maps to the `CreateTeamMemberRequest`.
 The maximum number of create objects is 25.
 
 If you include a team member's `wage_setting`, you must provide `job_id` for each job assignment. To get job IDs,
 call [ListJobs](api-endpoint:Team-ListJobs).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::TeamMembers::RequestOptions` 
     
 </dd>
 </dl>
@@ -13272,7 +14632,7 @@ call [ListJobs](api-endpoint:Team-ListJobs).
 </dl>
 </details>
 
-<details><summary><code>client.TeamMembers.BatchUpdate(request) -> Square::Types::BatchUpdateTeamMembersResponse</code></summary>
+<details><summary><code>client.team_members.<a href="/lib/square/team_members/client.rb">batch_update</a>(request) -> Square::Types::BatchUpdateTeamMembersResponse</code></summary>
 <dl>
 <dd>
 
@@ -13303,30 +14663,33 @@ Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/t
 <dd>
 
 ```ruby
-client.team_members.batch_update({
-  teamMembers:{
-    'AFMwA08kR-MIF-3Vs0OE':{
-      team_member:{
-        reference_id:'reference_id_2',
-        is_owner:false,
-        given_name:'Jane',
-        family_name:'Smith',
-        email_address:'jane_smith@gmail.com',
-        phone_number:'+14159223334',
-        assigned_locations:{}
+client.team_members.batch_update(team_members: {
+  'AFMwA08kR-MIF-3Vs0OE' => {
+    team_member: {
+      reference_id: 'reference_id_2',
+      is_owner: false,
+      status: 'ACTIVE',
+      given_name: 'Jane',
+      family_name: 'Smith',
+      email_address: 'jane_smith@gmail.com',
+      phone_number: '+14159223334',
+      assigned_locations: {
+        assignment_type: 'ALL_CURRENT_AND_FUTURE_LOCATIONS'
       }
-    },
-    'fpgteZNMaf0qOK-a4t6P':{
-      team_member:{
-        reference_id:'reference_id_1',
-        is_owner:false,
-        given_name:'Joe',
-        family_name:'Doe',
-        email_address:'joe_doe@gmail.com',
-        phone_number:'+14159283333',
-        assigned_locations:{
-          location_ids:['YSGH2WBKG94QZ', 'GA2Y9HSJ8KRYT']
-        }
+    }
+  },
+  'fpgteZNMaf0qOK-a4t6P' => {
+    team_member: {
+      reference_id: 'reference_id_1',
+      is_owner: false,
+      status: 'ACTIVE',
+      given_name: 'Joe',
+      family_name: 'Doe',
+      email_address: 'joe_doe@gmail.com',
+      phone_number: '+14159283333',
+      assigned_locations: {
+        assignment_type: 'EXPLICIT_LOCATIONS',
+        location_ids: ['YSGH2WBKG94QZ', 'GA2Y9HSJ8KRYT']
       }
     }
   }
@@ -13345,7 +14708,7 @@ client.team_members.batch_update({
 <dl>
 <dd>
 
-**teamMembers:** `Internal::Types::Hash[String, Square::Types::UpdateTeamMemberRequest]` 
+**team_members:** `Internal::Types::Hash[String, Square::Types::UpdateTeamMemberRequest]` 
 
 The data used to update the `TeamMember` objects. Each key is the `team_member_id` that maps to the `UpdateTeamMemberRequest`.
 The maximum number of update objects is 25.
@@ -13353,6 +14716,14 @@ The maximum number of update objects is 25.
 For each team member, include the fields to add, change, or clear. Fields can be cleared using a null value.
 To update `wage_setting.job_assignments`, you must provide the complete list of job assignments. If needed,
 call [ListJobs](api-endpoint:Team-ListJobs) to get the required `job_id` values.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::TeamMembers::RequestOptions` 
     
 </dd>
 </dl>
@@ -13364,7 +14735,7 @@ call [ListJobs](api-endpoint:Team-ListJobs) to get the required `job_id` values.
 </dl>
 </details>
 
-<details><summary><code>client.TeamMembers.Search(request) -> Square::Types::SearchTeamMembersResponse</code></summary>
+<details><summary><code>client.team_members.<a href="/lib/square/team_members/client.rb">search</a>(request) -> Square::Types::SearchTeamMembersResponse</code></summary>
 <dl>
 <dd>
 
@@ -13393,14 +14764,15 @@ the team member is the Square account owner.
 <dd>
 
 ```ruby
-client.team_members.search({
-  query:{
-    filter:{
-      location_ids:['0G5P3VGACMMQZ']
+client.team_members.search(
+  query: {
+    filter: {
+      location_ids: ['0G5P3VGACMMQZ'],
+      status: 'ACTIVE'
     }
   },
-  limit:10
-});
+  limit: 10
+);
 ```
 </dd>
 </dl>
@@ -13438,6 +14810,14 @@ The opaque cursor for fetching the next page. For more information, see
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::TeamMembers::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13446,7 +14826,7 @@ The opaque cursor for fetching the next page. For more information, see
 </dl>
 </details>
 
-<details><summary><code>client.TeamMembers.Get(TeamMemberId) -> Square::Types::GetTeamMemberResponse</code></summary>
+<details><summary><code>client.team_members.<a href="/lib/square/team_members/client.rb">get</a>(team_member_id) -> Square::Types::GetTeamMemberResponse</code></summary>
 <dl>
 <dd>
 
@@ -13474,9 +14854,7 @@ Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/t
 <dd>
 
 ```ruby
-client.team_members.get({
-  teamMemberId:'team_member_id'
-});
+client.team_members.get(team_member_id: 'team_member_id');
 ```
 </dd>
 </dl>
@@ -13491,7 +14869,15 @@ client.team_members.get({
 <dl>
 <dd>
 
-**teamMemberId:** `String` — The ID of the team member to retrieve.
+**team_member_id:** `String` — The ID of the team member to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::TeamMembers::RequestOptions` 
     
 </dd>
 </dl>
@@ -13503,7 +14889,7 @@ client.team_members.get({
 </dl>
 </details>
 
-<details><summary><code>client.TeamMembers.Update(TeamMemberId, request) -> Square::Types::UpdateTeamMemberResponse</code></summary>
+<details><summary><code>client.team_members.<a href="/lib/square/team_members/client.rb">update</a>(team_member_id, request) -> Square::Types::UpdateTeamMemberResponse</code></summary>
 <dl>
 <dd>
 
@@ -13531,9 +14917,40 @@ Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/t
 <dd>
 
 ```ruby
-client.team_members.update({
-  teamMemberId:'team_member_id'
-});
+client.team_members.update(
+  team_member_id: 'team_member_id',
+  team_member: {
+    reference_id: 'reference_id_1',
+    status: 'ACTIVE',
+    given_name: 'Joe',
+    family_name: 'Doe',
+    email_address: 'joe_doe@gmail.com',
+    phone_number: '+14159283333',
+    assigned_locations: {
+      assignment_type: 'EXPLICIT_LOCATIONS',
+      location_ids: ['YSGH2WBKG94QZ', 'GA2Y9HSJ8KRYT']
+    },
+    wage_setting: {
+      job_assignments: [{
+        pay_type: 'SALARY',
+        annual_rate: {
+          amount: 3000000,
+          currency: 'USD'
+        },
+        weekly_hours: 40,
+        job_id: 'FjS8x95cqHiMenw4f1NAUH4P'
+      }, {
+        pay_type: 'HOURLY',
+        hourly_rate: {
+          amount: 1200,
+          currency: 'USD'
+        },
+        job_id: 'VDNpRv8da51NU8qZFC5zDWpF'
+      }],
+      is_overtime_exempt: true
+    }
+  }
+);
 ```
 </dd>
 </dl>
@@ -13548,7 +14965,7 @@ client.team_members.update({
 <dl>
 <dd>
 
-**teamMemberId:** `String` — The ID of the team member to update.
+**team_member_id:** `String` — The ID of the team member to update.
     
 </dd>
 </dl>
@@ -13557,6 +14974,14 @@ client.team_members.update({
 <dd>
 
 **request:** `Square::Types::UpdateTeamMemberRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::TeamMembers::RequestOptions` 
     
 </dd>
 </dl>
@@ -13569,7 +14994,7 @@ client.team_members.update({
 </details>
 
 ## Team
-<details><summary><code>client.Team.ListJobs() -> Square::Types::ListJobsResponse</code></summary>
+<details><summary><code>client.team.<a href="/lib/square/team/client.rb">list_jobs</a>() -> Square::Types::ListJobsResponse</code></summary>
 <dl>
 <dd>
 
@@ -13596,9 +15021,7 @@ Lists jobs in a seller account. Results are sorted by title in ascending order.
 <dd>
 
 ```ruby
-client.team.list_jobs({
-  cursor:'cursor'
-});
+client.team.list_jobs(cursor: 'cursor');
 ```
 </dd>
 </dl>
@@ -13621,6 +15044,14 @@ see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-pat
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Team::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13629,7 +15060,7 @@ see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-pat
 </dl>
 </details>
 
-<details><summary><code>client.Team.CreateJob(request) -> Square::Types::CreateJobResponse</code></summary>
+<details><summary><code>client.team.<a href="/lib/square/team/client.rb">create_job</a>(request) -> Square::Types::CreateJobResponse</code></summary>
 <dl>
 <dd>
 
@@ -13657,13 +15088,13 @@ compensation is defined in a [job assignment](entity:JobAssignment) in a team me
 <dd>
 
 ```ruby
-client.team.create_job({
-  job:{
-    title:'Cashier',
-    is_tip_eligible:true
+client.team.create_job(
+  job: {
+    title: 'Cashier',
+    is_tip_eligible: true
   },
-  idempotencyKey:'idempotency-key-0'
-});
+  idempotency_key: 'idempotency-key-0'
+);
 ```
 </dd>
 </dl>
@@ -13686,11 +15117,19 @@ client.team.create_job({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for the `CreateJob` request. Keys can be any valid string,
 but must be unique for each request. For more information, see
 [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Team::RequestOptions` 
     
 </dd>
 </dl>
@@ -13702,7 +15141,7 @@ but must be unique for each request. For more information, see
 </dl>
 </details>
 
-<details><summary><code>client.Team.RetrieveJob(JobId) -> Square::Types::RetrieveJobResponse</code></summary>
+<details><summary><code>client.team.<a href="/lib/square/team/client.rb">retrieve_job</a>(job_id) -> Square::Types::RetrieveJobResponse</code></summary>
 <dl>
 <dd>
 
@@ -13729,9 +15168,7 @@ Retrieves a specified job.
 <dd>
 
 ```ruby
-client.team.retrieve_job({
-  jobId:'job_id'
-});
+client.team.retrieve_job(job_id: 'job_id');
 ```
 </dd>
 </dl>
@@ -13746,7 +15183,15 @@ client.team.retrieve_job({
 <dl>
 <dd>
 
-**jobId:** `String` — The ID of the job to retrieve.
+**job_id:** `String` — The ID of the job to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Team::RequestOptions` 
     
 </dd>
 </dl>
@@ -13758,7 +15203,7 @@ client.team.retrieve_job({
 </dl>
 </details>
 
-<details><summary><code>client.Team.UpdateJob(JobId, request) -> Square::Types::UpdateJobResponse</code></summary>
+<details><summary><code>client.team.<a href="/lib/square/team/client.rb">update_job</a>(job_id, request) -> Square::Types::UpdateJobResponse</code></summary>
 <dl>
 <dd>
 
@@ -13787,13 +15232,13 @@ tip eligibility propagate to all `TeamMemberWage` objects that reference the job
 <dd>
 
 ```ruby
-client.team.update_job({
-  jobId:'job_id',
-  job:{
-    title:'Cashier 1',
-    is_tip_eligible:true
+client.team.update_job(
+  job_id: 'job_id',
+  job: {
+    title: 'Cashier 1',
+    is_tip_eligible: true
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -13808,7 +15253,7 @@ client.team.update_job({
 <dl>
 <dd>
 
-**jobId:** `String` — The ID of the job to update.
+**job_id:** `String` — The ID of the job to update.
     
 </dd>
 </dl>
@@ -13823,6 +15268,14 @@ to be included in the request. Optionally include `version` to enable optimistic
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Team::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13832,7 +15285,7 @@ to be included in the request. Optionally include `version` to enable optimistic
 </details>
 
 ## Terminal
-<details><summary><code>client.Terminal.DismissTerminalAction(ActionId) -> Square::Types::DismissTerminalActionResponse</code></summary>
+<details><summary><code>client.terminal.<a href="/lib/square/terminal/client.rb">dismiss_terminal_action</a>(action_id) -> Square::Types::DismissTerminalActionResponse</code></summary>
 <dl>
 <dd>
 
@@ -13861,9 +15314,7 @@ See [Link and Dismiss Actions](https://developer.squareup.com/docs/terminal-api/
 <dd>
 
 ```ruby
-client.terminal.dismiss_terminal_action({
-  actionId:'action_id'
-});
+client.terminal.dismiss_terminal_action(action_id: 'action_id');
 ```
 </dd>
 </dl>
@@ -13878,7 +15329,15 @@ client.terminal.dismiss_terminal_action({
 <dl>
 <dd>
 
-**actionId:** `String` — Unique ID for the `TerminalAction` associated with the action to be dismissed.
+**action_id:** `String` — Unique ID for the `TerminalAction` associated with the action to be dismissed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Terminal::RequestOptions` 
     
 </dd>
 </dl>
@@ -13890,7 +15349,7 @@ client.terminal.dismiss_terminal_action({
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.DismissTerminalCheckout(CheckoutId) -> Square::Types::DismissTerminalCheckoutResponse</code></summary>
+<details><summary><code>client.terminal.<a href="/lib/square/terminal/client.rb">dismiss_terminal_checkout</a>(checkout_id) -> Square::Types::DismissTerminalCheckoutResponse</code></summary>
 <dl>
 <dd>
 
@@ -13917,9 +15376,7 @@ Dismisses a Terminal checkout request if the status and type of the request perm
 <dd>
 
 ```ruby
-client.terminal.dismiss_terminal_checkout({
-  checkoutId:'checkout_id'
-});
+client.terminal.dismiss_terminal_checkout(checkout_id: 'checkout_id');
 ```
 </dd>
 </dl>
@@ -13934,7 +15391,15 @@ client.terminal.dismiss_terminal_checkout({
 <dl>
 <dd>
 
-**checkoutId:** `String` — Unique ID for the `TerminalCheckout` associated with the checkout to be dismissed.
+**checkout_id:** `String` — Unique ID for the `TerminalCheckout` associated with the checkout to be dismissed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Terminal::RequestOptions` 
     
 </dd>
 </dl>
@@ -13946,7 +15411,7 @@ client.terminal.dismiss_terminal_checkout({
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.DismissTerminalRefund(TerminalRefundId) -> Square::Types::DismissTerminalRefundResponse</code></summary>
+<details><summary><code>client.terminal.<a href="/lib/square/terminal/client.rb">dismiss_terminal_refund</a>(terminal_refund_id) -> Square::Types::DismissTerminalRefundResponse</code></summary>
 <dl>
 <dd>
 
@@ -13973,9 +15438,7 @@ Dismisses a Terminal refund request if the status and type of the request permit
 <dd>
 
 ```ruby
-client.terminal.dismiss_terminal_refund({
-  terminalRefundId:'terminal_refund_id'
-});
+client.terminal.dismiss_terminal_refund(terminal_refund_id: 'terminal_refund_id');
 ```
 </dd>
 </dl>
@@ -13990,7 +15453,15 @@ client.terminal.dismiss_terminal_refund({
 <dl>
 <dd>
 
-**terminalRefundId:** `String` — Unique ID for the `TerminalRefund` associated with the refund to be dismissed.
+**terminal_refund_id:** `String` — Unique ID for the `TerminalRefund` associated with the refund to be dismissed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Terminal::RequestOptions` 
     
 </dd>
 </dl>
@@ -14003,7 +15474,7 @@ client.terminal.dismiss_terminal_refund({
 </details>
 
 ## TransferOrders
-<details><summary><code>client.TransferOrders.Create(request) -> Square::Types::CreateTransferOrderResponse</code></summary>
+<details><summary><code>client.transfer_orders.<a href="/lib/square/transfer_orders/client.rb">create</a>(request) -> Square::Types::CreateTransferOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -14049,24 +15520,24 @@ Creates a [transfer_order.created](webhook:transfer_order.created) webhook event
 <dd>
 
 ```ruby
-client.transfer_orders.create({
-  idempotencyKey:'65cc0586-3e82-384s-b524-3885cffd52',
-  transferOrder:{
-    source_location_id:'EXAMPLE_SOURCE_LOCATION_ID_123',
-    destination_location_id:'EXAMPLE_DEST_LOCATION_ID_456',
-    expected_at:'2025-11-09T05:00:00Z',
-    notes:'Example transfer order for inventory redistribution between locations',
-    tracking_number:'TRACK123456789',
-    created_by_team_member_id:'EXAMPLE_TEAM_MEMBER_ID_789',
-    line_items:[{
-      item_variation_id:'EXAMPLE_ITEM_VARIATION_ID_001',
-      quantity_ordered:'5'
+client.transfer_orders.create(
+  idempotency_key: '65cc0586-3e82-384s-b524-3885cffd52',
+  transfer_order: {
+    source_location_id: 'EXAMPLE_SOURCE_LOCATION_ID_123',
+    destination_location_id: 'EXAMPLE_DEST_LOCATION_ID_456',
+    expected_at: '2025-11-09T05:00:00Z',
+    notes: 'Example transfer order for inventory redistribution between locations',
+    tracking_number: 'TRACK123456789',
+    created_by_team_member_id: 'EXAMPLE_TEAM_MEMBER_ID_789',
+    line_items: [{
+      item_variation_id: 'EXAMPLE_ITEM_VARIATION_ID_001',
+      quantity_ordered: '5'
     }, {
-      item_variation_id:'EXAMPLE_ITEM_VARIATION_ID_002',
-      quantity_ordered:'3'
+      item_variation_id: 'EXAMPLE_ITEM_VARIATION_ID_002',
+      quantity_ordered: '3'
     }]
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -14081,7 +15552,7 @@ client.transfer_orders.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this CreateTransferOrder request. Keys can be
 any valid string but must be unique for every CreateTransferOrder request.
@@ -14092,7 +15563,15 @@ any valid string but must be unique for every CreateTransferOrder request.
 <dl>
 <dd>
 
-**transferOrder:** `Square::Types::CreateTransferOrderData` — The transfer order to create
+**transfer_order:** `Square::Types::CreateTransferOrderData` — The transfer order to create
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::TransferOrders::RequestOptions` 
     
 </dd>
 </dl>
@@ -14104,7 +15583,7 @@ any valid string but must be unique for every CreateTransferOrder request.
 </dl>
 </details>
 
-<details><summary><code>client.TransferOrders.Search(request) -> Square::Types::SearchTransferOrdersResponse</code></summary>
+<details><summary><code>client.transfer_orders.<a href="/lib/square/transfer_orders/client.rb">search</a>(request) -> Square::Types::SearchTransferOrdersResponse</code></summary>
 <dl>
 <dd>
 
@@ -14137,18 +15616,21 @@ Common search scenarios:
 <dd>
 
 ```ruby
-client.transfer_orders.search({
-  query:{
-    filter:{
-      source_location_ids:['EXAMPLE_SOURCE_LOCATION_ID_123'],
-      destination_location_ids:['EXAMPLE_DEST_LOCATION_ID_456'],
-      statuses:[]
+client.transfer_orders.search(
+  query: {
+    filter: {
+      source_location_ids: ['EXAMPLE_SOURCE_LOCATION_ID_123'],
+      destination_location_ids: ['EXAMPLE_DEST_LOCATION_ID_456'],
+      statuses: ['STARTED', 'PARTIALLY_RECEIVED']
     },
-    sort:{}
+    sort: {
+      field: 'UPDATED_AT',
+      order: 'DESC'
+    }
   },
-  cursor:'eyJsYXN0X3VwZGF0ZWRfYXQiOjE3NTMxMTg2NjQ4NzN9',
-  limit:10
-});
+  cursor: 'eyJsYXN0X3VwZGF0ZWRfYXQiOjE3NTMxMTg2NjQ4NzN9',
+  limit: 10
+);
 ```
 </dd>
 </dl>
@@ -14183,6 +15665,14 @@ client.transfer_orders.search({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::TransferOrders::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14191,7 +15681,7 @@ client.transfer_orders.search({
 </dl>
 </details>
 
-<details><summary><code>client.TransferOrders.Get(TransferOrderId) -> Square::Types::RetrieveTransferOrderResponse</code></summary>
+<details><summary><code>client.transfer_orders.<a href="/lib/square/transfer_orders/client.rb">get</a>(transfer_order_id) -> Square::Types::RetrieveTransferOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -14224,9 +15714,7 @@ order details including:
 <dd>
 
 ```ruby
-client.transfer_orders.get({
-  transferOrderId:'transfer_order_id'
-});
+client.transfer_orders.get(transfer_order_id: 'transfer_order_id');
 ```
 </dd>
 </dl>
@@ -14241,7 +15729,15 @@ client.transfer_orders.get({
 <dl>
 <dd>
 
-**transferOrderId:** `String` — The ID of the transfer order to retrieve
+**transfer_order_id:** `String` — The ID of the transfer order to retrieve
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::TransferOrders::RequestOptions` 
     
 </dd>
 </dl>
@@ -14253,7 +15749,7 @@ client.transfer_orders.get({
 </dl>
 </details>
 
-<details><summary><code>client.TransferOrders.Update(TransferOrderId, request) -> Square::Types::UpdateTransferOrderResponse</code></summary>
+<details><summary><code>client.transfer_orders.<a href="/lib/square/transfer_orders/client.rb">update</a>(transfer_order_id, request) -> Square::Types::UpdateTransferOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -14283,28 +15779,28 @@ Creates a [transfer_order.updated](webhook:transfer_order.updated) webhook event
 <dd>
 
 ```ruby
-client.transfer_orders.update({
-  transferOrderId:'transfer_order_id',
-  idempotencyKey:'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-  transferOrder:{
-    source_location_id:'EXAMPLE_SOURCE_LOCATION_ID_789',
-    destination_location_id:'EXAMPLE_DEST_LOCATION_ID_101',
-    expected_at:'2025-11-10T08:00:00Z',
-    notes:'Updated: Priority transfer due to low stock at destination',
-    tracking_number:'TRACK987654321',
-    line_items:[{
-      uid:'1',
-      quantity_ordered:'7'
+client.transfer_orders.update(
+  transfer_order_id: 'transfer_order_id',
+  idempotency_key: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+  transfer_order: {
+    source_location_id: 'EXAMPLE_SOURCE_LOCATION_ID_789',
+    destination_location_id: 'EXAMPLE_DEST_LOCATION_ID_101',
+    expected_at: '2025-11-10T08:00:00Z',
+    notes: 'Updated: Priority transfer due to low stock at destination',
+    tracking_number: 'TRACK987654321',
+    line_items: [{
+      uid: '1',
+      quantity_ordered: '7'
     }, {
-      item_variation_id:'EXAMPLE_NEW_ITEM_VARIATION_ID_003',
-      quantity_ordered:'2'
+      item_variation_id: 'EXAMPLE_NEW_ITEM_VARIATION_ID_003',
+      quantity_ordered: '2'
     }, {
-      uid:'2',
-      remove:true
+      uid: '2',
+      remove: true
     }]
   },
-  version:1753109537351
-});
+  version: 1753109537351
+);
 ```
 </dd>
 </dl>
@@ -14319,7 +15815,7 @@ client.transfer_orders.update({
 <dl>
 <dd>
 
-**transferOrderId:** `String` — The ID of the transfer order to update
+**transfer_order_id:** `String` — The ID of the transfer order to update
     
 </dd>
 </dl>
@@ -14327,7 +15823,7 @@ client.transfer_orders.update({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` — A unique string that identifies this UpdateTransferOrder request. Keys must contain only alphanumeric characters, dashes and underscores
+**idempotency_key:** `String` — A unique string that identifies this UpdateTransferOrder request. Keys must contain only alphanumeric characters, dashes and underscores
     
 </dd>
 </dl>
@@ -14335,7 +15831,7 @@ client.transfer_orders.update({
 <dl>
 <dd>
 
-**transferOrder:** `Square::Types::UpdateTransferOrderData` — The transfer order updates to apply
+**transfer_order:** `Square::Types::UpdateTransferOrderData` — The transfer order updates to apply
     
 </dd>
 </dl>
@@ -14347,6 +15843,14 @@ client.transfer_orders.update({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::TransferOrders::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14355,7 +15859,7 @@ client.transfer_orders.update({
 </dl>
 </details>
 
-<details><summary><code>client.TransferOrders.Delete(TransferOrderId) -> Square::Types::DeleteTransferOrderResponse</code></summary>
+<details><summary><code>client.transfer_orders.<a href="/lib/square/transfer_orders/client.rb">delete</a>(transfer_order_id) -> Square::Types::DeleteTransferOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -14386,10 +15890,10 @@ Creates a [transfer_order.deleted](webhook:transfer_order.deleted) webhook event
 <dd>
 
 ```ruby
-client.transfer_orders.delete({
-  transferOrderId:'transfer_order_id',
-  version:1000000
-});
+client.transfer_orders.delete(
+  transfer_order_id: 'transfer_order_id',
+  version: 1000000
+);
 ```
 </dd>
 </dl>
@@ -14404,7 +15908,7 @@ client.transfer_orders.delete({
 <dl>
 <dd>
 
-**transferOrderId:** `String` — The ID of the transfer order to delete
+**transfer_order_id:** `String` — The ID of the transfer order to delete
     
 </dd>
 </dl>
@@ -14416,6 +15920,14 @@ client.transfer_orders.delete({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::TransferOrders::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14424,7 +15936,7 @@ client.transfer_orders.delete({
 </dl>
 </details>
 
-<details><summary><code>client.TransferOrders.Cancel(TransferOrderId, request) -> Square::Types::CancelTransferOrderResponse</code></summary>
+<details><summary><code>client.transfer_orders.<a href="/lib/square/transfer_orders/client.rb">cancel</a>(transfer_order_id, request) -> Square::Types::CancelTransferOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -14460,11 +15972,11 @@ Creates a [transfer_order.updated](webhook:transfer_order.updated) webhook event
 <dd>
 
 ```ruby
-client.transfer_orders.cancel({
-  transferOrderId:'transfer_order_id',
-  idempotencyKey:'65cc0586-3e82-4d08-b524-3885cffd52',
-  version:1753117449752
-});
+client.transfer_orders.cancel(
+  transfer_order_id: 'transfer_order_id',
+  idempotency_key: '65cc0586-3e82-4d08-b524-3885cffd52',
+  version: 1753117449752
+);
 ```
 </dd>
 </dl>
@@ -14479,7 +15991,7 @@ client.transfer_orders.cancel({
 <dl>
 <dd>
 
-**transferOrderId:** `String` — The ID of the transfer order to cancel. Must be in STARTED or PARTIALLY_RECEIVED status.
+**transfer_order_id:** `String` — The ID of the transfer order to cancel. Must be in STARTED or PARTIALLY_RECEIVED status.
     
 </dd>
 </dl>
@@ -14487,7 +15999,7 @@ client.transfer_orders.cancel({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this UpdateTransferOrder request. Keys can be
 any valid string but must be unique for every UpdateTransferOrder request.
@@ -14502,6 +16014,14 @@ any valid string but must be unique for every UpdateTransferOrder request.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::TransferOrders::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14510,7 +16030,7 @@ any valid string but must be unique for every UpdateTransferOrder request.
 </dl>
 </details>
 
-<details><summary><code>client.TransferOrders.Receive(TransferOrderId, request) -> Square::Types::ReceiveTransferOrderResponse</code></summary>
+<details><summary><code>client.transfer_orders.<a href="/lib/square/transfer_orders/client.rb">receive</a>(transfer_order_id, request) -> Square::Types::ReceiveTransferOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -14552,23 +16072,23 @@ Creates a [transfer_order.updated](webhook:transfer_order.updated) webhook event
 <dd>
 
 ```ruby
-client.transfer_orders.receive({
-  transferOrderId:'transfer_order_id',
-  idempotencyKey:'EXAMPLE_IDEMPOTENCY_KEY_101',
-  receipt:{
-    line_items:[{
-      transfer_order_line_uid:'transfer_order_line_uid',
-      quantity_received:'3',
-      quantity_damaged:'1',
-      quantity_canceled:'1'
+client.transfer_orders.receive(
+  transfer_order_id: 'transfer_order_id',
+  idempotency_key: 'EXAMPLE_IDEMPOTENCY_KEY_101',
+  receipt: {
+    line_items: [{
+      transfer_order_line_uid: '1',
+      quantity_received: '3',
+      quantity_damaged: '1',
+      quantity_canceled: '1'
     }, {
-      transfer_order_line_uid:'transfer_order_line_uid',
-      quantity_received:'2',
-      quantity_canceled:'1'
+      transfer_order_line_uid: '2',
+      quantity_received: '2',
+      quantity_canceled: '1'
     }]
   },
-  version:1753118664873
-});
+  version: 1753118664873
+);
 ```
 </dd>
 </dl>
@@ -14583,7 +16103,7 @@ client.transfer_orders.receive({
 <dl>
 <dd>
 
-**transferOrderId:** `String` — The ID of the transfer order to receive items for
+**transfer_order_id:** `String` — The ID of the transfer order to receive items for
     
 </dd>
 </dl>
@@ -14591,7 +16111,7 @@ client.transfer_orders.receive({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` — A unique key to make this request idempotent
+**idempotency_key:** `String` — A unique key to make this request idempotent
     
 </dd>
 </dl>
@@ -14611,6 +16131,14 @@ client.transfer_orders.receive({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::TransferOrders::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14619,7 +16147,7 @@ client.transfer_orders.receive({
 </dl>
 </details>
 
-<details><summary><code>client.TransferOrders.Start(TransferOrderId, request) -> Square::Types::StartTransferOrderResponse</code></summary>
+<details><summary><code>client.transfer_orders.<a href="/lib/square/transfer_orders/client.rb">start</a>(transfer_order_id, request) -> Square::Types::StartTransferOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -14653,11 +16181,11 @@ Creates a [transfer_order.updated](webhook:transfer_order.updated) webhook event
 <dd>
 
 ```ruby
-client.transfer_orders.start({
-  transferOrderId:'transfer_order_id',
-  idempotencyKey:'EXAMPLE_IDEMPOTENCY_KEY_789',
-  version:1753109537351
-});
+client.transfer_orders.start(
+  transfer_order_id: 'transfer_order_id',
+  idempotency_key: 'EXAMPLE_IDEMPOTENCY_KEY_789',
+  version: 1753109537351
+);
 ```
 </dd>
 </dl>
@@ -14672,7 +16200,7 @@ client.transfer_orders.start({
 <dl>
 <dd>
 
-**transferOrderId:** `String` — The ID of the transfer order to start. Must be in DRAFT status.
+**transfer_order_id:** `String` — The ID of the transfer order to start. Must be in DRAFT status.
     
 </dd>
 </dl>
@@ -14680,7 +16208,7 @@ client.transfer_orders.start({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this UpdateTransferOrder request. Keys can be
 any valid string but must be unique for every UpdateTransferOrder request.
@@ -14695,6 +16223,14 @@ any valid string but must be unique for every UpdateTransferOrder request.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::TransferOrders::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14704,7 +16240,7 @@ any valid string but must be unique for every UpdateTransferOrder request.
 </details>
 
 ## Vendors
-<details><summary><code>client.Vendors.BatchCreate(request) -> Square::Types::BatchCreateVendorsResponse</code></summary>
+<details><summary><code>client.vendors.<a href="/lib/square/vendors/client.rb">batch_create</a>(request) -> Square::Types::BatchCreateVendorsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14731,26 +16267,25 @@ Creates one or more [Vendor](entity:Vendor) objects to represent suppliers to a 
 <dd>
 
 ```ruby
-client.vendors.batch_create({
-  vendors:{
-    '8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe':{
-      name:"Joe's Fresh Seafood",
-      address:{
-        address_line_1:'505 Electric Ave',
-        address_line_2:'Suite 600',
-        locality:'New York',
-        administrative_district_level_1:'NY',
-        postal_code:'10003'
-      },
-      contacts:[{
-        name:'Joe Burrow',
-        email_address:'joe@joesfreshseafood.com',
-        phone_number:'1-212-555-4250',
-        ordinal:1
-      }],
-      account_number:'4025391',
-      note:'a vendor'
-    }
+client.vendors.batch_create(vendors: {
+  '8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe' => {
+    name: "Joe's Fresh Seafood",
+    address: {
+      address_line_1: '505 Electric Ave',
+      address_line_2: 'Suite 600',
+      locality: 'New York',
+      administrative_district_level_1: 'NY',
+      postal_code: '10003',
+      country: 'US'
+    },
+    contacts: [{
+      name: 'Joe Burrow',
+      email_address: 'joe@joesfreshseafood.com',
+      phone_number: '1-212-555-4250',
+      ordinal: 1
+    }],
+    account_number: '4025391',
+    note: 'a vendor'
   }
 });
 ```
@@ -14771,6 +16306,14 @@ client.vendors.batch_create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Vendors::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14779,7 +16322,7 @@ client.vendors.batch_create({
 </dl>
 </details>
 
-<details><summary><code>client.Vendors.BatchGet(request) -> Square::Types::BatchGetVendorsResponse</code></summary>
+<details><summary><code>client.vendors.<a href="/lib/square/vendors/client.rb">batch_get</a>(request) -> Square::Types::BatchGetVendorsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14806,9 +16349,7 @@ Retrieves one or more vendors of specified [Vendor](entity:Vendor) IDs.
 <dd>
 
 ```ruby
-client.vendors.batch_get({
-  vendorIds:['INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4']
-});
+client.vendors.batch_get(vendor_ids: ['INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4']);
 ```
 </dd>
 </dl>
@@ -14823,7 +16364,15 @@ client.vendors.batch_get({
 <dl>
 <dd>
 
-**vendorIds:** `Internal::Types::Array[String]` — IDs of the [Vendor](entity:Vendor) objects to retrieve.
+**vendor_ids:** `Internal::Types::Array[String]` — IDs of the [Vendor](entity:Vendor) objects to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Vendors::RequestOptions` 
     
 </dd>
 </dl>
@@ -14835,7 +16384,7 @@ client.vendors.batch_get({
 </dl>
 </details>
 
-<details><summary><code>client.Vendors.BatchUpdate(request) -> Square::Types::BatchUpdateVendorsResponse</code></summary>
+<details><summary><code>client.vendors.<a href="/lib/square/vendors/client.rb">batch_update</a>(request) -> Square::Types::BatchUpdateVendorsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14862,14 +16411,12 @@ Updates one or more of existing [Vendor](entity:Vendor) objects as suppliers to 
 <dd>
 
 ```ruby
-client.vendors.batch_update({
-  vendors:{
-    FMCYHBWT1TPL8MFH52PBMEN92A:{
-      vendor:{}
-    },
-    INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4:{
-      vendor:{}
-    }
+client.vendors.batch_update(vendors: {
+  FMCYHBWT1TPL8MFH52PBMEN92A: {
+    vendor: {}
+  },
+  INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4: {
+    vendor: {}
   }
 });
 ```
@@ -14893,6 +16440,14 @@ objects. The set is represented by  a collection of `Vendor`-ID/`UpdateVendorReq
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Vendors::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14901,7 +16456,7 @@ objects. The set is represented by  a collection of `Vendor`-ID/`UpdateVendorReq
 </dl>
 </details>
 
-<details><summary><code>client.Vendors.Create(request) -> Square::Types::CreateVendorResponse</code></summary>
+<details><summary><code>client.vendors.<a href="/lib/square/vendors/client.rb">create</a>(request) -> Square::Types::CreateVendorResponse</code></summary>
 <dl>
 <dd>
 
@@ -14928,27 +16483,28 @@ Creates a single [Vendor](entity:Vendor) object to represent a supplier to a sel
 <dd>
 
 ```ruby
-client.vendors.create({
-  idempotencyKey:'8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe',
-  vendor:{
-    name:"Joe's Fresh Seafood",
-    address:{
-      address_line_1:'505 Electric Ave',
-      address_line_2:'Suite 600',
-      locality:'New York',
-      administrative_district_level_1:'NY',
-      postal_code:'10003'
+client.vendors.create(
+  idempotency_key: '8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe',
+  vendor: {
+    name: "Joe's Fresh Seafood",
+    address: {
+      address_line_1: '505 Electric Ave',
+      address_line_2: 'Suite 600',
+      locality: 'New York',
+      administrative_district_level_1: 'NY',
+      postal_code: '10003',
+      country: 'US'
     },
-    contacts:[{
-      name:'Joe Burrow',
-      email_address:'joe@joesfreshseafood.com',
-      phone_number:'1-212-555-4250',
-      ordinal:1
+    contacts: [{
+      name: 'Joe Burrow',
+      email_address: 'joe@joesfreshseafood.com',
+      phone_number: '1-212-555-4250',
+      ordinal: 1
     }],
-    account_number:'4025391',
-    note:'a vendor'
+    account_number: '4025391',
+    note: 'a vendor'
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -14963,7 +16519,7 @@ client.vendors.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A client-supplied, universally unique identifier (UUID) to make this [CreateVendor](api-endpoint:Vendors-CreateVendor) call idempotent.
 
@@ -14981,6 +16537,14 @@ information.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Vendors::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14989,7 +16553,7 @@ information.
 </dl>
 </details>
 
-<details><summary><code>client.Vendors.Search(request) -> Square::Types::SearchVendorsResponse</code></summary>
+<details><summary><code>client.vendors.<a href="/lib/square/vendors/client.rb">search</a>(request) -> Square::Types::SearchVendorsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15016,7 +16580,7 @@ Searches for vendors using a filter against supported [Vendor](entity:Vendor) pr
 <dd>
 
 ```ruby
-client.vendors.search({});
+client.vendors.search();
 ```
 </dd>
 </dl>
@@ -15056,6 +16620,14 @@ See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagin
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Vendors::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -15064,7 +16636,7 @@ See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagin
 </dl>
 </details>
 
-<details><summary><code>client.Vendors.Get(VendorId) -> Square::Types::GetVendorResponse</code></summary>
+<details><summary><code>client.vendors.<a href="/lib/square/vendors/client.rb">get</a>(vendor_id) -> Square::Types::GetVendorResponse</code></summary>
 <dl>
 <dd>
 
@@ -15091,9 +16663,7 @@ Retrieves the vendor of a specified [Vendor](entity:Vendor) ID.
 <dd>
 
 ```ruby
-client.vendors.get({
-  vendorId:'vendor_id'
-});
+client.vendors.get(vendor_id: 'vendor_id');
 ```
 </dd>
 </dl>
@@ -15108,7 +16678,15 @@ client.vendors.get({
 <dl>
 <dd>
 
-**vendorId:** `String` — ID of the [Vendor](entity:Vendor) to retrieve.
+**vendor_id:** `String` — ID of the [Vendor](entity:Vendor) to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Vendors::RequestOptions` 
     
 </dd>
 </dl>
@@ -15120,7 +16698,7 @@ client.vendors.get({
 </dl>
 </details>
 
-<details><summary><code>client.Vendors.Update(VendorId, request) -> Square::Types::UpdateVendorResponse</code></summary>
+<details><summary><code>client.vendors.<a href="/lib/square/vendors/client.rb">update</a>(vendor_id, request) -> Square::Types::UpdateVendorResponse</code></summary>
 <dl>
 <dd>
 
@@ -15147,9 +16725,16 @@ Updates an existing [Vendor](entity:Vendor) object as a supplier to a seller.
 <dd>
 
 ```ruby
-client.vendors.update({
-  vendorId:'vendor_id'
-});
+client.vendors.update(
+  vendor_id: 'vendor_id',
+  idempotency_key: '8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe',
+  vendor: {
+    id: 'INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4',
+    name: "Jack's Chicken Shack",
+    version: 1,
+    status: 'ACTIVE'
+  }
+);
 ```
 </dd>
 </dl>
@@ -15164,7 +16749,7 @@ client.vendors.update({
 <dl>
 <dd>
 
-**vendorId:** `String` — ID of the [Vendor](entity:Vendor) to retrieve.
+**vendor_id:** `String` — ID of the [Vendor](entity:Vendor) to retrieve.
     
 </dd>
 </dl>
@@ -15173,6 +16758,55 @@ client.vendors.update({
 <dd>
 
 **request:** `Square::Types::UpdateVendorRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Vendors::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Mobile
+<details><summary><code>client.mobile.<a href="/lib/square/mobile/client.rb">authorization_code</a>() -> </code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.mobile.authorization_code();
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Mobile::RequestOptions` 
     
 </dd>
 </dl>
@@ -15185,7 +16819,7 @@ client.vendors.update({
 </details>
 
 ## Bookings CustomAttributeDefinitions
-<details><summary><code>client.Bookings.CustomAttributeDefinitions.List() -> Square::Types::ListBookingCustomAttributeDefinitionsResponse</code></summary>
+<details><summary><code>client.bookings.custom_attribute_definitions.<a href="/lib/square/bookings/custom_attribute_definitions/client.rb">list</a>() -> Square::Types::ListBookingCustomAttributeDefinitionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15215,10 +16849,10 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 <dd>
 
 ```ruby
-client.bookings.custom_attribute_definitions.list({
-  limit:1,
-  cursor:'cursor'
-});
+client.bookings.custom_attribute_definitions.list(
+  limit: 1,
+  cursor: 'cursor'
+);
 ```
 </dd>
 </dl>
@@ -15253,6 +16887,14 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::CustomAttributeDefinitions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -15261,7 +16903,7 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributeDefinitions.Create(request) -> Square::Types::CreateBookingCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.bookings.custom_attribute_definitions.<a href="/lib/square/bookings/custom_attribute_definitions/client.rb">create</a>(request) -> Square::Types::CreateBookingCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -15294,9 +16936,7 @@ or *Appointments Premium*.
 <dd>
 
 ```ruby
-client.bookings.custom_attribute_definitions.create({
-  customAttributeDefinition:{}
-});
+client.bookings.custom_attribute_definitions.create(custom_attribute_definition: {});
 ```
 </dd>
 </dl>
@@ -15311,7 +16951,7 @@ client.bookings.custom_attribute_definitions.create({
 <dl>
 <dd>
 
-**customAttributeDefinition:** `Square::Types::CustomAttributeDefinition` 
+**custom_attribute_definition:** `Square::Types::CustomAttributeDefinition` 
 
 The custom attribute definition to create, with the following fields:
 
@@ -15335,10 +16975,18 @@ simple URL to the JSON schema definition hosted on the Square CDN. For more info
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, used to ensure idempotency. For more information,
 see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::CustomAttributeDefinitions::RequestOptions` 
     
 </dd>
 </dl>
@@ -15350,7 +16998,7 @@ see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-pa
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributeDefinitions.Get(Key) -> Square::Types::RetrieveBookingCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.bookings.custom_attribute_definitions.<a href="/lib/square/bookings/custom_attribute_definitions/client.rb">get</a>(key) -> Square::Types::RetrieveBookingCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -15380,10 +17028,10 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 <dd>
 
 ```ruby
-client.bookings.custom_attribute_definitions.get({
-  key:'key',
-  version:1
-});
+client.bookings.custom_attribute_definitions.get(
+  key: 'key',
+  version: 1
+);
 ```
 </dd>
 </dl>
@@ -15418,6 +17066,14 @@ is higher than the current version, Square returns a `BAD_REQUEST` error.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::CustomAttributeDefinitions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -15426,7 +17082,7 @@ is higher than the current version, Square returns a `BAD_REQUEST` error.
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributeDefinitions.Update(Key, request) -> Square::Types::UpdateBookingCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.bookings.custom_attribute_definitions.<a href="/lib/square/bookings/custom_attribute_definitions/client.rb">update</a>(key, request) -> Square::Types::UpdateBookingCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -15459,10 +17115,10 @@ or *Appointments Premium*.
 <dd>
 
 ```ruby
-client.bookings.custom_attribute_definitions.update({
-  key:'key',
-  customAttributeDefinition:{}
-});
+client.bookings.custom_attribute_definitions.update(
+  key: 'key',
+  custom_attribute_definition: {}
+);
 ```
 </dd>
 </dl>
@@ -15485,7 +17141,7 @@ client.bookings.custom_attribute_definitions.update({
 <dl>
 <dd>
 
-**customAttributeDefinition:** `Square::Types::CustomAttributeDefinition` 
+**custom_attribute_definition:** `Square::Types::CustomAttributeDefinition` 
 
 The custom attribute definition that contains the fields to update. Only the following fields can be updated:
 - `name`
@@ -15506,10 +17162,18 @@ control, include the optional `version` field and specify the current version of
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, used to ensure idempotency. For more information,
 see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::CustomAttributeDefinitions::RequestOptions` 
     
 </dd>
 </dl>
@@ -15521,7 +17185,7 @@ see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-pa
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributeDefinitions.Delete(Key) -> Square::Types::DeleteBookingCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.bookings.custom_attribute_definitions.<a href="/lib/square/bookings/custom_attribute_definitions/client.rb">delete</a>(key) -> Square::Types::DeleteBookingCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -15554,9 +17218,7 @@ or *Appointments Premium*.
 <dd>
 
 ```ruby
-client.bookings.custom_attribute_definitions.delete({
-  key:'key'
-});
+client.bookings.custom_attribute_definitions.delete(key: 'key');
 ```
 </dd>
 </dl>
@@ -15575,6 +17237,14 @@ client.bookings.custom_attribute_definitions.delete({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::CustomAttributeDefinitions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -15584,7 +17254,7 @@ client.bookings.custom_attribute_definitions.delete({
 </details>
 
 ## Bookings CustomAttributes
-<details><summary><code>client.Bookings.CustomAttributes.BatchDelete(request) -> Square::Types::BulkDeleteBookingCustomAttributesResponse</code></summary>
+<details><summary><code>client.bookings.custom_attributes.<a href="/lib/square/bookings/custom_attributes/client.rb">batch_delete</a>(request) -> Square::Types::BulkDeleteBookingCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -15617,12 +17287,10 @@ or *Appointments Premium*.
 <dd>
 
 ```ruby
-client.bookings.custom_attributes.batch_delete({
-  values:{
-    key:{
-      booking_id:'booking_id',
-      key:'key'
-    }
+client.bookings.custom_attributes.batch_delete(values: {
+  key: {
+    booking_id: 'booking_id',
+    key: 'key'
   }
 });
 ```
@@ -15647,6 +17315,14 @@ information needed to delete a custom attribute.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::CustomAttributes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -15655,7 +17331,7 @@ information needed to delete a custom attribute.
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributes.BatchUpsert(request) -> Square::Types::BulkUpsertBookingCustomAttributesResponse</code></summary>
+<details><summary><code>client.bookings.custom_attributes.<a href="/lib/square/bookings/custom_attributes/client.rb">batch_upsert</a>(request) -> Square::Types::BulkUpsertBookingCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -15688,12 +17364,10 @@ or *Appointments Premium*.
 <dd>
 
 ```ruby
-client.bookings.custom_attributes.batch_upsert({
-  values:{
-    key:{
-      booking_id:'booking_id',
-      custom_attribute:{}
-    }
+client.bookings.custom_attributes.batch_upsert(values: {
+  key: {
+    booking_id: 'booking_id',
+    custom_attribute: {}
   }
 });
 ```
@@ -15718,6 +17392,14 @@ information needed to create or update a custom attribute.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::CustomAttributes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -15726,7 +17408,7 @@ information needed to create or update a custom attribute.
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributes.List(BookingId) -> Square::Types::ListBookingCustomAttributesResponse</code></summary>
+<details><summary><code>client.bookings.custom_attributes.<a href="/lib/square/bookings/custom_attributes/client.rb">list</a>(booking_id) -> Square::Types::ListBookingCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -15756,12 +17438,12 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 <dd>
 
 ```ruby
-client.bookings.custom_attributes.list({
-  bookingId:'booking_id',
-  limit:1,
-  cursor:'cursor',
-  withDefinitions:true
-});
+client.bookings.custom_attributes.list(
+  booking_id: 'booking_id',
+  limit: 1,
+  cursor: 'cursor',
+  with_definitions: true
+);
 ```
 </dd>
 </dl>
@@ -15776,7 +17458,7 @@ client.bookings.custom_attributes.list({
 <dl>
 <dd>
 
-**bookingId:** `String` — The ID of the target [booking](entity:Booking).
+**booking_id:** `String` — The ID of the target [booking](entity:Booking).
     
 </dd>
 </dl>
@@ -15808,11 +17490,19 @@ information, see [Pagination](https://developer.squareup.com/docs/build-basics/c
 <dl>
 <dd>
 
-**withDefinitions:** `Internal::Types::Boolean` 
+**with_definitions:** `Internal::Types::Boolean` 
 
 Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each
 custom attribute. Set this parameter to `true` to get the name and description of each custom
 attribute, information about the data type, or other definition details. The default value is `false`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::CustomAttributes::RequestOptions` 
     
 </dd>
 </dl>
@@ -15824,7 +17514,7 @@ attribute, information about the data type, or other definition details. The def
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributes.Get(BookingId, Key) -> Square::Types::RetrieveBookingCustomAttributeResponse</code></summary>
+<details><summary><code>client.bookings.custom_attributes.<a href="/lib/square/bookings/custom_attributes/client.rb">get</a>(booking_id, key) -> Square::Types::RetrieveBookingCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -15854,12 +17544,12 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 <dd>
 
 ```ruby
-client.bookings.custom_attributes.get({
-  bookingId:'booking_id',
-  key:'key',
-  withDefinition:true,
-  version:1
-});
+client.bookings.custom_attributes.get(
+  booking_id: 'booking_id',
+  key: 'key',
+  with_definition: true,
+  version: 1
+);
 ```
 </dd>
 </dl>
@@ -15874,7 +17564,7 @@ client.bookings.custom_attributes.get({
 <dl>
 <dd>
 
-**bookingId:** `String` — The ID of the target [booking](entity:Booking).
+**booking_id:** `String` — The ID of the target [booking](entity:Booking).
     
 </dd>
 </dl>
@@ -15894,7 +17584,7 @@ definition owner, you must use the qualified key.
 <dl>
 <dd>
 
-**withDefinition:** `Internal::Types::Boolean` 
+**with_definition:** `Internal::Types::Boolean` 
 
 Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of
 the custom attribute. Set this parameter to `true` to get the name and description of the custom
@@ -15915,6 +17605,14 @@ higher than the current version, Square returns a `BAD_REQUEST` error.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::CustomAttributes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -15923,7 +17621,7 @@ higher than the current version, Square returns a `BAD_REQUEST` error.
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributes.Upsert(BookingId, Key, request) -> Square::Types::UpsertBookingCustomAttributeResponse</code></summary>
+<details><summary><code>client.bookings.custom_attributes.<a href="/lib/square/bookings/custom_attributes/client.rb">upsert</a>(booking_id, key, request) -> Square::Types::UpsertBookingCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -15956,11 +17654,11 @@ or *Appointments Premium*.
 <dd>
 
 ```ruby
-client.bookings.custom_attributes.upsert({
-  bookingId:'booking_id',
-  key:'key',
-  customAttribute:{}
-});
+client.bookings.custom_attributes.upsert(
+  booking_id: 'booking_id',
+  key: 'key',
+  custom_attribute: {}
+);
 ```
 </dd>
 </dl>
@@ -15975,7 +17673,7 @@ client.bookings.custom_attributes.upsert({
 <dl>
 <dd>
 
-**bookingId:** `String` — The ID of the target [booking](entity:Booking).
+**booking_id:** `String` — The ID of the target [booking](entity:Booking).
     
 </dd>
 </dl>
@@ -15995,7 +17693,7 @@ the definition owner, you must use the qualified key.
 <dl>
 <dd>
 
-**customAttribute:** `Square::Types::CustomAttribute` 
+**custom_attribute:** `Square::Types::CustomAttribute` 
 
 The custom attribute to create or update, with the following fields:
 
@@ -16012,10 +17710,18 @@ of the custom attribute.
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, used to ensure idempotency. For more information,
 see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::CustomAttributes::RequestOptions` 
     
 </dd>
 </dl>
@@ -16027,7 +17733,7 @@ see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-pa
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributes.Delete(BookingId, Key) -> Square::Types::DeleteBookingCustomAttributeResponse</code></summary>
+<details><summary><code>client.bookings.custom_attributes.<a href="/lib/square/bookings/custom_attributes/client.rb">delete</a>(booking_id, key) -> Square::Types::DeleteBookingCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -16060,10 +17766,10 @@ or *Appointments Premium*.
 <dd>
 
 ```ruby
-client.bookings.custom_attributes.delete({
-  bookingId:'booking_id',
-  key:'key'
-});
+client.bookings.custom_attributes.delete(
+  booking_id: 'booking_id',
+  key: 'key'
+);
 ```
 </dd>
 </dl>
@@ -16078,7 +17784,7 @@ client.bookings.custom_attributes.delete({
 <dl>
 <dd>
 
-**bookingId:** `String` — The ID of the target [booking](entity:Booking).
+**booking_id:** `String` — The ID of the target [booking](entity:Booking).
     
 </dd>
 </dl>
@@ -16094,6 +17800,14 @@ definition owner, you must use the qualified key.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::CustomAttributes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -16103,7 +17817,7 @@ definition owner, you must use the qualified key.
 </details>
 
 ## Bookings LocationProfiles
-<details><summary><code>client.Bookings.LocationProfiles.List() -> Square::Types::ListLocationBookingProfilesResponse</code></summary>
+<details><summary><code>client.bookings.location_profiles.<a href="/lib/square/bookings/location_profiles/client.rb">list</a>() -> Square::Types::ListLocationBookingProfilesResponse</code></summary>
 <dl>
 <dd>
 
@@ -16130,10 +17844,10 @@ Lists location booking profiles of a seller.
 <dd>
 
 ```ruby
-client.bookings.location_profiles.list({
-  limit:1,
-  cursor:'cursor'
-});
+client.bookings.location_profiles.list(
+  limit: 1,
+  cursor: 'cursor'
+);
 ```
 </dd>
 </dl>
@@ -16160,6 +17874,14 @@ client.bookings.location_profiles.list({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::LocationProfiles::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -16169,7 +17891,7 @@ client.bookings.location_profiles.list({
 </details>
 
 ## Bookings TeamMemberProfiles
-<details><summary><code>client.Bookings.TeamMemberProfiles.List() -> Square::Types::ListTeamMemberBookingProfilesResponse</code></summary>
+<details><summary><code>client.bookings.team_member_profiles.<a href="/lib/square/bookings/team_member_profiles/client.rb">list</a>() -> Square::Types::ListTeamMemberBookingProfilesResponse</code></summary>
 <dl>
 <dd>
 
@@ -16196,12 +17918,12 @@ Lists booking profiles for team members.
 <dd>
 
 ```ruby
-client.bookings.team_member_profiles.list({
-  bookableOnly:true,
-  limit:1,
-  cursor:'cursor',
-  locationId:'location_id'
-});
+client.bookings.team_member_profiles.list(
+  bookable_only: true,
+  limit: 1,
+  cursor: 'cursor',
+  location_id: 'location_id'
+);
 ```
 </dd>
 </dl>
@@ -16216,7 +17938,7 @@ client.bookings.team_member_profiles.list({
 <dl>
 <dd>
 
-**bookableOnly:** `Internal::Types::Boolean` — Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`).
+**bookable_only:** `Internal::Types::Boolean` — Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`).
     
 </dd>
 </dl>
@@ -16240,7 +17962,15 @@ client.bookings.team_member_profiles.list({
 <dl>
 <dd>
 
-**locationId:** `String` — Indicates whether to include only team members enabled at the given location in the returned result.
+**location_id:** `String` — Indicates whether to include only team members enabled at the given location in the returned result.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::TeamMemberProfiles::RequestOptions` 
     
 </dd>
 </dl>
@@ -16252,7 +17982,7 @@ client.bookings.team_member_profiles.list({
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.TeamMemberProfiles.Get(TeamMemberId) -> Square::Types::GetTeamMemberBookingProfileResponse</code></summary>
+<details><summary><code>client.bookings.team_member_profiles.<a href="/lib/square/bookings/team_member_profiles/client.rb">get</a>(team_member_id) -> Square::Types::GetTeamMemberBookingProfileResponse</code></summary>
 <dl>
 <dd>
 
@@ -16279,9 +18009,7 @@ Retrieves a team member's booking profile.
 <dd>
 
 ```ruby
-client.bookings.team_member_profiles.get({
-  teamMemberId:'team_member_id'
-});
+client.bookings.team_member_profiles.get(team_member_id: 'team_member_id');
 ```
 </dd>
 </dl>
@@ -16296,7 +18024,15 @@ client.bookings.team_member_profiles.get({
 <dl>
 <dd>
 
-**teamMemberId:** `String` — The ID of the team member to retrieve.
+**team_member_id:** `String` — The ID of the team member to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Bookings::TeamMemberProfiles::RequestOptions` 
     
 </dd>
 </dl>
@@ -16309,7 +18045,7 @@ client.bookings.team_member_profiles.get({
 </details>
 
 ## CashDrawers Shifts
-<details><summary><code>client.CashDrawers.Shifts.List() -> Square::Types::ListCashDrawerShiftsResponse</code></summary>
+<details><summary><code>client.cash_drawers.shifts.<a href="/lib/square/cash_drawers/shifts/client.rb">list</a>() -> Square::Types::ListCashDrawerShiftsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16337,13 +18073,14 @@ in a date range.
 <dd>
 
 ```ruby
-client.cash_drawers.shifts.list({
-  locationId:'location_id',
-  beginTime:'begin_time',
-  endTime:'end_time',
-  limit:1,
-  cursor:'cursor'
-});
+client.cash_drawers.shifts.list(
+  location_id: 'location_id',
+  sort_order: 'DESC',
+  begin_time: 'begin_time',
+  end_time: 'end_time',
+  limit: 1,
+  cursor: 'cursor'
+);
 ```
 </dd>
 </dl>
@@ -16358,7 +18095,7 @@ client.cash_drawers.shifts.list({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the location to query for a list of cash drawer shifts.
+**location_id:** `String` — The ID of the location to query for a list of cash drawer shifts.
     
 </dd>
 </dl>
@@ -16366,7 +18103,7 @@ client.cash_drawers.shifts.list({
 <dl>
 <dd>
 
-**sortOrder:** `Square::Types::SortOrder` 
+**sort_order:** `Square::Types::SortOrder` 
 
 The order in which cash drawer shifts are listed in the response,
 based on their opened_at field. Default value: ASC
@@ -16377,7 +18114,7 @@ based on their opened_at field. Default value: ASC
 <dl>
 <dd>
 
-**beginTime:** `String` — The inclusive start time of the query on opened_at, in ISO 8601 format.
+**begin_time:** `String` — The inclusive start time of the query on opened_at, in ISO 8601 format.
     
 </dd>
 </dl>
@@ -16385,7 +18122,7 @@ based on their opened_at field. Default value: ASC
 <dl>
 <dd>
 
-**endTime:** `String` — The exclusive end date of the query on opened_at, in ISO 8601 format.
+**end_time:** `String` — The exclusive end date of the query on opened_at, in ISO 8601 format.
     
 </dd>
 </dl>
@@ -16408,6 +18145,14 @@ default, 1000 max).
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::CashDrawers::Shifts::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -16416,7 +18161,7 @@ default, 1000 max).
 </dl>
 </details>
 
-<details><summary><code>client.CashDrawers.Shifts.Get(ShiftId) -> Square::Types::GetCashDrawerShiftResponse</code></summary>
+<details><summary><code>client.cash_drawers.shifts.<a href="/lib/square/cash_drawers/shifts/client.rb">get</a>(shift_id) -> Square::Types::GetCashDrawerShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -16444,10 +18189,10 @@ Provides the summary details for a single cash drawer shift. See
 <dd>
 
 ```ruby
-client.cash_drawers.shifts.get({
-  shiftId:'shift_id',
-  locationId:'location_id'
-});
+client.cash_drawers.shifts.get(
+  shift_id: 'shift_id',
+  location_id: 'location_id'
+);
 ```
 </dd>
 </dl>
@@ -16462,7 +18207,7 @@ client.cash_drawers.shifts.get({
 <dl>
 <dd>
 
-**shiftId:** `String` — The shift ID.
+**shift_id:** `String` — The shift ID.
     
 </dd>
 </dl>
@@ -16470,7 +18215,15 @@ client.cash_drawers.shifts.get({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the location to retrieve cash drawer shifts from.
+**location_id:** `String` — The ID of the location to retrieve cash drawer shifts from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::CashDrawers::Shifts::RequestOptions` 
     
 </dd>
 </dl>
@@ -16482,7 +18235,7 @@ client.cash_drawers.shifts.get({
 </dl>
 </details>
 
-<details><summary><code>client.CashDrawers.Shifts.ListEvents(ShiftId) -> Square::Types::ListCashDrawerShiftEventsResponse</code></summary>
+<details><summary><code>client.cash_drawers.shifts.<a href="/lib/square/cash_drawers/shifts/client.rb">list_events</a>(shift_id) -> Square::Types::ListCashDrawerShiftEventsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16509,12 +18262,12 @@ Provides a paginated list of events for a single cash drawer shift.
 <dd>
 
 ```ruby
-client.cash_drawers.shifts.list_events({
-  shiftId:'shift_id',
-  locationId:'location_id',
-  limit:1,
-  cursor:'cursor'
-});
+client.cash_drawers.shifts.list_events(
+  shift_id: 'shift_id',
+  location_id: 'location_id',
+  limit: 1,
+  cursor: 'cursor'
+);
 ```
 </dd>
 </dl>
@@ -16529,7 +18282,7 @@ client.cash_drawers.shifts.list_events({
 <dl>
 <dd>
 
-**shiftId:** `String` — The shift ID.
+**shift_id:** `String` — The shift ID.
     
 </dd>
 </dl>
@@ -16537,7 +18290,7 @@ client.cash_drawers.shifts.list_events({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the location to list cash drawer shifts for.
+**location_id:** `String` — The ID of the location to list cash drawer shifts for.
     
 </dd>
 </dl>
@@ -16560,6 +18313,14 @@ default, 1000 max).
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::CashDrawers::Shifts::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -16569,7 +18330,7 @@ default, 1000 max).
 </details>
 
 ## Catalog Images
-<details><summary><code>client.Catalog.Images.Create(request) -> Square::Types::CreateCatalogImageResponse</code></summary>
+<details><summary><code>client.catalog.images.<a href="/lib/square/catalog/images/client.rb">create</a>(request) -> Square::Types::CreateCatalogImageResponse</code></summary>
 <dl>
 <dd>
 
@@ -16601,8 +18362,23 @@ JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
 <dd>
 
 ```ruby
-client.catalog.images.create({});
+client.catalog.images.create();
 ```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Catalog::Images::RequestOptions` 
+    
 </dd>
 </dl>
 </dd>
@@ -16613,7 +18389,7 @@ client.catalog.images.create({});
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.Images.Update(ImageId, request) -> Square::Types::UpdateCatalogImageResponse</code></summary>
+<details><summary><code>client.catalog.images.<a href="/lib/square/catalog/images/client.rb">update</a>(image_id, request) -> Square::Types::UpdateCatalogImageResponse</code></summary>
 <dl>
 <dd>
 
@@ -16643,9 +18419,7 @@ JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
 <dd>
 
 ```ruby
-client.catalog.images.update({
-  imageId:'image_id'
-});
+client.catalog.images.update(image_id: 'image_id');
 ```
 </dd>
 </dl>
@@ -16660,7 +18434,15 @@ client.catalog.images.update({
 <dl>
 <dd>
 
-**imageId:** `String` — The ID of the `CatalogImage` object to update the encapsulated image file.
+**image_id:** `String` — The ID of the `CatalogImage` object to update the encapsulated image file.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Catalog::Images::RequestOptions` 
     
 </dd>
 </dl>
@@ -16673,7 +18455,7 @@ client.catalog.images.update({
 </details>
 
 ## Catalog Object_
-<details><summary><code>client.Catalog.Object_.Upsert(request) -> Square::Types::UpsertCatalogObjectResponse</code></summary>
+<details><summary><code>client.catalog.object.<a href="/lib/square/catalog/object/client.rb">upsert</a>(request) -> Square::Types::UpsertCatalogObjectResponse</code></summary>
 <dl>
 <dd>
 
@@ -16704,9 +18486,7 @@ update requests are rejected with the `429` error code.
 <dd>
 
 ```ruby
-client.catalog.object.upsert({
-  idempotencyKey:'af3d1afc-7212-4300-b463-0bfc5314a5ae'
-});
+client.catalog.object.upsert(idempotency_key: 'af3d1afc-7212-4300-b463-0bfc5314a5ae');
 ```
 </dd>
 </dl>
@@ -16721,7 +18501,7 @@ client.catalog.object.upsert({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A value you specify that uniquely identifies this
 request among all your requests. A common way to create
@@ -16749,6 +18529,14 @@ A CatalogObject to be created or updated.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Catalog::Object_::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -16757,7 +18545,7 @@ A CatalogObject to be created or updated.
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.Object_.Get(ObjectId) -> Square::Types::GetCatalogObjectResponse</code></summary>
+<details><summary><code>client.catalog.object.<a href="/lib/square/catalog/object/client.rb">get</a>(object_id_) -> Square::Types::GetCatalogObjectResponse</code></summary>
 <dl>
 <dd>
 
@@ -16790,12 +18578,12 @@ any [CatalogTax](entity:CatalogTax) objects that apply to it.
 <dd>
 
 ```ruby
-client.catalog.object.get({
-  objectId:'object_id',
-  includeRelatedObjects:true,
-  catalogVersion:1000000,
-  includeCategoryPathToRoot:true
-});
+client.catalog.object.get(
+  object_id_: 'object_id',
+  include_related_objects: true,
+  catalog_version: 1000000,
+  include_category_path_to_root: true
+);
 ```
 </dd>
 </dl>
@@ -16810,7 +18598,7 @@ client.catalog.object.get({
 <dl>
 <dd>
 
-**objectId:** `String` — The object ID of any type of catalog objects to be retrieved.
+**object_id_:** `String` — The object ID of any type of catalog objects to be retrieved.
     
 </dd>
 </dl>
@@ -16818,7 +18606,7 @@ client.catalog.object.get({
 <dl>
 <dd>
 
-**includeRelatedObjects:** `Internal::Types::Boolean` 
+**include_related_objects:** `Internal::Types::Boolean` 
 
 If `true`, the response will include additional objects that are related to the
 requested objects. Related objects are defined as any objects referenced by ID by the results in the `objects` field
@@ -16841,7 +18629,7 @@ Default value: `false`
 <dl>
 <dd>
 
-**catalogVersion:** `Integer` 
+**catalog_version:** `Integer` 
 
 Requests objects as of a specific version of the catalog. This allows you to retrieve historical
 versions of objects. The value to retrieve a specific version of an object can be found
@@ -16854,12 +18642,20 @@ be from the current version of the catalog.
 <dl>
 <dd>
 
-**includeCategoryPathToRoot:** `Internal::Types::Boolean` 
+**include_category_path_to_root:** `Internal::Types::Boolean` 
 
 Specifies whether or not to include the `path_to_root` list for each returned category instance. The `path_to_root` list consists
 of `CategoryPathToRootNode` objects and specifies the path that starts with the immediate parent category of the returned category
 and ends with its root category. If the returned category is a top-level category, the `path_to_root` list is empty and is not returned
 in the response payload.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Catalog::Object_::RequestOptions` 
     
 </dd>
 </dl>
@@ -16871,7 +18667,7 @@ in the response payload.
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.Object_.Delete(ObjectId) -> Square::Types::DeleteCatalogObjectResponse</code></summary>
+<details><summary><code>client.catalog.object.<a href="/lib/square/catalog/object/client.rb">delete</a>(object_id_) -> Square::Types::DeleteCatalogObjectResponse</code></summary>
 <dl>
 <dd>
 
@@ -16907,9 +18703,7 @@ delete requests are rejected with the `429` error code.
 <dd>
 
 ```ruby
-client.catalog.object.delete({
-  objectId:'object_id'
-});
+client.catalog.object.delete(object_id_: 'object_id');
 ```
 </dd>
 </dl>
@@ -16924,11 +18718,19 @@ client.catalog.object.delete({
 <dl>
 <dd>
 
-**objectId:** `String` 
+**object_id_:** `String` 
 
 The ID of the catalog object to be deleted. When an object is deleted, other
 objects in the graph that depend on that object will be deleted as well (for example, deleting a
 catalog item will delete its catalog item variations).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Catalog::Object_::RequestOptions` 
     
 </dd>
 </dl>
@@ -16941,7 +18743,7 @@ catalog item will delete its catalog item variations).
 </details>
 
 ## Checkout PaymentLinks
-<details><summary><code>client.Checkout.PaymentLinks.List() -> Square::Types::ListPaymentLinksResponse</code></summary>
+<details><summary><code>client.checkout.payment_links.<a href="/lib/square/checkout/payment_links/client.rb">list</a>() -> Square::Types::ListPaymentLinksResponse</code></summary>
 <dl>
 <dd>
 
@@ -16968,10 +18770,10 @@ Lists all payment links.
 <dd>
 
 ```ruby
-client.checkout.payment_links.list({
-  cursor:'cursor',
-  limit:1
-});
+client.checkout.payment_links.list(
+  cursor: 'cursor',
+  limit: 1
+);
 ```
 </dd>
 </dl>
@@ -17009,6 +18811,14 @@ Default value: `100`
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Checkout::PaymentLinks::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -17017,7 +18827,7 @@ Default value: `100`
 </dl>
 </details>
 
-<details><summary><code>client.Checkout.PaymentLinks.Create(request) -> Square::Types::CreatePaymentLinkResponse</code></summary>
+<details><summary><code>client.checkout.payment_links.<a href="/lib/square/checkout/payment_links/client.rb">create</a>(request) -> Square::Types::CreatePaymentLinkResponse</code></summary>
 <dl>
 <dd>
 
@@ -17044,16 +18854,17 @@ Creates a Square-hosted checkout page. Applications can share the resulting paym
 <dd>
 
 ```ruby
-client.checkout.payment_links.create({
-  idempotencyKey:'cd9e25dc-d9f2-4430-aedb-61605070e95f',
-  quickPay:{
-    name:'Auto Detailing',
-    price_money:{
-      amount:10000
+client.checkout.payment_links.create(
+  idempotency_key: 'cd9e25dc-d9f2-4430-aedb-61605070e95f',
+  quick_pay: {
+    name: 'Auto Detailing',
+    price_money: {
+      amount: 10000,
+      currency: 'USD'
     },
-    location_id:'A9Y43N9ABXZBP'
+    location_id: 'A9Y43N9ABXZBP'
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -17068,7 +18879,7 @@ client.checkout.payment_links.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this `CreatePaymentLinkRequest` request.
 If you do not provide a unique string (or provide an empty string as the value),
@@ -17093,7 +18904,7 @@ application context. It is not used anywhere.
 <dl>
 <dd>
 
-**quickPay:** `Square::Types::QuickPay` 
+**quick_pay:** `Square::Types::QuickPay` 
 
 Describes an ad hoc item and price for which to generate a quick pay checkout link.
 For more information,
@@ -17117,7 +18928,7 @@ see [Square Order Checkout](https://developer.squareup.com/docs/checkout-api/squ
 <dl>
 <dd>
 
-**checkoutOptions:** `Square::Types::CheckoutOptions` 
+**checkout_options:** `Square::Types::CheckoutOptions` 
 
 Describes optional fields to add to the resulting checkout page.
 For more information,
@@ -17129,7 +18940,7 @@ see [Optional Checkout Configurations](https://developer.squareup.com/docs/check
 <dl>
 <dd>
 
-**prePopulatedData:** `Square::Types::PrePopulatedData` 
+**pre_populated_data:** `Square::Types::PrePopulatedData` 
 
 Describes fields to prepopulate in the resulting checkout page.
 For more information, see [Prepopulate the shipping address](https://developer.squareup.com/docs/checkout-api/optional-checkout-configurations#prepopulate-the-shipping-address).
@@ -17140,7 +18951,15 @@ For more information, see [Prepopulate the shipping address](https://developer.s
 <dl>
 <dd>
 
-**paymentNote:** `String` — A note for the payment. After processing the payment, Square adds this note to the resulting `Payment`.
+**payment_note:** `String` — A note for the payment. After processing the payment, Square adds this note to the resulting `Payment`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Checkout::PaymentLinks::RequestOptions` 
     
 </dd>
 </dl>
@@ -17152,7 +18971,7 @@ For more information, see [Prepopulate the shipping address](https://developer.s
 </dl>
 </details>
 
-<details><summary><code>client.Checkout.PaymentLinks.Get(Id) -> Square::Types::GetPaymentLinkResponse</code></summary>
+<details><summary><code>client.checkout.payment_links.<a href="/lib/square/checkout/payment_links/client.rb">get</a>(id) -> Square::Types::GetPaymentLinkResponse</code></summary>
 <dl>
 <dd>
 
@@ -17179,9 +18998,7 @@ Retrieves a payment link.
 <dd>
 
 ```ruby
-client.checkout.payment_links.get({
-  id:'id'
-});
+client.checkout.payment_links.get(id: 'id');
 ```
 </dd>
 </dl>
@@ -17200,6 +19017,14 @@ client.checkout.payment_links.get({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Checkout::PaymentLinks::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -17208,7 +19033,7 @@ client.checkout.payment_links.get({
 </dl>
 </details>
 
-<details><summary><code>client.Checkout.PaymentLinks.Update(Id, request) -> Square::Types::UpdatePaymentLinkResponse</code></summary>
+<details><summary><code>client.checkout.payment_links.<a href="/lib/square/checkout/payment_links/client.rb">update</a>(id, request) -> Square::Types::UpdatePaymentLinkResponse</code></summary>
 <dl>
 <dd>
 
@@ -17237,15 +19062,15 @@ You cannot update other fields such as the `order_id`, `version`, `URL`, or `tim
 <dd>
 
 ```ruby
-client.checkout.payment_links.update({
-  id:'id',
-  paymentLink:{
-    version:1,
-    checkout_options:{
-      ask_for_shipping_address:true
+client.checkout.payment_links.update(
+  id: 'id',
+  payment_link: {
+    version: 1,
+    checkout_options: {
+      ask_for_shipping_address: true
     }
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -17268,10 +19093,18 @@ client.checkout.payment_links.update({
 <dl>
 <dd>
 
-**paymentLink:** `Square::Types::PaymentLink` 
+**payment_link:** `Square::Types::PaymentLink` 
 
 The `payment_link` object describing the updates to apply.
 For more information, see [Update a payment link](https://developer.squareup.com/docs/checkout-api/manage-checkout#update-a-payment-link).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Checkout::PaymentLinks::RequestOptions` 
     
 </dd>
 </dl>
@@ -17283,7 +19116,7 @@ For more information, see [Update a payment link](https://developer.squareup.com
 </dl>
 </details>
 
-<details><summary><code>client.Checkout.PaymentLinks.Delete(Id) -> Square::Types::DeletePaymentLinkResponse</code></summary>
+<details><summary><code>client.checkout.payment_links.<a href="/lib/square/checkout/payment_links/client.rb">delete</a>(id) -> Square::Types::DeletePaymentLinkResponse</code></summary>
 <dl>
 <dd>
 
@@ -17310,9 +19143,7 @@ Deletes a payment link.
 <dd>
 
 ```ruby
-client.checkout.payment_links.delete({
-  id:'id'
-});
+client.checkout.payment_links.delete(id: 'id');
 ```
 </dd>
 </dl>
@@ -17331,6 +19162,14 @@ client.checkout.payment_links.delete({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Checkout::PaymentLinks::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -17340,7 +19179,7 @@ client.checkout.payment_links.delete({
 </details>
 
 ## Customers CustomAttributeDefinitions
-<details><summary><code>client.Customers.CustomAttributeDefinitions.List() -> Square::Types::ListCustomerCustomAttributeDefinitionsResponse</code></summary>
+<details><summary><code>client.customers.custom_attribute_definitions.<a href="/lib/square/customers/custom_attribute_definitions/client.rb">list</a>() -> Square::Types::ListCustomerCustomAttributeDefinitionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17372,10 +19211,10 @@ seller-defined custom attributes (also known as custom fields) are always set to
 <dd>
 
 ```ruby
-client.customers.custom_attribute_definitions.list({
-  limit:1,
-  cursor:'cursor'
-});
+client.customers.custom_attribute_definitions.list(
+  limit: 1,
+  cursor: 'cursor'
+);
 ```
 </dd>
 </dl>
@@ -17410,6 +19249,14 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::CustomAttributeDefinitions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -17418,7 +19265,7 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
 </dl>
 </details>
 
-<details><summary><code>client.Customers.CustomAttributeDefinitions.Create(request) -> Square::Types::CreateCustomerCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.customers.custom_attribute_definitions.<a href="/lib/square/customers/custom_attribute_definitions/client.rb">create</a>(request) -> Square::Types::CreateCustomerCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -17455,13 +19302,12 @@ Sellers can view all custom attributes in exported customer data, including thos
 <dd>
 
 ```ruby
-client.customers.custom_attribute_definitions.create({
-  customAttributeDefinition:{
-    key:'favoritemovie',
-    schema:{},
-    name:'Favorite Movie',
-    description:'The favorite movie of the customer.'
-  }
+client.customers.custom_attribute_definitions.create(custom_attribute_definition: {
+  key: 'favoritemovie',
+  schema: {},
+  name: 'Favorite Movie',
+  description: 'The favorite movie of the customer.',
+  visibility: 'VISIBILITY_HIDDEN'
 });
 ```
 </dd>
@@ -17477,7 +19323,7 @@ client.customers.custom_attribute_definitions.create({
 <dl>
 <dd>
 
-**customAttributeDefinition:** `Square::Types::CustomAttributeDefinition` 
+**custom_attribute_definition:** `Square::Types::CustomAttributeDefinition` 
 
 The custom attribute definition to create. Note the following:
 - With the exception of the `Selection` data type, the `schema` is specified as a simple URL to the JSON schema
@@ -17492,10 +19338,18 @@ definition hosted on the Square CDN. For more information, including supported v
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, used to ensure idempotency. For more information,
 see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::CustomAttributeDefinitions::RequestOptions` 
     
 </dd>
 </dl>
@@ -17507,7 +19361,7 @@ see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-pa
 </dl>
 </details>
 
-<details><summary><code>client.Customers.CustomAttributeDefinitions.Get(Key) -> Square::Types::GetCustomerCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.customers.custom_attribute_definitions.<a href="/lib/square/customers/custom_attribute_definitions/client.rb">get</a>(key) -> Square::Types::GetCustomerCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -17538,10 +19392,10 @@ setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note t
 <dd>
 
 ```ruby
-client.customers.custom_attribute_definitions.get({
-  key:'key',
-  version:1
-});
+client.customers.custom_attribute_definitions.get(
+  key: 'key',
+  version: 1
+);
 ```
 </dd>
 </dl>
@@ -17576,6 +19430,14 @@ is higher than the current version, Square returns a `BAD_REQUEST` error.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::CustomAttributeDefinitions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -17584,7 +19446,7 @@ is higher than the current version, Square returns a `BAD_REQUEST` error.
 </dl>
 </details>
 
-<details><summary><code>client.Customers.CustomAttributeDefinitions.Update(Key, request) -> Square::Types::UpdateCustomerCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.customers.custom_attribute_definitions.<a href="/lib/square/customers/custom_attribute_definitions/client.rb">update</a>(key, request) -> Square::Types::UpdateCustomerCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -17617,12 +19479,13 @@ all custom attributes in exported customer data, including those set to `VISIBIL
 <dd>
 
 ```ruby
-client.customers.custom_attribute_definitions.update({
-  key:'key',
-  customAttributeDefinition:{
-    description:'Update the description as desired.'
+client.customers.custom_attribute_definitions.update(
+  key: 'key',
+  custom_attribute_definition: {
+    description: 'Update the description as desired.',
+    visibility: 'VISIBILITY_READ_ONLY'
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -17645,7 +19508,7 @@ client.customers.custom_attribute_definitions.update({
 <dl>
 <dd>
 
-**customAttributeDefinition:** `Square::Types::CustomAttributeDefinition` 
+**custom_attribute_definition:** `Square::Types::CustomAttributeDefinition` 
 
 The custom attribute definition that contains the fields to update. This endpoint
 supports sparse updates, so only new or changed fields need to be included in the request.
@@ -17669,10 +19532,18 @@ control, include the optional `version` field and specify the current version of
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, used to ensure idempotency. For more information,
 see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::CustomAttributeDefinitions::RequestOptions` 
     
 </dd>
 </dl>
@@ -17684,7 +19555,7 @@ see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-pa
 </dl>
 </details>
 
-<details><summary><code>client.Customers.CustomAttributeDefinitions.Delete(Key) -> Square::Types::DeleteCustomerCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.customers.custom_attribute_definitions.<a href="/lib/square/customers/custom_attribute_definitions/client.rb">delete</a>(key) -> Square::Types::DeleteCustomerCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -17716,9 +19587,7 @@ Only the definition owner can delete a custom attribute definition.
 <dd>
 
 ```ruby
-client.customers.custom_attribute_definitions.delete({
-  key:'key'
-});
+client.customers.custom_attribute_definitions.delete(key: 'key');
 ```
 </dd>
 </dl>
@@ -17737,6 +19606,14 @@ client.customers.custom_attribute_definitions.delete({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::CustomAttributeDefinitions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -17745,7 +19622,7 @@ client.customers.custom_attribute_definitions.delete({
 </dl>
 </details>
 
-<details><summary><code>client.Customers.CustomAttributeDefinitions.BatchUpsert(request) -> Square::Types::BatchUpsertCustomerCustomAttributesResponse</code></summary>
+<details><summary><code>client.customers.custom_attribute_definitions.<a href="/lib/square/customers/custom_attribute_definitions/client.rb">batch_upsert</a>(request) -> Square::Types::BatchUpsertCustomerCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -17785,37 +19662,35 @@ must be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attribut
 <dd>
 
 ```ruby
-client.customers.custom_attribute_definitions.batch_upsert({
-  values:{
-    id1:{
-      customer_id:'N3NCVYY3WS27HF0HKANA3R9FP8',
-      custom_attribute:{
-        key:'favoritemovie'
-      }
-    },
-    id2:{
-      customer_id:'SY8EMWRNDN3TQDP2H4KS1QWMMM',
-      custom_attribute:{
-        key:'ownsmovie'
-      }
-    },
-    id3:{
-      customer_id:'SY8EMWRNDN3TQDP2H4KS1QWMMM',
-      custom_attribute:{
-        key:'favoritemovie'
-      }
-    },
-    id4:{
-      customer_id:'N3NCVYY3WS27HF0HKANA3R9FP8',
-      custom_attribute:{
-        key:'square:a0f1505a-2aa1-490d-91a8-8d31ff181808'
-      }
-    },
-    id5:{
-      customer_id:'70548QG1HN43B05G0KCZ4MMC1G',
-      custom_attribute:{
-        key:'sq0ids-0evKIskIGaY45fCyNL66aw:backupemail'
-      }
+client.customers.custom_attribute_definitions.batch_upsert(values: {
+  id1: {
+    customer_id: 'N3NCVYY3WS27HF0HKANA3R9FP8',
+    custom_attribute: {
+      key: 'favoritemovie'
+    }
+  },
+  id2: {
+    customer_id: 'SY8EMWRNDN3TQDP2H4KS1QWMMM',
+    custom_attribute: {
+      key: 'ownsmovie'
+    }
+  },
+  id3: {
+    customer_id: 'SY8EMWRNDN3TQDP2H4KS1QWMMM',
+    custom_attribute: {
+      key: 'favoritemovie'
+    }
+  },
+  id4: {
+    customer_id: 'N3NCVYY3WS27HF0HKANA3R9FP8',
+    custom_attribute: {
+      key: 'square:a0f1505a-2aa1-490d-91a8-8d31ff181808'
+    }
+  },
+  id5: {
+    customer_id: '70548QG1HN43B05G0KCZ4MMC1G',
+    custom_attribute: {
+      key: 'sq0ids-0evKIskIGaY45fCyNL66aw:backupemail'
     }
   }
 });
@@ -17841,6 +19716,14 @@ information needed to create or update a custom attribute.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::CustomAttributeDefinitions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -17850,7 +19733,7 @@ information needed to create or update a custom attribute.
 </details>
 
 ## Customers Groups
-<details><summary><code>client.Customers.Groups.List() -> Square::Types::ListCustomerGroupsResponse</code></summary>
+<details><summary><code>client.customers.groups.<a href="/lib/square/customers/groups/client.rb">list</a>() -> Square::Types::ListCustomerGroupsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17877,10 +19760,10 @@ Retrieves the list of customer groups of a business.
 <dd>
 
 ```ruby
-client.customers.groups.list({
-  cursor:'cursor',
-  limit:1
-});
+client.customers.groups.list(
+  cursor: 'cursor',
+  limit: 1
+);
 ```
 </dd>
 </dl>
@@ -17917,6 +19800,14 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::Groups::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -17925,7 +19816,7 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Groups.Create(request) -> Square::Types::CreateCustomerGroupResponse</code></summary>
+<details><summary><code>client.customers.groups.<a href="/lib/square/customers/groups/client.rb">create</a>(request) -> Square::Types::CreateCustomerGroupResponse</code></summary>
 <dl>
 <dd>
 
@@ -17954,10 +19845,8 @@ The request must include the `name` value of the group.
 <dd>
 
 ```ruby
-client.customers.groups.create({
-  group:{
-    name:'Loyal Customers'
-  }
+client.customers.groups.create(group: {
+  name: 'Loyal Customers'
 });
 ```
 </dd>
@@ -17973,7 +19862,7 @@ client.customers.groups.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` — The idempotency key for the request. For more information, see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+**idempotency_key:** `String` — The idempotency key for the request. For more information, see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
     
 </dd>
 </dl>
@@ -17985,6 +19874,14 @@ client.customers.groups.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::Groups::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -17993,7 +19890,7 @@ client.customers.groups.create({
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Groups.Get(GroupId) -> Square::Types::GetCustomerGroupResponse</code></summary>
+<details><summary><code>client.customers.groups.<a href="/lib/square/customers/groups/client.rb">get</a>(group_id) -> Square::Types::GetCustomerGroupResponse</code></summary>
 <dl>
 <dd>
 
@@ -18020,9 +19917,7 @@ Retrieves a specific customer group as identified by the `group_id` value.
 <dd>
 
 ```ruby
-client.customers.groups.get({
-  groupId:'group_id'
-});
+client.customers.groups.get(group_id: 'group_id');
 ```
 </dd>
 </dl>
@@ -18037,7 +19932,15 @@ client.customers.groups.get({
 <dl>
 <dd>
 
-**groupId:** `String` — The ID of the customer group to retrieve.
+**group_id:** `String` — The ID of the customer group to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::Groups::RequestOptions` 
     
 </dd>
 </dl>
@@ -18049,7 +19952,7 @@ client.customers.groups.get({
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Groups.Update(GroupId, request) -> Square::Types::UpdateCustomerGroupResponse</code></summary>
+<details><summary><code>client.customers.groups.<a href="/lib/square/customers/groups/client.rb">update</a>(group_id, request) -> Square::Types::UpdateCustomerGroupResponse</code></summary>
 <dl>
 <dd>
 
@@ -18076,12 +19979,12 @@ Updates a customer group as identified by the `group_id` value.
 <dd>
 
 ```ruby
-client.customers.groups.update({
-  groupId:'group_id',
-  group:{
-    name:'Loyal Customers'
+client.customers.groups.update(
+  group_id: 'group_id',
+  group: {
+    name: 'Loyal Customers'
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -18096,7 +19999,7 @@ client.customers.groups.update({
 <dl>
 <dd>
 
-**groupId:** `String` — The ID of the customer group to update.
+**group_id:** `String` — The ID of the customer group to update.
     
 </dd>
 </dl>
@@ -18108,6 +20011,14 @@ client.customers.groups.update({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::Groups::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -18116,7 +20027,7 @@ client.customers.groups.update({
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Groups.Delete(GroupId) -> Square::Types::DeleteCustomerGroupResponse</code></summary>
+<details><summary><code>client.customers.groups.<a href="/lib/square/customers/groups/client.rb">delete</a>(group_id) -> Square::Types::DeleteCustomerGroupResponse</code></summary>
 <dl>
 <dd>
 
@@ -18143,9 +20054,7 @@ Deletes a customer group as identified by the `group_id` value.
 <dd>
 
 ```ruby
-client.customers.groups.delete({
-  groupId:'group_id'
-});
+client.customers.groups.delete(group_id: 'group_id');
 ```
 </dd>
 </dl>
@@ -18160,7 +20069,15 @@ client.customers.groups.delete({
 <dl>
 <dd>
 
-**groupId:** `String` — The ID of the customer group to delete.
+**group_id:** `String` — The ID of the customer group to delete.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::Groups::RequestOptions` 
     
 </dd>
 </dl>
@@ -18172,7 +20089,7 @@ client.customers.groups.delete({
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Groups.Add(CustomerId, GroupId) -> Square::Types::AddGroupToCustomerResponse</code></summary>
+<details><summary><code>client.customers.groups.<a href="/lib/square/customers/groups/client.rb">add</a>(customer_id, group_id) -> Square::Types::AddGroupToCustomerResponse</code></summary>
 <dl>
 <dd>
 
@@ -18202,10 +20119,10 @@ and the customer group is identified by the `group_id` value.
 <dd>
 
 ```ruby
-client.customers.groups.add({
-  customerId:'customer_id',
-  groupId:'group_id'
-});
+client.customers.groups.add(
+  customer_id: 'customer_id',
+  group_id: 'group_id'
+);
 ```
 </dd>
 </dl>
@@ -18220,7 +20137,7 @@ client.customers.groups.add({
 <dl>
 <dd>
 
-**customerId:** `String` — The ID of the customer to add to a group.
+**customer_id:** `String` — The ID of the customer to add to a group.
     
 </dd>
 </dl>
@@ -18228,7 +20145,15 @@ client.customers.groups.add({
 <dl>
 <dd>
 
-**groupId:** `String` — The ID of the customer group to add the customer to.
+**group_id:** `String` — The ID of the customer group to add the customer to.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::Groups::RequestOptions` 
     
 </dd>
 </dl>
@@ -18240,7 +20165,7 @@ client.customers.groups.add({
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Groups.Remove(CustomerId, GroupId) -> Square::Types::RemoveGroupFromCustomerResponse</code></summary>
+<details><summary><code>client.customers.groups.<a href="/lib/square/customers/groups/client.rb">remove</a>(customer_id, group_id) -> Square::Types::RemoveGroupFromCustomerResponse</code></summary>
 <dl>
 <dd>
 
@@ -18270,10 +20195,10 @@ and the customer group is identified by the `group_id` value.
 <dd>
 
 ```ruby
-client.customers.groups.remove({
-  customerId:'customer_id',
-  groupId:'group_id'
-});
+client.customers.groups.remove(
+  customer_id: 'customer_id',
+  group_id: 'group_id'
+);
 ```
 </dd>
 </dl>
@@ -18288,7 +20213,7 @@ client.customers.groups.remove({
 <dl>
 <dd>
 
-**customerId:** `String` — The ID of the customer to remove from the group.
+**customer_id:** `String` — The ID of the customer to remove from the group.
     
 </dd>
 </dl>
@@ -18296,7 +20221,15 @@ client.customers.groups.remove({
 <dl>
 <dd>
 
-**groupId:** `String` — The ID of the customer group to remove the customer from.
+**group_id:** `String` — The ID of the customer group to remove the customer from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::Groups::RequestOptions` 
     
 </dd>
 </dl>
@@ -18309,7 +20242,7 @@ client.customers.groups.remove({
 </details>
 
 ## Customers Segments
-<details><summary><code>client.Customers.Segments.List() -> Square::Types::ListCustomerSegmentsResponse</code></summary>
+<details><summary><code>client.customers.segments.<a href="/lib/square/customers/segments/client.rb">list</a>() -> Square::Types::ListCustomerSegmentsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18336,10 +20269,10 @@ Retrieves the list of customer segments of a business.
 <dd>
 
 ```ruby
-client.customers.segments.list({
-  cursor:'cursor',
-  limit:1
-});
+client.customers.segments.list(
+  cursor: 'cursor',
+  limit: 1
+);
 ```
 </dd>
 </dl>
@@ -18376,6 +20309,14 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::Segments::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -18384,7 +20325,7 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Segments.Get(SegmentId) -> Square::Types::GetCustomerSegmentResponse</code></summary>
+<details><summary><code>client.customers.segments.<a href="/lib/square/customers/segments/client.rb">get</a>(segment_id) -> Square::Types::GetCustomerSegmentResponse</code></summary>
 <dl>
 <dd>
 
@@ -18411,9 +20352,7 @@ Retrieves a specific customer segment as identified by the `segment_id` value.
 <dd>
 
 ```ruby
-client.customers.segments.get({
-  segmentId:'segment_id'
-});
+client.customers.segments.get(segment_id: 'segment_id');
 ```
 </dd>
 </dl>
@@ -18428,7 +20367,15 @@ client.customers.segments.get({
 <dl>
 <dd>
 
-**segmentId:** `String` — The Square-issued ID of the customer segment.
+**segment_id:** `String` — The Square-issued ID of the customer segment.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::Segments::RequestOptions` 
     
 </dd>
 </dl>
@@ -18441,7 +20388,7 @@ client.customers.segments.get({
 </details>
 
 ## Customers Cards
-<details><summary><code>client.Customers.Cards.Create(CustomerId, request) -> Square::Types::CreateCustomerCardResponse</code></summary>
+<details><summary><code>client.customers.cards.<a href="/lib/square/customers/cards/client.rb">create</a>(customer_id, request) -> Square::Types::CreateCustomerCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -18472,18 +20419,19 @@ with the provided nonce during the _first_ call.
 <dd>
 
 ```ruby
-client.customers.cards.create({
-  customerId:'customer_id',
-  cardNonce:'YOUR_CARD_NONCE',
-  billingAddress:{
-    address_line_1:'500 Electric Ave',
-    address_line_2:'Suite 600',
-    locality:'New York',
-    administrative_district_level_1:'NY',
-    postal_code:'10003'
+client.customers.cards.create(
+  customer_id: 'customer_id',
+  card_nonce: 'YOUR_CARD_NONCE',
+  billing_address: {
+    address_line_1: '500 Electric Ave',
+    address_line_2: 'Suite 600',
+    locality: 'New York',
+    administrative_district_level_1: 'NY',
+    postal_code: '10003',
+    country: 'US'
   },
-  cardholderName:'Amelia Earhart'
-});
+  cardholder_name: 'Amelia Earhart'
+);
 ```
 </dd>
 </dl>
@@ -18498,7 +20446,7 @@ client.customers.cards.create({
 <dl>
 <dd>
 
-**customerId:** `String` — The Square ID of the customer profile the card is linked to.
+**customer_id:** `String` — The Square ID of the customer profile the card is linked to.
     
 </dd>
 </dl>
@@ -18506,7 +20454,7 @@ client.customers.cards.create({
 <dl>
 <dd>
 
-**cardNonce:** `String` 
+**card_nonce:** `String` 
 
 A card nonce representing the credit card to link to the customer.
 
@@ -18523,7 +20471,7 @@ cannot be used to create a customer card.
 <dl>
 <dd>
 
-**billingAddress:** `Square::Types::Address` 
+**billing_address:** `Square::Types::Address` 
 
 Address information for the card on file.
 
@@ -18537,7 +20485,7 @@ the postal code encoded in the card nonce.
 <dl>
 <dd>
 
-**cardholderName:** `String` — The full name printed on the credit card.
+**cardholder_name:** `String` — The full name printed on the credit card.
     
 </dd>
 </dl>
@@ -18545,11 +20493,19 @@ the postal code encoded in the card nonce.
 <dl>
 <dd>
 
-**verificationToken:** `String` 
+**verification_token:** `String` 
 
 An identifying token generated by [Payments.verifyBuyer()](https://developer.squareup.com/reference/sdks/web/payments/objects/Payments#Payments.verifyBuyer).
 Verification tokens encapsulate customer device information and 3-D Secure
 challenge results to indicate that Square has verified the buyer identity.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::Cards::RequestOptions` 
     
 </dd>
 </dl>
@@ -18561,7 +20517,7 @@ challenge results to indicate that Square has verified the buyer identity.
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Cards.Delete(CustomerId, CardId) -> Square::Types::DeleteCustomerCardResponse</code></summary>
+<details><summary><code>client.customers.cards.<a href="/lib/square/customers/cards/client.rb">delete</a>(customer_id, card_id) -> Square::Types::DeleteCustomerCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -18588,10 +20544,10 @@ Removes a card on file from a customer.
 <dd>
 
 ```ruby
-client.customers.cards.delete({
-  customerId:'customer_id',
-  cardId:'card_id'
-});
+client.customers.cards.delete(
+  customer_id: 'customer_id',
+  card_id: 'card_id'
+);
 ```
 </dd>
 </dl>
@@ -18606,7 +20562,7 @@ client.customers.cards.delete({
 <dl>
 <dd>
 
-**customerId:** `String` — The ID of the customer that the card on file belongs to.
+**customer_id:** `String` — The ID of the customer that the card on file belongs to.
     
 </dd>
 </dl>
@@ -18614,7 +20570,15 @@ client.customers.cards.delete({
 <dl>
 <dd>
 
-**cardId:** `String` — The ID of the card on file to delete.
+**card_id:** `String` — The ID of the card on file to delete.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::Cards::RequestOptions` 
     
 </dd>
 </dl>
@@ -18627,7 +20591,7 @@ client.customers.cards.delete({
 </details>
 
 ## Customers CustomAttributes
-<details><summary><code>client.Customers.CustomAttributes.List(CustomerId) -> Square::Types::ListCustomerCustomAttributesResponse</code></summary>
+<details><summary><code>client.customers.custom_attributes.<a href="/lib/square/customers/custom_attributes/client.rb">list</a>(customer_id) -> Square::Types::ListCustomerCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -18661,12 +20625,12 @@ and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 <dd>
 
 ```ruby
-client.customers.custom_attributes.list({
-  customerId:'customer_id',
-  limit:1,
-  cursor:'cursor',
-  withDefinitions:true
-});
+client.customers.custom_attributes.list(
+  customer_id: 'customer_id',
+  limit: 1,
+  cursor: 'cursor',
+  with_definitions: true
+);
 ```
 </dd>
 </dl>
@@ -18681,7 +20645,7 @@ client.customers.custom_attributes.list({
 <dl>
 <dd>
 
-**customerId:** `String` — The ID of the target [customer profile](entity:Customer).
+**customer_id:** `String` — The ID of the target [customer profile](entity:Customer).
     
 </dd>
 </dl>
@@ -18713,11 +20677,19 @@ information, see [Pagination](https://developer.squareup.com/docs/build-basics/c
 <dl>
 <dd>
 
-**withDefinitions:** `Internal::Types::Boolean` 
+**with_definitions:** `Internal::Types::Boolean` 
 
 Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each
 custom attribute. Set this parameter to `true` to get the name and description of each custom
 attribute, information about the data type, or other definition details. The default value is `false`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::CustomAttributes::RequestOptions` 
     
 </dd>
 </dl>
@@ -18729,7 +20701,7 @@ attribute, information about the data type, or other definition details. The def
 </dl>
 </details>
 
-<details><summary><code>client.Customers.CustomAttributes.Get(CustomerId, Key) -> Square::Types::GetCustomerCustomAttributeResponse</code></summary>
+<details><summary><code>client.customers.custom_attributes.<a href="/lib/square/customers/custom_attributes/client.rb">get</a>(customer_id, key) -> Square::Types::GetCustomerCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -18763,12 +20735,12 @@ To retrieve a custom attribute owned by another application, the `visibility` se
 <dd>
 
 ```ruby
-client.customers.custom_attributes.get({
-  customerId:'customer_id',
-  key:'key',
-  withDefinition:true,
-  version:1
-});
+client.customers.custom_attributes.get(
+  customer_id: 'customer_id',
+  key: 'key',
+  with_definition: true,
+  version: 1
+);
 ```
 </dd>
 </dl>
@@ -18783,7 +20755,7 @@ client.customers.custom_attributes.get({
 <dl>
 <dd>
 
-**customerId:** `String` — The ID of the target [customer profile](entity:Customer).
+**customer_id:** `String` — The ID of the target [customer profile](entity:Customer).
     
 </dd>
 </dl>
@@ -18803,7 +20775,7 @@ definition owner, you must use the qualified key.
 <dl>
 <dd>
 
-**withDefinition:** `Internal::Types::Boolean` 
+**with_definition:** `Internal::Types::Boolean` 
 
 Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of
 the custom attribute. Set this parameter to `true` to get the name and description of the custom
@@ -18824,6 +20796,14 @@ higher than the current version, Square returns a `BAD_REQUEST` error.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::CustomAttributes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -18832,7 +20812,7 @@ higher than the current version, Square returns a `BAD_REQUEST` error.
 </dl>
 </details>
 
-<details><summary><code>client.Customers.CustomAttributes.Upsert(CustomerId, Key, request) -> Square::Types::UpsertCustomerCustomAttributeResponse</code></summary>
+<details><summary><code>client.customers.custom_attributes.<a href="/lib/square/customers/custom_attributes/client.rb">upsert</a>(customer_id, key, request) -> Square::Types::UpsertCustomerCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -18867,11 +20847,11 @@ must be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attribut
 <dd>
 
 ```ruby
-client.customers.custom_attributes.upsert({
-  customerId:'customer_id',
-  key:'key',
-  customAttribute:{}
-});
+client.customers.custom_attributes.upsert(
+  customer_id: 'customer_id',
+  key: 'key',
+  custom_attribute: {}
+);
 ```
 </dd>
 </dl>
@@ -18886,7 +20866,7 @@ client.customers.custom_attributes.upsert({
 <dl>
 <dd>
 
-**customerId:** `String` — The ID of the target [customer profile](entity:Customer).
+**customer_id:** `String` — The ID of the target [customer profile](entity:Customer).
     
 </dd>
 </dl>
@@ -18906,7 +20886,7 @@ the definition owner, you must use the qualified key.
 <dl>
 <dd>
 
-**customAttribute:** `Square::Types::CustomAttribute` 
+**custom_attribute:** `Square::Types::CustomAttribute` 
 
 The custom attribute to create or update, with the following fields:
 
@@ -18923,10 +20903,18 @@ of the custom attribute.
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, used to ensure idempotency. For more information,
 see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::CustomAttributes::RequestOptions` 
     
 </dd>
 </dl>
@@ -18938,7 +20926,7 @@ see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-pa
 </dl>
 </details>
 
-<details><summary><code>client.Customers.CustomAttributes.Delete(CustomerId, Key) -> Square::Types::DeleteCustomerCustomAttributeResponse</code></summary>
+<details><summary><code>client.customers.custom_attributes.<a href="/lib/square/customers/custom_attributes/client.rb">delete</a>(customer_id, key) -> Square::Types::DeleteCustomerCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -18969,10 +20957,10 @@ To delete a custom attribute owned by another application, the `visibility` sett
 <dd>
 
 ```ruby
-client.customers.custom_attributes.delete({
-  customerId:'customer_id',
-  key:'key'
-});
+client.customers.custom_attributes.delete(
+  customer_id: 'customer_id',
+  key: 'key'
+);
 ```
 </dd>
 </dl>
@@ -18987,7 +20975,7 @@ client.customers.custom_attributes.delete({
 <dl>
 <dd>
 
-**customerId:** `String` — The ID of the target [customer profile](entity:Customer).
+**customer_id:** `String` — The ID of the target [customer profile](entity:Customer).
     
 </dd>
 </dl>
@@ -19003,6 +20991,14 @@ definition owner, you must use the qualified key.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Customers::CustomAttributes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -19012,7 +21008,7 @@ definition owner, you must use the qualified key.
 </details>
 
 ## Devices Codes
-<details><summary><code>client.Devices.Codes.List() -> Square::Types::ListDeviceCodesResponse</code></summary>
+<details><summary><code>client.devices.codes.<a href="/lib/square/devices/codes/client.rb">list</a>() -> Square::Types::ListDeviceCodesResponse</code></summary>
 <dl>
 <dd>
 
@@ -19039,11 +21035,12 @@ Lists all DeviceCodes associated with the merchant.
 <dd>
 
 ```ruby
-client.devices.codes.list({
-  cursor:'cursor',
-  locationId:'location_id',
-  productType:'TERMINAL_API'
-});
+client.devices.codes.list(
+  cursor: 'cursor',
+  location_id: 'location_id',
+  product_type: 'TERMINAL_API',
+  status: 'UNKNOWN'
+);
 ```
 </dd>
 </dl>
@@ -19071,7 +21068,7 @@ See [Paginating results](https://developer.squareup.com/docs/working-with-apis/p
 <dl>
 <dd>
 
-**locationId:** `String` 
+**location_id:** `String` 
 
 If specified, only returns DeviceCodes of the specified location.
 Returns DeviceCodes of all locations if empty.
@@ -19082,7 +21079,7 @@ Returns DeviceCodes of all locations if empty.
 <dl>
 <dd>
 
-**productType:** `String` 
+**product_type:** `String` 
 
 If specified, only returns DeviceCodes targeting the specified product type.
 Returns DeviceCodes of all product types if empty.
@@ -19100,6 +21097,14 @@ Returns DeviceCodes of status `PAIRED` and `UNPAIRED` if empty.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Devices::Codes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -19108,7 +21113,7 @@ Returns DeviceCodes of status `PAIRED` and `UNPAIRED` if empty.
 </dl>
 </details>
 
-<details><summary><code>client.Devices.Codes.Create(request) -> Square::Types::CreateDeviceCodeResponse</code></summary>
+<details><summary><code>client.devices.codes.<a href="/lib/square/devices/codes/client.rb">create</a>(request) -> Square::Types::CreateDeviceCodeResponse</code></summary>
 <dl>
 <dd>
 
@@ -19136,14 +21141,14 @@ terminal mode.
 <dd>
 
 ```ruby
-client.devices.codes.create({
-  idempotencyKey:'01bb00a6-0c86-4770-94ed-f5fca973cd56',
-  deviceCode:{
-    name:'Counter 1',
-    product_type:'TERMINAL_API',
-    location_id:'B5E4484SHHNYH'
+client.devices.codes.create(
+  idempotency_key: '01bb00a6-0c86-4770-94ed-f5fca973cd56',
+  device_code: {
+    name: 'Counter 1',
+    product_type: 'TERMINAL_API',
+    location_id: 'B5E4484SHHNYH'
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -19158,7 +21163,7 @@ client.devices.codes.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this CreateDeviceCode request. Keys can
 be any valid string but must be unique for every CreateDeviceCode request.
@@ -19171,7 +21176,15 @@ See [Idempotency keys](https://developer.squareup.com/docs/build-basics/common-a
 <dl>
 <dd>
 
-**deviceCode:** `Square::Types::DeviceCode` — The device code to create.
+**device_code:** `Square::Types::DeviceCode` — The device code to create.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Devices::Codes::RequestOptions` 
     
 </dd>
 </dl>
@@ -19183,7 +21196,7 @@ See [Idempotency keys](https://developer.squareup.com/docs/build-basics/common-a
 </dl>
 </details>
 
-<details><summary><code>client.Devices.Codes.Get(Id) -> Square::Types::GetDeviceCodeResponse</code></summary>
+<details><summary><code>client.devices.codes.<a href="/lib/square/devices/codes/client.rb">get</a>(id) -> Square::Types::GetDeviceCodeResponse</code></summary>
 <dl>
 <dd>
 
@@ -19210,9 +21223,7 @@ Retrieves DeviceCode with the associated ID.
 <dd>
 
 ```ruby
-client.devices.codes.get({
-  id:'id'
-});
+client.devices.codes.get(id: 'id');
 ```
 </dd>
 </dl>
@@ -19231,6 +21242,14 @@ client.devices.codes.get({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Devices::Codes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -19240,7 +21259,7 @@ client.devices.codes.get({
 </details>
 
 ## Disputes Evidence
-<details><summary><code>client.Disputes.Evidence.List(DisputeId) -> Square::Types::ListDisputeEvidenceResponse</code></summary>
+<details><summary><code>client.disputes.evidence.<a href="/lib/square/disputes/evidence/client.rb">list</a>(dispute_id) -> Square::Types::ListDisputeEvidenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -19267,10 +21286,10 @@ Returns a list of evidence associated with a dispute.
 <dd>
 
 ```ruby
-client.disputes.evidence.list({
-  disputeId:'dispute_id',
-  cursor:'cursor'
-});
+client.disputes.evidence.list(
+  dispute_id: 'dispute_id',
+  cursor: 'cursor'
+);
 ```
 </dd>
 </dl>
@@ -19285,7 +21304,7 @@ client.disputes.evidence.list({
 <dl>
 <dd>
 
-**disputeId:** `String` — The ID of the dispute.
+**dispute_id:** `String` — The ID of the dispute.
     
 </dd>
 </dl>
@@ -19301,6 +21320,14 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Disputes::Evidence::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -19309,7 +21336,7 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
 </dl>
 </details>
 
-<details><summary><code>client.Disputes.Evidence.Get(DisputeId, EvidenceId) -> Square::Types::GetDisputeEvidenceResponse</code></summary>
+<details><summary><code>client.disputes.evidence.<a href="/lib/square/disputes/evidence/client.rb">get</a>(dispute_id, evidence_id) -> Square::Types::GetDisputeEvidenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -19338,10 +21365,10 @@ You must maintain a copy of any evidence uploaded if you want to reference it la
 <dd>
 
 ```ruby
-client.disputes.evidence.get({
-  disputeId:'dispute_id',
-  evidenceId:'evidence_id'
-});
+client.disputes.evidence.get(
+  dispute_id: 'dispute_id',
+  evidence_id: 'evidence_id'
+);
 ```
 </dd>
 </dl>
@@ -19356,7 +21383,7 @@ client.disputes.evidence.get({
 <dl>
 <dd>
 
-**disputeId:** `String` — The ID of the dispute from which you want to retrieve evidence metadata.
+**dispute_id:** `String` — The ID of the dispute from which you want to retrieve evidence metadata.
     
 </dd>
 </dl>
@@ -19364,7 +21391,15 @@ client.disputes.evidence.get({
 <dl>
 <dd>
 
-**evidenceId:** `String` — The ID of the evidence to retrieve.
+**evidence_id:** `String` — The ID of the evidence to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Disputes::Evidence::RequestOptions` 
     
 </dd>
 </dl>
@@ -19376,7 +21411,7 @@ client.disputes.evidence.get({
 </dl>
 </details>
 
-<details><summary><code>client.Disputes.Evidence.Delete(DisputeId, EvidenceId) -> Square::Types::DeleteDisputeEvidenceResponse</code></summary>
+<details><summary><code>client.disputes.evidence.<a href="/lib/square/disputes/evidence/client.rb">delete</a>(dispute_id, evidence_id) -> Square::Types::DeleteDisputeEvidenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -19404,10 +21439,10 @@ Square does not send the bank any evidence that is removed.
 <dd>
 
 ```ruby
-client.disputes.evidence.delete({
-  disputeId:'dispute_id',
-  evidenceId:'evidence_id'
-});
+client.disputes.evidence.delete(
+  dispute_id: 'dispute_id',
+  evidence_id: 'evidence_id'
+);
 ```
 </dd>
 </dl>
@@ -19422,7 +21457,7 @@ client.disputes.evidence.delete({
 <dl>
 <dd>
 
-**disputeId:** `String` — The ID of the dispute from which you want to remove evidence.
+**dispute_id:** `String` — The ID of the dispute from which you want to remove evidence.
     
 </dd>
 </dl>
@@ -19430,7 +21465,15 @@ client.disputes.evidence.delete({
 <dl>
 <dd>
 
-**evidenceId:** `String` — The ID of the evidence you want to remove.
+**evidence_id:** `String` — The ID of the evidence you want to remove.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Disputes::Evidence::RequestOptions` 
     
 </dd>
 </dl>
@@ -19443,7 +21486,7 @@ client.disputes.evidence.delete({
 </details>
 
 ## GiftCards Activities
-<details><summary><code>client.GiftCards.Activities.List() -> Square::Types::ListGiftCardActivitiesResponse</code></summary>
+<details><summary><code>client.gift_cards.activities.<a href="/lib/square/gift_cards/activities/client.rb">list</a>() -> Square::Types::ListGiftCardActivitiesResponse</code></summary>
 <dl>
 <dd>
 
@@ -19473,16 +21516,16 @@ for all gift cards in a specific region, or for activities within a time window.
 <dd>
 
 ```ruby
-client.gift_cards.activities.list({
-  giftCardId:'gift_card_id',
-  type:'type',
-  locationId:'location_id',
-  beginTime:'begin_time',
-  endTime:'end_time',
-  limit:1,
-  cursor:'cursor',
-  sortOrder:'sort_order'
-});
+client.gift_cards.activities.list(
+  gift_card_id: 'gift_card_id',
+  type: 'type',
+  location_id: 'location_id',
+  begin_time: 'begin_time',
+  end_time: 'end_time',
+  limit: 1,
+  cursor: 'cursor',
+  sort_order: 'sort_order'
+);
 ```
 </dd>
 </dl>
@@ -19497,7 +21540,7 @@ client.gift_cards.activities.list({
 <dl>
 <dd>
 
-**giftCardId:** `String` 
+**gift_card_id:** `String` 
 
 If a gift card ID is provided, the endpoint returns activities related 
 to the specified gift card. Otherwise, the endpoint returns all gift card activities for 
@@ -19520,7 +21563,7 @@ Otherwise, the endpoint returns all types of gift card activities.
 <dl>
 <dd>
 
-**locationId:** `String` 
+**location_id:** `String` 
 
 If a location ID is provided, the endpoint returns gift card activities for the specified location. 
 Otherwise, the endpoint returns gift card activities for all locations.
@@ -19531,7 +21574,7 @@ Otherwise, the endpoint returns gift card activities for all locations.
 <dl>
 <dd>
 
-**beginTime:** `String` 
+**begin_time:** `String` 
 
 The timestamp for the beginning of the reporting period, in RFC 3339 format.
 This start time is inclusive. The default value is the current time minus one year.
@@ -19542,7 +21585,7 @@ This start time is inclusive. The default value is the current time minus one ye
 <dl>
 <dd>
 
-**endTime:** `String` 
+**end_time:** `String` 
 
 The timestamp for the end of the reporting period, in RFC 3339 format.
 This end time is inclusive. The default value is the current time.
@@ -19578,11 +21621,19 @@ For more information, see [Pagination](https://developer.squareup.com/docs/worki
 <dl>
 <dd>
 
-**sortOrder:** `String` 
+**sort_order:** `String` 
 
 The order in which the endpoint returns the activities, based on `created_at`.
 - `ASC` - Oldest to newest.
 - `DESC` - Newest to oldest (default).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::GiftCards::Activities::RequestOptions` 
     
 </dd>
 </dl>
@@ -19594,7 +21645,7 @@ The order in which the endpoint returns the activities, based on `created_at`.
 </dl>
 </details>
 
-<details><summary><code>client.GiftCards.Activities.Create(request) -> Square::Types::CreateGiftCardActivityResponse</code></summary>
+<details><summary><code>client.gift_cards.activities.<a href="/lib/square/gift_cards/activities/client.rb">create</a>(request) -> Square::Types::CreateGiftCardActivityResponse</code></summary>
 <dl>
 <dd>
 
@@ -19622,17 +21673,18 @@ For example, create an `ACTIVATE` activity to activate a gift card with an initi
 <dd>
 
 ```ruby
-client.gift_cards.activities.create({
-  idempotencyKey:'U16kfr-kA70er-q4Rsym-7U7NnY',
-  giftCardActivity:{
-    location_id:'81FN9BNFZTKS4',
-    gift_card_id:'gftc:6d55a72470d940c6ba09c0ab8ad08d20',
-    activate_activity_details:{
-      order_id:'jJNGHm4gLI6XkFbwtiSLqK72KkAZY',
-      line_item_uid:'eIWl7X0nMuO9Ewbh0ChIx'
+client.gift_cards.activities.create(
+  idempotency_key: 'U16kfr-kA70er-q4Rsym-7U7NnY',
+  gift_card_activity: {
+    type: 'ACTIVATE',
+    location_id: '81FN9BNFZTKS4',
+    gift_card_id: 'gftc:6d55a72470d940c6ba09c0ab8ad08d20',
+    activate_activity_details: {
+      order_id: 'jJNGHm4gLI6XkFbwtiSLqK72KkAZY',
+      line_item_uid: 'eIWl7X0nMuO9Ewbh0ChIx'
     }
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -19647,7 +21699,7 @@ client.gift_cards.activities.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` — A unique string that identifies the `CreateGiftCardActivity` request.
+**idempotency_key:** `String` — A unique string that identifies the `CreateGiftCardActivity` request.
     
 </dd>
 </dl>
@@ -19655,10 +21707,18 @@ client.gift_cards.activities.create({
 <dl>
 <dd>
 
-**giftCardActivity:** `Square::Types::GiftCardActivity` 
+**gift_card_activity:** `Square::Types::GiftCardActivity` 
 
 The activity to create for the gift card. This activity must specify `gift_card_id` or `gift_card_gan` for the target
 gift card, the `location_id` where the activity occurred, and the activity `type` along with the corresponding activity details.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::GiftCards::Activities::RequestOptions` 
     
 </dd>
 </dl>
@@ -19671,7 +21731,7 @@ gift card, the `location_id` where the activity occurred, and the activity `type
 </details>
 
 ## Labor BreakTypes
-<details><summary><code>client.Labor.BreakTypes.List() -> Square::Types::ListBreakTypesResponse</code></summary>
+<details><summary><code>client.labor.break_types.<a href="/lib/square/labor/break_types/client.rb">list</a>() -> Square::Types::ListBreakTypesResponse</code></summary>
 <dl>
 <dd>
 
@@ -19698,11 +21758,11 @@ Returns a paginated list of `BreakType` instances for a business.
 <dd>
 
 ```ruby
-client.labor.break_types.list({
-  locationId:'location_id',
-  limit:1,
-  cursor:'cursor'
-});
+client.labor.break_types.list(
+  location_id: 'location_id',
+  limit: 1,
+  cursor: 'cursor'
+);
 ```
 </dd>
 </dl>
@@ -19717,7 +21777,7 @@ client.labor.break_types.list({
 <dl>
 <dd>
 
-**locationId:** `String` 
+**location_id:** `String` 
 
 Filter the returned `BreakType` results to only those that are associated with the
 specified location.
@@ -19743,6 +21803,14 @@ and 200. The default is 200.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::BreakTypes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -19751,7 +21819,7 @@ and 200. The default is 200.
 </dl>
 </details>
 
-<details><summary><code>client.Labor.BreakTypes.Create(request) -> Square::Types::CreateBreakTypeResponse</code></summary>
+<details><summary><code>client.labor.break_types.<a href="/lib/square/labor/break_types/client.rb">create</a>(request) -> Square::Types::CreateBreakTypeResponse</code></summary>
 <dl>
 <dd>
 
@@ -19791,15 +21859,15 @@ is returned.
 <dd>
 
 ```ruby
-client.labor.break_types.create({
-  idempotencyKey:'PAD3NG5KSN2GL',
-  breakType:{
-    location_id:'CGJN03P1D08GF',
-    break_name:'Lunch Break',
-    expected_duration:'PT30M',
-    is_paid:true
+client.labor.break_types.create(
+  idempotency_key: 'PAD3NG5KSN2GL',
+  break_type: {
+    location_id: 'CGJN03P1D08GF',
+    break_name: 'Lunch Break',
+    expected_duration: 'PT30M',
+    is_paid: true
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -19814,7 +21882,7 @@ client.labor.break_types.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` — A unique string value to ensure the idempotency of the operation.
+**idempotency_key:** `String` — A unique string value to ensure the idempotency of the operation.
     
 </dd>
 </dl>
@@ -19822,7 +21890,15 @@ client.labor.break_types.create({
 <dl>
 <dd>
 
-**breakType:** `Square::Types::BreakType` — The `BreakType` to be created.
+**break_type:** `Square::Types::BreakType` — The `BreakType` to be created.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::BreakTypes::RequestOptions` 
     
 </dd>
 </dl>
@@ -19834,7 +21910,7 @@ client.labor.break_types.create({
 </dl>
 </details>
 
-<details><summary><code>client.Labor.BreakTypes.Get(Id) -> Square::Types::GetBreakTypeResponse</code></summary>
+<details><summary><code>client.labor.break_types.<a href="/lib/square/labor/break_types/client.rb">get</a>(id) -> Square::Types::GetBreakTypeResponse</code></summary>
 <dl>
 <dd>
 
@@ -19861,9 +21937,7 @@ Returns a single `BreakType` specified by `id`.
 <dd>
 
 ```ruby
-client.labor.break_types.get({
-  id:'id'
-});
+client.labor.break_types.get(id: 'id');
 ```
 </dd>
 </dl>
@@ -19882,6 +21956,14 @@ client.labor.break_types.get({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::BreakTypes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -19890,7 +21972,7 @@ client.labor.break_types.get({
 </dl>
 </details>
 
-<details><summary><code>client.Labor.BreakTypes.Update(Id, request) -> Square::Types::UpdateBreakTypeResponse</code></summary>
+<details><summary><code>client.labor.break_types.<a href="/lib/square/labor/break_types/client.rb">update</a>(id, request) -> Square::Types::UpdateBreakTypeResponse</code></summary>
 <dl>
 <dd>
 
@@ -19917,16 +21999,16 @@ Updates an existing `BreakType`.
 <dd>
 
 ```ruby
-client.labor.break_types.update({
-  id:'id',
-  breakType:{
-    location_id:'26M7H24AZ9N6R',
-    break_name:'Lunch',
-    expected_duration:'PT50M',
-    is_paid:true,
-    version:1
+client.labor.break_types.update(
+  id: 'id',
+  break_type: {
+    location_id: '26M7H24AZ9N6R',
+    break_name: 'Lunch',
+    expected_duration: 'PT50M',
+    is_paid: true,
+    version: 1
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -19949,7 +22031,15 @@ client.labor.break_types.update({
 <dl>
 <dd>
 
-**breakType:** `Square::Types::BreakType` — The updated `BreakType`.
+**break_type:** `Square::Types::BreakType` — The updated `BreakType`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::BreakTypes::RequestOptions` 
     
 </dd>
 </dl>
@@ -19961,7 +22051,7 @@ client.labor.break_types.update({
 </dl>
 </details>
 
-<details><summary><code>client.Labor.BreakTypes.Delete(Id) -> Square::Types::DeleteBreakTypeResponse</code></summary>
+<details><summary><code>client.labor.break_types.<a href="/lib/square/labor/break_types/client.rb">delete</a>(id) -> Square::Types::DeleteBreakTypeResponse</code></summary>
 <dl>
 <dd>
 
@@ -19990,9 +22080,7 @@ A `BreakType` can be deleted even if it is referenced from a `Shift`.
 <dd>
 
 ```ruby
-client.labor.break_types.delete({
-  id:'id'
-});
+client.labor.break_types.delete(id: 'id');
 ```
 </dd>
 </dl>
@@ -20011,6 +22099,14 @@ client.labor.break_types.delete({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::BreakTypes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -20020,7 +22116,7 @@ client.labor.break_types.delete({
 </details>
 
 ## Labor EmployeeWages
-<details><summary><code>client.Labor.EmployeeWages.List() -> Square::Types::ListEmployeeWagesResponse</code></summary>
+<details><summary><code>client.labor.employee_wages.<a href="/lib/square/labor/employee_wages/client.rb">list</a>() -> Square::Types::ListEmployeeWagesResponse</code></summary>
 <dl>
 <dd>
 
@@ -20047,11 +22143,11 @@ Returns a paginated list of `EmployeeWage` instances for a business.
 <dd>
 
 ```ruby
-client.labor.employee_wages.list({
-  employeeId:'employee_id',
-  limit:1,
-  cursor:'cursor'
-});
+client.labor.employee_wages.list(
+  employee_id: 'employee_id',
+  limit: 1,
+  cursor: 'cursor'
+);
 ```
 </dd>
 </dl>
@@ -20066,7 +22162,7 @@ client.labor.employee_wages.list({
 <dl>
 <dd>
 
-**employeeId:** `String` — Filter the returned wages to only those that are associated with the specified employee.
+**employee_id:** `String` — Filter the returned wages to only those that are associated with the specified employee.
     
 </dd>
 </dl>
@@ -20089,6 +22185,14 @@ The maximum number of `EmployeeWage` results to return per page. The number can 
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::EmployeeWages::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -20097,7 +22201,7 @@ The maximum number of `EmployeeWage` results to return per page. The number can 
 </dl>
 </details>
 
-<details><summary><code>client.Labor.EmployeeWages.Get(Id) -> Square::Types::GetEmployeeWageResponse</code></summary>
+<details><summary><code>client.labor.employee_wages.<a href="/lib/square/labor/employee_wages/client.rb">get</a>(id) -> Square::Types::GetEmployeeWageResponse</code></summary>
 <dl>
 <dd>
 
@@ -20124,9 +22228,7 @@ Returns a single `EmployeeWage` specified by `id`.
 <dd>
 
 ```ruby
-client.labor.employee_wages.get({
-  id:'id'
-});
+client.labor.employee_wages.get(id: 'id');
 ```
 </dd>
 </dl>
@@ -20145,6 +22247,14 @@ client.labor.employee_wages.get({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::EmployeeWages::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -20154,7 +22264,7 @@ client.labor.employee_wages.get({
 </details>
 
 ## Labor Shifts
-<details><summary><code>client.Labor.Shifts.Create(request) -> Square::Types::CreateShiftResponse</code></summary>
+<details><summary><code>client.labor.shifts.<a href="/lib/square/labor/shifts/client.rb">create</a>(request) -> Square::Types::CreateShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -20198,33 +22308,35 @@ the `Shift.end_at`, or both.
 <dd>
 
 ```ruby
-client.labor.shifts.create({
-  idempotencyKey:'HIDSNG5KS478L',
-  shift:{
-    location_id:'PAA1RJZZKXBFG',
-    start_at:'2019-01-25T03:11:00-05:00',
-    end_at:'2019-01-25T13:11:00-05:00',
-    wage:{
-      title:'Barista',
-      hourly_rate:{
-        amount:1100
+client.labor.shifts.create(
+  idempotency_key: 'HIDSNG5KS478L',
+  shift: {
+    location_id: 'PAA1RJZZKXBFG',
+    start_at: '2019-01-25T03:11:00-05:00',
+    end_at: '2019-01-25T13:11:00-05:00',
+    wage: {
+      title: 'Barista',
+      hourly_rate: {
+        amount: 1100,
+        currency: 'USD'
       },
-      tip_eligible:true
+      tip_eligible: true
     },
-    breaks:[{
-      start_at:'2019-01-25T06:11:00-05:00',
-      end_at:'2019-01-25T06:16:00-05:00',
-      break_type_id:'REGS1EQR1TPZ5',
-      name:'Tea Break',
-      expected_duration:'PT5M',
-      is_paid:true
+    breaks: [{
+      start_at: '2019-01-25T06:11:00-05:00',
+      end_at: '2019-01-25T06:16:00-05:00',
+      break_type_id: 'REGS1EQR1TPZ5',
+      name: 'Tea Break',
+      expected_duration: 'PT5M',
+      is_paid: true
     }],
-    team_member_id:'ormj0jJJZ5OZIzxrZYJI',
-    declared_cash_tip_money:{
-      amount:500
+    team_member_id: 'ormj0jJJZ5OZIzxrZYJI',
+    declared_cash_tip_money: {
+      amount: 500,
+      currency: 'USD'
     }
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -20239,7 +22351,7 @@ client.labor.shifts.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` — A unique string value to ensure the idempotency of the operation.
+**idempotency_key:** `String` — A unique string value to ensure the idempotency of the operation.
     
 </dd>
 </dl>
@@ -20251,6 +22363,14 @@ client.labor.shifts.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::Shifts::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -20259,7 +22379,7 @@ client.labor.shifts.create({
 </dl>
 </details>
 
-<details><summary><code>client.Labor.Shifts.Search(request) -> Square::Types::SearchShiftsResponse</code></summary>
+<details><summary><code>client.labor.shifts.<a href="/lib/square/labor/shifts/client.rb">search</a>(request) -> Square::Types::SearchShiftsResponse</code></summary>
 <dl>
 <dd>
 
@@ -20299,20 +22419,21 @@ The list can be sorted by:
 <dd>
 
 ```ruby
-client.labor.shifts.search({
-  query:{
-    filter:{
-      workday:{
-        date_range:{
-          start_date:'2019-01-20',
-          end_date:'2019-02-03'
+client.labor.shifts.search(
+  query: {
+    filter: {
+      workday: {
+        date_range: {
+          start_date: '2019-01-20',
+          end_date: '2019-02-03'
         },
-        default_timezone:'America/Los_Angeles'
+        match_shifts_by: 'START_AT',
+        default_timezone: 'America/Los_Angeles'
       }
     }
   },
-  limit:100
-});
+  limit: 100
+);
 ```
 </dd>
 </dl>
@@ -20347,6 +22468,14 @@ client.labor.shifts.search({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::Shifts::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -20355,7 +22484,7 @@ client.labor.shifts.search({
 </dl>
 </details>
 
-<details><summary><code>client.Labor.Shifts.Get(Id) -> Square::Types::GetShiftResponse</code></summary>
+<details><summary><code>client.labor.shifts.<a href="/lib/square/labor/shifts/client.rb">get</a>(id) -> Square::Types::GetShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -20382,9 +22511,7 @@ Returns a single `Shift` specified by `id`.
 <dd>
 
 ```ruby
-client.labor.shifts.get({
-  id:'id'
-});
+client.labor.shifts.get(id: 'id');
 ```
 </dd>
 </dl>
@@ -20403,6 +22530,14 @@ client.labor.shifts.get({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::Shifts::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -20411,7 +22546,7 @@ client.labor.shifts.get({
 </dl>
 </details>
 
-<details><summary><code>client.Labor.Shifts.Update(Id, request) -> Square::Types::UpdateShiftResponse</code></summary>
+<details><summary><code>client.labor.shifts.<a href="/lib/square/labor/shifts/client.rb">update</a>(id, request) -> Square::Types::UpdateShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -20444,35 +22579,37 @@ set on each `Break`.
 <dd>
 
 ```ruby
-client.labor.shifts.update({
-  id:'id',
-  shift:{
-    location_id:'PAA1RJZZKXBFG',
-    start_at:'2019-01-25T03:11:00-05:00',
-    end_at:'2019-01-25T13:11:00-05:00',
-    wage:{
-      title:'Bartender',
-      hourly_rate:{
-        amount:1500
+client.labor.shifts.update(
+  id: 'id',
+  shift: {
+    location_id: 'PAA1RJZZKXBFG',
+    start_at: '2019-01-25T03:11:00-05:00',
+    end_at: '2019-01-25T13:11:00-05:00',
+    wage: {
+      title: 'Bartender',
+      hourly_rate: {
+        amount: 1500,
+        currency: 'USD'
       },
-      tip_eligible:true
+      tip_eligible: true
     },
-    breaks:[{
-      id:'X7GAQYVVRRG6P',
-      start_at:'2019-01-25T06:11:00-05:00',
-      end_at:'2019-01-25T06:16:00-05:00',
-      break_type_id:'REGS1EQR1TPZ5',
-      name:'Tea Break',
-      expected_duration:'PT5M',
-      is_paid:true
+    breaks: [{
+      id: 'X7GAQYVVRRG6P',
+      start_at: '2019-01-25T06:11:00-05:00',
+      end_at: '2019-01-25T06:16:00-05:00',
+      break_type_id: 'REGS1EQR1TPZ5',
+      name: 'Tea Break',
+      expected_duration: 'PT5M',
+      is_paid: true
     }],
-    version:1,
-    team_member_id:'ormj0jJJZ5OZIzxrZYJI',
-    declared_cash_tip_money:{
-      amount:500
+    version: 1,
+    team_member_id: 'ormj0jJJZ5OZIzxrZYJI',
+    declared_cash_tip_money: {
+      amount: 500,
+      currency: 'USD'
     }
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -20499,6 +22636,14 @@ client.labor.shifts.update({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::Shifts::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -20507,7 +22652,7 @@ client.labor.shifts.update({
 </dl>
 </details>
 
-<details><summary><code>client.Labor.Shifts.Delete(Id) -> Square::Types::DeleteShiftResponse</code></summary>
+<details><summary><code>client.labor.shifts.<a href="/lib/square/labor/shifts/client.rb">delete</a>(id) -> Square::Types::DeleteShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -20534,9 +22679,7 @@ Deletes a `Shift`.
 <dd>
 
 ```ruby
-client.labor.shifts.delete({
-  id:'id'
-});
+client.labor.shifts.delete(id: 'id');
 ```
 </dd>
 </dl>
@@ -20555,6 +22698,14 @@ client.labor.shifts.delete({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::Shifts::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -20564,7 +22715,7 @@ client.labor.shifts.delete({
 </details>
 
 ## Labor TeamMemberWages
-<details><summary><code>client.Labor.TeamMemberWages.List() -> Square::Types::ListTeamMemberWagesResponse</code></summary>
+<details><summary><code>client.labor.team_member_wages.<a href="/lib/square/labor/team_member_wages/client.rb">list</a>() -> Square::Types::ListTeamMemberWagesResponse</code></summary>
 <dl>
 <dd>
 
@@ -20591,11 +22742,11 @@ Returns a paginated list of `TeamMemberWage` instances for a business.
 <dd>
 
 ```ruby
-client.labor.team_member_wages.list({
-  teamMemberId:'team_member_id',
-  limit:1,
-  cursor:'cursor'
-});
+client.labor.team_member_wages.list(
+  team_member_id: 'team_member_id',
+  limit: 1,
+  cursor: 'cursor'
+);
 ```
 </dd>
 </dl>
@@ -20610,7 +22761,7 @@ client.labor.team_member_wages.list({
 <dl>
 <dd>
 
-**teamMemberId:** `String` 
+**team_member_id:** `String` 
 
 Filter the returned wages to only those that are associated with the
 specified team member.
@@ -20636,6 +22787,14 @@ The maximum number of `TeamMemberWage` results to return per page. The number ca
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::TeamMemberWages::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -20644,7 +22803,7 @@ The maximum number of `TeamMemberWage` results to return per page. The number ca
 </dl>
 </details>
 
-<details><summary><code>client.Labor.TeamMemberWages.Get(Id) -> Square::Types::GetTeamMemberWageResponse</code></summary>
+<details><summary><code>client.labor.team_member_wages.<a href="/lib/square/labor/team_member_wages/client.rb">get</a>(id) -> Square::Types::GetTeamMemberWageResponse</code></summary>
 <dl>
 <dd>
 
@@ -20671,9 +22830,7 @@ Returns a single `TeamMemberWage` specified by `id`.
 <dd>
 
 ```ruby
-client.labor.team_member_wages.get({
-  id:'id'
-});
+client.labor.team_member_wages.get(id: 'id');
 ```
 </dd>
 </dl>
@@ -20692,6 +22849,14 @@ client.labor.team_member_wages.get({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::TeamMemberWages::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -20701,7 +22866,7 @@ client.labor.team_member_wages.get({
 </details>
 
 ## Labor WorkweekConfigs
-<details><summary><code>client.Labor.WorkweekConfigs.List() -> Square::Types::ListWorkweekConfigsResponse</code></summary>
+<details><summary><code>client.labor.workweek_configs.<a href="/lib/square/labor/workweek_configs/client.rb">list</a>() -> Square::Types::ListWorkweekConfigsResponse</code></summary>
 <dl>
 <dd>
 
@@ -20728,10 +22893,10 @@ Returns a list of `WorkweekConfig` instances for a business.
 <dd>
 
 ```ruby
-client.labor.workweek_configs.list({
-  limit:1,
-  cursor:'cursor'
-});
+client.labor.workweek_configs.list(
+  limit: 1,
+  cursor: 'cursor'
+);
 ```
 </dd>
 </dl>
@@ -20758,6 +22923,14 @@ client.labor.workweek_configs.list({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::WorkweekConfigs::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -20766,7 +22939,7 @@ client.labor.workweek_configs.list({
 </dl>
 </details>
 
-<details><summary><code>client.Labor.WorkweekConfigs.Get(Id, request) -> Square::Types::UpdateWorkweekConfigResponse</code></summary>
+<details><summary><code>client.labor.workweek_configs.<a href="/lib/square/labor/workweek_configs/client.rb">get</a>(id, request) -> Square::Types::UpdateWorkweekConfigResponse</code></summary>
 <dl>
 <dd>
 
@@ -20793,13 +22966,14 @@ Updates a `WorkweekConfig`.
 <dd>
 
 ```ruby
-client.labor.workweek_configs.get({
-  id:'id',
-  workweekConfig:{
-    start_of_day_local_time:'10:00',
-    version:10
+client.labor.workweek_configs.get(
+  id: 'id',
+  workweek_config: {
+    start_of_week: 'MON',
+    start_of_day_local_time: '10:00',
+    version: 10
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -20822,7 +22996,15 @@ client.labor.workweek_configs.get({
 <dl>
 <dd>
 
-**workweekConfig:** `Square::Types::WorkweekConfig` — The updated `WorkweekConfig` object.
+**workweek_config:** `Square::Types::WorkweekConfig` — The updated `WorkweekConfig` object.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Labor::WorkweekConfigs::RequestOptions` 
     
 </dd>
 </dl>
@@ -20835,7 +23017,7 @@ client.labor.workweek_configs.get({
 </details>
 
 ## Locations CustomAttributeDefinitions
-<details><summary><code>client.Locations.CustomAttributeDefinitions.List() -> Square::Types::ListLocationCustomAttributeDefinitionsResponse</code></summary>
+<details><summary><code>client.locations.custom_attribute_definitions.<a href="/lib/square/locations/custom_attribute_definitions/client.rb">list</a>() -> Square::Types::ListLocationCustomAttributeDefinitionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -20865,10 +23047,11 @@ applications and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`
 <dd>
 
 ```ruby
-client.locations.custom_attribute_definitions.list({
-  limit:1,
-  cursor:'cursor'
-});
+client.locations.custom_attribute_definitions.list(
+  visibility_filter: 'ALL',
+  limit: 1,
+  cursor: 'cursor'
+);
 ```
 </dd>
 </dl>
@@ -20883,7 +23066,7 @@ client.locations.custom_attribute_definitions.list({
 <dl>
 <dd>
 
-**visibilityFilter:** `Square::Types::VisibilityFilter` — Filters the `CustomAttributeDefinition` results by their `visibility` values.
+**visibility_filter:** `Square::Types::VisibilityFilter` — Filters the `CustomAttributeDefinition` results by their `visibility` values.
     
 </dd>
 </dl>
@@ -20911,6 +23094,14 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::CustomAttributeDefinitions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -20919,7 +23110,7 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributeDefinitions.Create(request) -> Square::Types::CreateLocationCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.locations.custom_attribute_definitions.<a href="/lib/square/locations/custom_attribute_definitions/client.rb">create</a>(request) -> Square::Types::CreateLocationCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -20952,13 +23143,12 @@ to set the custom attribute for locations.
 <dd>
 
 ```ruby
-client.locations.custom_attribute_definitions.create({
-  customAttributeDefinition:{
-    key:'bestseller',
-    schema:{},
-    name:'Bestseller',
-    description:'Bestselling item at location'
-  }
+client.locations.custom_attribute_definitions.create(custom_attribute_definition: {
+  key: 'bestseller',
+  schema: {},
+  name: 'Bestseller',
+  description: 'Bestselling item at location',
+  visibility: 'VISIBILITY_READ_WRITE_VALUES'
 });
 ```
 </dd>
@@ -20974,7 +23164,7 @@ client.locations.custom_attribute_definitions.create({
 <dl>
 <dd>
 
-**customAttributeDefinition:** `Square::Types::CustomAttributeDefinition` 
+**custom_attribute_definition:** `Square::Types::CustomAttributeDefinition` 
 
 The custom attribute definition to create. Note the following:
 - With the exception of the `Selection` data type, the `schema` is specified as a simple URL to the JSON schema
@@ -20988,10 +23178,18 @@ definition hosted on the Square CDN. For more information, including supported v
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, used to ensure idempotency. For more information,
 see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::CustomAttributeDefinitions::RequestOptions` 
     
 </dd>
 </dl>
@@ -21003,7 +23201,7 @@ see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-pa
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributeDefinitions.Get(Key) -> Square::Types::RetrieveLocationCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.locations.custom_attribute_definitions.<a href="/lib/square/locations/custom_attribute_definitions/client.rb">get</a>(key) -> Square::Types::RetrieveLocationCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -21032,10 +23230,10 @@ setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 <dd>
 
 ```ruby
-client.locations.custom_attribute_definitions.get({
-  key:'key',
-  version:1
-});
+client.locations.custom_attribute_definitions.get(
+  key: 'key',
+  version: 1
+);
 ```
 </dd>
 </dl>
@@ -21070,6 +23268,14 @@ is higher than the current version, Square returns a `BAD_REQUEST` error.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::CustomAttributeDefinitions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -21078,7 +23284,7 @@ is higher than the current version, Square returns a `BAD_REQUEST` error.
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributeDefinitions.Update(Key, request) -> Square::Types::UpdateLocationCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.locations.custom_attribute_definitions.<a href="/lib/square/locations/custom_attribute_definitions/client.rb">update</a>(key, request) -> Square::Types::UpdateLocationCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -21108,12 +23314,13 @@ Only the definition owner can update a custom attribute definition.
 <dd>
 
 ```ruby
-client.locations.custom_attribute_definitions.update({
-  key:'key',
-  customAttributeDefinition:{
-    description:'Update the description as desired.'
+client.locations.custom_attribute_definitions.update(
+  key: 'key',
+  custom_attribute_definition: {
+    description: 'Update the description as desired.',
+    visibility: 'VISIBILITY_READ_ONLY'
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -21136,7 +23343,7 @@ client.locations.custom_attribute_definitions.update({
 <dl>
 <dd>
 
-**customAttributeDefinition:** `Square::Types::CustomAttributeDefinition` 
+**custom_attribute_definition:** `Square::Types::CustomAttributeDefinition` 
 
 The custom attribute definition that contains the fields to update. This endpoint
 supports sparse updates, so only new or changed fields need to be included in the request.
@@ -21159,10 +23366,18 @@ If this is not important for your application, `version` can be set to -1.
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, used to ensure idempotency. For more information,
 see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::CustomAttributeDefinitions::RequestOptions` 
     
 </dd>
 </dl>
@@ -21174,7 +23389,7 @@ see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-pa
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributeDefinitions.Delete(Key) -> Square::Types::DeleteLocationCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.locations.custom_attribute_definitions.<a href="/lib/square/locations/custom_attribute_definitions/client.rb">delete</a>(key) -> Square::Types::DeleteLocationCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -21204,9 +23419,7 @@ Only the definition owner can delete a custom attribute definition.
 <dd>
 
 ```ruby
-client.locations.custom_attribute_definitions.delete({
-  key:'key'
-});
+client.locations.custom_attribute_definitions.delete(key: 'key');
 ```
 </dd>
 </dl>
@@ -21225,6 +23438,14 @@ client.locations.custom_attribute_definitions.delete({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::CustomAttributeDefinitions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -21234,7 +23455,7 @@ client.locations.custom_attribute_definitions.delete({
 </details>
 
 ## Locations CustomAttributes
-<details><summary><code>client.Locations.CustomAttributes.BatchDelete(request) -> Square::Types::BulkDeleteLocationCustomAttributesResponse</code></summary>
+<details><summary><code>client.locations.custom_attributes.<a href="/lib/square/locations/custom_attributes/client.rb">batch_delete</a>(request) -> Square::Types::BulkDeleteLocationCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -21263,17 +23484,15 @@ To delete a custom attribute owned by another application, the `visibility` sett
 <dd>
 
 ```ruby
-client.locations.custom_attributes.batch_delete({
-  values:{
-    id1:{
-      key:'bestseller'
-    },
-    id2:{
-      key:'bestseller'
-    },
-    id3:{
-      key:'phone-number'
-    }
+client.locations.custom_attributes.batch_delete(values: {
+  id1: {
+    key: 'bestseller'
+  },
+  id2: {
+    key: 'bestseller'
+  },
+  id3: {
+    key: 'phone-number'
   }
 });
 ```
@@ -21297,6 +23516,14 @@ The keys must be unique and are used to map to the corresponding response.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::CustomAttributes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -21305,7 +23532,7 @@ The keys must be unique and are used to map to the corresponding response.
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributes.BatchUpsert(request) -> Square::Types::BulkUpsertLocationCustomAttributesResponse</code></summary>
+<details><summary><code>client.locations.custom_attributes.<a href="/lib/square/locations/custom_attributes/client.rb">batch_upsert</a>(request) -> Square::Types::BulkUpsertLocationCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -21341,25 +23568,23 @@ must be `VISIBILITY_READ_WRITE_VALUES`.
 <dd>
 
 ```ruby
-client.locations.custom_attributes.batch_upsert({
-  values:{
-    id1:{
-      location_id:'L0TBCBTB7P8RQ',
-      custom_attribute:{
-        key:'bestseller'
-      }
-    },
-    id2:{
-      location_id:'L9XMD04V3STJX',
-      custom_attribute:{
-        key:'bestseller'
-      }
-    },
-    id3:{
-      location_id:'L0TBCBTB7P8RQ',
-      custom_attribute:{
-        key:'phone-number'
-      }
+client.locations.custom_attributes.batch_upsert(values: {
+  id1: {
+    location_id: 'L0TBCBTB7P8RQ',
+    custom_attribute: {
+      key: 'bestseller'
+    }
+  },
+  id2: {
+    location_id: 'L9XMD04V3STJX',
+    custom_attribute: {
+      key: 'bestseller'
+    }
+  },
+  id3: {
+    location_id: 'L0TBCBTB7P8RQ',
+    custom_attribute: {
+      key: 'phone-number'
     }
   }
 });
@@ -21385,6 +23610,14 @@ information needed to create or update a custom attribute.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::CustomAttributes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -21393,7 +23626,7 @@ information needed to create or update a custom attribute.
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributes.List(LocationId) -> Square::Types::ListLocationCustomAttributesResponse</code></summary>
+<details><summary><code>client.locations.custom_attributes.<a href="/lib/square/locations/custom_attributes/client.rb">list</a>(location_id) -> Square::Types::ListLocationCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -21425,12 +23658,13 @@ and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 <dd>
 
 ```ruby
-client.locations.custom_attributes.list({
-  locationId:'location_id',
-  limit:1,
-  cursor:'cursor',
-  withDefinitions:true
-});
+client.locations.custom_attributes.list(
+  location_id: 'location_id',
+  visibility_filter: 'ALL',
+  limit: 1,
+  cursor: 'cursor',
+  with_definitions: true
+);
 ```
 </dd>
 </dl>
@@ -21445,7 +23679,7 @@ client.locations.custom_attributes.list({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the target [location](entity:Location).
+**location_id:** `String` — The ID of the target [location](entity:Location).
     
 </dd>
 </dl>
@@ -21453,7 +23687,7 @@ client.locations.custom_attributes.list({
 <dl>
 <dd>
 
-**visibilityFilter:** `Square::Types::VisibilityFilter` — Filters the `CustomAttributeDefinition` results by their `visibility` values.
+**visibility_filter:** `Square::Types::VisibilityFilter` — Filters the `CustomAttributeDefinition` results by their `visibility` values.
     
 </dd>
 </dl>
@@ -21485,11 +23719,19 @@ information, see [Pagination](https://developer.squareup.com/docs/build-basics/c
 <dl>
 <dd>
 
-**withDefinitions:** `Internal::Types::Boolean` 
+**with_definitions:** `Internal::Types::Boolean` 
 
 Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each
 custom attribute. Set this parameter to `true` to get the name and description of each custom
 attribute, information about the data type, or other definition details. The default value is `false`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::CustomAttributes::RequestOptions` 
     
 </dd>
 </dl>
@@ -21501,7 +23743,7 @@ attribute, information about the data type, or other definition details. The def
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributes.Get(LocationId, Key) -> Square::Types::RetrieveLocationCustomAttributeResponse</code></summary>
+<details><summary><code>client.locations.custom_attributes.<a href="/lib/square/locations/custom_attributes/client.rb">get</a>(location_id, key) -> Square::Types::RetrieveLocationCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -21532,12 +23774,12 @@ To retrieve a custom attribute owned by another application, the `visibility` se
 <dd>
 
 ```ruby
-client.locations.custom_attributes.get({
-  locationId:'location_id',
-  key:'key',
-  withDefinition:true,
-  version:1
-});
+client.locations.custom_attributes.get(
+  location_id: 'location_id',
+  key: 'key',
+  with_definition: true,
+  version: 1
+);
 ```
 </dd>
 </dl>
@@ -21552,7 +23794,7 @@ client.locations.custom_attributes.get({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the target [location](entity:Location).
+**location_id:** `String` — The ID of the target [location](entity:Location).
     
 </dd>
 </dl>
@@ -21572,7 +23814,7 @@ definition owner, you must use the qualified key.
 <dl>
 <dd>
 
-**withDefinition:** `Internal::Types::Boolean` 
+**with_definition:** `Internal::Types::Boolean` 
 
 Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of
 the custom attribute. Set this parameter to `true` to get the name and description of the custom
@@ -21593,6 +23835,14 @@ higher than the current version, Square returns a `BAD_REQUEST` error.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::CustomAttributes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -21601,7 +23851,7 @@ higher than the current version, Square returns a `BAD_REQUEST` error.
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributes.Upsert(LocationId, Key, request) -> Square::Types::UpsertLocationCustomAttributeResponse</code></summary>
+<details><summary><code>client.locations.custom_attributes.<a href="/lib/square/locations/custom_attributes/client.rb">upsert</a>(location_id, key, request) -> Square::Types::UpsertLocationCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -21633,11 +23883,11 @@ must be `VISIBILITY_READ_WRITE_VALUES`.
 <dd>
 
 ```ruby
-client.locations.custom_attributes.upsert({
-  locationId:'location_id',
-  key:'key',
-  customAttribute:{}
-});
+client.locations.custom_attributes.upsert(
+  location_id: 'location_id',
+  key: 'key',
+  custom_attribute: {}
+);
 ```
 </dd>
 </dl>
@@ -21652,7 +23902,7 @@ client.locations.custom_attributes.upsert({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the target [location](entity:Location).
+**location_id:** `String` — The ID of the target [location](entity:Location).
     
 </dd>
 </dl>
@@ -21672,7 +23922,7 @@ the definition owner, you must use the qualified key.
 <dl>
 <dd>
 
-**customAttribute:** `Square::Types::CustomAttribute` 
+**custom_attribute:** `Square::Types::CustomAttribute` 
 
 The custom attribute to create or update, with the following fields:
 - `value`. This value must conform to the `schema` specified by the definition.
@@ -21687,10 +23937,18 @@ If this is not important for your application, version can be set to -1.
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, used to ensure idempotency. For more information,
 see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::CustomAttributes::RequestOptions` 
     
 </dd>
 </dl>
@@ -21702,7 +23960,7 @@ see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-pa
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributes.Delete(LocationId, Key) -> Square::Types::DeleteLocationCustomAttributeResponse</code></summary>
+<details><summary><code>client.locations.custom_attributes.<a href="/lib/square/locations/custom_attributes/client.rb">delete</a>(location_id, key) -> Square::Types::DeleteLocationCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -21731,10 +23989,10 @@ To delete a custom attribute owned by another application, the `visibility` sett
 <dd>
 
 ```ruby
-client.locations.custom_attributes.delete({
-  locationId:'location_id',
-  key:'key'
-});
+client.locations.custom_attributes.delete(
+  location_id: 'location_id',
+  key: 'key'
+);
 ```
 </dd>
 </dl>
@@ -21749,7 +24007,7 @@ client.locations.custom_attributes.delete({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the target [location](entity:Location).
+**location_id:** `String` — The ID of the target [location](entity:Location).
     
 </dd>
 </dl>
@@ -21765,6 +24023,14 @@ definition owner, you must use the qualified key.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::CustomAttributes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -21774,7 +24040,7 @@ definition owner, you must use the qualified key.
 </details>
 
 ## Locations Transactions
-<details><summary><code>client.Locations.Transactions.List(LocationId) -> Square::Types::ListTransactionsResponse</code></summary>
+<details><summary><code>client.locations.transactions.<a href="/lib/square/locations/transactions/client.rb">list</a>(location_id) -> Square::Types::ListTransactionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -21806,12 +24072,13 @@ Max results per [page](https://developer.squareup.com/docs/working-with-apis/pag
 <dd>
 
 ```ruby
-client.locations.transactions.list({
-  locationId:'location_id',
-  beginTime:'begin_time',
-  endTime:'end_time',
-  cursor:'cursor'
-});
+client.locations.transactions.list(
+  location_id: 'location_id',
+  begin_time: 'begin_time',
+  end_time: 'end_time',
+  sort_order: 'DESC',
+  cursor: 'cursor'
+);
 ```
 </dd>
 </dl>
@@ -21826,7 +24093,7 @@ client.locations.transactions.list({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the location to list transactions for.
+**location_id:** `String` — The ID of the location to list transactions for.
     
 </dd>
 </dl>
@@ -21834,7 +24101,7 @@ client.locations.transactions.list({
 <dl>
 <dd>
 
-**beginTime:** `String` 
+**begin_time:** `String` 
 
 The beginning of the requested reporting period, in RFC 3339 format.
 
@@ -21848,7 +24115,7 @@ Default value: The current time minus one year.
 <dl>
 <dd>
 
-**endTime:** `String` 
+**end_time:** `String` 
 
 The end of the requested reporting period, in RFC 3339 format.
 
@@ -21862,7 +24129,7 @@ Default value: The current time.
 <dl>
 <dd>
 
-**sortOrder:** `Square::Types::SortOrder` 
+**sort_order:** `Square::Types::SortOrder` 
 
 The order in which results are listed in the response (`ASC` for
 oldest first, `DESC` for newest first).
@@ -21884,6 +24151,14 @@ See [Paginating results](https://developer.squareup.com/docs/working-with-apis/p
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::Transactions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -21892,7 +24167,7 @@ See [Paginating results](https://developer.squareup.com/docs/working-with-apis/p
 </dl>
 </details>
 
-<details><summary><code>client.Locations.Transactions.Get(LocationId, TransactionId) -> Square::Types::GetTransactionResponse</code></summary>
+<details><summary><code>client.locations.transactions.<a href="/lib/square/locations/transactions/client.rb">get</a>(location_id, transaction_id) -> Square::Types::GetTransactionResponse</code></summary>
 <dl>
 <dd>
 
@@ -21919,10 +24194,10 @@ Retrieves details for a single transaction.
 <dd>
 
 ```ruby
-client.locations.transactions.get({
-  locationId:'location_id',
-  transactionId:'transaction_id'
-});
+client.locations.transactions.get(
+  location_id: 'location_id',
+  transaction_id: 'transaction_id'
+);
 ```
 </dd>
 </dl>
@@ -21937,7 +24212,7 @@ client.locations.transactions.get({
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the transaction's associated location.
+**location_id:** `String` — The ID of the transaction's associated location.
     
 </dd>
 </dl>
@@ -21945,7 +24220,15 @@ client.locations.transactions.get({
 <dl>
 <dd>
 
-**transactionId:** `String` — The ID of the transaction to retrieve.
+**transaction_id:** `String` — The ID of the transaction to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::Transactions::RequestOptions` 
     
 </dd>
 </dl>
@@ -21957,7 +24240,7 @@ client.locations.transactions.get({
 </dl>
 </details>
 
-<details><summary><code>client.Locations.Transactions.Capture(LocationId, TransactionId) -> Square::Types::CaptureTransactionResponse</code></summary>
+<details><summary><code>client.locations.transactions.<a href="/lib/square/locations/transactions/client.rb">capture</a>(location_id, transaction_id) -> Square::Types::CaptureTransactionResponse</code></summary>
 <dl>
 <dd>
 
@@ -21989,10 +24272,10 @@ for more information.
 <dd>
 
 ```ruby
-client.locations.transactions.capture({
-  locationId:'location_id',
-  transactionId:'transaction_id'
-});
+client.locations.transactions.capture(
+  location_id: 'location_id',
+  transaction_id: 'transaction_id'
+);
 ```
 </dd>
 </dl>
@@ -22007,7 +24290,7 @@ client.locations.transactions.capture({
 <dl>
 <dd>
 
-**locationId:** `String` — 
+**location_id:** `String` — 
     
 </dd>
 </dl>
@@ -22015,7 +24298,15 @@ client.locations.transactions.capture({
 <dl>
 <dd>
 
-**transactionId:** `String` — 
+**transaction_id:** `String` — 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::Transactions::RequestOptions` 
     
 </dd>
 </dl>
@@ -22027,7 +24318,7 @@ client.locations.transactions.capture({
 </dl>
 </details>
 
-<details><summary><code>client.Locations.Transactions.Void(LocationId, TransactionId) -> Square::Types::VoidTransactionResponse</code></summary>
+<details><summary><code>client.locations.transactions.<a href="/lib/square/locations/transactions/client.rb">void</a>(location_id, transaction_id) -> Square::Types::VoidTransactionResponse</code></summary>
 <dl>
 <dd>
 
@@ -22059,10 +24350,10 @@ for more information.
 <dd>
 
 ```ruby
-client.locations.transactions.void({
-  locationId:'location_id',
-  transactionId:'transaction_id'
-});
+client.locations.transactions.void(
+  location_id: 'location_id',
+  transaction_id: 'transaction_id'
+);
 ```
 </dd>
 </dl>
@@ -22077,7 +24368,7 @@ client.locations.transactions.void({
 <dl>
 <dd>
 
-**locationId:** `String` — 
+**location_id:** `String` — 
     
 </dd>
 </dl>
@@ -22085,7 +24376,15 @@ client.locations.transactions.void({
 <dl>
 <dd>
 
-**transactionId:** `String` — 
+**transaction_id:** `String` — 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Locations::Transactions::RequestOptions` 
     
 </dd>
 </dl>
@@ -22098,7 +24397,7 @@ client.locations.transactions.void({
 </details>
 
 ## Loyalty Accounts
-<details><summary><code>client.Loyalty.Accounts.Create(request) -> Square::Types::CreateLoyaltyAccountResponse</code></summary>
+<details><summary><code>client.loyalty.accounts.<a href="/lib/square/loyalty/accounts/client.rb">create</a>(request) -> Square::Types::CreateLoyaltyAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -22125,15 +24424,15 @@ Creates a loyalty account. To create a loyalty account, you must provide the `pr
 <dd>
 
 ```ruby
-client.loyalty.accounts.create({
-  loyaltyAccount:{
-    program_id:'d619f755-2d17-41f3-990d-c04ecedd64dd',
-    mapping:{
-      phone_number:'+14155551234'
+client.loyalty.accounts.create(
+  loyalty_account: {
+    program_id: 'd619f755-2d17-41f3-990d-c04ecedd64dd',
+    mapping: {
+      phone_number: '+14155551234'
     }
   },
-  idempotencyKey:'ec78c477-b1c3-4899-a209-a4e71337c996'
-});
+  idempotency_key: 'ec78c477-b1c3-4899-a209-a4e71337c996'
+);
 ```
 </dd>
 </dl>
@@ -22148,7 +24447,7 @@ client.loyalty.accounts.create({
 <dl>
 <dd>
 
-**loyaltyAccount:** `Square::Types::LoyaltyAccount` — The loyalty account to create.
+**loyalty_account:** `Square::Types::LoyaltyAccount` — The loyalty account to create.
     
 </dd>
 </dl>
@@ -22156,10 +24455,18 @@ client.loyalty.accounts.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this `CreateLoyaltyAccount` request. 
 Keys can be any valid string, but must be unique for every request.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Accounts::RequestOptions` 
     
 </dd>
 </dl>
@@ -22171,7 +24478,7 @@ Keys can be any valid string, but must be unique for every request.
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Accounts.Search(request) -> Square::Types::SearchLoyaltyAccountsResponse</code></summary>
+<details><summary><code>client.loyalty.accounts.<a href="/lib/square/loyalty/accounts/client.rb">search</a>(request) -> Square::Types::SearchLoyaltyAccountsResponse</code></summary>
 <dl>
 <dd>
 
@@ -22202,14 +24509,14 @@ Search results are sorted by `created_at` in ascending order.
 <dd>
 
 ```ruby
-client.loyalty.accounts.search({
-  query:{
-    mappings:[{
-      phone_number:'+14155551234'
+client.loyalty.accounts.search(
+  query: {
+    mappings: [{
+      phone_number: '+14155551234'
     }]
   },
-  limit:10
-});
+  limit: 10
+);
 ```
 </dd>
 </dl>
@@ -22251,6 +24558,14 @@ see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-pat
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Accounts::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -22259,7 +24574,7 @@ see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-pat
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Accounts.Get(AccountId) -> Square::Types::GetLoyaltyAccountResponse</code></summary>
+<details><summary><code>client.loyalty.accounts.<a href="/lib/square/loyalty/accounts/client.rb">get</a>(account_id) -> Square::Types::GetLoyaltyAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -22286,9 +24601,7 @@ Retrieves a loyalty account.
 <dd>
 
 ```ruby
-client.loyalty.accounts.get({
-  accountId:'account_id'
-});
+client.loyalty.accounts.get(account_id: 'account_id');
 ```
 </dd>
 </dl>
@@ -22303,7 +24616,15 @@ client.loyalty.accounts.get({
 <dl>
 <dd>
 
-**accountId:** `String` — The ID of the [loyalty account](entity:LoyaltyAccount) to retrieve.
+**account_id:** `String` — The ID of the [loyalty account](entity:LoyaltyAccount) to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Accounts::RequestOptions` 
     
 </dd>
 </dl>
@@ -22315,7 +24636,7 @@ client.loyalty.accounts.get({
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Accounts.AccumulatePoints(AccountId, request) -> Square::Types::AccumulateLoyaltyPointsResponse</code></summary>
+<details><summary><code>client.loyalty.accounts.<a href="/lib/square/loyalty/accounts/client.rb">accumulate_points</a>(account_id, request) -> Square::Types::AccumulateLoyaltyPointsResponse</code></summary>
 <dl>
 <dd>
 
@@ -22355,14 +24676,14 @@ to compute the points earned from the base loyalty program. For information abou
 <dd>
 
 ```ruby
-client.loyalty.accounts.accumulate_points({
-  accountId:'account_id',
-  accumulatePoints:{
-    order_id:'RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY'
+client.loyalty.accounts.accumulate_points(
+  account_id: 'account_id',
+  accumulate_points: {
+    order_id: 'RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY'
   },
-  idempotencyKey:'58b90739-c3e8-4b11-85f7-e636d48d72cb',
-  locationId:'P034NEENMD09F'
-});
+  idempotency_key: '58b90739-c3e8-4b11-85f7-e636d48d72cb',
+  location_id: 'P034NEENMD09F'
+);
 ```
 </dd>
 </dl>
@@ -22377,7 +24698,7 @@ client.loyalty.accounts.accumulate_points({
 <dl>
 <dd>
 
-**accountId:** `String` — The ID of the target [loyalty account](entity:LoyaltyAccount).
+**account_id:** `String` — The ID of the target [loyalty account](entity:LoyaltyAccount).
     
 </dd>
 </dl>
@@ -22385,7 +24706,7 @@ client.loyalty.accounts.accumulate_points({
 <dl>
 <dd>
 
-**accumulatePoints:** `Square::Types::LoyaltyEventAccumulatePoints` 
+**accumulate_points:** `Square::Types::LoyaltyEventAccumulatePoints` 
 
 The points to add to the account. 
 If you are using the Orders API to manage orders, specify the order ID.
@@ -22397,7 +24718,7 @@ Otherwise, specify the points to add.
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies the `AccumulateLoyaltyPoints` request. 
 Keys can be any valid string but must be unique for every request.
@@ -22408,7 +24729,15 @@ Keys can be any valid string but must be unique for every request.
 <dl>
 <dd>
 
-**locationId:** `String` — The [location](entity:Location) where the purchase was made.
+**location_id:** `String` — The [location](entity:Location) where the purchase was made.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Accounts::RequestOptions` 
     
 </dd>
 </dl>
@@ -22420,7 +24749,7 @@ Keys can be any valid string but must be unique for every request.
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Accounts.Adjust(AccountId, request) -> Square::Types::AdjustLoyaltyPointsResponse</code></summary>
+<details><summary><code>client.loyalty.accounts.<a href="/lib/square/loyalty/accounts/client.rb">adjust</a>(account_id, request) -> Square::Types::AdjustLoyaltyPointsResponse</code></summary>
 <dl>
 <dd>
 
@@ -22451,14 +24780,14 @@ to add points when a buyer pays for the purchase.
 <dd>
 
 ```ruby
-client.loyalty.accounts.adjust({
-  accountId:'account_id',
-  idempotencyKey:'bc29a517-3dc9-450e-aa76-fae39ee849d1',
-  adjustPoints:{
-    points:10,
-    reason:'Complimentary points'
+client.loyalty.accounts.adjust(
+  account_id: 'account_id',
+  idempotency_key: 'bc29a517-3dc9-450e-aa76-fae39ee849d1',
+  adjust_points: {
+    points: 10,
+    reason: 'Complimentary points'
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -22473,7 +24802,7 @@ client.loyalty.accounts.adjust({
 <dl>
 <dd>
 
-**accountId:** `String` — The ID of the target [loyalty account](entity:LoyaltyAccount).
+**account_id:** `String` — The ID of the target [loyalty account](entity:LoyaltyAccount).
     
 </dd>
 </dl>
@@ -22481,7 +24810,7 @@ client.loyalty.accounts.adjust({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this `AdjustLoyaltyPoints` request. 
 Keys can be any valid string, but must be unique for every request.
@@ -22492,7 +24821,7 @@ Keys can be any valid string, but must be unique for every request.
 <dl>
 <dd>
 
-**adjustPoints:** `Square::Types::LoyaltyEventAdjustPoints` 
+**adjust_points:** `Square::Types::LoyaltyEventAdjustPoints` 
 
 The points to add or subtract and the reason for the adjustment. To add points, specify a positive integer.
 To subtract points, specify a negative integer.
@@ -22503,11 +24832,19 @@ To subtract points, specify a negative integer.
 <dl>
 <dd>
 
-**allowNegativeBalance:** `Internal::Types::Boolean` 
+**allow_negative_balance:** `Internal::Types::Boolean` 
 
 Indicates whether to allow a negative adjustment to result in a negative balance. If `true`, a negative
 balance is allowed when subtracting points. If `false`, Square returns a `BAD_REQUEST` error when subtracting
 the specified number of points would result in a negative balance. The default value is `false`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Accounts::RequestOptions` 
     
 </dd>
 </dl>
@@ -22520,7 +24857,7 @@ the specified number of points would result in a negative balance. The default v
 </details>
 
 ## Loyalty Programs
-<details><summary><code>client.Loyalty.Programs.List() -> Square::Types::ListLoyaltyProgramsResponse</code></summary>
+<details><summary><code>client.loyalty.programs.<a href="/lib/square/loyalty/programs/client.rb">list</a>() -> Square::Types::ListLoyaltyProgramsResponse</code></summary>
 <dl>
 <dd>
 
@@ -22558,12 +24895,27 @@ client.loyalty.programs.list();
 </dd>
 </dl>
 
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Programs::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Programs.Get(ProgramId) -> Square::Types::GetLoyaltyProgramResponse</code></summary>
+<details><summary><code>client.loyalty.programs.<a href="/lib/square/loyalty/programs/client.rb">get</a>(program_id) -> Square::Types::GetLoyaltyProgramResponse</code></summary>
 <dl>
 <dd>
 
@@ -22592,9 +24944,7 @@ Loyalty programs define how buyers can earn points and redeem points for rewards
 <dd>
 
 ```ruby
-client.loyalty.programs.get({
-  programId:'program_id'
-});
+client.loyalty.programs.get(program_id: 'program_id');
 ```
 </dd>
 </dl>
@@ -22609,7 +24959,15 @@ client.loyalty.programs.get({
 <dl>
 <dd>
 
-**programId:** `String` — The ID of the loyalty program or the keyword `main`. Either value can be used to retrieve the single loyalty program that belongs to the seller.
+**program_id:** `String` — The ID of the loyalty program or the keyword `main`. Either value can be used to retrieve the single loyalty program that belongs to the seller.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Programs::RequestOptions` 
     
 </dd>
 </dl>
@@ -22621,7 +24979,7 @@ client.loyalty.programs.get({
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Programs.Calculate(ProgramId, request) -> Square::Types::CalculateLoyaltyPointsResponse</code></summary>
+<details><summary><code>client.loyalty.programs.<a href="/lib/square/loyalty/programs/client.rb">calculate</a>(program_id, request) -> Square::Types::CalculateLoyaltyPointsResponse</code></summary>
 <dl>
 <dd>
 
@@ -22662,11 +25020,11 @@ to calculate whether the purchase also qualifies for promotion points. For more 
 <dd>
 
 ```ruby
-client.loyalty.programs.calculate({
-  programId:'program_id',
-  orderId:'RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY',
-  loyaltyAccountId:'79b807d2-d786-46a9-933b-918028d7a8c5'
-});
+client.loyalty.programs.calculate(
+  program_id: 'program_id',
+  order_id: 'RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY',
+  loyalty_account_id: '79b807d2-d786-46a9-933b-918028d7a8c5'
+);
 ```
 </dd>
 </dl>
@@ -22681,7 +25039,7 @@ client.loyalty.programs.calculate({
 <dl>
 <dd>
 
-**programId:** `String` — The ID of the [loyalty program](entity:LoyaltyProgram), which defines the rules for accruing points.
+**program_id:** `String` — The ID of the [loyalty program](entity:LoyaltyProgram), which defines the rules for accruing points.
     
 </dd>
 </dl>
@@ -22689,7 +25047,7 @@ client.loyalty.programs.calculate({
 <dl>
 <dd>
 
-**orderId:** `String` 
+**order_id:** `String` 
 
 The [order](entity:Order) ID for which to calculate the points.
 Specify this field if your application uses the Orders API to process orders.
@@ -22701,7 +25059,7 @@ Otherwise, specify the `transaction_amount_money`.
 <dl>
 <dd>
 
-**transactionAmountMoney:** `Square::Types::Money` 
+**transaction_amount_money:** `Square::Types::Money` 
 
 The purchase amount for which to calculate the points. 
 Specify this field if your application does not use the Orders API to process orders.
@@ -22713,7 +25071,7 @@ Otherwise, specify the `order_id`.
 <dl>
 <dd>
 
-**loyaltyAccountId:** `String` 
+**loyalty_account_id:** `String` 
 
 The ID of the target [loyalty account](entity:LoyaltyAccount). Optionally specify this field
 if your application uses the Orders API to process orders.
@@ -22726,6 +25084,14 @@ for regardless of the trigger limit.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Programs::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -22735,7 +25101,7 @@ for regardless of the trigger limit.
 </details>
 
 ## Loyalty Rewards
-<details><summary><code>client.Loyalty.Rewards.Create(request) -> Square::Types::CreateLoyaltyRewardResponse</code></summary>
+<details><summary><code>client.loyalty.rewards.<a href="/lib/square/loyalty/rewards/client.rb">create</a>(request) -> Square::Types::CreateLoyaltyRewardResponse</code></summary>
 <dl>
 <dd>
 
@@ -22769,14 +25135,14 @@ not available for the buyer to redeem another reward.
 <dd>
 
 ```ruby
-client.loyalty.rewards.create({
-  reward:{
-    loyalty_account_id:'5adcb100-07f1-4ee7-b8c6-6bb9ebc474bd',
-    reward_tier_id:'e1b39225-9da5-43d1-a5db-782cdd8ad94f',
-    order_id:'RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY'
+client.loyalty.rewards.create(
+  reward: {
+    loyalty_account_id: '5adcb100-07f1-4ee7-b8c6-6bb9ebc474bd',
+    reward_tier_id: 'e1b39225-9da5-43d1-a5db-782cdd8ad94f',
+    order_id: 'RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY'
   },
-  idempotencyKey:'18c2e5ea-a620-4b1f-ad60-7b167285e451'
-});
+  idempotency_key: '18c2e5ea-a620-4b1f-ad60-7b167285e451'
+);
 ```
 </dd>
 </dl>
@@ -22799,10 +25165,18 @@ client.loyalty.rewards.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this `CreateLoyaltyReward` request. 
 Keys can be any valid string, but must be unique for every request.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Rewards::RequestOptions` 
     
 </dd>
 </dl>
@@ -22814,7 +25188,7 @@ Keys can be any valid string, but must be unique for every request.
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Rewards.Search(request) -> Square::Types::SearchLoyaltyRewardsResponse</code></summary>
+<details><summary><code>client.loyalty.rewards.<a href="/lib/square/loyalty/rewards/client.rb">search</a>(request) -> Square::Types::SearchLoyaltyRewardsResponse</code></summary>
 <dl>
 <dd>
 
@@ -22847,12 +25221,12 @@ Search results are sorted by `updated_at` in descending order.
 <dd>
 
 ```ruby
-client.loyalty.rewards.search({
-  query:{
-    loyalty_account_id:'5adcb100-07f1-4ee7-b8c6-6bb9ebc474bd'
+client.loyalty.rewards.search(
+  query: {
+    loyalty_account_id: '5adcb100-07f1-4ee7-b8c6-6bb9ebc474bd'
   },
-  limit:10
-});
+  limit: 10
+);
 ```
 </dd>
 </dl>
@@ -22896,6 +25270,14 @@ see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-pat
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Rewards::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -22904,7 +25286,7 @@ see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-pat
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Rewards.Get(RewardId) -> Square::Types::GetLoyaltyRewardResponse</code></summary>
+<details><summary><code>client.loyalty.rewards.<a href="/lib/square/loyalty/rewards/client.rb">get</a>(reward_id) -> Square::Types::GetLoyaltyRewardResponse</code></summary>
 <dl>
 <dd>
 
@@ -22931,9 +25313,7 @@ Retrieves a loyalty reward.
 <dd>
 
 ```ruby
-client.loyalty.rewards.get({
-  rewardId:'reward_id'
-});
+client.loyalty.rewards.get(reward_id: 'reward_id');
 ```
 </dd>
 </dl>
@@ -22948,7 +25328,15 @@ client.loyalty.rewards.get({
 <dl>
 <dd>
 
-**rewardId:** `String` — The ID of the [loyalty reward](entity:LoyaltyReward) to retrieve.
+**reward_id:** `String` — The ID of the [loyalty reward](entity:LoyaltyReward) to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Rewards::RequestOptions` 
     
 </dd>
 </dl>
@@ -22960,7 +25348,7 @@ client.loyalty.rewards.get({
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Rewards.Delete(RewardId) -> Square::Types::DeleteLoyaltyRewardResponse</code></summary>
+<details><summary><code>client.loyalty.rewards.<a href="/lib/square/loyalty/rewards/client.rb">delete</a>(reward_id) -> Square::Types::DeleteLoyaltyRewardResponse</code></summary>
 <dl>
 <dd>
 
@@ -22995,9 +25383,7 @@ You cannot delete a reward that has reached the terminal state (REDEEMED).
 <dd>
 
 ```ruby
-client.loyalty.rewards.delete({
-  rewardId:'reward_id'
-});
+client.loyalty.rewards.delete(reward_id: 'reward_id');
 ```
 </dd>
 </dl>
@@ -23012,7 +25398,15 @@ client.loyalty.rewards.delete({
 <dl>
 <dd>
 
-**rewardId:** `String` — The ID of the [loyalty reward](entity:LoyaltyReward) to delete.
+**reward_id:** `String` — The ID of the [loyalty reward](entity:LoyaltyReward) to delete.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Rewards::RequestOptions` 
     
 </dd>
 </dl>
@@ -23024,7 +25418,7 @@ client.loyalty.rewards.delete({
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Rewards.Redeem(RewardId, request) -> Square::Types::RedeemLoyaltyRewardResponse</code></summary>
+<details><summary><code>client.loyalty.rewards.<a href="/lib/square/loyalty/rewards/client.rb">redeem</a>(reward_id, request) -> Square::Types::RedeemLoyaltyRewardResponse</code></summary>
 <dl>
 <dd>
 
@@ -23061,11 +25455,11 @@ to the account.
 <dd>
 
 ```ruby
-client.loyalty.rewards.redeem({
-  rewardId:'reward_id',
-  idempotencyKey:'98adc7f7-6963-473b-b29c-f3c9cdd7d994',
-  locationId:'P034NEENMD09F'
-});
+client.loyalty.rewards.redeem(
+  reward_id: 'reward_id',
+  idempotency_key: '98adc7f7-6963-473b-b29c-f3c9cdd7d994',
+  location_id: 'P034NEENMD09F'
+);
 ```
 </dd>
 </dl>
@@ -23080,7 +25474,7 @@ client.loyalty.rewards.redeem({
 <dl>
 <dd>
 
-**rewardId:** `String` — The ID of the [loyalty reward](entity:LoyaltyReward) to redeem.
+**reward_id:** `String` — The ID of the [loyalty reward](entity:LoyaltyReward) to redeem.
     
 </dd>
 </dl>
@@ -23088,7 +25482,7 @@ client.loyalty.rewards.redeem({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this `RedeemLoyaltyReward` request. 
 Keys can be any valid string, but must be unique for every request.
@@ -23099,7 +25493,15 @@ Keys can be any valid string, but must be unique for every request.
 <dl>
 <dd>
 
-**locationId:** `String` — The ID of the [location](entity:Location) where the reward is redeemed.
+**location_id:** `String` — The ID of the [location](entity:Location) where the reward is redeemed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Rewards::RequestOptions` 
     
 </dd>
 </dl>
@@ -23112,7 +25514,7 @@ Keys can be any valid string, but must be unique for every request.
 </details>
 
 ## Loyalty Programs Promotions
-<details><summary><code>client.Loyalty.Programs.Promotions.List(ProgramId) -> Square::Types::ListLoyaltyPromotionsResponse</code></summary>
+<details><summary><code>client.loyalty.programs.promotions.<a href="/lib/square/loyalty/programs/promotions/client.rb">list</a>(program_id) -> Square::Types::ListLoyaltyPromotionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -23140,11 +25542,12 @@ Results are sorted by the `created_at` date in descending order (newest to oldes
 <dd>
 
 ```ruby
-client.loyalty.programs.promotions.list({
-  programId:'program_id',
-  cursor:'cursor',
-  limit:1
-});
+client.loyalty.programs.promotions.list(
+  program_id: 'program_id',
+  status: 'ACTIVE',
+  cursor: 'cursor',
+  limit: 1
+);
 ```
 </dd>
 </dl>
@@ -23159,7 +25562,7 @@ client.loyalty.programs.promotions.list({
 <dl>
 <dd>
 
-**programId:** `String` 
+**program_id:** `String` 
 
 The ID of the base [loyalty program](entity:LoyaltyProgram). To get the program ID,
 call [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) using the `main` keyword.
@@ -23202,6 +25605,14 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Programs::Promotions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -23210,7 +25621,7 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Programs.Promotions.Create(ProgramId, request) -> Square::Types::CreateLoyaltyPromotionResponse</code></summary>
+<details><summary><code>client.loyalty.programs.promotions.<a href="/lib/square/loyalty/programs/promotions/client.rb">create</a>(program_id, request) -> Square::Types::CreateLoyaltyPromotionResponse</code></summary>
 <dl>
 <dd>
 
@@ -23242,32 +25653,35 @@ This endpoint sets the loyalty promotion to the `ACTIVE` or `SCHEDULED` status, 
 <dd>
 
 ```ruby
-client.loyalty.programs.promotions.create({
-  programId:'program_id',
-  loyaltyPromotion:{
-    name:'Tuesday Happy Hour Promo',
-    incentive:{
-      points_multiplier_data:{
-        multiplier:'3.0'
+client.loyalty.programs.promotions.create(
+  program_id: 'program_id',
+  loyalty_promotion: {
+    name: 'Tuesday Happy Hour Promo',
+    incentive: {
+      type: 'POINTS_MULTIPLIER',
+      points_multiplier_data: {
+        multiplier: '3.0'
       }
     },
-    available_time:{
-      time_periods:['BEGIN:VEVENT
+    available_time: {
+      time_periods: ['BEGIN:VEVENT
       DTSTART:20220816T160000
       DURATION:PT2H
       RRULE:FREQ=WEEKLY;BYDAY=TU
       END:VEVENT']
     },
-    trigger_limit:{
-      times:1
+    trigger_limit: {
+      times: 1,
+      interval: 'DAY'
     },
-    minimum_spend_amount_money:{
-      amount:2000
+    minimum_spend_amount_money: {
+      amount: 2000,
+      currency: 'USD'
     },
-    qualifying_category_ids:['XTQPYLR3IIU9C44VRCB3XD12']
+    qualifying_category_ids: ['XTQPYLR3IIU9C44VRCB3XD12']
   },
-  idempotencyKey:'ec78c477-b1c3-4899-a209-a4e71337c996'
-});
+  idempotency_key: 'ec78c477-b1c3-4899-a209-a4e71337c996'
+);
 ```
 </dd>
 </dl>
@@ -23282,7 +25696,7 @@ client.loyalty.programs.promotions.create({
 <dl>
 <dd>
 
-**programId:** `String` 
+**program_id:** `String` 
 
 The ID of the [loyalty program](entity:LoyaltyProgram) to associate with the promotion.
 To get the program ID, call [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram)
@@ -23294,7 +25708,7 @@ using the `main` keyword.
 <dl>
 <dd>
 
-**loyaltyPromotion:** `Square::Types::LoyaltyPromotion` — The loyalty promotion to create.
+**loyalty_promotion:** `Square::Types::LoyaltyPromotion` — The loyalty promotion to create.
     
 </dd>
 </dl>
@@ -23302,10 +25716,18 @@ using the `main` keyword.
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, which is used to ensure idempotency. For more information,
 see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Programs::Promotions::RequestOptions` 
     
 </dd>
 </dl>
@@ -23317,7 +25739,7 @@ see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-pa
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Programs.Promotions.Get(ProgramId, PromotionId) -> Square::Types::GetLoyaltyPromotionResponse</code></summary>
+<details><summary><code>client.loyalty.programs.promotions.<a href="/lib/square/loyalty/programs/promotions/client.rb">get</a>(program_id, promotion_id) -> Square::Types::GetLoyaltyPromotionResponse</code></summary>
 <dl>
 <dd>
 
@@ -23344,10 +25766,10 @@ Retrieves a loyalty promotion.
 <dd>
 
 ```ruby
-client.loyalty.programs.promotions.get({
-  programId:'program_id',
-  promotionId:'promotion_id'
-});
+client.loyalty.programs.promotions.get(
+  program_id: 'program_id',
+  promotion_id: 'promotion_id'
+);
 ```
 </dd>
 </dl>
@@ -23362,7 +25784,7 @@ client.loyalty.programs.promotions.get({
 <dl>
 <dd>
 
-**programId:** `String` 
+**program_id:** `String` 
 
 The ID of the base [loyalty program](entity:LoyaltyProgram). To get the program ID,
 call [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) using the `main` keyword.
@@ -23373,7 +25795,15 @@ call [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) using
 <dl>
 <dd>
 
-**promotionId:** `String` — The ID of the [loyalty promotion](entity:LoyaltyPromotion) to retrieve.
+**promotion_id:** `String` — The ID of the [loyalty promotion](entity:LoyaltyPromotion) to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Programs::Promotions::RequestOptions` 
     
 </dd>
 </dl>
@@ -23385,7 +25815,7 @@ call [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) using
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Programs.Promotions.Cancel(ProgramId, PromotionId) -> Square::Types::CancelLoyaltyPromotionResponse</code></summary>
+<details><summary><code>client.loyalty.programs.promotions.<a href="/lib/square/loyalty/programs/promotions/client.rb">cancel</a>(program_id, promotion_id) -> Square::Types::CancelLoyaltyPromotionResponse</code></summary>
 <dl>
 <dd>
 
@@ -23417,10 +25847,10 @@ This endpoint sets the loyalty promotion to the `CANCELED` state
 <dd>
 
 ```ruby
-client.loyalty.programs.promotions.cancel({
-  programId:'program_id',
-  promotionId:'promotion_id'
-});
+client.loyalty.programs.promotions.cancel(
+  program_id: 'program_id',
+  promotion_id: 'promotion_id'
+);
 ```
 </dd>
 </dl>
@@ -23435,7 +25865,7 @@ client.loyalty.programs.promotions.cancel({
 <dl>
 <dd>
 
-**programId:** `String` — The ID of the base [loyalty program](entity:LoyaltyProgram).
+**program_id:** `String` — The ID of the base [loyalty program](entity:LoyaltyProgram).
     
 </dd>
 </dl>
@@ -23443,10 +25873,18 @@ client.loyalty.programs.promotions.cancel({
 <dl>
 <dd>
 
-**promotionId:** `String` 
+**promotion_id:** `String` 
 
 The ID of the [loyalty promotion](entity:LoyaltyPromotion) to cancel. You can cancel a
 promotion that has an `ACTIVE` or `SCHEDULED` status.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Loyalty::Programs::Promotions::RequestOptions` 
     
 </dd>
 </dl>
@@ -23459,7 +25897,7 @@ promotion that has an `ACTIVE` or `SCHEDULED` status.
 </details>
 
 ## Merchants CustomAttributeDefinitions
-<details><summary><code>client.Merchants.CustomAttributeDefinitions.List() -> Square::Types::ListMerchantCustomAttributeDefinitionsResponse</code></summary>
+<details><summary><code>client.merchants.custom_attribute_definitions.<a href="/lib/square/merchants/custom_attribute_definitions/client.rb">list</a>() -> Square::Types::ListMerchantCustomAttributeDefinitionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -23489,10 +25927,11 @@ applications and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`
 <dd>
 
 ```ruby
-client.merchants.custom_attribute_definitions.list({
-  limit:1,
-  cursor:'cursor'
-});
+client.merchants.custom_attribute_definitions.list(
+  visibility_filter: 'ALL',
+  limit: 1,
+  cursor: 'cursor'
+);
 ```
 </dd>
 </dl>
@@ -23507,7 +25946,7 @@ client.merchants.custom_attribute_definitions.list({
 <dl>
 <dd>
 
-**visibilityFilter:** `Square::Types::VisibilityFilter` — Filters the `CustomAttributeDefinition` results by their `visibility` values.
+**visibility_filter:** `Square::Types::VisibilityFilter` — Filters the `CustomAttributeDefinition` results by their `visibility` values.
     
 </dd>
 </dl>
@@ -23535,6 +25974,14 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Merchants::CustomAttributeDefinitions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -23543,7 +25990,7 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributeDefinitions.Create(request) -> Square::Types::CreateMerchantCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.merchants.custom_attribute_definitions.<a href="/lib/square/merchants/custom_attribute_definitions/client.rb">create</a>(request) -> Square::Types::CreateMerchantCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -23576,13 +26023,12 @@ to set the custom attribute for a merchant.
 <dd>
 
 ```ruby
-client.merchants.custom_attribute_definitions.create({
-  customAttributeDefinition:{
-    key:'alternative_seller_name',
-    schema:{},
-    name:'Alternative Merchant Name',
-    description:'This is the other name this merchant goes by.'
-  }
+client.merchants.custom_attribute_definitions.create(custom_attribute_definition: {
+  key: 'alternative_seller_name',
+  schema: {},
+  name: 'Alternative Merchant Name',
+  description: 'This is the other name this merchant goes by.',
+  visibility: 'VISIBILITY_READ_ONLY'
 });
 ```
 </dd>
@@ -23598,7 +26044,7 @@ client.merchants.custom_attribute_definitions.create({
 <dl>
 <dd>
 
-**customAttributeDefinition:** `Square::Types::CustomAttributeDefinition` 
+**custom_attribute_definition:** `Square::Types::CustomAttributeDefinition` 
 
 The custom attribute definition to create. Note the following:
 - With the exception of the `Selection` data type, the `schema` is specified as a simple URL to the JSON schema
@@ -23612,10 +26058,18 @@ definition hosted on the Square CDN. For more information, including supported v
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, used to ensure idempotency. For more information,
 see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Merchants::CustomAttributeDefinitions::RequestOptions` 
     
 </dd>
 </dl>
@@ -23627,7 +26081,7 @@ see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-pa
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributeDefinitions.Get(Key) -> Square::Types::RetrieveMerchantCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.merchants.custom_attribute_definitions.<a href="/lib/square/merchants/custom_attribute_definitions/client.rb">get</a>(key) -> Square::Types::RetrieveMerchantCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -23656,10 +26110,10 @@ setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 <dd>
 
 ```ruby
-client.merchants.custom_attribute_definitions.get({
-  key:'key',
-  version:1
-});
+client.merchants.custom_attribute_definitions.get(
+  key: 'key',
+  version: 1
+);
 ```
 </dd>
 </dl>
@@ -23694,6 +26148,14 @@ is higher than the current version, Square returns a `BAD_REQUEST` error.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Merchants::CustomAttributeDefinitions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -23702,7 +26164,7 @@ is higher than the current version, Square returns a `BAD_REQUEST` error.
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributeDefinitions.Update(Key, request) -> Square::Types::UpdateMerchantCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.merchants.custom_attribute_definitions.<a href="/lib/square/merchants/custom_attribute_definitions/client.rb">update</a>(key, request) -> Square::Types::UpdateMerchantCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -23732,12 +26194,13 @@ Only the definition owner can update a custom attribute definition.
 <dd>
 
 ```ruby
-client.merchants.custom_attribute_definitions.update({
-  key:'key',
-  customAttributeDefinition:{
-    description:'Update the description as desired.'
+client.merchants.custom_attribute_definitions.update(
+  key: 'key',
+  custom_attribute_definition: {
+    description: 'Update the description as desired.',
+    visibility: 'VISIBILITY_READ_ONLY'
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -23760,7 +26223,7 @@ client.merchants.custom_attribute_definitions.update({
 <dl>
 <dd>
 
-**customAttributeDefinition:** `Square::Types::CustomAttributeDefinition` 
+**custom_attribute_definition:** `Square::Types::CustomAttributeDefinition` 
 
 The custom attribute definition that contains the fields to update. This endpoint
 supports sparse updates, so only new or changed fields need to be included in the request.
@@ -23782,10 +26245,18 @@ If this is not important for your application, version can be set to -1. For any
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, used to ensure idempotency. For more information,
 see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Merchants::CustomAttributeDefinitions::RequestOptions` 
     
 </dd>
 </dl>
@@ -23797,7 +26268,7 @@ see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-pa
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributeDefinitions.Delete(Key) -> Square::Types::DeleteMerchantCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.merchants.custom_attribute_definitions.<a href="/lib/square/merchants/custom_attribute_definitions/client.rb">delete</a>(key) -> Square::Types::DeleteMerchantCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -23827,9 +26298,7 @@ Only the definition owner can delete a custom attribute definition.
 <dd>
 
 ```ruby
-client.merchants.custom_attribute_definitions.delete({
-  key:'key'
-});
+client.merchants.custom_attribute_definitions.delete(key: 'key');
 ```
 </dd>
 </dl>
@@ -23848,6 +26317,14 @@ client.merchants.custom_attribute_definitions.delete({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Merchants::CustomAttributeDefinitions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -23857,7 +26334,7 @@ client.merchants.custom_attribute_definitions.delete({
 </details>
 
 ## Merchants CustomAttributes
-<details><summary><code>client.Merchants.CustomAttributes.BatchDelete(request) -> Square::Types::BulkDeleteMerchantCustomAttributesResponse</code></summary>
+<details><summary><code>client.merchants.custom_attributes.<a href="/lib/square/merchants/custom_attributes/client.rb">batch_delete</a>(request) -> Square::Types::BulkDeleteMerchantCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -23886,14 +26363,12 @@ To delete a custom attribute owned by another application, the `visibility` sett
 <dd>
 
 ```ruby
-client.merchants.custom_attributes.batch_delete({
-  values:{
-    id1:{
-      key:'alternative_seller_name'
-    },
-    id2:{
-      key:'has_seen_tutorial'
-    }
+client.merchants.custom_attributes.batch_delete(values: {
+  id1: {
+    key: 'alternative_seller_name'
+  },
+  id2: {
+    key: 'has_seen_tutorial'
   }
 });
 ```
@@ -23917,6 +26392,14 @@ The keys must be unique and are used to map to the corresponding response.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Merchants::CustomAttributes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -23925,7 +26408,7 @@ The keys must be unique and are used to map to the corresponding response.
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributes.BatchUpsert(request) -> Square::Types::BulkUpsertMerchantCustomAttributesResponse</code></summary>
+<details><summary><code>client.merchants.custom_attributes.<a href="/lib/square/merchants/custom_attributes/client.rb">batch_upsert</a>(request) -> Square::Types::BulkUpsertMerchantCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -23961,19 +26444,17 @@ must be `VISIBILITY_READ_WRITE_VALUES`.
 <dd>
 
 ```ruby
-client.merchants.custom_attributes.batch_upsert({
-  values:{
-    id1:{
-      merchant_id:'DM7VKY8Q63GNP',
-      custom_attribute:{
-        key:'alternative_seller_name'
-      }
-    },
-    id2:{
-      merchant_id:'DM7VKY8Q63GNP',
-      custom_attribute:{
-        key:'has_seen_tutorial'
-      }
+client.merchants.custom_attributes.batch_upsert(values: {
+  id1: {
+    merchant_id: 'DM7VKY8Q63GNP',
+    custom_attribute: {
+      key: 'alternative_seller_name'
+    }
+  },
+  id2: {
+    merchant_id: 'DM7VKY8Q63GNP',
+    custom_attribute: {
+      key: 'has_seen_tutorial'
     }
   }
 });
@@ -23999,6 +26480,14 @@ information needed to create or update a custom attribute.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Merchants::CustomAttributes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -24007,7 +26496,7 @@ information needed to create or update a custom attribute.
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributes.List(MerchantId) -> Square::Types::ListMerchantCustomAttributesResponse</code></summary>
+<details><summary><code>client.merchants.custom_attributes.<a href="/lib/square/merchants/custom_attributes/client.rb">list</a>(merchant_id) -> Square::Types::ListMerchantCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -24039,12 +26528,13 @@ and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 <dd>
 
 ```ruby
-client.merchants.custom_attributes.list({
-  merchantId:'merchant_id',
-  limit:1,
-  cursor:'cursor',
-  withDefinitions:true
-});
+client.merchants.custom_attributes.list(
+  merchant_id: 'merchant_id',
+  visibility_filter: 'ALL',
+  limit: 1,
+  cursor: 'cursor',
+  with_definitions: true
+);
 ```
 </dd>
 </dl>
@@ -24059,7 +26549,7 @@ client.merchants.custom_attributes.list({
 <dl>
 <dd>
 
-**merchantId:** `String` — The ID of the target [merchant](entity:Merchant).
+**merchant_id:** `String` — The ID of the target [merchant](entity:Merchant).
     
 </dd>
 </dl>
@@ -24067,7 +26557,7 @@ client.merchants.custom_attributes.list({
 <dl>
 <dd>
 
-**visibilityFilter:** `Square::Types::VisibilityFilter` — Filters the `CustomAttributeDefinition` results by their `visibility` values.
+**visibility_filter:** `Square::Types::VisibilityFilter` — Filters the `CustomAttributeDefinition` results by their `visibility` values.
     
 </dd>
 </dl>
@@ -24099,11 +26589,19 @@ information, see [Pagination](https://developer.squareup.com/docs/build-basics/c
 <dl>
 <dd>
 
-**withDefinitions:** `Internal::Types::Boolean` 
+**with_definitions:** `Internal::Types::Boolean` 
 
 Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each
 custom attribute. Set this parameter to `true` to get the name and description of each custom
 attribute, information about the data type, or other definition details. The default value is `false`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Merchants::CustomAttributes::RequestOptions` 
     
 </dd>
 </dl>
@@ -24115,7 +26613,7 @@ attribute, information about the data type, or other definition details. The def
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributes.Get(MerchantId, Key) -> Square::Types::RetrieveMerchantCustomAttributeResponse</code></summary>
+<details><summary><code>client.merchants.custom_attributes.<a href="/lib/square/merchants/custom_attributes/client.rb">get</a>(merchant_id, key) -> Square::Types::RetrieveMerchantCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -24146,12 +26644,12 @@ To retrieve a custom attribute owned by another application, the `visibility` se
 <dd>
 
 ```ruby
-client.merchants.custom_attributes.get({
-  merchantId:'merchant_id',
-  key:'key',
-  withDefinition:true,
-  version:1
-});
+client.merchants.custom_attributes.get(
+  merchant_id: 'merchant_id',
+  key: 'key',
+  with_definition: true,
+  version: 1
+);
 ```
 </dd>
 </dl>
@@ -24166,7 +26664,7 @@ client.merchants.custom_attributes.get({
 <dl>
 <dd>
 
-**merchantId:** `String` — The ID of the target [merchant](entity:Merchant).
+**merchant_id:** `String` — The ID of the target [merchant](entity:Merchant).
     
 </dd>
 </dl>
@@ -24186,7 +26684,7 @@ definition owner, you must use the qualified key.
 <dl>
 <dd>
 
-**withDefinition:** `Internal::Types::Boolean` 
+**with_definition:** `Internal::Types::Boolean` 
 
 Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of
 the custom attribute. Set this parameter to `true` to get the name and description of the custom
@@ -24207,6 +26705,14 @@ higher than the current version, Square returns a `BAD_REQUEST` error.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Merchants::CustomAttributes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -24215,7 +26721,7 @@ higher than the current version, Square returns a `BAD_REQUEST` error.
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributes.Upsert(MerchantId, Key, request) -> Square::Types::UpsertMerchantCustomAttributeResponse</code></summary>
+<details><summary><code>client.merchants.custom_attributes.<a href="/lib/square/merchants/custom_attributes/client.rb">upsert</a>(merchant_id, key, request) -> Square::Types::UpsertMerchantCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -24247,11 +26753,11 @@ must be `VISIBILITY_READ_WRITE_VALUES`.
 <dd>
 
 ```ruby
-client.merchants.custom_attributes.upsert({
-  merchantId:'merchant_id',
-  key:'key',
-  customAttribute:{}
-});
+client.merchants.custom_attributes.upsert(
+  merchant_id: 'merchant_id',
+  key: 'key',
+  custom_attribute: {}
+);
 ```
 </dd>
 </dl>
@@ -24266,7 +26772,7 @@ client.merchants.custom_attributes.upsert({
 <dl>
 <dd>
 
-**merchantId:** `String` — The ID of the target [merchant](entity:Merchant).
+**merchant_id:** `String` — The ID of the target [merchant](entity:Merchant).
     
 </dd>
 </dl>
@@ -24286,7 +26792,7 @@ the definition owner, you must use the qualified key.
 <dl>
 <dd>
 
-**customAttribute:** `Square::Types::CustomAttribute` 
+**custom_attribute:** `Square::Types::CustomAttribute` 
 
 The custom attribute to create or update, with the following fields:
 - `value`. This value must conform to the `schema` specified by the definition.
@@ -24301,10 +26807,18 @@ If this is not important for your application, version can be set to -1. For any
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, used to ensure idempotency. For more information,
 see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Merchants::CustomAttributes::RequestOptions` 
     
 </dd>
 </dl>
@@ -24316,7 +26830,7 @@ see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-pa
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributes.Delete(MerchantId, Key) -> Square::Types::DeleteMerchantCustomAttributeResponse</code></summary>
+<details><summary><code>client.merchants.custom_attributes.<a href="/lib/square/merchants/custom_attributes/client.rb">delete</a>(merchant_id, key) -> Square::Types::DeleteMerchantCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -24345,10 +26859,10 @@ To delete a custom attribute owned by another application, the `visibility` sett
 <dd>
 
 ```ruby
-client.merchants.custom_attributes.delete({
-  merchantId:'merchant_id',
-  key:'key'
-});
+client.merchants.custom_attributes.delete(
+  merchant_id: 'merchant_id',
+  key: 'key'
+);
 ```
 </dd>
 </dl>
@@ -24363,7 +26877,7 @@ client.merchants.custom_attributes.delete({
 <dl>
 <dd>
 
-**merchantId:** `String` — The ID of the target [merchant](entity:Merchant).
+**merchant_id:** `String` — The ID of the target [merchant](entity:Merchant).
     
 </dd>
 </dl>
@@ -24379,6 +26893,14 @@ definition owner, you must use the qualified key.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Merchants::CustomAttributes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -24388,7 +26910,7 @@ definition owner, you must use the qualified key.
 </details>
 
 ## Orders CustomAttributeDefinitions
-<details><summary><code>client.Orders.CustomAttributeDefinitions.List() -> Square::Types::ListOrderCustomAttributeDefinitionsResponse</code></summary>
+<details><summary><code>client.orders.custom_attribute_definitions.<a href="/lib/square/orders/custom_attribute_definitions/client.rb">list</a>() -> Square::Types::ListOrderCustomAttributeDefinitionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -24420,10 +26942,11 @@ seller-defined custom attributes (also known as custom fields) are always set to
 <dd>
 
 ```ruby
-client.orders.custom_attribute_definitions.list({
-  cursor:'cursor',
-  limit:1
-});
+client.orders.custom_attribute_definitions.list(
+  visibility_filter: 'ALL',
+  cursor: 'cursor',
+  limit: 1
+);
 ```
 </dd>
 </dl>
@@ -24438,7 +26961,7 @@ client.orders.custom_attribute_definitions.list({
 <dl>
 <dd>
 
-**visibilityFilter:** `Square::Types::VisibilityFilter` — Requests that all of the custom attributes be returned, or only those that are read-only or read-write.
+**visibility_filter:** `Square::Types::VisibilityFilter` — Requests that all of the custom attributes be returned, or only those that are read-only or read-write.
     
 </dd>
 </dl>
@@ -24467,6 +26990,14 @@ For more information, see [Pagination](https://developer.squareup.com/docs/worki
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::CustomAttributeDefinitions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -24475,7 +27006,7 @@ For more information, see [Pagination](https://developer.squareup.com/docs/worki
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributeDefinitions.Create(request) -> Square::Types::CreateOrderCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.orders.custom_attribute_definitions.<a href="/lib/square/orders/custom_attribute_definitions/client.rb">create</a>(request) -> Square::Types::CreateOrderCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -24506,15 +27037,16 @@ in the Square seller account.
 <dd>
 
 ```ruby
-client.orders.custom_attribute_definitions.create({
-  customAttributeDefinition:{
-    key:'cover-count',
-    schema:{},
-    name:'Cover count',
-    description:'The number of people seated at a table'
+client.orders.custom_attribute_definitions.create(
+  custom_attribute_definition: {
+    key: 'cover-count',
+    schema: {},
+    name: 'Cover count',
+    description: 'The number of people seated at a table',
+    visibility: 'VISIBILITY_READ_WRITE_VALUES'
   },
-  idempotencyKey:'IDEMPOTENCY_KEY'
-});
+  idempotency_key: 'IDEMPOTENCY_KEY'
+);
 ```
 </dd>
 </dl>
@@ -24529,7 +27061,7 @@ client.orders.custom_attribute_definitions.create({
 <dl>
 <dd>
 
-**customAttributeDefinition:** `Square::Types::CustomAttributeDefinition` 
+**custom_attribute_definition:** `Square::Types::CustomAttributeDefinition` 
 
 The custom attribute definition to create. Note the following:
 - With the exception of the `Selection` data type, the `schema` is specified as a simple URL to the JSON schema
@@ -24544,10 +27076,18 @@ definition hosted on the Square CDN. For more information, including supported v
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, used to ensure idempotency. 
 For more information, see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::CustomAttributeDefinitions::RequestOptions` 
     
 </dd>
 </dl>
@@ -24559,7 +27099,7 @@ For more information, see [Idempotency](https://developer.squareup.com/docs/buil
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributeDefinitions.Get(Key) -> Square::Types::RetrieveOrderCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.orders.custom_attribute_definitions.<a href="/lib/square/orders/custom_attribute_definitions/client.rb">get</a>(key) -> Square::Types::RetrieveOrderCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -24590,10 +27130,10 @@ setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note t
 <dd>
 
 ```ruby
-client.orders.custom_attribute_definitions.get({
-  key:'key',
-  version:1
-});
+client.orders.custom_attribute_definitions.get(
+  key: 'key',
+  version: 1
+);
 ```
 </dd>
 </dl>
@@ -24623,6 +27163,14 @@ control, include this optional field and specify the current version of the cust
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::CustomAttributeDefinitions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -24631,7 +27179,7 @@ control, include this optional field and specify the current version of the cust
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributeDefinitions.Update(Key, request) -> Square::Types::UpdateOrderCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.orders.custom_attribute_definitions.<a href="/lib/square/orders/custom_attribute_definitions/client.rb">update</a>(key, request) -> Square::Types::UpdateOrderCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -24660,14 +27208,15 @@ Only the definition owner can update a custom attribute definition. Note that se
 <dd>
 
 ```ruby
-client.orders.custom_attribute_definitions.update({
-  key:'key',
-  customAttributeDefinition:{
-    key:'cover-count',
-    version:1
+client.orders.custom_attribute_definitions.update(
+  key: 'key',
+  custom_attribute_definition: {
+    key: 'cover-count',
+    visibility: 'VISIBILITY_READ_ONLY',
+    version: 1
   },
-  idempotencyKey:'IDEMPOTENCY_KEY'
-});
+  idempotency_key: 'IDEMPOTENCY_KEY'
+);
 ```
 </dd>
 </dl>
@@ -24690,7 +27239,7 @@ client.orders.custom_attribute_definitions.update({
 <dl>
 <dd>
 
-**customAttributeDefinition:** `Square::Types::CustomAttributeDefinition` 
+**custom_attribute_definition:** `Square::Types::CustomAttributeDefinition` 
 
 The custom attribute definition that contains the fields to update. This endpoint supports sparse updates, 
 so only new or changed fields need to be included in the request.  For more information, see 
@@ -24704,10 +27253,18 @@ To enable [optimistic concurrency](https://developer.squareup.com/docs/build-bas
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, used to ensure idempotency. 
 For more information, see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::CustomAttributeDefinitions::RequestOptions` 
     
 </dd>
 </dl>
@@ -24719,7 +27276,7 @@ For more information, see [Idempotency](https://developer.squareup.com/docs/buil
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributeDefinitions.Delete(Key) -> Square::Types::DeleteOrderCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.orders.custom_attribute_definitions.<a href="/lib/square/orders/custom_attribute_definitions/client.rb">delete</a>(key) -> Square::Types::DeleteOrderCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -24748,9 +27305,7 @@ Only the definition owner can delete a custom attribute definition.
 <dd>
 
 ```ruby
-client.orders.custom_attribute_definitions.delete({
-  key:'key'
-});
+client.orders.custom_attribute_definitions.delete(key: 'key');
 ```
 </dd>
 </dl>
@@ -24769,6 +27324,14 @@ client.orders.custom_attribute_definitions.delete({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::CustomAttributeDefinitions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -24778,7 +27341,7 @@ client.orders.custom_attribute_definitions.delete({
 </details>
 
 ## Orders CustomAttributes
-<details><summary><code>client.Orders.CustomAttributes.BatchDelete(request) -> Square::Types::BulkDeleteOrderCustomAttributesResponse</code></summary>
+<details><summary><code>client.orders.custom_attributes.<a href="/lib/square/orders/custom_attributes/client.rb">batch_delete</a>(request) -> Square::Types::BulkDeleteOrderCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -24818,16 +27381,14 @@ must be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attribut
 <dd>
 
 ```ruby
-client.orders.custom_attributes.batch_delete({
-  values:{
-    'cover-count':{
-      key:'cover-count',
-      order_id:'7BbXGEIWNldxAzrtGf9GPVZTwZ4F'
-    },
-    'table-number':{
-      key:'table-number',
-      order_id:'7BbXGEIWNldxAzrtGf9GPVZTwZ4F'
-    }
+client.orders.custom_attributes.batch_delete(values: {
+  'cover-count' => {
+    key: 'cover-count',
+    order_id: '7BbXGEIWNldxAzrtGf9GPVZTwZ4F'
+  },
+  'table-number' => {
+    key: 'table-number',
+    order_id: '7BbXGEIWNldxAzrtGf9GPVZTwZ4F'
   }
 });
 ```
@@ -24848,6 +27409,14 @@ client.orders.custom_attributes.batch_delete({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::CustomAttributes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -24856,7 +27425,7 @@ client.orders.custom_attributes.batch_delete({
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributes.BatchUpsert(request) -> Square::Types::BulkUpsertOrderCustomAttributesResponse</code></summary>
+<details><summary><code>client.orders.custom_attributes.<a href="/lib/square/orders/custom_attributes/client.rb">batch_upsert</a>(request) -> Square::Types::BulkUpsertOrderCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -24896,22 +27465,20 @@ must be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attribut
 <dd>
 
 ```ruby
-client.orders.custom_attributes.batch_upsert({
-  values:{
-    'cover-count':{
-      custom_attribute:{
-        key:'cover-count',
-        version:2
-      },
-      order_id:'7BbXGEIWNldxAzrtGf9GPVZTwZ4F'
+client.orders.custom_attributes.batch_upsert(values: {
+  'cover-count' => {
+    custom_attribute: {
+      key: 'cover-count',
+      version: 2
     },
-    'table-number':{
-      custom_attribute:{
-        key:'table-number',
-        version:4
-      },
-      order_id:'7BbXGEIWNldxAzrtGf9GPVZTwZ4F'
-    }
+    order_id: '7BbXGEIWNldxAzrtGf9GPVZTwZ4F'
+  },
+  'table-number' => {
+    custom_attribute: {
+      key: 'table-number',
+      version: 4
+    },
+    order_id: '7BbXGEIWNldxAzrtGf9GPVZTwZ4F'
   }
 });
 ```
@@ -24932,6 +27499,14 @@ client.orders.custom_attributes.batch_upsert({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::CustomAttributes::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -24940,7 +27515,7 @@ client.orders.custom_attributes.batch_upsert({
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributes.List(OrderId) -> Square::Types::ListOrderCustomAttributesResponse</code></summary>
+<details><summary><code>client.orders.custom_attributes.<a href="/lib/square/orders/custom_attributes/client.rb">list</a>(order_id) -> Square::Types::ListOrderCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -24974,12 +27549,13 @@ and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 <dd>
 
 ```ruby
-client.orders.custom_attributes.list({
-  orderId:'order_id',
-  cursor:'cursor',
-  limit:1,
-  withDefinitions:true
-});
+client.orders.custom_attributes.list(
+  order_id: 'order_id',
+  visibility_filter: 'ALL',
+  cursor: 'cursor',
+  limit: 1,
+  with_definitions: true
+);
 ```
 </dd>
 </dl>
@@ -24994,7 +27570,7 @@ client.orders.custom_attributes.list({
 <dl>
 <dd>
 
-**orderId:** `String` — The ID of the target [order](entity:Order).
+**order_id:** `String` — The ID of the target [order](entity:Order).
     
 </dd>
 </dl>
@@ -25002,7 +27578,7 @@ client.orders.custom_attributes.list({
 <dl>
 <dd>
 
-**visibilityFilter:** `Square::Types::VisibilityFilter` — Requests that all of the custom attributes be returned, or only those that are read-only or read-write.
+**visibility_filter:** `Square::Types::VisibilityFilter` — Requests that all of the custom attributes be returned, or only those that are read-only or read-write.
     
 </dd>
 </dl>
@@ -25035,11 +27611,19 @@ For more information, see [Pagination](https://developer.squareup.com/docs/worki
 <dl>
 <dd>
 
-**withDefinitions:** `Internal::Types::Boolean` 
+**with_definitions:** `Internal::Types::Boolean` 
 
 Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each
 custom attribute. Set this parameter to `true` to get the name and description of each custom attribute, 
 information about the data type, or other definition details. The default value is `false`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::CustomAttributes::RequestOptions` 
     
 </dd>
 </dl>
@@ -25051,7 +27635,7 @@ information about the data type, or other definition details. The default value 
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributes.Get(OrderId, CustomAttributeKey) -> Square::Types::RetrieveOrderCustomAttributeResponse</code></summary>
+<details><summary><code>client.orders.custom_attributes.<a href="/lib/square/orders/custom_attributes/client.rb">get</a>(order_id, custom_attribute_key) -> Square::Types::RetrieveOrderCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -25085,12 +27669,12 @@ also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
 <dd>
 
 ```ruby
-client.orders.custom_attributes.get({
-  orderId:'order_id',
-  customAttributeKey:'custom_attribute_key',
-  version:1,
-  withDefinition:true
-});
+client.orders.custom_attributes.get(
+  order_id: 'order_id',
+  custom_attribute_key: 'custom_attribute_key',
+  version: 1,
+  with_definition: true
+);
 ```
 </dd>
 </dl>
@@ -25105,7 +27689,7 @@ client.orders.custom_attributes.get({
 <dl>
 <dd>
 
-**orderId:** `String` — The ID of the target [order](entity:Order).
+**order_id:** `String` — The ID of the target [order](entity:Order).
     
 </dd>
 </dl>
@@ -25113,7 +27697,7 @@ client.orders.custom_attributes.get({
 <dl>
 <dd>
 
-**customAttributeKey:** `String` 
+**custom_attribute_key:** `String` 
 
 The key of the custom attribute to retrieve.  This key must match the key of an
 existing custom attribute definition.
@@ -25135,11 +27719,19 @@ control, include this optional field and specify the current version of the cust
 <dl>
 <dd>
 
-**withDefinition:** `Internal::Types::Boolean` 
+**with_definition:** `Internal::Types::Boolean` 
 
 Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each 
 custom attribute. Set this parameter to `true` to get the name and description of each custom attribute, 
 information about the data type, or other definition details. The default value is `false`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::CustomAttributes::RequestOptions` 
     
 </dd>
 </dl>
@@ -25151,7 +27743,7 @@ information about the data type, or other definition details. The default value 
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributes.Upsert(OrderId, CustomAttributeKey, request) -> Square::Types::UpsertOrderCustomAttributeResponse</code></summary>
+<details><summary><code>client.orders.custom_attributes.<a href="/lib/square/orders/custom_attributes/client.rb">upsert</a>(order_id, custom_attribute_key, request) -> Square::Types::UpsertOrderCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -25186,14 +27778,14 @@ must be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attribut
 <dd>
 
 ```ruby
-client.orders.custom_attributes.upsert({
-  orderId:'order_id',
-  customAttributeKey:'custom_attribute_key',
-  customAttribute:{
-    key:'table-number',
-    version:1
+client.orders.custom_attributes.upsert(
+  order_id: 'order_id',
+  custom_attribute_key: 'custom_attribute_key',
+  custom_attribute: {
+    key: 'table-number',
+    version: 1
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -25208,7 +27800,7 @@ client.orders.custom_attributes.upsert({
 <dl>
 <dd>
 
-**orderId:** `String` — The ID of the target [order](entity:Order).
+**order_id:** `String` — The ID of the target [order](entity:Order).
     
 </dd>
 </dl>
@@ -25216,7 +27808,7 @@ client.orders.custom_attributes.upsert({
 <dl>
 <dd>
 
-**customAttributeKey:** `String` 
+**custom_attribute_key:** `String` 
 
 The key of the custom attribute to create or update.  This key must match the key 
 of an existing custom attribute definition.
@@ -25227,7 +27819,7 @@ of an existing custom attribute definition.
 <dl>
 <dd>
 
-**customAttribute:** `Square::Types::CustomAttribute` 
+**custom_attribute:** `Square::Types::CustomAttribute` 
 
 The custom attribute to create or update, with the following fields:
 
@@ -25243,10 +27835,18 @@ control, include this optional field and specify the current version of the cust
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique identifier for this request, used to ensure idempotency. 
 For more information, see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::CustomAttributes::RequestOptions` 
     
 </dd>
 </dl>
@@ -25258,7 +27858,7 @@ For more information, see [Idempotency](https://developer.squareup.com/docs/buil
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributes.Delete(OrderId, CustomAttributeKey) -> Square::Types::DeleteOrderCustomAttributeResponse</code></summary>
+<details><summary><code>client.orders.custom_attributes.<a href="/lib/square/orders/custom_attributes/client.rb">delete</a>(order_id, custom_attribute_key) -> Square::Types::DeleteOrderCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -25289,10 +27889,10 @@ To delete a custom attribute owned by another application, the `visibility` sett
 <dd>
 
 ```ruby
-client.orders.custom_attributes.delete({
-  orderId:'order_id',
-  customAttributeKey:'custom_attribute_key'
-});
+client.orders.custom_attributes.delete(
+  order_id: 'order_id',
+  custom_attribute_key: 'custom_attribute_key'
+);
 ```
 </dd>
 </dl>
@@ -25307,7 +27907,7 @@ client.orders.custom_attributes.delete({
 <dl>
 <dd>
 
-**orderId:** `String` — The ID of the target [order](entity:Order).
+**order_id:** `String` — The ID of the target [order](entity:Order).
     
 </dd>
 </dl>
@@ -25315,10 +27915,18 @@ client.orders.custom_attributes.delete({
 <dl>
 <dd>
 
-**customAttributeKey:** `String` 
+**custom_attribute_key:** `String` 
 
 The key of the custom attribute to delete.  This key must match the key of an
 existing custom attribute definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Orders::CustomAttributes::RequestOptions` 
     
 </dd>
 </dl>
@@ -25331,7 +27939,7 @@ existing custom attribute definition.
 </details>
 
 ## TeamMembers WageSetting
-<details><summary><code>client.TeamMembers.WageSetting.Get(TeamMemberId) -> Square::Types::GetWageSettingResponse</code></summary>
+<details><summary><code>client.team_members.wage_setting.<a href="/lib/square/team_members/wage_setting/client.rb">get</a>(team_member_id) -> Square::Types::GetWageSettingResponse</code></summary>
 <dl>
 <dd>
 
@@ -25363,9 +27971,7 @@ to get this information directly from the `TeamMember.wage_setting` field.
 <dd>
 
 ```ruby
-client.team_members.wage_setting.get({
-  teamMemberId:'team_member_id'
-});
+client.team_members.wage_setting.get(team_member_id: 'team_member_id');
 ```
 </dd>
 </dl>
@@ -25380,7 +27986,15 @@ client.team_members.wage_setting.get({
 <dl>
 <dd>
 
-**teamMemberId:** `String` — The ID of the team member for which to retrieve the wage setting.
+**team_member_id:** `String` — The ID of the team member for which to retrieve the wage setting.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::TeamMembers::WageSetting::RequestOptions` 
     
 </dd>
 </dl>
@@ -25392,7 +28006,7 @@ client.team_members.wage_setting.get({
 </dl>
 </details>
 
-<details><summary><code>client.TeamMembers.WageSetting.Update(TeamMemberId, request) -> Square::Types::UpdateWageSettingResponse</code></summary>
+<details><summary><code>client.team_members.wage_setting.<a href="/lib/square/team_members/wage_setting/client.rb">update</a>(team_member_id, request) -> Square::Types::UpdateWageSettingResponse</code></summary>
 <dl>
 <dd>
 
@@ -25426,24 +28040,28 @@ to manage the `TeamMember.wage_setting` field directly.
 <dd>
 
 ```ruby
-client.team_members.wage_setting.update({
-  teamMemberId:'team_member_id',
-  wageSetting:{
-    job_assignments:[{
-      job_title:'Manager',
-      annual_rate:{
-        amount:3000000
+client.team_members.wage_setting.update(
+  team_member_id: 'team_member_id',
+  wage_setting: {
+    job_assignments: [{
+      job_title: 'Manager',
+      pay_type: 'SALARY',
+      annual_rate: {
+        amount: 3000000,
+        currency: 'USD'
       },
-      weekly_hours:40
+      weekly_hours: 40
     }, {
-      job_title:'Cashier',
-      hourly_rate:{
-        amount:2000
+      job_title: 'Cashier',
+      pay_type: 'HOURLY',
+      hourly_rate: {
+        amount: 2000,
+        currency: 'USD'
       }
     }],
-    is_overtime_exempt:true
+    is_overtime_exempt: true
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -25458,7 +28076,7 @@ client.team_members.wage_setting.update({
 <dl>
 <dd>
 
-**teamMemberId:** `String` — The ID of the team member for which to update the `WageSetting` object.
+**team_member_id:** `String` — The ID of the team member for which to update the `WageSetting` object.
     
 </dd>
 </dl>
@@ -25466,13 +28084,21 @@ client.team_members.wage_setting.update({
 <dl>
 <dd>
 
-**wageSetting:** `Square::Types::WageSetting` 
+**wage_setting:** `Square::Types::WageSetting` 
 
 The complete `WageSetting` object. For all job assignments, specify one of the following:
 - `job_id` (recommended) - If needed, call [ListJobs](api-endpoint:Team-ListJobs) to get a list of all jobs.
 Requires Square API version 2024-12-18 or later.
 - `job_title` - Use the exact, case-sensitive spelling of an existing title unless you want to create a new job.
 This value is ignored if `job_id` is also provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::TeamMembers::WageSetting::RequestOptions` 
     
 </dd>
 </dl>
@@ -25485,7 +28111,7 @@ This value is ignored if `job_id` is also provided.
 </details>
 
 ## Terminal Actions
-<details><summary><code>client.Terminal.Actions.Create(request) -> Square::Types::CreateTerminalActionResponse</code></summary>
+<details><summary><code>client.terminal.actions.<a href="/lib/square/terminal/actions/client.rb">create</a>(request) -> Square::Types::CreateTerminalActionResponse</code></summary>
 <dl>
 <dd>
 
@@ -25512,17 +28138,18 @@ Creates a Terminal action request and sends it to the specified device.
 <dd>
 
 ```ruby
-client.terminal.actions.create({
-  idempotencyKey:'thahn-70e75c10-47f7-4ab6-88cc-aaa4076d065e',
-  action:{
-    device_id:'{{DEVICE_ID}}',
-    deadline_duration:'PT5M',
-    save_card_options:{
-      customer_id:'{{CUSTOMER_ID}}',
-      reference_id:'user-id-1'
+client.terminal.actions.create(
+  idempotency_key: 'thahn-70e75c10-47f7-4ab6-88cc-aaa4076d065e',
+  action: {
+    device_id: '{{DEVICE_ID}}',
+    deadline_duration: 'PT5M',
+    type: 'SAVE_CARD',
+    save_card_options: {
+      customer_id: '{{CUSTOMER_ID}}',
+      reference_id: 'user-id-1'
     }
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -25537,7 +28164,7 @@ client.terminal.actions.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this `CreateAction` request. Keys can be any valid string
 but must be unique for every `CreateAction` request.
@@ -25555,6 +28182,14 @@ information.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Terminal::Actions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -25563,7 +28198,7 @@ information.
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Actions.Search(request) -> Square::Types::SearchTerminalActionsResponse</code></summary>
+<details><summary><code>client.terminal.actions.<a href="/lib/square/terminal/actions/client.rb">search</a>(request) -> Square::Types::SearchTerminalActionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -25590,17 +28225,19 @@ Retrieves a filtered list of Terminal action requests created by the account mak
 <dd>
 
 ```ruby
-client.terminal.actions.search({
-  query:{
-    filter:{
-      created_at:{
-        start_at:'2022-04-01T00:00:00.000Z'
+client.terminal.actions.search(
+  query: {
+    filter: {
+      created_at: {
+        start_at: '2022-04-01T00:00:00.000Z'
       }
     },
-    sort:{}
+    sort: {
+      sort_order: 'DESC'
+    }
   },
-  limit:2
-});
+  limit: 2
+);
 ```
 </dd>
 </dl>
@@ -25643,6 +28280,14 @@ information.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Terminal::Actions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -25651,7 +28296,7 @@ information.
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Actions.Get(ActionId) -> Square::Types::GetTerminalActionResponse</code></summary>
+<details><summary><code>client.terminal.actions.<a href="/lib/square/terminal/actions/client.rb">get</a>(action_id) -> Square::Types::GetTerminalActionResponse</code></summary>
 <dl>
 <dd>
 
@@ -25678,9 +28323,7 @@ Retrieves a Terminal action request by `action_id`. Terminal action requests are
 <dd>
 
 ```ruby
-client.terminal.actions.get({
-  actionId:'action_id'
-});
+client.terminal.actions.get(action_id: 'action_id');
 ```
 </dd>
 </dl>
@@ -25695,7 +28338,15 @@ client.terminal.actions.get({
 <dl>
 <dd>
 
-**actionId:** `String` — Unique ID for the desired `TerminalAction`.
+**action_id:** `String` — Unique ID for the desired `TerminalAction`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Terminal::Actions::RequestOptions` 
     
 </dd>
 </dl>
@@ -25707,7 +28358,7 @@ client.terminal.actions.get({
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Actions.Cancel(ActionId) -> Square::Types::CancelTerminalActionResponse</code></summary>
+<details><summary><code>client.terminal.actions.<a href="/lib/square/terminal/actions/client.rb">cancel</a>(action_id) -> Square::Types::CancelTerminalActionResponse</code></summary>
 <dl>
 <dd>
 
@@ -25734,9 +28385,7 @@ Cancels a Terminal action request if the status of the request permits it.
 <dd>
 
 ```ruby
-client.terminal.actions.cancel({
-  actionId:'action_id'
-});
+client.terminal.actions.cancel(action_id: 'action_id');
 ```
 </dd>
 </dl>
@@ -25751,7 +28400,15 @@ client.terminal.actions.cancel({
 <dl>
 <dd>
 
-**actionId:** `String` — Unique ID for the desired `TerminalAction`.
+**action_id:** `String` — Unique ID for the desired `TerminalAction`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Terminal::Actions::RequestOptions` 
     
 </dd>
 </dl>
@@ -25764,7 +28421,7 @@ client.terminal.actions.cancel({
 </details>
 
 ## Terminal Checkouts
-<details><summary><code>client.Terminal.Checkouts.Create(request) -> Square::Types::CreateTerminalCheckoutResponse</code></summary>
+<details><summary><code>client.terminal.checkouts.<a href="/lib/square/terminal/checkouts/client.rb">create</a>(request) -> Square::Types::CreateTerminalCheckoutResponse</code></summary>
 <dl>
 <dd>
 
@@ -25792,19 +28449,20 @@ for the requested amount.
 <dd>
 
 ```ruby
-client.terminal.checkouts.create({
-  idempotencyKey:'28a0c3bc-7839-11ea-bc55-0242ac130003',
-  checkout:{
-    amount_money:{
-      amount:2610
+client.terminal.checkouts.create(
+  idempotency_key: '28a0c3bc-7839-11ea-bc55-0242ac130003',
+  checkout: {
+    amount_money: {
+      amount: 2610,
+      currency: 'USD'
     },
-    reference_id:'id11572',
-    note:'A brief note',
-    device_options:{
-      device_id:'dbb5d83a-7838-11ea-bc55-0242ac130003'
+    reference_id: 'id11572',
+    note: 'A brief note',
+    device_options: {
+      device_id: 'dbb5d83a-7838-11ea-bc55-0242ac130003'
     }
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -25819,7 +28477,7 @@ client.terminal.checkouts.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this `CreateCheckout` request. Keys can be any valid string but
 must be unique for every `CreateCheckout` request.
@@ -25836,6 +28494,14 @@ See [Idempotency keys](https://developer.squareup.com/docs/build-basics/common-a
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Terminal::Checkouts::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -25844,7 +28510,7 @@ See [Idempotency keys](https://developer.squareup.com/docs/build-basics/common-a
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Checkouts.Search(request) -> Square::Types::SearchTerminalCheckoutsResponse</code></summary>
+<details><summary><code>client.terminal.checkouts.<a href="/lib/square/terminal/checkouts/client.rb">search</a>(request) -> Square::Types::SearchTerminalCheckoutsResponse</code></summary>
 <dl>
 <dd>
 
@@ -25871,14 +28537,14 @@ Returns a filtered list of Terminal checkout requests created by the application
 <dd>
 
 ```ruby
-client.terminal.checkouts.search({
-  query:{
-    filter:{
-      status:'COMPLETED'
+client.terminal.checkouts.search(
+  query: {
+    filter: {
+      status: 'COMPLETED'
     }
   },
-  limit:2
-});
+  limit: 2
+);
 ```
 </dd>
 </dl>
@@ -25920,6 +28586,14 @@ See [Pagination](https://developer.squareup.com/docs/build-basics/common-api-pat
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Terminal::Checkouts::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -25928,7 +28602,7 @@ See [Pagination](https://developer.squareup.com/docs/build-basics/common-api-pat
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Checkouts.Get(CheckoutId) -> Square::Types::GetTerminalCheckoutResponse</code></summary>
+<details><summary><code>client.terminal.checkouts.<a href="/lib/square/terminal/checkouts/client.rb">get</a>(checkout_id) -> Square::Types::GetTerminalCheckoutResponse</code></summary>
 <dl>
 <dd>
 
@@ -25955,9 +28629,7 @@ Retrieves a Terminal checkout request by `checkout_id`. Terminal checkout reques
 <dd>
 
 ```ruby
-client.terminal.checkouts.get({
-  checkoutId:'checkout_id'
-});
+client.terminal.checkouts.get(checkout_id: 'checkout_id');
 ```
 </dd>
 </dl>
@@ -25972,7 +28644,15 @@ client.terminal.checkouts.get({
 <dl>
 <dd>
 
-**checkoutId:** `String` — The unique ID for the desired `TerminalCheckout`.
+**checkout_id:** `String` — The unique ID for the desired `TerminalCheckout`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Terminal::Checkouts::RequestOptions` 
     
 </dd>
 </dl>
@@ -25984,7 +28664,7 @@ client.terminal.checkouts.get({
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Checkouts.Cancel(CheckoutId) -> Square::Types::CancelTerminalCheckoutResponse</code></summary>
+<details><summary><code>client.terminal.checkouts.<a href="/lib/square/terminal/checkouts/client.rb">cancel</a>(checkout_id) -> Square::Types::CancelTerminalCheckoutResponse</code></summary>
 <dl>
 <dd>
 
@@ -26011,9 +28691,7 @@ Cancels a Terminal checkout request if the status of the request permits it.
 <dd>
 
 ```ruby
-client.terminal.checkouts.cancel({
-  checkoutId:'checkout_id'
-});
+client.terminal.checkouts.cancel(checkout_id: 'checkout_id');
 ```
 </dd>
 </dl>
@@ -26028,7 +28706,15 @@ client.terminal.checkouts.cancel({
 <dl>
 <dd>
 
-**checkoutId:** `String` — The unique ID for the desired `TerminalCheckout`.
+**checkout_id:** `String` — The unique ID for the desired `TerminalCheckout`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Terminal::Checkouts::RequestOptions` 
     
 </dd>
 </dl>
@@ -26041,7 +28727,7 @@ client.terminal.checkouts.cancel({
 </details>
 
 ## Terminal Refunds
-<details><summary><code>client.Terminal.Refunds.Create(request) -> Square::Types::CreateTerminalRefundResponse</code></summary>
+<details><summary><code>client.terminal.refunds.<a href="/lib/square/terminal/refunds/client.rb">create</a>(request) -> Square::Types::CreateTerminalRefundResponse</code></summary>
 <dl>
 <dd>
 
@@ -26068,17 +28754,18 @@ Creates a request to refund an Interac payment completed on a Square Terminal. R
 <dd>
 
 ```ruby
-client.terminal.refunds.create({
-  idempotencyKey:'402a640b-b26f-401f-b406-46f839590c04',
-  refund:{
-    payment_id:'5O5OvgkcNUhl7JBuINflcjKqUzXZY',
-    amount_money:{
-      amount:111
+client.terminal.refunds.create(
+  idempotency_key: '402a640b-b26f-401f-b406-46f839590c04',
+  refund: {
+    payment_id: '5O5OvgkcNUhl7JBuINflcjKqUzXZY',
+    amount_money: {
+      amount: 111,
+      currency: 'CAD'
     },
-    reason:'Returning items',
-    device_id:'f72dfb8e-4d65-4e56-aade-ec3fb8d33291'
+    reason: 'Returning items',
+    device_id: 'f72dfb8e-4d65-4e56-aade-ec3fb8d33291'
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -26093,7 +28780,7 @@ client.terminal.refunds.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` 
+**idempotency_key:** `String` 
 
 A unique string that identifies this `CreateRefund` request. Keys can be any valid string but
 must be unique for every `CreateRefund` request.
@@ -26110,6 +28797,14 @@ See [Idempotency keys](https://developer.squareup.com/docs/build-basics/common-a
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Terminal::Refunds::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -26118,7 +28813,7 @@ See [Idempotency keys](https://developer.squareup.com/docs/build-basics/common-a
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Refunds.Search(request) -> Square::Types::SearchTerminalRefundsResponse</code></summary>
+<details><summary><code>client.terminal.refunds.<a href="/lib/square/terminal/refunds/client.rb">search</a>(request) -> Square::Types::SearchTerminalRefundsResponse</code></summary>
 <dl>
 <dd>
 
@@ -26145,14 +28840,14 @@ Retrieves a filtered list of Interac Terminal refund requests created by the sel
 <dd>
 
 ```ruby
-client.terminal.refunds.search({
-  query:{
-    filter:{
-      status:'COMPLETED'
+client.terminal.refunds.search(
+  query: {
+    filter: {
+      status: 'COMPLETED'
     }
   },
-  limit:1
-});
+  limit: 1
+);
 ```
 </dd>
 </dl>
@@ -26194,6 +28889,14 @@ Provide this cursor to retrieve the next set of results for the original query.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Terminal::Refunds::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -26202,7 +28905,7 @@ Provide this cursor to retrieve the next set of results for the original query.
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Refunds.Get(TerminalRefundId) -> Square::Types::GetTerminalRefundResponse</code></summary>
+<details><summary><code>client.terminal.refunds.<a href="/lib/square/terminal/refunds/client.rb">get</a>(terminal_refund_id) -> Square::Types::GetTerminalRefundResponse</code></summary>
 <dl>
 <dd>
 
@@ -26229,9 +28932,7 @@ Retrieves an Interac Terminal refund object by ID. Terminal refund objects are a
 <dd>
 
 ```ruby
-client.terminal.refunds.get({
-  terminalRefundId:'terminal_refund_id'
-});
+client.terminal.refunds.get(terminal_refund_id: 'terminal_refund_id');
 ```
 </dd>
 </dl>
@@ -26246,7 +28947,15 @@ client.terminal.refunds.get({
 <dl>
 <dd>
 
-**terminalRefundId:** `String` — The unique ID for the desired `TerminalRefund`.
+**terminal_refund_id:** `String` — The unique ID for the desired `TerminalRefund`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Terminal::Refunds::RequestOptions` 
     
 </dd>
 </dl>
@@ -26258,7 +28967,7 @@ client.terminal.refunds.get({
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Refunds.Cancel(TerminalRefundId) -> Square::Types::CancelTerminalRefundResponse</code></summary>
+<details><summary><code>client.terminal.refunds.<a href="/lib/square/terminal/refunds/client.rb">cancel</a>(terminal_refund_id) -> Square::Types::CancelTerminalRefundResponse</code></summary>
 <dl>
 <dd>
 
@@ -26285,9 +28994,7 @@ Cancels an Interac Terminal refund request by refund request ID if the status of
 <dd>
 
 ```ruby
-client.terminal.refunds.cancel({
-  terminalRefundId:'terminal_refund_id'
-});
+client.terminal.refunds.cancel(terminal_refund_id: 'terminal_refund_id');
 ```
 </dd>
 </dl>
@@ -26302,7 +29009,15 @@ client.terminal.refunds.cancel({
 <dl>
 <dd>
 
-**terminalRefundId:** `String` — The unique ID for the desired `TerminalRefund`.
+**terminal_refund_id:** `String` — The unique ID for the desired `TerminalRefund`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Terminal::Refunds::RequestOptions` 
     
 </dd>
 </dl>
@@ -26315,7 +29030,7 @@ client.terminal.refunds.cancel({
 </details>
 
 ## Webhooks EventTypes
-<details><summary><code>client.Webhooks.EventTypes.List() -> Square::Types::ListWebhookEventTypesResponse</code></summary>
+<details><summary><code>client.webhooks.event_types.<a href="/lib/square/webhooks/event_types/client.rb">list</a>() -> Square::Types::ListWebhookEventTypesResponse</code></summary>
 <dl>
 <dd>
 
@@ -26342,9 +29057,7 @@ Lists all webhook event types that can be subscribed to.
 <dd>
 
 ```ruby
-client.webhooks.event_types.list({
-  apiVersion:'api_version'
-});
+client.webhooks.event_types.list(api_version: 'api_version');
 ```
 </dd>
 </dl>
@@ -26359,7 +29072,15 @@ client.webhooks.event_types.list({
 <dl>
 <dd>
 
-**apiVersion:** `String` — The API version for which to list event types. Setting this field overrides the default version used by the application.
+**api_version:** `String` — The API version for which to list event types. Setting this field overrides the default version used by the application.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Webhooks::EventTypes::RequestOptions` 
     
 </dd>
 </dl>
@@ -26372,7 +29093,7 @@ client.webhooks.event_types.list({
 </details>
 
 ## Webhooks Subscriptions
-<details><summary><code>client.Webhooks.Subscriptions.List() -> Square::Types::ListWebhookSubscriptionsResponse</code></summary>
+<details><summary><code>client.webhooks.subscriptions.<a href="/lib/square/webhooks/subscriptions/client.rb">list</a>() -> Square::Types::ListWebhookSubscriptionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -26399,11 +29120,12 @@ Lists all webhook subscriptions owned by your application.
 <dd>
 
 ```ruby
-client.webhooks.subscriptions.list({
-  cursor:'cursor',
-  includeDisabled:true,
-  limit:1
-});
+client.webhooks.subscriptions.list(
+  cursor: 'cursor',
+  include_disabled: true,
+  sort_order: 'DESC',
+  limit: 1
+);
 ```
 </dd>
 </dl>
@@ -26431,7 +29153,7 @@ For more information, see [Pagination](https://developer.squareup.com/docs/build
 <dl>
 <dd>
 
-**includeDisabled:** `Internal::Types::Boolean` 
+**include_disabled:** `Internal::Types::Boolean` 
 
 Includes disabled [Subscription](entity:WebhookSubscription)s.
 By default, all enabled [Subscription](entity:WebhookSubscription)s are returned.
@@ -26442,7 +29164,7 @@ By default, all enabled [Subscription](entity:WebhookSubscription)s are returned
 <dl>
 <dd>
 
-**sortOrder:** `Square::Types::SortOrder` 
+**sort_order:** `Square::Types::SortOrder` 
 
 Sorts the returned list by when the [Subscription](entity:WebhookSubscription) was created with the specified order.
 This field defaults to ASC.
@@ -26463,6 +29185,14 @@ Default: 100
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Webhooks::Subscriptions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -26471,7 +29201,7 @@ Default: 100
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.Subscriptions.Create(request) -> Square::Types::CreateWebhookSubscriptionResponse</code></summary>
+<details><summary><code>client.webhooks.subscriptions.<a href="/lib/square/webhooks/subscriptions/client.rb">create</a>(request) -> Square::Types::CreateWebhookSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -26498,15 +29228,15 @@ Creates a webhook subscription.
 <dd>
 
 ```ruby
-client.webhooks.subscriptions.create({
-  idempotencyKey:'63f84c6c-2200-4c99-846c-2670a1311fbf',
-  subscription:{
-    name:'Example Webhook Subscription',
-    event_types:['payment.created', 'payment.updated'],
-    notification_url:'https://example-webhook-url.com',
-    api_version:'2021-12-15'
+client.webhooks.subscriptions.create(
+  idempotency_key: '63f84c6c-2200-4c99-846c-2670a1311fbf',
+  subscription: {
+    name: 'Example Webhook Subscription',
+    event_types: ['payment.created', 'payment.updated'],
+    notification_url: 'https://example-webhook-url.com',
+    api_version: '2021-12-15'
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -26521,7 +29251,7 @@ client.webhooks.subscriptions.create({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` — A unique string that identifies the [CreateWebhookSubscription](api-endpoint:WebhookSubscriptions-CreateWebhookSubscription) request.
+**idempotency_key:** `String` — A unique string that identifies the [CreateWebhookSubscription](api-endpoint:WebhookSubscriptions-CreateWebhookSubscription) request.
     
 </dd>
 </dl>
@@ -26533,6 +29263,14 @@ client.webhooks.subscriptions.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Webhooks::Subscriptions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -26541,7 +29279,7 @@ client.webhooks.subscriptions.create({
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.Subscriptions.Get(SubscriptionId) -> Square::Types::GetWebhookSubscriptionResponse</code></summary>
+<details><summary><code>client.webhooks.subscriptions.<a href="/lib/square/webhooks/subscriptions/client.rb">get</a>(subscription_id) -> Square::Types::GetWebhookSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -26568,9 +29306,7 @@ Retrieves a webhook subscription identified by its ID.
 <dd>
 
 ```ruby
-client.webhooks.subscriptions.get({
-  subscriptionId:'subscription_id'
-});
+client.webhooks.subscriptions.get(subscription_id: 'subscription_id');
 ```
 </dd>
 </dl>
@@ -26585,7 +29321,15 @@ client.webhooks.subscriptions.get({
 <dl>
 <dd>
 
-**subscriptionId:** `String` — [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to retrieve.
+**subscription_id:** `String` — [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Webhooks::Subscriptions::RequestOptions` 
     
 </dd>
 </dl>
@@ -26597,7 +29341,7 @@ client.webhooks.subscriptions.get({
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.Subscriptions.Update(SubscriptionId, request) -> Square::Types::UpdateWebhookSubscriptionResponse</code></summary>
+<details><summary><code>client.webhooks.subscriptions.<a href="/lib/square/webhooks/subscriptions/client.rb">update</a>(subscription_id, request) -> Square::Types::UpdateWebhookSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -26624,13 +29368,13 @@ Updates a webhook subscription.
 <dd>
 
 ```ruby
-client.webhooks.subscriptions.update({
-  subscriptionId:'subscription_id',
-  subscription:{
-    name:'Updated Example Webhook Subscription',
-    enabled:false
+client.webhooks.subscriptions.update(
+  subscription_id: 'subscription_id',
+  subscription: {
+    name: 'Updated Example Webhook Subscription',
+    enabled: false
   }
-});
+);
 ```
 </dd>
 </dl>
@@ -26645,7 +29389,7 @@ client.webhooks.subscriptions.update({
 <dl>
 <dd>
 
-**subscriptionId:** `String` — [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to update.
+**subscription_id:** `String` — [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to update.
     
 </dd>
 </dl>
@@ -26657,6 +29401,14 @@ client.webhooks.subscriptions.update({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Webhooks::Subscriptions::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -26665,7 +29417,7 @@ client.webhooks.subscriptions.update({
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.Subscriptions.Delete(SubscriptionId) -> Square::Types::DeleteWebhookSubscriptionResponse</code></summary>
+<details><summary><code>client.webhooks.subscriptions.<a href="/lib/square/webhooks/subscriptions/client.rb">delete</a>(subscription_id) -> Square::Types::DeleteWebhookSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -26692,9 +29444,7 @@ Deletes a webhook subscription.
 <dd>
 
 ```ruby
-client.webhooks.subscriptions.delete({
-  subscriptionId:'subscription_id'
-});
+client.webhooks.subscriptions.delete(subscription_id: 'subscription_id');
 ```
 </dd>
 </dl>
@@ -26709,7 +29459,15 @@ client.webhooks.subscriptions.delete({
 <dl>
 <dd>
 
-**subscriptionId:** `String` — [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to delete.
+**subscription_id:** `String` — [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to delete.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Webhooks::Subscriptions::RequestOptions` 
     
 </dd>
 </dl>
@@ -26721,7 +29479,7 @@ client.webhooks.subscriptions.delete({
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.Subscriptions.UpdateSignatureKey(SubscriptionId, request) -> Square::Types::UpdateWebhookSubscriptionSignatureKeyResponse</code></summary>
+<details><summary><code>client.webhooks.subscriptions.<a href="/lib/square/webhooks/subscriptions/client.rb">update_signature_key</a>(subscription_id, request) -> Square::Types::UpdateWebhookSubscriptionSignatureKeyResponse</code></summary>
 <dl>
 <dd>
 
@@ -26748,10 +29506,10 @@ Updates a webhook subscription by replacing the existing signature key with a ne
 <dd>
 
 ```ruby
-client.webhooks.subscriptions.update_signature_key({
-  subscriptionId:'subscription_id',
-  idempotencyKey:'ed80ae6b-0654-473b-bbab-a39aee89a60d'
-});
+client.webhooks.subscriptions.update_signature_key(
+  subscription_id: 'subscription_id',
+  idempotency_key: 'ed80ae6b-0654-473b-bbab-a39aee89a60d'
+);
 ```
 </dd>
 </dl>
@@ -26766,7 +29524,7 @@ client.webhooks.subscriptions.update_signature_key({
 <dl>
 <dd>
 
-**subscriptionId:** `String` — [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to update.
+**subscription_id:** `String` — [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to update.
     
 </dd>
 </dl>
@@ -26774,7 +29532,15 @@ client.webhooks.subscriptions.update_signature_key({
 <dl>
 <dd>
 
-**idempotencyKey:** `String` — A unique string that identifies the [UpdateWebhookSubscriptionSignatureKey](api-endpoint:WebhookSubscriptions-UpdateWebhookSubscriptionSignatureKey) request.
+**idempotency_key:** `String` — A unique string that identifies the [UpdateWebhookSubscriptionSignatureKey](api-endpoint:WebhookSubscriptions-UpdateWebhookSubscriptionSignatureKey) request.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Webhooks::Subscriptions::RequestOptions` 
     
 </dd>
 </dl>
@@ -26786,7 +29552,7 @@ client.webhooks.subscriptions.update_signature_key({
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.Subscriptions.Test(SubscriptionId, request) -> Square::Types::TestWebhookSubscriptionResponse</code></summary>
+<details><summary><code>client.webhooks.subscriptions.<a href="/lib/square/webhooks/subscriptions/client.rb">test</a>(subscription_id, request) -> Square::Types::TestWebhookSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -26813,10 +29579,10 @@ Tests a webhook subscription by sending a test event to the notification URL.
 <dd>
 
 ```ruby
-client.webhooks.subscriptions.test({
-  subscriptionId:'subscription_id',
-  eventType:'payment.created'
-});
+client.webhooks.subscriptions.test(
+  subscription_id: 'subscription_id',
+  event_type: 'payment.created'
+);
 ```
 </dd>
 </dl>
@@ -26831,7 +29597,7 @@ client.webhooks.subscriptions.test({
 <dl>
 <dd>
 
-**subscriptionId:** `String` — [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to test.
+**subscription_id:** `String` — [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to test.
     
 </dd>
 </dl>
@@ -26839,10 +29605,18 @@ client.webhooks.subscriptions.test({
 <dl>
 <dd>
 
-**eventType:** `String` 
+**event_type:** `String` 
 
 The event type that will be used to test the [Subscription](entity:WebhookSubscription). The event type must be
 contained in the list of event types in the [Subscription](entity:WebhookSubscription).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Webhooks::Subscriptions::RequestOptions` 
     
 </dd>
 </dl>

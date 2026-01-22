@@ -12,24 +12,12 @@ module Square
       field :name, -> { String }, optional: false, nullable: false
       field :description, -> { String }, optional: true, nullable: false
       field :source_application, -> { Square::Types::SourceApplication }, optional: true, nullable: false
-      field :allowed_object_types, lambda {
-        Internal::Types::Array[Square::Types::CatalogObjectType]
-      }, optional: false, nullable: false
-      field :seller_visibility, lambda {
-        Square::Types::CatalogCustomAttributeDefinitionSellerVisibility
-      }, optional: true, nullable: false
-      field :app_visibility, lambda {
-        Square::Types::CatalogCustomAttributeDefinitionAppVisibility
-      }, optional: true, nullable: false
-      field :string_config, lambda {
-        Square::Types::CatalogCustomAttributeDefinitionStringConfig
-      }, optional: true, nullable: false
-      field :number_config, lambda {
-        Square::Types::CatalogCustomAttributeDefinitionNumberConfig
-      }, optional: true, nullable: false
-      field :selection_config, lambda {
-        Square::Types::CatalogCustomAttributeDefinitionSelectionConfig
-      }, optional: true, nullable: false
+      field :allowed_object_types, -> { Internal::Types::Array[Square::Types::CatalogObjectType] }, optional: false, nullable: false
+      field :seller_visibility, -> { Square::Types::CatalogCustomAttributeDefinitionSellerVisibility }, optional: true, nullable: false
+      field :app_visibility, -> { Square::Types::CatalogCustomAttributeDefinitionAppVisibility }, optional: true, nullable: false
+      field :string_config, -> { Square::Types::CatalogCustomAttributeDefinitionStringConfig }, optional: true, nullable: false
+      field :number_config, -> { Square::Types::CatalogCustomAttributeDefinitionNumberConfig }, optional: true, nullable: false
+      field :selection_config, -> { Square::Types::CatalogCustomAttributeDefinitionSelectionConfig }, optional: true, nullable: false
       field :custom_attribute_usage_count, -> { Integer }, optional: true, nullable: false
       field :key, -> { String }, optional: true, nullable: false
     end

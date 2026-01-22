@@ -4,67 +4,94 @@ module Square
   module Labor
     module TeamMemberWages
       class Client
-        # @return [Square::Labor::TeamMemberWages::Client]
+        # @param client [Square::Internal::Http::RawClient]
+        #
+        # @return [void]
         def initialize(client:)
           @client = client
         end
 
         # Returns a paginated list of `TeamMemberWage` instances for a business.
         #
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String, nil] :team_member_id
+        # @option params [Integer, nil] :limit
+        # @option params [String, nil] :cursor
+        #
         # @return [Square::Types::ListTeamMemberWagesResponse]
         def list(request_options: {}, **params)
           params = Square::Internal::Types::Utils.symbolize_keys(params)
-          _query_param_names = %i[team_member_id limit cursor]
-          _query = params.slice(*_query_param_names)
-          params.except(*_query_param_names)
+          query_param_names = %i[team_member_id limit cursor]
+          query_params = {}
+          query_params["team_member_id"] = params[:team_member_id] if params.key?(:team_member_id)
+          query_params["limit"] = params[:limit] if params.key?(:limit)
+          query_params["cursor"] = params[:cursor] if params.key?(:cursor)
+          params.except(*query_param_names)
 
           Square::Internal::CursorItemIterator.new(
             cursor_field: :cursor,
             item_field: :team_member_wages,
-            initial_cursor: _query[:cursor]
+            initial_cursor: query_params[:cursor]
           ) do |next_cursor|
-            _query[:cursor] = next_cursor
-            _request = Square::Internal::JSON::Request.new(
-              base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+            query_params[:cursor] = next_cursor
+            request = Square::Internal::JSON::Request.new(
+              base_url: request_options[:base_url],
               method: "GET",
               path: "v2/labor/team-member-wages",
-              query: _query
+              query: query_params,
+              request_options: request_options
             )
             begin
-              _response = @client.send(_request)
+              response = @client.send(request)
             rescue Net::HTTPRequestTimeout
               raise Square::Errors::TimeoutError
             end
-            code = _response.code.to_i
+            code = response.code.to_i
             if code.between?(200, 299)
-              Square::Types::ListTeamMemberWagesResponse.load(_response.body)
+              Square::Types::ListTeamMemberWagesResponse.load(response.body)
             else
               error_class = Square::Errors::ResponseError.subclass_for_code(code)
-              raise error_class.new(_response.body, code: code)
+              raise error_class.new(response.body, code: code)
             end
           end
         end
 
         # Returns a single `TeamMemberWage` specified by `id`.
         #
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String] :id
+        #
         # @return [Square::Types::GetTeamMemberWageResponse]
         def get(request_options: {}, **params)
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "GET",
-            path: "v2/labor/team-member-wages/#{params[:id]}"
+            path: "v2/labor/team-member-wages/#{params[:id]}",
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::GetTeamMemberWageResponse.load(_response.body)
+            Square::Types::GetTeamMemberWageResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
       end

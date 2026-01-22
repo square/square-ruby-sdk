@@ -9,9 +9,7 @@ module Square
       field :expected_at, -> { String }, optional: true, nullable: false
       field :notes, -> { String }, optional: true, nullable: false
       field :tracking_number, -> { String }, optional: true, nullable: false
-      field :line_items, lambda {
-        Internal::Types::Array[Square::Types::UpdateTransferOrderLineData]
-      }, optional: true, nullable: false
+      field :line_items, -> { Internal::Types::Array[Square::Types::UpdateTransferOrderLineData] }, optional: true, nullable: false
     end
   end
 end

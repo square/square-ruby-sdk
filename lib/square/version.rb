@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module Square
-  VERSION = "44.2.1.20251016"
+  VERSION = "45.0.0.20260122"
 end

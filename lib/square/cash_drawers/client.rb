@@ -3,7 +3,9 @@
 module Square
   module CashDrawers
     class Client
-      # @return [Square::CashDrawers::Client]
+      # @param client [Square::Internal::Http::RawClient]
+      #
+      # @return [void]
       def initialize(client:)
         @client = client
       end

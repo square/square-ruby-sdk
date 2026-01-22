@@ -5,9 +5,7 @@ module Square
     # Describes delivery details of an order fulfillment.
     class FulfillmentDeliveryDetails < Internal::Types::Model
       field :recipient, -> { Square::Types::FulfillmentRecipient }, optional: true, nullable: false
-      field :schedule_type, lambda {
-        Square::Types::FulfillmentDeliveryDetailsOrderFulfillmentDeliveryDetailsScheduleType
-      }, optional: true, nullable: false
+      field :schedule_type, -> { Square::Types::FulfillmentDeliveryDetailsOrderFulfillmentDeliveryDetailsScheduleType }, optional: true, nullable: false
       field :placed_at, -> { String }, optional: true, nullable: false
       field :deliver_at, -> { String }, optional: true, nullable: false
       field :prep_time_duration, -> { String }, optional: true, nullable: false

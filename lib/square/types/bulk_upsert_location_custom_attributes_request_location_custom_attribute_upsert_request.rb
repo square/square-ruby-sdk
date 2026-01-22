@@ -2,7 +2,8 @@
 
 module Square
   module Types
-    # Represents an individual upsert request in a [BulkUpsertLocationCustomAttributes](api-endpoint:LocationCustomAttributes-BulkUpsertLocationCustomAttributes)
+    # Represents an individual upsert request in a
+    # [BulkUpsertLocationCustomAttributes](api-endpoint:LocationCustomAttributes-BulkUpsertLocationCustomAttributes)
     # request. An individual request contains a location ID, the custom attribute to create or update,
     # and an optional idempotency key.
     class BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest < Internal::Types::Model

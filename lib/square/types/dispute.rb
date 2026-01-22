@@ -2,7 +2,8 @@
 
 module Square
   module Types
-    # Represents a [dispute](https://developer.squareup.com/docs/disputes-api/overview) a cardholder initiated with their bank.
+    # Represents a [dispute](https://developer.squareup.com/docs/disputes-api/overview) a cardholder initiated with
+    # their bank.
     class Dispute < Internal::Types::Model
       field :dispute_id, -> { String }, optional: true, nullable: false
       field :id, -> { String }, optional: true, nullable: false

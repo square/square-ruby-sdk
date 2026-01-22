@@ -13,9 +13,7 @@ module Square
       field :destination_details, -> { Square::Types::DestinationDetails }, optional: true, nullable: false
       field :amount_money, -> { Square::Types::Money }, optional: false, nullable: false
       field :app_fee_money, -> { Square::Types::Money }, optional: true, nullable: false
-      field :processing_fee, lambda {
-        Internal::Types::Array[Square::Types::ProcessingFee]
-      }, optional: true, nullable: false
+      field :processing_fee, -> { Internal::Types::Array[Square::Types::ProcessingFee] }, optional: true, nullable: false
       field :payment_id, -> { String }, optional: true, nullable: false
       field :order_id, -> { String }, optional: true, nullable: false
       field :reason, -> { String }, optional: true, nullable: false

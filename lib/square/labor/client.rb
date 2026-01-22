@@ -3,7 +3,9 @@
 module Square
   module Labor
     class Client
-      # @return [Square::Labor::Client]
+      # @param client [Square::Internal::Http::RawClient]
+      #
+      # @return [void]
       def initialize(client:)
         @client = client
       end
@@ -17,25 +19,37 @@ module Square
       # - `start_at`
       # - `end_at`
       #
+      # @param request_options [Hash]
+      # @param params [Square::Labor::Types::CreateScheduledShiftRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::CreateScheduledShiftResponse]
       def create_scheduled_shift(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[idempotency_key scheduled_shift]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/labor/scheduled-shifts",
-          body: params
+          body: Square::Labor::Types::CreateScheduledShiftRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreateScheduledShiftResponse.load(_response.body)
+          Square::Types::CreateScheduledShiftResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -46,73 +60,107 @@ module Square
       # The minimum `start_at` and maximum `end_at` timestamps of all shifts in a
       # `BulkPublishScheduledShifts` request must fall within a two-week period.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Labor::Types::BulkPublishScheduledShiftsRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::BulkPublishScheduledShiftsResponse]
       def bulk_publish_scheduled_shifts(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[scheduled_shifts scheduled_shift_notification_audience]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/labor/scheduled-shifts/bulk-publish",
-          body: params
+          body: Square::Labor::Types::BulkPublishScheduledShiftsRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BulkPublishScheduledShiftsResponse.load(_response.body)
+          Square::Types::BulkPublishScheduledShiftsResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Returns a paginated list of scheduled shifts, with optional filter and sort settings.
       # By default, results are sorted by `start_at` in ascending order.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Labor::Types::SearchScheduledShiftsRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::SearchScheduledShiftsResponse]
       def search_scheduled_shifts(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[query limit cursor]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/labor/scheduled-shifts/search",
-          body: params
+          body: Square::Labor::Types::SearchScheduledShiftsRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchScheduledShiftsResponse.load(_response.body)
+          Square::Types::SearchScheduledShiftsResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Retrieves a scheduled shift by ID.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :id
+      #
       # @return [Square::Types::RetrieveScheduledShiftResponse]
       def retrieve_scheduled_shift(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/labor/scheduled-shifts/#{params[:id]}"
+          path: "v2/labor/scheduled-shifts/#{params[:id]}",
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::RetrieveScheduledShiftResponse.load(_response.body)
+          Square::Types::RetrieveScheduledShiftResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -127,54 +175,80 @@ module Square
       # - Change the `is_deleted` field. To delete a scheduled shift, set `is_deleted` to true
       # and then publish the shift.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Labor::Types::UpdateScheduledShiftRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :id
+      #
       # @return [Square::Types::UpdateScheduledShiftResponse]
       def update_scheduled_shift(request_options: {}, **params)
-        _path_param_names = ["id"]
+        path_param_names = %i[id]
+        body_params = params.except(*path_param_names)
+        body_prop_names = %i[scheduled_shift]
+        body_bag = body_params.slice(*body_prop_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/labor/scheduled-shifts/#{params[:id]}",
-          body: params.except(*_path_param_names)
+          body: Square::Labor::Types::UpdateScheduledShiftRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdateScheduledShiftResponse.load(_response.body)
+          Square::Types::UpdateScheduledShiftResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Publishes a scheduled shift. When a scheduled shift is published, Square keeps the
       # `draft_shift_details` field as is and copies it to the `published_shift_details` field.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Labor::Types::PublishScheduledShiftRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :id
+      #
       # @return [Square::Types::PublishScheduledShiftResponse]
       def publish_scheduled_shift(request_options: {}, **params)
-        _path_param_names = ["id"]
+        path_param_names = %i[id]
+        body_params = params.except(*path_param_names)
+        body_prop_names = %i[idempotency_key version scheduled_shift_notification_audience]
+        body_bag = body_params.slice(*body_prop_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/labor/scheduled-shifts/#{params[:id]}/publish",
-          body: params.except(*_path_param_names)
+          body: Square::Labor::Types::PublishScheduledShiftRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::PublishScheduledShiftResponse.load(_response.body)
+          Square::Types::PublishScheduledShiftResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -197,25 +271,37 @@ module Square
       # is before the `Timecard.start_at`, a break `end_at` is after
       # the `Timecard.end_at`, or both.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Labor::Types::CreateTimecardRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::CreateTimecardResponse]
       def create_timecard(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[idempotency_key timecard]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/labor/timecards",
-          body: params
+          body: Square::Labor::Types::CreateTimecardRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreateTimecardResponse.load(_response.body)
+          Square::Types::CreateTimecardResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -234,48 +320,70 @@ module Square
       # - `CREATED_AT`
       # - `UPDATED_AT`
       #
+      # @param request_options [Hash]
+      # @param params [Square::Labor::Types::SearchTimecardsRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::SearchTimecardsResponse]
       def search_timecards(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[query limit cursor]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/labor/timecards/search",
-          body: params
+          body: Square::Labor::Types::SearchTimecardsRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchTimecardsResponse.load(_response.body)
+          Square::Types::SearchTimecardsResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Returns a single `Timecard` specified by `id`.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :id
+      #
       # @return [Square::Types::RetrieveTimecardResponse]
       def retrieve_timecard(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/labor/timecards/#{params[:id]}"
+          path: "v2/labor/timecards/#{params[:id]}",
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::RetrieveTimecardResponse.load(_response.body)
+          Square::Types::RetrieveTimecardResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -287,50 +395,73 @@ module Square
       # When closing a `Timecard`, all `Break` instances in the `Timecard` must be complete with `end_at`
       # set on each `Break`.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Labor::Types::UpdateTimecardRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :id
+      #
       # @return [Square::Types::UpdateTimecardResponse]
       def update_timecard(request_options: {}, **params)
-        _path_param_names = ["id"]
+        path_param_names = %i[id]
+        body_params = params.except(*path_param_names)
+        body_prop_names = %i[timecard]
+        body_bag = body_params.slice(*body_prop_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/labor/timecards/#{params[:id]}",
-          body: params.except(*_path_param_names)
+          body: Square::Labor::Types::UpdateTimecardRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdateTimecardResponse.load(_response.body)
+          Square::Types::UpdateTimecardResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Deletes a `Timecard`.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :id
+      #
       # @return [Square::Types::DeleteTimecardResponse]
       def delete_timecard(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "DELETE",
-          path: "v2/labor/timecards/#{params[:id]}"
+          path: "v2/labor/timecards/#{params[:id]}",
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::DeleteTimecardResponse.load(_response.body)
+          Square::Types::DeleteTimecardResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 

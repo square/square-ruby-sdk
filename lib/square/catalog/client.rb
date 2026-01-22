@@ -3,7 +3,9 @@
 module Square
   module Catalog
     class Client
-      # @return [Square::Catalog::Client]
+      # @param client [Square::Internal::Http::RawClient]
+      #
+      # @return [void]
       def initialize(client:)
         @client = client
       end
@@ -23,25 +25,37 @@ module Square
       # While one (batch or non-batch) delete request is being processed, other (batched and non-batched)
       # delete requests are rejected with the `429` error code.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Catalog::Types::BatchDeleteCatalogObjectsRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::BatchDeleteCatalogObjectsResponse]
       def batch_delete(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[object_ids]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/catalog/batch-delete",
-          body: params
+          body: Square::Catalog::Types::BatchDeleteCatalogObjectsRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BatchDeleteCatalogObjectsResponse.load(_response.body)
+          Square::Types::BatchDeleteCatalogObjectsResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -52,25 +66,37 @@ module Square
       # its [CatalogModifierList](entity:CatalogModifierList) objects, and the ids of
       # any [CatalogTax](entity:CatalogTax) objects that apply to it.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Catalog::Types::BatchGetCatalogObjectsRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::BatchGetCatalogObjectsResponse]
       def batch_get(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[object_ids include_related_objects catalog_version include_deleted_objects include_category_path_to_root]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/catalog/batch-retrieve",
-          body: params
+          body: Square::Catalog::Types::BatchGetCatalogObjectsRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BatchGetCatalogObjectsResponse.load(_response.body)
+          Square::Types::BatchGetCatalogObjectsResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -88,158 +114,228 @@ module Square
       # While one (batch or non-batch) update request is being processed, other (batched and non-batched)
       # update requests are rejected with the `429` error code.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Catalog::Types::BatchUpsertCatalogObjectsRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::BatchUpsertCatalogObjectsResponse]
       def batch_upsert(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[idempotency_key batches]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/catalog/batch-upsert",
-          body: params
+          body: Square::Catalog::Types::BatchUpsertCatalogObjectsRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BatchUpsertCatalogObjectsResponse.load(_response.body)
+          Square::Types::BatchUpsertCatalogObjectsResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Retrieves information about the Square Catalog API, such as batch size
       # limits that can be used by the `BatchUpsertCatalogObjects` endpoint.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::CatalogInfoResponse]
       def info(request_options: {}, **_params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/catalog/info"
+          path: "v2/catalog/info",
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CatalogInfoResponse.load(_response.body)
+          Square::Types::CatalogInfoResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Returns a list of all [CatalogObject](entity:CatalogObject)s of the specified types in the catalog.
       #
-      # The `types` parameter is specified as a comma-separated list of the [CatalogObjectType](entity:CatalogObjectType) values,
+      # The `types` parameter is specified as a comma-separated list of the
+      # [CatalogObjectType](entity:CatalogObjectType) values,
       # for example, "`ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`".
       #
       # __Important:__ ListCatalog does not return deleted catalog items. To retrieve
       # deleted catalog items, use [SearchCatalogObjects](api-endpoint:Catalog-SearchCatalogObjects)
       # and set the `include_deleted_objects` attribute value to `true`.
       #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String, nil] :cursor
+      # @option params [String, nil] :types
+      # @option params [Integer, nil] :catalog_version
+      #
       # @return [Square::Types::ListCatalogResponse]
       def list(request_options: {}, **params)
         params = Square::Internal::Types::Utils.symbolize_keys(params)
-        _query_param_names = %i[cursor types catalog_version]
-        _query = params.slice(*_query_param_names)
-        params.except(*_query_param_names)
+        query_param_names = %i[cursor types catalog_version]
+        query_params = {}
+        query_params["cursor"] = params[:cursor] if params.key?(:cursor)
+        query_params["types"] = params[:types] if params.key?(:types)
+        query_params["catalog_version"] = params[:catalog_version] if params.key?(:catalog_version)
+        params.except(*query_param_names)
 
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :objects,
-          initial_cursor: _query[:cursor]
+          initial_cursor: query_params[:cursor]
         ) do |next_cursor|
-          _query[:cursor] = next_cursor
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          query_params[:cursor] = next_cursor
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "GET",
             path: "v2/catalog/list",
-            query: _query
+            query: query_params,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::ListCatalogResponse.load(_response.body)
+            Square::Types::ListCatalogResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
       end
 
       # Searches for [CatalogObject](entity:CatalogObject) of any type by matching supported search attribute values,
-      # excluding custom attribute values on items or item variations, against one or more of the specified query filters.
+      # excluding custom attribute values on items or item variations, against one or more of the specified query
+      # filters.
       #
-      # This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](api-endpoint:Catalog-SearchCatalogItems)
+      # This (`SearchCatalogObjects`) endpoint differs from the
+      # [SearchCatalogItems](api-endpoint:Catalog-SearchCatalogItems)
       # endpoint in the following aspects:
       #
-      # - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
-      # - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
-      # - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+      # - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search
+      # for any type of catalog objects.
+      # - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that
+      # contain custom attribute values, where `SearchCatalogObjects` does not.
+      # - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item
+      # variations, whereas `SearchCatalogObjects` does.
       # - The both endpoints have different call conventions, including the query filter formats.
+      #
+      # @param request_options [Hash]
+      # @param params [Square::Catalog::Types::SearchCatalogObjectsRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
       #
       # @return [Square::Types::SearchCatalogObjectsResponse]
       def search(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[cursor object_types include_deleted_objects include_related_objects begin_time query limit include_category_path_to_root]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/catalog/search",
-          body: params
+          body: Square::Catalog::Types::SearchCatalogObjectsRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchCatalogObjectsResponse.load(_response.body)
+          Square::Types::SearchCatalogObjectsResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Searches for catalog items or item variations by matching supported search attribute values, including
       # custom attribute values, against one or more of the specified query filters.
       #
-      # This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](api-endpoint:Catalog-SearchCatalogObjects)
+      # This (`SearchCatalogItems`) endpoint differs from the
+      # [SearchCatalogObjects](api-endpoint:Catalog-SearchCatalogObjects)
       # endpoint in the following aspects:
       #
-      # - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
-      # - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
-      # - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+      # - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search
+      # for any type of catalog objects.
+      # - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that
+      # contain custom attribute values, where `SearchCatalogObjects` does not.
+      # - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item
+      # variations, whereas `SearchCatalogObjects` does.
       # - The both endpoints use different call conventions, including the query filter formats.
+      #
+      # @param request_options [Hash]
+      # @param params [Square::Catalog::Types::SearchCatalogItemsRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
       #
       # @return [Square::Types::SearchCatalogItemsResponse]
       def search_items(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[text_filter category_ids stock_levels enabled_location_ids cursor limit sort_order product_types custom_attribute_filters archived_state]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/catalog/search-catalog-items",
-          body: params
+          body: Square::Catalog::Types::SearchCatalogItemsRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchCatalogItemsResponse.load(_response.body)
+          Square::Types::SearchCatalogItemsResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -247,25 +343,37 @@ module Square
       # that apply to the targeted [CatalogItem](entity:CatalogItem) without having
       # to perform an upsert on the entire item.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Catalog::Types::UpdateItemModifierListsRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::UpdateItemModifierListsResponse]
       def update_item_modifier_lists(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[item_ids modifier_lists_to_enable modifier_lists_to_disable]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/catalog/update-item-modifier-lists",
-          body: params
+          body: Square::Catalog::Types::UpdateItemModifierListsRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdateItemModifierListsResponse.load(_response.body)
+          Square::Types::UpdateItemModifierListsResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -273,25 +381,37 @@ module Square
       # targeted [CatalogItem](entity:CatalogItem) without having to perform an
       # upsert on the entire item.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Catalog::Types::UpdateItemTaxesRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::UpdateItemTaxesResponse]
       def update_item_taxes(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[item_ids taxes_to_enable taxes_to_disable]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/catalog/update-item-taxes",
-          body: params
+          body: Square::Catalog::Types::UpdateItemTaxesRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdateItemTaxesResponse.load(_response.body)
+          Square::Types::UpdateItemTaxesResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 

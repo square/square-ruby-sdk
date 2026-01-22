@@ -4,7 +4,9 @@ module Square
   module Orders
     module CustomAttributes
       class Client
-        # @return [Square::Orders::CustomAttributes::Client]
+        # @param client [Square::Internal::Http::RawClient]
+        #
+        # @return [void]
         def initialize(client:)
           @client = client
         end
@@ -13,7 +15,9 @@ module Square
         #
         # Use this endpoint to delete one or more custom attributes from one or more orders.
         # A custom attribute is based on a custom attribute definition in a Square seller account.  (To create a
-        # custom attribute definition, use the [CreateOrderCustomAttributeDefinition](api-endpoint:OrderCustomAttributes-CreateOrderCustomAttributeDefinition) endpoint.)
+        # custom attribute definition, use the
+        # [CreateOrderCustomAttributeDefinition](api-endpoint:OrderCustomAttributes-CreateOrderCustomAttributeDefinition)
+        # endpoint.)
         #
         # This `BulkDeleteOrderCustomAttributes` endpoint accepts a map of 1 to 25 individual delete
         # requests and returns a map of individual delete responses. Each delete request has a unique ID
@@ -24,25 +28,37 @@ module Square
         # must be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes
         # (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         #
+        # @param request_options [Hash]
+        # @param params [Square::Orders::CustomAttributes::Types::BulkDeleteOrderCustomAttributesRequest]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        #
         # @return [Square::Types::BulkDeleteOrderCustomAttributesResponse]
         def batch_delete(request_options: {}, **params)
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          body_prop_names = %i[values]
+          body_bag = params.slice(*body_prop_names)
+
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "POST",
             path: "v2/orders/custom-attributes/bulk-delete",
-            body: params
+            body: Square::Orders::CustomAttributes::Types::BulkDeleteOrderCustomAttributesRequest.new(body_bag).to_h,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::BulkDeleteOrderCustomAttributesResponse.load(_response.body)
+            Square::Types::BulkDeleteOrderCustomAttributesResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
 
@@ -50,7 +66,9 @@ module Square
         #
         # Use this endpoint to delete one or more custom attributes from one or more orders.
         # A custom attribute is based on a custom attribute definition in a Square seller account.  (To create a
-        # custom attribute definition, use the [CreateOrderCustomAttributeDefinition](api-endpoint:OrderCustomAttributes-CreateOrderCustomAttributeDefinition) endpoint.)
+        # custom attribute definition, use the
+        # [CreateOrderCustomAttributeDefinition](api-endpoint:OrderCustomAttributes-CreateOrderCustomAttributeDefinition)
+        # endpoint.)
         #
         # This `BulkUpsertOrderCustomAttributes` endpoint accepts a map of 1 to 25 individual upsert
         # requests and returns a map of individual upsert responses. Each upsert request has a unique ID
@@ -61,25 +79,37 @@ module Square
         # must be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes
         # (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         #
+        # @param request_options [Hash]
+        # @param params [Square::Orders::CustomAttributes::Types::BulkUpsertOrderCustomAttributesRequest]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        #
         # @return [Square::Types::BulkUpsertOrderCustomAttributesResponse]
         def batch_upsert(request_options: {}, **params)
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          body_prop_names = %i[values]
+          body_bag = params.slice(*body_prop_names)
+
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "POST",
             path: "v2/orders/custom-attributes/bulk-upsert",
-            body: params
+            body: Square::Orders::CustomAttributes::Types::BulkUpsertOrderCustomAttributesRequest.new(body_bag).to_h,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::BulkUpsertOrderCustomAttributesResponse.load(_response.body)
+            Square::Types::BulkUpsertOrderCustomAttributesResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
 
@@ -92,36 +122,54 @@ module Square
         # visible to the requesting application, including those that are owned by other applications
         # and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
         #
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String] :order_id
+        # @option params [Square::Types::VisibilityFilter, nil] :visibility_filter
+        # @option params [String, nil] :cursor
+        # @option params [Integer, nil] :limit
+        # @option params [Boolean, nil] :with_definitions
+        #
         # @return [Square::Types::ListOrderCustomAttributesResponse]
         def list(request_options: {}, **params)
           params = Square::Internal::Types::Utils.symbolize_keys(params)
-          _query_param_names = %i[visibility_filter cursor limit with_definitions]
-          _query = params.slice(*_query_param_names)
-          params = params.except(*_query_param_names)
+          query_param_names = %i[visibility_filter cursor limit with_definitions]
+          query_params = {}
+          query_params["visibility_filter"] = params[:visibility_filter] if params.key?(:visibility_filter)
+          query_params["cursor"] = params[:cursor] if params.key?(:cursor)
+          query_params["limit"] = params[:limit] if params.key?(:limit)
+          query_params["with_definitions"] = params[:with_definitions] if params.key?(:with_definitions)
+          params = params.except(*query_param_names)
 
           Square::Internal::CursorItemIterator.new(
             cursor_field: :cursor,
             item_field: :custom_attributes,
-            initial_cursor: _query[:cursor]
+            initial_cursor: query_params[:cursor]
           ) do |next_cursor|
-            _query[:cursor] = next_cursor
-            _request = Square::Internal::JSON::Request.new(
-              base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+            query_params[:cursor] = next_cursor
+            request = Square::Internal::JSON::Request.new(
+              base_url: request_options[:base_url],
               method: "GET",
               path: "v2/orders/#{params[:order_id]}/custom-attributes",
-              query: _query
+              query: query_params,
+              request_options: request_options
             )
             begin
-              _response = @client.send(_request)
+              response = @client.send(request)
             rescue Net::HTTPRequestTimeout
               raise Square::Errors::TimeoutError
             end
-            code = _response.code.to_i
+            code = response.code.to_i
             if code.between?(200, 299)
-              Square::Types::ListOrderCustomAttributesResponse.load(_response.body)
+              Square::Types::ListOrderCustomAttributesResponse.load(response.body)
             else
               error_class = Square::Errors::ResponseError.subclass_for_code(code)
-              raise error_class.new(_response.body, code: code)
+              raise error_class.new(response.body, code: code)
             end
           end
         end
@@ -135,30 +183,45 @@ module Square
         # `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes
         # also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         #
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String] :order_id
+        # @option params [String] :custom_attribute_key
+        # @option params [Integer, nil] :version
+        # @option params [Boolean, nil] :with_definition
+        #
         # @return [Square::Types::RetrieveOrderCustomAttributeResponse]
         def get(request_options: {}, **params)
           params = Square::Internal::Types::Utils.symbolize_keys(params)
-          _query_param_names = %i[version with_definition]
-          _query = params.slice(*_query_param_names)
-          params = params.except(*_query_param_names)
+          query_param_names = %i[version with_definition]
+          query_params = {}
+          query_params["version"] = params[:version] if params.key?(:version)
+          query_params["with_definition"] = params[:with_definition] if params.key?(:with_definition)
+          params = params.except(*query_param_names)
 
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "GET",
             path: "v2/orders/#{params[:order_id]}/custom-attributes/#{params[:custom_attribute_key]}",
-            query: _query
+            query: query_params,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::RetrieveOrderCustomAttributeResponse.load(_response.body)
+            Square::Types::RetrieveOrderCustomAttributeResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
 
@@ -166,33 +229,49 @@ module Square
         #
         # Use this endpoint to set the value of a custom attribute for a specific order.
         # A custom attribute is based on a custom attribute definition in a Square seller account. (To create a
-        # custom attribute definition, use the [CreateOrderCustomAttributeDefinition](api-endpoint:OrderCustomAttributes-CreateOrderCustomAttributeDefinition) endpoint.)
+        # custom attribute definition, use the
+        # [CreateOrderCustomAttributeDefinition](api-endpoint:OrderCustomAttributes-CreateOrderCustomAttributeDefinition)
+        # endpoint.)
         #
         # To create or update a custom attribute owned by another application, the `visibility` setting
         # must be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes
         # (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         #
+        # @param request_options [Hash]
+        # @param params [Square::Orders::CustomAttributes::Types::UpsertOrderCustomAttributeRequest]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String] :order_id
+        # @option params [String] :custom_attribute_key
+        #
         # @return [Square::Types::UpsertOrderCustomAttributeResponse]
         def upsert(request_options: {}, **params)
-          _path_param_names = %w[order_id custom_attribute_key]
+          path_param_names = %i[order_id custom_attribute_key]
+          body_params = params.except(*path_param_names)
+          body_prop_names = %i[custom_attribute idempotency_key]
+          body_bag = body_params.slice(*body_prop_names)
 
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "POST",
             path: "v2/orders/#{params[:order_id]}/custom-attributes/#{params[:custom_attribute_key]}",
-            body: params.except(*_path_param_names)
+            body: Square::Orders::CustomAttributes::Types::UpsertOrderCustomAttributeRequest.new(body_bag).to_h,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::UpsertOrderCustomAttributeResponse.load(_response.body)
+            Square::Types::UpsertOrderCustomAttributeResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
 
@@ -202,24 +281,35 @@ module Square
         # `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes
         # (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         #
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String] :order_id
+        # @option params [String] :custom_attribute_key
+        #
         # @return [Square::Types::DeleteOrderCustomAttributeResponse]
         def delete(request_options: {}, **params)
-          _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          request = Square::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
             method: "DELETE",
-            path: "v2/orders/#{params[:order_id]}/custom-attributes/#{params[:custom_attribute_key]}"
+            path: "v2/orders/#{params[:order_id]}/custom-attributes/#{params[:custom_attribute_key]}",
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Square::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::DeleteOrderCustomAttributeResponse.load(_response.body)
+            Square::Types::DeleteOrderCustomAttributeResponse.load(response.body)
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
       end

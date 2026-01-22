@@ -3,7 +3,9 @@
 module Square
   module TeamMembers
     class Client
-      # @return [Square::TeamMembers::Client]
+      # @param client [Square::Internal::Http::RawClient]
+      #
+      # @return [void]
       def initialize(client:)
         @client = client
       end
@@ -13,27 +15,37 @@ module Square
       # - `given_name`
       # - `family_name`
       #
-      # Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#createteammember).
+      # Learn about [Troubleshooting the Team
+      # API](https://developer.squareup.com/docs/team/troubleshooting#createteammember).
+      #
+      # @param request_options [Hash]
+      # @param params [Square::Types::CreateTeamMemberRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
       #
       # @return [Square::Types::CreateTeamMemberResponse]
       def create(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/team-members",
-          body: Square::Types::CreateTeamMemberRequest.new(params).to_h
+          body: Square::Types::CreateTeamMemberRequest.new(params).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreateTeamMemberResponse.load(_response.body)
+          Square::Types::CreateTeamMemberResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -42,27 +54,40 @@ module Square
       # the request cannot be successfully processed, the request is not marked as failed, but the body of the response
       # contains explicit error information for the failed create.
       #
-      # Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#bulk-create-team-members).
+      # Learn about [Troubleshooting the Team
+      # API](https://developer.squareup.com/docs/team/troubleshooting#bulk-create-team-members).
+      #
+      # @param request_options [Hash]
+      # @param params [Square::TeamMembers::Types::BatchCreateTeamMembersRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
       #
       # @return [Square::Types::BatchCreateTeamMembersResponse]
       def batch_create(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[team_members]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/team-members/bulk-create",
-          body: params
+          body: Square::TeamMembers::Types::BatchCreateTeamMembersRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BatchCreateTeamMembersResponse.load(_response.body)
+          Square::Types::BatchCreateTeamMembersResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -70,27 +95,40 @@ module Square
       # This process is non-transactional and processes as much of the request as possible. If one of the updates in
       # the request cannot be successfully processed, the request is not marked as failed, but the body of the response
       # contains explicit error information for the failed update.
-      # Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#bulk-update-team-members).
+      # Learn about [Troubleshooting the Team
+      # API](https://developer.squareup.com/docs/team/troubleshooting#bulk-update-team-members).
+      #
+      # @param request_options [Hash]
+      # @param params [Square::TeamMembers::Types::BatchUpdateTeamMembersRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
       #
       # @return [Square::Types::BatchUpdateTeamMembersResponse]
       def batch_update(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[team_members]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/team-members/bulk-update",
-          body: params
+          body: Square::TeamMembers::Types::BatchUpdateTeamMembersRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BatchUpdateTeamMembersResponse.load(_response.body)
+          Square::Types::BatchUpdateTeamMembersResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -98,76 +136,111 @@ module Square
       # The list can be filtered by location IDs, `ACTIVE` or `INACTIVE` status, or whether
       # the team member is the Square account owner.
       #
+      # @param request_options [Hash]
+      # @param params [Square::TeamMembers::Types::SearchTeamMembersRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::SearchTeamMembersResponse]
       def search(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[query limit cursor]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/team-members/search",
-          body: params
+          body: Square::TeamMembers::Types::SearchTeamMembersRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchTeamMembersResponse.load(_response.body)
+          Square::Types::SearchTeamMembersResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Retrieves a `TeamMember` object for the given `TeamMember.id`.
-      # Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#retrieve-a-team-member).
+      # Learn about [Troubleshooting the Team
+      # API](https://developer.squareup.com/docs/team/troubleshooting#retrieve-a-team-member).
+      #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :team_member_id
       #
       # @return [Square::Types::GetTeamMemberResponse]
       def get(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/team-members/#{params[:team_member_id]}"
+          path: "v2/team-members/#{params[:team_member_id]}",
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::GetTeamMemberResponse.load(_response.body)
+          Square::Types::GetTeamMemberResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Updates a single `TeamMember` object. The `TeamMember` object is returned on successful updates.
-      # Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#update-a-team-member).
+      # Learn about [Troubleshooting the Team
+      # API](https://developer.squareup.com/docs/team/troubleshooting#update-a-team-member).
+      #
+      # @param request_options [Hash]
+      # @param params [Square::Types::UpdateTeamMemberRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :team_member_id
       #
       # @return [Square::Types::UpdateTeamMemberResponse]
       def update(request_options: {}, **params)
-        _path_param_names = ["team_member_id"]
+        path_param_names = %i[team_member_id]
+        body_params = params.except(*path_param_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/team-members/#{params[:team_member_id]}",
-          body: params.except(*_path_param_names)
+          body: Square::Types::UpdateTeamMemberRequest.new(body_params).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdateTeamMemberResponse.load(_response.body)
+          Square::Types::UpdateTeamMemberResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 

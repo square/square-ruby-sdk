@@ -2,21 +2,19 @@
 
 module Square
   class Client
-    # @return [Square::Client]
+    # @param base_url [String, nil]
+    # @param token [String]
+    #
+    # @return [void]
     def initialize(base_url:, token: ENV.fetch("SQUARE_TOKEN", nil))
       @raw_client = Square::Internal::Http::RawClient.new(
-        base_url: base_url,
+        base_url: base_url || Square::Environment::PRODUCTION,
         headers: {
-          "User-Agent": "square.rb/44.2.1.20251016",
-          "X-Fern-Language": "Ruby",
+          "User-Agent" => "square.rb/45.0.0.20260122",
+          "X-Fern-Language" => "Ruby",
           Authorization: "Bearer #{token}"
         }
       )
-    end
-
-    # @return [Square::Mobile::Client]
-    def mobile
-      @mobile ||= Square::Mobile::Client.new(client: @raw_client)
     end
 
     # @return [Square::OAuth::Client]
@@ -182,6 +180,11 @@ module Square
     # @return [Square::Vendors::Client]
     def vendors
       @vendors ||= Square::Vendors::Client.new(client: @raw_client)
+    end
+
+    # @return [Square::Mobile::Client]
+    def mobile
+      @mobile ||= Square::Mobile::Client.new(client: @raw_client)
     end
 
     # @return [Square::CashDrawers::Client]

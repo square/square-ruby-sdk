@@ -3,68 +3,99 @@
 module Square
   module Snippets
     class Client
-      # @return [Square::Snippets::Client]
+      # @param client [Square::Internal::Http::RawClient]
+      #
+      # @return [void]
       def initialize(client:)
         @client = client
       end
 
-      # Retrieves your snippet from a Square Online site. A site can contain snippets from multiple snippet applications, but you can retrieve only the snippet that was added by your application.
+      # Retrieves your snippet from a Square Online site. A site can contain snippets from multiple snippet
+      # applications, but you can retrieve only the snippet that was added by your application.
       #
       # You can call [ListSites](api-endpoint:Sites-ListSites) to get the IDs of the sites that belong to a seller.
       #
       #
-      # __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
+      # __Note:__ Square Online APIs are publicly available as part of an early access program. For more information,
+      # see [Early access program for Square Online
+      # APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
+      #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :site_id
       #
       # @return [Square::Types::GetSnippetResponse]
       def get(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/sites/#{params[:site_id]}/snippet"
+          path: "v2/sites/#{params[:site_id]}/snippet",
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::GetSnippetResponse.load(_response.body)
+          Square::Types::GetSnippetResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
       # Adds a snippet to a Square Online site or updates the existing snippet on the site.
-      # The snippet code is appended to the end of the `head` element on every page of the site, except checkout pages. A snippet application can add one snippet to a given site.
+      # The snippet code is appended to the end of the `head` element on every page of the site, except checkout pages.
+      # A snippet application can add one snippet to a given site.
       #
       # You can call [ListSites](api-endpoint:Sites-ListSites) to get the IDs of the sites that belong to a seller.
       #
       #
-      # __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
+      # __Note:__ Square Online APIs are publicly available as part of an early access program. For more information,
+      # see [Early access program for Square Online
+      # APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
+      #
+      # @param request_options [Hash]
+      # @param params [Square::Snippets::Types::UpsertSnippetRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :site_id
       #
       # @return [Square::Types::UpsertSnippetResponse]
       def upsert(request_options: {}, **params)
-        _path_param_names = ["site_id"]
+        path_param_names = %i[site_id]
+        body_params = params.except(*path_param_names)
+        body_prop_names = %i[snippet]
+        body_bag = body_params.slice(*body_prop_names)
 
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/sites/#{params[:site_id]}/snippet",
-          body: params.except(*_path_param_names)
+          body: Square::Snippets::Types::UpsertSnippetRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpsertSnippetResponse.load(_response.body)
+          Square::Types::UpsertSnippetResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 
@@ -73,26 +104,38 @@ module Square
       # You can call [ListSites](api-endpoint:Sites-ListSites) to get the IDs of the sites that belong to a seller.
       #
       #
-      # __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
+      # __Note:__ Square Online APIs are publicly available as part of an early access program. For more information,
+      # see [Early access program for Square Online
+      # APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
+      #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :site_id
       #
       # @return [Square::Types::DeleteSnippetResponse]
       def delete(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "DELETE",
-          path: "v2/sites/#{params[:site_id]}/snippet"
+          path: "v2/sites/#{params[:site_id]}/snippet",
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::DeleteSnippetResponse.load(_response.body)
+          Square::Types::DeleteSnippetResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
     end

@@ -3,7 +3,9 @@
 module Square
   module Loyalty
     class Client
-      # @return [Square::Loyalty::Client]
+      # @param client [Square::Internal::Http::RawClient]
+      #
+      # @return [void]
       def initialize(client:)
         @client = client
       end
@@ -17,25 +19,37 @@ module Square
       #
       # Search results are sorted by `created_at` in descending order.
       #
+      # @param request_options [Hash]
+      # @param params [Square::Loyalty::Types::SearchLoyaltyEventsRequest]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
       # @return [Square::Types::SearchLoyaltyEventsResponse]
       def search_events(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+        body_prop_names = %i[query limit cursor]
+        body_bag = params.slice(*body_prop_names)
+
+        request = Square::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/loyalty/events/search",
-          body: params
+          body: Square::Loyalty::Types::SearchLoyaltyEventsRequest.new(body_bag).to_h,
+          request_options: request_options
         )
         begin
-          _response = @client.send(_request)
+          response = @client.send(request)
         rescue Net::HTTPRequestTimeout
           raise Square::Errors::TimeoutError
         end
-        code = _response.code.to_i
+        code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchLoyaltyEventsResponse.load(_response.body)
+          Square::Types::SearchLoyaltyEventsResponse.load(response.body)
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
 

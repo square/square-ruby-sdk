@@ -21,9 +21,7 @@ module Square
     # - Adjusts received quantities
     # - Updates inventory levels at both source and destination [Location](entity:Location)s
     class TransferOrderGoodsReceipt < Internal::Types::Model
-      field :line_items, lambda {
-        Internal::Types::Array[Square::Types::TransferOrderGoodsReceiptLineItem]
-      }, optional: true, nullable: false
+      field :line_items, -> { Internal::Types::Array[Square::Types::TransferOrderGoodsReceiptLineItem] }, optional: true, nullable: false
     end
   end
 end

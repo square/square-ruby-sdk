@@ -38,6 +38,25 @@ module Square
           !@discriminant.nil?
         end
 
+        # Check if value matches a type, handling type wrapper instances
+        # (Internal::Types::Hash and Internal::Types::Array instances)
+        #
+        # @param value [Object]
+        # @param member_type [Object]
+        # @return [Boolean]
+        private def type_matches?(value, member_type)
+          case member_type
+          when Square::Internal::Types::Hash
+            value.is_a?(::Hash)
+          when Square::Internal::Types::Array
+            value.is_a?(::Array)
+          when Class, Module
+            value.is_a?(member_type)
+          else
+            false
+          end
+        end
+
         # Resolves the type of a value to be one of the members
         #
         # @param value [Object]
@@ -50,11 +69,37 @@ module Square
 
             members.to_h[discriminant_value]&.call
           else
-            members.find do |_key, mem|
+            # First try exact type matching
+            result = members.find do |_key, mem|
               member_type = Utils.unwrap_type(mem)
-
-              value.is_a?(member_type)
+              type_matches?(value, member_type)
             end&.last&.call
+
+            return result if result
+
+            # For Hash values, try to coerce into Model member types
+            if value.is_a?(::Hash)
+              members.find do |_key, mem|
+                member_type = Utils.unwrap_type(mem)
+                # Check if member_type is a Model class
+                next unless member_type.is_a?(Class) && member_type <= Model
+
+                # Try to coerce the hash into this model type with strict mode
+                begin
+                  candidate = Utils.coerce(member_type, value, strict: true)
+
+                  # Validate that all required (non-optional) fields are present
+                  # This ensures undiscriminated unions properly distinguish between member types
+                  member_type.fields.each do |field_name, field|
+                    raise Errors::TypeError, "Required field `#{field_name}` missing for union member #{member_type.name}" if candidate.instance_variable_get(:@data)[field_name].nil? && !field.optional
+                  end
+
+                  true
+                rescue Errors::TypeError
+                  false
+                end
+              end&.last&.call
+            end
           end
         end
 
@@ -73,6 +118,14 @@ module Square
           end
 
           Utils.coerce(type, value, strict: strict)
+        end
+
+        # Parse JSON string and coerce to the correct union member type
+        #
+        # @param str [String] JSON string to parse
+        # @return [Object] Coerced value matching a union member
+        def load(str)
+          coerce(::JSON.parse(str, symbolize_names: true))
         end
       end
     end
