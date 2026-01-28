@@ -30,14 +30,12 @@ module Square
       #
       # @return [Square::Types::CreateSubscriptionResponse]
       def create(request_options: {}, **params)
-        body_prop_names = %i[idempotency_key location_id plan_variation_id customer_id start_date canceled_date tax_percentage price_override_money card_id timezone source monthly_billing_anchor_date phases]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/subscriptions",
-          body: Square::Subscriptions::Types::CreateSubscriptionRequest.new(body_bag).to_h,
+          body: Square::Subscriptions::Types::CreateSubscriptionRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -68,14 +66,12 @@ module Square
       #
       # @return [Square::Types::BulkSwapPlanResponse]
       def bulk_swap_plan(request_options: {}, **params)
-        body_prop_names = %i[new_plan_variation_id old_plan_variation_id location_id]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/subscriptions/bulk-swap-plan",
-          body: Square::Subscriptions::Types::BulkSwapPlanRequest.new(body_bag).to_h,
+          body: Square::Subscriptions::Types::BulkSwapPlanRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -117,14 +113,12 @@ module Square
       #
       # @return [Square::Types::SearchSubscriptionsResponse]
       def search(request_options: {}, **params)
-        body_prop_names = %i[cursor limit query include]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/subscriptions/search",
-          body: Square::Subscriptions::Types::SearchSubscriptionsRequest.new(body_bag).to_h,
+          body: Square::Subscriptions::Types::SearchSubscriptionsRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -155,7 +149,7 @@ module Square
       #
       # @return [Square::Types::GetSubscriptionResponse]
       def get(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[include]
         query_params = {}
         query_params["include"] = params[:include] if params.key?(:include)
@@ -196,16 +190,16 @@ module Square
       #
       # @return [Square::Types::UpdateSubscriptionResponse]
       def update(request_options: {}, **params)
-        path_param_names = %i[subscription_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[subscription]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Subscriptions::Types::UpdateSubscriptionRequest.new(params).to_h
+        non_body_param_names = ["subscription_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/subscriptions/#{params[:subscription_id]}",
-          body: Square::Subscriptions::Types::UpdateSubscriptionRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -236,6 +230,7 @@ module Square
       #
       # @return [Square::Types::DeleteSubscriptionActionResponse]
       def delete_action(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "DELETE",
@@ -271,16 +266,16 @@ module Square
       #
       # @return [Square::Types::ChangeBillingAnchorDateResponse]
       def change_billing_anchor_date(request_options: {}, **params)
-        path_param_names = %i[subscription_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[monthly_billing_anchor_date effective_date]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Subscriptions::Types::ChangeBillingAnchorDateRequest.new(params).to_h
+        non_body_param_names = ["subscription_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/subscriptions/#{params[:subscription_id]}/billing-anchor",
-          body: Square::Subscriptions::Types::ChangeBillingAnchorDateRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -312,6 +307,7 @@ module Square
       #
       # @return [Square::Types::CancelSubscriptionResponse]
       def cancel(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
@@ -348,7 +344,7 @@ module Square
       #
       # @return [Square::Types::ListSubscriptionEventsResponse]
       def list_events(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[cursor limit]
         query_params = {}
         query_params["cursor"] = params[:cursor] if params.key?(:cursor)
@@ -396,16 +392,16 @@ module Square
       #
       # @return [Square::Types::PauseSubscriptionResponse]
       def pause(request_options: {}, **params)
-        path_param_names = %i[subscription_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[pause_effective_date pause_cycle_duration resume_effective_date resume_change_timing pause_reason]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Subscriptions::Types::PauseSubscriptionRequest.new(params).to_h
+        non_body_param_names = ["subscription_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/subscriptions/#{params[:subscription_id]}/pause",
-          body: Square::Subscriptions::Types::PauseSubscriptionRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -435,16 +431,16 @@ module Square
       #
       # @return [Square::Types::ResumeSubscriptionResponse]
       def resume(request_options: {}, **params)
-        path_param_names = %i[subscription_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[resume_effective_date resume_change_timing]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Subscriptions::Types::ResumeSubscriptionRequest.new(params).to_h
+        non_body_param_names = ["subscription_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/subscriptions/#{params[:subscription_id]}/resume",
-          body: Square::Subscriptions::Types::ResumeSubscriptionRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -476,16 +472,16 @@ module Square
       #
       # @return [Square::Types::SwapPlanResponse]
       def swap_plan(request_options: {}, **params)
-        path_param_names = %i[subscription_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[new_plan_variation_id phases]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Subscriptions::Types::SwapPlanRequest.new(params).to_h
+        non_body_param_names = ["subscription_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/subscriptions/#{params[:subscription_id]}/swap-plan",
-          body: Square::Subscriptions::Types::SwapPlanRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin

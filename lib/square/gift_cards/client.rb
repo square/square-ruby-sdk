@@ -28,7 +28,7 @@ module Square
       #
       # @return [Square::Types::ListGiftCardsResponse]
       def list(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[type state limit cursor customer_id]
         query_params = {}
         query_params["type"] = params[:type] if params.key?(:type)
@@ -83,14 +83,12 @@ module Square
       #
       # @return [Square::Types::CreateGiftCardResponse]
       def create(request_options: {}, **params)
-        body_prop_names = %i[idempotency_key location_id gift_card]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/gift-cards",
-          body: Square::GiftCards::Types::CreateGiftCardRequest.new(body_bag).to_h,
+          body: Square::GiftCards::Types::CreateGiftCardRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -119,14 +117,12 @@ module Square
       #
       # @return [Square::Types::GetGiftCardFromGanResponse]
       def get_from_gan(request_options: {}, **params)
-        body_prop_names = %i[gan]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/gift-cards/from-gan",
-          body: Square::GiftCards::Types::GetGiftCardFromGanRequest.new(body_bag).to_h,
+          body: Square::GiftCards::Types::GetGiftCardFromGanRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -155,14 +151,12 @@ module Square
       #
       # @return [Square::Types::GetGiftCardFromNonceResponse]
       def get_from_nonce(request_options: {}, **params)
-        body_prop_names = %i[nonce]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/gift-cards/from-nonce",
-          body: Square::GiftCards::Types::GetGiftCardFromNonceRequest.new(body_bag).to_h,
+          body: Square::GiftCards::Types::GetGiftCardFromNonceRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -192,16 +186,16 @@ module Square
       #
       # @return [Square::Types::LinkCustomerToGiftCardResponse]
       def link_customer(request_options: {}, **params)
-        path_param_names = %i[gift_card_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[customer_id]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::GiftCards::Types::LinkCustomerToGiftCardRequest.new(params).to_h
+        non_body_param_names = ["gift_card_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/gift-cards/#{params[:gift_card_id]}/link-customer",
-          body: Square::GiftCards::Types::LinkCustomerToGiftCardRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -231,16 +225,16 @@ module Square
       #
       # @return [Square::Types::UnlinkCustomerFromGiftCardResponse]
       def unlink_customer(request_options: {}, **params)
-        path_param_names = %i[gift_card_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[customer_id]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::GiftCards::Types::UnlinkCustomerFromGiftCardRequest.new(params).to_h
+        non_body_param_names = ["gift_card_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/gift-cards/#{params[:gift_card_id]}/unlink-customer",
-          body: Square::GiftCards::Types::UnlinkCustomerFromGiftCardRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -270,6 +264,7 @@ module Square
       #
       # @return [Square::Types::GetGiftCardResponse]
       def get(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",

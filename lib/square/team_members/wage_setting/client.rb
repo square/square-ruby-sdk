@@ -30,6 +30,7 @@ module Square
         #
         # @return [Square::Types::GetWageSettingResponse]
         def get(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -72,16 +73,16 @@ module Square
         #
         # @return [Square::Types::UpdateWageSettingResponse]
         def update(request_options: {}, **params)
-          path_param_names = %i[team_member_id]
-          body_params = params.except(*path_param_names)
-          body_prop_names = %i[wage_setting]
-          body_bag = body_params.slice(*body_prop_names)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
+          request_data = Square::TeamMembers::WageSetting::Types::UpdateWageSettingRequest.new(params).to_h
+          non_body_param_names = ["team_member_id"]
+          body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "PUT",
             path: "v2/team-members/#{params[:team_member_id]}/wage-setting",
-            body: Square::TeamMembers::WageSetting::Types::UpdateWageSettingRequest.new(body_bag).to_h,
+            body: body,
             request_options: request_options
           )
           begin

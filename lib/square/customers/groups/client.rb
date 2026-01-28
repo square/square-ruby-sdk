@@ -25,7 +25,7 @@ module Square
         #
         # @return [Square::Types::ListCustomerGroupsResponse]
         def list(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[cursor limit]
           query_params = {}
           query_params["cursor"] = params[:cursor] if params.key?(:cursor)
@@ -74,14 +74,12 @@ module Square
         #
         # @return [Square::Types::CreateCustomerGroupResponse]
         def create(request_options: {}, **params)
-          body_prop_names = %i[idempotency_key group]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/customers/groups",
-            body: Square::Customers::Groups::Types::CreateCustomerGroupRequest.new(body_bag).to_h,
+            body: Square::Customers::Groups::Types::CreateCustomerGroupRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -111,6 +109,7 @@ module Square
         #
         # @return [Square::Types::GetCustomerGroupResponse]
         def get(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -144,16 +143,16 @@ module Square
         #
         # @return [Square::Types::UpdateCustomerGroupResponse]
         def update(request_options: {}, **params)
-          path_param_names = %i[group_id]
-          body_params = params.except(*path_param_names)
-          body_prop_names = %i[group]
-          body_bag = body_params.slice(*body_prop_names)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
+          request_data = Square::Customers::Groups::Types::UpdateCustomerGroupRequest.new(params).to_h
+          non_body_param_names = ["group_id"]
+          body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "PUT",
             path: "v2/customers/groups/#{params[:group_id]}",
-            body: Square::Customers::Groups::Types::UpdateCustomerGroupRequest.new(body_bag).to_h,
+            body: body,
             request_options: request_options
           )
           begin
@@ -183,6 +182,7 @@ module Square
         #
         # @return [Square::Types::DeleteCustomerGroupResponse]
         def delete(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",
@@ -220,6 +220,7 @@ module Square
         #
         # @return [Square::Types::AddGroupToCustomerResponse]
         def add(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "PUT",
@@ -257,6 +258,7 @@ module Square
         #
         # @return [Square::Types::RemoveGroupFromCustomerResponse]
         def remove(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",

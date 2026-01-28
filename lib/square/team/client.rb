@@ -23,7 +23,7 @@ module Square
       #
       # @return [Square::Types::ListJobsResponse]
       def list_jobs(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[cursor]
         query_params = {}
         query_params["cursor"] = params[:cursor] if params.key?(:cursor)
@@ -63,14 +63,12 @@ module Square
       #
       # @return [Square::Types::CreateJobResponse]
       def create_job(request_options: {}, **params)
-        body_prop_names = %i[job idempotency_key]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/team-members/jobs",
-          body: Square::Team::Types::CreateJobRequest.new(body_bag).to_h,
+          body: Square::Team::Types::CreateJobRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -100,6 +98,7 @@ module Square
       #
       # @return [Square::Types::RetrieveJobResponse]
       def retrieve_job(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -135,16 +134,16 @@ module Square
       #
       # @return [Square::Types::UpdateJobResponse]
       def update_job(request_options: {}, **params)
-        path_param_names = %i[job_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[job]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Team::Types::UpdateJobRequest.new(params).to_h
+        non_body_param_names = ["job_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/team-members/jobs/#{params[:job_id]}",
-          body: Square::Team::Types::UpdateJobRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin

@@ -24,7 +24,7 @@ module Square
         #
         # @return [Square::Types::ListWebhookEventTypesResponse]
         def list(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[api_version]
           query_params = {}
           query_params["api_version"] = params[:api_version] if params.key?(:api_version)

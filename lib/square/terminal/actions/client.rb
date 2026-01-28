@@ -23,14 +23,12 @@ module Square
         #
         # @return [Square::Types::CreateTerminalActionResponse]
         def create(request_options: {}, **params)
-          body_prop_names = %i[idempotency_key action]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/terminals/actions",
-            body: Square::Terminal::Actions::Types::CreateTerminalActionRequest.new(body_bag).to_h,
+            body: Square::Terminal::Actions::Types::CreateTerminalActionRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -60,14 +58,12 @@ module Square
         #
         # @return [Square::Types::SearchTerminalActionsResponse]
         def search(request_options: {}, **params)
-          body_prop_names = %i[query cursor limit]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/terminals/actions/search",
-            body: Square::Terminal::Actions::Types::SearchTerminalActionsRequest.new(body_bag).to_h,
+            body: Square::Terminal::Actions::Types::SearchTerminalActionsRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -97,6 +93,7 @@ module Square
         #
         # @return [Square::Types::GetTerminalActionResponse]
         def get(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -130,6 +127,7 @@ module Square
         #
         # @return [Square::Types::CancelTerminalActionResponse]
         def cancel(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",

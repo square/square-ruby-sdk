@@ -24,14 +24,12 @@ module Square
         #
         # @return [Square::Types::CreateTerminalCheckoutResponse]
         def create(request_options: {}, **params)
-          body_prop_names = %i[idempotency_key checkout]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/terminals/checkouts",
-            body: Square::Terminal::Checkouts::Types::CreateTerminalCheckoutRequest.new(body_bag).to_h,
+            body: Square::Terminal::Checkouts::Types::CreateTerminalCheckoutRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -62,14 +60,12 @@ module Square
         #
         # @return [Square::Types::SearchTerminalCheckoutsResponse]
         def search(request_options: {}, **params)
-          body_prop_names = %i[query cursor limit]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/terminals/checkouts/search",
-            body: Square::Terminal::Checkouts::Types::SearchTerminalCheckoutsRequest.new(body_bag).to_h,
+            body: Square::Terminal::Checkouts::Types::SearchTerminalCheckoutsRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -99,6 +95,7 @@ module Square
         #
         # @return [Square::Types::GetTerminalCheckoutResponse]
         def get(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -132,6 +129,7 @@ module Square
         #
         # @return [Square::Types::CancelTerminalCheckoutResponse]
         def cancel(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",

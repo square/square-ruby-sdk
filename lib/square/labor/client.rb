@@ -29,14 +29,12 @@ module Square
       #
       # @return [Square::Types::CreateScheduledShiftResponse]
       def create_scheduled_shift(request_options: {}, **params)
-        body_prop_names = %i[idempotency_key scheduled_shift]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/labor/scheduled-shifts",
-          body: Square::Labor::Types::CreateScheduledShiftRequest.new(body_bag).to_h,
+          body: Square::Labor::Types::CreateScheduledShiftRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -70,14 +68,12 @@ module Square
       #
       # @return [Square::Types::BulkPublishScheduledShiftsResponse]
       def bulk_publish_scheduled_shifts(request_options: {}, **params)
-        body_prop_names = %i[scheduled_shifts scheduled_shift_notification_audience]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/labor/scheduled-shifts/bulk-publish",
-          body: Square::Labor::Types::BulkPublishScheduledShiftsRequest.new(body_bag).to_h,
+          body: Square::Labor::Types::BulkPublishScheduledShiftsRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -107,14 +103,12 @@ module Square
       #
       # @return [Square::Types::SearchScheduledShiftsResponse]
       def search_scheduled_shifts(request_options: {}, **params)
-        body_prop_names = %i[query limit cursor]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/labor/scheduled-shifts/search",
-          body: Square::Labor::Types::SearchScheduledShiftsRequest.new(body_bag).to_h,
+          body: Square::Labor::Types::SearchScheduledShiftsRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -144,6 +138,7 @@ module Square
       #
       # @return [Square::Types::RetrieveScheduledShiftResponse]
       def retrieve_scheduled_shift(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -186,16 +181,16 @@ module Square
       #
       # @return [Square::Types::UpdateScheduledShiftResponse]
       def update_scheduled_shift(request_options: {}, **params)
-        path_param_names = %i[id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[scheduled_shift]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Labor::Types::UpdateScheduledShiftRequest.new(params).to_h
+        non_body_param_names = ["id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/labor/scheduled-shifts/#{params[:id]}",
-          body: Square::Labor::Types::UpdateScheduledShiftRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -226,16 +221,16 @@ module Square
       #
       # @return [Square::Types::PublishScheduledShiftResponse]
       def publish_scheduled_shift(request_options: {}, **params)
-        path_param_names = %i[id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[idempotency_key version scheduled_shift_notification_audience]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Labor::Types::PublishScheduledShiftRequest.new(params).to_h
+        non_body_param_names = ["id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/labor/scheduled-shifts/#{params[:id]}/publish",
-          body: Square::Labor::Types::PublishScheduledShiftRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -281,14 +276,12 @@ module Square
       #
       # @return [Square::Types::CreateTimecardResponse]
       def create_timecard(request_options: {}, **params)
-        body_prop_names = %i[idempotency_key timecard]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/labor/timecards",
-          body: Square::Labor::Types::CreateTimecardRequest.new(body_bag).to_h,
+          body: Square::Labor::Types::CreateTimecardRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -330,14 +323,12 @@ module Square
       #
       # @return [Square::Types::SearchTimecardsResponse]
       def search_timecards(request_options: {}, **params)
-        body_prop_names = %i[query limit cursor]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/labor/timecards/search",
-          body: Square::Labor::Types::SearchTimecardsRequest.new(body_bag).to_h,
+          body: Square::Labor::Types::SearchTimecardsRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -367,6 +358,7 @@ module Square
       #
       # @return [Square::Types::RetrieveTimecardResponse]
       def retrieve_timecard(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -406,16 +398,16 @@ module Square
       #
       # @return [Square::Types::UpdateTimecardResponse]
       def update_timecard(request_options: {}, **params)
-        path_param_names = %i[id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[timecard]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Labor::Types::UpdateTimecardRequest.new(params).to_h
+        non_body_param_names = ["id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/labor/timecards/#{params[:id]}",
-          body: Square::Labor::Types::UpdateTimecardRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -445,6 +437,7 @@ module Square
       #
       # @return [Square::Types::DeleteTimecardResponse]
       def delete_timecard(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "DELETE",

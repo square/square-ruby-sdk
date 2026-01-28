@@ -32,7 +32,7 @@ module Square
       #
       # @return [Square::Types::ListMerchantsResponse]
       def list(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[cursor]
         query_params = {}
         query_params["cursor"] = params[:cursor] if params.key?(:cursor)
@@ -79,6 +79,7 @@ module Square
       #
       # @return [Square::Types::GetMerchantResponse]
       def get(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",

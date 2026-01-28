@@ -31,6 +31,7 @@ module Square
         #
         # @return [Square::Types::CreateCatalogImageResponse]
         def create(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           body = Internal::Multipart::FormData.new
 
           if params[:request]
@@ -81,6 +82,7 @@ module Square
         #
         # @return [Square::Types::UpdateCatalogImageResponse]
         def update(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           body = Internal::Multipart::FormData.new
 
           if params[:request]

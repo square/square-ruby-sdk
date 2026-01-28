@@ -29,7 +29,7 @@ module Square
           #
           # @return [Square::Types::ListLoyaltyPromotionsResponse]
           def list(request_options: {}, **params)
-            params = Square::Internal::Types::Utils.symbolize_keys(params)
+            params = Square::Internal::Types::Utils.normalize_keys(params)
             query_param_names = %i[status cursor limit]
             query_params = {}
             query_params["status"] = params[:status] if params.key?(:status)
@@ -83,16 +83,16 @@ module Square
           #
           # @return [Square::Types::CreateLoyaltyPromotionResponse]
           def create(request_options: {}, **params)
-            path_param_names = %i[program_id]
-            body_params = params.except(*path_param_names)
-            body_prop_names = %i[loyalty_promotion idempotency_key]
-            body_bag = body_params.slice(*body_prop_names)
+            params = Square::Internal::Types::Utils.normalize_keys(params)
+            request_data = Square::Loyalty::Programs::Promotions::Types::CreateLoyaltyPromotionRequest.new(params).to_h
+            non_body_param_names = ["program_id"]
+            body = request_data.except(*non_body_param_names)
 
             request = Square::Internal::JSON::Request.new(
               base_url: request_options[:base_url],
               method: "POST",
               path: "v2/loyalty/programs/#{params[:program_id]}/promotions",
-              body: Square::Loyalty::Programs::Promotions::Types::CreateLoyaltyPromotionRequest.new(body_bag).to_h,
+              body: body,
               request_options: request_options
             )
             begin
@@ -123,6 +123,7 @@ module Square
           #
           # @return [Square::Types::GetLoyaltyPromotionResponse]
           def get(request_options: {}, **params)
+            params = Square::Internal::Types::Utils.normalize_keys(params)
             request = Square::Internal::JSON::Request.new(
               base_url: request_options[:base_url],
               method: "GET",
@@ -162,6 +163,7 @@ module Square
           #
           # @return [Square::Types::CancelLoyaltyPromotionResponse]
           def cancel(request_options: {}, **params)
+            params = Square::Internal::Types::Utils.normalize_keys(params)
             request = Square::Internal::JSON::Request.new(
               base_url: request_options[:base_url],
               method: "POST",

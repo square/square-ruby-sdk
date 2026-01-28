@@ -29,7 +29,8 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         #
         # @return [Square::Types::ListLoyaltyProgramsResponse]
-        def list(request_options: {}, **_params)
+        def list(request_options: {}, **params)
+          Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -67,6 +68,7 @@ module Square
         #
         # @return [Square::Types::GetLoyaltyProgramResponse]
         def get(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -116,16 +118,16 @@ module Square
         #
         # @return [Square::Types::CalculateLoyaltyPointsResponse]
         def calculate(request_options: {}, **params)
-          path_param_names = %i[program_id]
-          body_params = params.except(*path_param_names)
-          body_prop_names = %i[order_id transaction_amount_money loyalty_account_id]
-          body_bag = body_params.slice(*body_prop_names)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
+          request_data = Square::Loyalty::Programs::Types::CalculateLoyaltyPointsRequest.new(params).to_h
+          non_body_param_names = ["program_id"]
+          body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/loyalty/programs/#{params[:program_id]}/calculate",
-            body: Square::Loyalty::Programs::Types::CalculateLoyaltyPointsRequest.new(body_bag).to_h,
+            body: body,
             request_options: request_options
           )
           begin

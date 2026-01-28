@@ -37,14 +37,12 @@ module Square
       #
       # @return [Square::Types::RegisterDomainResponse]
       def register_domain(request_options: {}, **params)
-        body_prop_names = %i[domain_name]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/apple-pay/domains",
-          body: Square::ApplePay::Types::RegisterDomainRequest.new(body_bag).to_h,
+          body: Square::ApplePay::Types::RegisterDomainRequest.new(params).to_h,
           request_options: request_options
         )
         begin

@@ -24,14 +24,12 @@ module Square
         #
         # @return [Square::Types::CreateLoyaltyAccountResponse]
         def create(request_options: {}, **params)
-          body_prop_names = %i[loyalty_account idempotency_key]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/loyalty/accounts",
-            body: Square::Loyalty::Accounts::Types::CreateLoyaltyAccountRequest.new(body_bag).to_h,
+            body: Square::Loyalty::Accounts::Types::CreateLoyaltyAccountRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -65,14 +63,12 @@ module Square
         #
         # @return [Square::Types::SearchLoyaltyAccountsResponse]
         def search(request_options: {}, **params)
-          body_prop_names = %i[query limit cursor]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/loyalty/accounts/search",
-            body: Square::Loyalty::Accounts::Types::SearchLoyaltyAccountsRequest.new(body_bag).to_h,
+            body: Square::Loyalty::Accounts::Types::SearchLoyaltyAccountsRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -102,6 +98,7 @@ module Square
         #
         # @return [Square::Types::GetLoyaltyAccountResponse]
         def get(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -152,16 +149,16 @@ module Square
         #
         # @return [Square::Types::AccumulateLoyaltyPointsResponse]
         def accumulate_points(request_options: {}, **params)
-          path_param_names = %i[account_id]
-          body_params = params.except(*path_param_names)
-          body_prop_names = %i[accumulate_points idempotency_key location_id]
-          body_bag = body_params.slice(*body_prop_names)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
+          request_data = Square::Loyalty::Accounts::Types::AccumulateLoyaltyPointsRequest.new(params).to_h
+          non_body_param_names = ["account_id"]
+          body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/loyalty/accounts/#{params[:account_id]}/accumulate",
-            body: Square::Loyalty::Accounts::Types::AccumulateLoyaltyPointsRequest.new(body_bag).to_h,
+            body: body,
             request_options: request_options
           )
           begin
@@ -195,16 +192,16 @@ module Square
         #
         # @return [Square::Types::AdjustLoyaltyPointsResponse]
         def adjust(request_options: {}, **params)
-          path_param_names = %i[account_id]
-          body_params = params.except(*path_param_names)
-          body_prop_names = %i[idempotency_key adjust_points allow_negative_balance]
-          body_bag = body_params.slice(*body_prop_names)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
+          request_data = Square::Loyalty::Accounts::Types::AdjustLoyaltyPointsRequest.new(params).to_h
+          non_body_param_names = ["account_id"]
+          body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/loyalty/accounts/#{params[:account_id]}/adjust",
-            body: Square::Loyalty::Accounts::Types::AdjustLoyaltyPointsRequest.new(body_bag).to_h,
+            body: body,
             request_options: request_options
           )
           begin

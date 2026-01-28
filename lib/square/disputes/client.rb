@@ -25,7 +25,7 @@ module Square
       #
       # @return [Square::Types::ListDisputesResponse]
       def list(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[cursor states location_id]
         query_params = {}
         query_params["cursor"] = params[:cursor] if params.key?(:cursor)
@@ -74,6 +74,7 @@ module Square
       #
       # @return [Square::Types::GetDisputeResponse]
       def get(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -111,6 +112,7 @@ module Square
       #
       # @return [Square::Types::AcceptDisputeResponse]
       def accept(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
@@ -145,6 +147,7 @@ module Square
       #
       # @return [Square::Types::CreateDisputeEvidenceFileResponse]
       def create_evidence_file(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         body = Internal::Multipart::FormData.new
 
         if params[:request]
@@ -190,16 +193,16 @@ module Square
       #
       # @return [Square::Types::CreateDisputeEvidenceTextResponse]
       def create_evidence_text(request_options: {}, **params)
-        path_param_names = %i[dispute_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[idempotency_key evidence_type evidence_text]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Disputes::Types::CreateDisputeEvidenceTextRequest.new(params).to_h
+        non_body_param_names = ["dispute_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/disputes/#{params[:dispute_id]}/evidence-text",
-          body: Square::Disputes::Types::CreateDisputeEvidenceTextRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -235,6 +238,7 @@ module Square
       #
       # @return [Square::Types::SubmitEvidenceResponse]
       def submit_evidence(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",

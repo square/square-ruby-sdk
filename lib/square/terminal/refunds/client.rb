@@ -25,14 +25,12 @@ module Square
         #
         # @return [Square::Types::CreateTerminalRefundResponse]
         def create(request_options: {}, **params)
-          body_prop_names = %i[idempotency_key refund]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/terminals/refunds",
-            body: Square::Terminal::Refunds::Types::CreateTerminalRefundRequest.new(body_bag).to_h,
+            body: Square::Terminal::Refunds::Types::CreateTerminalRefundRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -62,14 +60,12 @@ module Square
         #
         # @return [Square::Types::SearchTerminalRefundsResponse]
         def search(request_options: {}, **params)
-          body_prop_names = %i[query cursor limit]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/terminals/refunds/search",
-            body: Square::Terminal::Refunds::Types::SearchTerminalRefundsRequest.new(body_bag).to_h,
+            body: Square::Terminal::Refunds::Types::SearchTerminalRefundsRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -99,6 +95,7 @@ module Square
         #
         # @return [Square::Types::GetTerminalRefundResponse]
         def get(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -132,6 +129,7 @@ module Square
         #
         # @return [Square::Types::CancelTerminalRefundResponse]
         def cancel(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",

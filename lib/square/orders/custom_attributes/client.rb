@@ -38,14 +38,12 @@ module Square
         #
         # @return [Square::Types::BulkDeleteOrderCustomAttributesResponse]
         def batch_delete(request_options: {}, **params)
-          body_prop_names = %i[values]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/orders/custom-attributes/bulk-delete",
-            body: Square::Orders::CustomAttributes::Types::BulkDeleteOrderCustomAttributesRequest.new(body_bag).to_h,
+            body: Square::Orders::CustomAttributes::Types::BulkDeleteOrderCustomAttributesRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -89,14 +87,12 @@ module Square
         #
         # @return [Square::Types::BulkUpsertOrderCustomAttributesResponse]
         def batch_upsert(request_options: {}, **params)
-          body_prop_names = %i[values]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/orders/custom-attributes/bulk-upsert",
-            body: Square::Orders::CustomAttributes::Types::BulkUpsertOrderCustomAttributesRequest.new(body_bag).to_h,
+            body: Square::Orders::CustomAttributes::Types::BulkUpsertOrderCustomAttributesRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -137,7 +133,7 @@ module Square
         #
         # @return [Square::Types::ListOrderCustomAttributesResponse]
         def list(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[visibility_filter cursor limit with_definitions]
           query_params = {}
           query_params["visibility_filter"] = params[:visibility_filter] if params.key?(:visibility_filter)
@@ -197,7 +193,7 @@ module Square
         #
         # @return [Square::Types::RetrieveOrderCustomAttributeResponse]
         def get(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[version with_definition]
           query_params = {}
           query_params["version"] = params[:version] if params.key?(:version)
@@ -249,16 +245,16 @@ module Square
         #
         # @return [Square::Types::UpsertOrderCustomAttributeResponse]
         def upsert(request_options: {}, **params)
-          path_param_names = %i[order_id custom_attribute_key]
-          body_params = params.except(*path_param_names)
-          body_prop_names = %i[custom_attribute idempotency_key]
-          body_bag = body_params.slice(*body_prop_names)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
+          request_data = Square::Orders::CustomAttributes::Types::UpsertOrderCustomAttributeRequest.new(params).to_h
+          non_body_param_names = %w[order_id custom_attribute_key]
+          body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/orders/#{params[:order_id]}/custom-attributes/#{params[:custom_attribute_key]}",
-            body: Square::Orders::CustomAttributes::Types::UpsertOrderCustomAttributeRequest.new(body_bag).to_h,
+            body: body,
             request_options: request_options
           )
           begin
@@ -293,6 +289,7 @@ module Square
         #
         # @return [Square::Types::DeleteOrderCustomAttributeResponse]
         def delete(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",

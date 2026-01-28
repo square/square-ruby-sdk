@@ -25,7 +25,7 @@ module Square
         #
         # @return [Square::Types::ListLocationBookingProfilesResponse]
         def list(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[limit cursor]
           query_params = {}
           query_params["limit"] = params[:limit] if params.key?(:limit)

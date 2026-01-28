@@ -1,45 +1,21 @@
 # frozen_string_literal: true
 
-require_relative "wire_helper"
-require "net/http"
-require "json"
-require "uri"
-require "square"
+require_relative "wiremock_test_case"
 
-class TerminalActionsWireTest < Minitest::Test
-  WIREMOCK_BASE_URL = "http://localhost:8080"
-  WIREMOCK_ADMIN_URL = "http://localhost:8080/__admin"
-
+class TerminalActionsWireTest < WireMockTestCase
   def setup
     super
-    return if ENV["RUN_WIRE_TESTS"] == "true"
 
-    skip "Wire tests are disabled by default. Set RUN_WIRE_TESTS=true to enable them."
-  end
-
-  def verify_request_count(test_id:, method:, url_path:, expected:, query_params: nil)
-    uri = URI("#{WIREMOCK_ADMIN_URL}/requests/find")
-    http = Net::HTTP.new(uri.host, uri.port)
-    post_request = Net::HTTP::Post.new(uri.path, { "Content-Type" => "application/json" })
-
-    request_body = { "method" => method, "urlPath" => url_path }
-    request_body["headers"] = { "X-Test-Id" => { "equalTo" => test_id } }
-    request_body["queryParameters"] = query_params.transform_values { |v| { "equalTo" => v } } if query_params
-
-    post_request.body = request_body.to_json
-    response = http.request(post_request)
-    result = JSON.parse(response.body)
-    requests = result["requests"] || []
-
-    assert_equal expected, requests.length, "Expected #{expected} requests, found #{requests.length}"
+    @client = Square::Client.new(
+      token: "<token>",
+      base_url: WIREMOCK_BASE_URL
+    )
   end
 
   def test_terminal_actions_create_with_wiremock
     test_id = "terminal.actions.create.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.terminal.actions.create(
+    @client.terminal.actions.create(
       idempotency_key: "thahn-70e75c10-47f7-4ab6-88cc-aaa4076d065e",
       action: {
         device_id: "{{DEVICE_ID}}",
@@ -50,10 +26,11 @@ class TerminalActionsWireTest < Minitest::Test
           reference_id: "user-id-1"
         }
       },
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "terminal.actions.create.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "terminal.actions.create.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -68,9 +45,7 @@ class TerminalActionsWireTest < Minitest::Test
   def test_terminal_actions_search_with_wiremock
     test_id = "terminal.actions.search.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.terminal.actions.search(
+    @client.terminal.actions.search(
       query: {
         filter: {
           created_at: {
@@ -82,10 +57,11 @@ class TerminalActionsWireTest < Minitest::Test
         }
       },
       limit: 2,
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "terminal.actions.search.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "terminal.actions.search.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -100,14 +76,13 @@ class TerminalActionsWireTest < Minitest::Test
   def test_terminal_actions_get_with_wiremock
     test_id = "terminal.actions.get.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.terminal.actions.get(
+    @client.terminal.actions.get(
       action_id: "action_id",
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "terminal.actions.get.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "terminal.actions.get.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -122,14 +97,13 @@ class TerminalActionsWireTest < Minitest::Test
   def test_terminal_actions_cancel_with_wiremock
     test_id = "terminal.actions.cancel.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.terminal.actions.cancel(
+    @client.terminal.actions.cancel(
       action_id: "action_id",
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "terminal.actions.cancel.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "terminal.actions.cancel.0"
+        }
+      }
     )
 
     verify_request_count(

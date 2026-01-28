@@ -26,7 +26,7 @@ module Square
         #
         # @return [Square::Types::ListEmployeeWagesResponse]
         def list(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[employee_id limit cursor]
           query_params = {}
           query_params["employee_id"] = params[:employee_id] if params.key?(:employee_id)
@@ -75,6 +75,7 @@ module Square
         #
         # @return [Square::Types::GetEmployeeWageResponse]
         def get(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
