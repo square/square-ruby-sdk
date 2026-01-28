@@ -34,7 +34,7 @@ class CustomersApiTests < ApiTestBase
       )
 
     # Perform the API call through the SDK function
-    result = @controller.create_customer(body: body)
+    _result = @controller.create_customer(body: body)
 
     # Test response code
     assert_equal(200, @response_catcher.response.status_code)

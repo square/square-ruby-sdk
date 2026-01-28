@@ -159,11 +159,7 @@ describe Square::Payments::Client do
       )
       create_response = client.payments.create(**_create_request.to_h)
 
-      _request = Square::Payments::Types::CompletePaymentRequest.new(
-        payment_id: create_response.payment.id
-      )
-
-      response = client.payments.complete(**_request.to_h)
+      response = client.payments.complete(payment_id: create_response.payment.id)
       refute_nil response.payment
       assert_equal "COMPLETED", response.payment.status
 

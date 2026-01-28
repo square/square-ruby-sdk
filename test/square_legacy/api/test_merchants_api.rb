@@ -23,7 +23,7 @@ class MerchantsApiTests < ApiTestBase
     cursor = nil
 
     # Perform the API call through the SDK function
-    result = @controller.list_merchants(cursor: cursor)
+    _result = @controller.list_merchants(cursor: cursor)
 
     # Test response code
     assert_equal(200, @response_catcher.response.status_code)

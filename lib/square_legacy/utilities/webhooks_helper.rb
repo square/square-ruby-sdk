@@ -10,7 +10,7 @@ module SquareLegacy
 
       # Perform UTF-8 encoding to bytes
       payload_bytes = "#{notification_url}#{request_body}".force_encoding('utf-8')
-      signature_key_bytes = signature_key.force_encoding('utf-8')
+      signature_key_bytes = signature_key.dup.force_encoding('utf-8')
 
       # Compute the hash value
       hmac = OpenSSL::HMAC.digest('sha256', signature_key_bytes, payload_bytes)

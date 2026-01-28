@@ -52,14 +52,15 @@ describe Square::Customers::Client do
         customer_id: "123"
       ).to_h
 
-      assert_equal has_version.keys.length, 2
-      assert_equal missing_version.keys.length, 1
+      assert_equal 2, has_version.keys.length
+      assert_equal 1, missing_version.keys.length
 
-      has_version = has_version.except(:customer_id)
-      missing_version = missing_version.except(:customer_id)
+      # to_h returns string keys, so use string keys with except
+      has_version = has_version.except("customer_id")
+      missing_version = missing_version.except("customer_id")
 
-      assert_equal has_version.keys.length, 1
-      assert_equal missing_version.keys.length, 0
+      assert_equal 1, has_version.keys.length
+      assert_equal 0, missing_version.keys.length
     end
   end
 end

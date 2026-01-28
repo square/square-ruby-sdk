@@ -13,7 +13,7 @@ class LocationsApiTests < ApiTestBase
   def test_list_locations
 
     # Perform the API call through the SDK function
-    result = @controller.list_locations()
+    _result = @controller.list_locations()
 
     # Test response code
     assert_equal(200, @response_catcher.response.status_code)
