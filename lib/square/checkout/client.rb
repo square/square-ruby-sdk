@@ -23,6 +23,7 @@ module Square
       #
       # @return [Square::Types::RetrieveLocationSettingsResponse]
       def retrieve_location_settings(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -56,16 +57,16 @@ module Square
       #
       # @return [Square::Types::UpdateLocationSettingsResponse]
       def update_location_settings(request_options: {}, **params)
-        path_param_names = %i[location_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[location_settings]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Checkout::Types::UpdateLocationSettingsRequest.new(params).to_h
+        non_body_param_names = ["location_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/online-checkout/location-settings/#{params[:location_id]}",
-          body: Square::Checkout::Types::UpdateLocationSettingsRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -93,7 +94,8 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       #
       # @return [Square::Types::RetrieveMerchantSettingsResponse]
-      def retrieve_merchant_settings(request_options: {}, **_params)
+      def retrieve_merchant_settings(request_options: {}, **params)
+        Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -126,14 +128,12 @@ module Square
       #
       # @return [Square::Types::UpdateMerchantSettingsResponse]
       def update_merchant_settings(request_options: {}, **params)
-        body_prop_names = %i[merchant_settings]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/online-checkout/merchant-settings",
-          body: Square::Checkout::Types::UpdateMerchantSettingsRequest.new(body_bag).to_h,
+          body: Square::Checkout::Types::UpdateMerchantSettingsRequest.new(params).to_h,
           request_options: request_options
         )
         begin

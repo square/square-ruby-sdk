@@ -26,7 +26,7 @@ module Square
       #
       # @return [Array[Square::Types::V1Order]]
       def v_1_list_orders(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[order limit batch_token]
         query_params = {}
         query_params["order"] = params[:order] if params.key?(:order)
@@ -67,6 +67,7 @@ module Square
       #
       # @return [Square::Types::V1Order]
       def v_1_retrieve_order(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -102,16 +103,16 @@ module Square
       #
       # @return [Square::Types::V1Order]
       def v_1_update_order(request_options: {}, **params)
-        path_param_names = %i[location_id order_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[action shipped_tracking_number completed_note refunded_note canceled_note]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::V1Transactions::Types::V1UpdateOrderRequest.new(params).to_h
+        non_body_param_names = %w[location_id order_id]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
           path: "v1/#{params[:location_id]}/orders/#{params[:order_id]}",
-          body: Square::V1Transactions::Types::V1UpdateOrderRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin

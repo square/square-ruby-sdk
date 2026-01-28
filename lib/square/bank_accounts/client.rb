@@ -26,7 +26,7 @@ module Square
       #
       # @return [Square::Types::ListBankAccountsResponse]
       def list(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[cursor limit location_id customer_id]
         query_params = {}
         query_params["cursor"] = params[:cursor] if params.key?(:cursor)
@@ -75,14 +75,12 @@ module Square
       #
       # @return [Square::Types::CreateBankAccountResponse]
       def create_bank_account(request_options: {}, **params)
-        body_prop_names = %i[idempotency_key source_id customer_id]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/bank-accounts",
-          body: Square::BankAccounts::Types::CreateBankAccountRequest.new(body_bag).to_h,
+          body: Square::BankAccounts::Types::CreateBankAccountRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -112,6 +110,7 @@ module Square
       #
       # @return [Square::Types::GetBankAccountByV1IdResponse]
       def get_by_v_1_id(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -145,6 +144,7 @@ module Square
       #
       # @return [Square::Types::GetBankAccountResponse]
       def get(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -178,6 +178,7 @@ module Square
       #
       # @return [Square::Types::DisableBankAccountResponse]
       def disable_bank_account(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",

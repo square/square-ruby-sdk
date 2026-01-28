@@ -27,7 +27,7 @@ module Square
         #
         # @return [Square::Types::ListWebhookSubscriptionsResponse]
         def list(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[cursor include_disabled sort_order limit]
           query_params = {}
           query_params["cursor"] = params[:cursor] if params.key?(:cursor)
@@ -76,14 +76,12 @@ module Square
         #
         # @return [Square::Types::CreateWebhookSubscriptionResponse]
         def create(request_options: {}, **params)
-          body_prop_names = %i[idempotency_key subscription]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/webhooks/subscriptions",
-            body: Square::Webhooks::Subscriptions::Types::CreateWebhookSubscriptionRequest.new(body_bag).to_h,
+            body: Square::Webhooks::Subscriptions::Types::CreateWebhookSubscriptionRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -113,6 +111,7 @@ module Square
         #
         # @return [Square::Types::GetWebhookSubscriptionResponse]
         def get(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -146,16 +145,16 @@ module Square
         #
         # @return [Square::Types::UpdateWebhookSubscriptionResponse]
         def update(request_options: {}, **params)
-          path_param_names = %i[subscription_id]
-          body_params = params.except(*path_param_names)
-          body_prop_names = %i[subscription]
-          body_bag = body_params.slice(*body_prop_names)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
+          request_data = Square::Webhooks::Subscriptions::Types::UpdateWebhookSubscriptionRequest.new(params).to_h
+          non_body_param_names = ["subscription_id"]
+          body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "PUT",
             path: "v2/webhooks/subscriptions/#{params[:subscription_id]}",
-            body: Square::Webhooks::Subscriptions::Types::UpdateWebhookSubscriptionRequest.new(body_bag).to_h,
+            body: body,
             request_options: request_options
           )
           begin
@@ -185,6 +184,7 @@ module Square
         #
         # @return [Square::Types::DeleteWebhookSubscriptionResponse]
         def delete(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",
@@ -218,16 +218,16 @@ module Square
         #
         # @return [Square::Types::UpdateWebhookSubscriptionSignatureKeyResponse]
         def update_signature_key(request_options: {}, **params)
-          path_param_names = %i[subscription_id]
-          body_params = params.except(*path_param_names)
-          body_prop_names = %i[idempotency_key]
-          body_bag = body_params.slice(*body_prop_names)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
+          request_data = Square::Webhooks::Subscriptions::Types::UpdateWebhookSubscriptionSignatureKeyRequest.new(params).to_h
+          non_body_param_names = ["subscription_id"]
+          body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/webhooks/subscriptions/#{params[:subscription_id]}/signature-key",
-            body: Square::Webhooks::Subscriptions::Types::UpdateWebhookSubscriptionSignatureKeyRequest.new(body_bag).to_h,
+            body: body,
             request_options: request_options
           )
           begin
@@ -257,16 +257,16 @@ module Square
         #
         # @return [Square::Types::TestWebhookSubscriptionResponse]
         def test(request_options: {}, **params)
-          path_param_names = %i[subscription_id]
-          body_params = params.except(*path_param_names)
-          body_prop_names = %i[event_type]
-          body_bag = body_params.slice(*body_prop_names)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
+          request_data = Square::Webhooks::Subscriptions::Types::TestWebhookSubscriptionRequest.new(params).to_h
+          non_body_param_names = ["subscription_id"]
+          body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/webhooks/subscriptions/#{params[:subscription_id]}/test",
-            body: Square::Webhooks::Subscriptions::Types::TestWebhookSubscriptionRequest.new(body_bag).to_h,
+            body: body,
             request_options: request_options
           )
           begin

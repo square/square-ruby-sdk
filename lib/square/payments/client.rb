@@ -42,7 +42,7 @@ module Square
       #
       # @return [Square::Types::ListPaymentsResponse]
       def list(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[begin_time end_time sort_order cursor location_id total last_4 card_brand limit is_offline_payment offline_begin_time offline_end_time updated_at_begin_time updated_at_end_time sort_field]
         query_params = {}
         query_params["begin_time"] = params[:begin_time] if params.key?(:begin_time)
@@ -109,14 +109,12 @@ module Square
       #
       # @return [Square::Types::CreatePaymentResponse]
       def create(request_options: {}, **params)
-        body_prop_names = %i[source_id idempotency_key amount_money tip_money app_fee_money delay_duration delay_action autocomplete order_id customer_id location_id team_member_id reference_id verification_token accept_partial_authorization buyer_email_address buyer_phone_number billing_address shipping_address note statement_description_identifier cash_details external_details customer_details offline_payment_details]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/payments",
-          body: Square::Payments::Types::CreatePaymentRequest.new(body_bag).to_h,
+          body: Square::Payments::Types::CreatePaymentRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -155,14 +153,12 @@ module Square
       #
       # @return [Square::Types::CancelPaymentByIdempotencyKeyResponse]
       def cancel_by_idempotency_key(request_options: {}, **params)
-        body_prop_names = %i[idempotency_key]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/payments/cancel",
-          body: Square::Payments::Types::CancelPaymentByIdempotencyKeyRequest.new(body_bag).to_h,
+          body: Square::Payments::Types::CancelPaymentByIdempotencyKeyRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -192,6 +188,7 @@ module Square
       #
       # @return [Square::Types::GetPaymentResponse]
       def get(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -226,16 +223,16 @@ module Square
       #
       # @return [Square::Types::UpdatePaymentResponse]
       def update(request_options: {}, **params)
-        path_param_names = %i[payment_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[payment idempotency_key]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Payments::Types::UpdatePaymentRequest.new(params).to_h
+        non_body_param_names = ["payment_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/payments/#{params[:payment_id]}",
-          body: Square::Payments::Types::UpdatePaymentRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -266,6 +263,7 @@ module Square
       #
       # @return [Square::Types::CancelPaymentResponse]
       def cancel(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
@@ -302,16 +300,16 @@ module Square
       #
       # @return [Square::Types::CompletePaymentResponse]
       def complete(request_options: {}, **params)
-        path_param_names = %i[payment_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[version_token]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Payments::Types::CompletePaymentRequest.new(params).to_h
+        non_body_param_names = ["payment_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/payments/#{params[:payment_id]}/complete",
-          body: Square::Payments::Types::CompletePaymentRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin

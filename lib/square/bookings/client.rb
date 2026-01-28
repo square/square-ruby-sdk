@@ -33,7 +33,7 @@ module Square
       #
       # @return [Square::Types::ListBookingsResponse]
       def list(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[limit cursor customer_id team_member_id location_id start_at_min start_at_max]
         query_params = {}
         query_params["limit"] = params[:limit] if params.key?(:limit)
@@ -100,14 +100,12 @@ module Square
       #
       # @return [Square::Types::CreateBookingResponse]
       def create(request_options: {}, **params)
-        body_prop_names = %i[idempotency_key booking]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/bookings",
-          body: Square::Bookings::Types::CreateBookingRequest.new(body_bag).to_h,
+          body: Square::Bookings::Types::CreateBookingRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -140,14 +138,12 @@ module Square
       #
       # @return [Square::Types::SearchAvailabilityResponse]
       def search_availability(request_options: {}, **params)
-        body_prop_names = %i[query]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/bookings/availability/search",
-          body: Square::Bookings::Types::SearchAvailabilityRequest.new(body_bag).to_h,
+          body: Square::Bookings::Types::SearchAvailabilityRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -180,14 +176,12 @@ module Square
       #
       # @return [Square::Types::BulkRetrieveBookingsResponse]
       def bulk_retrieve_bookings(request_options: {}, **params)
-        body_prop_names = %i[booking_ids]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/bookings/bulk-retrieve",
-          body: Square::Bookings::Types::BulkRetrieveBookingsRequest.new(body_bag).to_h,
+          body: Square::Bookings::Types::BulkRetrieveBookingsRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -215,7 +209,8 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       #
       # @return [Square::Types::GetBusinessBookingProfileResponse]
-      def get_business_profile(request_options: {}, **_params)
+      def get_business_profile(request_options: {}, **params)
+        Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -249,6 +244,7 @@ module Square
       #
       # @return [Square::Types::RetrieveLocationBookingProfileResponse]
       def retrieve_location_booking_profile(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -281,14 +277,12 @@ module Square
       #
       # @return [Square::Types::BulkRetrieveTeamMemberBookingProfilesResponse]
       def bulk_retrieve_team_member_booking_profiles(request_options: {}, **params)
-        body_prop_names = %i[team_member_ids]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/bookings/team-member-booking-profiles/bulk-retrieve",
-          body: Square::Bookings::Types::BulkRetrieveTeamMemberBookingProfilesRequest.new(body_bag).to_h,
+          body: Square::Bookings::Types::BulkRetrieveTeamMemberBookingProfilesRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -322,6 +316,7 @@ module Square
       #
       # @return [Square::Types::GetBookingResponse]
       def get(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -363,16 +358,16 @@ module Square
       #
       # @return [Square::Types::UpdateBookingResponse]
       def update(request_options: {}, **params)
-        path_param_names = %i[booking_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[idempotency_key booking]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Bookings::Types::UpdateBookingRequest.new(params).to_h
+        non_body_param_names = ["booking_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/bookings/#{params[:booking_id]}",
-          body: Square::Bookings::Types::UpdateBookingRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -410,16 +405,16 @@ module Square
       #
       # @return [Square::Types::CancelBookingResponse]
       def cancel(request_options: {}, **params)
-        path_param_names = %i[booking_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[idempotency_key booking_version]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Bookings::Types::CancelBookingRequest.new(params).to_h
+        non_body_param_names = ["booking_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/bookings/#{params[:booking_id]}/cancel",
-          body: Square::Bookings::Types::CancelBookingRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin

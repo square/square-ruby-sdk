@@ -30,14 +30,12 @@ module Square
         #
         # @return [Square::Types::CreateLoyaltyRewardResponse]
         def create(request_options: {}, **params)
-          body_prop_names = %i[reward idempotency_key]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/loyalty/rewards",
-            body: Square::Loyalty::Rewards::Types::CreateLoyaltyRewardRequest.new(body_bag).to_h,
+            body: Square::Loyalty::Rewards::Types::CreateLoyaltyRewardRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -73,14 +71,12 @@ module Square
         #
         # @return [Square::Types::SearchLoyaltyRewardsResponse]
         def search(request_options: {}, **params)
-          body_prop_names = %i[query limit cursor]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/loyalty/rewards/search",
-            body: Square::Loyalty::Rewards::Types::SearchLoyaltyRewardsRequest.new(body_bag).to_h,
+            body: Square::Loyalty::Rewards::Types::SearchLoyaltyRewardsRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -110,6 +106,7 @@ module Square
         #
         # @return [Square::Types::GetLoyaltyRewardResponse]
         def get(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -151,6 +148,7 @@ module Square
         #
         # @return [Square::Types::DeleteLoyaltyRewardResponse]
         def delete(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",
@@ -194,16 +192,16 @@ module Square
         #
         # @return [Square::Types::RedeemLoyaltyRewardResponse]
         def redeem(request_options: {}, **params)
-          path_param_names = %i[reward_id]
-          body_params = params.except(*path_param_names)
-          body_prop_names = %i[idempotency_key location_id]
-          body_bag = body_params.slice(*body_prop_names)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
+          request_data = Square::Loyalty::Rewards::Types::RedeemLoyaltyRewardRequest.new(params).to_h
+          non_body_param_names = ["reward_id"]
+          body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/loyalty/rewards/#{params[:reward_id]}/redeem",
-            body: Square::Loyalty::Rewards::Types::RedeemLoyaltyRewardRequest.new(body_bag).to_h,
+            body: body,
             request_options: request_options
           )
           begin

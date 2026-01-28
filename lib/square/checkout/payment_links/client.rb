@@ -25,7 +25,7 @@ module Square
         #
         # @return [Square::Types::ListPaymentLinksResponse]
         def list(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[cursor limit]
           query_params = {}
           query_params["cursor"] = params[:cursor] if params.key?(:cursor)
@@ -73,14 +73,12 @@ module Square
         #
         # @return [Square::Types::CreatePaymentLinkResponse]
         def create(request_options: {}, **params)
-          body_prop_names = %i[idempotency_key description quick_pay order checkout_options pre_populated_data payment_note]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/online-checkout/payment-links",
-            body: Square::Checkout::PaymentLinks::Types::CreatePaymentLinkRequest.new(body_bag).to_h,
+            body: Square::Checkout::PaymentLinks::Types::CreatePaymentLinkRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -110,6 +108,7 @@ module Square
         #
         # @return [Square::Types::GetPaymentLinkResponse]
         def get(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -145,16 +144,16 @@ module Square
         #
         # @return [Square::Types::UpdatePaymentLinkResponse]
         def update(request_options: {}, **params)
-          path_param_names = %i[id]
-          body_params = params.except(*path_param_names)
-          body_prop_names = %i[payment_link]
-          body_bag = body_params.slice(*body_prop_names)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
+          request_data = Square::Checkout::PaymentLinks::Types::UpdatePaymentLinkRequest.new(params).to_h
+          non_body_param_names = ["id"]
+          body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "PUT",
             path: "v2/online-checkout/payment-links/#{params[:id]}",
-            body: Square::Checkout::PaymentLinks::Types::UpdatePaymentLinkRequest.new(body_bag).to_h,
+            body: body,
             request_options: request_options
           )
           begin
@@ -184,6 +183,7 @@ module Square
         #
         # @return [Square::Types::DeletePaymentLinkResponse]
         def delete(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",

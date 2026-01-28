@@ -27,7 +27,7 @@ module Square
         #
         # @return [Square::Types::ListDeviceCodesResponse]
         def list(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[cursor location_id product_type status]
           query_params = {}
           query_params["cursor"] = params[:cursor] if params.key?(:cursor)
@@ -77,14 +77,12 @@ module Square
         #
         # @return [Square::Types::CreateDeviceCodeResponse]
         def create(request_options: {}, **params)
-          body_prop_names = %i[idempotency_key device_code]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/devices/codes",
-            body: Square::Devices::Codes::Types::CreateDeviceCodeRequest.new(body_bag).to_h,
+            body: Square::Devices::Codes::Types::CreateDeviceCodeRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -114,6 +112,7 @@ module Square
         #
         # @return [Square::Types::GetDeviceCodeResponse]
         def get(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",

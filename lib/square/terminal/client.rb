@@ -27,6 +27,7 @@ module Square
       #
       # @return [Square::Types::DismissTerminalActionResponse]
       def dismiss_terminal_action(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
@@ -60,6 +61,7 @@ module Square
       #
       # @return [Square::Types::DismissTerminalCheckoutResponse]
       def dismiss_terminal_checkout(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
@@ -93,6 +95,7 @@ module Square
       #
       # @return [Square::Types::DismissTerminalRefundResponse]
       def dismiss_terminal_refund(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",

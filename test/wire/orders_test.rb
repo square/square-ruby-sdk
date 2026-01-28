@@ -1,45 +1,21 @@
 # frozen_string_literal: true
 
-require_relative "wire_helper"
-require "net/http"
-require "json"
-require "uri"
-require "square"
+require_relative "wiremock_test_case"
 
-class OrdersWireTest < Minitest::Test
-  WIREMOCK_BASE_URL = "http://localhost:8080"
-  WIREMOCK_ADMIN_URL = "http://localhost:8080/__admin"
-
+class OrdersWireTest < WireMockTestCase
   def setup
     super
-    return if ENV["RUN_WIRE_TESTS"] == "true"
 
-    skip "Wire tests are disabled by default. Set RUN_WIRE_TESTS=true to enable them."
-  end
-
-  def verify_request_count(test_id:, method:, url_path:, expected:, query_params: nil)
-    uri = URI("#{WIREMOCK_ADMIN_URL}/requests/find")
-    http = Net::HTTP.new(uri.host, uri.port)
-    post_request = Net::HTTP::Post.new(uri.path, { "Content-Type" => "application/json" })
-
-    request_body = { "method" => method, "urlPath" => url_path }
-    request_body["headers"] = { "X-Test-Id" => { "equalTo" => test_id } }
-    request_body["queryParameters"] = query_params.transform_values { |v| { "equalTo" => v } } if query_params
-
-    post_request.body = request_body.to_json
-    response = http.request(post_request)
-    result = JSON.parse(response.body)
-    requests = result["requests"] || []
-
-    assert_equal expected, requests.length, "Expected #{expected} requests, found #{requests.length}"
+    @client = Square::Client.new(
+      token: "<token>",
+      base_url: WIREMOCK_BASE_URL
+    )
   end
 
   def test_orders_create_with_wiremock
     test_id = "orders.create.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.orders.create(
+    @client.orders.create(
       order: {
         location_id: "057P5VYJ4A5X1",
         reference_id: "my-order-001",
@@ -86,10 +62,11 @@ class OrdersWireTest < Minitest::Test
         }]
       },
       idempotency_key: "8193148c-9586-11e6-99f9-28cfe92138cf",
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "orders.create.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "orders.create.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -104,15 +81,14 @@ class OrdersWireTest < Minitest::Test
   def test_orders_batch_get_with_wiremock
     test_id = "orders.batch_get.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.orders.batch_get(
+    @client.orders.batch_get(
       location_id: "057P5VYJ4A5X1",
       order_ids: %w[CAISEM82RcpmcFBM0TfOyiHV3es CAISENgvlJ6jLWAzERDzjyHVybY],
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "orders.batch_get.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "orders.batch_get.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -127,9 +103,7 @@ class OrdersWireTest < Minitest::Test
   def test_orders_calculate_with_wiremock
     test_id = "orders.calculate.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.orders.calculate(
+    @client.orders.calculate(
       order: {
         location_id: "D7AVYMEAPJ3A3",
         line_items: [{
@@ -153,10 +127,11 @@ class OrdersWireTest < Minitest::Test
           scope: "ORDER"
         }]
       },
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "orders.calculate.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "orders.calculate.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -171,16 +146,15 @@ class OrdersWireTest < Minitest::Test
   def test_orders_clone_with_wiremock
     test_id = "orders.clone.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.orders.clone(
+    @client.orders.clone(
       order_id: "ZAISEM52YcpmcWAzERDOyiWS123",
       version: 3,
       idempotency_key: "UNIQUE_STRING",
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "orders.clone.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "orders.clone.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -195,9 +169,7 @@ class OrdersWireTest < Minitest::Test
   def test_orders_search_with_wiremock
     test_id = "orders.search.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.orders.search(
+    @client.orders.search(
       location_ids: %w[057P5VYJ4A5X1 18YC4JDH91E1H],
       query: {
         filter: {
@@ -218,10 +190,11 @@ class OrdersWireTest < Minitest::Test
       },
       limit: 3,
       return_entries: true,
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "orders.search.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "orders.search.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -236,14 +209,13 @@ class OrdersWireTest < Minitest::Test
   def test_orders_get_with_wiremock
     test_id = "orders.get.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.orders.get(
+    @client.orders.get(
       order_id: "order_id",
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "orders.get.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "orders.get.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -258,9 +230,7 @@ class OrdersWireTest < Minitest::Test
   def test_orders_update_with_wiremock
     test_id = "orders.update.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.orders.update(
+    @client.orders.update(
       order_id: "order_id",
       order: {
         location_id: "location_id",
@@ -277,10 +247,11 @@ class OrdersWireTest < Minitest::Test
       },
       fields_to_clear: ["discounts"],
       idempotency_key: "UNIQUE_STRING",
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "orders.update.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "orders.update.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -295,16 +266,15 @@ class OrdersWireTest < Minitest::Test
   def test_orders_pay_with_wiremock
     test_id = "orders.pay.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.orders.pay(
+    @client.orders.pay(
       order_id: "order_id",
       idempotency_key: "c043a359-7ad9-4136-82a9-c3f1d66dcbff",
       payment_ids: %w[EnZdNAlWCmfh6Mt5FMNST1o7taB 0LRiVlbXVwe8ozu4KbZxd12mvaB],
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "orders.pay.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "orders.pay.0"
+        }
+      }
     )
 
     verify_request_count(

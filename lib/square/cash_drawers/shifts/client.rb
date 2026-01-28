@@ -30,7 +30,7 @@ module Square
         #
         # @return [Square::Types::ListCashDrawerShiftsResponse]
         def list(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[location_id sort_order begin_time end_time limit cursor]
           query_params = {}
           query_params["location_id"] = params[:location_id] if params.key?(:location_id)
@@ -85,7 +85,7 @@ module Square
         #
         # @return [Square::Types::GetCashDrawerShiftResponse]
         def get(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[location_id]
           query_params = {}
           query_params["location_id"] = params[:location_id] if params.key?(:location_id)
@@ -128,7 +128,7 @@ module Square
         #
         # @return [Square::Types::ListCashDrawerShiftEventsResponse]
         def list_events(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[location_id limit cursor]
           query_params = {}
           query_params["location_id"] = params[:location_id] if params.key?(:location_id)

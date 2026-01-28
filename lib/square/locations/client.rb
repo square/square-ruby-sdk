@@ -22,7 +22,8 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       #
       # @return [Square::Types::ListLocationsResponse]
-      def list(request_options: {}, **_params)
+      def list(request_options: {}, **params)
+        Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -61,14 +62,12 @@ module Square
       #
       # @return [Square::Types::CreateLocationResponse]
       def create(request_options: {}, **params)
-        body_prop_names = %i[location]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/locations",
-          body: Square::Locations::Types::CreateLocationRequest.new(body_bag).to_h,
+          body: Square::Locations::Types::CreateLocationRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -100,6 +99,7 @@ module Square
       #
       # @return [Square::Types::GetLocationResponse]
       def get(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -133,16 +133,16 @@ module Square
       #
       # @return [Square::Types::UpdateLocationResponse]
       def update(request_options: {}, **params)
-        path_param_names = %i[location_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[location]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Locations::Types::UpdateLocationRequest.new(params).to_h
+        non_body_param_names = ["location_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/locations/#{params[:location_id]}",
-          body: Square::Locations::Types::UpdateLocationRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -179,16 +179,16 @@ module Square
       #
       # @return [Square::Types::CreateCheckoutResponse]
       def checkouts(request_options: {}, **params)
-        path_param_names = %i[location_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[idempotency_key order ask_for_shipping_address merchant_support_email pre_populate_buyer_email pre_populate_shipping_address redirect_url additional_recipients note]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Locations::Types::CreateCheckoutRequest.new(params).to_h
+        non_body_param_names = ["location_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/locations/#{params[:location_id]}/checkouts",
-          body: Square::Locations::Types::CreateCheckoutRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin

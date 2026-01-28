@@ -35,14 +35,12 @@ module Square
       #
       # @return [Square::Types::RevokeTokenResponse]
       def revoke_token(request_options: {}, **params)
-        body_prop_names = %i[client_id access_token merchant_id revoke_only_access_token]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "oauth2/revoke",
-          body: Square::OAuth::Types::RevokeTokenRequest.new(body_bag).to_h,
+          body: Square::OAuth::Types::RevokeTokenRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -91,14 +89,12 @@ module Square
       #
       # @return [Square::Types::ObtainTokenResponse]
       def obtain_token(request_options: {}, **params)
-        body_prop_names = %i[client_id client_secret code redirect_uri grant_type refresh_token migration_token scopes short_lived code_verifier use_jwt]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "oauth2/token",
-          body: Square::OAuth::Types::ObtainTokenRequest.new(body_bag).to_h,
+          body: Square::OAuth::Types::ObtainTokenRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -142,7 +138,8 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       #
       # @return [Square::Types::RetrieveTokenStatusResponse]
-      def retrieve_token_status(request_options: {}, **_params)
+      def retrieve_token_status(request_options: {}, **params)
+        Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
@@ -172,7 +169,8 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       #
       # @return [untyped]
-      def authorize(request_options: {}, **_params)
+      def authorize(request_options: {}, **params)
+        Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",

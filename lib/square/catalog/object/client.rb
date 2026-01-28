@@ -27,14 +27,12 @@ module Square
         #
         # @return [Square::Types::UpsertCatalogObjectResponse]
         def upsert(request_options: {}, **params)
-          body_prop_names = %i[idempotency_key object]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/catalog/object",
-            body: Square::Catalog::Object_::Types::UpsertCatalogObjectRequest.new(body_bag).to_h,
+            body: Square::Catalog::Object_::Types::UpsertCatalogObjectRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -73,7 +71,7 @@ module Square
         #
         # @return [Square::Types::GetCatalogObjectResponse]
         def get(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[include_related_objects catalog_version include_category_path_to_root]
           query_params = {}
           query_params["include_related_objects"] = params[:include_related_objects] if params.key?(:include_related_objects)
@@ -124,6 +122,7 @@ module Square
         #
         # @return [Square::Types::DeleteCatalogObjectResponse]
         def delete(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",

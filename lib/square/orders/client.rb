@@ -28,6 +28,7 @@ module Square
       #
       # @return [Square::Types::CreateOrderResponse]
       def create(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
@@ -63,14 +64,12 @@ module Square
       #
       # @return [Square::Types::BatchGetOrdersResponse]
       def batch_get(request_options: {}, **params)
-        body_prop_names = %i[location_id order_ids]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/orders/batch-retrieve",
-          body: Square::Orders::Types::BatchGetOrdersRequest.new(body_bag).to_h,
+          body: Square::Orders::Types::BatchGetOrdersRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -99,14 +98,12 @@ module Square
       #
       # @return [Square::Types::CalculateOrderResponse]
       def calculate(request_options: {}, **params)
-        body_prop_names = %i[order proposed_rewards]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/orders/calculate",
-          body: Square::Orders::Types::CalculateOrderRequest.new(body_bag).to_h,
+          body: Square::Orders::Types::CalculateOrderRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -136,14 +133,12 @@ module Square
       #
       # @return [Square::Types::CloneOrderResponse]
       def clone(request_options: {}, **params)
-        body_prop_names = %i[order_id version idempotency_key]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/orders/clone",
-          body: Square::Orders::Types::CloneOrderRequest.new(body_bag).to_h,
+          body: Square::Orders::Types::CloneOrderRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -188,14 +183,12 @@ module Square
       #
       # @return [Square::Types::SearchOrdersResponse]
       def search(request_options: {}, **params)
-        body_prop_names = %i[location_ids cursor query limit return_entries]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/orders/search",
-          body: Square::Orders::Types::SearchOrdersRequest.new(body_bag).to_h,
+          body: Square::Orders::Types::SearchOrdersRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -225,6 +218,7 @@ module Square
       #
       # @return [Square::Types::GetOrderResponse]
       def get(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -274,16 +268,16 @@ module Square
       #
       # @return [Square::Types::UpdateOrderResponse]
       def update(request_options: {}, **params)
-        path_param_names = %i[order_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[order fields_to_clear idempotency_key]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Orders::Types::UpdateOrderRequest.new(params).to_h
+        non_body_param_names = ["order_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/orders/#{params[:order_id]}",
-          body: Square::Orders::Types::UpdateOrderRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -328,16 +322,16 @@ module Square
       #
       # @return [Square::Types::PayOrderResponse]
       def pay(request_options: {}, **params)
-        path_param_names = %i[order_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[idempotency_key order_version payment_ids]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Orders::Types::PayOrderRequest.new(params).to_h
+        non_body_param_names = ["order_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/orders/#{params[:order_id]}/pay",
-          body: Square::Orders::Types::PayOrderRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin

@@ -34,7 +34,7 @@ module Square
         #
         # @return [Square::Types::ListGiftCardActivitiesResponse]
         def list(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[gift_card_id type location_id begin_time end_time limit cursor sort_order]
           query_params = {}
           query_params["gift_card_id"] = params[:gift_card_id] if params.key?(:gift_card_id)
@@ -88,14 +88,12 @@ module Square
         #
         # @return [Square::Types::CreateGiftCardActivityResponse]
         def create(request_options: {}, **params)
-          body_prop_names = %i[idempotency_key gift_card_activity]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/gift-cards/activities",
-            body: Square::GiftCards::Activities::Types::CreateGiftCardActivityRequest.new(body_bag).to_h,
+            body: Square::GiftCards::Activities::Types::CreateGiftCardActivityRequest.new(params).to_h,
             request_options: request_options
           )
           begin

@@ -38,7 +38,7 @@ module Square
       #
       # @return [Square::Types::ListPaymentRefundsResponse]
       def list(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[begin_time end_time sort_order cursor location_id status source_type limit updated_at_begin_time updated_at_end_time sort_field]
         query_params = {}
         query_params["begin_time"] = params[:begin_time] if params.key?(:begin_time)
@@ -97,14 +97,12 @@ module Square
       #
       # @return [Square::Types::RefundPaymentResponse]
       def refund_payment(request_options: {}, **params)
-        body_prop_names = %i[idempotency_key amount_money app_fee_money payment_id destination_id unlinked location_id customer_id reason payment_version_token team_member_id cash_details external_details]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/refunds",
-          body: Square::Refunds::Types::RefundPaymentRequest.new(body_bag).to_h,
+          body: Square::Refunds::Types::RefundPaymentRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -134,6 +132,7 @@ module Square
       #
       # @return [Square::Types::GetPaymentRefundResponse]
       def get(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",

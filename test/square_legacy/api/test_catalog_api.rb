@@ -15,7 +15,7 @@ class CatalogApiTests < ApiTestBase
   def test_test_catalog_info()
 
     # Perform the API call through the SDK function
-    result = @controller.catalog_info()
+    _result = @controller.catalog_info()
 
     # Test response code
     assert_equal(200, @response_catcher.response.status_code)
@@ -42,7 +42,7 @@ class CatalogApiTests < ApiTestBase
     types = nil
 
     # Perform the API call through the SDK function
-    result = @controller.list_catalog(cursor: cursor, types: types)
+    _result = @controller.list_catalog(cursor: cursor, types: types)
 
     # Test response code
     assert_equal(200, @response_catcher.response.status_code)

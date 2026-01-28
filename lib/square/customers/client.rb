@@ -31,7 +31,7 @@ module Square
       #
       # @return [Square::Types::ListCustomersResponse]
       def list(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[cursor limit sort_field sort_order count]
         query_params = {}
         query_params["cursor"] = params[:cursor] if params.key?(:cursor)
@@ -90,14 +90,12 @@ module Square
       #
       # @return [Square::Types::CreateCustomerResponse]
       def create(request_options: {}, **params)
-        body_prop_names = %i[idempotency_key given_name family_name company_name nickname email_address address phone_number reference_id note birthday tax_ids]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/customers",
-          body: Square::Customers::Types::CreateCustomerRequest.new(body_bag).to_h,
+          body: Square::Customers::Types::CreateCustomerRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -136,14 +134,12 @@ module Square
       #
       # @return [Square::Types::BulkCreateCustomersResponse]
       def batch_create(request_options: {}, **params)
-        body_prop_names = %i[customers]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/customers/bulk-create",
-          body: Square::Customers::Types::BulkCreateCustomersRequest.new(body_bag).to_h,
+          body: Square::Customers::Types::BulkCreateCustomersRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -174,14 +170,12 @@ module Square
       #
       # @return [Square::Types::BulkDeleteCustomersResponse]
       def bulk_delete_customers(request_options: {}, **params)
-        body_prop_names = %i[customer_ids]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/customers/bulk-delete",
-          body: Square::Customers::Types::BulkDeleteCustomersRequest.new(body_bag).to_h,
+          body: Square::Customers::Types::BulkDeleteCustomersRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -212,14 +206,12 @@ module Square
       #
       # @return [Square::Types::BulkRetrieveCustomersResponse]
       def bulk_retrieve_customers(request_options: {}, **params)
-        body_prop_names = %i[customer_ids]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/customers/bulk-retrieve",
-          body: Square::Customers::Types::BulkRetrieveCustomersRequest.new(body_bag).to_h,
+          body: Square::Customers::Types::BulkRetrieveCustomersRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -250,14 +242,12 @@ module Square
       #
       # @return [Square::Types::BulkUpdateCustomersResponse]
       def bulk_update_customers(request_options: {}, **params)
-        body_prop_names = %i[customers]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/customers/bulk-update",
-          body: Square::Customers::Types::BulkUpdateCustomersRequest.new(body_bag).to_h,
+          body: Square::Customers::Types::BulkUpdateCustomersRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -294,14 +284,12 @@ module Square
       #
       # @return [Square::Types::SearchCustomersResponse]
       def search(request_options: {}, **params)
-        body_prop_names = %i[cursor limit query count]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/customers/search",
-          body: Square::Customers::Types::SearchCustomersRequest.new(body_bag).to_h,
+          body: Square::Customers::Types::SearchCustomersRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -331,6 +319,7 @@ module Square
       #
       # @return [Square::Types::GetCustomerResponse]
       def get(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -369,16 +358,16 @@ module Square
       #
       # @return [Square::Types::UpdateCustomerResponse]
       def update(request_options: {}, **params)
-        path_param_names = %i[customer_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[given_name family_name company_name nickname email_address address phone_number reference_id note birthday version tax_ids]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Customers::Types::UpdateCustomerRequest.new(params).to_h
+        non_body_param_names = ["customer_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/customers/#{params[:customer_id]}",
-          body: Square::Customers::Types::UpdateCustomerRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -412,7 +401,7 @@ module Square
       #
       # @return [Square::Types::DeleteCustomerResponse]
       def delete(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[version]
         query_params = {}
         query_params["version"] = params[:version] if params.key?(:version)

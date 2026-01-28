@@ -29,14 +29,12 @@ module Square
       #
       # @return [Square::Types::SearchLoyaltyEventsResponse]
       def search_events(request_options: {}, **params)
-        body_prop_names = %i[query limit cursor]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/loyalty/events/search",
-          body: Square::Loyalty::Types::SearchLoyaltyEventsRequest.new(body_bag).to_h,
+          body: Square::Loyalty::Types::SearchLoyaltyEventsRequest.new(params).to_h,
           request_options: request_options
         )
         begin

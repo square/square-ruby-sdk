@@ -27,7 +27,7 @@ module Square
       #
       # @return [Square::Types::ListInvoicesResponse]
       def list(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[location_id cursor limit]
         query_params = {}
         query_params["location_id"] = params[:location_id] if params.key?(:location_id)
@@ -80,14 +80,12 @@ module Square
       #
       # @return [Square::Types::CreateInvoiceResponse]
       def create(request_options: {}, **params)
-        body_prop_names = %i[invoice idempotency_key]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/invoices",
-          body: Square::Invoices::Types::CreateInvoiceRequest.new(body_bag).to_h,
+          body: Square::Invoices::Types::CreateInvoiceRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -122,14 +120,12 @@ module Square
       #
       # @return [Square::Types::SearchInvoicesResponse]
       def search(request_options: {}, **params)
-        body_prop_names = %i[query limit cursor]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/invoices/search",
-          body: Square::Invoices::Types::SearchInvoicesRequest.new(body_bag).to_h,
+          body: Square::Invoices::Types::SearchInvoicesRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -159,6 +155,7 @@ module Square
       #
       # @return [Square::Types::GetInvoiceResponse]
       def get(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -195,16 +192,16 @@ module Square
       #
       # @return [Square::Types::UpdateInvoiceResponse]
       def update(request_options: {}, **params)
-        path_param_names = %i[invoice_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[invoice idempotency_key fields_to_clear]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Invoices::Types::UpdateInvoiceRequest.new(params).to_h
+        non_body_param_names = ["invoice_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/invoices/#{params[:invoice_id]}",
-          body: Square::Invoices::Types::UpdateInvoiceRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -237,7 +234,7 @@ module Square
       #
       # @return [Square::Types::DeleteInvoiceResponse]
       def delete(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[version]
         query_params = {}
         query_params["version"] = params[:version] if params.key?(:version)
@@ -285,6 +282,7 @@ module Square
       #
       # @return [Square::Types::CreateInvoiceAttachmentResponse]
       def create_invoice_attachment(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         body = Internal::Multipart::FormData.new
 
         if params[:request]
@@ -332,6 +330,7 @@ module Square
       #
       # @return [Square::Types::DeleteInvoiceAttachmentResponse]
       def delete_invoice_attachment(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "DELETE",
@@ -369,16 +368,16 @@ module Square
       #
       # @return [Square::Types::CancelInvoiceResponse]
       def cancel(request_options: {}, **params)
-        path_param_names = %i[invoice_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[version]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Invoices::Types::CancelInvoiceRequest.new(params).to_h
+        non_body_param_names = ["invoice_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/invoices/#{params[:invoice_id]}/cancel",
-          body: Square::Invoices::Types::CancelInvoiceRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin
@@ -421,16 +420,16 @@ module Square
       #
       # @return [Square::Types::PublishInvoiceResponse]
       def publish(request_options: {}, **params)
-        path_param_names = %i[invoice_id]
-        body_params = params.except(*path_param_names)
-        body_prop_names = %i[version idempotency_key]
-        body_bag = body_params.slice(*body_prop_names)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
+        request_data = Square::Invoices::Types::PublishInvoiceRequest.new(params).to_h
+        non_body_param_names = ["invoice_id"]
+        body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/invoices/#{params[:invoice_id]}/publish",
-          body: Square::Invoices::Types::PublishInvoiceRequest.new(body_bag).to_h,
+          body: body,
           request_options: request_options
         )
         begin

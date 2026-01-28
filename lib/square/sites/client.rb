@@ -27,7 +27,8 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       #
       # @return [Square::Types::ListSitesResponse]
-      def list(request_options: {}, **_params)
+      def list(request_options: {}, **params)
+        Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",

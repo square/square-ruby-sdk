@@ -28,6 +28,7 @@ module Square
       #
       # @return [Square::Types::CreateTeamMemberResponse]
       def create(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
@@ -67,14 +68,12 @@ module Square
       #
       # @return [Square::Types::BatchCreateTeamMembersResponse]
       def batch_create(request_options: {}, **params)
-        body_prop_names = %i[team_members]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/team-members/bulk-create",
-          body: Square::TeamMembers::Types::BatchCreateTeamMembersRequest.new(body_bag).to_h,
+          body: Square::TeamMembers::Types::BatchCreateTeamMembersRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -108,14 +107,12 @@ module Square
       #
       # @return [Square::Types::BatchUpdateTeamMembersResponse]
       def batch_update(request_options: {}, **params)
-        body_prop_names = %i[team_members]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/team-members/bulk-update",
-          body: Square::TeamMembers::Types::BatchUpdateTeamMembersRequest.new(body_bag).to_h,
+          body: Square::TeamMembers::Types::BatchUpdateTeamMembersRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -146,14 +143,12 @@ module Square
       #
       # @return [Square::Types::SearchTeamMembersResponse]
       def search(request_options: {}, **params)
-        body_prop_names = %i[query limit cursor]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/team-members/search",
-          body: Square::TeamMembers::Types::SearchTeamMembersRequest.new(body_bag).to_h,
+          body: Square::TeamMembers::Types::SearchTeamMembersRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -185,6 +180,7 @@ module Square
       #
       # @return [Square::Types::GetTeamMemberResponse]
       def get(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -220,6 +216,7 @@ module Square
       #
       # @return [Square::Types::UpdateTeamMemberResponse]
       def update(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         path_param_names = %i[team_member_id]
         body_params = params.except(*path_param_names)
 

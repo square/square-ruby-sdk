@@ -28,7 +28,7 @@ module Square
       #
       # @return [Square::Types::ListCardsResponse]
       def list(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[cursor customer_id include_disabled reference_id sort_order]
         query_params = {}
         query_params["cursor"] = params[:cursor] if params.key?(:cursor)
@@ -78,14 +78,12 @@ module Square
       #
       # @return [Square::Types::CreateCardResponse]
       def create(request_options: {}, **params)
-        body_prop_names = %i[idempotency_key source_id verification_token card]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/cards",
-          body: Square::Cards::Types::CreateCardRequest.new(body_bag).to_h,
+          body: Square::Cards::Types::CreateCardRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -115,6 +113,7 @@ module Square
       #
       # @return [Square::Types::GetCardResponse]
       def get(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -149,6 +148,7 @@ module Square
       #
       # @return [Square::Types::DisableCardResponse]
       def disable(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",

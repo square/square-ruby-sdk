@@ -40,14 +40,12 @@ module Square
         #
         # @return [Square::Types::CreateShiftResponse]
         def create(request_options: {}, **params)
-          body_prop_names = %i[idempotency_key shift]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/labor/shifts",
-            body: Square::Labor::Shifts::Types::CreateShiftRequest.new(body_bag).to_h,
+            body: Square::Labor::Shifts::Types::CreateShiftRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -89,14 +87,12 @@ module Square
         #
         # @return [Square::Types::SearchShiftsResponse]
         def search(request_options: {}, **params)
-          body_prop_names = %i[query limit cursor]
-          body_bag = params.slice(*body_prop_names)
-
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/labor/shifts/search",
-            body: Square::Labor::Shifts::Types::SearchShiftsRequest.new(body_bag).to_h,
+            body: Square::Labor::Shifts::Types::SearchShiftsRequest.new(params).to_h,
             request_options: request_options
           )
           begin
@@ -126,6 +122,7 @@ module Square
         #
         # @return [Square::Types::GetShiftResponse]
         def get(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -165,16 +162,16 @@ module Square
         #
         # @return [Square::Types::UpdateShiftResponse]
         def update(request_options: {}, **params)
-          path_param_names = %i[id]
-          body_params = params.except(*path_param_names)
-          body_prop_names = %i[shift]
-          body_bag = body_params.slice(*body_prop_names)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
+          request_data = Square::Labor::Shifts::Types::UpdateShiftRequest.new(params).to_h
+          non_body_param_names = ["id"]
+          body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "PUT",
             path: "v2/labor/shifts/#{params[:id]}",
-            body: Square::Labor::Shifts::Types::UpdateShiftRequest.new(body_bag).to_h,
+            body: body,
             request_options: request_options
           )
           begin
@@ -204,6 +201,7 @@ module Square
         #
         # @return [Square::Types::DeleteShiftResponse]
         def delete(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",

@@ -1,53 +1,32 @@
 # frozen_string_literal: true
 
-require_relative "wire_helper"
-require "net/http"
-require "json"
-require "uri"
-require "square"
+require_relative "wiremock_test_case"
 
-class InvoicesWireTest < Minitest::Test
-  WIREMOCK_BASE_URL = "http://localhost:8080"
-  WIREMOCK_ADMIN_URL = "http://localhost:8080/__admin"
-
+class InvoicesWireTest < WireMockTestCase
   def setup
     super
-    return if ENV["RUN_WIRE_TESTS"] == "true"
 
-    skip "Wire tests are disabled by default. Set RUN_WIRE_TESTS=true to enable them."
-  end
-
-  def verify_request_count(test_id:, method:, url_path:, expected:, query_params: nil)
-    uri = URI("#{WIREMOCK_ADMIN_URL}/requests/find")
-    http = Net::HTTP.new(uri.host, uri.port)
-    post_request = Net::HTTP::Post.new(uri.path, { "Content-Type" => "application/json" })
-
-    request_body = { "method" => method, "urlPath" => url_path }
-    request_body["headers"] = { "X-Test-Id" => { "equalTo" => test_id } }
-    request_body["queryParameters"] = query_params.transform_values { |v| { "equalTo" => v } } if query_params
-
-    post_request.body = request_body.to_json
-    response = http.request(post_request)
-    result = JSON.parse(response.body)
-    requests = result["requests"] || []
-
-    assert_equal expected, requests.length, "Expected #{expected} requests, found #{requests.length}"
+    @client = Square::Client.new(
+      token: "<token>",
+      base_url: WIREMOCK_BASE_URL
+    )
   end
 
   def test_invoices_list_with_wiremock
     test_id = "invoices.list.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.invoices.list(
+    result = @client.invoices.list(
       location_id: "location_id",
       cursor: "cursor",
       limit: 1,
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "invoices.list.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "invoices.list.0"
+        }
+      }
     )
+
+    result.pages.next_page
 
     verify_request_count(
       test_id: test_id,
@@ -61,9 +40,7 @@ class InvoicesWireTest < Minitest::Test
   def test_invoices_create_with_wiremock
     test_id = "invoices.create.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.invoices.create(
+    @client.invoices.create(
       invoice: {
         location_id: "ES0RJRZYEC39A",
         order_id: "CAISENgvlJ6jLWAzERDzjyHVybY",
@@ -105,10 +82,11 @@ class InvoicesWireTest < Minitest::Test
         store_payment_method_enabled: false
       },
       idempotency_key: "ce3748f9-5fc1-4762-aa12-aae5e843f1f4",
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "invoices.create.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "invoices.create.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -123,9 +101,7 @@ class InvoicesWireTest < Minitest::Test
   def test_invoices_search_with_wiremock
     test_id = "invoices.search.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.invoices.search(
+    @client.invoices.search(
       query: {
         filter: {
           location_ids: ["ES0RJRZYEC39A"],
@@ -137,10 +113,11 @@ class InvoicesWireTest < Minitest::Test
         }
       },
       limit: 100,
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "invoices.search.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "invoices.search.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -155,14 +132,13 @@ class InvoicesWireTest < Minitest::Test
   def test_invoices_get_with_wiremock
     test_id = "invoices.get.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.invoices.get(
+    @client.invoices.get(
       invoice_id: "invoice_id",
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "invoices.get.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "invoices.get.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -177,9 +153,7 @@ class InvoicesWireTest < Minitest::Test
   def test_invoices_update_with_wiremock
     test_id = "invoices.update.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.invoices.update(
+    @client.invoices.update(
       invoice_id: "invoice_id",
       invoice: {
         version: 1,
@@ -189,10 +163,11 @@ class InvoicesWireTest < Minitest::Test
         }]
       },
       idempotency_key: "4ee82288-0910-499e-ab4c-5d0071dad1be",
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "invoices.update.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "invoices.update.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -207,15 +182,14 @@ class InvoicesWireTest < Minitest::Test
   def test_invoices_delete_with_wiremock
     test_id = "invoices.delete.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.invoices.delete(
+    @client.invoices.delete(
       invoice_id: "invoice_id",
       version: 1,
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "invoices.delete.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "invoices.delete.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -230,14 +204,13 @@ class InvoicesWireTest < Minitest::Test
   def test_invoices_create_invoice_attachment_with_wiremock
     test_id = "invoices.create_invoice_attachment.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.invoices.create_invoice_attachment(
+    @client.invoices.create_invoice_attachment(
       invoice_id: "invoice_id",
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "invoices.create_invoice_attachment.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "invoices.create_invoice_attachment.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -252,15 +225,14 @@ class InvoicesWireTest < Minitest::Test
   def test_invoices_delete_invoice_attachment_with_wiremock
     test_id = "invoices.delete_invoice_attachment.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.invoices.delete_invoice_attachment(
+    @client.invoices.delete_invoice_attachment(
       invoice_id: "invoice_id",
       attachment_id: "attachment_id",
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "invoices.delete_invoice_attachment.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "invoices.delete_invoice_attachment.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -275,15 +247,14 @@ class InvoicesWireTest < Minitest::Test
   def test_invoices_cancel_with_wiremock
     test_id = "invoices.cancel.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.invoices.cancel(
+    @client.invoices.cancel(
       invoice_id: "invoice_id",
       version: 0,
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "invoices.cancel.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "invoices.cancel.0"
+        }
+      }
     )
 
     verify_request_count(
@@ -298,16 +269,15 @@ class InvoicesWireTest < Minitest::Test
   def test_invoices_publish_with_wiremock
     test_id = "invoices.publish.0"
 
-    require "square"
-    client = Square::Client.new(base_url: WIREMOCK_BASE_URL, token: "<token>")
-    client.invoices.publish(
+    @client.invoices.publish(
       invoice_id: "invoice_id",
       version: 1,
       idempotency_key: "32da42d0-1997-41b0-826b-f09464fc2c2e",
-      request_options: { base_url: WIREMOCK_BASE_URL,
-                         additional_headers: {
-                           "X-Test-Id" => "invoices.publish.0"
-                         } }
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "invoices.publish.0"
+        }
+      }
     )
 
     verify_request_count(

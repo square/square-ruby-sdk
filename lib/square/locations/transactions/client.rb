@@ -33,7 +33,7 @@ module Square
         #
         # @return [Square::Types::ListTransactionsResponse]
         def list(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[begin_time end_time sort_order cursor]
           query_params = {}
           query_params["begin_time"] = params[:begin_time] if params.key?(:begin_time)
@@ -77,6 +77,7 @@ module Square
         #
         # @return [Square::Types::GetTransactionResponse]
         def get(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -117,6 +118,7 @@ module Square
         #
         # @return [Square::Types::CaptureTransactionResponse]
         def capture(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
@@ -157,6 +159,7 @@ module Square
         #
         # @return [Square::Types::VoidTransactionResponse]
         def void(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",

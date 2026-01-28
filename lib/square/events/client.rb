@@ -22,14 +22,12 @@ module Square
       #
       # @return [Square::Types::SearchEventsResponse]
       def search_events(request_options: {}, **params)
-        body_prop_names = %i[cursor limit query]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/events",
-          body: Square::Events::Types::SearchEventsRequest.new(body_bag).to_h,
+          body: Square::Events::Types::SearchEventsRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -60,7 +58,8 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       #
       # @return [Square::Types::DisableEventsResponse]
-      def disable_events(request_options: {}, **_params)
+      def disable_events(request_options: {}, **params)
+        Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
@@ -92,7 +91,8 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       #
       # @return [Square::Types::EnableEventsResponse]
-      def enable_events(request_options: {}, **_params)
+      def enable_events(request_options: {}, **params)
+        Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
@@ -126,7 +126,7 @@ module Square
       #
       # @return [Square::Types::ListEventTypesResponse]
       def list_event_types(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[api_version]
         query_params = {}
         query_params["api_version"] = params[:api_version] if params.key?(:api_version)

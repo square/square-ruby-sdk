@@ -101,7 +101,7 @@ describe Square::Orders::Client do
 
   describe "#update" do
     it "should update order" do
-      _request = Square::Orders::Types::UpdateOrderRequest.new(
+      response = client.orders.update(
         order_id: @order_id,
         idempotency_key: SecureRandom.uuid,
         order: Square::Types::Order.new(
@@ -121,8 +121,6 @@ describe Square::Orders::Client do
         ),
         fields_to_clear: ["line_items[#{@line_item_uid}]"]
       )
-
-      response = client.orders.update(**_request.to_h)
       refute_nil response.order
       assert_equal @order_id, response.order.id
       assert_equal "Updated Item", response.order.line_items.first.name
@@ -133,14 +131,12 @@ describe Square::Orders::Client do
 
   describe "#pay" do
     it "should pay order" do
-      _request = Square::Orders::Types::PayOrderRequest.new(
+      response = client.orders.pay(
         order_id: @order_id,
         idempotency_key: SecureRandom.uuid,
         order_version: @order.version,
         payment_ids: []
       )
-
-      response = client.orders.pay(**_request.to_h)
       refute_nil response.order
       assert_equal @order_id, response.order.id
 

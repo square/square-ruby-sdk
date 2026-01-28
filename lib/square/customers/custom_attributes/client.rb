@@ -34,7 +34,7 @@ module Square
         #
         # @return [Square::Types::ListCustomerCustomAttributesResponse]
         def list(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[limit cursor with_definitions]
           query_params = {}
           query_params["limit"] = params[:limit] if params.key?(:limit)
@@ -93,7 +93,7 @@ module Square
         #
         # @return [Square::Types::GetCustomerCustomAttributeResponse]
         def get(request_options: {}, **params)
-          params = Square::Internal::Types::Utils.symbolize_keys(params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           query_param_names = %i[with_definition version]
           query_params = {}
           query_params["with_definition"] = params[:with_definition] if params.key?(:with_definition)
@@ -145,16 +145,16 @@ module Square
         #
         # @return [Square::Types::UpsertCustomerCustomAttributeResponse]
         def upsert(request_options: {}, **params)
-          path_param_names = %i[customer_id key]
-          body_params = params.except(*path_param_names)
-          body_prop_names = %i[custom_attribute idempotency_key]
-          body_bag = body_params.slice(*body_prop_names)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
+          request_data = Square::Customers::CustomAttributes::Types::UpsertCustomerCustomAttributeRequest.new(params).to_h
+          non_body_param_names = %w[customer_id key]
+          body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/customers/#{params[:customer_id]}/custom-attributes/#{params[:key]}",
-            body: Square::Customers::CustomAttributes::Types::UpsertCustomerCustomAttributeRequest.new(body_bag).to_h,
+            body: body,
             request_options: request_options
           )
           begin
@@ -189,6 +189,7 @@ module Square
         #
         # @return [Square::Types::DeleteCustomerCustomAttributeResponse]
         def delete(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",

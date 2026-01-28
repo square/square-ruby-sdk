@@ -28,16 +28,16 @@ module Square
         #
         # @return [Square::Types::CreateCustomerCardResponse]
         def create(request_options: {}, **params)
-          path_param_names = %i[customer_id]
-          body_params = params.except(*path_param_names)
-          body_prop_names = %i[card_nonce billing_address cardholder_name verification_token]
-          body_bag = body_params.slice(*body_prop_names)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
+          request_data = Square::Customers::Cards::Types::CreateCustomerCardRequest.new(params).to_h
+          non_body_param_names = ["customer_id"]
+          body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/customers/#{params[:customer_id]}/cards",
-            body: Square::Customers::Cards::Types::CreateCustomerCardRequest.new(body_bag).to_h,
+            body: body,
             request_options: request_options
           )
           begin
@@ -68,6 +68,7 @@ module Square
         #
         # @return [Square::Types::DeleteCustomerCardResponse]
         def delete(request_options: {}, **params)
+          params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",

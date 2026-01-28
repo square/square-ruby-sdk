@@ -22,14 +22,12 @@ module Square
       #
       # @return [Square::Types::BatchCreateVendorsResponse]
       def batch_create(request_options: {}, **params)
-        body_prop_names = %i[vendors]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/vendors/bulk-create",
-          body: Square::Vendors::Types::BatchCreateVendorsRequest.new(body_bag).to_h,
+          body: Square::Vendors::Types::BatchCreateVendorsRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -58,14 +56,12 @@ module Square
       #
       # @return [Square::Types::BatchGetVendorsResponse]
       def batch_get(request_options: {}, **params)
-        body_prop_names = %i[vendor_ids]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/vendors/bulk-retrieve",
-          body: Square::Vendors::Types::BatchGetVendorsRequest.new(body_bag).to_h,
+          body: Square::Vendors::Types::BatchGetVendorsRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -94,14 +90,12 @@ module Square
       #
       # @return [Square::Types::BatchUpdateVendorsResponse]
       def batch_update(request_options: {}, **params)
-        body_prop_names = %i[vendors]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/vendors/bulk-update",
-          body: Square::Vendors::Types::BatchUpdateVendorsRequest.new(body_bag).to_h,
+          body: Square::Vendors::Types::BatchUpdateVendorsRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -130,14 +124,12 @@ module Square
       #
       # @return [Square::Types::CreateVendorResponse]
       def create(request_options: {}, **params)
-        body_prop_names = %i[idempotency_key vendor]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/vendors/create",
-          body: Square::Vendors::Types::CreateVendorRequest.new(body_bag).to_h,
+          body: Square::Vendors::Types::CreateVendorRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -166,14 +158,12 @@ module Square
       #
       # @return [Square::Types::SearchVendorsResponse]
       def search(request_options: {}, **params)
-        body_prop_names = %i[filter sort cursor]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/vendors/search",
-          body: Square::Vendors::Types::SearchVendorsRequest.new(body_bag).to_h,
+          body: Square::Vendors::Types::SearchVendorsRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -203,6 +193,7 @@ module Square
       #
       # @return [Square::Types::GetVendorResponse]
       def get(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -236,6 +227,7 @@ module Square
       #
       # @return [Square::Types::UpdateVendorResponse]
       def update(request_options: {}, **params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         path_param_names = %i[vendor_id]
         body_params = params.except(*path_param_names)
 

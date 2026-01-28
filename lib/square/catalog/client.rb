@@ -35,14 +35,12 @@ module Square
       #
       # @return [Square::Types::BatchDeleteCatalogObjectsResponse]
       def batch_delete(request_options: {}, **params)
-        body_prop_names = %i[object_ids]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/catalog/batch-delete",
-          body: Square::Catalog::Types::BatchDeleteCatalogObjectsRequest.new(body_bag).to_h,
+          body: Square::Catalog::Types::BatchDeleteCatalogObjectsRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -76,14 +74,12 @@ module Square
       #
       # @return [Square::Types::BatchGetCatalogObjectsResponse]
       def batch_get(request_options: {}, **params)
-        body_prop_names = %i[object_ids include_related_objects catalog_version include_deleted_objects include_category_path_to_root]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/catalog/batch-retrieve",
-          body: Square::Catalog::Types::BatchGetCatalogObjectsRequest.new(body_bag).to_h,
+          body: Square::Catalog::Types::BatchGetCatalogObjectsRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -124,14 +120,12 @@ module Square
       #
       # @return [Square::Types::BatchUpsertCatalogObjectsResponse]
       def batch_upsert(request_options: {}, **params)
-        body_prop_names = %i[idempotency_key batches]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/catalog/batch-upsert",
-          body: Square::Catalog::Types::BatchUpsertCatalogObjectsRequest.new(body_bag).to_h,
+          body: Square::Catalog::Types::BatchUpsertCatalogObjectsRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -160,7 +154,8 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       #
       # @return [Square::Types::CatalogInfoResponse]
-      def info(request_options: {}, **_params)
+      def info(request_options: {}, **params)
+        Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -204,7 +199,7 @@ module Square
       #
       # @return [Square::Types::ListCatalogResponse]
       def list(request_options: {}, **params)
-        params = Square::Internal::Types::Utils.symbolize_keys(params)
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         query_param_names = %i[cursor types catalog_version]
         query_params = {}
         query_params["cursor"] = params[:cursor] if params.key?(:cursor)
@@ -266,14 +261,12 @@ module Square
       #
       # @return [Square::Types::SearchCatalogObjectsResponse]
       def search(request_options: {}, **params)
-        body_prop_names = %i[cursor object_types include_deleted_objects include_related_objects begin_time query limit include_category_path_to_root]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/catalog/search",
-          body: Square::Catalog::Types::SearchCatalogObjectsRequest.new(body_bag).to_h,
+          body: Square::Catalog::Types::SearchCatalogObjectsRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -315,14 +308,12 @@ module Square
       #
       # @return [Square::Types::SearchCatalogItemsResponse]
       def search_items(request_options: {}, **params)
-        body_prop_names = %i[text_filter category_ids stock_levels enabled_location_ids cursor limit sort_order product_types custom_attribute_filters archived_state]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/catalog/search-catalog-items",
-          body: Square::Catalog::Types::SearchCatalogItemsRequest.new(body_bag).to_h,
+          body: Square::Catalog::Types::SearchCatalogItemsRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -353,14 +344,12 @@ module Square
       #
       # @return [Square::Types::UpdateItemModifierListsResponse]
       def update_item_modifier_lists(request_options: {}, **params)
-        body_prop_names = %i[item_ids modifier_lists_to_enable modifier_lists_to_disable]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/catalog/update-item-modifier-lists",
-          body: Square::Catalog::Types::UpdateItemModifierListsRequest.new(body_bag).to_h,
+          body: Square::Catalog::Types::UpdateItemModifierListsRequest.new(params).to_h,
           request_options: request_options
         )
         begin
@@ -391,14 +380,12 @@ module Square
       #
       # @return [Square::Types::UpdateItemTaxesResponse]
       def update_item_taxes(request_options: {}, **params)
-        body_prop_names = %i[item_ids taxes_to_enable taxes_to_disable]
-        body_bag = params.slice(*body_prop_names)
-
+        params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/catalog/update-item-taxes",
-          body: Square::Catalog::Types::UpdateItemTaxesRequest.new(body_bag).to_h,
+          body: Square::Catalog::Types::UpdateItemTaxesRequest.new(params).to_h,
           request_options: request_options
         )
         begin
