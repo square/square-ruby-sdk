@@ -16,7 +16,8 @@ module Square
         _request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/inventory/adjustment/#{params[:adjustment_id]}"
+          path: "v2/inventory/adjustment/#{params[:adjustment_id]}",
+          request_options: request_options
         )
         begin
           _response = @client.send(_request)
@@ -40,7 +41,8 @@ module Square
         _request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/inventory/adjustments/#{params[:adjustment_id]}"
+          path: "v2/inventory/adjustments/#{params[:adjustment_id]}",
+          request_options: request_options
         )
         begin
           _response = @client.send(_request)
@@ -65,7 +67,8 @@ module Square
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/inventory/batch-change",
-          body: Square::Types::BatchChangeInventoryRequest.new(params).to_h
+          body: Square::Types::BatchChangeInventoryRequest.new(params).to_h,
+          request_options: request_options
         )
         begin
           _response = @client.send(_request)
@@ -90,7 +93,8 @@ module Square
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/inventory/batch-retrieve-changes",
-          body: Square::Types::BatchRetrieveInventoryChangesRequest.new(params).to_h
+          body: Square::Types::BatchRetrieveInventoryChangesRequest.new(params).to_h,
+          request_options: request_options
         )
         begin
           _response = @client.send(_request)
@@ -115,7 +119,8 @@ module Square
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/inventory/batch-retrieve-counts",
-          body: Square::Types::BatchGetInventoryCountsRequest.new(params).to_h
+          body: Square::Types::BatchGetInventoryCountsRequest.new(params).to_h,
+          request_options: request_options
         )
         begin
           _response = @client.send(_request)
@@ -143,7 +148,8 @@ module Square
           base_url: request_options[:base_url],
           method: "POST",
           path: "v2/inventory/changes/batch-create",
-          body: Square::Types::BatchChangeInventoryRequest.new(params).to_h
+          body: Square::Types::BatchChangeInventoryRequest.new(params).to_h,
+          request_options: request_options
         )
         begin
           _response = @client.send(_request)
@@ -180,7 +186,8 @@ module Square
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/inventory/changes/batch-retrieve",
-            body: Square::Types::BatchRetrieveInventoryChangesRequest.new(params).to_h
+            body: Square::Types::BatchRetrieveInventoryChangesRequest.new(params).to_h,
+            request_options: request_options
           )
           begin
             _response = @client.send(_request)
@@ -221,7 +228,8 @@ module Square
             base_url: request_options[:base_url],
             method: "POST",
             path: "v2/inventory/counts/batch-retrieve",
-            body: Square::Types::BatchGetInventoryCountsRequest.new(params).to_h
+            body: Square::Types::BatchGetInventoryCountsRequest.new(params).to_h,
+            request_options: request_options
           )
           begin
             _response = @client.send(_request)
@@ -246,7 +254,8 @@ module Square
         _request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/inventory/physical-count/#{params[:physical_count_id]}"
+          path: "v2/inventory/physical-count/#{params[:physical_count_id]}",
+          request_options: request_options
         )
         begin
           _response = @client.send(_request)
@@ -270,7 +279,8 @@ module Square
         _request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/inventory/physical-counts/#{params[:physical_count_id]}"
+          path: "v2/inventory/physical-counts/#{params[:physical_count_id]}",
+          request_options: request_options
         )
         begin
           _response = @client.send(_request)
@@ -294,7 +304,8 @@ module Square
         _request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/inventory/transfers/#{params[:transfer_id]}"
+          path: "v2/inventory/transfers/#{params[:transfer_id]}",
+          request_options: request_options
         )
         begin
           _response = @client.send(_request)
@@ -332,7 +343,8 @@ module Square
             base_url: request_options[:base_url],
             method: "GET",
             path: "v2/inventory/#{params[:catalog_object_id]}",
-            query: _query
+            query: _query,
+            request_options: request_options
           )
           begin
             _response = @client.send(_request)
@@ -380,7 +392,8 @@ module Square
             base_url: request_options[:base_url],
             method: "GET",
             path: "v2/inventory/#{params[:catalog_object_id]}/changes",
-            query: _query
+            query: _query,
+            request_options: request_options
           )
           begin
             _response = @client.send(_request)
