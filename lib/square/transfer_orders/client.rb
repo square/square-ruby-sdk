@@ -32,10 +32,11 @@ module Square
       # @return [Square::Types::CreateTransferOrderResponse]
       def create(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/transfer-orders",
-          body: params
+          body: params,
+          request_options: request_options
         )
         begin
           _response = @client.send(_request)
@@ -68,10 +69,11 @@ module Square
         ) do |next_cursor|
           params[:cursor] = next_cursor
           _request = Square::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+            base_url: request_options[:base_url],
             method: "POST",
             path: "v2/transfer-orders/search",
-            body: params
+            body: params,
+            request_options: request_options
           )
           begin
             _response = @client.send(_request)
@@ -99,9 +101,10 @@ module Square
       # @return [Square::Types::RetrieveTransferOrderResponse]
       def get(request_options: {}, **params)
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/transfer-orders/#{params[:transfer_order_id]}"
+          path: "v2/transfer-orders/#{params[:transfer_order_id]}",
+          request_options: request_options
         )
         begin
           _response = @client.send(_request)
@@ -127,10 +130,11 @@ module Square
         _path_param_names = ["transfer_order_id"]
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          base_url: request_options[:base_url],
           method: "PUT",
           path: "v2/transfer-orders/#{params[:transfer_order_id]}",
-          body: params.except(*_path_param_names)
+          body: params.except(*_path_param_names),
+          request_options: request_options
         )
         begin
           _response = @client.send(_request)
@@ -160,10 +164,11 @@ module Square
         params = params.except(*_query_param_names)
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          base_url: request_options[:base_url],
           method: "DELETE",
           path: "v2/transfer-orders/#{params[:transfer_order_id]}",
-          query: _query
+          query: _query,
+          request_options: request_options
         )
         begin
           _response = @client.send(_request)
@@ -195,10 +200,11 @@ module Square
         _path_param_names = ["transfer_order_id"]
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/transfer-orders/#{params[:transfer_order_id]}/cancel",
-          body: params.except(*_path_param_names)
+          body: params.except(*_path_param_names),
+          request_options: request_options
         )
         begin
           _response = @client.send(_request)
@@ -236,10 +242,11 @@ module Square
         _path_param_names = ["transfer_order_id"]
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/transfer-orders/#{params[:transfer_order_id]}/receive",
-          body: params.except(*_path_param_names)
+          body: params.except(*_path_param_names),
+          request_options: request_options
         )
         begin
           _response = @client.send(_request)
@@ -269,10 +276,11 @@ module Square
         _path_param_names = ["transfer_order_id"]
 
         _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url] || Square::Environment::PRODUCTION,
+          base_url: request_options[:base_url],
           method: "POST",
           path: "v2/transfer-orders/#{params[:transfer_order_id]}/start",
-          body: params.except(*_path_param_names)
+          body: params.except(*_path_param_names),
+          request_options: request_options
         )
         begin
           _response = @client.send(_request)
