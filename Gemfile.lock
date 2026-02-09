@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    square.rb (45.0.1.20260122)
+    square.rb (45.0.2.20260122)
       apimatic_core (~> 0.3.11)
       apimatic_core_interfaces (~> 0.2.1)
       apimatic_faraday_client_adapter (~> 0.1.4)
