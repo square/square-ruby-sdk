@@ -10,7 +10,7 @@ module Square
       @raw_client = Square::Internal::Http::RawClient.new(
         base_url: base_url || Square::Environment::PRODUCTION,
         headers: {
-          "User-Agent" => "square.rb/45.0.2.20260122",
+          "User-Agent" => "square.rb/45.1.0.20260520",
           "X-Fern-Language" => "Ruby",
           Authorization: "Bearer #{token}"
         }

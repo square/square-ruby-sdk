@@ -18,3 +18,6 @@ lib/square/transfer_orders/client.rb
 # Iterator does not handle nil item fields (when API returns nil instead of empty array for no items)
 # Manually added nil checks to avoid calling .shift/.empty? on nil
 lib/square/internal/iterators/item_iterator.rb
+.fern/replay.lock
+.fern/replay.yml
+.gitattributes

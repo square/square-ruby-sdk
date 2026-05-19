@@ -9,6 +9,7 @@ module Square
         field :amount_money, -> { Square::Types::Money }, optional: true, nullable: false
         field :tip_money, -> { Square::Types::Money }, optional: true, nullable: false
         field :app_fee_money, -> { Square::Types::Money }, optional: true, nullable: false
+        field :app_fee_allocations, -> { Internal::Types::Array[Object] }, optional: true, nullable: false
         field :delay_duration, -> { String }, optional: true, nullable: false
         field :delay_action, -> { String }, optional: true, nullable: false
         field :autocomplete, -> { Internal::Types::Boolean }, optional: true, nullable: false

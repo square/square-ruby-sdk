@@ -11,6 +11,7 @@ module Square
       field :tip_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :total_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :app_fee_money, -> { Square::Types::Money }, optional: true, nullable: false
+      field :app_fee_allocations, -> { Internal::Types::Array[Object] }, optional: true, nullable: false
       field :approved_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :processing_fee, -> { Internal::Types::Array[Square::Types::ProcessingFee] }, optional: true, nullable: false
       field :refunded_money, -> { Square::Types::Money }, optional: true, nullable: false
@@ -22,6 +23,7 @@ module Square
       field :card_details, -> { Square::Types::CardPaymentDetails }, optional: true, nullable: false
       field :cash_details, -> { Square::Types::CashPaymentDetails }, optional: true, nullable: false
       field :bank_account_details, -> { Square::Types::BankAccountPaymentDetails }, optional: true, nullable: false
+      field :electronic_money_details, -> { Square::Types::ElectronicMoneyDetails }, optional: true, nullable: false
       field :external_details, -> { Square::Types::ExternalPaymentDetails }, optional: true, nullable: false
       field :wallet_details, -> { Square::Types::DigitalWalletDetails }, optional: true, nullable: false
       field :buy_now_pay_later_details, -> { Square::Types::BuyNowPayLaterDetails }, optional: true, nullable: false
@@ -45,6 +47,7 @@ module Square
       field :receipt_url, -> { String }, optional: true, nullable: false
       field :device_details, -> { Square::Types::DeviceDetails }, optional: true, nullable: false
       field :application_details, -> { Square::Types::ApplicationDetails }, optional: true, nullable: false
+      field :buyer_currency_exchange, -> { Object }, optional: true, nullable: false
       field :is_offline_payment, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :offline_payment_details, -> { Square::Types::OfflinePaymentDetails }, optional: true, nullable: false
       field :version_token, -> { String }, optional: true, nullable: false
