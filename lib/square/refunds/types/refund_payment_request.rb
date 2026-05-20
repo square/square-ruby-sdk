@@ -7,6 +7,7 @@ module Square
         field :idempotency_key, -> { String }, optional: false, nullable: false
         field :amount_money, -> { Square::Types::Money }, optional: false, nullable: false
         field :app_fee_money, -> { Square::Types::Money }, optional: true, nullable: false
+        field :app_fee_allocations, -> { Internal::Types::Array[Object] }, optional: true, nullable: false
         field :payment_id, -> { String }, optional: true, nullable: false
         field :destination_id, -> { String }, optional: true, nullable: false
         field :unlinked, -> { Internal::Types::Boolean }, optional: true, nullable: false
