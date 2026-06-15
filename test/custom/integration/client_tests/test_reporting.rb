@@ -9,14 +9,16 @@ require "square/reporting_helper"
 # The Reporting API is PRODUCTION-ONLY: sandbox returns 404, and a sandbox token
 # against production returns 401. End-to-end runs therefore need a production,
 # reporting-provisioned Square token, which CI does not have. This suite is
-# OPT-IN: it skips entirely unless TEST_SQUARE_REPORTING is set, and reuses the
-# TEST_SQUARE_TOKEN credential when it runs.
+# OPT-IN: it skips entirely unless TEST_SQUARE_REPORTING is set, and uses that
+# value as the production access token when it runs.
+#
+# Run with: TEST_SQUARE_REPORTING=<prod-reporting-token> bundle exec rake test
 describe Square::Reporting::Client do
   before do
-    skip "set TEST_SQUARE_REPORTING=1 (and TEST_SQUARE_TOKEN) to run the live Reporting suite" unless ENV["TEST_SQUARE_REPORTING"]
-
-    token = ENV.fetch("TEST_SQUARE_TOKEN", nil) || ENV.fetch("SQUARE_TOKEN", nil)
-    skip "TEST_SQUARE_TOKEN (or SQUARE_TOKEN) required for the live Reporting suite" if token.nil?
+    # CI wires this from a repo secret; a missing secret resolves to an empty
+    # string, so treat blank the same as unset and skip.
+    token = ENV.fetch("TEST_SQUARE_REPORTING", nil)
+    skip "set TEST_SQUARE_REPORTING=<prod-reporting-token> to run the live Reporting suite" if token.nil? || token.strip.empty?
 
     @reporting_client = Square::Client.new(
       token: token,
