@@ -10,7 +10,7 @@ module Square
       @raw_client = Square::Internal::Http::RawClient.new(
         base_url: base_url || Square::Environment::PRODUCTION,
         headers: {
-          "User-Agent" => "square.rb/45.1.0.20260520",
+          "User-Agent" => "square.rb/45.2.0.20260520",
           "X-Fern-Language" => "Ruby",
           Authorization: "Bearer #{token}"
         }
@@ -180,6 +180,11 @@ module Square
     # @return [Square::Vendors::Client]
     def vendors
       @vendors ||= Square::Vendors::Client.new(client: @raw_client)
+    end
+
+    # @return [Square::Reporting::Client]
+    def reporting
+      @reporting ||= Square::Reporting::Client.new(client: @raw_client)
     end
 
     # @return [Square::CashDrawers::Client]
