@@ -255,6 +255,60 @@ response = client.payments.create(..., {
 })
 ```
 
+## Reporting API
+
+The [Reporting API](https://developer.squareup.com/docs/reporting-api/overview) exposes two
+polling endpoints under `client.reporting`:
+
+- `get_metadata` — describes the data you can query (cubes, measures, dimensions, segments).
+  Call it first to discover the schema.
+- `load` — runs a reporting query and returns the aggregated results.
+
+`load` is asynchronous: while a query is still being computed it returns an HTTP 200 whose body
+is `{ "error": "Continue wait" }` rather than the results. Callers are expected to re-send the
+identical request, with backoff, until real results arrive.
+
+The SDK ships a `.fernignore`-protected helper that owns that retry loop. Require it explicitly
+to add `load_and_wait` to `client.reporting`:
+
+```ruby
+require "square"
+require "square/reporting_helper"
+
+client = Square::Client.new(token: ENV.fetch("SQUARE_TOKEN"))
+
+# 1. Discover the schema.
+metadata = client.reporting.get_metadata
+
+# 2. Run a query and transparently poll until it resolves.
+response = client.reporting.load_and_wait(
+  query: {
+    measures: ["orders.count"],
+    time_dimensions: [{ dimension: "orders.created_at", granularity: "day" }]
+  }
+)
+
+response.results.each { |result| puts result.to_h }
+```
+
+`load_and_wait` accepts optional polling parameters (defaults shown): `max_attempts: 20`,
+`initial_delay: 2.0`, `max_delay: 20.0`, `backoff_factor: 2.0` (seconds). It raises
+`Square::Reporting::ContinueWaitTimeoutError` if the query has not resolved within
+`max_attempts`. Pass a `should_cancel` predicate to abort the loop early (the Ruby idiom for an
+abort signal); it raises `Square::Reporting::PollingCancelledError` when the predicate returns a
+truthy value:
+
+```ruby
+deadline = Time.now + 60
+response = client.reporting.load_and_wait(
+  query: { measures: ["orders.count"] },
+  should_cancel: -> { Time.now > deadline }
+)
+```
+
+> **Note:** The Reporting API is production-only — sandbox requests return 404, and a sandbox
+> token against production returns 401. Use a production, reporting-provisioned token.
+
 ## Contributing
 
 While we value open-source contributions to this SDK, this library is generated programmatically. Additions made directly to this library would have to be moved over to our generation code, otherwise they would be overwritten upon the next generated release. Feel free to open a PR as a proof of concept, but know that we will not be able to merge it as-is. We suggest opening an issue first to discuss with us!
