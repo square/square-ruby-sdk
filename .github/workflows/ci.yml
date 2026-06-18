@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SQUARE_SANDBOX_TOKEN: ${{ secrets.SQUARE_SANDBOX_TOKEN }}
+      TEST_SQUARE_REPORTING: ${{ secrets.TEST_SQUARE_REPORTING }}
     strategy:
       matrix:
         ruby-version: ['3.3', '3.4']
