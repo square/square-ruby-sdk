@@ -7,6 +7,10 @@ test/custom
 .github/workflows
 README.md
 lib/square/file_param.rb
+
+# Custom polling helper for the Reporting API (load_and_wait + Continue-wait
+# retry loop). Unit test lives under the already-ignored test/custom. FER-11257.
+lib/square/reporting_helper.rb
 Gemfile.custom
 custom.gemspec.rb
 

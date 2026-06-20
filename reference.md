@@ -16803,6 +16803,139 @@ client.vendors.update(
 </dl>
 </details>
 
+## Reporting
+<details><summary><code>client.reporting.<a href="/lib/square/reporting/client.rb">get_metadata</a>() -> Square::Types::MetadataResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Describes the data available to query: the cubes, views, measures, dimensions, and segments you can reference in a reporting query. Call this first to discover the schema, then pass the members you need to `load`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.reporting.get_metadata();
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Reporting::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reporting.<a href="/lib/square/reporting/client.rb">load</a>(request) -> Square::Types::LoadResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Runs a reporting query against the discovered schema and returns the aggregated results. Long-running queries may return a "Continue wait" response while processing — retry the same request until results are ready.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.reporting.load();
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**query_type:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cache:** `Square::Types::CacheMode` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**query:** `Square::Types::Query` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Reporting::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Bookings CustomAttributeDefinitions
 <details><summary><code>client.bookings.custom_attribute_definitions.<a href="/lib/square/bookings/custom_attribute_definitions/client.rb">list</a>() -> Square::Types::ListBookingCustomAttributeDefinitionsResponse</code></summary>
 <dl>
