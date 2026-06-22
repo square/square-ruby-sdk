@@ -96,7 +96,8 @@ jobs:
           bundle exec rake build
 
       - name: Configure RubyGems credentials (OIDC trusted publishing)
-        uses: rubygems/configure-rubygems-credentials@v1.0.0
+        # rubygems/configure-rubygems-credentials@v1.0.0
+        uses: rubygems/configure-rubygems-credentials@bc6dd217f8a4f919d6835fcfefd470ef821f5c44
 
       - name: Publish to RubyGems
         run: |
