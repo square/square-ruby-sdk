@@ -2,11 +2,11 @@
 
 module Square
   module Types
-    module InventoryChangeType
+    module InventoryAdjustmentReasonDirection
       extend Square::Internal::Types::Enum
 
-      PHYSICAL_COUNT = "PHYSICAL_COUNT"
-      ADJUSTMENT = "ADJUSTMENT"
+      INCREASE = "INCREASE"
+      DECREASE = "DECREASE"
     end
   end
 end

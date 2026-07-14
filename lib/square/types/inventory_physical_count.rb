@@ -19,6 +19,7 @@ module Square
       field :team_member_id, -> { String }, optional: true, nullable: false
       field :occurred_at, -> { String }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
+      field :adjustment_id, -> { String }, optional: true, nullable: false
     end
   end
 end

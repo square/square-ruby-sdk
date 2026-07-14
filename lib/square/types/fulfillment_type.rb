@@ -8,6 +8,7 @@ module Square
       PICKUP = "PICKUP"
       SHIPMENT = "SHIPMENT"
       DELIVERY = "DELIVERY"
+      IN_STORE = "IN_STORE"
     end
   end
 end

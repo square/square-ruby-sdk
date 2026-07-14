@@ -11,6 +11,8 @@ module Square
       field :updated_before, -> { String }, optional: true, nullable: false
       field :cursor, -> { String }, optional: true, nullable: false
       field :limit, -> { Integer }, optional: true, nullable: false
+      field :sort, -> { Square::Types::BatchRetrieveInventoryChangesSort }, optional: true, nullable: false
+      field :reason_ids, -> { Internal::Types::Array[Square::Types::InventoryAdjustmentReasonId] }, optional: true, nullable: false
     end
   end
 end

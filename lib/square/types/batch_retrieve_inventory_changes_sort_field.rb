@@ -2,8 +2,8 @@
 
 module Square
   module Types
-    module GetInventoryTransferResponse
-      # GetInventoryTransferResponse is an alias for Object
+    module BatchRetrieveInventoryChangesSortField
+      # BatchRetrieveInventoryChangesSortField is an alias for Object
 
       # @option str [String]
       #

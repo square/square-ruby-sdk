@@ -16,6 +16,7 @@ module Square
       field :pickup_details, -> { Square::Types::FulfillmentPickupDetails }, optional: true, nullable: false
       field :shipment_details, -> { Square::Types::FulfillmentShipmentDetails }, optional: true, nullable: false
       field :delivery_details, -> { Square::Types::FulfillmentDeliveryDetails }, optional: true, nullable: false
+      field :in_store_details, -> { Square::Types::FulfillmentInStoreDetails }, optional: true, nullable: false
     end
   end
 end

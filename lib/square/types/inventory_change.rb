@@ -9,7 +9,6 @@ module Square
       field :type, -> { Square::Types::InventoryChangeType }, optional: true, nullable: false
       field :physical_count, -> { Square::Types::InventoryPhysicalCount }, optional: true, nullable: false
       field :adjustment, -> { Square::Types::InventoryAdjustment }, optional: true, nullable: false
-      field :transfer, -> { Square::Types::InventoryTransfer }, optional: true, nullable: false
       field :measurement_unit, -> { Square::Types::CatalogMeasurementUnit }, optional: true, nullable: false
       field :measurement_unit_id, -> { String }, optional: true, nullable: false
     end

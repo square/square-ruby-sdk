@@ -42,6 +42,7 @@ module Square
       field :team_member_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :stockable_conversion, -> { Square::Types::CatalogStockConversion }, optional: true, nullable: false
       field :kitchen_name, -> { String }, optional: true, nullable: false
+      field :vendor_information, -> { Internal::Types::Array[Square::Types::CatalogItemVariationVendorInformation] }, optional: true, nullable: false
     end
   end
 end
