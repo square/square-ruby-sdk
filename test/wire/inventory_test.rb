@@ -12,6 +12,159 @@ class InventoryWireTest < WireMockTestCase
     )
   end
 
+  def test_inventory_list_inventory_adjustment_reasons_with_wiremock
+    test_id = "inventory.list_inventory_adjustment_reasons.0"
+
+    @client.inventory.list_inventory_adjustment_reasons(
+      include_deleted: true,
+      include_system_codes: true,
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "inventory.list_inventory_adjustment_reasons.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "GET",
+      url_path: "/v2/inventory/adjustment-reasons",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
+  def test_inventory_create_inventory_adjustment_reason_with_wiremock
+    test_id = "inventory.create_inventory_adjustment_reason.0"
+
+    @client.inventory.create_inventory_adjustment_reason(
+      idempotency_key: "27b2f2b1-1c2a-4b9e-8f3a-0d9c3a1e5b47",
+      adjustment_reason: {
+        id: {
+          type: "CUSTOM"
+        },
+        name: "Donated to charity",
+        direction: "DECREASE"
+      },
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "inventory.create_inventory_adjustment_reason.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/inventory/adjustment-reasons/create",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
+  def test_inventory_delete_inventory_adjustment_reason_with_wiremock
+    test_id = "inventory.delete_inventory_adjustment_reason.0"
+
+    @client.inventory.delete_inventory_adjustment_reason(
+      reason_id: {
+        type: "CUSTOM",
+        custom_reason_id: "R5BX3PDCZ6EXAMPLE"
+      },
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "inventory.delete_inventory_adjustment_reason.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/inventory/adjustment-reasons/delete",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
+  def test_inventory_restore_inventory_adjustment_reason_with_wiremock
+    test_id = "inventory.restore_inventory_adjustment_reason.0"
+
+    @client.inventory.restore_inventory_adjustment_reason(
+      reason_id: {
+        type: "CUSTOM",
+        custom_reason_id: "R5BX3PDCZ6EXAMPLE"
+      },
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "inventory.restore_inventory_adjustment_reason.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/inventory/adjustment-reasons/restore",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
+  def test_inventory_retrieve_inventory_adjustment_reason_with_wiremock
+    test_id = "inventory.retrieve_inventory_adjustment_reason.0"
+
+    @client.inventory.retrieve_inventory_adjustment_reason(
+      reason_id: {
+        type: "CUSTOM",
+        custom_reason_id: "R5BX3PDCZ6EXAMPLE"
+      },
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "inventory.retrieve_inventory_adjustment_reason.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/inventory/adjustment-reasons/retrieve",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
+  def test_inventory_update_inventory_adjustment_reason_with_wiremock
+    test_id = "inventory.update_inventory_adjustment_reason.0"
+
+    @client.inventory.update_inventory_adjustment_reason(
+      reason_id: {
+        type: "CUSTOM",
+        custom_reason_id: "R5BX3PDCZ6EXAMPLE"
+      },
+      adjustment_reason: {
+        id: {
+          type: "CUSTOM",
+          custom_reason_id: "R5BX3PDCZ6EXAMPLE"
+        },
+        name: "Charitable donation"
+      },
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "inventory.update_inventory_adjustment_reason.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "PUT",
+      url_path: "/v2/inventory/adjustment-reasons/update",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
   def test_inventory_deprecated_get_adjustment_with_wiremock
     test_id = "inventory.deprecated_get_adjustment.0"
 
@@ -28,6 +181,28 @@ class InventoryWireTest < WireMockTestCase
       test_id: test_id,
       method: "GET",
       url_path: "/v2/inventory/adjustment/adjustment_id",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
+  def test_inventory_update_inventory_adjustment_with_wiremock
+    test_id = "inventory.update_inventory_adjustment.0"
+
+    @client.inventory.update_inventory_adjustment(
+      idempotency_key: "8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe",
+      adjustment: {},
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "inventory.update_inventory_adjustment.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "PUT",
+      url_path: "/v2/inventory/adjustments/update",
       query_params: nil,
       expected: 1
     )
@@ -266,27 +441,6 @@ class InventoryWireTest < WireMockTestCase
     )
   end
 
-  def test_inventory_get_transfer_with_wiremock
-    test_id = "inventory.get_transfer.0"
-
-    @client.inventory.get_transfer(
-      transfer_id: "transfer_id",
-      request_options: {
-        additional_headers: {
-          "X-Test-Id" => "inventory.get_transfer.0"
-        }
-      }
-    )
-
-    verify_request_count(
-      test_id: test_id,
-      method: "GET",
-      url_path: "/v2/inventory/transfers/transfer_id",
-      query_params: nil,
-      expected: 1
-    )
-  end
-
   def test_inventory_get_with_wiremock
     test_id = "inventory.get.0"
 
@@ -332,6 +486,27 @@ class InventoryWireTest < WireMockTestCase
       test_id: test_id,
       method: "GET",
       url_path: "/v2/inventory/catalog_object_id/changes",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
+  def test_inventory_get_transfer_with_wiremock
+    test_id = "inventory.get_transfer.0"
+
+    @client.inventory.get_transfer(
+      transfer_id: "transfer_id",
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "inventory.get_transfer.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "GET",
+      url_path: "/v2/inventory/transfers/transfer_id",
       query_params: nil,
       expected: 1
     )

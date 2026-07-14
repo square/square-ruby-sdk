@@ -12,6 +12,7 @@ module Square
       field :base_price_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :total_price_money, -> { Square::Types::Money }, optional: true, nullable: false
       field :metadata, -> { Internal::Types::Hash[String, String] }, optional: true, nullable: false
+      field :parent_modifier_uid, -> { String }, optional: true, nullable: false
     end
   end
 end

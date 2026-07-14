@@ -9,7 +9,8 @@ module Square
       field :reference_id, -> { String }, optional: true, nullable: false
       field :from_state, -> { Square::Types::InventoryState }, optional: true, nullable: false
       field :to_state, -> { Square::Types::InventoryState }, optional: true, nullable: false
-      field :location_id, -> { String }, optional: true, nullable: false
+      field :from_location_id, -> { String }, optional: true, nullable: false
+      field :to_location_id, -> { String }, optional: true, nullable: false
       field :catalog_object_id, -> { String }, optional: true, nullable: false
       field :catalog_object_type, -> { String }, optional: true, nullable: false
       field :quantity, -> { String }, optional: true, nullable: false
@@ -24,6 +25,10 @@ module Square
       field :purchase_order_id, -> { String }, optional: true, nullable: false
       field :goods_receipt_id, -> { String }, optional: true, nullable: false
       field :adjustment_group, -> { Square::Types::InventoryAdjustmentGroup }, optional: true, nullable: false
+      field :cost_money, -> { Square::Types::Money }, optional: true, nullable: false
+      field :vendor_id, -> { String }, optional: true, nullable: false
+      field :physical_count_id, -> { String }, optional: true, nullable: false
+      field :reason_id, -> { Square::Types::InventoryAdjustmentReasonId }, optional: true, nullable: false
     end
   end
 end

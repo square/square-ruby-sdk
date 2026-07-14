@@ -4,7 +4,8 @@ module Square
   module Types
     # Represents Square-estimated quantity of items in a particular state at a
     # particular seller location based on the known history of physical counts and
-    # inventory adjustments.
+    # inventory adjustments. The absence of an inventory count indicates that the
+    # catalog object hasn't interacted with the given inventory state at the given location.
     class InventoryCount < Internal::Types::Model
       field :catalog_object_id, -> { String }, optional: true, nullable: false
       field :catalog_object_type, -> { String }, optional: true, nullable: false

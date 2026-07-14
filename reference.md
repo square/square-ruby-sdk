@@ -2535,9 +2535,15 @@ batches will be processed in order as long as the total object count for the
 request (items, variations, modifier lists, discounts, and taxes) is no more
 than 10,000.
 
+This endpoint uses full-replacement semantics. The client must send the complete object, and any
+field absent from the request is interpreted as an intentional clear. This logic applies to
+nested objects as well. For example, omitting inlined children like variations will delete them.
+
 To ensure consistency, only one update request is processed at a time per seller account.
 While one (batch or non-batch) update request is being processed, other (batched and non-batched)
-update requests are rejected with the `429` error code.
+update requests are rejected with the `429` error code. Prefer batching related changes into a
+single call rather than issuing many small writes, since each write acquires the lock separately
+and parallel writes to the same seller will contend with each other, producing `429` errors.
 </dd>
 </dl>
 </dd>
@@ -2703,6 +2709,8 @@ Returns a list of all [CatalogObject](entity:CatalogObject)s of the specified ty
 
 The `types` parameter is specified as a comma-separated list of the [CatalogObjectType](entity:CatalogObjectType) values,
 for example, "`ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`".
+Always specify `types` explicitly. When upgrading to a newer API version, omitting `types` may
+cause new object types to appear in results that were not returned under the previous version.
 
 __Important:__ ListCatalog does not return deleted catalog items. To retrieve
 deleted catalog items, use [SearchCatalogObjects](api-endpoint:Catalog-SearchCatalogObjects)
@@ -2822,6 +2830,11 @@ endpoint in the following aspects:
 - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
 - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
 - The both endpoints have different call conventions, including the query filter formats.
+
+The `object_types` parameter is specified as a list of [CatalogObjectType](entity:CatalogObjectType) values.
+Always specify `object_types` explicitly. When upgrading to a newer API version, omitting
+`object_types` may cause new object types to appear in results that were not returned under
+the previous version.
 </dd>
 </dl>
 </dd>
@@ -6315,6 +6328,460 @@ client.gift_cards.get(id: 'id');
 </details>
 
 ## Inventory
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">list_inventory_adjustment_reasons</a>() -> Square::Types::ListInventoryAdjustmentReasonsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the standard and custom inventory adjustment reasons available
+to the seller.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.inventory.list_inventory_adjustment_reasons(
+  include_deleted: true,
+  include_system_codes: true
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**include_deleted:** `Internal::Types::Boolean` 
+
+Indicates whether the response should include deleted custom inventory
+adjustment reasons. The default value is `false`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include_system_codes:** `Internal::Types::Boolean` 
+
+Indicates whether the response should include Square-generated system
+inventory adjustment reason codes that cannot be used to write adjustments
+from the Connect API, such as `SALE`, `RECOUNT`, `TRANSFER`, `IN_TRANSIT`,
+and `CANCELED_SALE`. The default value is `false`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">create_inventory_adjustment_reason</a>(request) -> Square::Types::CreateInventoryAdjustmentReasonResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a custom inventory adjustment reason.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.inventory.create_inventory_adjustment_reason(
+  idempotency_key: '27b2f2b1-1c2a-4b9e-8f3a-0d9c3a1e5b47',
+  adjustment_reason: {
+    id: {
+      type: 'CUSTOM'
+    },
+    name: 'Donated to charity',
+    direction: 'DECREASE'
+  }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` 
+
+A client-supplied, universally unique identifier to make this
+[CreateInventoryAdjustmentReason](api-endpoint:Inventory-CreateInventoryAdjustmentReason)
+request idempotent.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**adjustment_reason:** `Square::Types::InventoryAdjustmentReason` 
+
+The custom inventory adjustment reason to create. Only custom
+adjustment reasons can be created.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">delete_inventory_adjustment_reason</a>(request) -> Square::Types::DeleteInventoryAdjustmentReasonResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Soft deletes a custom inventory adjustment reason.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.inventory.delete_inventory_adjustment_reason(reason_id: {
+  type: 'CUSTOM',
+  custom_reason_id: 'R5BX3PDCZ6EXAMPLE'
+});
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**reason_id:** `Square::Types::InventoryAdjustmentReasonId` — The identifier of the custom inventory adjustment reason to soft delete.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">restore_inventory_adjustment_reason</a>(request) -> Square::Types::RestoreInventoryAdjustmentReasonResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Restores a soft-deleted custom inventory adjustment reason.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.inventory.restore_inventory_adjustment_reason(reason_id: {
+  type: 'CUSTOM',
+  custom_reason_id: 'R5BX3PDCZ6EXAMPLE'
+});
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**reason_id:** `Square::Types::InventoryAdjustmentReasonId` 
+
+The identifier of the soft-deleted custom inventory adjustment reason
+to restore.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">retrieve_inventory_adjustment_reason</a>(request) -> Square::Types::RetrieveInventoryAdjustmentReasonResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the inventory adjustment reason identified by the provided
+`reason_id`. Deleted custom reasons can be retrieved by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.inventory.retrieve_inventory_adjustment_reason(reason_id: {
+  type: 'CUSTOM',
+  custom_reason_id: 'R5BX3PDCZ6EXAMPLE'
+});
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**reason_id:** `Square::Types::InventoryAdjustmentReasonId` — The identifier of the inventory adjustment reason to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">update_inventory_adjustment_reason</a>(request) -> Square::Types::UpdateInventoryAdjustmentReasonResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates a custom inventory adjustment reason.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.inventory.update_inventory_adjustment_reason(
+  reason_id: {
+    type: 'CUSTOM',
+    custom_reason_id: 'R5BX3PDCZ6EXAMPLE'
+  },
+  adjustment_reason: {
+    id: {
+      type: 'CUSTOM',
+      custom_reason_id: 'R5BX3PDCZ6EXAMPLE'
+    },
+    name: 'Charitable donation'
+  }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**reason_id:** `Square::Types::InventoryAdjustmentReasonId` — The identifier of the custom inventory adjustment reason to update.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**adjustment_reason:** `Square::Types::InventoryAdjustmentReason` 
+
+The requested custom inventory adjustment reason update. Only the
+`name` field can be updated. Deleted custom reasons cannot be updated. To
+restore a deleted custom reason, call
+[RestoreInventoryAdjustmentReason](api-endpoint:Inventory-RestoreInventoryAdjustmentReason).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">deprecated_get_adjustment</a>(adjustment_id) -> Square::Types::GetInventoryAdjustmentResponse</code></summary>
 <dl>
 <dd>
@@ -6359,6 +6826,102 @@ client.inventory.deprecated_get_adjustment(adjustment_id: 'adjustment_id');
 <dd>
 
 **adjustment_id:** `String` — ID of the [InventoryAdjustment](entity:InventoryAdjustment) to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">update_inventory_adjustment</a>(request) -> Square::Types::UpdateInventoryAdjustmentResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Applies an update to the provided adjustment.
+
+On success: returns the newly updated adjustment.
+On failure: returns a list of related errors.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.inventory.update_inventory_adjustment(
+  idempotency_key: '8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe',
+  adjustment: {}
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` 
+
+A client-supplied, universally unique identifier (UUID) for the
+request.
+
+See [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency) in the
+[Build Basics](https://developer.squareup.com/docs/buildbasics) section for more
+information.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**adjustment:** `Square::Types::InventoryAdjustment` 
+
+Represents the updates being written to a past/existing inventory adjustment.
+This works using sparse updates, meaning that any fields omitted from the inputted InventoryAdjustment
+will retain their values.
+
+Only updates to the quantity, cost_money, vendor_id, and reason_id fields of an InventoryAdjustment can be made here.
+Note that the quantity field must be provided, but it can be identical to the current quantity if there are no desired quantity changes.
+cost_money and vendor_id can only be written to adjustments that add stock to the system (from_state of NONE or UNLINKED_RETURN) and to untracked sale adjustments.
+reason_id can be changed to any reason that is valid for the adjustment's state transition. The reason of a system-generated adjustment (for example, SALE or RECOUNT) cannot be changed.
+Adjustments generated by Square from other records cannot be updated. This includes inferred adjustments created by physical counts, transfer-like cross-location adjustments, and component adjustments.
+Adjustments linked to purchase orders cannot be updated. Adjustments linked to sales can only have cost_money and vendor_id updated, and only for untracked sales.
+Restock adjustments linked to an itemized return can have their quantity updated, up to the quantity remaining on the return.
+Adjustments older than one year cannot be updated.
     
 </dd>
 </dl>
@@ -7021,69 +7584,6 @@ ID of the
 </dl>
 </details>
 
-<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">get_transfer</a>(transfer_id) -> Square::Types::GetInventoryTransferResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns the [InventoryTransfer](entity:InventoryTransfer) object
-with the provided `transfer_id`.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```ruby
-client.inventory.get_transfer(transfer_id: 'transfer_id');
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**transfer_id:** `String` — ID of the [InventoryTransfer](entity:InventoryTransfer) to retrieve.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `Square::Inventory::RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">get</a>(catalog_object_id) -> Square::Types::GetInventoryCountResponse</code></summary>
 <dl>
 <dd>
@@ -7260,6 +7760,54 @@ A pagination cursor returned by a previous call to this endpoint.
 Provide this to retrieve the next set of results for the original query.
 
 See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Square::Inventory::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.inventory.<a href="/lib/square/inventory/client.rb">get_transfer</a>(transfer_id) -> </code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.inventory.get_transfer(transfer_id: 'transfer_id');
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**transfer_id:** `String` 
     
 </dd>
 </dl>
@@ -18586,6 +19134,10 @@ client.catalog.images.update(image_id: 'image_id');
 <dd>
 
 Creates a new or updates the specified [CatalogObject](entity:CatalogObject).
+
+This endpoint uses full-replacement semantics. The client must send the complete object, and any
+field absent from the request is interpreted as an intentional clear. This logic applies to
+nested objects as well. For example, omitting inlined children like variations will delete them.
 
 To ensure consistency, only one update request is processed at a time per seller account.
 While one (batch or non-batch) update request is being processed, other (batched and non-batched)
