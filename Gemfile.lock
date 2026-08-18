@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    square.rb (46.0.1.20260715)
+    square.rb (46.1.0.20260819)
 
 GEM
   remote: https://rubygems.org/
@@ -15,8 +15,8 @@ GEM
       bigdecimal
       rexml
     hashdiff (1.2.1)
-    io-console (0.8.2)
-    json (2.21.1)
+    io-console (0.9.2)
+    json (2.21.2)
     language_server-protocol (3.17.0.6)
     lint_roller (1.1.0)
     method_source (1.1.0)
@@ -24,7 +24,7 @@ GEM
     minitest-rg (5.4.0)
       minitest (>= 5.0, < 7)
     parallel (2.1.0)
-    parser (3.3.11.1)
+    parser (3.3.12.0)
       ast (~> 2.4.1)
       racc
     prism (1.9.0)
@@ -37,10 +37,10 @@ GEM
     rainbow (3.1.1)
     rake (13.4.2)
     regexp_parser (2.12.0)
-    reline (0.6.3)
+    reline (0.7.0)
       io-console (~> 0.5)
     rexml (3.4.4)
-    rubocop (1.88.2)
+    rubocop (1.89.0)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -54,7 +54,7 @@ GEM
     rubocop-ast (1.50.0)
       parser (>= 3.3.7.2)
       prism (~> 1.7)
-    rubocop-minitest (0.39.1)
+    rubocop-minitest (0.40.0)
       lint_roller (~> 1.1)
       rubocop (>= 1.75.0, < 2.0)
       rubocop-ast (>= 1.38.0, < 2.0)
