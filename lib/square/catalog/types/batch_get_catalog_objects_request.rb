@@ -9,6 +9,7 @@ module Square
         field :catalog_version, -> { Integer }, optional: true, nullable: false
         field :include_deleted_objects, -> { Internal::Types::Boolean }, optional: true, nullable: false
         field :include_category_path_to_root, -> { Internal::Types::Boolean }, optional: true, nullable: false
+        field :include_options, -> { Square::Types::IncludeOptions }, optional: true, nullable: false
       end
     end
   end

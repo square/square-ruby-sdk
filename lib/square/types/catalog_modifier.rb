@@ -14,6 +14,7 @@ module Square
       field :kitchen_name, -> { String }, optional: true, nullable: false
       field :image_id, -> { String }, optional: true, nullable: false
       field :hidden_online, -> { Internal::Types::Boolean }, optional: true, nullable: false
+      field :child_modifier_list_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
     end
   end
 end

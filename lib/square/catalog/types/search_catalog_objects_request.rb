@@ -12,6 +12,7 @@ module Square
         field :query, -> { Square::Types::CatalogQuery }, optional: true, nullable: false
         field :limit, -> { Integer }, optional: true, nullable: false
         field :include_category_path_to_root, -> { Internal::Types::Boolean }, optional: true, nullable: false
+        field :include_options, -> { Square::Types::IncludeOptions }, optional: true, nullable: false
       end
     end
   end

@@ -19,6 +19,10 @@ module Square
       EFTPOS = "EFTPOS"
       FELICA = "FELICA"
       EBT = "EBT"
+      QUICPAY = "QUICPAY"
+      ID = "ID"
+      TRANSPORTATION_IC = "TRANSPORTATION_IC"
+      CARNET = "CARNET"
     end
   end
 end

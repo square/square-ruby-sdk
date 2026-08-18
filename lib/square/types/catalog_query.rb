@@ -43,6 +43,7 @@ module Square
       field :items_for_modifier_list_query, -> { Square::Types::CatalogQueryItemsForModifierList }, optional: true, nullable: false
       field :items_for_item_options_query, -> { Square::Types::CatalogQueryItemsForItemOptions }, optional: true, nullable: false
       field :item_variations_for_item_option_values_query, -> { Square::Types::CatalogQueryItemVariationsForItemOptionValues }, optional: true, nullable: false
+      field :modifiers_for_child_list_query, -> { Square::Types::CatalogQueryModifiersForChildList }, optional: true, nullable: false
     end
   end
 end
