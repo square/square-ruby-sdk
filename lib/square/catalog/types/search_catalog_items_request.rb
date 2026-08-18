@@ -14,6 +14,7 @@ module Square
         field :product_types, -> { Internal::Types::Array[Square::Types::CatalogItemProductType] }, optional: true, nullable: false
         field :custom_attribute_filters, -> { Internal::Types::Array[Square::Types::CustomAttributeFilter] }, optional: true, nullable: false
         field :archived_state, -> { Square::Types::ArchivedState }, optional: true, nullable: false
+        field :include_options, -> { Square::Types::IncludeOptions }, optional: true, nullable: false
       end
     end
   end

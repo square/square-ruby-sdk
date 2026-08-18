@@ -31,6 +31,8 @@ module Square
       field :mcc, -> { String }, optional: true, nullable: false
       field :full_format_logo_url, -> { String }, optional: true, nullable: false
       field :tax_ids, -> { Square::Types::TaxIds }, optional: true, nullable: false
+      field :custom_receipt_text, -> { String }, optional: true, nullable: false
+      field :return_policy, -> { String }, optional: true, nullable: false
     end
   end
 end
