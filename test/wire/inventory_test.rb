@@ -490,25 +490,4 @@ class InventoryWireTest < WireMockTestCase
       expected: 1
     )
   end
-
-  def test_inventory_get_transfer_with_wiremock
-    test_id = "inventory.get_transfer.0"
-
-    @client.inventory.get_transfer(
-      transfer_id: "transfer_id",
-      request_options: {
-        additional_headers: {
-          "X-Test-Id" => "inventory.get_transfer.0"
-        }
-      }
-    )
-
-    verify_request_count(
-      test_id: test_id,
-      method: "GET",
-      url_path: "/v2/inventory/transfers/transfer_id",
-      query_params: nil,
-      expected: 1
-    )
-  end
 end

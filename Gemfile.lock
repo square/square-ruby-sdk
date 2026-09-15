@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    square.rb (46.1.0.20260819)
+    square.rb (47.0.0.20260916)
 
 GEM
   remote: https://rubygems.org/
@@ -9,21 +9,21 @@ GEM
     addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
     ast (2.4.3)
-    bigdecimal (4.1.2)
+    bigdecimal (4.1.3)
     coderay (1.1.3)
     crack (1.0.1)
       bigdecimal
       rexml
     hashdiff (1.2.1)
-    io-console (0.9.2)
-    json (2.21.2)
+    io-console (0.9.3)
+    json (3.0.2)
     language_server-protocol (3.17.0.6)
     lint_roller (1.1.0)
     method_source (1.1.0)
     minitest (5.27.0)
     minitest-rg (5.4.0)
       minitest (>= 5.0, < 7)
-    parallel (2.1.0)
+    parallel (2.2.0)
     parser (3.3.12.0)
       ast (~> 2.4.1)
       racc
@@ -40,8 +40,8 @@ GEM
     reline (0.7.0)
       io-console (~> 0.5)
     rexml (3.4.4)
-    rubocop (1.89.0)
-      json (~> 2.3)
+    rubocop (1.91.0)
+      json (>= 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
       parallel (>= 1.10)
@@ -62,7 +62,7 @@ GEM
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.2.0)
-    webmock (3.26.2)
+    webmock (3.26.4)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
