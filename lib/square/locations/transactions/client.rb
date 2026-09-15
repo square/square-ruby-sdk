@@ -98,14 +98,6 @@ module Square
           end
         end
 
-        # Captures a transaction that was created with the [Charge](api-endpoint:Transactions-Charge)
-        # endpoint with a `delay_capture` value of `true`.
-        #
-        #
-        # See [Delayed capture
-        # transactions](https://developer.squareup.com/docs/payments/transactions/overview#delayed-capture)
-        # for more information.
-        #
         # @param request_options [Hash]
         # @param params [Hash]
         # @option request_options [String] :base_url
@@ -116,7 +108,7 @@ module Square
         # @option params [String] :location_id
         # @option params [String] :transaction_id
         #
-        # @return [Square::Types::CaptureTransactionResponse]
+        # @return [untyped]
         def capture(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
@@ -131,22 +123,12 @@ module Square
             raise Square::Errors::TimeoutError
           end
           code = response.code.to_i
-          if code.between?(200, 299)
-            Square::Types::CaptureTransactionResponse.load(response.body)
-          else
-            error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(response.body, code: code)
-          end
+          return if code.between?(200, 299)
+
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
         end
 
-        # Cancels a transaction that was created with the [Charge](api-endpoint:Transactions-Charge)
-        # endpoint with a `delay_capture` value of `true`.
-        #
-        #
-        # See [Delayed capture
-        # transactions](https://developer.squareup.com/docs/payments/transactions/overview#delayed-capture)
-        # for more information.
-        #
         # @param request_options [Hash]
         # @param params [Hash]
         # @option request_options [String] :base_url
@@ -157,7 +139,7 @@ module Square
         # @option params [String] :location_id
         # @option params [String] :transaction_id
         #
-        # @return [Square::Types::VoidTransactionResponse]
+        # @return [untyped]
         def void(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
@@ -172,12 +154,10 @@ module Square
             raise Square::Errors::TimeoutError
           end
           code = response.code.to_i
-          if code.between?(200, 299)
-            Square::Types::VoidTransactionResponse.load(response.body)
-          else
-            error_class = Square::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(response.body, code: code)
-          end
+          return if code.between?(200, 299)
+
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
         end
       end
     end
