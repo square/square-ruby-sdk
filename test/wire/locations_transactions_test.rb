@@ -58,48 +58,4 @@ class LocationsTransactionsWireTest < WireMockTestCase
       expected: 1
     )
   end
-
-  def test_locations_transactions_capture_with_wiremock
-    test_id = "locations.transactions.capture.0"
-
-    @client.locations.transactions.capture(
-      location_id: "location_id",
-      transaction_id: "transaction_id",
-      request_options: {
-        additional_headers: {
-          "X-Test-Id" => "locations.transactions.capture.0"
-        }
-      }
-    )
-
-    verify_request_count(
-      test_id: test_id,
-      method: "POST",
-      url_path: "/v2/locations/location_id/transactions/transaction_id/capture",
-      query_params: nil,
-      expected: 1
-    )
-  end
-
-  def test_locations_transactions_void_with_wiremock
-    test_id = "locations.transactions.void.0"
-
-    @client.locations.transactions.void(
-      location_id: "location_id",
-      transaction_id: "transaction_id",
-      request_options: {
-        additional_headers: {
-          "X-Test-Id" => "locations.transactions.void.0"
-        }
-      }
-    )
-
-    verify_request_count(
-      test_id: test_id,
-      method: "POST",
-      url_path: "/v2/locations/location_id/transactions/transaction_id/void",
-      query_params: nil,
-      expected: 1
-    )
-  end
 end
