@@ -296,31 +296,6 @@ module Square
         end
       end
 
-      # Returns the [InventoryTransfer](entity:InventoryTransfer) object
-      # with the provided `transfer_id`.
-      #
-      # @return [Square::Types::GetInventoryTransferResponse]
-      def get_transfer(request_options: {}, **params)
-        _request = Square::Internal::JSON::Request.new(
-          base_url: request_options[:base_url],
-          method: "GET",
-          path: "v2/inventory/transfers/#{params[:transfer_id]}",
-          request_options: request_options
-        )
-        begin
-          _response = @client.send(_request)
-        rescue Net::HTTPRequestTimeout
-          raise Square::Errors::TimeoutError
-        end
-        code = _response.code.to_i
-        if code.between?(200, 299)
-          Square::Types::GetInventoryTransferResponse.load(_response.body)
-        else
-          error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
-        end
-      end
-
       # Retrieves the current calculated stock count for a given
       # [CatalogObject](entity:CatalogObject) at a given set of
       # [Location](entity:Location)s. Responses are paginated and unsorted.
