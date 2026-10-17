@@ -138,16 +138,16 @@ module Square
         def initialize(values = {})
           @data = {}
 
-          values = Utils.symbolize_keys(values.dup)
+          values = Utils.symbolize_keys(values)
 
           self.class.fields.each do |field_name, field|
-            value = values.delete(field.api_name.to_sym) || values.delete(field.api_name) || values.delete(field_name)
+            value = values.delete(field.api_name.to_sym) { values.delete(field_name) }
 
-            field_value = value || (if field.literal?
-                                      field.value
-                                    elsif field.default
-                                      field.default
-                                    end)
+            field_value = if value.nil?
+                            field.literal? ? field.value : field.default
+                          else
+                            value
+                          end
 
             @data[field_name] = Utils.coerce(field.type, field_value)
           end
@@ -170,13 +170,7 @@ module Square
 
             next if value.nil? && field.optional && !field.nullable
 
-            if value.is_a?(::Array)
-              value = value.map { |item| item.respond_to?(:to_h) ? item.to_h : item }
-            elsif value.respond_to?(:to_h)
-              value = value.to_h
-            end
-
-            acc[field.api_name] = value
+            acc[field.api_name] = serialize_field_value(value)
           end
 
           # Inject union discriminant if this instance was coerced from a discriminated union
@@ -186,6 +180,19 @@ module Square
           result[discriminant_key] = discriminant_value if discriminant_key && discriminant_value && !result.key?(discriminant_key)
 
           result
+        end
+
+        # Shared catalog metadata includes maps of models (custom attributes).
+        # Recursively serialize these instead of leaving model instances in hashes.
+        private def serialize_field_value(value)
+          case value
+          when ::Hash
+            value.transform_values { |item| serialize_field_value(item) }
+          when ::Array
+            value.map { |item| serialize_field_value(item) }
+          else
+            value && value.respond_to?(:to_h) ? value.to_h : value
+          end
         end
 
         def ==(other)

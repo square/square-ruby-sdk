@@ -112,6 +112,42 @@ describe Square::Internal::Types::Model do
     end
   end
 
+  describe "falsy values and serialization" do
+    class BooleanModel < Square::Internal::Types::Model
+      field :enabled, Square::Internal::Types::Boolean, optional: true, default: true
+      field :disabled, Square::Internal::Types::Boolean, optional: true, default: false
+      field :aliased, Square::Internal::Types::Boolean, optional: true, api_name: "apiFlag"
+    end
+
+    it "preserves false rather than deleting it or applying the default" do
+      model = BooleanModel.new(enabled: false, apiFlag: false)
+
+      assert_same false, model.enabled
+      assert_same false, model.disabled
+      assert_same false, model.aliased
+      assert_equal({ "enabled" => false, "disabled" => false, "apiFlag" => false }, model.to_h)
+      assert_same false, BooleanModel.new(aliased: false).aliased
+    end
+
+    it "leaves the caller's hash unchanged while accepting string and API keys" do
+      values = { "name" => "Inception", "yearOfRelease" => "2014" }.freeze
+      model = ExampleModel.new(values)
+
+      assert_equal 2014, model.year
+      assert_equal({ "name" => "Inception", "yearOfRelease" => "2014" }, values)
+    end
+
+    it "keeps nullable values as nil in serialized output" do
+      assert_nil ExampleModel.new(name: "Inception").to_h["yearOfRelease"]
+    end
+
+    it "recursively serializes maps and nested arrays of models" do
+      model = ExampleModel.new(name: "Inception", nested: { children: [[ExampleChild.new(value: "child")]] })
+
+      assert_equal({ children: [[{ "value" => "child" }]] }, model.to_h["nested"])
+    end
+  end
+
   describe "#inspect" do
     class SensitiveModel < Square::Internal::Types::Model
       field :username, String

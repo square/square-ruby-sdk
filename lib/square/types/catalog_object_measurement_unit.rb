@@ -2,7 +2,7 @@
 
 module Square
   module Types
-    class CatalogObjectMeasurementUnit < Internal::Types::Model
+    class CatalogObjectMeasurementUnit < CatalogObjectBase
       field :measurement_unit_data, -> { Square::Types::CatalogMeasurementUnit }, optional: true, nullable: false
     end
   end

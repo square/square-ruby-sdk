@@ -2,7 +2,7 @@
 
 module Square
   module Types
-    class CatalogObjectModifierList < Internal::Types::Model
+    class CatalogObjectModifierList < CatalogObjectBase
       field :modifier_list_data, -> { Square::Types::CatalogModifierList }, optional: true, nullable: false
     end
   end

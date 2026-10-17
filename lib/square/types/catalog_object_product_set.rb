@@ -2,7 +2,7 @@
 
 module Square
   module Types
-    class CatalogObjectProductSet < Internal::Types::Model
+    class CatalogObjectProductSet < CatalogObjectBase
       field :product_set_data, -> { Square::Types::CatalogProductSet }, optional: true, nullable: false
     end
   end

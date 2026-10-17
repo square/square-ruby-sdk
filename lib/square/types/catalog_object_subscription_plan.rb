@@ -2,7 +2,7 @@
 
 module Square
   module Types
-    class CatalogObjectSubscriptionPlan < Internal::Types::Model
+    class CatalogObjectSubscriptionPlan < CatalogObjectBase
       field :subscription_plan_data, -> { Square::Types::CatalogSubscriptionPlan }, optional: true, nullable: false
     end
   end

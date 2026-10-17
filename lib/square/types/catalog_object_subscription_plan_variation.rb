@@ -2,7 +2,7 @@
 
 module Square
   module Types
-    class CatalogObjectSubscriptionPlanVariation < Internal::Types::Model
+    class CatalogObjectSubscriptionPlanVariation < CatalogObjectBase
       field :subscription_plan_variation_data, -> { Square::Types::CatalogSubscriptionPlanVariation }, optional: true, nullable: false
     end
   end

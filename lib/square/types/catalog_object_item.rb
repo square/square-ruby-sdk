@@ -2,7 +2,7 @@
 
 module Square
   module Types
-    class CatalogObjectItem < Internal::Types::Model
+    class CatalogObjectItem < CatalogObjectBase
       field :item_data, -> { Square::Types::CatalogItem }, optional: true, nullable: false
     end
   end
