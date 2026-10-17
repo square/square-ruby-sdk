@@ -27,6 +27,10 @@ module Square
         end
 
         def self.coerce(target, value, strict: false)
+          # Most optional model fields are absent in API responses. Avoid
+          # resolving lazy types and dispatching coercion for these nil values.
+          return nil if value.nil? && !strict
+
           type = unwrap_type(target)
 
           case type
@@ -44,29 +48,29 @@ module Square
             when ::Array
               return coerce(type, value.to_h)
             end
-          in ->(t) { t <= NilClass }
+          in Module if type <= NilClass
             return nil
-          in ->(t) { t <= String }
+          in Module if type <= String
             case value
             when String, Symbol, Numeric, TrueClass, FalseClass
               return value.to_s
             end
-          in ->(t) { t <= Symbol }
+          in Module if type <= Symbol
             case value
             when Symbol, String
               return value.to_sym
             end
-          in ->(t) { t <= Integer }
+          in Module if type <= Integer
             case value
             when Numeric, String, Time
               return value.to_i
             end
-          in ->(t) { t <= Float }
+          in Module if type <= Float
             case value
             when Numeric, Time, String
               return value.to_f
             end
-          in ->(t) { t <= Model }
+          in Module if type <= Model
             case value
             when type
               return value
@@ -74,15 +78,7 @@ module Square
               return type.coerce(value, strict: strict)
             end
           in Module
-            case type
-            in ->(t) {
-                 t.singleton_class.include?(Enum) ||
-                   t.singleton_class.include?(Union)
-               }
-              return type.coerce(value, strict: strict)
-            else
-              value
-            end
+            return type.coerce(value, strict: strict) if type.singleton_class.include?(Enum) || type.singleton_class.include?(Union)
           else
             value
           end

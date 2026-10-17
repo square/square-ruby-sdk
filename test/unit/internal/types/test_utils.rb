@@ -34,6 +34,30 @@ describe Square::Internal::Types::Utils do
   end
 
   describe ".coerce" do
+    describe "absent values" do
+      it "does not resolve a lazy type for nil in non-strict mode" do
+        unresolved_type = -> { raise "absent values should not resolve their type" }
+
+        assert_nil Utils.coerce(unresolved_type, nil)
+      end
+
+      it "does not resolve or coerce a lazy type for an absent model field" do
+        model_class = Class.new(Square::Internal::Types::Model) do
+          field :missing, -> { raise "absent fields should not resolve their type" }, optional: true
+        end
+
+        assert_nil model_class.new.missing
+        assert_empty model_class.new.to_h
+      end
+
+      it "still checks nil values in strict mode" do
+        assert_raises Square::Internal::Errors::TypeError do
+          Utils.coerce(String, nil, strict: true)
+        end
+        assert_nil Utils.coerce(NilClass, nil, strict: true)
+      end
+    end
+
     describe "NilClass" do
       it "always returns nil" do
         assert_nil Utils.coerce(NilClass, "foobar")
