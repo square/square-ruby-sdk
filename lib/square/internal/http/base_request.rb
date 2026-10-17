@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require "date"
+require "time"
+
 module Square
   module Internal
     module Http
@@ -25,7 +28,25 @@ module Square
         # @return [Hash] The query parameters merged with additional query parameters from request options.
         def encode_query
           additional_query = @request_options&.dig(:additional_query_parameters) || @request_options&.dig("additional_query_parameters") || {}
-          @query.merge(additional_query)
+          serialize_value(@query.merge(additional_query))
+        end
+
+        # Format dates explicitly rather than relying on to_s or Rails' global
+        # JSON settings. TimeWithZone reports itself as a Time, so Rails remains
+        # an optional dependency. Match the legacy JSON millisecond precision.
+        private def serialize_value(value)
+          case value
+          when Time, DateTime
+            value.iso8601(3)
+          when Date
+            value.iso8601
+          when ::Hash
+            value.transform_values { |item| serialize_value(item) }
+          when ::Array
+            value.map { |item| serialize_value(item) }
+          else
+            value
+          end
         end
 
         # Child classes should implement:

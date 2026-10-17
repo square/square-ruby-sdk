@@ -31,7 +31,7 @@ module Square
 
         # @return [String, nil] The encoded HTTP request body.
         def encode_body
-          @body.nil? ? nil : ::JSON.generate(@body)
+          @body.nil? ? nil : ::JSON.generate(serialize_value(@body))
         end
       end
     end
