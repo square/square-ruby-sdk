@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Defines the fields that are included in the response body of
@@ -8,6 +10,7 @@ module Square
     # Either `errors` or `status` are present in a given response (never both).
     class RegisterDomainResponse < Internal::Types::Model
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
+
       field :status, -> { Square::Types::RegisterDomainResponseStatus }, optional: true, nullable: false
     end
   end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # A mapping between a temporary client-supplied ID and a permanent server-generated ID.
@@ -14,8 +16,9 @@ module Square
     # After the request is submitted and the object created, a permanent server-generated ID is assigned
     # to the new object. The permanent ID is unique across the Square catalog.
     class CatalogIdMapping < Internal::Types::Model
-      field :client_object_id, -> { String }, optional: true, nullable: false
-      field :object_id_, -> { String }, optional: true, nullable: false, api_name: "object_id"
+      field :client_object_id, -> { String }, optional: true, nullable: true
+
+      field :object_id_, -> { String }, optional: true, nullable: true, api_name: "object_id"
     end
   end
 end

@@ -8,14 +8,15 @@ class LaborShiftsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
   def test_labor_shifts_create_with_wiremock
     test_id = "labor.shifts.create.0"
 
-    @client.labor.shifts.create(
+    result = @client.labor.shifts.create(
       idempotency_key: "HIDSNG5KS478L",
       shift: {
         location_id: "PAA1RJZZKXBFG",
@@ -57,12 +58,31 @@ class LaborShiftsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/labor/shifts",
+      expected: {
+        "/shift/wage/hourly_rate/amount" => 1100,
+        "/shift/declared_cash_tip_money/amount" => 500
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/shift/wage/hourly_rate/amount" => 1100,
+        "/shift/version" => 1,
+        "/shift/declared_cash_tip_money/amount" => 500
+      }
+    )
   end
 
   def test_labor_shifts_search_with_wiremock
     test_id = "labor.shifts.search.0"
 
-    @client.labor.shifts.search(
+    result = @client.labor.shifts.search(
       query: {
         filter: {
           workday: {
@@ -90,12 +110,33 @@ class LaborShiftsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/labor/shifts/search",
+      expected: {
+        "/limit" => 100
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/shifts/0/wage/hourly_rate/amount" => 1100,
+        "/shifts/0/version" => 6,
+        "/shifts/0/declared_cash_tip_money/amount" => 500,
+        "/shifts/1/wage/hourly_rate/amount" => 1600,
+        "/shifts/1/version" => 16,
+        "/shifts/1/declared_cash_tip_money/amount" => 0
+      }
+    )
   end
 
   def test_labor_shifts_get_with_wiremock
     test_id = "labor.shifts.get.0"
 
-    @client.labor.shifts.get(
+    result = @client.labor.shifts.get(
       id: "id",
       request_options: {
         additional_headers: {
@@ -111,12 +152,21 @@ class LaborShiftsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/shift/wage/hourly_rate/amount" => 1457,
+        "/shift/version" => 1,
+        "/shift/declared_cash_tip_money/amount" => 500
+      }
+    )
   end
 
   def test_labor_shifts_update_with_wiremock
     test_id = "labor.shifts.update.0"
 
-    @client.labor.shifts.update(
+    result = @client.labor.shifts.update(
       id: "id",
       shift: {
         location_id: "PAA1RJZZKXBFG",
@@ -159,6 +209,26 @@ class LaborShiftsWireTest < WireMockTestCase
       url_path: "/v2/labor/shifts/id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "PUT",
+      url_path: "/v2/labor/shifts/id",
+      expected: {
+        "/shift/wage/hourly_rate/amount" => 1500,
+        "/shift/version" => 1,
+        "/shift/declared_cash_tip_money/amount" => 500
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/shift/wage/hourly_rate/amount" => 1500,
+        "/shift/version" => 2,
+        "/shift/declared_cash_tip_money/amount" => 500
+      }
     )
   end
 

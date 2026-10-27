@@ -20,6 +20,9 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.events.search_events
+      #
       # @return [Square::Types::SearchEventsResponse]
       def search_events(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -37,7 +40,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchEventsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::SearchEventsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -50,16 +53,18 @@ module Square
       # later.
       #
       # @param request_options [Hash]
-      # @param params [Hash]
+      # @param _params [Hash]
       # @option request_options [String] :base_url
       # @option request_options [Hash{String => Object}] :additional_headers
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.events.disable_events
+      #
       # @return [Square::Types::DisableEventsResponse]
-      def disable_events(request_options: {}, **params)
-        Square::Internal::Types::Utils.normalize_keys(params)
+      def disable_events(request_options: {}, **_params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
@@ -73,7 +78,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::DisableEventsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::DisableEventsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -83,16 +88,18 @@ module Square
       # Enables events to make them searchable. Only events that occur while in the enabled state are searchable.
       #
       # @param request_options [Hash]
-      # @param params [Hash]
+      # @param _params [Hash]
       # @option request_options [String] :base_url
       # @option request_options [Hash{String => Object}] :additional_headers
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.events.enable_events
+      #
       # @return [Square::Types::EnableEventsResponse]
-      def enable_events(request_options: {}, **params)
-        Square::Internal::Types::Utils.normalize_keys(params)
+      def enable_events(request_options: {}, **_params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
@@ -106,7 +113,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::EnableEventsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::EnableEventsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -124,13 +131,14 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String, nil] :api_version
       #
+      # @example
+      #   client.events.list_event_types(api_version: "api_version")
+      #
       # @return [Square::Types::ListEventTypesResponse]
       def list_event_types(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[api_version]
         query_params = {}
         query_params["api_version"] = params[:api_version] if params.key?(:api_version)
-        params.except(*query_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
@@ -146,7 +154,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::ListEventTypesResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::ListEventTypesResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

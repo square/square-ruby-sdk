@@ -6,7 +6,8 @@ module Square
       module Types
         class GetCustomAttributeDefinitionsRequest < Internal::Types::Model
           field :key, -> { String }, optional: false, nullable: false
-          field :version, -> { Integer }, optional: true, nullable: false
+
+          field :version, -> { Integer }, optional: true, nullable: true
         end
       end
     end

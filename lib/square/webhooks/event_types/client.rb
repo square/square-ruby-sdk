@@ -22,13 +22,14 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String, nil] :api_version
         #
+        # @example
+        #   client.webhooks.event_types.list(api_version: "api_version")
+        #
         # @return [Square::Types::ListWebhookEventTypesResponse]
         def list(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[api_version]
           query_params = {}
           query_params["api_version"] = params[:api_version] if params.key?(:api_version)
-          params.except(*query_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
@@ -44,7 +45,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::ListWebhookEventTypesResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::ListWebhookEventTypesResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

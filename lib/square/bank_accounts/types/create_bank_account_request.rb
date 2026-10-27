@@ -5,7 +5,9 @@ module Square
     module Types
       class CreateBankAccountRequest < Internal::Types::Model
         field :idempotency_key, -> { String }, optional: false, nullable: false
+
         field :source_id, -> { String }, optional: false, nullable: false
+
         field :customer_id, -> { String }, optional: true, nullable: false
       end
     end

@@ -4,7 +4,7 @@ module Square
   module Team
     module Types
       class ListJobsRequest < Internal::Types::Model
-        field :cursor, -> { String }, optional: true, nullable: false
+        field :cursor, -> { String }, optional: true, nullable: true
       end
     end
   end

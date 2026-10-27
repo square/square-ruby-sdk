@@ -8,7 +8,8 @@ class BankAccountsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -26,7 +27,6 @@ class BankAccountsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -41,7 +41,7 @@ class BankAccountsWireTest < WireMockTestCase
   def test_bank_accounts_create_bank_account_with_wiremock
     test_id = "bank_accounts.create_bank_account.0"
 
-    @client.bank_accounts.create_bank_account(
+    result = @client.bank_accounts.create_bank_account(
       idempotency_key: "4e43559a-f0fd-47d3-9da2-7ea1f97d94be",
       source_id: "bnon:CA4SEHsQwr0rx6DbWLD5BQaqMnoYAQ",
       customer_id: "HM3B2D5JKGZ69359BTEHXM2V8M",
@@ -59,12 +59,19 @@ class BankAccountsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/bank_account/version" => 2
+      }
+    )
   end
 
   def test_bank_accounts_get_by_v_1_id_with_wiremock
     test_id = "bank_accounts.get_by_v_1_id.0"
 
-    @client.bank_accounts.get_by_v_1_id(
+    result = @client.bank_accounts.get_by_v_1_id(
       v_1_bank_account_id: "v1_bank_account_id",
       request_options: {
         additional_headers: {
@@ -80,12 +87,19 @@ class BankAccountsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/bank_account/version" => 5
+      }
+    )
   end
 
   def test_bank_accounts_get_with_wiremock
     test_id = "bank_accounts.get.0"
 
-    @client.bank_accounts.get(
+    result = @client.bank_accounts.get(
       bank_account_id: "bank_account_id",
       request_options: {
         additional_headers: {
@@ -101,12 +115,19 @@ class BankAccountsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/bank_account/version" => 2
+      }
+    )
   end
 
   def test_bank_accounts_disable_bank_account_with_wiremock
     test_id = "bank_accounts.disable_bank_account.0"
 
-    @client.bank_accounts.disable_bank_account(
+    result = @client.bank_accounts.disable_bank_account(
       bank_account_id: "bank_account_id",
       request_options: {
         additional_headers: {
@@ -121,6 +142,13 @@ class BankAccountsWireTest < WireMockTestCase
       url_path: "/v2/bank-accounts/bank_account_id/disable",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/bank_account/version" => 3
+      }
     )
   end
 end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # The custom attribute filters in a set of [customer filters](entity:CustomerFilter) used in a search query. Use
@@ -9,7 +11,7 @@ module Square
     # [Search by custom
     # attribute](https://developer.squareup.com/docs/customers-api/use-the-api/search-customers#search-by-custom-attribute).
     class CustomerCustomAttributeFilters < Internal::Types::Model
-      field :filters, -> { Internal::Types::Array[Square::Types::CustomerCustomAttributeFilter] }, optional: true, nullable: false
+      field :filters, -> { Internal::Types::Array[Square::Types::CustomerCustomAttributeFilter] }, optional: true, nullable: true
     end
   end
 end

@@ -1,15 +1,22 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Data model for updating a transfer order. All fields are optional.
     class UpdateTransferOrderData < Internal::Types::Model
-      field :source_location_id, -> { String }, optional: true, nullable: false
-      field :destination_location_id, -> { String }, optional: true, nullable: false
-      field :expected_at, -> { String }, optional: true, nullable: false
-      field :notes, -> { String }, optional: true, nullable: false
-      field :tracking_number, -> { String }, optional: true, nullable: false
-      field :line_items, -> { Internal::Types::Array[Square::Types::UpdateTransferOrderLineData] }, optional: true, nullable: false
+      field :source_location_id, -> { String }, optional: true, nullable: true
+
+      field :destination_location_id, -> { String }, optional: true, nullable: true
+
+      field :expected_at, -> { String }, optional: true, nullable: true
+
+      field :notes, -> { String }, optional: true, nullable: true
+
+      field :tracking_number, -> { String }, optional: true, nullable: true
+
+      field :line_items, -> { Internal::Types::Array[Square::Types::UpdateTransferOrderLineData] }, optional: true, nullable: true
     end
   end
 end

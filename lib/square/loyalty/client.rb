@@ -27,6 +27,18 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.loyalty.search_events(
+      #     query: {
+      #       filter: {
+      #         order_filter: {
+      #           order_id: "PyATxhYLfsMqpVkcKJITPydgEYfZY"
+      #         }
+      #       }
+      #     },
+      #     limit: 30
+      #   )
+      #
       # @return [Square::Types::SearchLoyaltyEventsResponse]
       def search_events(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -44,7 +56,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchLoyaltyEventsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::SearchLoyaltyEventsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

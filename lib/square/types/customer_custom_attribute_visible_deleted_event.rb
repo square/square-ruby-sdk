@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Published when a customer [custom attribute](entity:CustomAttribute) that is visible to the
@@ -12,10 +14,14 @@ module Square
     # `VISIBILITY_READ_ONLY` or `VISIBILITY_HIDDEN` can only be deleted by the owner. Custom attributes are owned
     # by the application that created the corresponding [custom attribute definition](entity:CustomAttributeDefinition).
     class CustomerCustomAttributeVisibleDeletedEvent < Internal::Types::Model
-      field :merchant_id, -> { String }, optional: true, nullable: false
-      field :type, -> { String }, optional: true, nullable: false
-      field :event_id, -> { String }, optional: true, nullable: false
+      field :merchant_id, -> { String }, optional: true, nullable: true
+
+      field :type, -> { String }, optional: true, nullable: true
+
+      field :event_id, -> { String }, optional: true, nullable: true
+
       field :created_at, -> { String }, optional: true, nullable: false
+
       field :data, -> { Square::Types::CustomAttributeEventData }, optional: true, nullable: false
     end
   end

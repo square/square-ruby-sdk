@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # A `CatalogItemOptionValue` links an item variation to an item option as
@@ -7,8 +9,9 @@ module Square
     # a size option. An item option value would represent each variation of t-shirt:
     # For example, "Color:Red, Size:Small" or "Color:Blue, Size:Medium".
     class CatalogItemOptionValueForItemVariation < Internal::Types::Model
-      field :item_option_id, -> { String }, optional: true, nullable: false
-      field :item_option_value_id, -> { String }, optional: true, nullable: false
+      field :item_option_id, -> { String }, optional: true, nullable: true
+
+      field :item_option_value_id, -> { String }, optional: true, nullable: true
     end
   end
 end

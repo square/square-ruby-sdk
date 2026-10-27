@@ -31,21 +31,28 @@ module Square
         # @option params [Square::Types::SortOrder, nil] :sort_order
         # @option params [String, nil] :cursor
         #
+        # @example
+        #   client.locations.transactions.list(
+        #     location_id: "location_id",
+        #     begin_time: "begin_time",
+        #     end_time: "end_time",
+        #     sort_order: "DESC",
+        #     cursor: "cursor"
+        #   )
+        #
         # @return [Square::Types::ListTransactionsResponse]
         def list(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[begin_time end_time sort_order cursor]
           query_params = {}
           query_params["begin_time"] = params[:begin_time] if params.key?(:begin_time)
           query_params["end_time"] = params[:end_time] if params.key?(:end_time)
           query_params["sort_order"] = params[:sort_order] if params.key?(:sort_order)
           query_params["cursor"] = params[:cursor] if params.key?(:cursor)
-          params = params.except(*query_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
-            path: "v2/locations/#{params[:location_id]}/transactions",
+            path: "v2/locations/#{URI.encode_uri_component(params[:location_id].to_s)}/transactions",
             query: query_params,
             request_options: request_options
           )
@@ -56,7 +63,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::ListTransactionsResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::ListTransactionsResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -75,13 +82,19 @@ module Square
         # @option params [String] :location_id
         # @option params [String] :transaction_id
         #
+        # @example
+        #   client.locations.transactions.get(
+        #     location_id: "location_id",
+        #     transaction_id: "transaction_id"
+        #   )
+        #
         # @return [Square::Types::GetTransactionResponse]
         def get(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
-            path: "v2/locations/#{params[:location_id]}/transactions/#{params[:transaction_id]}",
+            path: "v2/locations/#{URI.encode_uri_component(params[:location_id].to_s)}/transactions/#{URI.encode_uri_component(params[:transaction_id].to_s)}",
             request_options: request_options
           )
           begin
@@ -91,7 +104,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::GetTransactionResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::GetTransactionResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

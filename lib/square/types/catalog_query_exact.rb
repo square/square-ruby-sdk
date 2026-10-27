@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # The query filter to return the search result by exact match of the specified attribute name and value.
     class CatalogQueryExact < Internal::Types::Model
       field :attribute_name, -> { String }, optional: false, nullable: false
+
       field :attribute_value, -> { String }, optional: false, nullable: false
     end
   end

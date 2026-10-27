@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents a job that can be assigned to [team members](entity:TeamMember). This object defines the
@@ -7,10 +9,15 @@ module Square
     # in a team member's wage setting.
     class Job < Internal::Types::Model
       field :id, -> { String }, optional: true, nullable: false
-      field :title, -> { String }, optional: true, nullable: false
-      field :is_tip_eligible, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
+      field :title, -> { String }, optional: true, nullable: true
+
+      field :is_tip_eligible, -> { Internal::Types::Boolean }, optional: true, nullable: true
+
       field :created_at, -> { String }, optional: true, nullable: false
+
       field :updated_at, -> { String }, optional: true, nullable: false
+
       field :version, -> { Integer }, optional: true, nullable: false
     end
   end

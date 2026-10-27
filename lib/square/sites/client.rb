@@ -19,16 +19,18 @@ module Square
       # APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).
       #
       # @param request_options [Hash]
-      # @param params [Hash]
+      # @param _params [Hash]
       # @option request_options [String] :base_url
       # @option request_options [Hash{String => Object}] :additional_headers
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.sites.list
+      #
       # @return [Square::Types::ListSitesResponse]
-      def list(request_options: {}, **params)
-        Square::Internal::Types::Utils.normalize_keys(params)
+      def list(request_options: {}, **_params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -42,7 +44,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::ListSitesResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::ListSitesResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

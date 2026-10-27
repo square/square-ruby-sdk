@@ -29,6 +29,9 @@ module Square
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.catalog.object.upsert(idempotency_key: "af3d1afc-7212-4300-b463-0bfc5314a5ae")
+        #
         # @return [Square::Types::UpsertCatalogObjectResponse]
         def upsert(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -46,7 +49,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::UpsertCatalogObjectResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::UpsertCatalogObjectResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -73,20 +76,26 @@ module Square
         # @option params [Integer, nil] :catalog_version
         # @option params [Boolean, nil] :include_category_path_to_root
         #
+        # @example
+        #   client.catalog.object.get(
+        #     object_id_: "object_id",
+        #     include_related_objects: true,
+        #     catalog_version: 1000000,
+        #     include_category_path_to_root: true
+        #   )
+        #
         # @return [Square::Types::GetCatalogObjectResponse]
         def get(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[include_related_objects catalog_version include_category_path_to_root]
           query_params = {}
           query_params["include_related_objects"] = params[:include_related_objects] if params.key?(:include_related_objects)
           query_params["catalog_version"] = params[:catalog_version] if params.key?(:catalog_version)
           query_params["include_category_path_to_root"] = params[:include_category_path_to_root] if params.key?(:include_category_path_to_root)
-          params = params.except(*query_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
-            path: "v2/catalog/object/#{params[:object_id_]}",
+            path: "v2/catalog/object/#{URI.encode_uri_component(params[:object_id_].to_s)}",
             query: query_params,
             request_options: request_options
           )
@@ -97,7 +106,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::GetCatalogObjectResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::GetCatalogObjectResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -124,13 +133,16 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :object_id_
         #
+        # @example
+        #   client.catalog.object.delete(object_id_: "object_id")
+        #
         # @return [Square::Types::DeleteCatalogObjectResponse]
         def delete(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",
-            path: "v2/catalog/object/#{params[:object_id_]}",
+            path: "v2/catalog/object/#{URI.encode_uri_component(params[:object_id_].to_s)}",
             request_options: request_options
           )
           begin
@@ -140,7 +152,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::DeleteCatalogObjectResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::DeleteCatalogObjectResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

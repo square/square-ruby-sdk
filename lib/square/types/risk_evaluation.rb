@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents fraud risk information for the associated payment.
@@ -10,6 +12,7 @@ module Square
     # provide the goods/services or refund the payment).
     class RiskEvaluation < Internal::Types::Model
       field :created_at, -> { String }, optional: true, nullable: false
+
       field :risk_level, -> { Square::Types::RiskEvaluationRiskLevel }, optional: true, nullable: false
     end
   end

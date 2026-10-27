@@ -8,7 +8,8 @@ class CardsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -27,7 +28,6 @@ class CardsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -42,7 +42,7 @@ class CardsWireTest < WireMockTestCase
   def test_cards_create_with_wiremock
     test_id = "cards.create.0"
 
-    @client.cards.create(
+    result = @client.cards.create(
       idempotency_key: "4935a656-a929-4792-b97c-8848be85c27c",
       source_id: "cnon:uIbfJXhXETSP197M3GB",
       card: {
@@ -72,12 +72,21 @@ class CardsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/card/exp_month" => 11,
+        "/card/exp_year" => 2022,
+        "/card/version" => 1
+      }
+    )
   end
 
   def test_cards_get_with_wiremock
     test_id = "cards.get.0"
 
-    @client.cards.get(
+    result = @client.cards.get(
       card_id: "card_id",
       request_options: {
         additional_headers: {
@@ -93,12 +102,21 @@ class CardsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/card/exp_month" => 11,
+        "/card/exp_year" => 2022,
+        "/card/version" => 1
+      }
+    )
   end
 
   def test_cards_disable_with_wiremock
     test_id = "cards.disable.0"
 
-    @client.cards.disable(
+    result = @client.cards.disable(
       card_id: "card_id",
       request_options: {
         additional_headers: {
@@ -113,6 +131,15 @@ class CardsWireTest < WireMockTestCase
       url_path: "/v2/cards/card_id/disable",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/card/exp_month" => 11,
+        "/card/exp_year" => 2022,
+        "/card/version" => 2
+      }
     )
   end
 end

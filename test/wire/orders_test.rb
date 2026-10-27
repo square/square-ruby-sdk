@@ -8,14 +8,15 @@ class OrdersWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
   def test_orders_create_with_wiremock
     test_id = "orders.create.0"
 
-    @client.orders.create(
+    result = @client.orders.create(
       order: {
         location_id: "057P5VYJ4A5X1",
         reference_id: "my-order-001",
@@ -76,12 +77,68 @@ class OrdersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/orders",
+      expected: {
+        "/order/line_items/0/base_price_money/amount" => 1599,
+        "/order/discounts/2/amount_money/amount" => 100
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/order/line_items/0/applied_taxes/0/applied_money/amount" => 136,
+        "/order/line_items/0/applied_discounts/0/applied_money/amount" => 8,
+        "/order/line_items/0/applied_discounts/1/applied_money/amount" => 79,
+        "/order/line_items/0/base_price_money/amount" => 1599,
+        "/order/line_items/0/variation_total_price_money/amount" => 1599,
+        "/order/line_items/0/gross_sales_money/amount" => 1599,
+        "/order/line_items/0/total_tax_money/amount" => 136,
+        "/order/line_items/0/total_discount_money/amount" => 87,
+        "/order/line_items/0/total_money/amount" => 1648,
+        "/order/line_items/0/total_service_charge_money/amount" => 0,
+        "/order/line_items/1/modifiers/0/base_price_money/amount" => 50,
+        "/order/line_items/1/modifiers/0/total_price_money/amount" => 100,
+        "/order/line_items/1/applied_taxes/0/applied_money/amount" => 374,
+        "/order/line_items/1/applied_discounts/0/applied_money/amount" => 22,
+        "/order/line_items/1/applied_discounts/1/applied_money/amount" => 224,
+        "/order/line_items/1/applied_discounts/2/applied_money/amount" => 100,
+        "/order/line_items/1/base_price_money/amount" => 2200,
+        "/order/line_items/1/variation_total_price_money/amount" => 4400,
+        "/order/line_items/1/gross_sales_money/amount" => 4500,
+        "/order/line_items/1/total_tax_money/amount" => 374,
+        "/order/line_items/1/total_discount_money/amount" => 346,
+        "/order/line_items/1/total_money/amount" => 4528,
+        "/order/line_items/1/total_service_charge_money/amount" => 0,
+        "/order/taxes/0/applied_money/amount" => 510,
+        "/order/discounts/0/applied_money/amount" => 30,
+        "/order/discounts/1/applied_money/amount" => 303,
+        "/order/discounts/2/amount_money/amount" => 100,
+        "/order/discounts/2/applied_money/amount" => 100,
+        "/order/net_amounts/total_money/amount" => 6176,
+        "/order/net_amounts/tax_money/amount" => 510,
+        "/order/net_amounts/discount_money/amount" => 433,
+        "/order/net_amounts/tip_money/amount" => 0,
+        "/order/net_amounts/service_charge_money/amount" => 0,
+        "/order/version" => 1,
+        "/order/total_money/amount" => 6176,
+        "/order/total_tax_money/amount" => 510,
+        "/order/total_discount_money/amount" => 433,
+        "/order/total_tip_money/amount" => 0,
+        "/order/total_service_charge_money/amount" => 0,
+        "/order/net_amount_due_money/amount" => 1000000
+      }
+    )
   end
 
   def test_orders_batch_get_with_wiremock
     test_id = "orders.batch_get.0"
 
-    @client.orders.batch_get(
+    result = @client.orders.batch_get(
       location_id: "057P5VYJ4A5X1",
       order_ids: %w[CAISEM82RcpmcFBM0TfOyiHV3es CAISENgvlJ6jLWAzERDzjyHVybY],
       request_options: {
@@ -98,12 +155,24 @@ class OrdersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/orders/0/line_items/0/base_price_money/amount" => 1599,
+        "/orders/0/line_items/0/total_money/amount" => 1599,
+        "/orders/0/line_items/1/base_price_money/amount" => 2000,
+        "/orders/0/line_items/1/total_money/amount" => 6000,
+        "/orders/0/version" => 1,
+        "/orders/0/total_money/amount" => 7599
+      }
+    )
   end
 
   def test_orders_calculate_with_wiremock
     test_id = "orders.calculate.0"
 
-    @client.orders.calculate(
+    result = @client.orders.calculate(
       order: {
         location_id: "D7AVYMEAPJ3A3",
         line_items: [{
@@ -141,12 +210,57 @@ class OrdersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/orders/calculate",
+      expected: {
+        "/order/line_items/0/base_price_money/amount" => 500,
+        "/order/line_items/1/base_price_money/amount" => 300
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/order/line_items/0/applied_discounts/0/applied_money/amount" => 250,
+        "/order/line_items/0/base_price_money/amount" => 500,
+        "/order/line_items/0/variation_total_price_money/amount" => 500,
+        "/order/line_items/0/gross_sales_money/amount" => 500,
+        "/order/line_items/0/total_tax_money/amount" => 0,
+        "/order/line_items/0/total_discount_money/amount" => 250,
+        "/order/line_items/0/total_money/amount" => 250,
+        "/order/line_items/0/total_service_charge_money/amount" => 0,
+        "/order/line_items/1/applied_discounts/0/applied_money/amount" => 300,
+        "/order/line_items/1/base_price_money/amount" => 300,
+        "/order/line_items/1/variation_total_price_money/amount" => 600,
+        "/order/line_items/1/gross_sales_money/amount" => 600,
+        "/order/line_items/1/total_tax_money/amount" => 0,
+        "/order/line_items/1/total_discount_money/amount" => 300,
+        "/order/line_items/1/total_money/amount" => 300,
+        "/order/line_items/1/total_service_charge_money/amount" => 0,
+        "/order/discounts/0/applied_money/amount" => 550,
+        "/order/net_amounts/total_money/amount" => 550,
+        "/order/net_amounts/tax_money/amount" => 0,
+        "/order/net_amounts/discount_money/amount" => 550,
+        "/order/net_amounts/tip_money/amount" => 0,
+        "/order/net_amounts/service_charge_money/amount" => 0,
+        "/order/version" => 1,
+        "/order/total_money/amount" => 550,
+        "/order/total_tax_money/amount" => 0,
+        "/order/total_discount_money/amount" => 550,
+        "/order/total_tip_money/amount" => 0,
+        "/order/total_service_charge_money/amount" => 0,
+        "/order/net_amount_due_money/amount" => 1000000
+      }
+    )
   end
 
   def test_orders_clone_with_wiremock
     test_id = "orders.clone.0"
 
-    @client.orders.clone(
+    result = @client.orders.clone(
       order_id: "ZAISEM52YcpmcWAzERDOyiWS123",
       version: 3,
       idempotency_key: "UNIQUE_STRING",
@@ -164,12 +278,67 @@ class OrdersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/orders/clone",
+      expected: {
+        "/version" => 3
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/order/line_items/0/applied_taxes/0/applied_money/amount" => 136,
+        "/order/line_items/0/applied_discounts/0/applied_money/amount" => 8,
+        "/order/line_items/0/applied_discounts/1/applied_money/amount" => 79,
+        "/order/line_items/0/base_price_money/amount" => 1599,
+        "/order/line_items/0/variation_total_price_money/amount" => 1599,
+        "/order/line_items/0/gross_sales_money/amount" => 1599,
+        "/order/line_items/0/total_tax_money/amount" => 136,
+        "/order/line_items/0/total_discount_money/amount" => 87,
+        "/order/line_items/0/total_money/amount" => 1648,
+        "/order/line_items/0/total_service_charge_money/amount" => 0,
+        "/order/line_items/1/modifiers/0/base_price_money/amount" => 50,
+        "/order/line_items/1/modifiers/0/total_price_money/amount" => 100,
+        "/order/line_items/1/applied_taxes/0/applied_money/amount" => 374,
+        "/order/line_items/1/applied_discounts/0/applied_money/amount" => 22,
+        "/order/line_items/1/applied_discounts/1/applied_money/amount" => 224,
+        "/order/line_items/1/applied_discounts/2/applied_money/amount" => 100,
+        "/order/line_items/1/base_price_money/amount" => 2200,
+        "/order/line_items/1/variation_total_price_money/amount" => 4400,
+        "/order/line_items/1/gross_sales_money/amount" => 4500,
+        "/order/line_items/1/total_tax_money/amount" => 374,
+        "/order/line_items/1/total_discount_money/amount" => 346,
+        "/order/line_items/1/total_money/amount" => 4528,
+        "/order/line_items/1/total_service_charge_money/amount" => 0,
+        "/order/taxes/0/applied_money/amount" => 510,
+        "/order/discounts/0/applied_money/amount" => 30,
+        "/order/discounts/1/applied_money/amount" => 303,
+        "/order/discounts/2/amount_money/amount" => 100,
+        "/order/discounts/2/applied_money/amount" => 100,
+        "/order/net_amounts/total_money/amount" => 6176,
+        "/order/net_amounts/tax_money/amount" => 510,
+        "/order/net_amounts/discount_money/amount" => 433,
+        "/order/net_amounts/tip_money/amount" => 0,
+        "/order/net_amounts/service_charge_money/amount" => 0,
+        "/order/version" => 1,
+        "/order/total_money/amount" => 6176,
+        "/order/total_tax_money/amount" => 510,
+        "/order/total_discount_money/amount" => 433,
+        "/order/total_tip_money/amount" => 0,
+        "/order/total_service_charge_money/amount" => 0,
+        "/order/net_amount_due_money/amount" => 1000000
+      }
+    )
   end
 
   def test_orders_search_with_wiremock
     test_id = "orders.search.0"
 
-    @client.orders.search(
+    result = @client.orders.search(
       location_ids: %w[057P5VYJ4A5X1 18YC4JDH91E1H],
       query: {
         filter: {
@@ -204,12 +373,31 @@ class OrdersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/orders/search",
+      expected: {
+        "/limit" => 3
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/order_entries/0/version" => 1,
+        "/order_entries/1/version" => 1,
+        "/order_entries/2/version" => 1,
+        "/orders/0/version" => 1
+      }
+    )
   end
 
   def test_orders_get_with_wiremock
     test_id = "orders.get.0"
 
-    @client.orders.get(
+    result = @client.orders.get(
       order_id: "order_id",
       request_options: {
         additional_headers: {
@@ -225,12 +413,47 @@ class OrdersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/order/line_items/0/applied_discounts/0/applied_money/amount" => 250,
+        "/order/line_items/0/base_price_money/amount" => 500,
+        "/order/line_items/0/variation_total_price_money/amount" => 500,
+        "/order/line_items/0/gross_sales_money/amount" => 500,
+        "/order/line_items/0/total_tax_money/amount" => 0,
+        "/order/line_items/0/total_discount_money/amount" => 250,
+        "/order/line_items/0/total_money/amount" => 250,
+        "/order/line_items/0/total_service_charge_money/amount" => 0,
+        "/order/line_items/1/applied_discounts/0/applied_money/amount" => 300,
+        "/order/line_items/1/base_price_money/amount" => 300,
+        "/order/line_items/1/variation_total_price_money/amount" => 600,
+        "/order/line_items/1/gross_sales_money/amount" => 600,
+        "/order/line_items/1/total_tax_money/amount" => 0,
+        "/order/line_items/1/total_discount_money/amount" => 300,
+        "/order/line_items/1/total_money/amount" => 300,
+        "/order/line_items/1/total_service_charge_money/amount" => 0,
+        "/order/discounts/0/applied_money/amount" => 550,
+        "/order/net_amounts/total_money/amount" => 550,
+        "/order/net_amounts/tax_money/amount" => 0,
+        "/order/net_amounts/discount_money/amount" => 550,
+        "/order/net_amounts/tip_money/amount" => 0,
+        "/order/net_amounts/service_charge_money/amount" => 0,
+        "/order/version" => 1,
+        "/order/total_money/amount" => 550,
+        "/order/total_tax_money/amount" => 0,
+        "/order/total_discount_money/amount" => 550,
+        "/order/total_tip_money/amount" => 0,
+        "/order/total_service_charge_money/amount" => 0,
+        "/order/net_amount_due_money/amount" => 1000000
+      }
+    )
   end
 
   def test_orders_update_with_wiremock
     test_id = "orders.update.0"
 
-    @client.orders.update(
+    result = @client.orders.update(
       order_id: "order_id",
       order: {
         location_id: "location_id",
@@ -261,12 +484,53 @@ class OrdersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "PUT",
+      url_path: "/v2/orders/order_id",
+      expected: {
+        "/order/line_items/0/base_price_money/amount" => 200,
+        "/order/version" => 1
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/order/line_items/0/base_price_money/amount" => 500,
+        "/order/line_items/0/variation_total_price_money/amount" => 500,
+        "/order/line_items/0/gross_sales_money/amount" => 500,
+        "/order/line_items/0/total_tax_money/amount" => 0,
+        "/order/line_items/0/total_discount_money/amount" => 0,
+        "/order/line_items/0/total_money/amount" => 500,
+        "/order/line_items/0/total_service_charge_money/amount" => 0,
+        "/order/line_items/1/base_price_money/amount" => 200,
+        "/order/line_items/1/variation_total_price_money/amount" => 400,
+        "/order/line_items/1/gross_sales_money/amount" => 400,
+        "/order/line_items/1/total_tax_money/amount" => 0,
+        "/order/line_items/1/total_discount_money/amount" => 0,
+        "/order/line_items/1/total_money/amount" => 400,
+        "/order/line_items/1/total_service_charge_money/amount" => 0,
+        "/order/net_amounts/total_money/amount" => 900,
+        "/order/net_amounts/tax_money/amount" => 0,
+        "/order/net_amounts/discount_money/amount" => 0,
+        "/order/net_amounts/service_charge_money/amount" => 0,
+        "/order/version" => 2,
+        "/order/total_money/amount" => 900,
+        "/order/total_tax_money/amount" => 0,
+        "/order/total_discount_money/amount" => 0,
+        "/order/total_tip_money/amount" => 1000000,
+        "/order/total_service_charge_money/amount" => 0,
+        "/order/net_amount_due_money/amount" => 1000000
+      }
+    )
   end
 
   def test_orders_pay_with_wiremock
     test_id = "orders.pay.0"
 
-    @client.orders.pay(
+    result = @client.orders.pay(
       order_id: "order_id",
       idempotency_key: "c043a359-7ad9-4136-82a9-c3f1d66dcbff",
       payment_ids: %w[EnZdNAlWCmfh6Mt5FMNST1o7taB 0LRiVlbXVwe8ozu4KbZxd12mvaB],
@@ -283,6 +547,42 @@ class OrdersWireTest < WireMockTestCase
       url_path: "/v2/orders/order_id/pay",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/order/line_items/0/base_price_money/amount" => 500,
+        "/order/line_items/0/gross_sales_money/amount" => 500,
+        "/order/line_items/0/total_tax_money/amount" => 0,
+        "/order/line_items/0/total_discount_money/amount" => 0,
+        "/order/line_items/0/total_money/amount" => 500,
+        "/order/line_items/0/total_service_charge_money/amount" => 0,
+        "/order/line_items/1/base_price_money/amount" => 750,
+        "/order/line_items/1/gross_sales_money/amount" => 1500,
+        "/order/line_items/1/total_tax_money/amount" => 0,
+        "/order/line_items/1/total_discount_money/amount" => 0,
+        "/order/line_items/1/total_money/amount" => 1500,
+        "/order/line_items/1/total_service_charge_money/amount" => 0,
+        "/order/net_amounts/total_money/amount" => 2000,
+        "/order/net_amounts/tax_money/amount" => 0,
+        "/order/net_amounts/discount_money/amount" => 0,
+        "/order/net_amounts/tip_money/amount" => 0,
+        "/order/net_amounts/service_charge_money/amount" => 0,
+        "/order/tenders/0/amount_money/amount" => 1000,
+        "/order/tenders/0/card_details/card/exp_month" => 2,
+        "/order/tenders/0/card_details/card/exp_year" => 2022,
+        "/order/tenders/1/amount_money/amount" => 1000,
+        "/order/tenders/1/card_details/card/exp_month" => 2,
+        "/order/tenders/1/card_details/card/exp_year" => 2022,
+        "/order/version" => 4,
+        "/order/total_money/amount" => 2000,
+        "/order/total_tax_money/amount" => 0,
+        "/order/total_discount_money/amount" => 0,
+        "/order/total_tip_money/amount" => 1000000,
+        "/order/total_service_charge_money/amount" => 0,
+        "/order/net_amount_due_money/amount" => 1000000
+      }
     )
   end
 end

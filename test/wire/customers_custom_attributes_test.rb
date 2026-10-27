@@ -8,7 +8,8 @@ class CustomersCustomAttributesWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -26,7 +27,6 @@ class CustomersCustomAttributesWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -41,7 +41,7 @@ class CustomersCustomAttributesWireTest < WireMockTestCase
   def test_customers_custom_attributes_get_with_wiremock
     test_id = "customers.custom_attributes.get.0"
 
-    @client.customers.custom_attributes.get(
+    result = @client.customers.custom_attributes.get(
       customer_id: "customer_id",
       key: "key",
       with_definition: true,
@@ -60,15 +60,25 @@ class CustomersCustomAttributesWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute/version" => 1,
+        "/custom_attribute/definition/version" => 1
+      }
+    )
   end
 
   def test_customers_custom_attributes_upsert_with_wiremock
     test_id = "customers.custom_attributes.upsert.0"
 
-    @client.customers.custom_attributes.upsert(
+    result = @client.customers.custom_attributes.upsert(
       customer_id: "customer_id",
       key: "key",
-      custom_attribute: {},
+      custom_attribute: {
+        value: "Dune"
+      },
       request_options: {
         additional_headers: {
           "X-Test-Id" => "customers.custom_attributes.upsert.0"
@@ -82,6 +92,14 @@ class CustomersCustomAttributesWireTest < WireMockTestCase
       url_path: "/v2/customers/customer_id/custom-attributes/key",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute/version" => 1,
+        "/custom_attribute/definition/version" => 1
+      }
     )
   end
 

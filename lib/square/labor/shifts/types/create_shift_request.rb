@@ -6,6 +6,7 @@ module Square
       module Types
         class CreateShiftRequest < Internal::Types::Model
           field :idempotency_key, -> { String }, optional: true, nullable: false
+
           field :shift, -> { Square::Types::Shift }, optional: false, nullable: false
         end
       end

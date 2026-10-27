@@ -26,6 +26,42 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.team_members.create(
+      #     idempotency_key: "idempotency-key-0",
+      #     team_member: {
+      #       reference_id: "reference_id_1",
+      #       status: "ACTIVE",
+      #       given_name: "Joe",
+      #       family_name: "Doe",
+      #       email_address: "joe_doe@gmail.com",
+      #       phone_number: "+14159283333",
+      #       assigned_locations: {
+      #         assignment_type: "EXPLICIT_LOCATIONS",
+      #         location_ids: %w[YSGH2WBKG94QZ GA2Y9HSJ8KRYT]
+      #       },
+      #       wage_setting: {
+      #         job_assignments: [{
+      #           pay_type: "SALARY",
+      #           annual_rate: {
+      #             amount: 3000000,
+      #             currency: "USD"
+      #           },
+      #           weekly_hours: 40,
+      #           job_id: "FjS8x95cqHiMenw4f1NAUH4P"
+      #         }, {
+      #           pay_type: "HOURLY",
+      #           hourly_rate: {
+      #             amount: 2000,
+      #             currency: "USD"
+      #           },
+      #           job_id: "VDNpRv8da51NU8qZFC5zDWpF"
+      #         }],
+      #         is_overtime_exempt: true
+      #       }
+      #     }
+      #   )
+      #
       # @return [Square::Types::CreateTeamMemberResponse]
       def create(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -43,7 +79,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreateTeamMemberResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::CreateTeamMemberResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -66,6 +102,35 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.team_members.batch_create(team_members: {
+      #     "idempotency-key-1" => {
+      #       team_member: {
+      #         reference_id: "reference_id_1",
+      #         given_name: "Joe",
+      #         family_name: "Doe",
+      #         email_address: "joe_doe@gmail.com",
+      #         phone_number: "+14159283333",
+      #         assigned_locations: {
+      #           assignment_type: "EXPLICIT_LOCATIONS",
+      #           location_ids: %w[YSGH2WBKG94QZ GA2Y9HSJ8KRYT]
+      #         }
+      #       }
+      #     },
+      #     "idempotency-key-2" => {
+      #       team_member: {
+      #         reference_id: "reference_id_2",
+      #         given_name: "Jane",
+      #         family_name: "Smith",
+      #         email_address: "jane_smith@gmail.com",
+      #         phone_number: "+14159223334",
+      #         assigned_locations: {
+      #           assignment_type: "ALL_CURRENT_AND_FUTURE_LOCATIONS"
+      #         }
+      #       }
+      #     }
+      #   })
+      #
       # @return [Square::Types::BatchCreateTeamMembersResponse]
       def batch_create(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -83,7 +148,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BatchCreateTeamMembersResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::BatchCreateTeamMembersResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -105,6 +170,39 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.team_members.batch_update(team_members: {
+      #     "AFMwA08kR-MIF-3Vs0OE" => {
+      #       team_member: {
+      #         reference_id: "reference_id_2",
+      #         is_owner: false,
+      #         status: "ACTIVE",
+      #         given_name: "Jane",
+      #         family_name: "Smith",
+      #         email_address: "jane_smith@gmail.com",
+      #         phone_number: "+14159223334",
+      #         assigned_locations: {
+      #           assignment_type: "ALL_CURRENT_AND_FUTURE_LOCATIONS"
+      #         }
+      #       }
+      #     },
+      #     "fpgteZNMaf0qOK-a4t6P" => {
+      #       team_member: {
+      #         reference_id: "reference_id_1",
+      #         is_owner: false,
+      #         status: "ACTIVE",
+      #         given_name: "Joe",
+      #         family_name: "Doe",
+      #         email_address: "joe_doe@gmail.com",
+      #         phone_number: "+14159283333",
+      #         assigned_locations: {
+      #           assignment_type: "EXPLICIT_LOCATIONS",
+      #           location_ids: %w[YSGH2WBKG94QZ GA2Y9HSJ8KRYT]
+      #         }
+      #       }
+      #     }
+      #   })
+      #
       # @return [Square::Types::BatchUpdateTeamMembersResponse]
       def batch_update(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -122,7 +220,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BatchUpdateTeamMembersResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::BatchUpdateTeamMembersResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -141,6 +239,17 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.team_members.search(
+      #     query: {
+      #       filter: {
+      #         location_ids: ["0G5P3VGACMMQZ"],
+      #         status: "ACTIVE"
+      #       }
+      #     },
+      #     limit: 10
+      #   )
+      #
       # @return [Square::Types::SearchTeamMembersResponse]
       def search(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -158,7 +267,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchTeamMembersResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::SearchTeamMembersResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -178,13 +287,16 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :team_member_id
       #
+      # @example
+      #   client.team_members.get(team_member_id: "team_member_id")
+      #
       # @return [Square::Types::GetTeamMemberResponse]
       def get(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/team-members/#{params[:team_member_id]}",
+          path: "v2/team-members/#{URI.encode_uri_component(params[:team_member_id].to_s)}",
           request_options: request_options
         )
         begin
@@ -194,7 +306,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::GetTeamMemberResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::GetTeamMemberResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -214,6 +326,42 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :team_member_id
       #
+      # @example
+      #   client.team_members.update(
+      #     team_member_id: "team_member_id",
+      #     team_member: {
+      #       reference_id: "reference_id_1",
+      #       status: "ACTIVE",
+      #       given_name: "Joe",
+      #       family_name: "Doe",
+      #       email_address: "joe_doe@gmail.com",
+      #       phone_number: "+14159283333",
+      #       assigned_locations: {
+      #         assignment_type: "EXPLICIT_LOCATIONS",
+      #         location_ids: %w[YSGH2WBKG94QZ GA2Y9HSJ8KRYT]
+      #       },
+      #       wage_setting: {
+      #         job_assignments: [{
+      #           pay_type: "SALARY",
+      #           annual_rate: {
+      #             amount: 3000000,
+      #             currency: "USD"
+      #           },
+      #           weekly_hours: 40,
+      #           job_id: "FjS8x95cqHiMenw4f1NAUH4P"
+      #         }, {
+      #           pay_type: "HOURLY",
+      #           hourly_rate: {
+      #             amount: 1200,
+      #             currency: "USD"
+      #           },
+      #           job_id: "VDNpRv8da51NU8qZFC5zDWpF"
+      #         }],
+      #         is_overtime_exempt: true
+      #       }
+      #     }
+      #   )
+      #
       # @return [Square::Types::UpdateTeamMemberResponse]
       def update(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -223,7 +371,7 @@ module Square
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
-          path: "v2/team-members/#{params[:team_member_id]}",
+          path: "v2/team-members/#{URI.encode_uri_component(params[:team_member_id].to_s)}",
           body: Square::Types::UpdateTeamMemberRequest.new(body_params).to_h,
           request_options: request_options
         )
@@ -234,7 +382,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdateTeamMemberResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::UpdateTeamMemberResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

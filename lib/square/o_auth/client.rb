@@ -33,6 +33,12 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.o_auth.revoke_token(
+      #     client_id: "CLIENT_ID",
+      #     access_token: "ACCESS_TOKEN"
+      #   )
+      #
       # @return [Square::Types::RevokeTokenResponse]
       def revoke_token(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -50,7 +56,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::RevokeTokenResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::RevokeTokenResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -87,6 +93,14 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.o_auth.obtain_token(
+      #     client_id: "sq0idp-uaPHILoPzWZk3tlJqlML0g",
+      #     client_secret: "sq0csp-30a-4C_tVOnTh14Piza2BfTPBXyLafLPWSzY1qAjeBfM",
+      #     code: "sq0cgb-l0SBqxs4uwxErTVyYOdemg",
+      #     grant_type: "authorization_code"
+      #   )
+      #
       # @return [Square::Types::ObtainTokenResponse]
       def obtain_token(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -104,7 +118,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::ObtainTokenResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::ObtainTokenResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -130,16 +144,18 @@ module Square
       # If the access token is expired or not a valid access token, the endpoint returns an `UNAUTHORIZED` error.
       #
       # @param request_options [Hash]
-      # @param params [Hash]
+      # @param _params [Hash]
       # @option request_options [String] :base_url
       # @option request_options [Hash{String => Object}] :additional_headers
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.o_auth.retrieve_token_status
+      #
       # @return [Square::Types::RetrieveTokenStatusResponse]
-      def retrieve_token_status(request_options: {}, **params)
-        Square::Internal::Types::Utils.normalize_keys(params)
+      def retrieve_token_status(request_options: {}, **_params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
@@ -153,7 +169,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::RetrieveTokenStatusResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::RetrieveTokenStatusResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -161,16 +177,18 @@ module Square
       end
 
       # @param request_options [Hash]
-      # @param params [Hash]
+      # @param _params [Hash]
       # @option request_options [String] :base_url
       # @option request_options [Hash{String => Object}] :additional_headers
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.o_auth.authorize
+      #
       # @return [untyped]
-      def authorize(request_options: {}, **params)
-        Square::Internal::Types::Utils.normalize_keys(params)
+      def authorize(request_options: {}, **_params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",

@@ -8,7 +8,8 @@ class CatalogWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -36,7 +37,7 @@ class CatalogWireTest < WireMockTestCase
   def test_catalog_batch_get_with_wiremock
     test_id = "catalog.batch_get.0"
 
-    @client.catalog.batch_get(
+    result = @client.catalog.batch_get(
       object_ids: %w[W62UWFY35CWMYGVWK6TWJDNI AA27W3M2GGTF3H6AVPNB77CK],
       include_related_objects: true,
       request_options: {
@@ -53,12 +54,23 @@ class CatalogWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/objects/0/version" => 1000000,
+        "/objects/1/version" => 1000000,
+        "/related_objects/0/version" => 1000000,
+        "/related_objects/0/ordinal" => 1000000,
+        "/related_objects/1/version" => 1000000
+      }
+    )
   end
 
   def test_catalog_batch_upsert_with_wiremock
     test_id = "catalog.batch_upsert.0"
 
-    @client.catalog.batch_upsert(
+    result = @client.catalog.batch_upsert(
       idempotency_key: "789ff020-f723-43a9-b4b5-43b5dc1fa3dc",
       batches: [{
         objects: []
@@ -77,16 +89,27 @@ class CatalogWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/objects/0/version" => 1000000,
+        "/objects/1/version" => 1000000,
+        "/objects/2/version" => 1000000,
+        "/objects/2/ordinal" => 1000000,
+        "/objects/3/version" => 1000000
+      }
+    )
   end
 
   def test_catalog_info_with_wiremock
     test_id = "catalog.info.0"
 
-    @client.catalog.info(request_options: {
-                           additional_headers: {
-                             "X-Test-Id" => "catalog.info.0"
-                           }
-                         })
+    result = @client.catalog.info(request_options: {
+      additional_headers: {
+        "X-Test-Id" => "catalog.info.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -94,6 +117,23 @@ class CatalogWireTest < WireMockTestCase
       url_path: "/v2/catalog/info",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/limits/batch_upsert_max_objects_per_batch" => 1000,
+        "/limits/batch_upsert_max_total_objects" => 10000,
+        "/limits/batch_retrieve_max_object_ids" => 1000,
+        "/limits/search_max_page_limit" => 1000,
+        "/limits/batch_delete_max_object_ids" => 200,
+        "/limits/update_item_taxes_max_item_ids" => 1000,
+        "/limits/update_item_taxes_max_taxes_to_enable" => 1000,
+        "/limits/update_item_taxes_max_taxes_to_disable" => 1000,
+        "/limits/update_item_modifier_lists_max_item_ids" => 1000,
+        "/limits/update_item_modifier_lists_max_modifier_lists_to_enable" => 1000,
+        "/limits/update_item_modifier_lists_max_modifier_lists_to_disable" => 1000
+      }
     )
   end
 
@@ -103,14 +143,13 @@ class CatalogWireTest < WireMockTestCase
     result = @client.catalog.list(
       cursor: "cursor",
       types: "types",
-      catalog_version: 1_000_000,
+      catalog_version: 1000000,
       request_options: {
         additional_headers: {
           "X-Test-Id" => "catalog.list.0"
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -125,7 +164,7 @@ class CatalogWireTest < WireMockTestCase
   def test_catalog_search_with_wiremock
     test_id = "catalog.search.0"
 
-    @client.catalog.search(
+    result = @client.catalog.search(
       object_types: ["ITEM"],
       query: {
         prefix_query: {
@@ -148,12 +187,30 @@ class CatalogWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/catalog/search",
+      expected: {
+        "/limit" => 100
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/objects/0/version" => 1000000,
+        "/objects/1/version" => 1000000,
+        "/related_objects/0/version" => 1000000
+      }
+    )
   end
 
   def test_catalog_search_items_with_wiremock
     test_id = "catalog.search_items.0"
 
-    @client.catalog.search_items(
+    result = @client.catalog.search_items(
       text_filter: "red",
       category_ids: ["WINE_CATEGORY_ID"],
       stock_levels: %w[OUT LOW],
@@ -189,6 +246,22 @@ class CatalogWireTest < WireMockTestCase
       url_path: "/v2/catalog/search-catalog-items",
       query_params: nil,
       expected: 1
+    )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/catalog/search-catalog-items",
+      expected: {
+        "/limit" => 100
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/items/0/version" => 1000000
+      }
     )
   end
 

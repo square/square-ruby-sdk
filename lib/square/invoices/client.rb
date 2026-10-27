@@ -14,6 +14,13 @@ module Square
       # is paginated. If truncated, the response includes a `cursor` that you
       # use in a subsequent request to retrieve the next set of invoices.
       #
+      # Returns a `Square::Internal::CursorItemIterator` that yields each `Square::Types::Invoice` in the `invoices`
+      # field of every page, requesting pages as they are needed. Call `pages` on it to get each page as a
+      # `Square::Types::ListInvoicesResponse`, including its other fields.
+      #
+      # No request is sent by this call. The first page is requested when you start iterating (or call
+      # `load_first_page`), so an API error is raised by the loop (or by `load_first_page`), not by this call.
+      #
       # @param request_options [Hash]
       # @param params [Hash]
       # @option request_options [String] :base_url
@@ -25,22 +32,27 @@ module Square
       # @option params [String, nil] :cursor
       # @option params [Integer, nil] :limit
       #
-      # @return [Square::Types::ListInvoicesResponse]
+      # @example
+      #   client.invoices.list(
+      #     location_id: "location_id",
+      #     cursor: "cursor",
+      #     limit: 1
+      #   )
+      #
+      # @return [Square::Internal::CursorItemIterator]
       def list(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[location_id cursor limit]
         query_params = {}
         query_params["location_id"] = params[:location_id] if params.key?(:location_id)
         query_params["cursor"] = params[:cursor] if params.key?(:cursor)
         query_params["limit"] = params[:limit] if params.key?(:limit)
-        params.except(*query_param_names)
 
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :invoices,
-          initial_cursor: query_params[:cursor]
+          initial_cursor: query_params["cursor"]
         ) do |next_cursor|
-          query_params[:cursor] = next_cursor
+          query_params["cursor"] = next_cursor
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -55,7 +67,8 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::ListInvoicesResponse.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Square::Types::ListInvoicesResponse.load(response.body))
+            [parsed_response, response]
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -78,6 +91,51 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.invoices.create(
+      #     invoice: {
+      #       location_id: "ES0RJRZYEC39A",
+      #       order_id: "CAISENgvlJ6jLWAzERDzjyHVybY",
+      #       primary_recipient: {
+      #         customer_id: "JDKYHBWT1D4F8MFH63DBMEN8Y4"
+      #       },
+      #       payment_requests: [{
+      #         request_type: "BALANCE",
+      #         due_date: "2030-01-24",
+      #         tipping_enabled: true,
+      #         automatic_payment_source: "NONE",
+      #         reminders: [{
+      #           relative_scheduled_days: -1,
+      #           message: "Your invoice is due tomorrow"
+      #         }]
+      #       }],
+      #       delivery_method: "EMAIL",
+      #       invoice_number: "inv-100",
+      #       title: "Event Planning Services",
+      #       description: "We appreciate your business!",
+      #       scheduled_at: "2030-01-13T10:00:00Z",
+      #       accepted_payment_methods: {
+      #         card: true,
+      #         square_gift_card: false,
+      #         bank_account: false,
+      #         buy_now_pay_later: false,
+      #         cash_app_pay: false
+      #       },
+      #       custom_fields: [{
+      #         label: "Event Reference Number",
+      #         value: "Ref. #1234",
+      #         placement: "ABOVE_LINE_ITEMS"
+      #       }, {
+      #         label: "Terms of Service",
+      #         value: "The terms of service are...",
+      #         placement: "BELOW_LINE_ITEMS"
+      #       }],
+      #       sale_or_service_date: "2030-01-24",
+      #       store_payment_method_enabled: false
+      #     },
+      #     idempotency_key: "ce3748f9-5fc1-4762-aa12-aae5e843f1f4"
+      #   )
+      #
       # @return [Square::Types::CreateInvoiceResponse]
       def create(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -95,7 +153,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreateInvoiceResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::CreateInvoiceResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -118,6 +176,21 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.invoices.search(
+      #     query: {
+      #       filter: {
+      #         location_ids: ["ES0RJRZYEC39A"],
+      #         customer_ids: ["JDKYHBWT1D4F8MFH63DBMEN8Y4"]
+      #       },
+      #       sort: {
+      #         field: "INVOICE_SORT_DATE",
+      #         order: "DESC"
+      #       }
+      #     },
+      #     limit: 100
+      #   )
+      #
       # @return [Square::Types::SearchInvoicesResponse]
       def search(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -135,7 +208,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchInvoicesResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::SearchInvoicesResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -153,13 +226,16 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :invoice_id
       #
+      # @example
+      #   client.invoices.get(invoice_id: "invoice_id")
+      #
       # @return [Square::Types::GetInvoiceResponse]
       def get(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/invoices/#{params[:invoice_id]}",
+          path: "v2/invoices/#{URI.encode_uri_component(params[:invoice_id].to_s)}",
           request_options: request_options
         )
         begin
@@ -169,7 +245,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::GetInvoiceResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::GetInvoiceResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -190,17 +266,30 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :invoice_id
       #
+      # @example
+      #   client.invoices.update(
+      #     invoice_id: "invoice_id",
+      #     invoice: {
+      #       version: 1,
+      #       payment_requests: [{
+      #         uid: "2da7964f-f3d2-4f43-81e8-5aa220bf3355",
+      #         tipping_enabled: false
+      #       }]
+      #     },
+      #     idempotency_key: "4ee82288-0910-499e-ab4c-5d0071dad1be"
+      #   )
+      #
       # @return [Square::Types::UpdateInvoiceResponse]
       def update(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request_data = Square::Invoices::Types::UpdateInvoiceRequest.new(params).to_h
-        non_body_param_names = ["invoice_id"]
+        non_body_param_names = %w[invoice_id]
         body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
-          path: "v2/invoices/#{params[:invoice_id]}",
+          path: "v2/invoices/#{URI.encode_uri_component(params[:invoice_id].to_s)}",
           body: body,
           request_options: request_options
         )
@@ -211,7 +300,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdateInvoiceResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::UpdateInvoiceResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -232,18 +321,22 @@ module Square
       # @option params [String] :invoice_id
       # @option params [Integer, nil] :version
       #
+      # @example
+      #   client.invoices.delete(
+      #     invoice_id: "invoice_id",
+      #     version: 1
+      #   )
+      #
       # @return [Square::Types::DeleteInvoiceResponse]
       def delete(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[version]
         query_params = {}
         query_params["version"] = params[:version] if params.key?(:version)
-        params = params.except(*query_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "DELETE",
-          path: "v2/invoices/#{params[:invoice_id]}",
+          path: "v2/invoices/#{URI.encode_uri_component(params[:invoice_id].to_s)}",
           query: query_params,
           request_options: request_options
         )
@@ -254,7 +347,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::DeleteInvoiceResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::DeleteInvoiceResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -280,24 +373,33 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :invoice_id
       #
+      # @example
+      #   client.invoices.create_invoice_attachment(invoice_id: "invoice_id")
+      #
       # @return [Square::Types::CreateInvoiceAttachmentResponse]
       def create_invoice_attachment(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         body = Internal::Multipart::FormData.new
 
-        if params[:request]
+        unless params[:request].nil?
           body.add(
             name: "request",
             value: params[:request],
             content_type: "application/json; charset=utf-8"
           )
         end
-        body.add_part(params[:image_file].to_form_data_part(name: "image_file")) if params[:image_file]
+        if params[:image_file]
+          body.add_file(
+            name: "image_file",
+            file: params[:image_file],
+            content_type: "image/jpeg"
+          )
+        end
 
         request = Square::Internal::Multipart::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
-          path: "v2/invoices/#{params[:invoice_id]}/attachments",
+          path: "v2/invoices/#{URI.encode_uri_component(params[:invoice_id].to_s)}/attachments",
           body: body,
           request_options: request_options
         )
@@ -308,7 +410,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreateInvoiceAttachmentResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::CreateInvoiceAttachmentResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -328,13 +430,19 @@ module Square
       # @option params [String] :invoice_id
       # @option params [String] :attachment_id
       #
+      # @example
+      #   client.invoices.delete_invoice_attachment(
+      #     invoice_id: "invoice_id",
+      #     attachment_id: "attachment_id"
+      #   )
+      #
       # @return [Square::Types::DeleteInvoiceAttachmentResponse]
       def delete_invoice_attachment(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "DELETE",
-          path: "v2/invoices/#{params[:invoice_id]}/attachments/#{params[:attachment_id]}",
+          path: "v2/invoices/#{URI.encode_uri_component(params[:invoice_id].to_s)}/attachments/#{URI.encode_uri_component(params[:attachment_id].to_s)}",
           request_options: request_options
         )
         begin
@@ -344,7 +452,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::DeleteInvoiceAttachmentResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::DeleteInvoiceAttachmentResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -366,17 +474,23 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :invoice_id
       #
+      # @example
+      #   client.invoices.cancel(
+      #     invoice_id: "invoice_id",
+      #     version: 0
+      #   )
+      #
       # @return [Square::Types::CancelInvoiceResponse]
       def cancel(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request_data = Square::Invoices::Types::CancelInvoiceRequest.new(params).to_h
-        non_body_param_names = ["invoice_id"]
+        non_body_param_names = %w[invoice_id]
         body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
-          path: "v2/invoices/#{params[:invoice_id]}/cancel",
+          path: "v2/invoices/#{URI.encode_uri_component(params[:invoice_id].to_s)}/cancel",
           body: body,
           request_options: request_options
         )
@@ -387,7 +501,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CancelInvoiceResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::CancelInvoiceResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -418,17 +532,24 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :invoice_id
       #
+      # @example
+      #   client.invoices.publish(
+      #     invoice_id: "invoice_id",
+      #     version: 1,
+      #     idempotency_key: "32da42d0-1997-41b0-826b-f09464fc2c2e"
+      #   )
+      #
       # @return [Square::Types::PublishInvoiceResponse]
       def publish(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request_data = Square::Invoices::Types::PublishInvoiceRequest.new(params).to_h
-        non_body_param_names = ["invoice_id"]
+        non_body_param_names = %w[invoice_id]
         body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
-          path: "v2/invoices/#{params[:invoice_id]}/publish",
+          path: "v2/invoices/#{URI.encode_uri_component(params[:invoice_id].to_s)}/publish",
           body: body,
           request_options: request_options
         )
@@ -439,7 +560,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::PublishInvoiceResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::PublishInvoiceResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

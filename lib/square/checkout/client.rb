@@ -21,13 +21,16 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :location_id
       #
+      # @example
+      #   client.checkout.retrieve_location_settings(location_id: "location_id")
+      #
       # @return [Square::Types::RetrieveLocationSettingsResponse]
       def retrieve_location_settings(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/online-checkout/location-settings/#{params[:location_id]}",
+          path: "v2/online-checkout/location-settings/#{URI.encode_uri_component(params[:location_id].to_s)}",
           request_options: request_options
         )
         begin
@@ -37,7 +40,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::RetrieveLocationSettingsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::RetrieveLocationSettingsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -55,17 +58,23 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :location_id
       #
+      # @example
+      #   client.checkout.update_location_settings(
+      #     location_id: "location_id",
+      #     location_settings: {}
+      #   )
+      #
       # @return [Square::Types::UpdateLocationSettingsResponse]
       def update_location_settings(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request_data = Square::Checkout::Types::UpdateLocationSettingsRequest.new(params).to_h
-        non_body_param_names = ["location_id"]
+        non_body_param_names = %w[location_id]
         body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
-          path: "v2/online-checkout/location-settings/#{params[:location_id]}",
+          path: "v2/online-checkout/location-settings/#{URI.encode_uri_component(params[:location_id].to_s)}",
           body: body,
           request_options: request_options
         )
@@ -76,7 +85,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdateLocationSettingsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::UpdateLocationSettingsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -86,16 +95,18 @@ module Square
       # Retrieves the merchant-level settings for a Square-hosted checkout page.
       #
       # @param request_options [Hash]
-      # @param params [Hash]
+      # @param _params [Hash]
       # @option request_options [String] :base_url
       # @option request_options [Hash{String => Object}] :additional_headers
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.checkout.retrieve_merchant_settings
+      #
       # @return [Square::Types::RetrieveMerchantSettingsResponse]
-      def retrieve_merchant_settings(request_options: {}, **params)
-        Square::Internal::Types::Utils.normalize_keys(params)
+      def retrieve_merchant_settings(request_options: {}, **_params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -109,7 +120,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::RetrieveMerchantSettingsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::RetrieveMerchantSettingsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -125,6 +136,9 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
+      #
+      # @example
+      #   client.checkout.update_merchant_settings(merchant_settings: {})
       #
       # @return [Square::Types::UpdateMerchantSettingsResponse]
       def update_merchant_settings(request_options: {}, **params)
@@ -143,7 +157,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdateMerchantSettingsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::UpdateMerchantSettingsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

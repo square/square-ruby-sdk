@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Filter for `Order` objects based on whether their `CREATED_AT`,
@@ -19,7 +21,9 @@ module Square
     # range.](https://developer.squareup.com/docs/orders-api/manage-orders/search-orders#important-note-about-filtering-orders-by-time-range)
     class SearchOrdersDateTimeFilter < Internal::Types::Model
       field :created_at, -> { Square::Types::TimeRange }, optional: true, nullable: false
+
       field :updated_at, -> { Square::Types::TimeRange }, optional: true, nullable: false
+
       field :closed_at, -> { Square::Types::TimeRange }, optional: true, nullable: false
     end
   end

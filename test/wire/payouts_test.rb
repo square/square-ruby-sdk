@@ -8,7 +8,8 @@ class PayoutsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -29,7 +30,6 @@ class PayoutsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -44,7 +44,7 @@ class PayoutsWireTest < WireMockTestCase
   def test_payouts_get_with_wiremock
     test_id = "payouts.get.0"
 
-    @client.payouts.get(
+    result = @client.payouts.get(
       payout_id: "payout_id",
       request_options: {
         additional_headers: {
@@ -59,6 +59,14 @@ class PayoutsWireTest < WireMockTestCase
       url_path: "/v2/payouts/payout_id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/payout/amount_money/amount" => -103,
+        "/payout/version" => 1
+      }
     )
   end
 
@@ -76,7 +84,6 @@ class PayoutsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(

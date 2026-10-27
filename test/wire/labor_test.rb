@@ -8,14 +8,15 @@ class LaborWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
   def test_labor_create_scheduled_shift_with_wiremock
     test_id = "labor.create_scheduled_shift.0"
 
-    @client.labor.create_scheduled_shift(
+    result = @client.labor.create_scheduled_shift(
       idempotency_key: "HIDSNG5KS478L",
       scheduled_shift: {
         draft_shift_details: {
@@ -42,12 +43,19 @@ class LaborWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/scheduled_shift/version" => 1
+      }
+    )
   end
 
   def test_labor_bulk_publish_scheduled_shifts_with_wiremock
     test_id = "labor.bulk_publish_scheduled_shifts.0"
 
-    @client.labor.bulk_publish_scheduled_shifts(
+    result = @client.labor.bulk_publish_scheduled_shifts(
       scheduled_shifts: {
         key: {}
       },
@@ -66,12 +74,19 @@ class LaborWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/responses/idp_key_1/scheduled_shift/version" => 3
+      }
+    )
   end
 
   def test_labor_search_scheduled_shifts_with_wiremock
     test_id = "labor.search_scheduled_shifts.0"
 
-    @client.labor.search_scheduled_shifts(
+    result = @client.labor.search_scheduled_shifts(
       query: {
         filter: {
           assignment_status: "ASSIGNED"
@@ -97,12 +112,28 @@ class LaborWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/labor/scheduled-shifts/search",
+      expected: {
+        "/limit" => 2
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/scheduled_shifts/0/version" => 1
+      }
+    )
   end
 
   def test_labor_retrieve_scheduled_shift_with_wiremock
     test_id = "labor.retrieve_scheduled_shift.0"
 
-    @client.labor.retrieve_scheduled_shift(
+    result = @client.labor.retrieve_scheduled_shift(
       id: "id",
       request_options: {
         additional_headers: {
@@ -118,12 +149,19 @@ class LaborWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/scheduled_shift/version" => 2
+      }
+    )
   end
 
   def test_labor_update_scheduled_shift_with_wiremock
     test_id = "labor.update_scheduled_shift.0"
 
-    @client.labor.update_scheduled_shift(
+    result = @client.labor.update_scheduled_shift(
       id: "id",
       scheduled_shift: {
         draft_shift_details: {
@@ -151,12 +189,28 @@ class LaborWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "PUT",
+      url_path: "/v2/labor/scheduled-shifts/id",
+      expected: {
+        "/scheduled_shift/version" => 1
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/scheduled_shift/version" => 2
+      }
+    )
   end
 
   def test_labor_publish_scheduled_shift_with_wiremock
     test_id = "labor.publish_scheduled_shift.0"
 
-    @client.labor.publish_scheduled_shift(
+    result = @client.labor.publish_scheduled_shift(
       id: "id",
       idempotency_key: "HIDSNG5KS478L",
       version: 2,
@@ -175,12 +229,28 @@ class LaborWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/labor/scheduled-shifts/id/publish",
+      expected: {
+        "/version" => 2
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/scheduled_shift/version" => 2
+      }
+    )
   end
 
   def test_labor_create_timecard_with_wiremock
     test_id = "labor.create_timecard.0"
 
-    @client.labor.create_timecard(
+    result = @client.labor.create_timecard(
       idempotency_key: "HIDSNG5KS478L",
       timecard: {
         location_id: "PAA1RJZZKXBFG",
@@ -222,12 +292,31 @@ class LaborWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/labor/timecards",
+      expected: {
+        "/timecard/wage/hourly_rate/amount" => 1100,
+        "/timecard/declared_cash_tip_money/amount" => 500
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/timecard/wage/hourly_rate/amount" => 1100,
+        "/timecard/version" => 1,
+        "/timecard/declared_cash_tip_money/amount" => 500
+      }
+    )
   end
 
   def test_labor_search_timecards_with_wiremock
     test_id = "labor.search_timecards.0"
 
-    @client.labor.search_timecards(
+    result = @client.labor.search_timecards(
       query: {
         filter: {
           workday: {
@@ -255,12 +344,33 @@ class LaborWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/labor/timecards/search",
+      expected: {
+        "/limit" => 100
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/timecards/0/wage/hourly_rate/amount" => 1100,
+        "/timecards/0/version" => 6,
+        "/timecards/0/declared_cash_tip_money/amount" => 500,
+        "/timecards/1/wage/hourly_rate/amount" => 1600,
+        "/timecards/1/version" => 16,
+        "/timecards/1/declared_cash_tip_money/amount" => 0
+      }
+    )
   end
 
   def test_labor_retrieve_timecard_with_wiremock
     test_id = "labor.retrieve_timecard.0"
 
-    @client.labor.retrieve_timecard(
+    result = @client.labor.retrieve_timecard(
       id: "id",
       request_options: {
         additional_headers: {
@@ -276,12 +386,21 @@ class LaborWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/timecard/wage/hourly_rate/amount" => 1457,
+        "/timecard/version" => 1,
+        "/timecard/declared_cash_tip_money/amount" => 500
+      }
+    )
   end
 
   def test_labor_update_timecard_with_wiremock
     test_id = "labor.update_timecard.0"
 
-    @client.labor.update_timecard(
+    result = @client.labor.update_timecard(
       id: "id",
       timecard: {
         location_id: "PAA1RJZZKXBFG",
@@ -325,6 +444,26 @@ class LaborWireTest < WireMockTestCase
       url_path: "/v2/labor/timecards/id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "PUT",
+      url_path: "/v2/labor/timecards/id",
+      expected: {
+        "/timecard/wage/hourly_rate/amount" => 1500,
+        "/timecard/version" => 1,
+        "/timecard/declared_cash_tip_money/amount" => 500
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/timecard/wage/hourly_rate/amount" => 1500,
+        "/timecard/version" => 2,
+        "/timecard/declared_cash_tip_money/amount" => 500
+      }
     )
   end
 

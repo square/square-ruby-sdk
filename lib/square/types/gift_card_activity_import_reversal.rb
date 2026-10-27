@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents details about an `IMPORT_REVERSAL` [gift card activity type](entity:GiftCardActivityType).

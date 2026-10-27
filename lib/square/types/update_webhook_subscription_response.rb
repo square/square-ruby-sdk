@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Defines the fields that are included in the response body of
@@ -10,6 +12,7 @@ module Square
     # present.
     class UpdateWebhookSubscriptionResponse < Internal::Types::Model
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
+
       field :subscription, -> { Square::Types::WebhookSubscription }, optional: true, nullable: false
     end
   end

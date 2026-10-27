@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # The query filter to return the search result whose searchable attribute values contain all of the specified

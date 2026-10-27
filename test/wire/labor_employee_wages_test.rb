@@ -8,7 +8,8 @@ class LaborEmployeeWagesWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -25,7 +26,6 @@ class LaborEmployeeWagesWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -40,7 +40,7 @@ class LaborEmployeeWagesWireTest < WireMockTestCase
   def test_labor_employee_wages_get_with_wiremock
     test_id = "labor.employee_wages.get.0"
 
-    @client.labor.employee_wages.get(
+    result = @client.labor.employee_wages.get(
       id: "id",
       request_options: {
         additional_headers: {
@@ -55,6 +55,13 @@ class LaborEmployeeWagesWireTest < WireMockTestCase
       url_path: "/v2/labor/employee-wages/id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/employee_wage/hourly_rate/amount" => 2000
+      }
     )
   end
 end

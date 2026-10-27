@@ -8,14 +8,15 @@ class LoyaltyAccountsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
   def test_loyalty_accounts_create_with_wiremock
     test_id = "loyalty.accounts.create.0"
 
-    @client.loyalty.accounts.create(
+    result = @client.loyalty.accounts.create(
       loyalty_account: {
         program_id: "d619f755-2d17-41f3-990d-c04ecedd64dd",
         mapping: {
@@ -37,12 +38,21 @@ class LoyaltyAccountsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/loyalty_account/balance" => 0,
+        "/loyalty_account/lifetime_points" => 0,
+        "/loyalty_account/expiring_point_deadlines/0/points" => 1
+      }
+    )
   end
 
   def test_loyalty_accounts_search_with_wiremock
     test_id = "loyalty.accounts.search.0"
 
-    @client.loyalty.accounts.search(
+    result = @client.loyalty.accounts.search(
       query: {
         mappings: [{
           phone_number: "+14155551234"
@@ -63,12 +73,30 @@ class LoyaltyAccountsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/loyalty/accounts/search",
+      expected: {
+        "/limit" => 10
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/loyalty_accounts/0/balance" => 10,
+        "/loyalty_accounts/0/lifetime_points" => 20,
+        "/loyalty_accounts/0/expiring_point_deadlines/0/points" => 1
+      }
+    )
   end
 
   def test_loyalty_accounts_get_with_wiremock
     test_id = "loyalty.accounts.get.0"
 
-    @client.loyalty.accounts.get(
+    result = @client.loyalty.accounts.get(
       account_id: "account_id",
       request_options: {
         additional_headers: {
@@ -84,12 +112,21 @@ class LoyaltyAccountsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/loyalty_account/balance" => 10,
+        "/loyalty_account/lifetime_points" => 20,
+        "/loyalty_account/expiring_point_deadlines/0/points" => 1
+      }
+    )
   end
 
   def test_loyalty_accounts_accumulate_points_with_wiremock
     test_id = "loyalty.accounts.accumulate_points.0"
 
-    @client.loyalty.accounts.accumulate_points(
+    result = @client.loyalty.accounts.accumulate_points(
       account_id: "account_id",
       accumulate_points: {
         order_id: "RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY"
@@ -110,12 +147,29 @@ class LoyaltyAccountsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/event/accumulate_points/points" => 1,
+        "/event/create_reward/points" => 1,
+        "/event/delete_reward/points" => 1,
+        "/event/adjust_points/points" => 1,
+        "/event/expire_points/points" => 1,
+        "/event/other_event/points" => 1,
+        "/event/accumulate_promotion_points/points" => 1,
+        "/events/0/accumulate_points/points" => 6,
+        "/events/0/adjust_points/points" => 1,
+        "/events/0/expire_points/points" => 1,
+        "/events/0/other_event/points" => 1
+      }
+    )
   end
 
   def test_loyalty_accounts_adjust_with_wiremock
     test_id = "loyalty.accounts.adjust.0"
 
-    @client.loyalty.accounts.adjust(
+    result = @client.loyalty.accounts.adjust(
       account_id: "account_id",
       idempotency_key: "bc29a517-3dc9-450e-aa76-fae39ee849d1",
       adjust_points: {
@@ -135,6 +189,28 @@ class LoyaltyAccountsWireTest < WireMockTestCase
       url_path: "/v2/loyalty/accounts/account_id/adjust",
       query_params: nil,
       expected: 1
+    )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/loyalty/accounts/account_id/adjust",
+      expected: {
+        "/adjust_points/points" => 10
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/event/accumulate_points/points" => 1,
+        "/event/create_reward/points" => 1,
+        "/event/delete_reward/points" => 1,
+        "/event/adjust_points/points" => 10,
+        "/event/expire_points/points" => 1,
+        "/event/other_event/points" => 1,
+        "/event/accumulate_promotion_points/points" => 1
+      }
     )
   end
 end

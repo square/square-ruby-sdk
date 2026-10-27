@@ -35,6 +35,9 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.apple_pay.register_domain(domain_name: "example.com")
+      #
       # @return [Square::Types::RegisterDomainResponse]
       def register_domain(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -52,7 +55,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::RegisterDomainResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::RegisterDomainResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

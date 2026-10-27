@@ -16,6 +16,13 @@ module Square
         # filter the list. For example, you can get a list of gift card activities for a gift card,
         # for all gift cards in a specific region, or for activities within a time window.
         #
+        # Returns a `Square::Internal::CursorItemIterator` that yields each `Square::Types::GiftCardActivity` in the
+        # `gift_card_activities` field of every page, requesting pages as they are needed. Call `pages` on it to get
+        # each page as a `Square::Types::ListGiftCardActivitiesResponse`, including its other fields.
+        #
+        # No request is sent by this call. The first page is requested when you start iterating (or call
+        # `load_first_page`), so an API error is raised by the loop (or by `load_first_page`), not by this call.
+        #
         # @param request_options [Hash]
         # @param params [Hash]
         # @option request_options [String] :base_url
@@ -32,10 +39,21 @@ module Square
         # @option params [String, nil] :cursor
         # @option params [String, nil] :sort_order
         #
-        # @return [Square::Types::ListGiftCardActivitiesResponse]
+        # @example
+        #   client.gift_cards.activities.list(
+        #     gift_card_id: "gift_card_id",
+        #     type: "type",
+        #     location_id: "location_id",
+        #     begin_time: "begin_time",
+        #     end_time: "end_time",
+        #     limit: 1,
+        #     cursor: "cursor",
+        #     sort_order: "sort_order"
+        #   )
+        #
+        # @return [Square::Internal::CursorItemIterator]
         def list(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[gift_card_id type location_id begin_time end_time limit cursor sort_order]
           query_params = {}
           query_params["gift_card_id"] = params[:gift_card_id] if params.key?(:gift_card_id)
           query_params["type"] = params[:type] if params.key?(:type)
@@ -45,14 +63,13 @@ module Square
           query_params["limit"] = params[:limit] if params.key?(:limit)
           query_params["cursor"] = params[:cursor] if params.key?(:cursor)
           query_params["sort_order"] = params[:sort_order] if params.key?(:sort_order)
-          params.except(*query_param_names)
 
           Square::Internal::CursorItemIterator.new(
             cursor_field: :cursor,
             item_field: :gift_card_activities,
-            initial_cursor: query_params[:cursor]
+            initial_cursor: query_params["cursor"]
           ) do |next_cursor|
-            query_params[:cursor] = next_cursor
+            query_params["cursor"] = next_cursor
             request = Square::Internal::JSON::Request.new(
               base_url: request_options[:base_url],
               method: "GET",
@@ -67,7 +84,8 @@ module Square
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Square::Types::ListGiftCardActivitiesResponse.load(response.body)
+              parsed_response = (response.body.to_s.empty? ? nil : Square::Types::ListGiftCardActivitiesResponse.load(response.body))
+              [parsed_response, response]
             else
               error_class = Square::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -86,6 +104,20 @@ module Square
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.gift_cards.activities.create(
+        #     idempotency_key: "U16kfr-kA70er-q4Rsym-7U7NnY",
+        #     gift_card_activity: {
+        #       type: "ACTIVATE",
+        #       location_id: "81FN9BNFZTKS4",
+        #       gift_card_id: "gftc:6d55a72470d940c6ba09c0ab8ad08d20",
+        #       activate_activity_details: {
+        #         order_id: "jJNGHm4gLI6XkFbwtiSLqK72KkAZY",
+        #         line_item_uid: "eIWl7X0nMuO9Ewbh0ChIx"
+        #       }
+        #     }
+        #   )
+        #
         # @return [Square::Types::CreateGiftCardActivityResponse]
         def create(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -103,7 +135,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::CreateGiftCardActivityResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::CreateGiftCardActivityResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

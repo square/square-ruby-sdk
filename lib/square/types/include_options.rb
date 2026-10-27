@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Options to include related resources of the requested `CatalogObject`s. Related resources will be included in
     # `IncludedResources` in the response.
     class IncludeOptions < Internal::Types::Model
-      field :include, -> { Internal::Types::Array[Square::Types::IncludeType] }, optional: true, nullable: false
+      field :include, -> { Internal::Types::Array[Square::Types::IncludeType] }, optional: true, nullable: true
     end
   end
 end

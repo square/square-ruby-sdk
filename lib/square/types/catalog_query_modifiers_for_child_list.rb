@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Query to find `CatalogModifier` objects that reference a given `CatalogModifierList` in their

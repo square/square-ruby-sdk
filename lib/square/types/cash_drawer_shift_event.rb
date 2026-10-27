@@ -1,13 +1,20 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     class CashDrawerShiftEvent < Internal::Types::Model
       field :id, -> { String }, optional: true, nullable: false
+
       field :event_type, -> { Square::Types::CashDrawerEventType }, optional: true, nullable: false
+
       field :event_money, -> { Square::Types::Money }, optional: true, nullable: false
+
       field :created_at, -> { String }, optional: true, nullable: false
-      field :description, -> { String }, optional: true, nullable: false
+
+      field :description, -> { String }, optional: true, nullable: true
+
       field :team_member_id, -> { String }, optional: true, nullable: false
     end
   end

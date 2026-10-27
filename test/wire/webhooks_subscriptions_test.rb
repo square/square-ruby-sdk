@@ -8,7 +8,8 @@ class WebhooksSubscriptionsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -26,7 +27,6 @@ class WebhooksSubscriptionsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -45,7 +45,7 @@ class WebhooksSubscriptionsWireTest < WireMockTestCase
       idempotency_key: "63f84c6c-2200-4c99-846c-2670a1311fbf",
       subscription: {
         name: "Example Webhook Subscription",
-        event_types: ["payment.created", "payment.updated"],
+        event_types: %w[payment.created payment.updated],
         notification_url: "https://example-webhook-url.com",
         api_version: "2021-12-15"
       },
@@ -157,7 +157,7 @@ class WebhooksSubscriptionsWireTest < WireMockTestCase
   def test_webhooks_subscriptions_test_with_wiremock
     test_id = "webhooks.subscriptions.test.0"
 
-    @client.webhooks.subscriptions.test(
+    result = @client.webhooks.subscriptions.test(
       subscription_id: "subscription_id",
       event_type: "payment.created",
       request_options: {
@@ -173,6 +173,14 @@ class WebhooksSubscriptionsWireTest < WireMockTestCase
       url_path: "/v2/webhooks/subscriptions/subscription_id/test",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/subscription_test_result/status_code" => 404,
+        "/status_code" => 1
+      }
     )
   end
 end

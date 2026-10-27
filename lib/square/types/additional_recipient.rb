@@ -1,13 +1,18 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents an additional recipient (other than the merchant) receiving a portion of this tender.
     class AdditionalRecipient < Internal::Types::Model
       field :location_id, -> { String }, optional: false, nullable: false
-      field :description, -> { String }, optional: true, nullable: false
+
+      field :description, -> { String }, optional: true, nullable: true
+
       field :amount_money, -> { Square::Types::Money }, optional: false, nullable: false
-      field :receivable_id, -> { String }, optional: true, nullable: false
+
+      field :receivable_id, -> { String }, optional: true, nullable: true
     end
   end
 end

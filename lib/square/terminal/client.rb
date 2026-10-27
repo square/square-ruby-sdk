@@ -25,13 +25,16 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :action_id
       #
+      # @example
+      #   client.terminal.dismiss_terminal_action(action_id: "action_id")
+      #
       # @return [Square::Types::DismissTerminalActionResponse]
       def dismiss_terminal_action(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
-          path: "v2/terminals/actions/#{params[:action_id]}/dismiss",
+          path: "v2/terminals/actions/#{URI.encode_uri_component(params[:action_id].to_s)}/dismiss",
           request_options: request_options
         )
         begin
@@ -41,7 +44,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::DismissTerminalActionResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::DismissTerminalActionResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -59,13 +62,16 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :checkout_id
       #
+      # @example
+      #   client.terminal.dismiss_terminal_checkout(checkout_id: "checkout_id")
+      #
       # @return [Square::Types::DismissTerminalCheckoutResponse]
       def dismiss_terminal_checkout(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
-          path: "v2/terminals/checkouts/#{params[:checkout_id]}/dismiss",
+          path: "v2/terminals/checkouts/#{URI.encode_uri_component(params[:checkout_id].to_s)}/dismiss",
           request_options: request_options
         )
         begin
@@ -75,7 +81,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::DismissTerminalCheckoutResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::DismissTerminalCheckoutResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -93,13 +99,16 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :terminal_refund_id
       #
+      # @example
+      #   client.terminal.dismiss_terminal_refund(terminal_refund_id: "terminal_refund_id")
+      #
       # @return [Square::Types::DismissTerminalRefundResponse]
       def dismiss_terminal_refund(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
-          path: "v2/terminals/refunds/#{params[:terminal_refund_id]}/dismiss",
+          path: "v2/terminals/refunds/#{URI.encode_uri_component(params[:terminal_refund_id].to_s)}/dismiss",
           request_options: request_options
         )
         begin
@@ -109,7 +118,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::DismissTerminalRefundResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::DismissTerminalRefundResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

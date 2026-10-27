@@ -20,6 +20,29 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.vendors.batch_create(vendors: {
+      #     "8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe" => {
+      #       name: "Joe's Fresh Seafood",
+      #       address: {
+      #         address_line_1: "505 Electric Ave",
+      #         address_line_2: "Suite 600",
+      #         locality: "New York",
+      #         administrative_district_level_1: "NY",
+      #         postal_code: "10003",
+      #         country: "US"
+      #       },
+      #       contacts: [{
+      #         name: "Joe Burrow",
+      #         email_address: "joe@joesfreshseafood.com",
+      #         phone_number: "1-212-555-4250",
+      #         ordinal: 1
+      #       }],
+      #       account_number: "4025391",
+      #       note: "a vendor"
+      #     }
+      #   })
+      #
       # @return [Square::Types::BatchCreateVendorsResponse]
       def batch_create(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -37,7 +60,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BatchCreateVendorsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::BatchCreateVendorsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -53,6 +76,9 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
+      #
+      # @example
+      #   client.vendors.batch_get(vendor_ids: ["INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4"])
       #
       # @return [Square::Types::BatchGetVendorsResponse]
       def batch_get(request_options: {}, **params)
@@ -71,7 +97,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BatchGetVendorsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::BatchGetVendorsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -87,6 +113,16 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
+      #
+      # @example
+      #   client.vendors.batch_update(vendors: {
+      #     FMCYHBWT1TPL8MFH52PBMEN92A: {
+      #       vendor: {}
+      #     },
+      #     INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4: {
+      #       vendor: {}
+      #     }
+      #   })
       #
       # @return [Square::Types::BatchUpdateVendorsResponse]
       def batch_update(request_options: {}, **params)
@@ -105,7 +141,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BatchUpdateVendorsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::BatchUpdateVendorsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -121,6 +157,30 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
+      #
+      # @example
+      #   client.vendors.create(
+      #     idempotency_key: "8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe",
+      #     vendor: {
+      #       name: "Joe's Fresh Seafood",
+      #       address: {
+      #         address_line_1: "505 Electric Ave",
+      #         address_line_2: "Suite 600",
+      #         locality: "New York",
+      #         administrative_district_level_1: "NY",
+      #         postal_code: "10003",
+      #         country: "US"
+      #       },
+      #       contacts: [{
+      #         name: "Joe Burrow",
+      #         email_address: "joe@joesfreshseafood.com",
+      #         phone_number: "1-212-555-4250",
+      #         ordinal: 1
+      #       }],
+      #       account_number: "4025391",
+      #       note: "a vendor"
+      #     }
+      #   )
       #
       # @return [Square::Types::CreateVendorResponse]
       def create(request_options: {}, **params)
@@ -139,7 +199,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreateVendorResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::CreateVendorResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -155,6 +215,9 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
+      #
+      # @example
+      #   client.vendors.search
       #
       # @return [Square::Types::SearchVendorsResponse]
       def search(request_options: {}, **params)
@@ -173,7 +236,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchVendorsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::SearchVendorsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -191,13 +254,16 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :vendor_id
       #
+      # @example
+      #   client.vendors.get(vendor_id: "vendor_id")
+      #
       # @return [Square::Types::GetVendorResponse]
       def get(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/vendors/#{params[:vendor_id]}",
+          path: "v2/vendors/#{URI.encode_uri_component(params[:vendor_id].to_s)}",
           request_options: request_options
         )
         begin
@@ -207,7 +273,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::GetVendorResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::GetVendorResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -225,6 +291,18 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :vendor_id
       #
+      # @example
+      #   client.vendors.update(
+      #     vendor_id: "vendor_id",
+      #     idempotency_key: "8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe",
+      #     vendor: {
+      #       id: "INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4",
+      #       name: "Jack's Chicken Shack",
+      #       version: 1,
+      #       status: "ACTIVE"
+      #     }
+      #   )
+      #
       # @return [Square::Types::UpdateVendorResponse]
       def update(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -234,7 +312,7 @@ module Square
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
-          path: "v2/vendors/#{params[:vendor_id]}",
+          path: "v2/vendors/#{URI.encode_uri_component(params[:vendor_id].to_s)}",
           body: Square::Types::UpdateVendorRequest.new(body_params).to_h,
           request_options: request_options
         )
@@ -245,7 +323,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdateVendorResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::UpdateVendorResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

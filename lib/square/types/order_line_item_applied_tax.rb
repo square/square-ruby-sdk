@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents an applied portion of a tax to a line item in an order.
@@ -9,9 +11,12 @@ module Square
     # The corresponding applied money is automatically computed, based on the
     # set of participating line items.
     class OrderLineItemAppliedTax < Internal::Types::Model
-      field :uid, -> { String }, optional: true, nullable: false
+      field :uid, -> { String }, optional: true, nullable: true
+
       field :tax_uid, -> { String }, optional: false, nullable: false
+
       field :applied_money, -> { Square::Types::Money }, optional: true, nullable: false
+
       field :auto_applied, -> { Internal::Types::Boolean }, optional: true, nullable: false
     end
   end

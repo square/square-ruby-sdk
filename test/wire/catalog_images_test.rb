@@ -8,18 +8,19 @@ class CatalogImagesWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
   def test_catalog_images_create_with_wiremock
     test_id = "catalog.images.create.0"
 
-    @client.catalog.images.create(request_options: {
-                                    additional_headers: {
-                                      "X-Test-Id" => "catalog.images.create.0"
-                                    }
-                                  })
+    result = @client.catalog.images.create(request_options: {
+      additional_headers: {
+        "X-Test-Id" => "catalog.images.create.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -28,12 +29,19 @@ class CatalogImagesWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/image/version" => 1000000
+      }
+    )
   end
 
   def test_catalog_images_update_with_wiremock
     test_id = "catalog.images.update.0"
 
-    @client.catalog.images.update(
+    result = @client.catalog.images.update(
       image_id: "image_id",
       request_options: {
         additional_headers: {
@@ -48,6 +56,13 @@ class CatalogImagesWireTest < WireMockTestCase
       url_path: "/v2/catalog/images/image_id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/image/version" => 1000000
+      }
     )
   end
 end

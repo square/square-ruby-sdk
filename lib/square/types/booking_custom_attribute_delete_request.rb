@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents an individual delete request in a
@@ -8,6 +10,7 @@ module Square
     # key.
     class BookingCustomAttributeDeleteRequest < Internal::Types::Model
       field :booking_id, -> { String }, optional: false, nullable: false
+
       field :key, -> { String }, optional: false, nullable: false
     end
   end

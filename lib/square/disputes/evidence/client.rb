@@ -13,6 +13,13 @@ module Square
 
         # Returns a list of evidence associated with a dispute.
         #
+        # Returns a `Square::Internal::CursorItemIterator` that yields each `Square::Types::DisputeEvidence` in the
+        # `evidence` field of every page, requesting pages as they are needed. Call `pages` on it to get each page as a
+        # `Square::Types::ListDisputeEvidenceResponse`, including its other fields.
+        #
+        # No request is sent by this call. The first page is requested when you start iterating (or call
+        # `load_first_page`), so an API error is raised by the loop (or by `load_first_page`), not by this call.
+        #
         # @param request_options [Hash]
         # @param params [Hash]
         # @option request_options [String] :base_url
@@ -23,24 +30,28 @@ module Square
         # @option params [String] :dispute_id
         # @option params [String, nil] :cursor
         #
-        # @return [Square::Types::ListDisputeEvidenceResponse]
+        # @example
+        #   client.disputes.evidence.list(
+        #     dispute_id: "dispute_id",
+        #     cursor: "cursor"
+        #   )
+        #
+        # @return [Square::Internal::CursorItemIterator]
         def list(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[cursor]
           query_params = {}
           query_params["cursor"] = params[:cursor] if params.key?(:cursor)
-          params = params.except(*query_param_names)
 
           Square::Internal::CursorItemIterator.new(
             cursor_field: :cursor,
             item_field: :evidence,
-            initial_cursor: query_params[:cursor]
+            initial_cursor: query_params["cursor"]
           ) do |next_cursor|
-            query_params[:cursor] = next_cursor
+            query_params["cursor"] = next_cursor
             request = Square::Internal::JSON::Request.new(
               base_url: request_options[:base_url],
               method: "GET",
-              path: "v2/disputes/#{params[:dispute_id]}/evidence",
+              path: "v2/disputes/#{URI.encode_uri_component(params[:dispute_id].to_s)}/evidence",
               query: query_params,
               request_options: request_options
             )
@@ -51,7 +62,8 @@ module Square
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Square::Types::ListDisputeEvidenceResponse.load(response.body)
+              parsed_response = (response.body.to_s.empty? ? nil : Square::Types::ListDisputeEvidenceResponse.load(response.body))
+              [parsed_response, response]
             else
               error_class = Square::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -74,13 +86,19 @@ module Square
         # @option params [String] :dispute_id
         # @option params [String] :evidence_id
         #
+        # @example
+        #   client.disputes.evidence.get(
+        #     dispute_id: "dispute_id",
+        #     evidence_id: "evidence_id"
+        #   )
+        #
         # @return [Square::Types::GetDisputeEvidenceResponse]
         def get(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
-            path: "v2/disputes/#{params[:dispute_id]}/evidence/#{params[:evidence_id]}",
+            path: "v2/disputes/#{URI.encode_uri_component(params[:dispute_id].to_s)}/evidence/#{URI.encode_uri_component(params[:evidence_id].to_s)}",
             request_options: request_options
           )
           begin
@@ -90,7 +108,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::GetDisputeEvidenceResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::GetDisputeEvidenceResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -110,13 +128,19 @@ module Square
         # @option params [String] :dispute_id
         # @option params [String] :evidence_id
         #
+        # @example
+        #   client.disputes.evidence.delete(
+        #     dispute_id: "dispute_id",
+        #     evidence_id: "evidence_id"
+        #   )
+        #
         # @return [Square::Types::DeleteDisputeEvidenceResponse]
         def delete(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",
-            path: "v2/disputes/#{params[:dispute_id]}/evidence/#{params[:evidence_id]}",
+            path: "v2/disputes/#{URI.encode_uri_component(params[:dispute_id].to_s)}/evidence/#{URI.encode_uri_component(params[:evidence_id].to_s)}",
             request_options: request_options
           )
           begin
@@ -126,7 +150,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::DeleteDisputeEvidenceResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::DeleteDisputeEvidenceResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

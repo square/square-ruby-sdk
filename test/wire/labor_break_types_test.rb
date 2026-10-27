@@ -8,7 +8,8 @@ class LaborBreakTypesWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -25,7 +26,6 @@ class LaborBreakTypesWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -40,7 +40,7 @@ class LaborBreakTypesWireTest < WireMockTestCase
   def test_labor_break_types_create_with_wiremock
     test_id = "labor.break_types.create.0"
 
-    @client.labor.break_types.create(
+    result = @client.labor.break_types.create(
       idempotency_key: "PAD3NG5KSN2GL",
       break_type: {
         location_id: "CGJN03P1D08GF",
@@ -62,12 +62,19 @@ class LaborBreakTypesWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/break_type/version" => 1
+      }
+    )
   end
 
   def test_labor_break_types_get_with_wiremock
     test_id = "labor.break_types.get.0"
 
-    @client.labor.break_types.get(
+    result = @client.labor.break_types.get(
       id: "id",
       request_options: {
         additional_headers: {
@@ -83,12 +90,19 @@ class LaborBreakTypesWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/break_type/version" => 1
+      }
+    )
   end
 
   def test_labor_break_types_update_with_wiremock
     test_id = "labor.break_types.update.0"
 
-    @client.labor.break_types.update(
+    result = @client.labor.break_types.update(
       id: "id",
       break_type: {
         location_id: "26M7H24AZ9N6R",
@@ -110,6 +124,22 @@ class LaborBreakTypesWireTest < WireMockTestCase
       url_path: "/v2/labor/break-types/id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "PUT",
+      url_path: "/v2/labor/break-types/id",
+      expected: {
+        "/break_type/version" => 1
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/break_type/version" => 2
+      }
     )
   end
 

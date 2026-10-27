@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # A filter to select resources based on an exact field value. For any given
@@ -8,9 +10,11 @@ module Square
     #
     # Refer to the documentation of the field.
     class FilterValue < Internal::Types::Model
-      field :all, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-      field :any, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-      field :none, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+      field :all, -> { Internal::Types::Array[String] }, optional: true, nullable: true
+
+      field :any, -> { Internal::Types::Array[String] }, optional: true, nullable: true
+
+      field :none, -> { Internal::Types::Array[String] }, optional: true, nullable: true
     end
   end
 end

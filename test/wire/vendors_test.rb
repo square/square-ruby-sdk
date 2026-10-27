@@ -8,14 +8,15 @@ class VendorsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
   def test_vendors_batch_create_with_wiremock
     test_id = "vendors.batch_create.0"
 
-    @client.vendors.batch_create(
+    result = @client.vendors.batch_create(
       vendors: {
         "8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe" => {
           name: "Joe's Fresh Seafood",
@@ -51,12 +52,29 @@ class VendorsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/vendors/bulk-create",
+      expected: {
+        "/vendors/8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe/contacts/0/ordinal" => 1
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/responses/8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe/vendor/contacts/0/ordinal" => 1,
+        "/responses/8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe/vendor/version" => 0
+      }
+    )
   end
 
   def test_vendors_batch_get_with_wiremock
     test_id = "vendors.batch_get.0"
 
-    @client.vendors.batch_get(
+    result = @client.vendors.batch_get(
       vendor_ids: ["INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4"],
       request_options: {
         additional_headers: {
@@ -72,12 +90,20 @@ class VendorsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/responses/INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4/vendor/contacts/0/ordinal" => 1,
+        "/responses/INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4/vendor/version" => 1
+      }
+    )
   end
 
   def test_vendors_batch_update_with_wiremock
     test_id = "vendors.batch_update.0"
 
-    @client.vendors.batch_update(
+    result = @client.vendors.batch_update(
       vendors: {
         FMCYHBWT1TPL8MFH52PBMEN92A: {
           vendor: {}
@@ -100,12 +126,22 @@ class VendorsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/responses/INV_V_FMCYHBWT1TPL8MFH52PBMEN92A/vendor/contacts/0/ordinal" => 0,
+        "/responses/INV_V_FMCYHBWT1TPL8MFH52PBMEN92A/vendor/version" => 11,
+        "/responses/INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4/vendor/contacts/0/ordinal" => 0,
+        "/responses/INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4/vendor/version" => 31
+      }
+    )
   end
 
   def test_vendors_create_with_wiremock
     test_id = "vendors.create.0"
 
-    @client.vendors.create(
+    result = @client.vendors.create(
       idempotency_key: "8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe",
       vendor: {
         name: "Joe's Fresh Seafood",
@@ -140,16 +176,33 @@ class VendorsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/vendors/create",
+      expected: {
+        "/vendor/contacts/0/ordinal" => 1
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/vendor/contacts/0/ordinal" => 1,
+        "/vendor/version" => 1
+      }
+    )
   end
 
   def test_vendors_search_with_wiremock
     test_id = "vendors.search.0"
 
-    @client.vendors.search(request_options: {
-                             additional_headers: {
-                               "X-Test-Id" => "vendors.search.0"
-                             }
-                           })
+    result = @client.vendors.search(request_options: {
+      additional_headers: {
+        "X-Test-Id" => "vendors.search.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -158,12 +211,20 @@ class VendorsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/vendors/0/contacts/0/ordinal" => 1,
+        "/vendors/0/version" => 1
+      }
+    )
   end
 
   def test_vendors_get_with_wiremock
     test_id = "vendors.get.0"
 
-    @client.vendors.get(
+    result = @client.vendors.get(
       vendor_id: "vendor_id",
       request_options: {
         additional_headers: {
@@ -179,12 +240,20 @@ class VendorsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/vendor/contacts/0/ordinal" => 1,
+        "/vendor/version" => 1
+      }
+    )
   end
 
   def test_vendors_update_with_wiremock
     test_id = "vendors.update.0"
 
-    @client.vendors.update(
+    result = @client.vendors.update(
       vendor_id: "vendor_id",
       idempotency_key: "8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe",
       vendor: {
@@ -206,6 +275,23 @@ class VendorsWireTest < WireMockTestCase
       url_path: "/v2/vendors/vendor_id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "PUT",
+      url_path: "/v2/vendors/vendor_id",
+      expected: {
+        "/vendor/version" => 1
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/vendor/contacts/0/ordinal" => 0,
+        "/vendor/version" => 2
+      }
     )
   end
 end

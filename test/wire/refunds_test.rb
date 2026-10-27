@@ -8,7 +8,8 @@ class RefundsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -33,7 +34,6 @@ class RefundsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -48,7 +48,7 @@ class RefundsWireTest < WireMockTestCase
   def test_refunds_refund_payment_with_wiremock
     test_id = "refunds.refund_payment.0"
 
-    @client.refunds.refund_payment(
+    result = @client.refunds.refund_payment(
       idempotency_key: "9b7f2dcf-49da-4411-b23e-a2d6af21333a",
       amount_money: {
         amount: 1000,
@@ -74,12 +74,30 @@ class RefundsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/refunds",
+      expected: {
+        "/amount_money/amount" => 1000,
+        "/app_fee_money/amount" => 10
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/refund/amount_money/amount" => 1000,
+        "/refund/app_fee_money/amount" => 10
+      }
+    )
   end
 
   def test_refunds_get_with_wiremock
     test_id = "refunds.get.0"
 
-    @client.refunds.get(
+    result = @client.refunds.get(
       refund_id: "refund_id",
       request_options: {
         additional_headers: {
@@ -94,6 +112,15 @@ class RefundsWireTest < WireMockTestCase
       url_path: "/v2/refunds/refund_id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/refund/amount_money/amount" => 555,
+        "/refund/app_fee_money/amount" => 1000000,
+        "/refund/processing_fee/0/amount_money/amount" => -34
+      }
     )
   end
 end

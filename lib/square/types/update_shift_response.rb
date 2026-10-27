@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # The response to a request to update a `Shift`. The response contains
@@ -7,6 +9,7 @@ module Square
     # the request resulted in errors.
     class UpdateShiftResponse < Internal::Types::Model
       field :shift, -> { Square::Types::Shift }, optional: true, nullable: false
+
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
     end
   end

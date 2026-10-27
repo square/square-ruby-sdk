@@ -16,6 +16,13 @@ module Square
       # for the listing operation in well under 30 seconds. Occasionally, propagation of the new or updated
       # profiles can take closer to one minute or longer, especially during network incidents and outages.
       #
+      # Returns a `Square::Internal::CursorItemIterator` that yields each `Square::Types::Customer` in the `customers`
+      # field of every page, requesting pages as they are needed. Call `pages` on it to get each page as a
+      # `Square::Types::ListCustomersResponse`, including its other fields.
+      #
+      # No request is sent by this call. The first page is requested when you start iterating (or call
+      # `load_first_page`), so an API error is raised by the loop (or by `load_first_page`), not by this call.
+      #
       # @param request_options [Hash]
       # @param params [Hash]
       # @option request_options [String] :base_url
@@ -29,24 +36,31 @@ module Square
       # @option params [Square::Types::SortOrder, nil] :sort_order
       # @option params [Boolean, nil] :count
       #
-      # @return [Square::Types::ListCustomersResponse]
+      # @example
+      #   client.customers.list(
+      #     cursor: "cursor",
+      #     limit: 1,
+      #     sort_field: "DEFAULT",
+      #     sort_order: "DESC",
+      #     count: true
+      #   )
+      #
+      # @return [Square::Internal::CursorItemIterator]
       def list(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[cursor limit sort_field sort_order count]
         query_params = {}
         query_params["cursor"] = params[:cursor] if params.key?(:cursor)
         query_params["limit"] = params[:limit] if params.key?(:limit)
         query_params["sort_field"] = params[:sort_field] if params.key?(:sort_field)
         query_params["sort_order"] = params[:sort_order] if params.key?(:sort_order)
         query_params["count"] = params[:count] if params.key?(:count)
-        params.except(*query_param_names)
 
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :customers,
-          initial_cursor: query_params[:cursor]
+          initial_cursor: query_params["cursor"]
         ) do |next_cursor|
-          query_params[:cursor] = next_cursor
+          query_params["cursor"] = next_cursor
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -61,7 +75,8 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::ListCustomersResponse.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Square::Types::ListCustomersResponse.load(response.body))
+            [parsed_response, response]
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -88,6 +103,24 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.customers.create(
+      #     given_name: "Amelia",
+      #     family_name: "Earhart",
+      #     email_address: "Amelia.Earhart@example.com",
+      #     address: {
+      #       address_line_1: "500 Electric Ave",
+      #       address_line_2: "Suite 600",
+      #       locality: "New York",
+      #       administrative_district_level_1: "NY",
+      #       postal_code: "10003",
+      #       country: "US"
+      #     },
+      #     phone_number: "+1-212-555-4240",
+      #     reference_id: "YOUR_REFERENCE_ID",
+      #     note: "a customer"
+      #   )
+      #
       # @return [Square::Types::CreateCustomerResponse]
       def create(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -105,7 +138,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreateCustomerResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::CreateCustomerResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -132,6 +165,42 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.customers.batch_create(customers: {
+      #     "8bb76c4f-e35d-4c5b-90de-1194cd9179f0" => {
+      #       given_name: "Amelia",
+      #       family_name: "Earhart",
+      #       email_address: "Amelia.Earhart@example.com",
+      #       address: {
+      #         address_line_1: "500 Electric Ave",
+      #         address_line_2: "Suite 600",
+      #         locality: "New York",
+      #         administrative_district_level_1: "NY",
+      #         postal_code: "10003",
+      #         country: "US"
+      #       },
+      #       phone_number: "+1-212-555-4240",
+      #       reference_id: "YOUR_REFERENCE_ID",
+      #       note: "a customer"
+      #     },
+      #     "d1689f23-b25d-4932-b2f0-aed00f5e2029" => {
+      #       given_name: "Marie",
+      #       family_name: "Curie",
+      #       email_address: "Marie.Curie@example.com",
+      #       address: {
+      #         address_line_1: "500 Electric Ave",
+      #         address_line_2: "Suite 601",
+      #         locality: "New York",
+      #         administrative_district_level_1: "NY",
+      #         postal_code: "10003",
+      #         country: "US"
+      #       },
+      #       phone_number: "+1-212-444-4240",
+      #       reference_id: "YOUR_REFERENCE_ID",
+      #       note: "another customer"
+      #     }
+      #   })
+      #
       # @return [Square::Types::BulkCreateCustomersResponse]
       def batch_create(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -149,7 +218,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BulkCreateCustomersResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::BulkCreateCustomersResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -168,6 +237,9 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.customers.bulk_delete_customers(customer_ids: %w[8DDA5NZVBZFGAX0V3HPF81HHE0 N18CPRVXR5214XPBBA6BZQWF3C 2GYD7WNXF7BJZW1PMGNXZ3Y8M8])
+      #
       # @return [Square::Types::BulkDeleteCustomersResponse]
       def bulk_delete_customers(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -185,7 +257,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BulkDeleteCustomersResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::BulkDeleteCustomersResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -204,6 +276,9 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.customers.bulk_retrieve_customers(customer_ids: %w[8DDA5NZVBZFGAX0V3HPF81HHE0 N18CPRVXR5214XPBBA6BZQWF3C 2GYD7WNXF7BJZW1PMGNXZ3Y8M8])
+      #
       # @return [Square::Types::BulkRetrieveCustomersResponse]
       def bulk_retrieve_customers(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -221,7 +296,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BulkRetrieveCustomersResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::BulkRetrieveCustomersResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -240,6 +315,20 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.customers.bulk_update_customers(customers: {
+      #     "8DDA5NZVBZFGAX0V3HPF81HHE0" => {
+      #       email_address: "New.Amelia.Earhart@example.com",
+      #       note: "updated customer note",
+      #       version: 2
+      #     },
+      #     N18CPRVXR5214XPBBA6BZQWF3C: {
+      #       given_name: "Marie",
+      #       family_name: "Curie",
+      #       version: 0
+      #     }
+      #   })
+      #
       # @return [Square::Types::BulkUpdateCustomersResponse]
       def bulk_update_customers(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -257,7 +346,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BulkUpdateCustomersResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::BulkUpdateCustomersResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -282,6 +371,33 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.customers.search(
+      #     limit: 2,
+      #     query: {
+      #       filter: {
+      #         creation_source: {
+      #           values: ["THIRD_PARTY"],
+      #           rule: "INCLUDE"
+      #         },
+      #         created_at: {
+      #           start_at: "2018-01-01T00:00:00-00:00",
+      #           end_at: "2018-02-01T00:00:00-00:00"
+      #         },
+      #         email_address: {
+      #           fuzzy: "example.com"
+      #         },
+      #         group_ids: {
+      #           all: ["545AXB44B4XXWMVQ4W8SBT3HHF"]
+      #         }
+      #       },
+      #       sort: {
+      #         field: "CREATED_AT",
+      #         order: "ASC"
+      #       }
+      #     }
+      #   )
+      #
       # @return [Square::Types::SearchCustomersResponse]
       def search(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -299,7 +415,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchCustomersResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::SearchCustomersResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -317,13 +433,16 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :customer_id
       #
+      # @example
+      #   client.customers.get(customer_id: "customer_id")
+      #
       # @return [Square::Types::GetCustomerResponse]
       def get(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/customers/#{params[:customer_id]}",
+          path: "v2/customers/#{URI.encode_uri_component(params[:customer_id].to_s)}",
           request_options: request_options
         )
         begin
@@ -333,7 +452,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::GetCustomerResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::GetCustomerResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -356,17 +475,25 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :customer_id
       #
+      # @example
+      #   client.customers.update(
+      #     customer_id: "customer_id",
+      #     email_address: "New.Amelia.Earhart@example.com",
+      #     note: "updated customer note",
+      #     version: 2
+      #   )
+      #
       # @return [Square::Types::UpdateCustomerResponse]
       def update(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request_data = Square::Customers::Types::UpdateCustomerRequest.new(params).to_h
-        non_body_param_names = ["customer_id"]
+        non_body_param_names = %w[customer_id]
         body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
-          path: "v2/customers/#{params[:customer_id]}",
+          path: "v2/customers/#{URI.encode_uri_component(params[:customer_id].to_s)}",
           body: body,
           request_options: request_options
         )
@@ -377,7 +504,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdateCustomerResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::UpdateCustomerResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -399,18 +526,22 @@ module Square
       # @option params [String] :customer_id
       # @option params [Integer, nil] :version
       #
+      # @example
+      #   client.customers.delete(
+      #     customer_id: "customer_id",
+      #     version: 1000000
+      #   )
+      #
       # @return [Square::Types::DeleteCustomerResponse]
       def delete(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[version]
         query_params = {}
         query_params["version"] = params[:version] if params.key?(:version)
-        params = params.except(*query_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "DELETE",
-          path: "v2/customers/#{params[:customer_id]}",
+          path: "v2/customers/#{URI.encode_uri_component(params[:customer_id].to_s)}",
           query: query_params,
           request_options: request_options
         )
@@ -421,7 +552,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::DeleteCustomerResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::DeleteCustomerResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

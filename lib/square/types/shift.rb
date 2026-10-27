@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # A record of the hourly rate, start, and end times for a single work shift
@@ -10,18 +12,31 @@ module Square
     # See the [migration notes](https://developer.squareup.com/docs/labor-api/what-it-does#migration-notes).
     class Shift < Internal::Types::Model
       field :id, -> { String }, optional: true, nullable: false
-      field :employee_id, -> { String }, optional: true, nullable: false
+
+      field :employee_id, -> { String }, optional: true, nullable: true
+
       field :location_id, -> { String }, optional: false, nullable: false
-      field :timezone, -> { String }, optional: true, nullable: false
+
+      field :timezone, -> { String }, optional: true, nullable: true
+
       field :start_at, -> { String }, optional: false, nullable: false
-      field :end_at, -> { String }, optional: true, nullable: false
+
+      field :end_at, -> { String }, optional: true, nullable: true
+
       field :wage, -> { Square::Types::ShiftWage }, optional: true, nullable: false
-      field :breaks, -> { Internal::Types::Array[Square::Types::Break] }, optional: true, nullable: false
+
+      field :breaks, -> { Internal::Types::Array[Square::Types::Break] }, optional: true, nullable: true
+
       field :status, -> { Square::Types::ShiftStatus }, optional: true, nullable: false
+
       field :version, -> { Integer }, optional: true, nullable: false
+
       field :created_at, -> { String }, optional: true, nullable: false
+
       field :updated_at, -> { String }, optional: true, nullable: false
-      field :team_member_id, -> { String }, optional: true, nullable: false
+
+      field :team_member_id, -> { String }, optional: true, nullable: true
+
       field :declared_cash_tip_money, -> { Square::Types::Money }, optional: true, nullable: false
     end
   end

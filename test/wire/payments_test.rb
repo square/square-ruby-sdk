@@ -8,7 +8,8 @@ class PaymentsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -21,7 +22,7 @@ class PaymentsWireTest < WireMockTestCase
       sort_order: "sort_order",
       cursor: "cursor",
       location_id: "location_id",
-      total: 1_000_000,
+      total: 1000000,
       last_4: "last_4",
       card_brand: "card_brand",
       limit: 1,
@@ -37,7 +38,6 @@ class PaymentsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -52,7 +52,7 @@ class PaymentsWireTest < WireMockTestCase
   def test_payments_create_with_wiremock
     test_id = "payments.create.0"
 
-    @client.payments.create(
+    result = @client.payments.create(
       source_id: "ccof:GaJGNaZa8x4OgDJn4GB",
       idempotency_key: "7b0f3ec5-086a-4871-8f13-3c81b3875218",
       amount_money: {
@@ -82,6 +82,30 @@ class PaymentsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/payments",
+      expected: {
+        "/amount_money/amount" => 1000,
+        "/app_fee_money/amount" => 10
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/payment/amount_money/amount" => 1000,
+        "/payment/tip_money/amount" => 1000000,
+        "/payment/total_money/amount" => 1000,
+        "/payment/app_fee_money/amount" => 10,
+        "/payment/approved_money/amount" => 1000,
+        "/payment/refunded_money/amount" => 1000000,
+        "/payment/card_details/card/exp_month" => 11,
+        "/payment/card_details/card/exp_year" => 2022
+      }
+    )
   end
 
   def test_payments_cancel_by_idempotency_key_with_wiremock
@@ -108,7 +132,7 @@ class PaymentsWireTest < WireMockTestCase
   def test_payments_get_with_wiremock
     test_id = "payments.get.0"
 
-    @client.payments.get(
+    result = @client.payments.get(
       payment_id: "payment_id",
       request_options: {
         additional_headers: {
@@ -124,12 +148,27 @@ class PaymentsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/payment/amount_money/amount" => 555,
+        "/payment/tip_money/amount" => 1000000,
+        "/payment/total_money/amount" => 555,
+        "/payment/app_fee_money/amount" => 1000000,
+        "/payment/approved_money/amount" => 555,
+        "/payment/processing_fee/0/amount_money/amount" => 34,
+        "/payment/refunded_money/amount" => 1000000,
+        "/payment/card_details/card/exp_month" => 11,
+        "/payment/card_details/card/exp_year" => 2022
+      }
+    )
   end
 
   def test_payments_update_with_wiremock
     test_id = "payments.update.0"
 
-    @client.payments.update(
+    result = @client.payments.update(
       payment_id: "payment_id",
       payment: {
         amount_money: {
@@ -157,12 +196,36 @@ class PaymentsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "PUT",
+      url_path: "/v2/payments/payment_id",
+      expected: {
+        "/payment/amount_money/amount" => 1000,
+        "/payment/tip_money/amount" => 100
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/payment/amount_money/amount" => 1000,
+        "/payment/tip_money/amount" => 100,
+        "/payment/total_money/amount" => 1100,
+        "/payment/app_fee_money/amount" => 1000000,
+        "/payment/approved_money/amount" => 1000,
+        "/payment/refunded_money/amount" => 1000000,
+        "/payment/card_details/card/exp_month" => 11,
+        "/payment/card_details/card/exp_year" => 2022
+      }
+    )
   end
 
   def test_payments_cancel_with_wiremock
     test_id = "payments.cancel.0"
 
-    @client.payments.cancel(
+    result = @client.payments.cancel(
       payment_id: "payment_id",
       request_options: {
         additional_headers: {
@@ -178,12 +241,26 @@ class PaymentsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/payment/amount_money/amount" => 1000,
+        "/payment/tip_money/amount" => 100,
+        "/payment/total_money/amount" => 1100,
+        "/payment/app_fee_money/amount" => 1000000,
+        "/payment/approved_money/amount" => 1000,
+        "/payment/refunded_money/amount" => 1000000,
+        "/payment/card_details/card/exp_month" => 11,
+        "/payment/card_details/card/exp_year" => 2022
+      }
+    )
   end
 
   def test_payments_complete_with_wiremock
     test_id = "payments.complete.0"
 
-    @client.payments.complete(
+    result = @client.payments.complete(
       payment_id: "payment_id",
       request_options: {
         additional_headers: {
@@ -198,6 +275,21 @@ class PaymentsWireTest < WireMockTestCase
       url_path: "/v2/payments/payment_id/complete",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/payment/amount_money/amount" => 555,
+        "/payment/tip_money/amount" => 1000000,
+        "/payment/total_money/amount" => 555,
+        "/payment/app_fee_money/amount" => 1000000,
+        "/payment/approved_money/amount" => 555,
+        "/payment/processing_fee/0/amount_money/amount" => 34,
+        "/payment/refunded_money/amount" => 1000000,
+        "/payment/card_details/card/exp_month" => 11,
+        "/payment/card_details/card/exp_year" => 2022
+      }
     )
   end
 end

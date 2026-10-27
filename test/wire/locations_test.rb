@@ -8,18 +8,19 @@ class LocationsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
   def test_locations_list_with_wiremock
     test_id = "locations.list.0"
 
-    @client.locations.list(request_options: {
-                             additional_headers: {
-                               "X-Test-Id" => "locations.list.0"
-                             }
-                           })
+    result = @client.locations.list(request_options: {
+      additional_headers: {
+        "X-Test-Id" => "locations.list.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -28,12 +29,20 @@ class LocationsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/locations/1/coordinates/latitude" => 33.7889,
+        "/locations/1/coordinates/longitude" => -84.3841
+      }
+    )
   end
 
   def test_locations_create_with_wiremock
     test_id = "locations.create.0"
 
-    @client.locations.create(
+    result = @client.locations.create(
       location: {
         name: "Midtown",
         address: {
@@ -58,12 +67,20 @@ class LocationsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/location/coordinates/latitude" => 33.7889,
+        "/location/coordinates/longitude" => -84.3841
+      }
+    )
   end
 
   def test_locations_get_with_wiremock
     test_id = "locations.get.0"
 
-    @client.locations.get(
+    result = @client.locations.get(
       location_id: "location_id",
       request_options: {
         additional_headers: {
@@ -79,12 +96,20 @@ class LocationsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/location/coordinates/latitude" => 1.1,
+        "/location/coordinates/longitude" => 1.1
+      }
+    )
   end
 
   def test_locations_update_with_wiremock
     test_id = "locations.update.0"
 
-    @client.locations.update(
+    result = @client.locations.update(
       location_id: "location_id",
       location: {
         business_hours: {
@@ -118,12 +143,20 @@ class LocationsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/location/coordinates/latitude" => 33.7889,
+        "/location/coordinates/longitude" => -84.3841
+      }
+    )
   end
 
   def test_locations_checkouts_with_wiremock
     test_id = "locations.checkouts.0"
 
-    @client.locations.checkouts(
+    result = @client.locations.checkouts(
       location_id: "location_id",
       idempotency_key: "86ae1696-b1e3-4328-af6d-f1e04d947ad6",
       order: {
@@ -212,6 +245,42 @@ class LocationsWireTest < WireMockTestCase
       url_path: "/v2/locations/location_id/checkouts",
       query_params: nil,
       expected: 1
+    )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/locations/location_id/checkouts",
+      expected: {
+        "/order/order/line_items/0/base_price_money/amount" => 1500,
+        "/order/order/line_items/1/base_price_money/amount" => 2500,
+        "/order/order/line_items/2/base_price_money/amount" => 3500,
+        "/order/order/discounts/0/amount_money/amount" => 100,
+        "/additional_recipients/0/amount_money/amount" => 60
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/checkout/order/line_items/0/applied_taxes/0/applied_money/amount" => 103,
+        "/checkout/order/line_items/0/applied_discounts/0/applied_money/amount" => 100,
+        "/checkout/order/line_items/0/base_price_money/amount" => 1500,
+        "/checkout/order/line_items/0/total_tax_money/amount" => 103,
+        "/checkout/order/line_items/0/total_discount_money/amount" => 100,
+        "/checkout/order/line_items/0/total_money/amount" => 1503,
+        "/checkout/order/line_items/1/base_price_money/amount" => 2500,
+        "/checkout/order/line_items/1/total_money/amount" => 2500,
+        "/checkout/order/line_items/2/base_price_money/amount" => 3500,
+        "/checkout/order/line_items/2/total_money/amount" => 10500,
+        "/checkout/order/discounts/0/amount_money/amount" => 100,
+        "/checkout/order/discounts/0/applied_money/amount" => 100,
+        "/checkout/order/version" => 1,
+        "/checkout/order/total_money/amount" => 14503,
+        "/checkout/order/total_tax_money/amount" => 103,
+        "/checkout/order/total_discount_money/amount" => 100,
+        "/checkout/additional_recipients/0/amount_money/amount" => 60
+      }
     )
   end
 end

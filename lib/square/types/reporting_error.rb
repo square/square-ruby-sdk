@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Error envelope returned by the Reporting API. Note: a 200 response whose body is `{ "error": "Continue wait" }` is

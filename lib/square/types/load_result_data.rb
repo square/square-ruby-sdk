@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Result `data` payload. Either an array of objects keyed by member name (default); a compact `{ members, dataset }`
@@ -8,7 +10,9 @@ module Square
       extend Square::Internal::Types::Union
 
       member -> { Internal::Types::Array[Internal::Types::Hash[String, Object]] }
+
       member -> { Square::Types::LoadResultDataCompact }
+
       member -> { Square::Types::LoadResultDataColumnar }
     end
   end

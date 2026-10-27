@@ -7,6 +7,7 @@ module Square
         module Types
           class GetPromotionsRequest < Internal::Types::Model
             field :program_id, -> { String }, optional: false, nullable: false
+
             field :promotion_id, -> { String }, optional: false, nullable: false
           end
         end

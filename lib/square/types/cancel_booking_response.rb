@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     class CancelBookingResponse < Internal::Types::Model
       field :booking, -> { Square::Types::Booking }, optional: true, nullable: false
+
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
     end
   end

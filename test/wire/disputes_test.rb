@@ -8,7 +8,8 @@ class DisputesWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -25,7 +26,6 @@ class DisputesWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -40,7 +40,7 @@ class DisputesWireTest < WireMockTestCase
   def test_disputes_get_with_wiremock
     test_id = "disputes.get.0"
 
-    @client.disputes.get(
+    result = @client.disputes.get(
       dispute_id: "dispute_id",
       request_options: {
         additional_headers: {
@@ -56,12 +56,20 @@ class DisputesWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/dispute/amount_money/amount" => 2500,
+        "/dispute/version" => 2
+      }
+    )
   end
 
   def test_disputes_accept_with_wiremock
     test_id = "disputes.accept.0"
 
-    @client.disputes.accept(
+    result = @client.disputes.accept(
       dispute_id: "dispute_id",
       request_options: {
         additional_headers: {
@@ -76,6 +84,14 @@ class DisputesWireTest < WireMockTestCase
       url_path: "/v2/disputes/dispute_id/accept",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/dispute/amount_money/amount" => 2500,
+        "/dispute/version" => 2
+      }
     )
   end
 
@@ -127,7 +143,7 @@ class DisputesWireTest < WireMockTestCase
   def test_disputes_submit_evidence_with_wiremock
     test_id = "disputes.submit_evidence.0"
 
-    @client.disputes.submit_evidence(
+    result = @client.disputes.submit_evidence(
       dispute_id: "dispute_id",
       request_options: {
         additional_headers: {
@@ -142,6 +158,14 @@ class DisputesWireTest < WireMockTestCase
       url_path: "/v2/disputes/dispute_id/submit-evidence",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/dispute/amount_money/amount" => 4350,
+        "/dispute/version" => 4
+      }
     )
   end
 end

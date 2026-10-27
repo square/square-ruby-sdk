@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents an amount of money. `Money` fields can be signed or unsigned.
@@ -9,7 +11,8 @@ module Square
     # [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
     # for more information.
     class Money < Internal::Types::Model
-      field :amount, -> { Integer }, optional: true, nullable: false
+      field :amount, -> { Integer }, optional: true, nullable: true
+
       field :currency, -> { Square::Types::Currency }, optional: true, nullable: false
     end
   end

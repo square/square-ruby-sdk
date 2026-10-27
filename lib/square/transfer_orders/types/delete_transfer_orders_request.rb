@@ -5,7 +5,8 @@ module Square
     module Types
       class DeleteTransferOrdersRequest < Internal::Types::Model
         field :transfer_order_id, -> { String }, optional: false, nullable: false
-        field :version, -> { Integer }, optional: true, nullable: false
+
+        field :version, -> { Integer }, optional: true, nullable: true
       end
     end
   end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # The response to the request to create a `BreakType`. The response contains
@@ -7,6 +9,7 @@ module Square
     # the request resulted in errors.
     class CreateBreakTypeResponse < Internal::Types::Model
       field :break_type, -> { Square::Types::BreakType }, optional: true, nullable: false
+
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
     end
   end

@@ -17,6 +17,13 @@ module Square
       #
       # The maximum results per page is 100.
       #
+      # Returns a `Square::Internal::CursorItemIterator` that yields each `Square::Types::PaymentRefund` in the
+      # `refunds` field of every page, requesting pages as they are needed. Call `pages` on it to get each page as a
+      # `Square::Types::ListPaymentRefundsResponse`, including its other fields.
+      #
+      # No request is sent by this call. The first page is requested when you start iterating (or call
+      # `load_first_page`), so an API error is raised by the loop (or by `load_first_page`), not by this call.
+      #
       # @param request_options [Hash]
       # @param params [Hash]
       # @option request_options [String] :base_url
@@ -36,10 +43,24 @@ module Square
       # @option params [String, nil] :updated_at_end_time
       # @option params [Square::Types::ListPaymentRefundsRequestSortField, nil] :sort_field
       #
-      # @return [Square::Types::ListPaymentRefundsResponse]
+      # @example
+      #   client.refunds.list(
+      #     begin_time: "begin_time",
+      #     end_time: "end_time",
+      #     sort_order: "sort_order",
+      #     cursor: "cursor",
+      #     location_id: "location_id",
+      #     status: "status",
+      #     source_type: "source_type",
+      #     limit: 1,
+      #     updated_at_begin_time: "updated_at_begin_time",
+      #     updated_at_end_time: "updated_at_end_time",
+      #     sort_field: "CREATED_AT"
+      #   )
+      #
+      # @return [Square::Internal::CursorItemIterator]
       def list(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[begin_time end_time sort_order cursor location_id status source_type limit updated_at_begin_time updated_at_end_time sort_field]
         query_params = {}
         query_params["begin_time"] = params[:begin_time] if params.key?(:begin_time)
         query_params["end_time"] = params[:end_time] if params.key?(:end_time)
@@ -52,14 +73,13 @@ module Square
         query_params["updated_at_begin_time"] = params[:updated_at_begin_time] if params.key?(:updated_at_begin_time)
         query_params["updated_at_end_time"] = params[:updated_at_end_time] if params.key?(:updated_at_end_time)
         query_params["sort_field"] = params[:sort_field] if params.key?(:sort_field)
-        params.except(*query_param_names)
 
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :refunds,
-          initial_cursor: query_params[:cursor]
+          initial_cursor: query_params["cursor"]
         ) do |next_cursor|
-          query_params[:cursor] = next_cursor
+          query_params["cursor"] = next_cursor
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -74,7 +94,8 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::ListPaymentRefundsResponse.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Square::Types::ListPaymentRefundsResponse.load(response.body))
+            [parsed_response, response]
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -95,6 +116,21 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.refunds.refund_payment(
+      #     idempotency_key: "9b7f2dcf-49da-4411-b23e-a2d6af21333a",
+      #     amount_money: {
+      #       amount: 1000,
+      #       currency: "USD"
+      #     },
+      #     app_fee_money: {
+      #       amount: 10,
+      #       currency: "USD"
+      #     },
+      #     payment_id: "R2B3Z8WMVt3EAmzYWLZvz7Y69EbZY",
+      #     reason: "Example"
+      #   )
+      #
       # @return [Square::Types::RefundPaymentResponse]
       def refund_payment(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -112,7 +148,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::RefundPaymentResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::RefundPaymentResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -130,13 +166,16 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :refund_id
       #
+      # @example
+      #   client.refunds.get(refund_id: "refund_id")
+      #
       # @return [Square::Types::GetPaymentRefundResponse]
       def get(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/refunds/#{params[:refund_id]}",
+          path: "v2/refunds/#{URI.encode_uri_component(params[:refund_id].to_s)}",
           request_options: request_options
         )
         begin
@@ -146,7 +185,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::GetPaymentRefundResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::GetPaymentRefundResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

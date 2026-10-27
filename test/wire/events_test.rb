@@ -8,18 +8,19 @@ class EventsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
   def test_events_search_events_with_wiremock
     test_id = "events.search_events.0"
 
-    @client.events.search_events(request_options: {
-                                   additional_headers: {
-                                     "X-Test-Id" => "events.search_events.0"
-                                   }
-                                 })
+    result = @client.events.search_events(request_options: {
+      additional_headers: {
+        "X-Test-Id" => "events.search_events.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -28,16 +29,24 @@ class EventsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/events/0/data/object/dispute/amount_money/amount" => 8801,
+        "/events/0/data/object/dispute/version" => 6
+      }
+    )
   end
 
   def test_events_disable_events_with_wiremock
     test_id = "events.disable_events.0"
 
     @client.events.disable_events(request_options: {
-                                    additional_headers: {
-                                      "X-Test-Id" => "events.disable_events.0"
-                                    }
-                                  })
+      additional_headers: {
+        "X-Test-Id" => "events.disable_events.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -52,10 +61,10 @@ class EventsWireTest < WireMockTestCase
     test_id = "events.enable_events.0"
 
     @client.events.enable_events(request_options: {
-                                   additional_headers: {
-                                     "X-Test-Id" => "events.enable_events.0"
-                                   }
-                                 })
+      additional_headers: {
+        "X-Test-Id" => "events.enable_events.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

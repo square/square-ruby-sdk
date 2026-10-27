@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents a contract to redeem loyalty points for a [reward tier](entity:LoyaltyProgramRewardTier) discount.
@@ -8,13 +10,21 @@ module Square
     # rewards](https://developer.squareup.com/docs/loyalty-api/loyalty-rewards).
     class LoyaltyReward < Internal::Types::Model
       field :id, -> { String }, optional: true, nullable: false
+
       field :status, -> { Square::Types::LoyaltyRewardStatus }, optional: true, nullable: false
+
       field :loyalty_account_id, -> { String }, optional: false, nullable: false
+
       field :reward_tier_id, -> { String }, optional: false, nullable: false
+
       field :points, -> { Integer }, optional: true, nullable: false
-      field :order_id, -> { String }, optional: true, nullable: false
+
+      field :order_id, -> { String }, optional: true, nullable: true
+
       field :created_at, -> { String }, optional: true, nullable: false
+
       field :updated_at, -> { String }, optional: true, nullable: false
+
       field :redeemed_at, -> { String }, optional: true, nullable: false
     end
   end

@@ -38,6 +38,37 @@ module Square
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.labor.shifts.create(
+        #     idempotency_key: "HIDSNG5KS478L",
+        #     shift: {
+        #       location_id: "PAA1RJZZKXBFG",
+        #       start_at: "2019-01-25T03:11:00-05:00",
+        #       end_at: "2019-01-25T13:11:00-05:00",
+        #       wage: {
+        #         title: "Barista",
+        #         hourly_rate: {
+        #           amount: 1100,
+        #           currency: "USD"
+        #         },
+        #         tip_eligible: true
+        #       },
+        #       breaks: [{
+        #         start_at: "2019-01-25T06:11:00-05:00",
+        #         end_at: "2019-01-25T06:16:00-05:00",
+        #         break_type_id: "REGS1EQR1TPZ5",
+        #         name: "Tea Break",
+        #         expected_duration: "PT5M",
+        #         is_paid: true
+        #       }],
+        #       team_member_id: "ormj0jJJZ5OZIzxrZYJI",
+        #       declared_cash_tip_money: {
+        #         amount: 500,
+        #         currency: "USD"
+        #       }
+        #     }
+        #   )
+        #
         # @return [Square::Types::CreateShiftResponse]
         def create(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -55,7 +86,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::CreateShiftResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::CreateShiftResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -85,6 +116,23 @@ module Square
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.labor.shifts.search(
+        #     query: {
+        #       filter: {
+        #         workday: {
+        #           date_range: {
+        #             start_date: "2019-01-20",
+        #             end_date: "2019-02-03"
+        #           },
+        #           match_shifts_by: "START_AT",
+        #           default_timezone: "America/Los_Angeles"
+        #         }
+        #       }
+        #     },
+        #     limit: 100
+        #   )
+        #
         # @return [Square::Types::SearchShiftsResponse]
         def search(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -102,7 +150,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::SearchShiftsResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::SearchShiftsResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -120,13 +168,16 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         #
+        # @example
+        #   client.labor.shifts.get(id: "id")
+        #
         # @return [Square::Types::GetShiftResponse]
         def get(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
-            path: "v2/labor/shifts/#{params[:id]}",
+            path: "v2/labor/shifts/#{URI.encode_uri_component(params[:id].to_s)}",
             request_options: request_options
           )
           begin
@@ -136,7 +187,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::GetShiftResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::GetShiftResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -160,17 +211,50 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         #
+        # @example
+        #   client.labor.shifts.update(
+        #     id: "id",
+        #     shift: {
+        #       location_id: "PAA1RJZZKXBFG",
+        #       start_at: "2019-01-25T03:11:00-05:00",
+        #       end_at: "2019-01-25T13:11:00-05:00",
+        #       wage: {
+        #         title: "Bartender",
+        #         hourly_rate: {
+        #           amount: 1500,
+        #           currency: "USD"
+        #         },
+        #         tip_eligible: true
+        #       },
+        #       breaks: [{
+        #         id: "X7GAQYVVRRG6P",
+        #         start_at: "2019-01-25T06:11:00-05:00",
+        #         end_at: "2019-01-25T06:16:00-05:00",
+        #         break_type_id: "REGS1EQR1TPZ5",
+        #         name: "Tea Break",
+        #         expected_duration: "PT5M",
+        #         is_paid: true
+        #       }],
+        #       version: 1,
+        #       team_member_id: "ormj0jJJZ5OZIzxrZYJI",
+        #       declared_cash_tip_money: {
+        #         amount: 500,
+        #         currency: "USD"
+        #       }
+        #     }
+        #   )
+        #
         # @return [Square::Types::UpdateShiftResponse]
         def update(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request_data = Square::Labor::Shifts::Types::UpdateShiftRequest.new(params).to_h
-          non_body_param_names = ["id"]
+          non_body_param_names = %w[id]
           body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "PUT",
-            path: "v2/labor/shifts/#{params[:id]}",
+            path: "v2/labor/shifts/#{URI.encode_uri_component(params[:id].to_s)}",
             body: body,
             request_options: request_options
           )
@@ -181,7 +265,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::UpdateShiftResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::UpdateShiftResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -199,13 +283,16 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         #
+        # @example
+        #   client.labor.shifts.delete(id: "id")
+        #
         # @return [Square::Types::DeleteShiftResponse]
         def delete(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",
-            path: "v2/labor/shifts/#{params[:id]}",
+            path: "v2/labor/shifts/#{URI.encode_uri_component(params[:id].to_s)}",
             request_options: request_options
           )
           begin
@@ -215,7 +302,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::DeleteShiftResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::DeleteShiftResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

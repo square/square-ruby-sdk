@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # The goods receipt details for a transfer order. This object represents a single receipt
@@ -21,7 +23,7 @@ module Square
     # - Adjusts received quantities
     # - Updates inventory levels at both source and destination [Location](entity:Location)s
     class TransferOrderGoodsReceipt < Internal::Types::Model
-      field :line_items, -> { Internal::Types::Array[Square::Types::TransferOrderGoodsReceiptLineItem] }, optional: true, nullable: false
+      field :line_items, -> { Internal::Types::Array[Square::Types::TransferOrderGoodsReceiptLineItem] }, optional: true, nullable: true
     end
   end
 end

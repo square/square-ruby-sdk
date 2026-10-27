@@ -8,7 +8,8 @@ class BookingsCustomAttributesWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -41,7 +42,7 @@ class BookingsCustomAttributesWireTest < WireMockTestCase
   def test_bookings_custom_attributes_batch_upsert_with_wiremock
     test_id = "bookings.custom_attributes.batch_upsert.0"
 
-    @client.bookings.custom_attributes.batch_upsert(
+    result = @client.bookings.custom_attributes.batch_upsert(
       values: {
         key: {
           booking_id: "booking_id",
@@ -62,6 +63,18 @@ class BookingsCustomAttributesWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/values/id1/custom_attribute/version" => 1,
+        "/values/id2/custom_attribute/version" => 2,
+        "/values/id3/custom_attribute/version" => 2,
+        "/values/id4/custom_attribute/value" => 4,
+        "/values/id4/custom_attribute/version" => 1,
+        "/values/id5/custom_attribute/version" => 2
+      }
+    )
   end
 
   def test_bookings_custom_attributes_list_with_wiremock
@@ -78,7 +91,6 @@ class BookingsCustomAttributesWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -93,7 +105,7 @@ class BookingsCustomAttributesWireTest < WireMockTestCase
   def test_bookings_custom_attributes_get_with_wiremock
     test_id = "bookings.custom_attributes.get.0"
 
-    @client.bookings.custom_attributes.get(
+    result = @client.bookings.custom_attributes.get(
       booking_id: "booking_id",
       key: "key",
       with_definition: true,
@@ -112,12 +124,20 @@ class BookingsCustomAttributesWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute/version" => 1,
+        "/custom_attribute/definition/version" => 1
+      }
+    )
   end
 
   def test_bookings_custom_attributes_upsert_with_wiremock
     test_id = "bookings.custom_attributes.upsert.0"
 
-    @client.bookings.custom_attributes.upsert(
+    result = @client.bookings.custom_attributes.upsert(
       booking_id: "booking_id",
       key: "key",
       custom_attribute: {},
@@ -134,6 +154,14 @@ class BookingsCustomAttributesWireTest < WireMockTestCase
       url_path: "/v2/bookings/booking_id/custom-attributes/key",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute/version" => 1,
+        "/custom_attribute/definition/version" => 1
+      }
     )
   end
 

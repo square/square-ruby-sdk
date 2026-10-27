@@ -4,16 +4,21 @@ module Square
   class Client
     # @param base_url [String, nil]
     # @param token [String]
+    # @param max_retries [Integer]
+    # @param timeout [Numeric]
     #
     # @return [void]
-    def initialize(base_url: nil, token: ENV.fetch("SQUARE_TOKEN", nil))
+    def initialize(base_url: nil, token: ENV.fetch("SQUARE_TOKEN", nil), max_retries: 2, timeout: 60)
       @raw_client = Square::Internal::Http::RawClient.new(
         base_url: base_url || Square::Environment::PRODUCTION,
         headers: {
-          "User-Agent" => "square.rb/47.0.0.20260916",
+          "User-Agent" => "square.rb/48.0.0.20260916",
           "X-Fern-Language" => "Ruby",
-          Authorization: "Bearer #{token}"
-        }
+          Authorization: "Bearer #{token}",
+          "Square-Version" => "2026-09-16"
+        },
+        max_retries: max_retries,
+        timeout: timeout
       )
     end
 

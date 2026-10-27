@@ -26,6 +26,56 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.orders.create(
+      #     order: {
+      #       location_id: "057P5VYJ4A5X1",
+      #       reference_id: "my-order-001",
+      #       line_items: [{
+      #         name: "New York Strip Steak",
+      #         quantity: "1",
+      #         base_price_money: {
+      #           amount: 1599,
+      #           currency: "USD"
+      #         }
+      #       }, {
+      #         quantity: "2",
+      #         catalog_object_id: "BEMYCSMIJL46OCDV4KYIKXIB",
+      #         modifiers: [{
+      #           catalog_object_id: "CHQX7Y4KY6N5KINJKZCFURPZ"
+      #         }],
+      #         applied_discounts: [{
+      #           discount_uid: "one-dollar-off"
+      #         }]
+      #       }],
+      #       taxes: [{
+      #         uid: "state-sales-tax",
+      #         name: "State Sales Tax",
+      #         percentage: "9",
+      #         scope: "ORDER"
+      #       }],
+      #       discounts: [{
+      #         uid: "labor-day-sale",
+      #         name: "Labor Day Sale",
+      #         percentage: "5",
+      #         scope: "ORDER"
+      #       }, {
+      #         uid: "membership-discount",
+      #         catalog_object_id: "DB7L55ZH2BGWI4H23ULIWOQ7",
+      #         scope: "ORDER"
+      #       }, {
+      #         uid: "one-dollar-off",
+      #         name: "Sale - $1.00 off",
+      #         amount_money: {
+      #           amount: 100,
+      #           currency: "USD"
+      #         },
+      #         scope: "LINE_ITEM"
+      #       }]
+      #     },
+      #     idempotency_key: "8193148c-9586-11e6-99f9-28cfe92138cf"
+      #   )
+      #
       # @return [Square::Types::CreateOrderResponse]
       def create(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -43,7 +93,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreateOrderResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::CreateOrderResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -62,6 +112,12 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.orders.batch_get(
+      #     location_id: "057P5VYJ4A5X1",
+      #     order_ids: %w[CAISEM82RcpmcFBM0TfOyiHV3es CAISENgvlJ6jLWAzERDzjyHVybY]
+      #   )
+      #
       # @return [Square::Types::BatchGetOrdersResponse]
       def batch_get(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -79,7 +135,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BatchGetOrdersResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::BatchGetOrdersResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -95,6 +151,31 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
+      #
+      # @example
+      #   client.orders.calculate(order: {
+      #     location_id: "D7AVYMEAPJ3A3",
+      #     line_items: [{
+      #       name: "Item 1",
+      #       quantity: "1",
+      #       base_price_money: {
+      #         amount: 500,
+      #         currency: "USD"
+      #       }
+      #     }, {
+      #       name: "Item 2",
+      #       quantity: "2",
+      #       base_price_money: {
+      #         amount: 300,
+      #         currency: "USD"
+      #       }
+      #     }],
+      #     discounts: [{
+      #       name: "50% Off",
+      #       percentage: "50",
+      #       scope: "ORDER"
+      #     }]
+      #   })
       #
       # @return [Square::Types::CalculateOrderResponse]
       def calculate(request_options: {}, **params)
@@ -113,7 +194,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CalculateOrderResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::CalculateOrderResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -130,6 +211,13 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
+      #
+      # @example
+      #   client.orders.clone(
+      #     order_id: "ZAISEM52YcpmcWAzERDOyiWS123",
+      #     version: 3,
+      #     idempotency_key: "UNIQUE_STRING"
+      #   )
       #
       # @return [Square::Types::CloneOrderResponse]
       def clone(request_options: {}, **params)
@@ -148,7 +236,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CloneOrderResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::CloneOrderResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -182,6 +270,30 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.orders.search(
+      #     location_ids: %w[057P5VYJ4A5X1 18YC4JDH91E1H],
+      #     query: {
+      #       filter: {
+      #         state_filter: {
+      #           states: ["COMPLETED"]
+      #         },
+      #         date_time_filter: {
+      #           closed_at: {
+      #             start_at: "2018-03-03T20:00:00+00:00",
+      #             end_at: "2019-03-04T21:54:45+00:00"
+      #           }
+      #         }
+      #       },
+      #       sort: {
+      #         sort_field: "CLOSED_AT",
+      #         sort_order: "DESC"
+      #       }
+      #     },
+      #     limit: 3,
+      #     return_entries: true
+      #   )
+      #
       # @return [Square::Types::SearchOrdersResponse]
       def search(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -199,7 +311,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchOrdersResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::SearchOrdersResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -217,13 +329,16 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :order_id
       #
+      # @example
+      #   client.orders.get(order_id: "order_id")
+      #
       # @return [Square::Types::GetOrderResponse]
       def get(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/orders/#{params[:order_id]}",
+          path: "v2/orders/#{URI.encode_uri_component(params[:order_id].to_s)}",
           request_options: request_options
         )
         begin
@@ -233,7 +348,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::GetOrderResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::GetOrderResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -267,17 +382,37 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :order_id
       #
+      # @example
+      #   client.orders.update(
+      #     order_id: "order_id",
+      #     order: {
+      #       location_id: "location_id",
+      #       line_items: [{
+      #         uid: "cookie_uid",
+      #         name: "COOKIE",
+      #         quantity: "2",
+      #         base_price_money: {
+      #           amount: 200,
+      #           currency: "USD"
+      #         }
+      #       }],
+      #       version: 1
+      #     },
+      #     fields_to_clear: ["discounts"],
+      #     idempotency_key: "UNIQUE_STRING"
+      #   )
+      #
       # @return [Square::Types::UpdateOrderResponse]
       def update(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request_data = Square::Orders::Types::UpdateOrderRequest.new(params).to_h
-        non_body_param_names = ["order_id"]
+        non_body_param_names = %w[order_id]
         body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
-          path: "v2/orders/#{params[:order_id]}",
+          path: "v2/orders/#{URI.encode_uri_component(params[:order_id].to_s)}",
           body: body,
           request_options: request_options
         )
@@ -288,7 +423,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdateOrderResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::UpdateOrderResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -321,17 +456,24 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :order_id
       #
+      # @example
+      #   client.orders.pay(
+      #     order_id: "order_id",
+      #     idempotency_key: "c043a359-7ad9-4136-82a9-c3f1d66dcbff",
+      #     payment_ids: %w[EnZdNAlWCmfh6Mt5FMNST1o7taB 0LRiVlbXVwe8ozu4KbZxd12mvaB]
+      #   )
+      #
       # @return [Square::Types::PayOrderResponse]
       def pay(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request_data = Square::Orders::Types::PayOrderRequest.new(params).to_h
-        non_body_param_names = ["order_id"]
+        non_body_param_names = %w[order_id]
         body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
-          path: "v2/orders/#{params[:order_id]}/pay",
+          path: "v2/orders/#{URI.encode_uri_component(params[:order_id].to_s)}/pay",
           body: body,
           request_options: request_options
         )
@@ -342,7 +484,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::PayOrderResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::PayOrderResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

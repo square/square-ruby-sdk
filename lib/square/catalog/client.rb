@@ -33,6 +33,9 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.catalog.batch_delete(object_ids: %w[W62UWFY35CWMYGVWK6TWJDNI AA27W3M2GGTF3H6AVPNB77CK])
+      #
       # @return [Square::Types::BatchDeleteCatalogObjectsResponse]
       def batch_delete(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -50,7 +53,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BatchDeleteCatalogObjectsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::BatchDeleteCatalogObjectsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -72,6 +75,12 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.catalog.batch_get(
+      #     object_ids: %w[W62UWFY35CWMYGVWK6TWJDNI AA27W3M2GGTF3H6AVPNB77CK],
+      #     include_related_objects: true
+      #   )
+      #
       # @return [Square::Types::BatchGetCatalogObjectsResponse]
       def batch_get(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -89,7 +98,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BatchGetCatalogObjectsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::BatchGetCatalogObjectsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -124,6 +133,14 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.catalog.batch_upsert(
+      #     idempotency_key: "789ff020-f723-43a9-b4b5-43b5dc1fa3dc",
+      #     batches: [{
+      #       objects: []
+      #     }]
+      #   )
+      #
       # @return [Square::Types::BatchUpsertCatalogObjectsResponse]
       def batch_upsert(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -141,7 +158,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BatchUpsertCatalogObjectsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::BatchUpsertCatalogObjectsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -152,16 +169,18 @@ module Square
       # limits that can be used by the `BatchUpsertCatalogObjects` endpoint.
       #
       # @param request_options [Hash]
-      # @param params [Hash]
+      # @param _params [Hash]
       # @option request_options [String] :base_url
       # @option request_options [Hash{String => Object}] :additional_headers
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.catalog.info
+      #
       # @return [Square::Types::CatalogInfoResponse]
-      def info(request_options: {}, **params)
-        Square::Internal::Types::Utils.normalize_keys(params)
+      def info(request_options: {}, **_params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -175,7 +194,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CatalogInfoResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::CatalogInfoResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -194,6 +213,13 @@ module Square
       # deleted catalog items, use [SearchCatalogObjects](api-endpoint:Catalog-SearchCatalogObjects)
       # and set the `include_deleted_objects` attribute value to `true`.
       #
+      # Returns a `Square::Internal::CursorItemIterator` that yields each `Square::Types::CatalogObject` in the
+      # `objects` field of every page, requesting pages as they are needed. Call `pages` on it to get each page as a
+      # `Square::Types::ListCatalogResponse`, including its other fields.
+      #
+      # No request is sent by this call. The first page is requested when you start iterating (or call
+      # `load_first_page`), so an API error is raised by the loop (or by `load_first_page`), not by this call.
+      #
       # @param request_options [Hash]
       # @param params [Hash]
       # @option request_options [String] :base_url
@@ -205,22 +231,27 @@ module Square
       # @option params [String, nil] :types
       # @option params [Integer, nil] :catalog_version
       #
-      # @return [Square::Types::ListCatalogResponse]
+      # @example
+      #   client.catalog.list(
+      #     cursor: "cursor",
+      #     types: "types",
+      #     catalog_version: 1000000
+      #   )
+      #
+      # @return [Square::Internal::CursorItemIterator]
       def list(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[cursor types catalog_version]
         query_params = {}
         query_params["cursor"] = params[:cursor] if params.key?(:cursor)
         query_params["types"] = params[:types] if params.key?(:types)
         query_params["catalog_version"] = params[:catalog_version] if params.key?(:catalog_version)
-        params.except(*query_param_names)
 
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :objects,
-          initial_cursor: query_params[:cursor]
+          initial_cursor: query_params["cursor"]
         ) do |next_cursor|
-          query_params[:cursor] = next_cursor
+          query_params["cursor"] = next_cursor
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -235,7 +266,8 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::ListCatalogResponse.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Square::Types::ListCatalogResponse.load(response.body))
+            [parsed_response, response]
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -272,6 +304,18 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.catalog.search(
+      #     object_types: ["ITEM"],
+      #     query: {
+      #       prefix_query: {
+      #         attribute_name: "name",
+      #         attribute_prefix: "tea"
+      #       }
+      #     },
+      #     limit: 100
+      #   )
+      #
       # @return [Square::Types::SearchCatalogObjectsResponse]
       def search(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -289,7 +333,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchCatalogObjectsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::SearchCatalogObjectsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -319,6 +363,32 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.catalog.search_items(
+      #     text_filter: "red",
+      #     category_ids: ["WINE_CATEGORY_ID"],
+      #     stock_levels: %w[OUT LOW],
+      #     enabled_location_ids: ["ATL_LOCATION_ID"],
+      #     limit: 100,
+      #     sort_order: "ASC",
+      #     product_types: ["REGULAR"],
+      #     custom_attribute_filters: [{
+      #       custom_attribute_definition_id: "VEGAN_DEFINITION_ID",
+      #       bool_filter: true
+      #     }, {
+      #       custom_attribute_definition_id: "BRAND_DEFINITION_ID",
+      #       string_filter: "Dark Horse"
+      #     }, {
+      #       key: "VINTAGE",
+      #       number_filter: {
+      #         min: "min",
+      #         max: "max"
+      #       }
+      #     }, {
+      #       custom_attribute_definition_id: "VARIETAL_DEFINITION_ID"
+      #     }]
+      #   )
+      #
       # @return [Square::Types::SearchCatalogItemsResponse]
       def search_items(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -336,7 +406,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SearchCatalogItemsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::SearchCatalogItemsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -355,6 +425,13 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.catalog.update_item_modifier_lists(
+      #     item_ids: %w[H42BRLUJ5KTZTTMPVSLFAACQ 2JXOBJIHCWBQ4NZ3RIXQGJA6],
+      #     modifier_lists_to_enable: %w[H42BRLUJ5KTZTTMPVSLFAACQ 2JXOBJIHCWBQ4NZ3RIXQGJA6],
+      #     modifier_lists_to_disable: ["7WRC16CJZDVLSNDQ35PP6YAD"]
+      #   )
+      #
       # @return [Square::Types::UpdateItemModifierListsResponse]
       def update_item_modifier_lists(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -372,7 +449,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdateItemModifierListsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::UpdateItemModifierListsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -391,6 +468,13 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.catalog.update_item_taxes(
+      #     item_ids: %w[H42BRLUJ5KTZTTMPVSLFAACQ 2JXOBJIHCWBQ4NZ3RIXQGJA6],
+      #     taxes_to_enable: ["4WRCNHCJZDVLSNDQ35PP6YAD"],
+      #     taxes_to_disable: ["AQCEGCEBBQONINDOHRGZISEX"]
+      #   )
+      #
       # @return [Square::Types::UpdateItemTaxesResponse]
       def update_item_taxes(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -408,7 +492,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::UpdateItemTaxesResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::UpdateItemTaxesResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

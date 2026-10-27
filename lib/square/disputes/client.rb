@@ -12,6 +12,13 @@ module Square
 
       # Returns a list of disputes associated with a particular account.
       #
+      # Returns a `Square::Internal::CursorItemIterator` that yields each `Square::Types::Dispute` in the `disputes`
+      # field of every page, requesting pages as they are needed. Call `pages` on it to get each page as a
+      # `Square::Types::ListDisputesResponse`, including its other fields.
+      #
+      # No request is sent by this call. The first page is requested when you start iterating (or call
+      # `load_first_page`), so an API error is raised by the loop (or by `load_first_page`), not by this call.
+      #
       # @param request_options [Hash]
       # @param params [Hash]
       # @option request_options [String] :base_url
@@ -23,22 +30,27 @@ module Square
       # @option params [Square::Types::DisputeState, nil] :states
       # @option params [String, nil] :location_id
       #
-      # @return [Square::Types::ListDisputesResponse]
+      # @example
+      #   client.disputes.list(
+      #     cursor: "cursor",
+      #     states: "INQUIRY_EVIDENCE_REQUIRED",
+      #     location_id: "location_id"
+      #   )
+      #
+      # @return [Square::Internal::CursorItemIterator]
       def list(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[cursor states location_id]
         query_params = {}
         query_params["cursor"] = params[:cursor] if params.key?(:cursor)
         query_params["states"] = params[:states] if params.key?(:states)
         query_params["location_id"] = params[:location_id] if params.key?(:location_id)
-        params.except(*query_param_names)
 
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :disputes,
-          initial_cursor: query_params[:cursor]
+          initial_cursor: query_params["cursor"]
         ) do |next_cursor|
-          query_params[:cursor] = next_cursor
+          query_params["cursor"] = next_cursor
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -53,7 +65,8 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::ListDisputesResponse.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Square::Types::ListDisputesResponse.load(response.body))
+            [parsed_response, response]
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -72,13 +85,16 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :dispute_id
       #
+      # @example
+      #   client.disputes.get(dispute_id: "dispute_id")
+      #
       # @return [Square::Types::GetDisputeResponse]
       def get(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/disputes/#{params[:dispute_id]}",
+          path: "v2/disputes/#{URI.encode_uri_component(params[:dispute_id].to_s)}",
           request_options: request_options
         )
         begin
@@ -88,7 +104,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::GetDisputeResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::GetDisputeResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -110,13 +126,16 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :dispute_id
       #
+      # @example
+      #   client.disputes.accept(dispute_id: "dispute_id")
+      #
       # @return [Square::Types::AcceptDisputeResponse]
       def accept(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
-          path: "v2/disputes/#{params[:dispute_id]}/accept",
+          path: "v2/disputes/#{URI.encode_uri_component(params[:dispute_id].to_s)}/accept",
           request_options: request_options
         )
         begin
@@ -126,7 +145,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::AcceptDisputeResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::AcceptDisputeResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -145,24 +164,33 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :dispute_id
       #
+      # @example
+      #   client.disputes.create_evidence_file(dispute_id: "dispute_id")
+      #
       # @return [Square::Types::CreateDisputeEvidenceFileResponse]
       def create_evidence_file(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         body = Internal::Multipart::FormData.new
 
-        if params[:request]
+        unless params[:request].nil?
           body.add(
             name: "request",
             value: params[:request],
             content_type: "application/json; charset=utf-8"
           )
         end
-        body.add_part(params[:image_file].to_form_data_part(name: "image_file")) if params[:image_file]
+        if params[:image_file]
+          body.add_file(
+            name: "image_file",
+            file: params[:image_file],
+            content_type: "image/jpeg"
+          )
+        end
 
         request = Square::Internal::Multipart::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
-          path: "v2/disputes/#{params[:dispute_id]}/evidence-files",
+          path: "v2/disputes/#{URI.encode_uri_component(params[:dispute_id].to_s)}/evidence-files",
           body: body,
           request_options: request_options
         )
@@ -173,7 +201,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreateDisputeEvidenceFileResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::CreateDisputeEvidenceFileResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -191,17 +219,25 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :dispute_id
       #
+      # @example
+      #   client.disputes.create_evidence_text(
+      #     dispute_id: "dispute_id",
+      #     idempotency_key: "ed3ee3933d946f1514d505d173c82648",
+      #     evidence_type: "TRACKING_NUMBER",
+      #     evidence_text: "1Z8888888888888888"
+      #   )
+      #
       # @return [Square::Types::CreateDisputeEvidenceTextResponse]
       def create_evidence_text(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request_data = Square::Disputes::Types::CreateDisputeEvidenceTextRequest.new(params).to_h
-        non_body_param_names = ["dispute_id"]
+        non_body_param_names = %w[dispute_id]
         body = request_data.except(*non_body_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
-          path: "v2/disputes/#{params[:dispute_id]}/evidence-text",
+          path: "v2/disputes/#{URI.encode_uri_component(params[:dispute_id].to_s)}/evidence-text",
           body: body,
           request_options: request_options
         )
@@ -212,7 +248,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::CreateDisputeEvidenceTextResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::CreateDisputeEvidenceTextResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -236,13 +272,16 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :dispute_id
       #
+      # @example
+      #   client.disputes.submit_evidence(dispute_id: "dispute_id")
+      #
       # @return [Square::Types::SubmitEvidenceResponse]
       def submit_evidence(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "POST",
-          path: "v2/disputes/#{params[:dispute_id]}/submit-evidence",
+          path: "v2/disputes/#{URI.encode_uri_component(params[:dispute_id].to_s)}/submit-evidence",
           request_options: request_options
         )
         begin
@@ -252,7 +291,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::SubmitEvidenceResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::SubmitEvidenceResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

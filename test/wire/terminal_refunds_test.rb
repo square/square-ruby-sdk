@@ -8,14 +8,15 @@ class TerminalRefundsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
   def test_terminal_refunds_create_with_wiremock
     test_id = "terminal.refunds.create.0"
 
-    @client.terminal.refunds.create(
+    result = @client.terminal.refunds.create(
       idempotency_key: "402a640b-b26f-401f-b406-46f839590c04",
       refund: {
         payment_id: "5O5OvgkcNUhl7JBuINflcjKqUzXZY",
@@ -40,12 +41,28 @@ class TerminalRefundsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/terminals/refunds",
+      expected: {
+        "/refund/amount_money/amount" => 111
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/refund/amount_money/amount" => 111
+      }
+    )
   end
 
   def test_terminal_refunds_search_with_wiremock
     test_id = "terminal.refunds.search.0"
 
-    @client.terminal.refunds.search(
+    result = @client.terminal.refunds.search(
       query: {
         filter: {
           status: "COMPLETED"
@@ -66,12 +83,28 @@ class TerminalRefundsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/terminals/refunds/search",
+      expected: {
+        "/limit" => 1
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/refunds/0/amount_money/amount" => 111
+      }
+    )
   end
 
   def test_terminal_refunds_get_with_wiremock
     test_id = "terminal.refunds.get.0"
 
-    @client.terminal.refunds.get(
+    result = @client.terminal.refunds.get(
       terminal_refund_id: "terminal_refund_id",
       request_options: {
         additional_headers: {
@@ -87,12 +120,19 @@ class TerminalRefundsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/refund/amount_money/amount" => 111
+      }
+    )
   end
 
   def test_terminal_refunds_cancel_with_wiremock
     test_id = "terminal.refunds.cancel.0"
 
-    @client.terminal.refunds.cancel(
+    result = @client.terminal.refunds.cancel(
       terminal_refund_id: "terminal_refund_id",
       request_options: {
         additional_headers: {
@@ -107,6 +147,13 @@ class TerminalRefundsWireTest < WireMockTestCase
       url_path: "/v2/terminals/refunds/terminal_refund_id/cancel",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/refund/amount_money/amount" => 100
+      }
     )
   end
 end

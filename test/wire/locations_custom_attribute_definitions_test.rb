@@ -8,7 +8,8 @@ class LocationsCustomAttributeDefinitionsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -25,7 +26,6 @@ class LocationsCustomAttributeDefinitionsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -40,10 +40,12 @@ class LocationsCustomAttributeDefinitionsWireTest < WireMockTestCase
   def test_locations_custom_attribute_definitions_create_with_wiremock
     test_id = "locations.custom_attribute_definitions.create.0"
 
-    @client.locations.custom_attribute_definitions.create(
+    result = @client.locations.custom_attribute_definitions.create(
       custom_attribute_definition: {
         key: "bestseller",
-        schema: {},
+        schema: {
+          "$ref" => "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
+        },
         name: "Bestseller",
         description: "Bestselling item at location",
         visibility: "VISIBILITY_READ_WRITE_VALUES"
@@ -62,12 +64,19 @@ class LocationsCustomAttributeDefinitionsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute_definition/version" => 1
+      }
+    )
   end
 
   def test_locations_custom_attribute_definitions_get_with_wiremock
     test_id = "locations.custom_attribute_definitions.get.0"
 
-    @client.locations.custom_attribute_definitions.get(
+    result = @client.locations.custom_attribute_definitions.get(
       key: "key",
       version: 1,
       request_options: {
@@ -84,12 +93,19 @@ class LocationsCustomAttributeDefinitionsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute_definition/version" => 1
+      }
+    )
   end
 
   def test_locations_custom_attribute_definitions_update_with_wiremock
     test_id = "locations.custom_attribute_definitions.update.0"
 
-    @client.locations.custom_attribute_definitions.update(
+    result = @client.locations.custom_attribute_definitions.update(
       key: "key",
       custom_attribute_definition: {
         description: "Update the description as desired.",
@@ -108,6 +124,13 @@ class LocationsCustomAttributeDefinitionsWireTest < WireMockTestCase
       url_path: "/v2/locations/custom-attribute-definitions/key",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute_definition/version" => 2
+      }
     )
   end
 

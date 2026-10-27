@@ -8,7 +8,8 @@ class LocationsCustomAttributesWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -46,24 +47,27 @@ class LocationsCustomAttributesWireTest < WireMockTestCase
   def test_locations_custom_attributes_batch_upsert_with_wiremock
     test_id = "locations.custom_attributes.batch_upsert.0"
 
-    @client.locations.custom_attributes.batch_upsert(
+    result = @client.locations.custom_attributes.batch_upsert(
       values: {
         id1: {
           location_id: "L0TBCBTB7P8RQ",
           custom_attribute: {
-            key: "bestseller"
+            key: "bestseller",
+            value: "hot cocoa"
           }
         },
         id2: {
           location_id: "L9XMD04V3STJX",
           custom_attribute: {
-            key: "bestseller"
+            key: "bestseller",
+            value: "berry smoothie"
           }
         },
         id3: {
           location_id: "L0TBCBTB7P8RQ",
           custom_attribute: {
-            key: "phone-number"
+            key: "phone-number",
+            value: "+12223334444"
           }
         }
       },
@@ -80,6 +84,15 @@ class LocationsCustomAttributesWireTest < WireMockTestCase
       url_path: "/v2/locations/custom-attributes/bulk-upsert",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/values/id1/custom_attribute/version" => 2,
+        "/values/id2/custom_attribute/version" => 1,
+        "/values/id3/custom_attribute/version" => 2
+      }
     )
   end
 
@@ -98,7 +111,6 @@ class LocationsCustomAttributesWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -113,7 +125,7 @@ class LocationsCustomAttributesWireTest < WireMockTestCase
   def test_locations_custom_attributes_get_with_wiremock
     test_id = "locations.custom_attributes.get.0"
 
-    @client.locations.custom_attributes.get(
+    result = @client.locations.custom_attributes.get(
       location_id: "location_id",
       key: "key",
       with_definition: true,
@@ -132,15 +144,25 @@ class LocationsCustomAttributesWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute/version" => 2,
+        "/custom_attribute/definition/version" => 1
+      }
+    )
   end
 
   def test_locations_custom_attributes_upsert_with_wiremock
     test_id = "locations.custom_attributes.upsert.0"
 
-    @client.locations.custom_attributes.upsert(
+    result = @client.locations.custom_attributes.upsert(
       location_id: "location_id",
       key: "key",
-      custom_attribute: {},
+      custom_attribute: {
+        value: "hot cocoa"
+      },
       request_options: {
         additional_headers: {
           "X-Test-Id" => "locations.custom_attributes.upsert.0"
@@ -154,6 +176,14 @@ class LocationsCustomAttributesWireTest < WireMockTestCase
       url_path: "/v2/locations/location_id/custom-attributes/key",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute/version" => 2,
+        "/custom_attribute/definition/version" => 1
+      }
     )
   end
 

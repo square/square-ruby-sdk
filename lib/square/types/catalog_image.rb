@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # An image file to use in Square catalogs. It can be associated with
@@ -9,10 +11,13 @@ module Square
     # Images on items and variations are displayed through Square Online Store.
     # Images on other object types are for use by 3rd party application developers.
     class CatalogImage < Internal::Types::Model
-      field :name, -> { String }, optional: true, nullable: false
-      field :url, -> { String }, optional: true, nullable: false
-      field :caption, -> { String }, optional: true, nullable: false
-      field :photo_studio_order_id, -> { String }, optional: true, nullable: false
+      field :name, -> { String }, optional: true, nullable: true
+
+      field :url, -> { String }, optional: true, nullable: true
+
+      field :caption, -> { String }, optional: true, nullable: true
+
+      field :photo_studio_order_id, -> { String }, optional: true, nullable: true
     end
   end
 end

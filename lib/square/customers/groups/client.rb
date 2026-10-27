@@ -13,6 +13,13 @@ module Square
 
         # Retrieves the list of customer groups of a business.
         #
+        # Returns a `Square::Internal::CursorItemIterator` that yields each `Square::Types::CustomerGroup` in the
+        # `groups` field of every page, requesting pages as they are needed. Call `pages` on it to get each page as a
+        # `Square::Types::ListCustomerGroupsResponse`, including its other fields.
+        #
+        # No request is sent by this call. The first page is requested when you start iterating (or call
+        # `load_first_page`), so an API error is raised by the loop (or by `load_first_page`), not by this call.
+        #
         # @param request_options [Hash]
         # @param params [Hash]
         # @option request_options [String] :base_url
@@ -23,21 +30,25 @@ module Square
         # @option params [String, nil] :cursor
         # @option params [Integer, nil] :limit
         #
-        # @return [Square::Types::ListCustomerGroupsResponse]
+        # @example
+        #   client.customers.groups.list(
+        #     cursor: "cursor",
+        #     limit: 1
+        #   )
+        #
+        # @return [Square::Internal::CursorItemIterator]
         def list(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[cursor limit]
           query_params = {}
           query_params["cursor"] = params[:cursor] if params.key?(:cursor)
           query_params["limit"] = params[:limit] if params.key?(:limit)
-          params.except(*query_param_names)
 
           Square::Internal::CursorItemIterator.new(
             cursor_field: :cursor,
             item_field: :groups,
-            initial_cursor: query_params[:cursor]
+            initial_cursor: query_params["cursor"]
           ) do |next_cursor|
-            query_params[:cursor] = next_cursor
+            query_params["cursor"] = next_cursor
             request = Square::Internal::JSON::Request.new(
               base_url: request_options[:base_url],
               method: "GET",
@@ -52,7 +63,8 @@ module Square
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Square::Types::ListCustomerGroupsResponse.load(response.body)
+              parsed_response = (response.body.to_s.empty? ? nil : Square::Types::ListCustomerGroupsResponse.load(response.body))
+              [parsed_response, response]
             else
               error_class = Square::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -72,6 +84,11 @@ module Square
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.customers.groups.create(group: {
+        #     name: "Loyal Customers"
+        #   })
+        #
         # @return [Square::Types::CreateCustomerGroupResponse]
         def create(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -89,7 +106,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::CreateCustomerGroupResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::CreateCustomerGroupResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -107,13 +124,16 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :group_id
         #
+        # @example
+        #   client.customers.groups.get(group_id: "group_id")
+        #
         # @return [Square::Types::GetCustomerGroupResponse]
         def get(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
-            path: "v2/customers/groups/#{params[:group_id]}",
+            path: "v2/customers/groups/#{URI.encode_uri_component(params[:group_id].to_s)}",
             request_options: request_options
           )
           begin
@@ -123,7 +143,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::GetCustomerGroupResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::GetCustomerGroupResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -141,17 +161,25 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :group_id
         #
+        # @example
+        #   client.customers.groups.update(
+        #     group_id: "group_id",
+        #     group: {
+        #       name: "Loyal Customers"
+        #     }
+        #   )
+        #
         # @return [Square::Types::UpdateCustomerGroupResponse]
         def update(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request_data = Square::Customers::Groups::Types::UpdateCustomerGroupRequest.new(params).to_h
-          non_body_param_names = ["group_id"]
+          non_body_param_names = %w[group_id]
           body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "PUT",
-            path: "v2/customers/groups/#{params[:group_id]}",
+            path: "v2/customers/groups/#{URI.encode_uri_component(params[:group_id].to_s)}",
             body: body,
             request_options: request_options
           )
@@ -162,7 +190,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::UpdateCustomerGroupResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::UpdateCustomerGroupResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -180,13 +208,16 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :group_id
         #
+        # @example
+        #   client.customers.groups.delete(group_id: "group_id")
+        #
         # @return [Square::Types::DeleteCustomerGroupResponse]
         def delete(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",
-            path: "v2/customers/groups/#{params[:group_id]}",
+            path: "v2/customers/groups/#{URI.encode_uri_component(params[:group_id].to_s)}",
             request_options: request_options
           )
           begin
@@ -196,7 +227,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::DeleteCustomerGroupResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::DeleteCustomerGroupResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -218,13 +249,19 @@ module Square
         # @option params [String] :customer_id
         # @option params [String] :group_id
         #
+        # @example
+        #   client.customers.groups.add(
+        #     customer_id: "customer_id",
+        #     group_id: "group_id"
+        #   )
+        #
         # @return [Square::Types::AddGroupToCustomerResponse]
         def add(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "PUT",
-            path: "v2/customers/#{params[:customer_id]}/groups/#{params[:group_id]}",
+            path: "v2/customers/#{URI.encode_uri_component(params[:customer_id].to_s)}/groups/#{URI.encode_uri_component(params[:group_id].to_s)}",
             request_options: request_options
           )
           begin
@@ -234,7 +271,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::AddGroupToCustomerResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::AddGroupToCustomerResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -256,13 +293,19 @@ module Square
         # @option params [String] :customer_id
         # @option params [String] :group_id
         #
+        # @example
+        #   client.customers.groups.remove(
+        #     customer_id: "customer_id",
+        #     group_id: "group_id"
+        #   )
+        #
         # @return [Square::Types::RemoveGroupFromCustomerResponse]
         def remove(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",
-            path: "v2/customers/#{params[:customer_id]}/groups/#{params[:group_id]}",
+            path: "v2/customers/#{URI.encode_uri_component(params[:customer_id].to_s)}/groups/#{URI.encode_uri_component(params[:group_id].to_s)}",
             request_options: request_options
           )
           begin
@@ -272,7 +315,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::RemoveGroupFromCustomerResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::RemoveGroupFromCustomerResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

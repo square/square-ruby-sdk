@@ -5,6 +5,7 @@ module Square
     module Types
       class UpdateTeamMembersRequest < Internal::Types::Model
         field :team_member_id, -> { String }, optional: false, nullable: false
+
         field :body, -> { Square::Types::UpdateTeamMemberRequest }, optional: false, nullable: false
       end
     end

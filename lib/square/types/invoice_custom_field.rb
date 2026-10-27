@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # An additional seller-defined and customer-facing field to include on the invoice. For more information,
@@ -9,8 +11,10 @@ module Square
     # [Invoices Plus
     # subscription](https://developer.squareup.com/docs/invoices-api/overview#invoices-plus-subscription).
     class InvoiceCustomField < Internal::Types::Model
-      field :label, -> { String }, optional: true, nullable: false
-      field :value, -> { String }, optional: true, nullable: false
+      field :label, -> { String }, optional: true, nullable: true
+
+      field :value, -> { String }, optional: true, nullable: true
+
       field :placement, -> { Square::Types::InvoiceCustomFieldPlacement }, optional: true, nullable: false
     end
   end

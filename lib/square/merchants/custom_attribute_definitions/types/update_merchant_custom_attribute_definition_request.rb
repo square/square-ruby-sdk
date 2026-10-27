@@ -6,8 +6,10 @@ module Square
       module Types
         class UpdateMerchantCustomAttributeDefinitionRequest < Internal::Types::Model
           field :key, -> { String }, optional: false, nullable: false
+
           field :custom_attribute_definition, -> { Square::Types::CustomAttributeDefinition }, optional: false, nullable: false
-          field :idempotency_key, -> { String }, optional: true, nullable: false
+
+          field :idempotency_key, -> { String }, optional: true, nullable: true
         end
       end
     end

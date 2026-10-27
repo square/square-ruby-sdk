@@ -5,7 +5,8 @@ module Square
     module Types
       class CompletePaymentRequest < Internal::Types::Model
         field :payment_id, -> { String }, optional: false, nullable: false
-        field :version_token, -> { String }, optional: true, nullable: false
+
+        field :version_token, -> { String }, optional: true, nullable: true
       end
     end
   end
