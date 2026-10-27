@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents a group of customer profiles that match one or more predefined filter criteria.
@@ -8,8 +10,11 @@ module Square
     # Square Seller Dashboard or Point of Sale.
     class CustomerSegment < Internal::Types::Model
       field :id, -> { String }, optional: true, nullable: false
+
       field :name, -> { String }, optional: true, nullable: false
+
       field :created_at, -> { String }, optional: true, nullable: false
+
       field :updated_at, -> { String }, optional: true, nullable: false
     end
   end

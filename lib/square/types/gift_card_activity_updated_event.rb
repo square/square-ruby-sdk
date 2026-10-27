@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Published when a [gift card activity](entity:GiftCardActivity) is updated.
@@ -9,10 +11,14 @@ module Square
     # These redemptions are initially assigned a `PENDING` state, but then change to a `COMPLETED` or `CANCELED` state.
     # - An update to the `IMPORT` activity for an imported gift card when the balance is later adjusted by Square.
     class GiftCardActivityUpdatedEvent < Internal::Types::Model
-      field :merchant_id, -> { String }, optional: true, nullable: false
-      field :type, -> { String }, optional: true, nullable: false
-      field :event_id, -> { String }, optional: true, nullable: false
+      field :merchant_id, -> { String }, optional: true, nullable: true
+
+      field :type, -> { String }, optional: true, nullable: true
+
+      field :event_id, -> { String }, optional: true, nullable: true
+
       field :created_at, -> { String }, optional: true, nullable: false
+
       field :data, -> { Square::Types::GiftCardActivityUpdatedEventData }, optional: true, nullable: false
     end
   end

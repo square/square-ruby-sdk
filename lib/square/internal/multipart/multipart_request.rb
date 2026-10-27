@@ -21,14 +21,17 @@ module Square
         end
 
         # @return [Hash] The encoded HTTP request headers.
-        def encode_headers
-          additional_headers = @request_options&.dig(:additional_headers) || @request_options&.dig("additional_headers") || {}
-          {
+        # @param protected_keys [Array<String>] Header keys set by the SDK client (e.g. auth, metadata)
+        #   that must not be overridden by additional_headers from request_options.
+        def encode_headers(protected_keys: [])
+          sdk_headers = {
             "Content-Type" => @body.content_type
-          }.merge(@headers).merge(additional_headers)
+          }.merge(@headers)
+          merge_additional_headers(sdk_headers, protected_keys:)
         end
 
         # @return [String, nil] The encoded HTTP request body.
+        # Note: additional_body_parameters from request_options are not applied to multipart requests.
         def encode_body
           @body&.encode
         end

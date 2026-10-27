@@ -8,7 +8,8 @@ class GiftCardsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -27,7 +28,6 @@ class GiftCardsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -42,7 +42,7 @@ class GiftCardsWireTest < WireMockTestCase
   def test_gift_cards_create_with_wiremock
     test_id = "gift_cards.create.0"
 
-    @client.gift_cards.create(
+    result = @client.gift_cards.create(
       idempotency_key: "NC9Tm69EjbjtConu",
       location_id: "81FN9BNFZTKS4",
       gift_card: {
@@ -62,12 +62,19 @@ class GiftCardsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/gift_card/balance_money/amount" => 0
+      }
+    )
   end
 
   def test_gift_cards_get_from_gan_with_wiremock
     test_id = "gift_cards.get_from_gan.0"
 
-    @client.gift_cards.get_from_gan(
+    result = @client.gift_cards.get_from_gan(
       gan: "7783320001001635",
       request_options: {
         additional_headers: {
@@ -83,12 +90,19 @@ class GiftCardsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/gift_card/balance_money/amount" => 5000
+      }
+    )
   end
 
   def test_gift_cards_get_from_nonce_with_wiremock
     test_id = "gift_cards.get_from_nonce.0"
 
-    @client.gift_cards.get_from_nonce(
+    result = @client.gift_cards.get_from_nonce(
       nonce: "cnon:7783322135245171",
       request_options: {
         additional_headers: {
@@ -104,12 +118,19 @@ class GiftCardsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/gift_card/balance_money/amount" => 5000
+      }
+    )
   end
 
   def test_gift_cards_link_customer_with_wiremock
     test_id = "gift_cards.link_customer.0"
 
-    @client.gift_cards.link_customer(
+    result = @client.gift_cards.link_customer(
       gift_card_id: "gift_card_id",
       customer_id: "GKY0FZ3V717AH8Q2D821PNT2ZW",
       request_options: {
@@ -126,12 +147,19 @@ class GiftCardsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/gift_card/balance_money/amount" => 2500
+      }
+    )
   end
 
   def test_gift_cards_unlink_customer_with_wiremock
     test_id = "gift_cards.unlink_customer.0"
 
-    @client.gift_cards.unlink_customer(
+    result = @client.gift_cards.unlink_customer(
       gift_card_id: "gift_card_id",
       customer_id: "GKY0FZ3V717AH8Q2D821PNT2ZW",
       request_options: {
@@ -148,12 +176,19 @@ class GiftCardsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/gift_card/balance_money/amount" => 2500
+      }
+    )
   end
 
   def test_gift_cards_get_with_wiremock
     test_id = "gift_cards.get.0"
 
-    @client.gift_cards.get(
+    result = @client.gift_cards.get(
       id: "id",
       request_options: {
         additional_headers: {
@@ -168,6 +203,13 @@ class GiftCardsWireTest < WireMockTestCase
       url_path: "/v2/gift-cards/id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/gift_card/balance_money/amount" => 1000
+      }
     )
   end
 end

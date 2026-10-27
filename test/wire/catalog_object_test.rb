@@ -8,14 +8,15 @@ class CatalogObjectWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
   def test_catalog_object_upsert_with_wiremock
     test_id = "catalog.object.upsert.0"
 
-    @client.catalog.object.upsert(
+    result = @client.catalog.object.upsert(
       idempotency_key: "af3d1afc-7212-4300-b463-0bfc5314a5ae",
       request_options: {
         additional_headers: {
@@ -31,15 +32,22 @@ class CatalogObjectWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/catalog_object/version" => 1000000
+      }
+    )
   end
 
   def test_catalog_object_get_with_wiremock
     test_id = "catalog.object.get.0"
 
-    @client.catalog.object.get(
+    result = @client.catalog.object.get(
       object_id_: "object_id",
       include_related_objects: true,
-      catalog_version: 1_000_000,
+      catalog_version: 1000000,
       include_category_path_to_root: true,
       request_options: {
         additional_headers: {
@@ -54,6 +62,16 @@ class CatalogObjectWireTest < WireMockTestCase
       url_path: "/v2/catalog/object/object_id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/object/version" => 1000000,
+        "/related_objects/0/version" => 1000000,
+        "/related_objects/0/ordinal" => 1000000,
+        "/related_objects/1/version" => 1000000
+      }
     )
   end
 

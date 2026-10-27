@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Published when a customer [custom attribute](entity:CustomAttribute) owned by the
@@ -10,10 +12,14 @@ module Square
     # This event is replaced by
     # [customer.custom_attribute.owned.deleted](webhook:customer.custom_attribute.owned.deleted).
     class CustomerCustomAttributeDeletedEvent < Internal::Types::Model
-      field :merchant_id, -> { String }, optional: true, nullable: false
-      field :type, -> { String }, optional: true, nullable: false
-      field :event_id, -> { String }, optional: true, nullable: false
+      field :merchant_id, -> { String }, optional: true, nullable: true
+
+      field :type, -> { String }, optional: true, nullable: true
+
+      field :event_id, -> { String }, optional: true, nullable: true
+
       field :created_at, -> { String }, optional: true, nullable: false
+
       field :data, -> { Square::Types::CustomAttributeEventData }, optional: true, nullable: false
     end
   end

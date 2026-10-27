@@ -14,6 +14,13 @@ module Square
         # Provides the details for all of the cash drawer shifts for a location
         # in a date range.
         #
+        # Returns a `Square::Internal::CursorItemIterator` that yields each `Square::Types::CashDrawerShiftSummary` in
+        # the `cash_drawer_shifts` field of every page, requesting pages as they are needed. Call `pages` on it to get
+        # each page as a `Square::Types::ListCashDrawerShiftsResponse`, including its other fields.
+        #
+        # No request is sent by this call. The first page is requested when you start iterating (or call
+        # `load_first_page`), so an API error is raised by the loop (or by `load_first_page`), not by this call.
+        #
         # @param request_options [Hash]
         # @param params [Hash]
         # @option request_options [String] :base_url
@@ -28,10 +35,19 @@ module Square
         # @option params [Integer, nil] :limit
         # @option params [String, nil] :cursor
         #
-        # @return [Square::Types::ListCashDrawerShiftsResponse]
+        # @example
+        #   client.cash_drawers.shifts.list(
+        #     location_id: "location_id",
+        #     sort_order: "DESC",
+        #     begin_time: "begin_time",
+        #     end_time: "end_time",
+        #     limit: 1,
+        #     cursor: "cursor"
+        #   )
+        #
+        # @return [Square::Internal::CursorItemIterator]
         def list(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[location_id sort_order begin_time end_time limit cursor]
           query_params = {}
           query_params["location_id"] = params[:location_id] if params.key?(:location_id)
           query_params["sort_order"] = params[:sort_order] if params.key?(:sort_order)
@@ -39,14 +55,13 @@ module Square
           query_params["end_time"] = params[:end_time] if params.key?(:end_time)
           query_params["limit"] = params[:limit] if params.key?(:limit)
           query_params["cursor"] = params[:cursor] if params.key?(:cursor)
-          params.except(*query_param_names)
 
           Square::Internal::CursorItemIterator.new(
             cursor_field: :cursor,
             item_field: :cash_drawer_shifts,
-            initial_cursor: query_params[:cursor]
+            initial_cursor: query_params["cursor"]
           ) do |next_cursor|
-            query_params[:cursor] = next_cursor
+            query_params["cursor"] = next_cursor
             request = Square::Internal::JSON::Request.new(
               base_url: request_options[:base_url],
               method: "GET",
@@ -61,7 +76,8 @@ module Square
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Square::Types::ListCashDrawerShiftsResponse.load(response.body)
+              parsed_response = (response.body.to_s.empty? ? nil : Square::Types::ListCashDrawerShiftsResponse.load(response.body))
+              [parsed_response, response]
             else
               error_class = Square::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -83,18 +99,22 @@ module Square
         # @option params [String] :shift_id
         # @option params [String] :location_id
         #
+        # @example
+        #   client.cash_drawers.shifts.get(
+        #     shift_id: "shift_id",
+        #     location_id: "location_id"
+        #   )
+        #
         # @return [Square::Types::GetCashDrawerShiftResponse]
         def get(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[location_id]
           query_params = {}
           query_params["location_id"] = params[:location_id] if params.key?(:location_id)
-          params = params.except(*query_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
-            path: "v2/cash-drawers/shifts/#{params[:shift_id]}",
+            path: "v2/cash-drawers/shifts/#{URI.encode_uri_component(params[:shift_id].to_s)}",
             query: query_params,
             request_options: request_options
           )
@@ -105,7 +125,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::GetCashDrawerShiftResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::GetCashDrawerShiftResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -113,6 +133,13 @@ module Square
         end
 
         # Provides a paginated list of events for a single cash drawer shift.
+        #
+        # Returns a `Square::Internal::CursorItemIterator` that yields each `Square::Types::CashDrawerShiftEvent` in the
+        # `cash_drawer_shift_events` field of every page, requesting pages as they are needed. Call `pages` on it to get
+        # each page as a `Square::Types::ListCashDrawerShiftEventsResponse`, including its other fields.
+        #
+        # No request is sent by this call. The first page is requested when you start iterating (or call
+        # `load_first_page`), so an API error is raised by the loop (or by `load_first_page`), not by this call.
         #
         # @param request_options [Hash]
         # @param params [Hash]
@@ -126,26 +153,32 @@ module Square
         # @option params [Integer, nil] :limit
         # @option params [String, nil] :cursor
         #
-        # @return [Square::Types::ListCashDrawerShiftEventsResponse]
+        # @example
+        #   client.cash_drawers.shifts.list_events(
+        #     shift_id: "shift_id",
+        #     location_id: "location_id",
+        #     limit: 1,
+        #     cursor: "cursor"
+        #   )
+        #
+        # @return [Square::Internal::CursorItemIterator]
         def list_events(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[location_id limit cursor]
           query_params = {}
           query_params["location_id"] = params[:location_id] if params.key?(:location_id)
           query_params["limit"] = params[:limit] if params.key?(:limit)
           query_params["cursor"] = params[:cursor] if params.key?(:cursor)
-          params = params.except(*query_param_names)
 
           Square::Internal::CursorItemIterator.new(
             cursor_field: :cursor,
             item_field: :cash_drawer_shift_events,
-            initial_cursor: query_params[:cursor]
+            initial_cursor: query_params["cursor"]
           ) do |next_cursor|
-            query_params[:cursor] = next_cursor
+            query_params["cursor"] = next_cursor
             request = Square::Internal::JSON::Request.new(
               base_url: request_options[:base_url],
               method: "GET",
-              path: "v2/cash-drawers/shifts/#{params[:shift_id]}/events",
+              path: "v2/cash-drawers/shifts/#{URI.encode_uri_component(params[:shift_id].to_s)}/events",
               query: query_params,
               request_options: request_options
             )
@@ -156,7 +189,8 @@ module Square
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Square::Types::ListCashDrawerShiftEventsResponse.load(response.body)
+              parsed_response = (response.body.to_s.empty? ? nil : Square::Types::ListCashDrawerShiftEventsResponse.load(response.body))
+              [parsed_response, response]
             else
               error_class = Square::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)

@@ -5,7 +5,9 @@ module Square
     module Types
       class SearchTransferOrdersRequest < Internal::Types::Model
         field :query, -> { Square::Types::TransferOrderQuery }, optional: true, nullable: false
+
         field :cursor, -> { String }, optional: true, nullable: false
+
         field :limit, -> { Integer }, optional: true, nullable: false
       end
     end

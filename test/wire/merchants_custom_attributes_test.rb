@@ -8,7 +8,8 @@ class MerchantsCustomAttributesWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -43,18 +44,20 @@ class MerchantsCustomAttributesWireTest < WireMockTestCase
   def test_merchants_custom_attributes_batch_upsert_with_wiremock
     test_id = "merchants.custom_attributes.batch_upsert.0"
 
-    @client.merchants.custom_attributes.batch_upsert(
+    result = @client.merchants.custom_attributes.batch_upsert(
       values: {
         id1: {
           merchant_id: "DM7VKY8Q63GNP",
           custom_attribute: {
-            key: "alternative_seller_name"
+            key: "alternative_seller_name",
+            value: "Ultimate Sneaker Store"
           }
         },
         id2: {
           merchant_id: "DM7VKY8Q63GNP",
           custom_attribute: {
-            key: "has_seen_tutorial"
+            key: "has_seen_tutorial",
+            value: true
           }
         }
       },
@@ -71,6 +74,14 @@ class MerchantsCustomAttributesWireTest < WireMockTestCase
       url_path: "/v2/merchants/custom-attributes/bulk-upsert",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/values/id1/custom_attribute/version" => 2,
+        "/values/id2/custom_attribute/version" => 1
+      }
     )
   end
 
@@ -89,7 +100,6 @@ class MerchantsCustomAttributesWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -104,7 +114,7 @@ class MerchantsCustomAttributesWireTest < WireMockTestCase
   def test_merchants_custom_attributes_get_with_wiremock
     test_id = "merchants.custom_attributes.get.0"
 
-    @client.merchants.custom_attributes.get(
+    result = @client.merchants.custom_attributes.get(
       merchant_id: "merchant_id",
       key: "key",
       with_definition: true,
@@ -123,15 +133,25 @@ class MerchantsCustomAttributesWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute/version" => 2,
+        "/custom_attribute/definition/version" => 1
+      }
+    )
   end
 
   def test_merchants_custom_attributes_upsert_with_wiremock
     test_id = "merchants.custom_attributes.upsert.0"
 
-    @client.merchants.custom_attributes.upsert(
+    result = @client.merchants.custom_attributes.upsert(
       merchant_id: "merchant_id",
       key: "key",
-      custom_attribute: {},
+      custom_attribute: {
+        value: "Ultimate Sneaker Store"
+      },
       request_options: {
         additional_headers: {
           "X-Test-Id" => "merchants.custom_attributes.upsert.0"
@@ -145,6 +165,14 @@ class MerchantsCustomAttributesWireTest < WireMockTestCase
       url_path: "/v2/merchants/merchant_id/custom-attributes/key",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute/version" => 2,
+        "/custom_attribute/definition/version" => 1
+      }
     )
   end
 

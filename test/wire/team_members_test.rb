@@ -8,14 +8,15 @@ class TeamMembersWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
   def test_team_members_create_with_wiremock
     test_id = "team_members.create.0"
 
-    @client.team_members.create(
+    result = @client.team_members.create(
       idempotency_key: "idempotency-key-0",
       team_member: {
         reference_id: "reference_id_1",
@@ -32,7 +33,7 @@ class TeamMembersWireTest < WireMockTestCase
           job_assignments: [{
             pay_type: "SALARY",
             annual_rate: {
-              amount: 3_000_000,
+              amount: 3000000,
               currency: "USD"
             },
             weekly_hours: 40,
@@ -61,6 +62,28 @@ class TeamMembersWireTest < WireMockTestCase
       url_path: "/v2/team-members",
       query_params: nil,
       expected: 1
+    )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/team-members",
+      expected: {
+        "/team_member/wage_setting/job_assignments/0/annual_rate/amount" => 3000000,
+        "/team_member/wage_setting/job_assignments/0/weekly_hours" => 40,
+        "/team_member/wage_setting/job_assignments/1/hourly_rate/amount" => 2000
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/team_member/wage_setting/job_assignments/0/hourly_rate/amount" => 1443,
+        "/team_member/wage_setting/job_assignments/0/annual_rate/amount" => 3000000,
+        "/team_member/wage_setting/job_assignments/0/weekly_hours" => 40,
+        "/team_member/wage_setting/job_assignments/1/hourly_rate/amount" => 2000,
+        "/team_member/wage_setting/version" => 1
+      }
     )
   end
 
@@ -165,7 +188,7 @@ class TeamMembersWireTest < WireMockTestCase
   def test_team_members_search_with_wiremock
     test_id = "team_members.search.0"
 
-    @client.team_members.search(
+    result = @client.team_members.search(
       query: {
         filter: {
           location_ids: ["0G5P3VGACMMQZ"],
@@ -187,12 +210,40 @@ class TeamMembersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/team-members/search",
+      expected: {
+        "/limit" => 10
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/team_members/0/wage_setting/job_assignments/0/hourly_rate/amount" => 1443,
+        "/team_members/0/wage_setting/job_assignments/0/annual_rate/amount" => 3000000,
+        "/team_members/0/wage_setting/job_assignments/0/weekly_hours" => 40,
+        "/team_members/0/wage_setting/job_assignments/1/hourly_rate/amount" => 2000,
+        "/team_members/0/wage_setting/version" => 1,
+        "/team_members/1/wage_setting/job_assignments/0/hourly_rate/amount" => 2400,
+        "/team_members/1/wage_setting/version" => 2,
+        "/team_members/2/wage_setting/job_assignments/0/hourly_rate/amount" => 2400,
+        "/team_members/2/wage_setting/version" => 1,
+        "/team_members/5/wage_setting/job_assignments/0/hourly_rate/amount" => 2000,
+        "/team_members/5/wage_setting/version" => 1,
+        "/team_members/9/wage_setting/job_assignments/0/hourly_rate/amount" => 2000,
+        "/team_members/9/wage_setting/version" => 1
+      }
+    )
   end
 
   def test_team_members_get_with_wiremock
     test_id = "team_members.get.0"
 
-    @client.team_members.get(
+    result = @client.team_members.get(
       team_member_id: "team_member_id",
       request_options: {
         additional_headers: {
@@ -208,12 +259,23 @@ class TeamMembersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/team_member/wage_setting/job_assignments/0/hourly_rate/amount" => 1443,
+        "/team_member/wage_setting/job_assignments/0/annual_rate/amount" => 3000000,
+        "/team_member/wage_setting/job_assignments/0/weekly_hours" => 40,
+        "/team_member/wage_setting/job_assignments/1/hourly_rate/amount" => 2000,
+        "/team_member/wage_setting/version" => 1
+      }
+    )
   end
 
   def test_team_members_update_with_wiremock
     test_id = "team_members.update.0"
 
-    @client.team_members.update(
+    result = @client.team_members.update(
       team_member_id: "team_member_id",
       team_member: {
         reference_id: "reference_id_1",
@@ -230,7 +292,7 @@ class TeamMembersWireTest < WireMockTestCase
           job_assignments: [{
             pay_type: "SALARY",
             annual_rate: {
-              amount: 3_000_000,
+              amount: 3000000,
               currency: "USD"
             },
             weekly_hours: 40,
@@ -259,6 +321,28 @@ class TeamMembersWireTest < WireMockTestCase
       url_path: "/v2/team-members/team_member_id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "PUT",
+      url_path: "/v2/team-members/team_member_id",
+      expected: {
+        "/team_member/wage_setting/job_assignments/0/annual_rate/amount" => 3000000,
+        "/team_member/wage_setting/job_assignments/0/weekly_hours" => 40,
+        "/team_member/wage_setting/job_assignments/1/hourly_rate/amount" => 1200
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/team_member/wage_setting/job_assignments/0/hourly_rate/amount" => 1443,
+        "/team_member/wage_setting/job_assignments/0/annual_rate/amount" => 3000000,
+        "/team_member/wage_setting/job_assignments/0/weekly_hours" => 40,
+        "/team_member/wage_setting/job_assignments/1/hourly_rate/amount" => 1200,
+        "/team_member/wage_setting/version" => 1
+      }
     )
   end
 end

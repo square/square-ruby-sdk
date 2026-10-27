@@ -21,21 +21,33 @@ module Square
         # @param max_retries [Integer] The number of times to retry a failed request, defaults to 2.
         # @param timeout [Float] The timeout for the request, defaults to 60.0 seconds.
         # @param headers [Hash] The headers for the request.
-        def initialize(base_url:, max_retries: 2, timeout: 60.0, headers: {})
+        # @param overridable_headers [Array<String>] The names of the client-level headers a request
+        #   may replace via `additional_headers`. Holds the API's global headers; SDK metadata and
+        #   auth headers are absent from it and so stay protected.
+        # @param auth_provider [Object, nil] An optional auth provider responding to
+        #   `auth_headers`. When present its headers are resolved on every request so
+        #   token-based schemes (e.g. OAuth) can refresh an expired token mid-session.
+        def initialize(base_url:, max_retries: 2, timeout: 60.0, headers: {}, overridable_headers: [], auth_provider: nil)
           @base_url = base_url
           @max_retries = max_retries
           @timeout = timeout
+          @auth_provider = auth_provider
           @default_headers = {
             "X-Fern-Language": "Ruby",
             "X-Fern-SDK-Name": "square",
             "X-Fern-SDK-Version": "0.0.1"
           }.merge(headers)
+          @overridable_headers = overridable_headers.to_set { |name| name.to_s.downcase }
         end
 
         # @param request [Square::Internal::Http::BaseRequest] The HTTP request.
         # @return [HTTP::Response] The HTTP response.
         def send(request)
           url = build_url(request)
+          # Resolve auth headers once per request (not per retry) so token-based
+          # providers refresh at most once here; static providers are cheap.
+          auth_headers = resolve_auth_headers
+          timeout = request_timeout(request)
           attempt = 0
           response = nil
 
@@ -43,17 +55,18 @@ module Square
             http_request = build_http_request(
               url:,
               method: request.method,
-              headers: request.encode_headers,
-              body: request.encode_body
+              headers: request.encode_headers(protected_keys: protected_header_keys + auth_headers.keys),
+              body: request.encode_body,
+              auth_headers: auth_headers
             )
 
             conn = connect(url)
-            conn.open_timeout = @timeout
-            conn.read_timeout = @timeout
-            conn.write_timeout = @timeout
-            conn.continue_timeout = @timeout
+            conn.open_timeout = timeout
+            conn.read_timeout = timeout
+            conn.write_timeout = timeout
+            conn.continue_timeout = timeout
 
-            response = conn.request(http_request)
+            response = wrap_transport_errors { conn.request(http_request) }
 
             break unless should_retry?(response, attempt)
 
@@ -63,6 +76,44 @@ module Square
           end
 
           response
+        end
+
+        # Socket-level `Errno` failures. Other `SystemCallError`s, such as file errors raised by a
+        # custom HTTP client, are not connection failures and propagate unchanged.
+        NETWORK_ERRNOS = [
+          Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::ECONNABORTED, Errno::EPIPE,
+          Errno::EHOSTUNREACH, Errno::ENETUNREACH, Errno::ENETDOWN, Errno::EHOSTDOWN,
+          Errno::EADDRNOTAVAIL
+        ].freeze
+
+        # Runs a single request attempt, re-raising transport failures as SDK errors so that
+        # rescuing `Errors::ApiError` covers them. The original exception is kept as `cause`.
+        # These failures are not retried: the server may already have processed the request.
+        # @return [Net::HTTPResponse] The HTTP response.
+        def wrap_transport_errors
+          yield
+        rescue Net::OpenTimeout, Net::ReadTimeout, Net::WriteTimeout, Errno::ETIMEDOUT => e
+          raise Square::Errors::TimeoutError, e.message
+        rescue EOFError, SocketError, OpenSSL::SSL::SSLError, *NETWORK_ERRNOS,
+               Net::ProtocolError, Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError => e
+          raise Square::Errors::ConnectionError, e.message
+        end
+
+        # @param request [Square::Internal::Http::BaseRequest] The HTTP request.
+        # @return [Float] The request's `timeout_in_seconds` option, or the client-level timeout.
+        def request_timeout(request)
+          options = request.request_options || {}
+          timeout = options.key?(:timeout_in_seconds) ? options[:timeout_in_seconds] : options["timeout_in_seconds"]
+          (timeout.nil? ? @timeout : timeout).to_f
+        end
+
+        # The client-level header names that `additional_headers` must not replace: every default
+        # header except the API's global headers, which are overridable per request.
+        # @return [Array<Symbol, String>] The protected header names.
+        def protected_header_keys
+          return @default_headers.keys if @overridable_headers.empty?
+
+          @default_headers.keys.reject { |name| @overridable_headers.include?(name.to_s.downcase) }
         end
 
         # Determines if a request should be retried based on the response status code.
@@ -120,6 +171,8 @@ module Square
           [delay + jitter, 0].max
         end
 
+        LOCALHOST_HOSTS = %w[localhost 127.0.0.1 [::1]].freeze
+
         # @param request [Square::Internal::Http::BaseRequest] The HTTP request.
         # @return [URI::Generic] The URL.
         def build_url(request)
@@ -129,22 +182,53 @@ module Square
           if request.path.start_with?("http://", "https://")
             url = request.path
             url = "#{url}?#{encode_query(encoded_query)}" if encoded_query&.any?
-            return URI.parse(url)
+            parsed = URI.parse(url)
+            validate_https!(parsed)
+            return parsed
           end
 
           path = request.path.start_with?("/") ? request.path[1..] : request.path
           base = request.base_url || @base_url
           url = "#{base.chomp("/")}/#{path}"
           url = "#{url}?#{encode_query(encoded_query)}" if encoded_query&.any?
-          URI.parse(url)
+          parsed = URI.parse(url)
+          validate_https!(parsed)
+          parsed
+        end
+
+        # Raises if the URL uses http:// for a non-localhost host, which would
+        # send authentication credentials in plaintext.
+        # @param url [URI::Generic] The parsed URL.
+        def validate_https!(url)
+          return if url.scheme != "http"
+          return if LOCALHOST_HOSTS.include?(url.host)
+
+          raise ArgumentError,
+                "Refusing to send request to non-HTTPS URL: #{url}. " \
+                "HTTP is only allowed for localhost. Use HTTPS or pass a localhost URL."
+        end
+
+        # Resolves the auth headers to send with the next request. Delegates to the
+        # configured auth provider (if any) on every call so that token-based
+        # providers (e.g. OAuth client-credentials) can refresh an expired token
+        # before the request is sent. Returns an empty hash when no provider is set,
+        # which keeps the api-key / basic / bearer / no-auth paths unchanged.
+        # @return [Hash] The auth headers for the current request.
+        def resolve_auth_headers
+          return {} if @auth_provider.nil?
+
+          @auth_provider.auth_headers
         end
 
         # @param url [URI::Generic] The url to the resource.
         # @param method [String] The HTTP method to use.
         # @param headers [Hash] The headers for the request.
         # @param body [String, nil] The body for the request.
+        # @param auth_headers [Hash] The auth headers resolved for this request. These
+        #   take precedence over the static default headers but not over per-request
+        #   headers, mirroring the previous baked-header precedence.
         # @return [HTTP::Request] The HTTP request.
-        def build_http_request(url:, method:, headers: {}, body: nil)
+        def build_http_request(url:, method:, headers: {}, body: nil, auth_headers: {})
           request = Net::HTTPGenericRequest.new(
             method,
             !body.nil?,
@@ -152,11 +236,25 @@ module Square
             url
           )
 
-          request_headers = @default_headers.merge(headers)
+          request_headers = @default_headers.merge(auth_headers).merge(headers)
           request_headers.each { |name, value| request[name] = value }
           request.body = body if body
 
+          # Net::HTTP disables its transparent gzip/deflate decoding as soon as an
+          # Accept-Encoding header is set explicitly on the request. Re-enable it so
+          # that compressed response bodies are still inflated.
+          request.extend(DecodeContent) if request_headers.keys.any? { |name| name.to_s.casecmp("accept-encoding").zero? }
+
           request
+        end
+
+        # Keeps Net::HTTP's transparent gzip/deflate response decoding enabled
+        # even when an Accept-Encoding header is set explicitly on the request.
+        # @api private
+        module DecodeContent
+          def decode_content # rubocop:disable Naming/PredicateMethod
+            true
+          end
         end
 
         # @param query [Hash] The query for the request.
@@ -180,6 +278,7 @@ module Square
 
           http = Net::HTTP.new(url.host, port)
           http.use_ssl = is_https
+          http.verify_mode = OpenSSL::SSL::VERIFY_PEER if is_https
           # NOTE: We handle retries at the application level with HTTP status code awareness,
           # so we set max_retries to 0 to disable Net::HTTP's built-in network-level retries.
           http.max_retries = 0

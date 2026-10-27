@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Describes a custom form field to add to the checkout page to collect more information from buyers during checkout.

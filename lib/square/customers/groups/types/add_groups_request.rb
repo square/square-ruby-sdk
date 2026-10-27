@@ -6,6 +6,7 @@ module Square
       module Types
         class AddGroupsRequest < Internal::Types::Model
           field :customer_id, -> { String }, optional: false, nullable: false
+
           field :group_id, -> { String }, optional: false, nullable: false
         end
       end

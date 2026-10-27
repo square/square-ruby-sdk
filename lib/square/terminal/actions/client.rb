@@ -21,6 +21,20 @@ module Square
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.terminal.actions.create(
+        #     idempotency_key: "thahn-70e75c10-47f7-4ab6-88cc-aaa4076d065e",
+        #     action: {
+        #       device_id: "{{DEVICE_ID}}",
+        #       deadline_duration: "PT5M",
+        #       type: "SAVE_CARD",
+        #       save_card_options: {
+        #         customer_id: "{{CUSTOMER_ID}}",
+        #         reference_id: "user-id-1"
+        #       }
+        #     }
+        #   )
+        #
         # @return [Square::Types::CreateTerminalActionResponse]
         def create(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -38,7 +52,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::CreateTerminalActionResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::CreateTerminalActionResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -55,6 +69,21 @@ module Square
         # @option request_options [Hash{String => Object}] :additional_query_parameters
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
+        #
+        # @example
+        #   client.terminal.actions.search(
+        #     query: {
+        #       filter: {
+        #         created_at: {
+        #           start_at: "2022-04-01T00:00:00.000Z"
+        #         }
+        #       },
+        #       sort: {
+        #         sort_order: "DESC"
+        #       }
+        #     },
+        #     limit: 2
+        #   )
         #
         # @return [Square::Types::SearchTerminalActionsResponse]
         def search(request_options: {}, **params)
@@ -73,7 +102,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::SearchTerminalActionsResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::SearchTerminalActionsResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -91,13 +120,16 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :action_id
         #
+        # @example
+        #   client.terminal.actions.get(action_id: "action_id")
+        #
         # @return [Square::Types::GetTerminalActionResponse]
         def get(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
-            path: "v2/terminals/actions/#{params[:action_id]}",
+            path: "v2/terminals/actions/#{URI.encode_uri_component(params[:action_id].to_s)}",
             request_options: request_options
           )
           begin
@@ -107,7 +139,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::GetTerminalActionResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::GetTerminalActionResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -125,13 +157,16 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :action_id
         #
+        # @example
+        #   client.terminal.actions.cancel(action_id: "action_id")
+        #
         # @return [Square::Types::CancelTerminalActionResponse]
         def cancel(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
-            path: "v2/terminals/actions/#{params[:action_id]}/cancel",
+            path: "v2/terminals/actions/#{URI.encode_uri_component(params[:action_id].to_s)}/cancel",
             request_options: request_options
           )
           begin
@@ -141,7 +176,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::CancelTerminalActionResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::CancelTerminalActionResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

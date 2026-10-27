@@ -5,8 +5,9 @@ module Square
     module Groups
       module Types
         class ListGroupsRequest < Internal::Types::Model
-          field :cursor, -> { String }, optional: true, nullable: false
-          field :limit, -> { Integer }, optional: true, nullable: false
+          field :cursor, -> { String }, optional: true, nullable: true
+
+          field :limit, -> { Integer }, optional: true, nullable: true
         end
       end
     end

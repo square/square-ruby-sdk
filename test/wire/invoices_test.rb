@@ -8,7 +8,8 @@ class InvoicesWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -25,7 +26,6 @@ class InvoicesWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -40,7 +40,7 @@ class InvoicesWireTest < WireMockTestCase
   def test_invoices_create_with_wiremock
     test_id = "invoices.create.0"
 
-    @client.invoices.create(
+    result = @client.invoices.create(
       invoice: {
         location_id: "ES0RJRZYEC39A",
         order_id: "CAISENgvlJ6jLWAzERDzjyHVybY",
@@ -96,12 +96,32 @@ class InvoicesWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/invoices",
+      expected: {
+        "/invoice/payment_requests/0/reminders/0/relative_scheduled_days" => -1
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/invoice/version" => 0,
+        "/invoice/payment_requests/0/reminders/0/relative_scheduled_days" => -1,
+        "/invoice/payment_requests/0/computed_amount_money/amount" => 10000,
+        "/invoice/payment_requests/0/total_completed_amount_money/amount" => 0,
+        "/invoice/next_payment_amount_money/amount" => 1000000
+      }
+    )
   end
 
   def test_invoices_search_with_wiremock
     test_id = "invoices.search.0"
 
-    @client.invoices.search(
+    result = @client.invoices.search(
       query: {
         filter: {
           location_ids: ["ES0RJRZYEC39A"],
@@ -127,12 +147,37 @@ class InvoicesWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/invoices/search",
+      expected: {
+        "/limit" => 100
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/invoices/0/version" => 0,
+        "/invoices/0/payment_requests/0/reminders/0/relative_scheduled_days" => -1,
+        "/invoices/0/payment_requests/0/computed_amount_money/amount" => 10000,
+        "/invoices/0/payment_requests/0/total_completed_amount_money/amount" => 0,
+        "/invoices/1/version" => 3,
+        "/invoices/1/payment_requests/0/computed_amount_money/amount" => 1000,
+        "/invoices/1/payment_requests/0/total_completed_amount_money/amount" => 1000,
+        "/invoices/1/payment_requests/1/computed_amount_money/amount" => 3000,
+        "/invoices/1/payment_requests/1/total_completed_amount_money/amount" => 0,
+        "/invoices/1/next_payment_amount_money/amount" => 3000
+      }
+    )
   end
 
   def test_invoices_get_with_wiremock
     test_id = "invoices.get.0"
 
-    @client.invoices.get(
+    result = @client.invoices.get(
       invoice_id: "invoice_id",
       request_options: {
         additional_headers: {
@@ -148,12 +193,23 @@ class InvoicesWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/invoice/version" => 0,
+        "/invoice/payment_requests/0/reminders/0/relative_scheduled_days" => -1,
+        "/invoice/payment_requests/0/computed_amount_money/amount" => 10000,
+        "/invoice/payment_requests/0/total_completed_amount_money/amount" => 0,
+        "/invoice/next_payment_amount_money/amount" => 1000000
+      }
+    )
   end
 
   def test_invoices_update_with_wiremock
     test_id = "invoices.update.0"
 
-    @client.invoices.update(
+    result = @client.invoices.update(
       invoice_id: "invoice_id",
       invoice: {
         version: 1,
@@ -176,6 +232,25 @@ class InvoicesWireTest < WireMockTestCase
       url_path: "/v2/invoices/invoice_id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "PUT",
+      url_path: "/v2/invoices/invoice_id",
+      expected: {
+        "/invoice/version" => 1
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/invoice/version" => 2,
+        "/invoice/payment_requests/0/computed_amount_money/amount" => 10000,
+        "/invoice/payment_requests/0/total_completed_amount_money/amount" => 0,
+        "/invoice/next_payment_amount_money/amount" => 10000
+      }
     )
   end
 
@@ -204,7 +279,7 @@ class InvoicesWireTest < WireMockTestCase
   def test_invoices_create_invoice_attachment_with_wiremock
     test_id = "invoices.create_invoice_attachment.0"
 
-    @client.invoices.create_invoice_attachment(
+    result = @client.invoices.create_invoice_attachment(
       invoice_id: "invoice_id",
       request_options: {
         additional_headers: {
@@ -219,6 +294,13 @@ class InvoicesWireTest < WireMockTestCase
       url_path: "/v2/invoices/invoice_id/attachments",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/attachment/filesize" => 102705
+      }
     )
   end
 
@@ -247,7 +329,7 @@ class InvoicesWireTest < WireMockTestCase
   def test_invoices_cancel_with_wiremock
     test_id = "invoices.cancel.0"
 
-    @client.invoices.cancel(
+    result = @client.invoices.cancel(
       invoice_id: "invoice_id",
       version: 0,
       request_options: {
@@ -264,12 +346,32 @@ class InvoicesWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/invoices/invoice_id/cancel",
+      expected: {
+        "/version" => 0
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/invoice/version" => 1,
+        "/invoice/payment_requests/0/reminders/0/relative_scheduled_days" => -1,
+        "/invoice/payment_requests/0/computed_amount_money/amount" => 10000,
+        "/invoice/payment_requests/0/total_completed_amount_money/amount" => 0,
+        "/invoice/next_payment_amount_money/amount" => 1000000
+      }
+    )
   end
 
   def test_invoices_publish_with_wiremock
     test_id = "invoices.publish.0"
 
-    @client.invoices.publish(
+    result = @client.invoices.publish(
       invoice_id: "invoice_id",
       version: 1,
       idempotency_key: "32da42d0-1997-41b0-826b-f09464fc2c2e",
@@ -286,6 +388,26 @@ class InvoicesWireTest < WireMockTestCase
       url_path: "/v2/invoices/invoice_id/publish",
       query_params: nil,
       expected: 1
+    )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/invoices/invoice_id/publish",
+      expected: {
+        "/version" => 1
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/invoice/version" => 1,
+        "/invoice/payment_requests/0/reminders/0/relative_scheduled_days" => -1,
+        "/invoice/payment_requests/0/computed_amount_money/amount" => 10000,
+        "/invoice/payment_requests/0/total_completed_amount_money/amount" => 0,
+        "/invoice/next_payment_amount_money/amount" => 1000000
+      }
     )
   end
 end

@@ -6,6 +6,7 @@ module Square
       module Types
         class DeleteEvidenceRequest < Internal::Types::Model
           field :dispute_id, -> { String }, optional: false, nullable: false
+
           field :evidence_id, -> { String }, optional: false, nullable: false
         end
       end

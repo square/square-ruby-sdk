@@ -1,14 +1,20 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents details about an `ACTIVATE` [gift card activity type](entity:GiftCardActivityType).
     class GiftCardActivityActivate < Internal::Types::Model
       field :amount_money, -> { Square::Types::Money }, optional: true, nullable: false
-      field :order_id, -> { String }, optional: true, nullable: false
-      field :line_item_uid, -> { String }, optional: true, nullable: false
-      field :reference_id, -> { String }, optional: true, nullable: false
-      field :buyer_payment_instrument_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
+      field :order_id, -> { String }, optional: true, nullable: true
+
+      field :line_item_uid, -> { String }, optional: true, nullable: true
+
+      field :reference_id, -> { String }, optional: true, nullable: true
+
+      field :buyer_payment_instrument_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: true
     end
   end
 end

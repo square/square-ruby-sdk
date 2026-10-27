@@ -20,6 +20,13 @@ module Square
         # visible to the requesting application, including those that are owned by other applications
         # and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
         #
+        # Returns a `Square::Internal::CursorItemIterator` that yields each `Square::Types::CustomAttribute` in the
+        # `custom_attributes` field of every page, requesting pages as they are needed. Call `pages` on it to get each
+        # page as a `Square::Types::ListCustomerCustomAttributesResponse`, including its other fields.
+        #
+        # No request is sent by this call. The first page is requested when you start iterating (or call
+        # `load_first_page`), so an API error is raised by the loop (or by `load_first_page`), not by this call.
+        #
         # @param request_options [Hash]
         # @param params [Hash]
         # @option request_options [String] :base_url
@@ -32,26 +39,32 @@ module Square
         # @option params [String, nil] :cursor
         # @option params [Boolean, nil] :with_definitions
         #
-        # @return [Square::Types::ListCustomerCustomAttributesResponse]
+        # @example
+        #   client.customers.custom_attributes.list(
+        #     customer_id: "customer_id",
+        #     limit: 1,
+        #     cursor: "cursor",
+        #     with_definitions: true
+        #   )
+        #
+        # @return [Square::Internal::CursorItemIterator]
         def list(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[limit cursor with_definitions]
           query_params = {}
           query_params["limit"] = params[:limit] if params.key?(:limit)
           query_params["cursor"] = params[:cursor] if params.key?(:cursor)
           query_params["with_definitions"] = params[:with_definitions] if params.key?(:with_definitions)
-          params = params.except(*query_param_names)
 
           Square::Internal::CursorItemIterator.new(
             cursor_field: :cursor,
             item_field: :custom_attributes,
-            initial_cursor: query_params[:cursor]
+            initial_cursor: query_params["cursor"]
           ) do |next_cursor|
-            query_params[:cursor] = next_cursor
+            query_params["cursor"] = next_cursor
             request = Square::Internal::JSON::Request.new(
               base_url: request_options[:base_url],
               method: "GET",
-              path: "v2/customers/#{params[:customer_id]}/custom-attributes",
+              path: "v2/customers/#{URI.encode_uri_component(params[:customer_id].to_s)}/custom-attributes",
               query: query_params,
               request_options: request_options
             )
@@ -62,7 +75,8 @@ module Square
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Square::Types::ListCustomerCustomAttributesResponse.load(response.body)
+              parsed_response = (response.body.to_s.empty? ? nil : Square::Types::ListCustomerCustomAttributesResponse.load(response.body))
+              [parsed_response, response]
             else
               error_class = Square::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -91,19 +105,25 @@ module Square
         # @option params [Boolean, nil] :with_definition
         # @option params [Integer, nil] :version
         #
+        # @example
+        #   client.customers.custom_attributes.get(
+        #     customer_id: "customer_id",
+        #     key: "key",
+        #     with_definition: true,
+        #     version: 1
+        #   )
+        #
         # @return [Square::Types::GetCustomerCustomAttributeResponse]
         def get(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[with_definition version]
           query_params = {}
           query_params["with_definition"] = params[:with_definition] if params.key?(:with_definition)
           query_params["version"] = params[:version] if params.key?(:version)
-          params = params.except(*query_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
-            path: "v2/customers/#{params[:customer_id]}/custom-attributes/#{params[:key]}",
+            path: "v2/customers/#{URI.encode_uri_component(params[:customer_id].to_s)}/custom-attributes/#{URI.encode_uri_component(params[:key].to_s)}",
             query: query_params,
             request_options: request_options
           )
@@ -114,7 +134,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::GetCustomerCustomAttributeResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::GetCustomerCustomAttributeResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -143,6 +163,15 @@ module Square
         # @option params [String] :customer_id
         # @option params [String] :key
         #
+        # @example
+        #   client.customers.custom_attributes.upsert(
+        #     customer_id: "customer_id",
+        #     key: "key",
+        #     custom_attribute: {
+        #       value: "Dune"
+        #     }
+        #   )
+        #
         # @return [Square::Types::UpsertCustomerCustomAttributeResponse]
         def upsert(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -153,7 +182,7 @@ module Square
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
-            path: "v2/customers/#{params[:customer_id]}/custom-attributes/#{params[:key]}",
+            path: "v2/customers/#{URI.encode_uri_component(params[:customer_id].to_s)}/custom-attributes/#{URI.encode_uri_component(params[:key].to_s)}",
             body: body,
             request_options: request_options
           )
@@ -164,7 +193,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::UpsertCustomerCustomAttributeResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::UpsertCustomerCustomAttributeResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -187,13 +216,19 @@ module Square
         # @option params [String] :customer_id
         # @option params [String] :key
         #
+        # @example
+        #   client.customers.custom_attributes.delete(
+        #     customer_id: "customer_id",
+        #     key: "key"
+        #   )
+        #
         # @return [Square::Types::DeleteCustomerCustomAttributeResponse]
         def delete(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",
-            path: "v2/customers/#{params[:customer_id]}/custom-attributes/#{params[:key]}",
+            path: "v2/customers/#{URI.encode_uri_component(params[:customer_id].to_s)}/custom-attributes/#{URI.encode_uri_component(params[:key].to_s)}",
             request_options: request_options
           )
           begin
@@ -203,7 +238,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::DeleteCustomerCustomAttributeResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::DeleteCustomerCustomAttributeResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

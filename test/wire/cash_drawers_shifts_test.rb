@@ -8,7 +8,8 @@ class CashDrawersShiftsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -28,7 +29,6 @@ class CashDrawersShiftsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -43,7 +43,7 @@ class CashDrawersShiftsWireTest < WireMockTestCase
   def test_cash_drawers_shifts_get_with_wiremock
     test_id = "cash_drawers.shifts.get.0"
 
-    @client.cash_drawers.shifts.get(
+    result = @client.cash_drawers.shifts.get(
       shift_id: "shift_id",
       location_id: "location_id",
       request_options: {
@@ -59,6 +59,19 @@ class CashDrawersShiftsWireTest < WireMockTestCase
       url_path: "/v2/cash-drawers/shifts/shift_id",
       query_params: { "location_id" => "location_id" },
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/cash_drawer_shift/opened_cash_money/amount" => 10000,
+        "/cash_drawer_shift/cash_payment_money/amount" => 100,
+        "/cash_drawer_shift/cash_refunds_money/amount" => -100,
+        "/cash_drawer_shift/cash_paid_in_money/amount" => 10000,
+        "/cash_drawer_shift/cash_paid_out_money/amount" => -10000,
+        "/cash_drawer_shift/expected_cash_money/amount" => 10000,
+        "/cash_drawer_shift/closed_cash_money/amount" => 9970
+      }
     )
   end
 
@@ -76,7 +89,6 @@ class CashDrawersShiftsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(

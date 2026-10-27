@@ -8,7 +8,8 @@ class OrdersCustomAttributeDefinitionsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -25,7 +26,6 @@ class OrdersCustomAttributeDefinitionsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -40,10 +40,12 @@ class OrdersCustomAttributeDefinitionsWireTest < WireMockTestCase
   def test_orders_custom_attribute_definitions_create_with_wiremock
     test_id = "orders.custom_attribute_definitions.create.0"
 
-    @client.orders.custom_attribute_definitions.create(
+    result = @client.orders.custom_attribute_definitions.create(
       custom_attribute_definition: {
         key: "cover-count",
-        schema: {},
+        schema: {
+          "$ref" => "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.Number"
+        },
         name: "Cover count",
         description: "The number of people seated at a table",
         visibility: "VISIBILITY_READ_WRITE_VALUES"
@@ -63,12 +65,19 @@ class OrdersCustomAttributeDefinitionsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute_definition/version" => 1
+      }
+    )
   end
 
   def test_orders_custom_attribute_definitions_get_with_wiremock
     test_id = "orders.custom_attribute_definitions.get.0"
 
-    @client.orders.custom_attribute_definitions.get(
+    result = @client.orders.custom_attribute_definitions.get(
       key: "key",
       version: 1,
       request_options: {
@@ -85,12 +94,19 @@ class OrdersCustomAttributeDefinitionsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute_definition/version" => 1
+      }
+    )
   end
 
   def test_orders_custom_attribute_definitions_update_with_wiremock
     test_id = "orders.custom_attribute_definitions.update.0"
 
-    @client.orders.custom_attribute_definitions.update(
+    result = @client.orders.custom_attribute_definitions.update(
       key: "key",
       custom_attribute_definition: {
         key: "cover-count",
@@ -111,6 +127,22 @@ class OrdersCustomAttributeDefinitionsWireTest < WireMockTestCase
       url_path: "/v2/orders/custom-attribute-definitions/key",
       query_params: nil,
       expected: 1
+    )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "PUT",
+      url_path: "/v2/orders/custom-attribute-definitions/key",
+      expected: {
+        "/custom_attribute_definition/version" => 1
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute_definition/version" => 2
+      }
     )
   end
 

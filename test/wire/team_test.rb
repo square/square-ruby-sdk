@@ -8,14 +8,15 @@ class TeamWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
   def test_team_list_jobs_with_wiremock
     test_id = "team.list_jobs.0"
 
-    @client.team.list_jobs(
+    result = @client.team.list_jobs(
       cursor: "cursor",
       request_options: {
         additional_headers: {
@@ -31,12 +32,20 @@ class TeamWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/jobs/0/version" => 2,
+        "/jobs/1/version" => 1
+      }
+    )
   end
 
   def test_team_create_job_with_wiremock
     test_id = "team.create_job.0"
 
-    @client.team.create_job(
+    result = @client.team.create_job(
       job: {
         title: "Cashier",
         is_tip_eligible: true
@@ -56,12 +65,19 @@ class TeamWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/job/version" => 1
+      }
+    )
   end
 
   def test_team_retrieve_job_with_wiremock
     test_id = "team.retrieve_job.0"
 
-    @client.team.retrieve_job(
+    result = @client.team.retrieve_job(
       job_id: "job_id",
       request_options: {
         additional_headers: {
@@ -77,12 +93,19 @@ class TeamWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/job/version" => 2
+      }
+    )
   end
 
   def test_team_update_job_with_wiremock
     test_id = "team.update_job.0"
 
-    @client.team.update_job(
+    result = @client.team.update_job(
       job_id: "job_id",
       job: {
         title: "Cashier 1",
@@ -101,6 +124,13 @@ class TeamWireTest < WireMockTestCase
       url_path: "/v2/team-members/jobs/job_id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/job/version" => 2
+      }
     )
   end
 end

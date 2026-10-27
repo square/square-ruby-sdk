@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents Square-estimated quantity of items in a particular state at a
@@ -7,12 +9,18 @@ module Square
     # inventory adjustments. The absence of an inventory count indicates that the
     # catalog object hasn't interacted with the given inventory state at the given location.
     class InventoryCount < Internal::Types::Model
-      field :catalog_object_id, -> { String }, optional: true, nullable: false
-      field :catalog_object_type, -> { String }, optional: true, nullable: false
+      field :catalog_object_id, -> { String }, optional: true, nullable: true
+
+      field :catalog_object_type, -> { String }, optional: true, nullable: true
+
       field :state, -> { Square::Types::InventoryState }, optional: true, nullable: false
-      field :location_id, -> { String }, optional: true, nullable: false
-      field :quantity, -> { String }, optional: true, nullable: false
+
+      field :location_id, -> { String }, optional: true, nullable: true
+
+      field :quantity, -> { String }, optional: true, nullable: true
+
       field :calculated_at, -> { String }, optional: true, nullable: false
+
       field :is_estimated, -> { Internal::Types::Boolean }, optional: true, nullable: false
     end
   end

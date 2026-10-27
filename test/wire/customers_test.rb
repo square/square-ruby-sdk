@@ -8,7 +8,8 @@ class CustomersWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -27,7 +28,6 @@ class CustomersWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -42,7 +42,7 @@ class CustomersWireTest < WireMockTestCase
   def test_customers_create_with_wiremock
     test_id = "customers.create.0"
 
-    @client.customers.create(
+    result = @client.customers.create(
       given_name: "Amelia",
       family_name: "Earhart",
       email_address: "Amelia.Earhart@example.com",
@@ -71,12 +71,19 @@ class CustomersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/customer/version" => 0
+      }
+    )
   end
 
   def test_customers_batch_create_with_wiremock
     test_id = "customers.batch_create.0"
 
-    @client.customers.batch_create(
+    result = @client.customers.batch_create(
       customers: {
         "8bb76c4f-e35d-4c5b-90de-1194cd9179f0" => {
           given_name: "Amelia",
@@ -125,6 +132,14 @@ class CustomersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/responses/8bb76c4f-e35d-4c5b-90de-1194cd9179f4/customer/version" => 0,
+        "/responses/d1689f23-b25d-4932-b2f0-aed00f5e2029/customer/version" => 0
+      }
+    )
   end
 
   def test_customers_bulk_delete_customers_with_wiremock
@@ -151,7 +166,7 @@ class CustomersWireTest < WireMockTestCase
   def test_customers_bulk_retrieve_customers_with_wiremock
     test_id = "customers.bulk_retrieve_customers.0"
 
-    @client.customers.bulk_retrieve_customers(
+    result = @client.customers.bulk_retrieve_customers(
       customer_ids: %w[8DDA5NZVBZFGAX0V3HPF81HHE0 N18CPRVXR5214XPBBA6BZQWF3C 2GYD7WNXF7BJZW1PMGNXZ3Y8M8],
       request_options: {
         additional_headers: {
@@ -167,12 +182,20 @@ class CustomersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/responses/8DDA5NZVBZFGAX0V3HPF81HHE0/customer/version" => 3,
+        "/responses/N18CPRVXR5214XPBBA6BZQWF3C/customer/version" => 1
+      }
+    )
   end
 
   def test_customers_bulk_update_customers_with_wiremock
     test_id = "customers.bulk_update_customers.0"
 
-    @client.customers.bulk_update_customers(
+    result = @client.customers.bulk_update_customers(
       customers: {
         "8DDA5NZVBZFGAX0V3HPF81HHE0" => {
           email_address: "New.Amelia.Earhart@example.com",
@@ -199,12 +222,30 @@ class CustomersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/customers/bulk-update",
+      expected: {
+        "/customers/8DDA5NZVBZFGAX0V3HPF81HHE0/version" => 2,
+        "/customers/N18CPRVXR5214XPBBA6BZQWF3C/version" => 0
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/responses/8DDA5NZVBZFGAX0V3HPF81HHE0/customer/version" => 3,
+        "/responses/N18CPRVXR5214XPBBA6BZQWF3C/customer/version" => 1
+      }
+    )
   end
 
   def test_customers_search_with_wiremock
     test_id = "customers.search.0"
 
-    @client.customers.search(
+    result = @client.customers.search(
       limit: 2,
       query: {
         filter: {
@@ -242,12 +283,30 @@ class CustomersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/customers/search",
+      expected: {
+        "/limit" => 2
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/customers/0/version" => 7,
+        "/customers/1/version" => 1,
+        "/count" => 1000000
+      }
+    )
   end
 
   def test_customers_get_with_wiremock
     test_id = "customers.get.0"
 
-    @client.customers.get(
+    result = @client.customers.get(
       customer_id: "customer_id",
       request_options: {
         additional_headers: {
@@ -263,12 +322,19 @@ class CustomersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/customer/version" => 1
+      }
+    )
   end
 
   def test_customers_update_with_wiremock
     test_id = "customers.update.0"
 
-    @client.customers.update(
+    result = @client.customers.update(
       customer_id: "customer_id",
       email_address: "New.Amelia.Earhart@example.com",
       note: "updated customer note",
@@ -287,6 +353,22 @@ class CustomersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "PUT",
+      url_path: "/v2/customers/customer_id",
+      expected: {
+        "/version" => 2
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/customer/version" => 3
+      }
+    )
   end
 
   def test_customers_delete_with_wiremock
@@ -294,7 +376,7 @@ class CustomersWireTest < WireMockTestCase
 
     @client.customers.delete(
       customer_id: "customer_id",
-      version: 1_000_000,
+      version: 1000000,
       request_options: {
         additional_headers: {
           "X-Test-Id" => "customers.delete.0"

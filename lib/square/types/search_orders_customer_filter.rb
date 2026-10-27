@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # A filter based on the order `customer_id` and any tender `customer_id`
     # associated with the order. It does not filter based on the
     # [FulfillmentRecipient](entity:FulfillmentRecipient) `customer_id`.
     class SearchOrdersCustomerFilter < Internal::Types::Model
-      field :customer_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+      field :customer_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: true
     end
   end
 end

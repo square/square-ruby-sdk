@@ -8,7 +8,8 @@ class LaborWorkweekConfigsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -24,7 +25,6 @@ class LaborWorkweekConfigsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -39,7 +39,7 @@ class LaborWorkweekConfigsWireTest < WireMockTestCase
   def test_labor_workweek_configs_get_with_wiremock
     test_id = "labor.workweek_configs.get.0"
 
-    @client.labor.workweek_configs.get(
+    result = @client.labor.workweek_configs.get(
       id: "id",
       workweek_config: {
         start_of_week: "MON",
@@ -59,6 +59,22 @@ class LaborWorkweekConfigsWireTest < WireMockTestCase
       url_path: "/v2/labor/workweek-configs/id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "PUT",
+      url_path: "/v2/labor/workweek-configs/id",
+      expected: {
+        "/workweek_config/version" => 10
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/workweek_config/version" => 11
+      }
     )
   end
 end

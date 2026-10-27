@@ -8,7 +8,8 @@ class GiftCardsActivitiesWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -30,7 +31,6 @@ class GiftCardsActivitiesWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -45,7 +45,7 @@ class GiftCardsActivitiesWireTest < WireMockTestCase
   def test_gift_cards_activities_create_with_wiremock
     test_id = "gift_cards.activities.create.0"
 
-    @client.gift_cards.activities.create(
+    result = @client.gift_cards.activities.create(
       idempotency_key: "U16kfr-kA70er-q4Rsym-7U7NnY",
       gift_card_activity: {
         type: "ACTIVATE",
@@ -69,6 +69,14 @@ class GiftCardsActivitiesWireTest < WireMockTestCase
       url_path: "/v2/gift-cards/activities",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/gift_card_activity/gift_card_balance_money/amount" => 1000,
+        "/gift_card_activity/activate_activity_details/amount_money/amount" => 1000
+      }
     )
   end
 end

@@ -5,7 +5,7 @@ module Square
     class ServerError < ResponseError
     end
 
-    class ServiceUnavailableError < ApiError
+    class ServiceUnavailableError < ResponseError
     end
   end
 end

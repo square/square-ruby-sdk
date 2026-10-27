@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Details about a refund's destination.
     class DestinationDetails < Internal::Types::Model
       field :card_details, -> { Square::Types::DestinationDetailsCardRefundDetails }, optional: true, nullable: false
+
       field :cash_details, -> { Square::Types::DestinationDetailsCashRefundDetails }, optional: true, nullable: false
+
       field :external_details, -> { Square::Types::DestinationDetailsExternalRefundDetails }, optional: true, nullable: false
     end
   end

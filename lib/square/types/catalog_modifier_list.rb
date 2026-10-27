@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # A container for a list of modifiers, or a text-based modifier.
@@ -10,20 +12,33 @@ module Square
     # (For example, a list of condiments for a hot dog, or a list of ice cream flavors).
     # Each element of the modifier list is a `CatalogObject` instance of the `MODIFIER` type.
     class CatalogModifierList < Internal::Types::Model
-      field :name, -> { String }, optional: true, nullable: false
-      field :ordinal, -> { Integer }, optional: true, nullable: false
+      field :name, -> { String }, optional: true, nullable: true
+
+      field :ordinal, -> { Integer }, optional: true, nullable: true
+
       field :selection_type, -> { Square::Types::CatalogModifierListSelectionType }, optional: true, nullable: false
-      field :modifiers, -> { Internal::Types::Array[Square::Types::CatalogObject] }, optional: true, nullable: false
-      field :image_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-      field :allow_quantities, -> { Internal::Types::Boolean }, optional: true, nullable: false
-      field :is_conversational, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
+      field :modifiers, -> { Internal::Types::Array[Square::Types::CatalogObject] }, optional: true, nullable: true
+
+      field :image_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: true
+
+      field :allow_quantities, -> { Internal::Types::Boolean }, optional: true, nullable: true
+
+      field :is_conversational, -> { Internal::Types::Boolean }, optional: true, nullable: true
+
       field :modifier_type, -> { Square::Types::CatalogModifierListModifierType }, optional: true, nullable: false
-      field :max_length, -> { Integer }, optional: true, nullable: false
-      field :text_required, -> { Internal::Types::Boolean }, optional: true, nullable: false
-      field :internal_name, -> { String }, optional: true, nullable: false
-      field :min_selected_modifiers, -> { Integer }, optional: true, nullable: false
-      field :max_selected_modifiers, -> { Integer }, optional: true, nullable: false
-      field :hidden_from_customer, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
+      field :max_length, -> { Integer }, optional: true, nullable: true
+
+      field :text_required, -> { Internal::Types::Boolean }, optional: true, nullable: true
+
+      field :internal_name, -> { String }, optional: true, nullable: true
+
+      field :min_selected_modifiers, -> { Integer }, optional: true, nullable: true
+
+      field :max_selected_modifiers, -> { Integer }, optional: true, nullable: true
+
+      field :hidden_from_customer, -> { Internal::Types::Boolean }, optional: true, nullable: true
     end
   end
 end

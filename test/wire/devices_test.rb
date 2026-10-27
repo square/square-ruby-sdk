@@ -8,7 +8,8 @@ class DevicesWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -26,7 +27,6 @@ class DevicesWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -41,7 +41,7 @@ class DevicesWireTest < WireMockTestCase
   def test_devices_get_with_wiremock
     test_id = "devices.get.0"
 
-    @client.devices.get(
+    result = @client.devices.get(
       device_id: "device_id",
       request_options: {
         additional_headers: {
@@ -56,6 +56,14 @@ class DevicesWireTest < WireMockTestCase
       url_path: "/v2/devices/device_id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/device/components/2/battery_details/visible_percent" => 5,
+        "/device/components/3/wifi_details/signal_strength/value" => 2
+      }
     )
   end
 end

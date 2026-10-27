@@ -8,7 +8,8 @@ class TerminalWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -36,7 +37,7 @@ class TerminalWireTest < WireMockTestCase
   def test_terminal_dismiss_terminal_checkout_with_wiremock
     test_id = "terminal.dismiss_terminal_checkout.0"
 
-    @client.terminal.dismiss_terminal_checkout(
+    result = @client.terminal.dismiss_terminal_checkout(
       checkout_id: "checkout_id",
       request_options: {
         additional_headers: {
@@ -52,12 +53,21 @@ class TerminalWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/checkout/amount_money/amount" => 2610,
+        "/checkout/app_fee_money/amount" => 1000000,
+        "/checkout/tip_money/amount" => 1000000
+      }
+    )
   end
 
   def test_terminal_dismiss_terminal_refund_with_wiremock
     test_id = "terminal.dismiss_terminal_refund.0"
 
-    @client.terminal.dismiss_terminal_refund(
+    result = @client.terminal.dismiss_terminal_refund(
       terminal_refund_id: "terminal_refund_id",
       request_options: {
         additional_headers: {
@@ -72,6 +82,13 @@ class TerminalWireTest < WireMockTestCase
       url_path: "/v2/terminals/refunds/terminal_refund_id/dismiss",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/refund/amount_money/amount" => 111
+      }
     )
   end
 end

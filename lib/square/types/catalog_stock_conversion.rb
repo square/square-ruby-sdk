@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents the rule of conversion between a stockable [CatalogItemVariation](entity:CatalogItemVariation)
@@ -7,7 +9,9 @@ module Square
     # share the same underlying stock.
     class CatalogStockConversion < Internal::Types::Model
       field :stockable_item_variation_id, -> { String }, optional: false, nullable: false
+
       field :stockable_quantity, -> { String }, optional: false, nullable: false
+
       field :nonstockable_quantity, -> { String }, optional: false, nullable: false
     end
   end

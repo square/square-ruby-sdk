@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # The hourly wage rate used to compensate an employee for this shift.
@@ -7,10 +9,13 @@ module Square
     # Deprecated at Square API version 2025-05-21. See the [migration
     # notes](https://developer.squareup.com/docs/labor-api/what-it-does#migration-notes).
     class ShiftWage < Internal::Types::Model
-      field :title, -> { String }, optional: true, nullable: false
+      field :title, -> { String }, optional: true, nullable: true
+
       field :hourly_rate, -> { Square::Types::Money }, optional: true, nullable: false
+
       field :job_id, -> { String }, optional: true, nullable: false
-      field :tip_eligible, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
+      field :tip_eligible, -> { Internal::Types::Boolean }, optional: true, nullable: true
     end
   end
 end

@@ -8,7 +8,8 @@ class BookingsCustomAttributeDefinitionsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -24,7 +25,6 @@ class BookingsCustomAttributeDefinitionsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -39,7 +39,7 @@ class BookingsCustomAttributeDefinitionsWireTest < WireMockTestCase
   def test_bookings_custom_attribute_definitions_create_with_wiremock
     test_id = "bookings.custom_attribute_definitions.create.0"
 
-    @client.bookings.custom_attribute_definitions.create(
+    result = @client.bookings.custom_attribute_definitions.create(
       custom_attribute_definition: {},
       request_options: {
         additional_headers: {
@@ -55,12 +55,19 @@ class BookingsCustomAttributeDefinitionsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute_definition/version" => 1
+      }
+    )
   end
 
   def test_bookings_custom_attribute_definitions_get_with_wiremock
     test_id = "bookings.custom_attribute_definitions.get.0"
 
-    @client.bookings.custom_attribute_definitions.get(
+    result = @client.bookings.custom_attribute_definitions.get(
       key: "key",
       version: 1,
       request_options: {
@@ -77,12 +84,19 @@ class BookingsCustomAttributeDefinitionsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute_definition/version" => 1
+      }
+    )
   end
 
   def test_bookings_custom_attribute_definitions_update_with_wiremock
     test_id = "bookings.custom_attribute_definitions.update.0"
 
-    @client.bookings.custom_attribute_definitions.update(
+    result = @client.bookings.custom_attribute_definitions.update(
       key: "key",
       custom_attribute_definition: {},
       request_options: {
@@ -98,6 +112,13 @@ class BookingsCustomAttributeDefinitionsWireTest < WireMockTestCase
       url_path: "/v2/bookings/custom-attribute-definitions/key",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute_definition/version" => 2
+      }
     )
   end
 

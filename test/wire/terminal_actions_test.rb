@@ -8,7 +8,8 @@ class TerminalActionsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -70,6 +71,15 @@ class TerminalActionsWireTest < WireMockTestCase
       url_path: "/v2/terminals/actions/search",
       query_params: nil,
       expected: 1
+    )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/terminals/actions/search",
+      expected: {
+        "/limit" => 2
+      }
     )
   end
 

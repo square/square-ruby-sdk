@@ -28,13 +28,16 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :team_member_id
         #
+        # @example
+        #   client.team_members.wage_setting.get(team_member_id: "team_member_id")
+        #
         # @return [Square::Types::GetWageSettingResponse]
         def get(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
-            path: "v2/team-members/#{params[:team_member_id]}/wage-setting",
+            path: "v2/team-members/#{URI.encode_uri_component(params[:team_member_id].to_s)}/wage-setting",
             request_options: request_options
           )
           begin
@@ -44,7 +47,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::GetWageSettingResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::GetWageSettingResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -71,17 +74,41 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :team_member_id
         #
+        # @example
+        #   client.team_members.wage_setting.update(
+        #     team_member_id: "team_member_id",
+        #     wage_setting: {
+        #       job_assignments: [{
+        #         job_title: "Manager",
+        #         pay_type: "SALARY",
+        #         annual_rate: {
+        #           amount: 3000000,
+        #           currency: "USD"
+        #         },
+        #         weekly_hours: 40
+        #       }, {
+        #         job_title: "Cashier",
+        #         pay_type: "HOURLY",
+        #         hourly_rate: {
+        #           amount: 2000,
+        #           currency: "USD"
+        #         }
+        #       }],
+        #       is_overtime_exempt: true
+        #     }
+        #   )
+        #
         # @return [Square::Types::UpdateWageSettingResponse]
         def update(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request_data = Square::TeamMembers::WageSetting::Types::UpdateWageSettingRequest.new(params).to_h
-          non_body_param_names = ["team_member_id"]
+          non_body_param_names = %w[team_member_id]
           body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "PUT",
-            path: "v2/team-members/#{params[:team_member_id]}/wage-setting",
+            path: "v2/team-members/#{URI.encode_uri_component(params[:team_member_id].to_s)}/wage-setting",
             body: body,
             request_options: request_options
           )
@@ -92,7 +119,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::UpdateWageSettingResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::UpdateWageSettingResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

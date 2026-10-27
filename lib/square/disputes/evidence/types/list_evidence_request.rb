@@ -6,7 +6,8 @@ module Square
       module Types
         class ListEvidenceRequest < Internal::Types::Model
           field :dispute_id, -> { String }, optional: false, nullable: false
-          field :cursor, -> { String }, optional: true, nullable: false
+
+          field :cursor, -> { String }, optional: true, nullable: true
         end
       end
     end

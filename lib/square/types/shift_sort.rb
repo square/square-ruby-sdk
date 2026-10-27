@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Sets the sort order of search results.
@@ -8,6 +10,7 @@ module Square
     # notes](https://developer.squareup.com/docs/labor-api/what-it-does#migration-notes).
     class ShiftSort < Internal::Types::Model
       field :field, -> { Square::Types::ShiftSortField }, optional: true, nullable: false
+
       field :order, -> { Square::Types::SortOrder }, optional: true, nullable: false
     end
   end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents the tax ID associated with a [customer profile](entity:Customer). The corresponding `tax_ids` field is
@@ -7,7 +9,7 @@ module Square
     # For more information, see [Customer tax
     # IDs](https://developer.squareup.com/docs/customers-api/what-it-does#customer-tax-ids).
     class CustomerTaxIds < Internal::Types::Model
-      field :eu_vat, -> { String }, optional: true, nullable: false
+      field :eu_vat, -> { String }, optional: true, nullable: true
     end
   end
 end

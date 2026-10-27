@@ -22,6 +22,17 @@ module Square
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.loyalty.accounts.create(
+        #     loyalty_account: {
+        #       program_id: "d619f755-2d17-41f3-990d-c04ecedd64dd",
+        #       mapping: {
+        #         phone_number: "+14155551234"
+        #       }
+        #     },
+        #     idempotency_key: "ec78c477-b1c3-4899-a209-a4e71337c996"
+        #   )
+        #
         # @return [Square::Types::CreateLoyaltyAccountResponse]
         def create(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -39,7 +50,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::CreateLoyaltyAccountResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::CreateLoyaltyAccountResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -61,6 +72,16 @@ module Square
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.loyalty.accounts.search(
+        #     query: {
+        #       mappings: [{
+        #         phone_number: "+14155551234"
+        #       }]
+        #     },
+        #     limit: 10
+        #   )
+        #
         # @return [Square::Types::SearchLoyaltyAccountsResponse]
         def search(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -78,7 +99,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::SearchLoyaltyAccountsResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::SearchLoyaltyAccountsResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -96,13 +117,16 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :account_id
         #
+        # @example
+        #   client.loyalty.accounts.get(account_id: "account_id")
+        #
         # @return [Square::Types::GetLoyaltyAccountResponse]
         def get(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
-            path: "v2/loyalty/accounts/#{params[:account_id]}",
+            path: "v2/loyalty/accounts/#{URI.encode_uri_component(params[:account_id].to_s)}",
             request_options: request_options
           )
           begin
@@ -112,7 +136,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::GetLoyaltyAccountResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::GetLoyaltyAccountResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -147,17 +171,27 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :account_id
         #
+        # @example
+        #   client.loyalty.accounts.accumulate_points(
+        #     account_id: "account_id",
+        #     accumulate_points: {
+        #       order_id: "RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY"
+        #     },
+        #     idempotency_key: "58b90739-c3e8-4b11-85f7-e636d48d72cb",
+        #     location_id: "P034NEENMD09F"
+        #   )
+        #
         # @return [Square::Types::AccumulateLoyaltyPointsResponse]
         def accumulate_points(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request_data = Square::Loyalty::Accounts::Types::AccumulateLoyaltyPointsRequest.new(params).to_h
-          non_body_param_names = ["account_id"]
+          non_body_param_names = %w[account_id]
           body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
-            path: "v2/loyalty/accounts/#{params[:account_id]}/accumulate",
+            path: "v2/loyalty/accounts/#{URI.encode_uri_component(params[:account_id].to_s)}/accumulate",
             body: body,
             request_options: request_options
           )
@@ -168,7 +202,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::AccumulateLoyaltyPointsResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::AccumulateLoyaltyPointsResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -190,17 +224,27 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :account_id
         #
+        # @example
+        #   client.loyalty.accounts.adjust(
+        #     account_id: "account_id",
+        #     idempotency_key: "bc29a517-3dc9-450e-aa76-fae39ee849d1",
+        #     adjust_points: {
+        #       points: 10,
+        #       reason: "Complimentary points"
+        #     }
+        #   )
+        #
         # @return [Square::Types::AdjustLoyaltyPointsResponse]
         def adjust(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request_data = Square::Loyalty::Accounts::Types::AdjustLoyaltyPointsRequest.new(params).to_h
-          non_body_param_names = ["account_id"]
+          non_body_param_names = %w[account_id]
           body = request_data.except(*non_body_param_names)
 
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
-            path: "v2/loyalty/accounts/#{params[:account_id]}/adjust",
+            path: "v2/loyalty/accounts/#{URI.encode_uri_component(params[:account_id].to_s)}/adjust",
             body: body,
             request_options: request_options
           )
@@ -211,7 +255,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::AdjustLoyaltyPointsResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::AdjustLoyaltyPointsResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

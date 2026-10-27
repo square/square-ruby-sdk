@@ -14,16 +14,18 @@ module Square
       # a reporting query. Call this first to discover the schema, then pass the members you need to `load`.
       #
       # @param request_options [Hash]
-      # @param params [Hash]
+      # @param _params [Hash]
       # @option request_options [String] :base_url
       # @option request_options [Hash{String => Object}] :additional_headers
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.reporting.get_metadata
+      #
       # @return [Square::Types::MetadataResponse]
-      def get_metadata(request_options: {}, **params)
-        Square::Internal::Types::Utils.normalize_keys(params)
+      def get_metadata(request_options: {}, **_params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -37,10 +39,15 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::MetadataResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::MetadataResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(response.body, code: code)
+          error_types = {
+            (400..499) => Square::Types::ReportingError,
+            (500..599) => Square::Types::ReportingError
+          }
+          error_body = Square::Errors::ResponseError.load_error_body(code, response.body, error_types)
+          raise error_class.new(response.body, code: code, body: error_body)
         end
       end
 
@@ -54,6 +61,9 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
+      #
+      # @example
+      #   client.reporting.load
       #
       # @return [Square::Types::LoadResponse]
       def load(request_options: {}, **params)
@@ -72,10 +82,15 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::LoadResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::LoadResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(response.body, code: code)
+          error_types = {
+            (400..499) => Square::Types::ReportingError,
+            (500..599) => Square::Types::ReportingError
+          }
+          error_body = Square::Errors::ResponseError.load_error_body(code, response.body, error_types)
+          raise error_class.new(response.body, code: code, body: error_body)
         end
       end
     end

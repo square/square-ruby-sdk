@@ -5,7 +5,9 @@ module Square
     module Types
       class UpdateBookingRequest < Internal::Types::Model
         field :booking_id, -> { String }, optional: false, nullable: false
-        field :idempotency_key, -> { String }, optional: true, nullable: false
+
+        field :idempotency_key, -> { String }, optional: true, nullable: true
+
         field :booking, -> { Square::Types::Booking }, optional: false, nullable: false
       end
     end

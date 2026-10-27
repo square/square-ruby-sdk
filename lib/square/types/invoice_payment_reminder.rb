@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Describes a payment request reminder (automatic notification) that Square sends
@@ -7,9 +9,13 @@ module Square
     # `due_date`.
     class InvoicePaymentReminder < Internal::Types::Model
       field :uid, -> { String }, optional: true, nullable: false
-      field :relative_scheduled_days, -> { Integer }, optional: true, nullable: false
-      field :message, -> { String }, optional: true, nullable: false
+
+      field :relative_scheduled_days, -> { Integer }, optional: true, nullable: true
+
+      field :message, -> { String }, optional: true, nullable: true
+
       field :status, -> { Square::Types::InvoicePaymentReminderStatus }, optional: true, nullable: false
+
       field :sent_at, -> { String }, optional: true, nullable: false
     end
   end

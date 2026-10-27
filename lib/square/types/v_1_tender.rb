@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # A tender represents a discrete monetary exchange. Square represents this
@@ -26,21 +28,36 @@ module Square
     # associated payment.
     class V1Tender < Internal::Types::Model
       field :id, -> { String }, optional: true, nullable: false
+
       field :type, -> { Square::Types::V1TenderType }, optional: true, nullable: false
-      field :name, -> { String }, optional: true, nullable: false
-      field :employee_id, -> { String }, optional: true, nullable: false
-      field :receipt_url, -> { String }, optional: true, nullable: false
+
+      field :name, -> { String }, optional: true, nullable: true
+
+      field :employee_id, -> { String }, optional: true, nullable: true
+
+      field :receipt_url, -> { String }, optional: true, nullable: true
+
       field :card_brand, -> { Square::Types::V1TenderCardBrand }, optional: true, nullable: false
-      field :pan_suffix, -> { String }, optional: true, nullable: false
+
+      field :pan_suffix, -> { String }, optional: true, nullable: true
+
       field :entry_method, -> { Square::Types::V1TenderEntryMethod }, optional: true, nullable: false
-      field :payment_note, -> { String }, optional: true, nullable: false
+
+      field :payment_note, -> { String }, optional: true, nullable: true
+
       field :total_money, -> { Square::Types::V1Money }, optional: true, nullable: false
+
       field :tendered_money, -> { Square::Types::V1Money }, optional: true, nullable: false
-      field :tendered_at, -> { String }, optional: true, nullable: false
-      field :settled_at, -> { String }, optional: true, nullable: false
+
+      field :tendered_at, -> { String }, optional: true, nullable: true
+
+      field :settled_at, -> { String }, optional: true, nullable: true
+
       field :change_back_money, -> { Square::Types::V1Money }, optional: true, nullable: false
+
       field :refunded_money, -> { Square::Types::V1Money }, optional: true, nullable: false
-      field :is_exchange, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
+      field :is_exchange, -> { Internal::Types::Boolean }, optional: true, nullable: true
     end
   end
 end

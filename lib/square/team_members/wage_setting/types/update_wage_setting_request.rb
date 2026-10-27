@@ -6,6 +6,7 @@ module Square
       module Types
         class UpdateWageSettingRequest < Internal::Types::Model
           field :team_member_id, -> { String }, optional: false, nullable: false
+
           field :wage_setting, -> { Square::Types::WageSetting }, optional: false, nullable: false
         end
       end

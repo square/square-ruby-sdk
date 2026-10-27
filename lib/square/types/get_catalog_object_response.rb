@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     class GetCatalogObjectResponse < Internal::Types::Model
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
+
       field :object, -> { Square::Types::CatalogObject }, optional: true, nullable: false
+
       field :related_objects, -> { Internal::Types::Array[Square::Types::CatalogObject] }, optional: true, nullable: false
     end
   end

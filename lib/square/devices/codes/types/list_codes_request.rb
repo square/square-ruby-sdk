@@ -5,10 +5,13 @@ module Square
     module Codes
       module Types
         class ListCodesRequest < Internal::Types::Model
-          field :cursor, -> { String }, optional: true, nullable: false
-          field :location_id, -> { String }, optional: true, nullable: false
-          field :product_type, -> { String }, optional: true, nullable: false
-          field :status, -> { Square::Types::DeviceCodeStatus }, optional: true, nullable: false
+          field :cursor, -> { String }, optional: true, nullable: true
+
+          field :location_id, -> { String }, optional: true, nullable: true
+
+          field :product_type, -> { String }, optional: true, nullable: true
+
+          field :status, -> { Square::Types::DeviceCodeStatus }, optional: true, nullable: true
         end
       end
     end

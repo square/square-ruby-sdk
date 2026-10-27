@@ -21,6 +21,13 @@ module Square
       # If you know the merchant ID, you can also use the [RetrieveMerchant](api-endpoint:Merchants-RetrieveMerchant)
       # endpoint to retrieve the merchant information.
       #
+      # Returns a `Square::Internal::CursorItemIterator` that yields each `Square::Types::Merchant` in the `merchant`
+      # field of every page, requesting pages as they are needed. Call `pages` on it to get each page as a
+      # `Square::Types::ListMerchantsResponse`, including its other fields.
+      #
+      # No request is sent by this call. The first page is requested when you start iterating (or call
+      # `load_first_page`), so an API error is raised by the loop (or by `load_first_page`), not by this call.
+      #
       # @param request_options [Hash]
       # @param params [Hash]
       # @option request_options [String] :base_url
@@ -30,20 +37,21 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [Integer, nil] :cursor
       #
-      # @return [Square::Types::ListMerchantsResponse]
+      # @example
+      #   client.merchants.list(cursor: 1)
+      #
+      # @return [Square::Internal::CursorItemIterator]
       def list(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[cursor]
         query_params = {}
         query_params["cursor"] = params[:cursor] if params.key?(:cursor)
-        params.except(*query_param_names)
 
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :merchant,
-          initial_cursor: query_params[:cursor]
+          initial_cursor: query_params["cursor"]
         ) do |next_cursor|
-          query_params[:cursor] = next_cursor
+          query_params["cursor"] = next_cursor
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -58,7 +66,8 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::ListMerchantsResponse.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Square::Types::ListMerchantsResponse.load(response.body))
+            [parsed_response, response]
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -77,13 +86,16 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :merchant_id
       #
+      # @example
+      #   client.merchants.get(merchant_id: "merchant_id")
+      #
       # @return [Square::Types::GetMerchantResponse]
       def get(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/merchants/#{params[:merchant_id]}",
+          path: "v2/merchants/#{URI.encode_uri_component(params[:merchant_id].to_s)}",
           request_options: request_options
         )
         begin
@@ -93,7 +105,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::GetMerchantResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::GetMerchantResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

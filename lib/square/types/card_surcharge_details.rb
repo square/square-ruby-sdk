@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Details related to an attempt to apply a card surcharge to this payment.  When surcharge

@@ -8,7 +8,8 @@ class CustomersCustomAttributeDefinitionsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -24,7 +25,6 @@ class CustomersCustomAttributeDefinitionsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -39,10 +39,12 @@ class CustomersCustomAttributeDefinitionsWireTest < WireMockTestCase
   def test_customers_custom_attribute_definitions_create_with_wiremock
     test_id = "customers.custom_attribute_definitions.create.0"
 
-    @client.customers.custom_attribute_definitions.create(
+    result = @client.customers.custom_attribute_definitions.create(
       custom_attribute_definition: {
         key: "favoritemovie",
-        schema: {},
+        schema: {
+          "$ref" => "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
+        },
         name: "Favorite Movie",
         description: "The favorite movie of the customer.",
         visibility: "VISIBILITY_HIDDEN"
@@ -61,12 +63,19 @@ class CustomersCustomAttributeDefinitionsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute_definition/version" => 1
+      }
+    )
   end
 
   def test_customers_custom_attribute_definitions_get_with_wiremock
     test_id = "customers.custom_attribute_definitions.get.0"
 
-    @client.customers.custom_attribute_definitions.get(
+    result = @client.customers.custom_attribute_definitions.get(
       key: "key",
       version: 1,
       request_options: {
@@ -83,12 +92,19 @@ class CustomersCustomAttributeDefinitionsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute_definition/version" => 1
+      }
+    )
   end
 
   def test_customers_custom_attribute_definitions_update_with_wiremock
     test_id = "customers.custom_attribute_definitions.update.0"
 
-    @client.customers.custom_attribute_definitions.update(
+    result = @client.customers.custom_attribute_definitions.update(
       key: "key",
       custom_attribute_definition: {
         description: "Update the description as desired.",
@@ -107,6 +123,13 @@ class CustomersCustomAttributeDefinitionsWireTest < WireMockTestCase
       url_path: "/v2/customers/custom-attribute-definitions/key",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute_definition/version" => 2
+      }
     )
   end
 
@@ -134,36 +157,41 @@ class CustomersCustomAttributeDefinitionsWireTest < WireMockTestCase
   def test_customers_custom_attribute_definitions_batch_upsert_with_wiremock
     test_id = "customers.custom_attribute_definitions.batch_upsert.0"
 
-    @client.customers.custom_attribute_definitions.batch_upsert(
+    result = @client.customers.custom_attribute_definitions.batch_upsert(
       values: {
         id1: {
           customer_id: "N3NCVYY3WS27HF0HKANA3R9FP8",
           custom_attribute: {
-            key: "favoritemovie"
+            key: "favoritemovie",
+            value: "Dune"
           }
         },
         id2: {
           customer_id: "SY8EMWRNDN3TQDP2H4KS1QWMMM",
           custom_attribute: {
-            key: "ownsmovie"
+            key: "ownsmovie",
+            value: false
           }
         },
         id3: {
           customer_id: "SY8EMWRNDN3TQDP2H4KS1QWMMM",
           custom_attribute: {
-            key: "favoritemovie"
+            key: "favoritemovie",
+            value: "Star Wars"
           }
         },
         id4: {
           customer_id: "N3NCVYY3WS27HF0HKANA3R9FP8",
           custom_attribute: {
-            key: "square:a0f1505a-2aa1-490d-91a8-8d31ff181808"
+            key: "square:a0f1505a-2aa1-490d-91a8-8d31ff181808",
+            value: "10.5"
           }
         },
         id5: {
           customer_id: "70548QG1HN43B05G0KCZ4MMC1G",
           custom_attribute: {
-            key: "sq0ids-0evKIskIGaY45fCyNL66aw:backupemail"
+            key: "sq0ids-0evKIskIGaY45fCyNL66aw:backupemail",
+            value: "fake-email@squareup.com"
           }
         }
       },
@@ -180,6 +208,17 @@ class CustomersCustomAttributeDefinitionsWireTest < WireMockTestCase
       url_path: "/v2/customers/custom-attributes/bulk-upsert",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/values/id1/custom_attribute/version" => 1,
+        "/values/id2/custom_attribute/version" => 2,
+        "/values/id3/custom_attribute/version" => 2,
+        "/values/id4/custom_attribute/version" => 1,
+        "/values/id5/custom_attribute/version" => 2
+      }
     )
   end
 end

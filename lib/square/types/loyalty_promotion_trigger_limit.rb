@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents the number of times a buyer can earn points during a [loyalty promotion](entity:LoyaltyPromotion).
@@ -10,6 +12,7 @@ module Square
     # promotion.
     class LoyaltyPromotionTriggerLimit < Internal::Types::Model
       field :times, -> { Integer }, optional: false, nullable: false
+
       field :interval, -> { Square::Types::LoyaltyPromotionTriggerLimitInterval }, optional: true, nullable: false
     end
   end

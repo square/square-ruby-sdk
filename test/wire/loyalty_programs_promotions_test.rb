@@ -8,7 +8,8 @@ class LoyaltyProgramsPromotionsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -26,7 +27,6 @@ class LoyaltyProgramsPromotionsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -41,7 +41,7 @@ class LoyaltyProgramsPromotionsWireTest < WireMockTestCase
   def test_loyalty_programs_promotions_create_with_wiremock
     test_id = "loyalty.programs.promotions.create.0"
 
-    @client.loyalty.programs.promotions.create(
+    result = @client.loyalty.programs.promotions.create(
       program_id: "program_id",
       loyalty_promotion: {
         name: "Tuesday Happy Hour Promo",
@@ -52,11 +52,11 @@ class LoyaltyProgramsPromotionsWireTest < WireMockTestCase
           }
         },
         available_time: {
-          time_periods: ['BEGIN:VEVENT
+          time_periods: ["BEGIN:VEVENT
           DTSTART:20220816T160000
           DURATION:PT2H
           RRULE:FREQ=WEEKLY;BYDAY=TU
-          END:VEVENT']
+          END:VEVENT"]
         },
         trigger_limit: {
           times: 1,
@@ -83,12 +83,32 @@ class LoyaltyProgramsPromotionsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/loyalty/programs/program_id/promotions",
+      expected: {
+        "/loyalty_promotion/trigger_limit/times" => 1,
+        "/loyalty_promotion/minimum_spend_amount_money/amount" => 2000
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/loyalty_promotion/incentive/points_multiplier_data/points_multiplier" => 3,
+        "/loyalty_promotion/incentive/points_addition_data/points_addition" => 1,
+        "/loyalty_promotion/trigger_limit/times" => 1,
+        "/loyalty_promotion/minimum_spend_amount_money/amount" => 2000
+      }
+    )
   end
 
   def test_loyalty_programs_promotions_get_with_wiremock
     test_id = "loyalty.programs.promotions.get.0"
 
-    @client.loyalty.programs.promotions.get(
+    result = @client.loyalty.programs.promotions.get(
       program_id: "program_id",
       promotion_id: "promotion_id",
       request_options: {
@@ -105,12 +125,22 @@ class LoyaltyProgramsPromotionsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/loyalty_promotion/incentive/points_multiplier_data/points_multiplier" => 3,
+        "/loyalty_promotion/incentive/points_addition_data/points_addition" => 1,
+        "/loyalty_promotion/trigger_limit/times" => 1,
+        "/loyalty_promotion/minimum_spend_amount_money/amount" => 2000
+      }
+    )
   end
 
   def test_loyalty_programs_promotions_cancel_with_wiremock
     test_id = "loyalty.programs.promotions.cancel.0"
 
-    @client.loyalty.programs.promotions.cancel(
+    result = @client.loyalty.programs.promotions.cancel(
       program_id: "program_id",
       promotion_id: "promotion_id",
       request_options: {
@@ -126,6 +156,16 @@ class LoyaltyProgramsPromotionsWireTest < WireMockTestCase
       url_path: "/v2/loyalty/programs/program_id/promotions/promotion_id/cancel",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/loyalty_promotion/incentive/points_multiplier_data/points_multiplier" => 3,
+        "/loyalty_promotion/incentive/points_addition_data/points_addition" => 1,
+        "/loyalty_promotion/trigger_limit/times" => 1,
+        "/loyalty_promotion/minimum_spend_amount_money/amount" => 2000
+      }
     )
   end
 end

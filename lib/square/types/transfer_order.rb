@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents a transfer order for moving [CatalogItemVariation](entity:CatalogItemVariation)s
@@ -18,17 +20,29 @@ module Square
     # - Audit inventory movement history
     class TransferOrder < Internal::Types::Model
       field :id, -> { String }, optional: true, nullable: false
-      field :source_location_id, -> { String }, optional: true, nullable: false
-      field :destination_location_id, -> { String }, optional: true, nullable: false
+
+      field :source_location_id, -> { String }, optional: true, nullable: true
+
+      field :destination_location_id, -> { String }, optional: true, nullable: true
+
       field :status, -> { Square::Types::TransferOrderStatus }, optional: true, nullable: false
+
       field :created_at, -> { String }, optional: true, nullable: false
+
       field :updated_at, -> { String }, optional: true, nullable: false
-      field :expected_at, -> { String }, optional: true, nullable: false
+
+      field :expected_at, -> { String }, optional: true, nullable: true
+
       field :completed_at, -> { String }, optional: true, nullable: false
-      field :notes, -> { String }, optional: true, nullable: false
-      field :tracking_number, -> { String }, optional: true, nullable: false
+
+      field :notes, -> { String }, optional: true, nullable: true
+
+      field :tracking_number, -> { String }, optional: true, nullable: true
+
       field :created_by_team_member_id, -> { String }, optional: true, nullable: false
-      field :line_items, -> { Internal::Types::Array[Square::Types::TransferOrderLine] }, optional: true, nullable: false
+
+      field :line_items, -> { Internal::Types::Array[Square::Types::TransferOrderLine] }, optional: true, nullable: true
+
       field :version, -> { Integer }, optional: true, nullable: false
     end
   end

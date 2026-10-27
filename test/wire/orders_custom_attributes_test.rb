@@ -8,7 +8,8 @@ class OrdersCustomAttributesWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -50,6 +51,7 @@ class OrdersCustomAttributesWireTest < WireMockTestCase
         "cover-count" => {
           custom_attribute: {
             key: "cover-count",
+            value: "6",
             version: 2
           },
           order_id: "7BbXGEIWNldxAzrtGf9GPVZTwZ4F"
@@ -57,6 +59,7 @@ class OrdersCustomAttributesWireTest < WireMockTestCase
         "table-number" => {
           custom_attribute: {
             key: "table-number",
+            value: "11",
             version: 4
           },
           order_id: "7BbXGEIWNldxAzrtGf9GPVZTwZ4F"
@@ -76,6 +79,16 @@ class OrdersCustomAttributesWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/orders/custom-attributes/bulk-upsert",
+      expected: {
+        "/values/cover-count/custom_attribute/version" => 2,
+        "/values/table-number/custom_attribute/version" => 4
+      }
+    )
   end
 
   def test_orders_custom_attributes_list_with_wiremock
@@ -93,7 +106,6 @@ class OrdersCustomAttributesWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -108,7 +120,7 @@ class OrdersCustomAttributesWireTest < WireMockTestCase
   def test_orders_custom_attributes_get_with_wiremock
     test_id = "orders.custom_attributes.get.0"
 
-    @client.orders.custom_attributes.get(
+    result = @client.orders.custom_attributes.get(
       order_id: "order_id",
       custom_attribute_key: "custom_attribute_key",
       version: 1,
@@ -127,16 +139,25 @@ class OrdersCustomAttributesWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute/version" => 1,
+        "/custom_attribute/definition/version" => 1
+      }
+    )
   end
 
   def test_orders_custom_attributes_upsert_with_wiremock
     test_id = "orders.custom_attributes.upsert.0"
 
-    @client.orders.custom_attributes.upsert(
+    result = @client.orders.custom_attributes.upsert(
       order_id: "order_id",
       custom_attribute_key: "custom_attribute_key",
       custom_attribute: {
         key: "table-number",
+        value: "42",
         version: 1
       },
       request_options: {
@@ -152,6 +173,23 @@ class OrdersCustomAttributesWireTest < WireMockTestCase
       url_path: "/v2/orders/order_id/custom-attributes/custom_attribute_key",
       query_params: nil,
       expected: 1
+    )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/orders/order_id/custom-attributes/custom_attribute_key",
+      expected: {
+        "/custom_attribute/version" => 1
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/custom_attribute/version" => 1,
+        "/custom_attribute/definition/version" => 1
+      }
     )
   end
 

@@ -22,6 +22,22 @@ module Square
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.terminal.checkouts.create(
+        #     idempotency_key: "28a0c3bc-7839-11ea-bc55-0242ac130003",
+        #     checkout: {
+        #       amount_money: {
+        #         amount: 2610,
+        #         currency: "USD"
+        #       },
+        #       reference_id: "id11572",
+        #       note: "A brief note",
+        #       device_options: {
+        #         device_id: "dbb5d83a-7838-11ea-bc55-0242ac130003"
+        #       }
+        #     }
+        #   )
+        #
         # @return [Square::Types::CreateTerminalCheckoutResponse]
         def create(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -39,7 +55,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::CreateTerminalCheckoutResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::CreateTerminalCheckoutResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -58,6 +74,16 @@ module Square
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.terminal.checkouts.search(
+        #     query: {
+        #       filter: {
+        #         status: "COMPLETED"
+        #       }
+        #     },
+        #     limit: 2
+        #   )
+        #
         # @return [Square::Types::SearchTerminalCheckoutsResponse]
         def search(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -75,7 +101,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::SearchTerminalCheckoutsResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::SearchTerminalCheckoutsResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -93,13 +119,16 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :checkout_id
         #
+        # @example
+        #   client.terminal.checkouts.get(checkout_id: "checkout_id")
+        #
         # @return [Square::Types::GetTerminalCheckoutResponse]
         def get(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
-            path: "v2/terminals/checkouts/#{params[:checkout_id]}",
+            path: "v2/terminals/checkouts/#{URI.encode_uri_component(params[:checkout_id].to_s)}",
             request_options: request_options
           )
           begin
@@ -109,7 +138,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::GetTerminalCheckoutResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::GetTerminalCheckoutResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -127,13 +156,16 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :checkout_id
         #
+        # @example
+        #   client.terminal.checkouts.cancel(checkout_id: "checkout_id")
+        #
         # @return [Square::Types::CancelTerminalCheckoutResponse]
         def cancel(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
-            path: "v2/terminals/checkouts/#{params[:checkout_id]}/cancel",
+            path: "v2/terminals/checkouts/#{URI.encode_uri_component(params[:checkout_id].to_s)}/cancel",
             request_options: request_options
           )
           begin
@@ -143,7 +175,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::CancelTerminalCheckoutResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::CancelTerminalCheckoutResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

@@ -8,14 +8,15 @@ class CustomersCardsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
   def test_customers_cards_create_with_wiremock
     test_id = "customers.cards.create.0"
 
-    @client.customers.cards.create(
+    result = @client.customers.cards.create(
       customer_id: "customer_id",
       card_nonce: "YOUR_CARD_NONCE",
       billing_address: {
@@ -40,6 +41,15 @@ class CustomersCardsWireTest < WireMockTestCase
       url_path: "/v2/customers/customer_id/cards",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/card/exp_month" => 11,
+        "/card/exp_year" => 2018,
+        "/card/version" => 1000000
+      }
     )
   end
 

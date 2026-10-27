@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents a generic time range. The start and end values are
@@ -8,8 +10,9 @@ module Square
     # Refer to the relevant endpoint-specific documentation to determine
     # how time ranges are handled.
     class TimeRange < Internal::Types::Model
-      field :start_at, -> { String }, optional: true, nullable: false
-      field :end_at, -> { String }, optional: true, nullable: false
+      field :start_at, -> { String }, optional: true, nullable: true
+
+      field :end_at, -> { String }, optional: true, nullable: true
     end
   end
 end

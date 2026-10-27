@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents a
@@ -9,7 +11,9 @@ module Square
     # If additional results are available, the `cursor` field is also present along with `custom_attribute_definitions`.
     class ListCustomerCustomAttributeDefinitionsResponse < Internal::Types::Model
       field :custom_attribute_definitions, -> { Internal::Types::Array[Square::Types::CustomAttributeDefinition] }, optional: true, nullable: false
+
       field :cursor, -> { String }, optional: true, nullable: false
+
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
     end
   end

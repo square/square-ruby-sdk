@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # A `Shift` search query filter parameter that sets a range of days that
@@ -9,8 +11,10 @@ module Square
     # notes](https://developer.squareup.com/docs/labor-api/what-it-does#migration-notes).
     class ShiftWorkday < Internal::Types::Model
       field :date_range, -> { Square::Types::DateRange }, optional: true, nullable: false
+
       field :match_shifts_by, -> { Square::Types::ShiftWorkdayMatcher }, optional: true, nullable: false
-      field :default_timezone, -> { String }, optional: true, nullable: false
+
+      field :default_timezone, -> { String }, optional: true, nullable: true
     end
   end
 end

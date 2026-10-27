@@ -4,7 +4,7 @@ module Square
   module Vendors
     module Types
       class BatchGetVendorsRequest < Internal::Types::Model
-        field :vendor_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+        field :vendor_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: true
       end
     end
   end

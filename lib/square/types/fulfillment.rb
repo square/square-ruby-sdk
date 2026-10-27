@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Contains details about how to fulfill this order.
@@ -7,15 +9,24 @@ module Square
     # However, orders returned by the Orders API might contain multiple fulfillments because sellers can create multiple
     # fulfillments using Square products such as Square Online.
     class Fulfillment < Internal::Types::Model
-      field :uid, -> { String }, optional: true, nullable: false
+      field :uid, -> { String }, optional: true, nullable: true
+
       field :type, -> { Square::Types::FulfillmentType }, optional: true, nullable: false
+
       field :state, -> { Square::Types::FulfillmentState }, optional: true, nullable: false
+
       field :line_item_application, -> { Square::Types::FulfillmentFulfillmentLineItemApplication }, optional: true, nullable: false
+
       field :entries, -> { Internal::Types::Array[Square::Types::FulfillmentFulfillmentEntry] }, optional: true, nullable: false
-      field :metadata, -> { Internal::Types::Hash[String, String] }, optional: true, nullable: false
+
+      field :metadata, -> { Internal::Types::Hash[String, String] }, optional: true, nullable: true
+
       field :pickup_details, -> { Square::Types::FulfillmentPickupDetails }, optional: true, nullable: false
+
       field :shipment_details, -> { Square::Types::FulfillmentShipmentDetails }, optional: true, nullable: false
+
       field :delivery_details, -> { Square::Types::FulfillmentDeliveryDetails }, optional: true, nullable: false
+
       field :in_store_details, -> { Square::Types::FulfillmentInStoreDetails }, optional: true, nullable: false
     end
   end

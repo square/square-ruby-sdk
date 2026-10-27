@@ -5,8 +5,9 @@ module Square
     module LocationProfiles
       module Types
         class ListLocationProfilesRequest < Internal::Types::Model
-          field :limit, -> { Integer }, optional: true, nullable: false
-          field :cursor, -> { String }, optional: true, nullable: false
+          field :limit, -> { Integer }, optional: true, nullable: true
+
+          field :cursor, -> { String }, optional: true, nullable: true
         end
       end
     end

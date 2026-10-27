@@ -29,19 +29,28 @@ module Square
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.catalog.images.create
+        #
         # @return [Square::Types::CreateCatalogImageResponse]
         def create(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           body = Internal::Multipart::FormData.new
 
-          if params[:request]
+          unless params[:request].nil?
             body.add(
               name: "request",
               value: params[:request],
               content_type: "application/json; charset=utf-8"
             )
           end
-          body.add_part(params[:image_file].to_form_data_part(name: "image_file")) if params[:image_file]
+          if params[:image_file]
+            body.add_file(
+              name: "image_file",
+              file: params[:image_file],
+              content_type: "image/jpeg"
+            )
+          end
 
           request = Square::Internal::Multipart::Request.new(
             base_url: request_options[:base_url],
@@ -57,7 +66,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::CreateCatalogImageResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::CreateCatalogImageResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -80,24 +89,33 @@ module Square
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :image_id
         #
+        # @example
+        #   client.catalog.images.update(image_id: "image_id")
+        #
         # @return [Square::Types::UpdateCatalogImageResponse]
         def update(request_options: {}, **params)
           params = Square::Internal::Types::Utils.normalize_keys(params)
           body = Internal::Multipart::FormData.new
 
-          if params[:request]
+          unless params[:request].nil?
             body.add(
               name: "request",
               value: params[:request],
               content_type: "application/json; charset=utf-8"
             )
           end
-          body.add_part(params[:image_file].to_form_data_part(name: "image_file")) if params[:image_file]
+          if params[:image_file]
+            body.add_file(
+              name: "image_file",
+              file: params[:image_file],
+              content_type: "image/jpeg"
+            )
+          end
 
           request = Square::Internal::Multipart::Request.new(
             base_url: request_options[:base_url],
             method: "PUT",
-            path: "v2/catalog/images/#{params[:image_id]}",
+            path: "v2/catalog/images/#{URI.encode_uri_component(params[:image_id].to_s)}",
             body: body,
             request_options: request_options
           )
@@ -108,7 +126,7 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::UpdateCatalogImageResponse.load(response.body)
+            (response.body.to_s.empty? ? nil : Square::Types::UpdateCatalogImageResponse.load(response.body))
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

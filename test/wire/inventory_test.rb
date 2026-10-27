@@ -8,7 +8,8 @@ class InventoryWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -168,7 +169,7 @@ class InventoryWireTest < WireMockTestCase
   def test_inventory_deprecated_get_adjustment_with_wiremock
     test_id = "inventory.deprecated_get_adjustment.0"
 
-    @client.inventory.deprecated_get_adjustment(
+    result = @client.inventory.deprecated_get_adjustment(
       adjustment_id: "adjustment_id",
       request_options: {
         additional_headers: {
@@ -184,12 +185,20 @@ class InventoryWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/adjustment/total_price_money/amount" => 4550,
+        "/adjustment/cost_money/amount" => 1000000
+      }
+    )
   end
 
   def test_inventory_update_inventory_adjustment_with_wiremock
     test_id = "inventory.update_inventory_adjustment.0"
 
-    @client.inventory.update_inventory_adjustment(
+    result = @client.inventory.update_inventory_adjustment(
       idempotency_key: "8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe",
       adjustment: {},
       request_options: {
@@ -206,12 +215,20 @@ class InventoryWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/adjustment/total_price_money/amount" => 4550,
+        "/adjustment/cost_money/amount" => 1000000
+      }
+    )
   end
 
   def test_inventory_get_adjustment_with_wiremock
     test_id = "inventory.get_adjustment.0"
 
-    @client.inventory.get_adjustment(
+    result = @client.inventory.get_adjustment(
       adjustment_id: "adjustment_id",
       request_options: {
         additional_headers: {
@@ -226,6 +243,14 @@ class InventoryWireTest < WireMockTestCase
       url_path: "/v2/inventory/adjustments/adjustment_id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/adjustment/total_price_money/amount" => 4550,
+        "/adjustment/cost_money/amount" => 1000000
+      }
     )
   end
 
@@ -362,7 +387,6 @@ class InventoryWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -387,7 +411,6 @@ class InventoryWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -454,7 +477,6 @@ class InventoryWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -479,7 +501,6 @@ class InventoryWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(

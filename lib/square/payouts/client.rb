@@ -14,6 +14,13 @@ module Square
       # You can filter payouts by location ID, status, time range, and order them in ascending or descending order.
       # To call this endpoint, set `PAYOUTS_READ` for the OAuth scope.
       #
+      # Returns a `Square::Internal::CursorItemIterator` that yields each `Square::Types::Payout` in the `payouts` field
+      # of every page, requesting pages as they are needed. Call `pages` on it to get each page as a
+      # `Square::Types::ListPayoutsResponse`, including its other fields.
+      #
+      # No request is sent by this call. The first page is requested when you start iterating (or call
+      # `load_first_page`), so an API error is raised by the loop (or by `load_first_page`), not by this call.
+      #
       # @param request_options [Hash]
       # @param params [Hash]
       # @option request_options [String] :base_url
@@ -29,10 +36,20 @@ module Square
       # @option params [String, nil] :cursor
       # @option params [Integer, nil] :limit
       #
-      # @return [Square::Types::ListPayoutsResponse]
+      # @example
+      #   client.payouts.list(
+      #     location_id: "location_id",
+      #     status: "SENT",
+      #     begin_time: "begin_time",
+      #     end_time: "end_time",
+      #     sort_order: "DESC",
+      #     cursor: "cursor",
+      #     limit: 1
+      #   )
+      #
+      # @return [Square::Internal::CursorItemIterator]
       def list(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[location_id status begin_time end_time sort_order cursor limit]
         query_params = {}
         query_params["location_id"] = params[:location_id] if params.key?(:location_id)
         query_params["status"] = params[:status] if params.key?(:status)
@@ -41,14 +58,13 @@ module Square
         query_params["sort_order"] = params[:sort_order] if params.key?(:sort_order)
         query_params["cursor"] = params[:cursor] if params.key?(:cursor)
         query_params["limit"] = params[:limit] if params.key?(:limit)
-        params.except(*query_param_names)
 
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :payouts,
-          initial_cursor: query_params[:cursor]
+          initial_cursor: query_params["cursor"]
         ) do |next_cursor|
-          query_params[:cursor] = next_cursor
+          query_params["cursor"] = next_cursor
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -63,7 +79,8 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::ListPayoutsResponse.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Square::Types::ListPayoutsResponse.load(response.body))
+            [parsed_response, response]
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -83,13 +100,16 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :payout_id
       #
+      # @example
+      #   client.payouts.get(payout_id: "payout_id")
+      #
       # @return [Square::Types::GetPayoutResponse]
       def get(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/payouts/#{params[:payout_id]}",
+          path: "v2/payouts/#{URI.encode_uri_component(params[:payout_id].to_s)}",
           request_options: request_options
         )
         begin
@@ -99,7 +119,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::GetPayoutResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::GetPayoutResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -108,6 +128,13 @@ module Square
 
       # Retrieves a list of all payout entries for a specific payout.
       # To call this endpoint, set `PAYOUTS_READ` for the OAuth scope.
+      #
+      # Returns a `Square::Internal::CursorItemIterator` that yields each `Square::Types::PayoutEntry` in the
+      # `payout_entries` field of every page, requesting pages as they are needed. Call `pages` on it to get each page
+      # as a `Square::Types::ListPayoutEntriesResponse`, including its other fields.
+      #
+      # No request is sent by this call. The first page is requested when you start iterating (or call
+      # `load_first_page`), so an API error is raised by the loop (or by `load_first_page`), not by this call.
       #
       # @param request_options [Hash]
       # @param params [Hash]
@@ -121,26 +148,32 @@ module Square
       # @option params [String, nil] :cursor
       # @option params [Integer, nil] :limit
       #
-      # @return [Square::Types::ListPayoutEntriesResponse]
+      # @example
+      #   client.payouts.list_entries(
+      #     payout_id: "payout_id",
+      #     sort_order: "DESC",
+      #     cursor: "cursor",
+      #     limit: 1
+      #   )
+      #
+      # @return [Square::Internal::CursorItemIterator]
       def list_entries(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[sort_order cursor limit]
         query_params = {}
         query_params["sort_order"] = params[:sort_order] if params.key?(:sort_order)
         query_params["cursor"] = params[:cursor] if params.key?(:cursor)
         query_params["limit"] = params[:limit] if params.key?(:limit)
-        params = params.except(*query_param_names)
 
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :payout_entries,
-          initial_cursor: query_params[:cursor]
+          initial_cursor: query_params["cursor"]
         ) do |next_cursor|
-          query_params[:cursor] = next_cursor
+          query_params["cursor"] = next_cursor
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
-            path: "v2/payouts/#{params[:payout_id]}/payout-entries",
+            path: "v2/payouts/#{URI.encode_uri_component(params[:payout_id].to_s)}/payout-entries",
             query: query_params,
             request_options: request_options
           )
@@ -151,7 +184,8 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::ListPayoutEntriesResponse.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Square::Types::ListPayoutEntriesResponse.load(response.body))
+            [parsed_response, response]
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

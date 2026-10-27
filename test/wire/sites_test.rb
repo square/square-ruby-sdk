@@ -8,7 +8,8 @@ class SitesWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -16,10 +17,10 @@ class SitesWireTest < WireMockTestCase
     test_id = "sites.list.0"
 
     @client.sites.list(request_options: {
-                         additional_headers: {
-                           "X-Test-Id" => "sites.list.0"
-                         }
-                       })
+      additional_headers: {
+        "X-Test-Id" => "sites.list.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

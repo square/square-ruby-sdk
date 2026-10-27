@@ -10,6 +10,13 @@ module Square
         @client = client
       end
 
+      # Returns a `Square::Internal::CursorItemIterator` that yields each `Square::Types::Channel` in the `channels`
+      # field of every page, requesting pages as they are needed. Call `pages` on it to get each page as a
+      # `Square::Types::ListChannelsResponse`, including its other fields.
+      #
+      # No request is sent by this call. The first page is requested when you start iterating (or call
+      # `load_first_page`), so an API error is raised by the loop (or by `load_first_page`), not by this call.
+      #
       # @param request_options [Hash]
       # @param params [Hash]
       # @option request_options [String] :base_url
@@ -23,24 +30,31 @@ module Square
       # @option params [String, nil] :cursor
       # @option params [Integer, nil] :limit
       #
-      # @return [Square::Types::ListChannelsResponse]
+      # @example
+      #   client.channels.list(
+      #     reference_type: "UNKNOWN_TYPE",
+      #     reference_id: "reference_id",
+      #     status: "ACTIVE",
+      #     cursor: "cursor",
+      #     limit: 1
+      #   )
+      #
+      # @return [Square::Internal::CursorItemIterator]
       def list(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[reference_type reference_id status cursor limit]
         query_params = {}
         query_params["reference_type"] = params[:reference_type] if params.key?(:reference_type)
         query_params["reference_id"] = params[:reference_id] if params.key?(:reference_id)
         query_params["status"] = params[:status] if params.key?(:status)
         query_params["cursor"] = params[:cursor] if params.key?(:cursor)
         query_params["limit"] = params[:limit] if params.key?(:limit)
-        params.except(*query_param_names)
 
         Square::Internal::CursorItemIterator.new(
           cursor_field: :cursor,
           item_field: :channels,
-          initial_cursor: query_params[:cursor]
+          initial_cursor: query_params["cursor"]
         ) do |next_cursor|
-          query_params[:cursor] = next_cursor
+          query_params["cursor"] = next_cursor
           request = Square::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -55,7 +69,8 @@ module Square
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Square::Types::ListChannelsResponse.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Square::Types::ListChannelsResponse.load(response.body))
+            [parsed_response, response]
           else
             error_class = Square::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -70,6 +85,9 @@ module Square
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
+      #
+      # @example
+      #   client.channels.bulk_retrieve(channel_ids: %w[CH_9C03D0B59 CH_6X139B5MN NOT_EXISTING])
       #
       # @return [Square::Types::BulkRetrieveChannelsResponse]
       def bulk_retrieve(request_options: {}, **params)
@@ -88,7 +106,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::BulkRetrieveChannelsResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::BulkRetrieveChannelsResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -104,13 +122,16 @@ module Square
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :channel_id
       #
+      # @example
+      #   client.channels.get(channel_id: "channel_id")
+      #
       # @return [Square::Types::RetrieveChannelResponse]
       def get(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v2/channels/#{params[:channel_id]}",
+          path: "v2/channels/#{URI.encode_uri_component(params[:channel_id].to_s)}",
           request_options: request_options
         )
         begin
@@ -120,7 +141,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::RetrieveChannelResponse.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::RetrieveChannelResponse.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

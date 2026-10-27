@@ -24,20 +24,26 @@ module Square
       # @option params [Integer, nil] :limit
       # @option params [String, nil] :batch_token
       #
+      # @example
+      #   client.v_1_transactions.v_1_list_orders(
+      #     location_id: "location_id",
+      #     order: "DESC",
+      #     limit: 1,
+      #     batch_token: "batch_token"
+      #   )
+      #
       # @return [Array[Square::Types::V1Order]]
       def v_1_list_orders(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[order limit batch_token]
         query_params = {}
         query_params["order"] = params[:order] if params.key?(:order)
         query_params["limit"] = params[:limit] if params.key?(:limit)
         query_params["batch_token"] = params[:batch_token] if params.key?(:batch_token)
-        params = params.except(*query_param_names)
 
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v1/#{params[:location_id]}/orders",
+          path: "v1/#{URI.encode_uri_component(params[:location_id].to_s)}/orders",
           query: query_params,
           request_options: request_options
         )
@@ -47,10 +53,12 @@ module Square
           raise Square::Errors::TimeoutError
         end
         code = response.code.to_i
-        return if code.between?(200, 299)
-
-        error_class = Square::Errors::ResponseError.subclass_for_code(code)
-        raise error_class.new(response.body, code: code)
+        if code.between?(200, 299)
+          Square::Internal::Types::Utils.coerce(Internal::Types::Array[Square::Types::V1Order], (response.body.to_s.empty? ? nil : JSON.parse(response.body, symbolize_names: true)))
+        else
+          error_class = Square::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
       end
 
       # Provides comprehensive information for a single online store order, including the order's history.
@@ -65,13 +73,19 @@ module Square
       # @option params [String] :location_id
       # @option params [String] :order_id
       #
+      # @example
+      #   client.v_1_transactions.v_1_retrieve_order(
+      #     location_id: "location_id",
+      #     order_id: "order_id"
+      #   )
+      #
       # @return [Square::Types::V1Order]
       def v_1_retrieve_order(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
-          path: "v1/#{params[:location_id]}/orders/#{params[:order_id]}",
+          path: "v1/#{URI.encode_uri_component(params[:location_id].to_s)}/orders/#{URI.encode_uri_component(params[:order_id].to_s)}",
           request_options: request_options
         )
         begin
@@ -81,7 +95,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::V1Order.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::V1Order.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -101,6 +115,13 @@ module Square
       # @option params [String] :location_id
       # @option params [String] :order_id
       #
+      # @example
+      #   client.v_1_transactions.v_1_update_order(
+      #     location_id: "location_id",
+      #     order_id: "order_id",
+      #     action: "COMPLETE"
+      #   )
+      #
       # @return [Square::Types::V1Order]
       def v_1_update_order(request_options: {}, **params)
         params = Square::Internal::Types::Utils.normalize_keys(params)
@@ -111,7 +132,7 @@ module Square
         request = Square::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "PUT",
-          path: "v1/#{params[:location_id]}/orders/#{params[:order_id]}",
+          path: "v1/#{URI.encode_uri_component(params[:location_id].to_s)}/orders/#{URI.encode_uri_component(params[:order_id].to_s)}",
           body: body,
           request_options: request_options
         )
@@ -122,7 +143,7 @@ module Square
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Square::Types::V1Order.load(response.body)
+          (response.body.to_s.empty? ? nil : Square::Types::V1Order.load(response.body))
         else
           error_class = Square::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

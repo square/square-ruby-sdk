@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # Represents a
@@ -8,6 +10,7 @@ module Square
     # which contains a map of responses that each corresponds to an individual delete request.
     class BulkDeleteMerchantCustomAttributesResponse < Internal::Types::Model
       field :values, -> { Internal::Types::Hash[String, Square::Types::BulkDeleteMerchantCustomAttributesResponseMerchantCustomAttributeDeleteResponse] }, optional: false, nullable: false
+
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
     end
   end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../square"
+
 module Square
   module Types
     # The response to a request for a set of `WorkweekConfig` objects. The response contains
@@ -7,7 +9,9 @@ module Square
     # the request resulted in errors.
     class ListWorkweekConfigsResponse < Internal::Types::Model
       field :workweek_configs, -> { Internal::Types::Array[Square::Types::WorkweekConfig] }, optional: true, nullable: false
+
       field :cursor, -> { String }, optional: true, nullable: false
+
       field :errors, -> { Internal::Types::Array[Square::Types::Error] }, optional: true, nullable: false
     end
   end

@@ -8,7 +8,8 @@ class ChannelsWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
@@ -27,7 +28,6 @@ class ChannelsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -42,7 +42,7 @@ class ChannelsWireTest < WireMockTestCase
   def test_channels_bulk_retrieve_with_wiremock
     test_id = "channels.bulk_retrieve.0"
 
-    @client.channels.bulk_retrieve(
+    result = @client.channels.bulk_retrieve(
       channel_ids: %w[CH_9C03D0B59 CH_6X139B5MN NOT_EXISTING],
       request_options: {
         additional_headers: {
@@ -58,12 +58,20 @@ class ChannelsWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/responses/CH_6X139B5MN/channel/version" => 1,
+        "/responses/CH_9C03D0B59/channel/version" => 1
+      }
+    )
   end
 
   def test_channels_get_with_wiremock
     test_id = "channels.get.0"
 
-    @client.channels.get(
+    result = @client.channels.get(
       channel_id: "channel_id",
       request_options: {
         additional_headers: {
@@ -78,6 +86,13 @@ class ChannelsWireTest < WireMockTestCase
       url_path: "/v2/channels/channel_id",
       query_params: nil,
       expected: 1
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/channel/version" => 1
+      }
     )
   end
 end

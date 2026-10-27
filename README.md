@@ -9,7 +9,7 @@ The Square Ruby library provides convenient access to the Square API from Ruby.
 
 Use of the Square Ruby SDK requires:
 
-* Ruby 3.2+
+* Ruby 3.3+
 
 ## Installation
 
@@ -21,8 +21,25 @@ gem install square.rb
 
 Or in your Gemfile:
 ```ruby
-gem 'square.rb', '~> 44.0.0'
+gem 'square.rb', '~> 48.0'
 ```
+
+### Upgrading to 48.0
+
+Version 48.0 contains the following behavior changes:
+
+* **Plain `http://` base URLs are rejected.** The SDK raises `ArgumentError` for any non-HTTPS `base_url`
+  except `localhost`, `127.0.0.1` and `[::1]`, because credentials would otherwise be sent in plaintext.
+  If you route requests through a proxy or gateway, give it an HTTPS URL.
+* **Connection failures raise `Square::Errors::ConnectionError`.** Failed connections, DNS lookups and TLS
+  handshakes no longer leak `Errno::ECONNREFUSED`, `Errno::ECONNRESET`, `SocketError` or
+  `OpenSSL::SSL::SSLError`; the original exception is available as `cause`. `Errno::ETIMEDOUT` now raises
+  `Square::Errors::TimeoutError`. Rescue these classes instead of the raw ones (see [Errors](#errors)).
+* **Decimal fields are `Float`.** `Coordinates#latitude`, `Coordinates#longitude` and
+  `V1Order#btc_price_satoshi` were `Integer`, which dropped the fractional part.
+* **Unset fields are not sent.** Sparse updates such as `orders.update(order: {})` no longer send `null`
+  for fields you did not set (see [Sparse Updates](#sparse-updates)).
+* **Pagination** now returns an iterator that can be looped over more than once (see [Pagination](#pagination)).
 
 ## Usage
 
@@ -127,6 +144,8 @@ client = Square::Client.new(
 )
 ```
 
+Custom URLs must use HTTPS. Plain `http://` is only accepted for `localhost`, `127.0.0.1` and `[::1]`.
+
 ## Request And Response Types
 
 The SDK exports all request and response types as Ruby classes. Simply require them with the
@@ -156,56 +175,70 @@ begin
     result = client.payments.create
 rescue Square::Errors::TimeoutError
     puts "API didn't respond before our timeout elapsed"
+rescue Square::Errors::ConnectionError => e
+    puts "Could not connect to the API: #{e.cause&.message}"
 rescue Square::Errors::ServiceUnavailableError
     puts "API returned status 503, is probably overloaded, try again later"
 rescue Square::Errors::ServerError
     puts "API returned some other 5xx status, this is probably a bug"
 rescue Square::Errors::ResponseError => e
-    puts "API returned an unexpected status other than 5xx: #{e.code} {e.message}"
+    puts "API returned an unexpected status other than 5xx: #{e.code} #{e.message}"
 rescue Square::Errors::ApiError => e
-    puts "Some other error occurred when calling the API: {e.message}"
+    puts "Some other error occurred when calling the API: #{e.message}"
 end
 ```
 
 ## Pagination
 
-List endpoints are paginated. The SDK provides methods to handle pagination:
+List and search endpoints return an iterator. Looping over it yields individual items and fetches further
+pages as needed:
 
 ```ruby
 require 'square'
 
-client = Square::Client.new(access_token: "YOUR_TOKEN")
+client = Square::Client.new(token: "YOUR_TOKEN")
 
-# Get all items using pagination
-response = client.bank_accounts.list
-all_bank_accounts = []
-
-while response.data.bank_accounts.any?
-  all_bank_accounts.concat(response.data.bank_accounts)
-  
-  # Check if there are more pages
-  if response.cursor
-    response = client.bank_accounts.list(cursor: response.cursor)
-  else
-    break
-  end
+client.bank_accounts.list.each do |bank_account|
+  puts bank_account.id
 end
-
-puts "Total bank accounts: #{all_bank_accounts.length}"
 ```
+
+Use `pages` to work with whole pages instead of items:
+
+```ruby
+client.bank_accounts.list.pages.each do |page|
+  puts "Got #{page.bank_accounts.length} bank accounts"
+end
+```
+
+Every loop starts again from the first page, and loops (and `pages`) do not share a position, so you can
+iterate a result more than once or nest loops. To step through items manually, use `next_element` and
+`next?`; call `rewind` to go back to the start.
+
+The request for the first page is sent when you first read from the iterator. To send it immediately, so
+that an API error is raised at the call site, use `load_first_page`:
+
+```ruby
+items = client.bank_accounts.list.load_first_page
+```
+
+After a request, `http_response` returns the raw `Net::HTTPResponse` of the most recent page request.
 
 ## Advanced
 
 ### Additional Headers
 
-If you would like to send additional headers as part of the request, use the `headers` request option.
+If you would like to send additional headers as part of the request, use the `additional_headers` request option.
 
 ```ruby
-response = client.payments.create(..., {
-  headers: {
-    'X-Custom-Header' => 'custom value'
+response = client.payments.create(
+  ...,
+  request_options: {
+    additional_headers: {
+      'X-Custom-Header' => 'custom value'
+    }
   }
-})
+)
 ```
 
 ### Receive Extra Properties
@@ -235,25 +268,56 @@ A request is deemed retriable when any of the following HTTP status codes is ret
 
 - [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
 - [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
-- [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) (Internal Server Errors)
+- [500](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500), [502](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/502), [503](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503), [504](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504) (Server Errors)
+- 521, 522 and 524 (Cloudflare origin errors)
 
-Use the `max_retries` request option to configure this behavior.
+Connection failures (`Square::Errors::ConnectionError`) are not retried.
+
+Use the `max_retries` client option to configure this behavior.
 
 ```ruby
-response = client.payments.create(..., {
-  max_retries: 0 # override max_retries at the request level
-})
+client = Square::Client.new(
+  token: "YOUR_TOKEN",
+  max_retries: 0 # disable retries
+)
 ```
 
 ### Timeouts
 
-The SDK defaults to a 60 second timeout. Use the `timeout_in_seconds` option to configure this behavior.
+The SDK defaults to a 60 second timeout. Use the `timeout` client option to change it for every request, or
+the `timeout_in_seconds` request option to override it for a single request.
 
 ```ruby
-response = client.payments.create(..., {
-  timeout_in_seconds: 30 # override timeout to 30s
-})
+client = Square::Client.new(
+  token: "YOUR_TOKEN",
+  timeout: 30 # 30s for every request
+)
+
+response = client.payments.create(
+  ...,
+  request_options: {
+    timeout_in_seconds: 10 # override to 10s for this request
+  }
+)
 ```
+
+### Sparse Updates
+
+Fields you do not set are left out of the request body, so partial updates only send what you provide.
+A field you set to `nil` is still sent as `null`.
+
+```ruby
+client.orders.update(order_id: order.id, idempotency_key: SecureRandom.uuid, order: {})
+# => {"order":{},"idempotency_key":"..."}
+
+client.orders.update(order_id: order.id, idempotency_key: SecureRandom.uuid, order: { reference_id: nil })
+# => {"order":{"reference_id":null},"idempotency_key":"..."}
+```
+
+### Times
+
+`Time` values, including `ActiveSupport::TimeWithZone`, are sent as RFC 3339 strings with millisecond
+precision in request bodies and query parameters (for example `begin_time`).
 
 ## Reporting API
 

@@ -6,6 +6,7 @@ module Square
       module Types
         class GetShiftsRequest < Internal::Types::Model
           field :shift_id, -> { String }, optional: false, nullable: false
+
           field :location_id, -> { String }, optional: false, nullable: false
         end
       end

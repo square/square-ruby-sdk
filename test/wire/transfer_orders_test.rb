@@ -8,14 +8,15 @@ class TransferOrdersWireTest < WireMockTestCase
 
     @client = Square::Client.new(
       token: "<token>",
-      base_url: WIREMOCK_BASE_URL
+      base_url: WIREMOCK_BASE_URL,
+      max_retries: 0
     )
   end
 
   def test_transfer_orders_create_with_wiremock
     test_id = "transfer_orders.create.0"
 
-    @client.transfer_orders.create(
+    result = @client.transfer_orders.create(
       idempotency_key: "65cc0586-3e82-384s-b524-3885cffd52",
       transfer_order: {
         source_location_id: "EXAMPLE_SOURCE_LOCATION_ID_123",
@@ -46,6 +47,13 @@ class TransferOrdersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/transfer_order/version" => 1753109537351
+      }
+    )
   end
 
   def test_transfer_orders_search_with_wiremock
@@ -71,7 +79,6 @@ class TransferOrdersWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -81,12 +88,21 @@ class TransferOrdersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/transfer-orders/search",
+      expected: {
+        "/limit" => 10
+      }
+    )
   end
 
   def test_transfer_orders_get_with_wiremock
     test_id = "transfer_orders.get.0"
 
-    @client.transfer_orders.get(
+    result = @client.transfer_orders.get(
       transfer_order_id: "transfer_order_id",
       request_options: {
         additional_headers: {
@@ -102,12 +118,19 @@ class TransferOrdersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/transfer_order/version" => 1753117449752
+      }
+    )
   end
 
   def test_transfer_orders_update_with_wiremock
     test_id = "transfer_orders.update.0"
 
-    @client.transfer_orders.update(
+    result = @client.transfer_orders.update(
       transfer_order_id: "transfer_order_id",
       idempotency_key: "f47ac10b-58cc-4372-a567-0e02b2c3d479",
       transfer_order: {
@@ -127,7 +150,7 @@ class TransferOrdersWireTest < WireMockTestCase
           remove: true
         }]
       },
-      version: 1_753_109_537_351,
+      version: 1753109537351,
       request_options: {
         additional_headers: {
           "X-Test-Id" => "transfer_orders.update.0"
@@ -142,6 +165,22 @@ class TransferOrdersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "PUT",
+      url_path: "/v2/transfer-orders/transfer_order_id",
+      expected: {
+        "/version" => 1753109537351
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/transfer_order/version" => 1753122900456
+      }
+    )
   end
 
   def test_transfer_orders_delete_with_wiremock
@@ -149,7 +188,7 @@ class TransferOrdersWireTest < WireMockTestCase
 
     @client.transfer_orders.delete(
       transfer_order_id: "transfer_order_id",
-      version: 1_000_000,
+      version: 1000000,
       request_options: {
         additional_headers: {
           "X-Test-Id" => "transfer_orders.delete.0"
@@ -169,10 +208,10 @@ class TransferOrdersWireTest < WireMockTestCase
   def test_transfer_orders_cancel_with_wiremock
     test_id = "transfer_orders.cancel.0"
 
-    @client.transfer_orders.cancel(
+    result = @client.transfer_orders.cancel(
       transfer_order_id: "transfer_order_id",
       idempotency_key: "65cc0586-3e82-4d08-b524-3885cffd52",
-      version: 1_753_117_449_752,
+      version: 1753117449752,
       request_options: {
         additional_headers: {
           "X-Test-Id" => "transfer_orders.cancel.0"
@@ -187,12 +226,28 @@ class TransferOrdersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/transfer-orders/transfer_order_id/cancel",
+      expected: {
+        "/version" => 1753117449752
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/transfer_order/version" => 1753117461842
+      }
+    )
   end
 
   def test_transfer_orders_receive_with_wiremock
     test_id = "transfer_orders.receive.0"
 
-    @client.transfer_orders.receive(
+    result = @client.transfer_orders.receive(
       transfer_order_id: "transfer_order_id",
       idempotency_key: "EXAMPLE_IDEMPOTENCY_KEY_101",
       receipt: {
@@ -207,7 +262,7 @@ class TransferOrdersWireTest < WireMockTestCase
           quantity_canceled: "1"
         }]
       },
-      version: 1_753_118_664_873,
+      version: 1753118664873,
       request_options: {
         additional_headers: {
           "X-Test-Id" => "transfer_orders.receive.0"
@@ -222,15 +277,31 @@ class TransferOrdersWireTest < WireMockTestCase
       query_params: nil,
       expected: 1
     )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/transfer-orders/transfer_order_id/receive",
+      expected: {
+        "/version" => 1753118664873
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/transfer_order/version" => 1753118667248
+      }
+    )
   end
 
   def test_transfer_orders_start_with_wiremock
     test_id = "transfer_orders.start.0"
 
-    @client.transfer_orders.start(
+    result = @client.transfer_orders.start(
       transfer_order_id: "transfer_order_id",
       idempotency_key: "EXAMPLE_IDEMPOTENCY_KEY_789",
-      version: 1_753_109_537_351,
+      version: 1753109537351,
       request_options: {
         additional_headers: {
           "X-Test-Id" => "transfer_orders.start.0"
@@ -244,6 +315,22 @@ class TransferOrdersWireTest < WireMockTestCase
       url_path: "/v2/transfer-orders/transfer_order_id/start",
       query_params: nil,
       expected: 1
+    )
+
+    verify_request_body_numbers(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v2/transfer-orders/transfer_order_id/start",
+      expected: {
+        "/version" => 1753109537351
+      }
+    )
+
+    verify_response_numbers(
+      actual: result,
+      expected: {
+        "/transfer_order/version" => 1753118664873
+      }
     )
   end
 end
