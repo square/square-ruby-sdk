@@ -319,6 +319,29 @@ client.orders.update(order_id: order.id, idempotency_key: SecureRandom.uuid, ord
 `Time` values, including `ActiveSupport::TimeWithZone`, are sent as RFC 3339 strings with millisecond
 precision in request bodies and query parameters (for example `begin_time`).
 
+## Webhook Signature Verification
+
+The SDK ships a `.fernignore`-protected helper that verifies webhook signatures, so you can
+confirm that a webhook event came from Square. Require it explicitly, then pass the raw request
+body exactly as received:
+
+```ruby
+require "square"
+require "square/webhooks_helper"
+
+is_valid = Square::WebhooksHelper.verify_signature(
+  request_body: request.raw_post,
+  signature_header: request.headers["x-square-hmacsha256-signature"],
+  signature_key: ENV.fetch("SQUARE_WEBHOOK_SIGNATURE_KEY"),
+  notification_url: "https://example.com/webhooks/square" # The URL where event notifications are sent.
+)
+```
+
+`verify_signature` returns `false` when the signature doesn't match, and raises `ArgumentError`
+if `signature_key` or `notification_url` is empty. It replaces
+`SquareLegacy::WebhooksHelper.is_valid_webhook_event_signature`, so you no longer need to require
+`square_legacy` to verify webhooks.
+
 ## Reporting API
 
 The [Reporting API](https://developer.squareup.com/docs/reporting-api/overview) exposes two
