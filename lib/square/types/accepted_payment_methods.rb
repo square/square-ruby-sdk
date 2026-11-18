@@ -12,6 +12,8 @@ module Square
       field :cash_app_pay, -> { Internal::Types::Boolean }, optional: true, nullable: true
 
       field :afterpay_clearpay, -> { Internal::Types::Boolean }, optional: true, nullable: true
+
+      field :bank_account, -> { Internal::Types::Boolean }, optional: true, nullable: true
     end
   end
 end

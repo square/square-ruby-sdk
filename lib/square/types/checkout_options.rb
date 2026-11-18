@@ -26,6 +26,8 @@ module Square
       field :enable_coupon, -> { Internal::Types::Boolean }, optional: true, nullable: true
 
       field :enable_loyalty, -> { Internal::Types::Boolean }, optional: true, nullable: true
+
+      field :phone_collection, -> { Square::Types::CheckoutOptionsPhoneCollection }, optional: true, nullable: false
     end
   end
 end

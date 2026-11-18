@@ -60,8 +60,8 @@ class CatalogWireTest < WireMockTestCase
       expected: {
         "/objects/0/version" => 1000000,
         "/objects/1/version" => 1000000,
-        "/related_objects/0/version" => 1000000,
         "/related_objects/0/ordinal" => 1000000,
+        "/related_objects/0/version" => 1000000,
         "/related_objects/1/version" => 1000000
       }
     )
@@ -95,8 +95,8 @@ class CatalogWireTest < WireMockTestCase
       expected: {
         "/objects/0/version" => 1000000,
         "/objects/1/version" => 1000000,
-        "/objects/2/version" => 1000000,
         "/objects/2/ordinal" => 1000000,
+        "/objects/2/version" => 1000000,
         "/objects/3/version" => 1000000
       }
     )

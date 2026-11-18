@@ -19710,7 +19710,7 @@ For more information, see [Prepopulate the shipping address](https://developer.s
 <dl>
 <dd>
 
-**payment_note:** `String` — A note for the payment. After processing the payment, Square adds this note to the resulting `Payment`.
+**payment_note:** `String` — A note for the payment. After processing the payment, Square adds this note to the resulting `Payment` as well as the post payment confirmation email.
     
 </dd>
 </dl>

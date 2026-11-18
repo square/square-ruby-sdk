@@ -6,10 +6,10 @@
     "enableWireTests": true,
     "omitUnsetModelFields": true
   },
-  "originGitCommit": "f1e181827110c8ff2dad958ade935292d8025065",
+  "originGitCommit": "2e6eeaa128a1cfb820d04cb151d24c94e3c27c76",
   "originGitCommitIsDirty": false,
   "invokedBy": "ci",
-  "requestedVersion": "48.0.0.20260916",
+  "requestedVersion": "48.1.0.20261118",
   "ciProvider": "github",
-  "sdkVersion": "48.0.0.20260916"
+  "sdkVersion": "48.1.0.20261118"
 }
