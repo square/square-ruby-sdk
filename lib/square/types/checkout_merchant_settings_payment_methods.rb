@@ -11,6 +11,8 @@ module Square
 
       field :cash_app, -> { Square::Types::CheckoutMerchantSettingsPaymentMethodsPaymentMethod }, optional: true, nullable: false
 
+      field :bank_account, -> { Square::Types::CheckoutMerchantSettingsPaymentMethodsPaymentMethod }, optional: true, nullable: false
+
       field :afterpay_clearpay, -> { Square::Types::CheckoutMerchantSettingsPaymentMethodsAfterpayClearpay }, optional: true, nullable: false
     end
   end

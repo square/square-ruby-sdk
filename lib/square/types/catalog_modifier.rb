@@ -26,6 +26,8 @@ module Square
       field :hidden_online, -> { Internal::Types::Boolean }, optional: true, nullable: true
 
       field :child_modifier_list_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: true
+
+      field :kitchen_color, -> { Square::Types::CatalogModifierColor }, optional: true, nullable: false
     end
   end
 end

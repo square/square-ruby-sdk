@@ -8,7 +8,13 @@ module Square
     # to another category. For example, a clothing category can be assigned to a t-shirt item or
     # be made as the parent category to the pants category.
     class CatalogObjectCategory < Internal::Types::Model
-      field :id, -> { String }, optional: false, nullable: false
+      field :id, -> { String }, optional: true, nullable: false
+
+      field :ordinal, -> { Integer }, optional: true, nullable: true
+
+      field :type, -> { String }, optional: true, nullable: false
+
+      field :category_data, -> { Square::Types::CatalogCategory }, optional: true, nullable: false
 
       field :updated_at, -> { String }, optional: true, nullable: false
 
@@ -27,12 +33,6 @@ module Square
       field :absent_at_location_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
       field :image_id, -> { String }, optional: true, nullable: false
-
-      field :ordinal, -> { Integer }, optional: true, nullable: true
-
-      field :type, -> { String }, optional: false, nullable: false
-
-      field :category_data, -> { Square::Types::CatalogCategory }, optional: true, nullable: false
     end
   end
 end
